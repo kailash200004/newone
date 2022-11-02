@@ -1,0 +1,55 @@
+package com.jci.service.Impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.jci.dao.DailyPurchaseConfDao;
+import com.jci.model.DailyPurchaseConfModel;
+import com.jci.service.DailyPurchaseModelConfService;
+
+@Service
+public class DailyPurchaseConfModelServiceImpl  implements DailyPurchaseModelConfService{
+
+	@Autowired
+	DailyPurchaseConfDao dailyPurchaseConfDao;
+
+	@Override
+	public void create(DailyPurchaseConfModel dailyPurchaseConfModel) {
+		dailyPurchaseConfDao.create(dailyPurchaseConfModel);
+
+	}
+
+	@Override
+	public void update(DailyPurchaseConfModel dailyPurchaseConfModel) {
+		dailyPurchaseConfDao.update(dailyPurchaseConfModel);
+	}
+
+	@Override
+	public DailyPurchaseConfModel edit(int id) {
+		return dailyPurchaseConfDao.edit(id);
+	}
+
+	@Override
+	public void delete(int id) {
+		dailyPurchaseConfDao.delete(id);
+	}
+
+	@Override
+	public DailyPurchaseConfModel find(int id) {
+		return dailyPurchaseConfDao.find(id);
+	}
+
+	@Override
+	public List<DailyPurchaseConfModel> getAll() {
+		return dailyPurchaseConfDao.getAll();
+	}
+
+	@Override
+	public boolean submitform(DailyPurchaseConfModel dailyPurchaseConfModel) {
+		return dailyPurchaseConfDao.submitform(dailyPurchaseConfModel);
+	}
+
+
+}
