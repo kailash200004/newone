@@ -279,7 +279,7 @@ body {
 			String dpcCode;
 			dpcCode = (String) session.getAttribute("dpcId");
 			//String tally = (String)request.getAttribute("tally");
-			 
+			  String dpcCenter = (String) session.getAttribute("dpc_center");
 			%>
 			 
 			<div class="page-content fade-in-up">
@@ -343,12 +343,15 @@ body {
 											<label>Place of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errplaceOfPurchase"
 												name="errplaceOfPurchase" class="text-danger"> </span> <input
-												class="form-control" type="number" name="placeOfPurchase"
+												class="form-control" type="hidden" name="placeOfPurchase"
 												id="placeOfPurchase" placeholder="Place of Purhase"
 												onkeyup="deleteErrorMsg()" value="<%=dpcCode%>"
 												oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);">
+										
+											<input class="form-control" type="text" 
+												 placeholder="Place of Purhase"
+												 value="<%=dpcCenter%>" readonly>
 										</div>
-
 										<div class="col-sm-4 form-group">
 											<label>Rate Slip Number</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errrateSlipNumber" name="errrateSlipNumber"

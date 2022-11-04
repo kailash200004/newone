@@ -70,9 +70,9 @@
                 <h1 class="page-title"> Raw Jute Procurement and Payment</h1>
             </div>
             <% 
-            	String dpcCode;
-            	dpcCode = (String) session.getAttribute("dpcId");
             	
+            String dpcCenter = (String) session.getAttribute("dpc_center");
+            String dpcid = (String) session.getAttribute("dpcId");
             	
             	
                 List<String> farmerno= (List<String>) request.getAttribute("farmerNo");
@@ -132,7 +132,8 @@
                                              <label>Place of Purchase</label>
                                              <span class="text-danger">* </span>&nbsp; <span id="errplaceofpurchase" name="errplaceofpurchase"
 												class="text-danger"> </span>
-                                        	 <input class="form-control" name="placeofpurchase" id="placeofpurchase" type="text" placeholder="Place of Purchase" value="<%=dpcCode%>" onkeyup="deleteErrorMsg()" oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);">
+                                        	 <input class="form-control"  type="text" placeholder="Place of Purchase" value="<%=dpcCenter%>" onkeyup="deleteErrorMsg()" oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);" readonly>
+                                        	  <input class="form-control" name="placeofpurchase" id="placeofpurchase" type="hidden" value="<%=dpcid%>" >
                                         </div>
                                         
                                        

@@ -75,4 +75,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		System.out.println("service impl region method");
 		return userRegistrationDao.getUserRegion(userId);
 	}
+
+	@Override
+	public String getdpc_center(String dpcIdd) {
+		return userRegistrationDao.getdpc_center(dpcIdd);
+	}
 }

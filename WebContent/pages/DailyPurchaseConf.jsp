@@ -32,6 +32,7 @@
              <% 
             	String dpcCode;
             	dpcCode = (String)session.getAttribute("dpcId");
+            	  String dpcCenter = (String) session.getAttribute("dpc_center");
             %>
             <div class="page-content fade-in-up">
                 <div class="row">
@@ -80,7 +81,10 @@
 										<div class="col-sm-4 form-group">
 											<label>Place of Purchase </label><span class="text-danger">* </span>&nbsp; <span id="errplaceofpurchase" name="errplaceofpurchase"
 												class="text-danger"> </span>
-											 <input class="form-control" name="placeofpurchase" id="placeofpurchase" type="text" placeholder="Place of Purchase" value="<%=dpcCode%>" required  min="0">
+											 <input class="form-control" name="placeofpurchase" id="placeofpurchase" type="hidden" placeholder="Place of Purchase" value="<%=dpcCode%>" required  min="0">
+                                        <input class="form-control" type="text" 
+												 placeholder="Place of Purhase"
+												 value="<%=dpcCenter%>" readonly>
                                         </div>
                                         <div class="col-sm-4 form-group">
                                         

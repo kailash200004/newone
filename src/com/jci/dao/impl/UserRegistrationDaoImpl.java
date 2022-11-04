@@ -159,4 +159,18 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			return "0";
 		}
 	}
+
+
+	@Override
+	public String getdpc_center(String dpcIdd) {
+		String querystr = "select centername FROM jcipurchasecenter where CENTER_CODE='"+dpcIdd+"'";
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(querystr);
+		String dpc_center = query.list().toString();
+		dpc_center= dpc_center.replace("[", "");
+		dpc_center= dpc_center.replace("]", "");
+			
+			System.out.println("dpccenter==============>>>>>>>>>>>>>>>>>>  "+dpc_center);
+			return dpc_center;
+	}	
 }

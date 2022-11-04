@@ -43,6 +43,7 @@ public class LoginController {
 			int userId = userRegService.getUserId(usrname);
 			String dpcIdd = userRegService.getUserDpc(userId);
 			String region = userRegService.getUserRegion(userId);
+			String dpc_center = userRegService.getdpc_center(dpcIdd);
 		//	int dpcId = userRegService.getUserDpc(userId);
 			// System.out.println("userId "+userId+" dpcId "+dpcId+" region "+ region);
 			session.setAttribute("userId", userId);
@@ -52,7 +53,7 @@ public class LoginController {
 			session.setAttribute("region", region);
 		//	session.setAttribute("dpcId", dpcId);
 			session.setAttribute("zone", dpcId);
-
+			session.setAttribute("dpc_center", dpc_center);
 			if(ifExist!=null)
 				return new ModelAndView("dashboard");
 			else
