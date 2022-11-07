@@ -125,7 +125,7 @@
                                             <label>Tally Slip No.</label>
                                             <span class="text-danger">* </span>&nbsp; <span id="errtallyslipno" name="errtallyslipno"
 												class="text-danger"> </span>
-                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 5) this.value = this.value.slice(0, 5);">
+                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
                                         </div>
                                         
                                         <div class="col-sm-4 form-group">
