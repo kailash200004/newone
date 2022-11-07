@@ -443,6 +443,13 @@ public class InsertDataController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			String F_NAME = request.getParameter("F_NAME");
+			String M_NAME = request.getParameter("M_NAME");
+			String L_NAME = request.getParameter("L_NAME");
+			
+			 String fname = F_NAME.replaceAll("\\s", "");
+			 String mname = M_NAME.replaceAll("\\s", "");
+			 String lname = L_NAME.replaceAll("\\s", "");
+			 
 			String caste = request.getParameter("caste");
 			String gender = request.getParameter("gender");
 			String F_ADDRESS = request.getParameter("F_ADDRESS");
@@ -475,7 +482,9 @@ public class InsertDataController {
 			boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
 			String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
 			FarmerRegModel farmerRegModel = new FarmerRegModel();
-			farmerRegModel.setF_NAME(F_NAME);
+			String farmerName= fname+" "+mname+" "+lname;
+			System.out.println("==========>>>>>>>>>>>>>>>>  "+farmerName);
+			farmerRegModel.setF_NAME(farmerName);
 			farmerRegModel.setCaste(caste);
 			farmerRegModel.setGender(gender);
 			farmerRegModel.setF_ADDRESS(F_ADDRESS);

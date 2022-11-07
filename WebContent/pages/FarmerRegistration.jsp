@@ -92,20 +92,36 @@
 									<input type="hidden" name="dubMobile" id="dubMobile"> 
 									<input type="hidden" name="F_REG_BY" id="F_REG_BY" value="<%=userId%>">
 									
-									<%
+								<%
 									FarmerRegModel farme = (FarmerRegModel) request.getAttribute("FarmerRegistration");
 								%>
 									<div class="row">
 									
 									
 										<div class="col-sm-4 form-group">
-											<label class="required">Name of Farmer</label>
+											<label class="required">First Name of Farmer</label>
 											&nbsp;&nbsp;&nbsp; <span id="errName" name="errName"
 												class="text-danger"> </span> <input class="form-control"
 												type="text" name="F_NAME" id="F_NAME"
-												placeholder="Farmer Name" value=""
+												placeholder="First Name" value=""
 												oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
 										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">Middle Name of Farmer</label>
+											&nbsp;&nbsp;&nbsp; <input class="form-control"
+												type="text" name="M_NAME" id="M_NAME"
+												placeholder="Middle Name" value=""
+												oninput="allow_alphabets(this)" >
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">Last Name of Farmer</label>
+											&nbsp;&nbsp;&nbsp;  <input class="form-control"
+												type="text" name="L_NAME" id="L_NAME"
+												placeholder="Last Name" value=""
+												oninput="allow_alphabets(this)" >
+										</div>
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Caste</label> &nbsp;&nbsp;&nbsp; <span
 												id="errCaste" name="errCaste" class="text-danger"> </span> 
@@ -161,7 +177,6 @@
 													}
 												%>
 											</select>
-
 										</div>
 									
 									<div class="col-sm-4 form-group">
