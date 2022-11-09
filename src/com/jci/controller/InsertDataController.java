@@ -446,10 +446,30 @@ public class InsertDataController {
 			String M_NAME = request.getParameter("M_NAME");
 			String L_NAME = request.getParameter("L_NAME");
 			
-			 String fname = F_NAME.replaceAll("\\s", "");
-			 String mname = M_NAME.replaceAll("\\s", "");
-			 String lname = L_NAME.replaceAll("\\s", "");
+			 String farmerName="";
+			 String fname = F_NAME.trim();
+			 String mname = "";
+			 String lname = "";
+			
+			 if((M_NAME == "" ||M_NAME == null)&&(L_NAME != "" ||L_NAME != null)) {
+				 
+				 lname = L_NAME.trim();
+				 farmerName= fname+" "+lname;	 
+			 }
 			 
+			 if((M_NAME != "" ||M_NAME != null) &&(L_NAME != "" ||L_NAME != null)) {
+				 
+				 mname = M_NAME.trim();
+				 lname = L_NAME.trim();
+				 farmerName= fname+" "+mname+" "+lname;	 
+						 }
+			 else if((M_NAME != "" ||M_NAME != null)&&(L_NAME == "" ||L_NAME == null)) {
+				 
+				 mname = M_NAME.trim();
+				 farmerName= fname+" "+mname;	 
+			 }
+			
+	       
 			String caste = request.getParameter("caste");
 			String gender = request.getParameter("gender");
 			String F_ADDRESS = request.getParameter("F_ADDRESS");
@@ -482,7 +502,7 @@ public class InsertDataController {
 			boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
 			String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
 			FarmerRegModel farmerRegModel = new FarmerRegModel();
-			String farmerName= fname+" "+mname+" "+lname;
+	
 			System.out.println("==========>>>>>>>>>>>>>>>>  "+farmerName);
 			farmerRegModel.setF_NAME(farmerName);
 			farmerRegModel.setCaste(caste);

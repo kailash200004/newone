@@ -107,14 +107,14 @@
 												oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
 										</div>
 										<div class="col-sm-4 form-group">
-											<label class="required">Middle Name of Farmer</label>
+											<label >Middle Name of Farmer</label>
 											&nbsp;&nbsp;&nbsp; <input class="form-control"
 												type="text" name="M_NAME" id="M_NAME"
 												placeholder="Middle Name" value=""
 												oninput="allow_alphabets(this)" >
 										</div>
 										<div class="col-sm-4 form-group">
-											<label class="required">Last Name of Farmer</label>
+											<label >Last Name of Farmer</label>
 											&nbsp;&nbsp;&nbsp;  <input class="form-control"
 												type="text" name="L_NAME" id="L_NAME"
 												placeholder="Last Name" value=""
@@ -752,7 +752,7 @@ function validateAccount(){
 					if(result === 'false'){
 						document.getElementById("dubAcc").innerHTML = "Duplicate account number";
 					}else{
-						
+						document.getElementById("dubAcc").hide();
 					}
 				}	
 		  });

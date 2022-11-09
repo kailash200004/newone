@@ -159,7 +159,7 @@
 											</div>
 											<div class="form-group">
 												<label class="required">Name of farmer</label>  <span class="err" name="name_span" id="name_span"></span>
-												<input type="text" class="form-control"   name="farmer_name" id="farmer_name" placeholder="Name of farmer" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+												<input type="text" class="form-control"   name="farmer_name" id="farmer_name" placeholder="Name of farmer" required >
 											</div>
 											
 											<div class="form-group">
