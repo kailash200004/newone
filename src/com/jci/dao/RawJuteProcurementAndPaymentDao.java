@@ -2,6 +2,8 @@ package com.jci.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.jci.model.RawJuteProcurementAndPayment;
 
 public interface RawJuteProcurementAndPaymentDao {
@@ -25,4 +27,5 @@ public interface RawJuteProcurementAndPaymentDao {
 	public boolean updateProcurementerror(String status, int verified,String tallyno,String error);
 	public RawJuteProcurementAndPayment findbyTally(String tallyno);
 	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status);
+	public boolean validateTally(String tally, String ro);
 }

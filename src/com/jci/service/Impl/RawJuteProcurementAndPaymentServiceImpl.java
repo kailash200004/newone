@@ -2,6 +2,8 @@ package com.jci.service.Impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -114,6 +116,14 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 
 		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status);
 	}
+
+	@Override
+	public boolean validateTally(String tally, String ro) {
+		
+		return rawJuteProcurementAndPaymentDao.validateTally(tally, ro);
+	}
+
+	
 
 
 

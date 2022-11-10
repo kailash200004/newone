@@ -18,7 +18,16 @@ public class RawJuteProcurementAndPayment {
 	@Column(name = "ptsid")
 	private int ptsid;
 
+	@Column(name = "regionId")
+	private String regionId;
+	
+	public String getRegionId() {
+		return regionId;
+	}
 
+	public void setRegionId(String regionId) {
+		this.regionId = regionId;
+	}
 
 	@Column(name = "status")
 	private String status;
@@ -407,16 +416,17 @@ public class RawJuteProcurementAndPayment {
 
 	@Override
 	public String toString() {
-		return "RawJuteProcurementAndPayment [ptsid=" + ptsid + ", status=" + status + ", is_varified=" + is_varified
-				+ ", farmerregno=" + farmerregno + ", formno=" + formno + ", slip_image=" + slip_image
-				+ ", datepurchase=" + datepurchase + ", basis=" + basis + ", cropyr=" + cropyr + ", placeofpurchase="
-				+ placeofpurchase + ", rateslipno=" + rateslipno + ", binno=" + binno + ", jutevariety=" + jutevariety
-				+ ", grossquantity=" + grossquantity + ", deductionquantity=" + deductionquantity + ", netquantity="
-				+ netquantity + ", grasatrate=" + grasatrate + ", amountpayable=" + amountpayable + ", tallyslipno="
-				+ tallyslipno + ", grade1=" + grade1 + ", grade2=" + grade2 + ", grade3=" + grade3 + ", grade4="
-				+ grade4 + ", grade5=" + grade5 + ", grade6=" + grade6 + ", grade7=" + grade7 + ", grade8=" + grade8
-				+ ", createddate=" + createddate + ", createdfrom=" + createdfrom + ", ipaddress=" + ipaddress
-				+ ", creadtedby=" + creadtedby + ", dateof_entry=" + dateof_entry + ", td_base=" + td_base + "]";
+		return "RawJuteProcurementAndPayment [ptsid=" + ptsid + ", regionId=" + regionId + ", status=" + status
+				+ ", is_varified=" + is_varified + ", farmerregno=" + farmerregno + ", formno=" + formno
+				+ ", slip_image=" + slip_image + ", datepurchase=" + datepurchase + ", basis=" + basis + ", cropyr="
+				+ cropyr + ", placeofpurchase=" + placeofpurchase + ", rateslipno=" + rateslipno + ", binno=" + binno
+				+ ", jutevariety=" + jutevariety + ", grossquantity=" + grossquantity + ", deductionquantity="
+				+ deductionquantity + ", netquantity=" + netquantity + ", grasatrate=" + grasatrate + ", amountpayable="
+				+ amountpayable + ", tallyslipno=" + tallyslipno + ", grade1=" + grade1 + ", grade2=" + grade2
+				+ ", grade3=" + grade3 + ", grade4=" + grade4 + ", grade5=" + grade5 + ", grade6=" + grade6
+				+ ", grade7=" + grade7 + ", grade8=" + grade8 + ", createddate=" + createddate + ", createdfrom="
+				+ createdfrom + ", ipaddress=" + ipaddress + ", creadtedby=" + creadtedby + ", dateof_entry="
+				+ dateof_entry + ", td_base=" + td_base + ", reason=" + reason + "]";
 	}
 
 

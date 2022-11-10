@@ -123,9 +123,9 @@
                                         </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Tally Slip No.</label>
-                                            <span class="text-danger">* </span>&nbsp; <span id="errtallyslipno" name="errtallyslipno"
+                                            <span class="text-danger">* </span>&nbsp; <span id="dubtally" name="dubtally" class="text-danger"></span> &nbsp;&nbsp;&nbsp;<span id="errtallyslipno" name="errtallyslipno"
 												class="text-danger"> </span>
-                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
+                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onkeyup="return validateTallySlipNo();deleteErrorMsg();" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
                                         </div>
                                         
                                         <div class="col-sm-4 form-group">
@@ -276,7 +276,7 @@
                                    
                                   <div class="form-group"> 
                                     <button class="btn btn-default" type="button"    id = "calc">Calculate</button>
-                                     <button class="btn btn-default" type="submit">Submit</button>
+                                     <button class="btn btn-default" type="submit" id="button">Submit</button>
                                     </div>
                                     <div class="form-group"> 
                                    <input type="hidden" id="g0" name="g0" value="0">
@@ -639,7 +639,36 @@
 //$( "#datepurchase" ).datepicker({ dateFormat: 'mm-dd-yy'    });
 
 </script>
+	<script>
 	
+	function validateTallySlipNo(){
+		
+		var tally = document.getElementById("tallyslipno").value;
+		var tallyLen = tally.length;
+		  if(tallyLen >= 5){
+			 
+			  $.ajax({
+					type:"GET",
+					url:"validateTally.obj",
+					data:{"tally":tally},
+					success:function(result){
+						console.log(result);
+						//document.getElementById("accNoCheck").value = result;
+						if(result == 'false'){
+							document.getElementById("dubtally").innerHTML = "Duplicate Tally number";
+							document.getElementById("button").disabled = true;
+							return false;
+						}else if(result == 'true'){
+							document.getElementById("dubtally").innerHTML = "";
+							document.getElementById("button").disabled = false;
+							return true;
+						}
+					}	
+			  });
+		 }  
+	}
+	
+	</script>
 	 	<script>
  function validate() {
 	

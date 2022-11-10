@@ -1126,6 +1126,8 @@ if(grade1!=null) {
 				url = path;
 				rawJuteProcAndPay.setSlip_image(url);
 			}
+			  String ro = (String)request.getSession().getAttribute("region");
+			  rawJuteProcAndPay.setRegionId(ro);
 			  rawJuteProcAndPay.setBasis(basis);
 			  rawJuteProcAndPay.setBinno(Integer.parseInt(binno));
 			  rawJuteProcAndPay.setCreateddate(new Date());
@@ -3333,7 +3335,15 @@ if(grade1!=null) {
 		mv.addObject("juteList", juteList);
 		return mv;
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "validateTally", method = RequestMethod.GET)
+	public String validateTally(HttpServletRequest request) {
+		  String ro = (String)request.getSession().getAttribute("region");
+		  String tallyslip= request.getParameter("tally");
+		Gson gson = new Gson();
+		
+		return rawJuteProcurAndPayService.validateTally(tallyslip, ro) + "";
+	}
 
 }
 

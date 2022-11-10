@@ -2,6 +2,8 @@ package com.jci.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.jci.model.RawJuteProcurementAndPayment;
 
 public interface RawJuteProcurementAndPaymentService {
@@ -25,5 +27,5 @@ public interface RawJuteProcurementAndPaymentService {
 	public boolean updateProcurement(String status, int verified,String tallyno);
 	public boolean updateProcurementerror(String status, int verified,String tallyno,String error);
 	public List <RawJuteProcurementAndPayment> jutelistbystatus(String status);
-
+	public boolean validateTally(String tally, String ro);
 }

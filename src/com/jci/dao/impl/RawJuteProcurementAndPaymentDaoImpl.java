@@ -352,6 +352,24 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 			  return result;
 	}
 
+	@Override
+	public boolean validateTally(String tally, String ro) {
+		List<Integer> result = new ArrayList<>();
+		String querystr = "select * from jciprocurement where tallyslipno ='"+tally+"' and regionId='"+ro+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		//System.out.println("you are in DAO layer");
+		boolean tallyMatched = rows.isEmpty();		// returns true if no tally number is found in db
+		if(tallyMatched) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
 
 
 
