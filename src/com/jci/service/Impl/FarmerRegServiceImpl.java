@@ -79,4 +79,12 @@ public class FarmerRegServiceImpl implements FarmerRegService{
 	public boolean validateAdhar(String aadharNo) {
 		return farmerRegDao.validateAdhar(aadharNo);
 	}
+
+	@Override
+	public String findRegno(String dpcid, String region) {
+		 
+		return farmerRegDao.findRegno(dpcid, region);
+	}
+	
+	
 }

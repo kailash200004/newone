@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jci.controller.Testing;
 import com.jci.dao.FarmerRegDao;
 import com.jci.model.FarmerRegModel;
 import com.jci.model.FarmerRegModelDTO;
@@ -27,6 +28,12 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 		return sessionFactory.getCurrentSession();
 	}
 
+	public static void main(String[] args) {
+		 FarmerRegDaoImpl fr = new FarmerRegDaoImpl();
+		 fr.findRegno("05","0212");
+	}
+	
+	
 	@Override
 	public void create(FarmerRegModel farmerRegModel) {
 		currentSession().saveOrUpdate(farmerRegModel);
@@ -190,4 +197,27 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			return false;
 		}
 	}
+
+	@Override
+	public String findRegno(String dpcid, String region) { 
+		
+		String querystr = "select max(F_REG_NO) from jcirmt where F_REG_NO like '"+region+dpcid+"%'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+	 
+		List<Object[]> rows = query.list();
+		//System.out.println("rows = "+rows.toString()+rows.size());
+		Object row = rows.get(0);
+		 
+		if(row!=null) {
+		//System.out.println("row = "+row.toString());
+	 
+		return row.toString(); }
+		else {
+			return null;
+		}
+	}
+	
+	
 }

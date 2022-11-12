@@ -468,8 +468,6 @@ public class InsertDataController {
 				 mname = M_NAME.trim();
 				 farmerName= fname+" "+mname;	 
 			 }
-			
-	       
 			String caste = request.getParameter("caste");
 			String gender = request.getParameter("gender");
 			String F_ADDRESS = request.getParameter("F_ADDRESS");
@@ -486,8 +484,6 @@ public class InsertDataController {
 			String F_Pincode=request.getParameter("pincode");
 			String police_station = request.getParameter("policestation");
 			System.out.print(" ...................."+police_station);
-
-
 			String F_AC_NO = request.getParameter("F_AC_NO");
 			String bank_ac_type = request.getParameter("bank_ac_type");
 			String F_BANK_NAME = request.getParameter("F_BANK_NAME");
@@ -502,7 +498,6 @@ public class InsertDataController {
 			boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
 			String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
 			FarmerRegModel farmerRegModel = new FarmerRegModel();
-	
 			System.out.println("==========>>>>>>>>>>>>>>>>  "+farmerName);
 			farmerRegModel.setF_NAME(farmerName);
 			farmerRegModel.setCaste(caste);
@@ -517,31 +512,18 @@ public class InsertDataController {
 			farmerRegModel.setF_MOBILE((F_MOBILE));
 			farmerRegModel.setF_AC_NO(F_AC_NO);
 			farmerRegModel.setF_Pincode(F_Pincode);
-
 			farmerRegModel.setF_STATE(state);
 			farmerRegModel.setF_Block(F_Block);
 			farmerRegModel.setF_District(F_District);
-
 			farmerRegModel.setPolice_station(police_station);
-
-
-
-
 			farmerRegModel.setBank_ac_type(bank_ac_type);
 			farmerRegModel.setF_BANK_NAME(F_BANK_NAME);
 			farmerRegModel.setF_BANK_BRANCH(F_BANK_BRANCH);
-			farmerRegModel.setF_BANK_IFSC(F_BANK_IFSC);
-			// farmerRegModel.setReg_form(F_REG_FORM);
+			farmerRegModel.setF_BANK_IFSC(F_BANK_IFSC); 
 			farmerRegModel.setF_Address2(F_Address2);
 			farmerRegModel.setF_Pincode(F_Pincode);
 			farmerRegModel.setIS_VERIFIED(0);
-			// farmerRegModel.setF_REG_NO("06" +F_REG_BY +"0000"+count++);
-			// farmerRegModel.setF_BANK_DOC(F_BANK_DOC);
-			// farmerRegModel.setF_DOC_PATH(F_DOC_PATH);
-			// farmerRegModel.setF_ID_PROF(F_ID_PROF);
-			/* farmerRegModel.setF_DOC_PATH(F_DOC_PATHupload); */
-			// farmerRegModel.setF_UPDATED_BY(f_UPDATED_BY);
-			// farmerRegModel.setF_VERFIED_DATE(F_VERFIED_DATE);
+			 
 			File file = null;
 			String pathurl = "";
 			// Farmer id proof upload
@@ -600,56 +582,36 @@ public class InsertDataController {
 					farmerRegModel.setF_REG_FORM(url);
 				}
 
-				//
-				//					if (F_ID_PROF.isEmpty() != true) {
-				//						try {
-				//							Files.copy(F_ID_PROF.getInputStream(),
-				//								Paths.get(farmerUpload + F_ID_PROF.getOriginalFilename()),
-				//								StandardCopyOption.REPLACE_EXISTING);
-				//						} catch (Exception e) {
-				//							e.printStackTrace();
-				//						}
-				//						String path = farmerUpload + F_ID_PROF.getOriginalFilename();
-				//						url = path;
-				//						farmerRegModel.setF_ID_PROF(url);
-				//					}
-				//
-				//					// farmer bank document
-				//					if (F_BANK_DOC.isEmpty() != true) {
-				//						try {
-				//							Files.copy(F_BANK_DOC.getInputStream(),
-				//									Paths.get(farmerUpload + F_BANK_DOC.getOriginalFilename()),
-				//									StandardCopyOption.REPLACE_EXISTING);
-				//						} catch (Exception e) {
-				//							e.printStackTrace();
-				//						}
-				//						String path = farmerUpload + F_BANK_DOC.getOriginalFilename();
-				//						url = path;
-				//						farmerRegModel.setF_BANK_DOC(url);
-				//					}
-				//
-				//					// farmer bank form
-				//					if (F_REG_FORM.isEmpty() != true) {
-				//						try {
-				//							Files.copy(F_REG_FORM.getInputStream(),
-				//									Paths.get(farmerUpload + F_REG_FORM.getOriginalFilename()),
-				//									StandardCopyOption.REPLACE_EXISTING);
-				//						} catch (Exception e) {
-				//							e.printStackTrace();
-				//						}
-				//						String path = farmerUpload + F_REG_FORM.getOriginalFilename();
-				//						url = path;
-				//						farmerRegModel.setF_REG_FORM(url);
-				//					}
-
-				// mv.addObject("msg", "Farmer Registered Successfully");
+				
 			} catch (Exception e) {
 				System.out.println(e);
 
 				mv.addObject("msg", "Not Save please try again");
 			}
-
+			HttpSession session=request.getSession();
+			String dpcid="0000",region ="00";
+			if(session.getAttribute("dpcId")!=null){
+				 dpcid =  (String) session.getAttribute("dpcId");
+			}
+			if(session.getAttribute("region")!=null){
+				region =   (String) (session.getAttribute("region"));
+			}
+			System.out.println("session dpc ="+dpcid+" region = "+region);
+			 
 			if (accountBool && duplicateMobiile) {
+				String regno = farmerRegService.findRegno(dpcid, region);
+				System.out.println("regno = "+regno);
+				if(regno!=null)
+				{
+					boolean zero = regno.startsWith("0");
+					long reg = Long.parseLong(regno)+1;
+					if(zero) {farmerRegModel.setF_REG_NO("0"+reg);}
+					else {farmerRegModel.setF_REG_NO(""+reg);}
+				}
+				else
+				{
+					farmerRegModel.setF_REG_NO(region+dpcid+"00001");
+				}
 				farmerRegService.create(farmerRegModel);
 				redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
@@ -668,6 +630,13 @@ public class InsertDataController {
 		return new ModelAndView(new RedirectView("FarmerRegistration.obj"));
 	}
 
+	@RequestMapping("abc")
+	public String abc(HttpServletRequest request) {
+		String regno = farmerRegService.findRegno("0212", "05");
+		System.out.println("regno = "+regno);
+		return null;
+	}
+	
 	@RequestMapping("rawJutePaymentAndProcurement")
 	public ModelAndView rawJutePaymentAndProcurement(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");

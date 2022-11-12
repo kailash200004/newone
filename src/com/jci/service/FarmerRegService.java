@@ -18,4 +18,5 @@ public interface FarmerRegService {
 	public boolean updateVerificationStatus(int id);
 	boolean validateAccount(String accountNo);
 	boolean validateAdhar(String aadharNo);
+	public String findRegno(String dpcid,String region);
 }
