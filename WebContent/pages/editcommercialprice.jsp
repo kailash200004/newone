@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.ceph.model.CommercialCeilingPriceIntimationModel" %>
+<%@page import="com.jci.model.CommercialCeilingPriceIntimationModel" %>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

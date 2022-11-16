@@ -12,8 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.jci.controller.Testing;
+ 
 import com.jci.dao.FarmerRegDao;
 import com.jci.model.FarmerRegModel;
 import com.jci.model.FarmerRegModelDTO;

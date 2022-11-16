@@ -1,8 +1,8 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
-<%@page import="com.ceph.model.VerifyFarmerModel"%>
-<%@page import="com.ceph.model.FarmerRegModelDTO"%>
+<%@page import="com.jci.model.VerifyFarmerModel"%>
+<%@page import="com.jci.model.FarmerRegModelDTO"%>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
 
-<%@page import="com.ceph.model.MarketArrivalModel"%>
+<%@page import="com.jci.model.MarketArrivalModel"%>
 
 <!DOCTYPE html>
 <html lang="en">

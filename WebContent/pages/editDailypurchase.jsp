@@ -1,4 +1,4 @@
-<%@page import="com.ceph.model.DailyPurchaseConfModel" %>
+<%@page import="com.jci.model.DailyPurchaseConfModel" %>
 <!DOCTYPE html>
 <html lang="en">
 <%@ page import="javax.servlet.http.HttpServletRequest" %>

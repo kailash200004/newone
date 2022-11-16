@@ -1,7 +1,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
-<%@page import="com.ceph.model.RulingMarket"%>
+<%@page import="com.jci.model.RulingMarket"%>
 
 <!DOCTYPE html>
 <html lang="en">

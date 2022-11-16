@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
 
-<%@page import="com.ceph.model.RawJuteProcurementAndPayment"%>
+<%@page import="com.jci.model.RawJuteProcurementAndPayment"%>
 
 <!DOCTYPE html>
 <html lang="en">

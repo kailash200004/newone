@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.ceph.model.JbaModel"%>
+<%@page import="com.jci.model.JbaModel"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <head>
 <meta charset="UTF-8">

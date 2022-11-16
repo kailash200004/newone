@@ -1,6 +1,6 @@
-<%@page import="com.ceph.model.RoleMasterModel"%>
-<%@page import="com.ceph.model.ZoneModel"%>
-<%@page import="com.ceph.model.MSPPriceCalculationModel"%>
+<%@page import="com.jci.model.RoleMasterModel"%>
+<%@page import="com.jci.model.ZoneModel"%>
+<%@page import="com.jci.model.MSPPriceCalculationModel"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.ceph.model.RulingMarket"%>
+<%@page import="com.jci.model.RulingMarket"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <head>
 <meta charset="UTF-8">

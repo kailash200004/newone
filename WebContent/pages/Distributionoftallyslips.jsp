@@ -1,5 +1,5 @@
 
-<%@page import="com.ceph.model.ZoneModel"%>
+<%@page import="com.jci.model.ZoneModel"%>
 
 <%@page import="java.util.List"%>
 

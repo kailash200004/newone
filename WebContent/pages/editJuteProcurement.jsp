@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.ceph.model.RawJuteProcurementAndPayment"%>
+<%@page import="com.jci.model.RawJuteProcurementAndPayment"%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
