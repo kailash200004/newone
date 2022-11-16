@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.jci.model.BalePreparationModel"%>
+<%@page import="com.ceph.model.BalePreparationModel"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <head>
 <meta charset="UTF-8">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.jci.model.DistributionoftallyslipModel" %>
+<%@page import="com.ceph.model.DistributionoftallyslipModel" %>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.jci.model.BalePreparationModel"%>
-<%@page import="com.jci.model.BalePreparation"%>
+<%@page import="com.ceph.model.BalePreparationModel"%>
+<%@page import="com.ceph.model.BalePreparation"%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

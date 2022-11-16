@@ -1,9 +1,9 @@
-<%@page import="com.jci.model.RawJuteProcurementAndPayment"%>
+<%@page import="com.ceph.model.RawJuteProcurementAndPayment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
-<%@page import="com.jci.model.VerifyTallySlip"%>
+<%@page import="com.ceph.model.VerifyTallySlip"%>
 
 <!DOCTYPE html>
 <html lang="en">

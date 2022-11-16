@@ -1,10 +1,10 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
-<%@page import="com.jci.model.RoleMasterModel"%>
-<%@page import="com.jci.model.ZoneModel"%>
+<%@page import="com.ceph.model.RoleMasterModel"%>
+<%@page import="com.ceph.model.ZoneModel"%>
 
-<%@page import="com.jci.model.UserRegistrationModel"%>
+<%@page import="com.ceph.model.UserRegistrationModel"%>
 
 <!DOCTYPE html>
 <html lang="en">

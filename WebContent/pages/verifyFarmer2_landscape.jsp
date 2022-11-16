@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
-<%@page import="com.jci.model.FarmerRegModel"%>
-<%@page import="com.jci.common.*"%>
+<%@page import="com.ceph.model.FarmerRegModel"%>
+<%@page import="com.ceph.common.*"%>
 <%@page import="java.io.File"%>
 <head>
 <meta charset="UTF-8">

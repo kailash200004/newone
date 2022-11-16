@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@page import="com.jci.model.AreaDetailCode"%>
+<%@page import="com.ceph.model.AreaDetailCode"%>
 <%@page import="java.util.List"%>
 
 

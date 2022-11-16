@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
 
-<%@page import="com.jci.model.DistributionoftallyslipModel"%>
+<%@page import="com.ceph.model.DistributionoftallyslipModel"%>
 
 <!DOCTYPE html>
 <html lang="en">

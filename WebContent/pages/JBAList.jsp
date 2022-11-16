@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
 
-<%@page import="com.jci.model.JbaModel"%>
+<%@page import="com.ceph.model.JbaModel"%>
 
 <!DOCTYPE html>
 <html lang="en">
