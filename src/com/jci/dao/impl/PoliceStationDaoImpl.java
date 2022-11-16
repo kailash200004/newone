@@ -71,7 +71,8 @@ public class PoliceStationDaoImpl implements PoliceStationDao{
 
 		//System.out.println("block value from DaoImpl is "+PoliceStation);
 
-		String hql = "select police_stationName from tbl_policeStation where Block_name ='"+F_Block+"'";
+		String hql = "select police_station from tbl_policeStation where district_id ='"+F_Block+"'";
+		
 		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List<String> results = query.list();
 		//String sql = "select max(position) from dbo.product where menu_name='Insurance'";

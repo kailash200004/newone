@@ -200,7 +200,7 @@
 										<div class="col-sm-4 form-group">
 											<label class="required">Police Station</label> &nbsp;
 											<span id="errPoliceStation"name="errPoliceStation" class="text-danger"> </span>
-										<select class="form-control" name="policestation" type="text" placeholder="policestation" id="PoliceStation" onchange="deleteErrorMsg()">
+										<select class="form-control" name="policestation" type="text" placeholder="police station" id="PoliceStation" onchange="deleteErrorMsg()">
 												<option selected value="">-Select-</option>
 												
 											</select>
@@ -969,7 +969,7 @@ $("#ParentMenuID").change(function(){
  					var result = JSON.parse(result);
  					var s = "<option disabled selected value>-Select-</option>";
  					for(var i = 0; i < result.length; i++) {
- 						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 						s += '<option value="' + result[i].split("-")[0] + '">' + result[i].split("-")[1] + '</option>';
  					}
  					$('#child').html(s);
 				}
@@ -988,7 +988,7 @@ $("#ParentMenuID").change(function(){
 
 <script type="text/javascript">
 
-$(document).ready(()=>{
+$(document).ready((){
     $('#F_REG_FORM').change(function(){
       const file = this.files[0];
       console.log(file);
@@ -1044,13 +1044,14 @@ $(document).ready(()=>{
   });
 </script>
 
-<script>
+<!-- <script>
 $("#child").change(function(){
 	//alert("hello");
 	var val = $(this).val();	
 	//alert(val);
  	if(val!="")
 	{
+ 		console.log(val);
  		//alert("sjbgsgd");
  		$.ajax({
 			type:"GET",
@@ -1076,14 +1077,41 @@ $("#child").change(function(){
  				} 			
 			}			
 		});	 	
+ 		$.ajax({
+			type:"GET",
+			url:"findByPoliceStation.obj",
+			data:{"PoliceStation":val},
+			success:function(result){
+				//alert(result);
+ 				if(result.length>0){
+ 					var result = JSON.parse(result);
+ 					var s = "<option disabled selected value>-Select-</option>";
+ 					//var html = "<option disabled selected value>-Select-</option>";
+ 					for(var i = 0; i < result.length; i++) {
+ 						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 					}
+ 					$('#PoliceStation').html(s);
+				}
+ 				else
+ 				{
+ 					document.getElementById("PoliceStation").style.display="none";
+ 					document.getElementById("selectedArea").value="";
+ 					//document.getElementById("selectedAreaDiv").style.display="none";
+ 					alert("No Record Found!");
+ 				} 			
+			}			
+		});
+ 		
+ 		
 	}
- });	
-</script>
+}
+</script> -->
 
 <script>
-$("#F_Block").change(function(){
+$("#child").change(function(){
 	//alert("hello");
 	var val = $(this).val();	
+	console.log(val);
 	//alert(val);
 	if(val!="")
 	{
@@ -1111,8 +1139,34 @@ $("#F_Block").change(function(){
  					alert("No Record Found!");
  				} 			
 			}			
+		});	
+ 		
+ 		$.ajax({
+			type:"GET",
+			url:"findVByBlock.obj",
+			data:{"F_Block":val},
+			success:function(result){
+				
+			//	alert(result);
+ 				if(result.length>0){
+ 					var result = JSON.parse(result);
+ 					var s = "<option disabled selected value>-Select-</option>";
+ 					for(var i = 0; i < result.length; i++) {
+ 						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 					}
+ 					$('#F_Block').html(s);
+				}
+ 				else
+ 				{
+ 					document.getElementById("F_Block").style.display="none";
+ 					document.getElementById("selectedArea").value="";
+ 					//document.getElementById("selectedAreaDiv").style.display="none";
+ 					alert("No Record Found!");
+ 				} 			
+			}			
 		});	 	
 	}
+	
  });	
 </script>
 

@@ -3082,8 +3082,9 @@ if(grade1!=null) {
 	public String getBlockdata(HttpServletRequest request) {
 		String str = request.getParameter("F_Block");
 		//System.out.println("str controller"+str);
+		int id=Integer.parseInt(str);
 		Gson gson = new Gson();
-		return gson.toJson(block.getAllFilledlock(str));
+		return gson.toJson(block.getAllFilledlock(id));
 	}
 
 	@ResponseBody

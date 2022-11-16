@@ -66,9 +66,9 @@ public class blockdaoImpl implements BlockDao{
 
 		@Override
 		//public List<String> getAllFilledlock(String F_District) {
- 	public List<String> getAllFilledlock(String block) {
+ 	public List<String> getAllFilledlock(int block) {
 			System.out.println("block value from DaoImpl is "+block);
-			String hql = "select Block_Name from tbl_blocks where district_name ='"+block+"'";
+			String hql = "select Block_Name from tbl_blocks where district_id ='"+block+"'";
 
 	//	public List<String> getAllFilledlock(String F_District) {
 
