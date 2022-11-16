@@ -16,13 +16,31 @@ public class PoliceStationModel
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "police_stationName")
+	@Column(name = "police_station")
 	private String police_stationName ;
 
 	@Column(name = "Block_name")
 	private String Block_name;
 
+	
+	@Column(name = "district_id")
+	private String district_id;
 
+	public String getPolice_stationName() {
+		return police_stationName;
+	}
+
+	public void setPolice_stationName(String police_stationName) {
+		this.police_stationName = police_stationName;
+	}
+
+	public String getDistrict_id() {
+		return district_id;
+	}
+
+	public void setDistrict_id(String district_id) {
+		this.district_id = district_id;
+	}
 
 	public String getpolice_stationName() {
 		return police_stationName;

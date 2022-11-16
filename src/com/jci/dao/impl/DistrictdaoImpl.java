@@ -1,5 +1,6 @@
 package com.jci.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -80,10 +81,17 @@ public class DistrictdaoImpl implements DistrictDao {
 	 */
 	@Override
 	public List<String> getAllFilledPosition(String state) {
-		System.out.println("state value from DaoImpl is "+state);
-		String hql = "select district_name from tbl_districts where state_id ="+state+"";
+		List<String> result = new ArrayList<>();
+	
+		
+		String hql = "select id, district_name from tbl_districts where state_id ="+state+"";
 		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
-		List<String> results = query.list();
-		return results;
+		List<Object[]> rows = query.list();
+		for(Object[] row : rows){
+			result.add(row[0].toString()+"-"+row[1].toString());
+			System.out.println("state value from DaoImpl is      "+result);
+		
+		}
+		return result;
 	}
 }

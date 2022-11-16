@@ -13,5 +13,5 @@ public interface blockService
 	public blockModel find(int id);
 	public List <blockModel> getAll();
 	public boolean submitform(blockModel off);
-	public List <String> getAllFilledlock(String id);
+	public List <String> getAllFilledlock(int id);
 }

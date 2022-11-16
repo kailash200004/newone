@@ -12,7 +12,7 @@ public interface BlockDao
 	public void delete(int Block_Id);
 	public blockModel find(int Block_Id);
 	public List <blockModel> getAll();
-	public List<String> getAllFilledlock(String id);
+	public List<String> getAllFilledlock(int id);
 	public boolean submitform(blockModel off);
 
 }

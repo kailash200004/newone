@@ -54,7 +54,7 @@ public class BlockServiceImpl implements blockService {
 	}
 
 	@Override
-	public List<String> getAllFilledlock(String id) {
+	public List<String> getAllFilledlock(int id) {
 		return blockdao.getAllFilledlock(id);
 	}
 }

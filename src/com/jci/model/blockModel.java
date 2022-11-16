@@ -17,7 +17,7 @@ public class blockModel
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	@Column(name = "Block_Name")
+	@Column(name = "block_name")
 	private String Block_Name ;
 
 	@Column(name = "district_id")
