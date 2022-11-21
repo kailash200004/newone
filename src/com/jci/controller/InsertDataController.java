@@ -3243,7 +3243,8 @@ if(grade1!=null) {
 	@RequestMapping(value = "transectionDetails", method = RequestMethod.GET)
 	public String transectionDetails(HttpServletRequest request) {
 		//ModelAndView mv= new ModelAndView("verifyTallySlip");
-		 String details = verifyTallySlipService.GettransectionDetails(request.getParameter("tallyslipNo"));
+		 String details = verifyTallySlipService.GettransectionDetails(request.getParameter("tallyslipNo"),request.getParameter("region"));
+		 
 	//	String detailss=details.toString().replace("[", "").replace("]", "");
 	//	Gson gson = new Gson();
 	//	mv.addObject("transectionDetails", details);

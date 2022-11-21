@@ -57,9 +57,9 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	 */
 
 	@Override
-	public String GettransectionDetails(String tallyNo) {
+	public String GettransectionDetails(String tallyNo,String region) {
 
-		return VerificationTallySlipDao.GettransectionDetails(tallyNo);
+		return VerificationTallySlipDao.GettransectionDetails(tallyNo,region);
 	}
 
 	@Override

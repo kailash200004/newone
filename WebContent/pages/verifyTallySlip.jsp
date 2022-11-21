@@ -249,7 +249,7 @@ body {
 	} 
  </script>
  <script type="text/javascript">
- var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg ;
+ var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg, popname  ;
  </script>
  
   
@@ -278,8 +278,9 @@ body {
 			<%
 			String dpcCode;
 			dpcCode = (String) session.getAttribute("dpcId");
+			String region = (String)session.getAttribute("region");
 			//String tally = (String)request.getAttribute("tally");
-			  String dpcCenter = (String) session.getAttribute("dpc_center");
+			 
 			%>
 			 
 			<div class="page-content fade-in-up">
@@ -342,16 +343,13 @@ body {
 										<div class="col-sm-4 form-group">
 											<label>Place of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errplaceOfPurchase"
-												name="errplaceOfPurchase" class="text-danger"> </span> <input
-												class="form-control" type="hidden" name="placeOfPurchase"
-												id="placeOfPurchase" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" value="<%=dpcCode%>"
-												oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);">
-										
-											<input class="form-control" type="text" 
-												 placeholder="Place of Purhase"
-												 value="<%=dpcCenter%>" readonly>
+												name="errplaceOfPurchase" class="text-danger"> </span> 
+												<input class="form-control" type="hidden" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
+												onkeyup="deleteErrorMsg()" readonly="readonly">
+												<input class="form-control" type="text" name="popname" id="popname" placeholder="Place of Purhase"
+												onkeyup="deleteErrorMsg()" readonly="readonly">
 										</div>
+
 										<div class="col-sm-4 form-group">
 											<label>Rate Slip Number</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errrateSlipNumber" name="errrateSlipNumber"
@@ -402,9 +400,19 @@ body {
 										<div class="col-sm-4 form-group">
 											<label>Jute Variety</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety"
-												class="text-danger"> </span> <input class="form-control"
-												type="text" name="juteVariety" id="juteVariety"
-												placeholder="Jute Variety" onkeyup="deleteErrorMsg()">
+												class="text-danger"> </span> 
+												<!-- <input class="form-control"type="text" name="juteVariety" id="juteVariety" placeholder="Jute Variety" onkeyup="deleteErrorMsg()"> -->
+												
+											<select name="juteVariety" id="juteVariety" class="form-control" required  onselect="deleteErrorMsg()">
+                                        	<option value="">Select</option>
+                                        	<option value="Bimli">Bimli</option>
+                                        	<option value="Mesta">Mesta</option>
+                                        	<option value="Tossa">Tossa</option>
+                                        	<option value="White">White</option>
+                                        	   	<option value="Tossa (New)">Tossa (New)</option>
+                                        	<option value="White (New)">White (New)</option>
+                                        	</select>
+                                        	
 										</div>
 										<div class=" col-sm-4 form-group">
 											<label>Drum-wise Quantity</label> <span class="text-danger">*
@@ -793,13 +801,15 @@ body {
 	let	dateOfPurchase = document.forms["myForm"]["dateOfPurchase"].value;
 	//alert(dateOfPurchase);
 	let	 placeOfPurchase = document.forms["myForm"]["placeOfPurchase"].value;
+	//alert(placeOfPurchase);
 	let	 rateSlipNumber = Number(document.forms["myForm"]["rateSlipNumber"].value);
 	let	 binNumber = Number(document.forms["myForm"]["binNumber"].value);
 	let	 juteVariety = document.forms["myForm"]["juteVariety"].value;
+	//alert(juteVariety);
 		// let drumWiseQuantity = document.forms["myForm"]["drumWiseQuantity"].value; 
 	let	 netQuantity =  Number(document.forms["myForm"]["netQuantity"].value);
 	netQuantity =  netQuantity.toFixed(3);
-//	alert(""+  netQuantity)  ;
+	//alert(""+  netQuantity)  ;
 	let	 garsatRate = Number(document.forms["myForm"]["garsatRate"].value);
 	garsatRate = garsatRate.toFixed(3);
 	let	 amountPayable = Number(document.forms["myForm"]["amountPayable"].value);
@@ -991,10 +1001,10 @@ body {
 <script>
 	function transection() {
  
-    //   alert("act");
+     //  alert("act");
 		 tallyNo = document.forms["myForm"]["tallyNo"].value;
 		 if (tallyNo.length >= 3) {
- 
+            var reg = '<%=region%>';
 
 			//alert("tallyNo.length " + tallyNo.length);
 			//alert("inside tallyslip2");
@@ -1002,7 +1012,7 @@ body {
 			 $.ajax({
 						type : "GET",
 						url : "transectionDetails.obj",
-						data : jQuery.param({"tallyslipNo" : tallyNo}),
+						data : jQuery.param({"tallyslipNo" : tallyNo,"region" : reg}),
 						success : function(result) {
 						//	alert(result);
 						
@@ -1026,7 +1036,11 @@ body {
 							 grossqty =  parsedJSON.grossqty.toFixed(3);
 							 amtpay = parsedJSON.amountpayable.toFixed(3);
 							 pop = parsedJSON.placeOfPurchase;
+							 popname = parsedJSON.popname;
 							 $("#uploadedImage").attr("src","http://49.50.79.121:8080/TallySlip/"+tallyimage);
+							 $("#placeOfPurchase").attr("value",pop);
+							 $("#popname").attr("value",popname);
+							 magnify("uploadedImage", 2);
 							//alert("inside transaction date = "+grossqty+"  amt pay = "+amtpay+"   bin = "+bin+" pop = "+pop);
 						  }
 						else{

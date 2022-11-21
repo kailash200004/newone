@@ -12,7 +12,7 @@ public interface VerificationTallySlipDao {
 	public VerifyTallySlip find(int id);
 	public List <VerifyTallySlip> getAll(String status);
 	public boolean submitform(VerifyTallySlip verifyTallySlip);
-	public String GettransectionDetails(String tallyNo);
+	public String GettransectionDetails(String tallyNo, String region);
 	//public  VerifyTallySlip findByTally(String tallyslipno);
 	public boolean updatebyTally(String status, int verified,String tallyno);
 }

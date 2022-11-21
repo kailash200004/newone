@@ -224,11 +224,39 @@ public class VerifyTallySlip {
 
 	@Transient
 	String dop;
+	
+	@Transient
+	String popname;
+	
+	
+	
 
 
 
 
 
+
+
+
+
+
+
+
+	
+	
+	public String getPopname() {
+		return popname;
+	}
+
+
+
+
+
+
+
+	public void setPopname(String popname) {
+		this.popname = popname;
+	}
 
 
 

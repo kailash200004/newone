@@ -122,12 +122,12 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	}
 
 	@Override
-	public String GettransectionDetails(String tallyNo) {
+	public String GettransectionDetails(String tallyNo,String region) {
 
 		// System.out.println("############"+ tallyNo);
 		List<VerifyTallySlip> r = new ArrayList<>();
 		List<Object[]> result = new ArrayList<>();
-		String querystr = "Select  datepurchase, rateslipno, binno, netquantity, grasatrate, amountpayable, jutevariety, grossquantity, farmerregno, slip_image, tallyslipno,placeofpurchase from jciprocurement where tallyslipno='"+tallyNo+"' and is_varified = 0 and status = 'ROV'";
+		String querystr = "Select  datepurchase, rateslipno, binno, netquantity, grasatrate, amountpayable, jutevariety, grossquantity, farmerregno, slip_image, tallyslipno,placeofpurchase, pur.centername  from jciprocurement  jci left join jcipurchasecenter pur on jci.placeofpurchase = pur.CENTER_CODE where tallyslipno='"+tallyNo+"' and regionId = '"+region+"' and is_varified = 0 and jci.status = 'ROV'";
 
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -161,6 +161,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			verifyTallySlip.setTallySlipImg((String)row[9]);
 			verifyTallySlip.setTallyNo((String)row[10]);
 			verifyTallySlip.setPlaceOfPurchase((String)row[11]);
+			verifyTallySlip.setPopname((String)row[12]);
 			//System.out.println("================>>>>>>>>>>>result  "+result.toString());
 			//r.add(verifyTallySlip);
            Gson gson = new Gson();

@@ -546,7 +546,7 @@
               k +=  parseFloat(a.value);
              count++;
           }
-	
+		if(parseInt(k)==100.00){
 		     $.ajax({
 				type:"GET",
 				url:"findGradePriceJuteVariety.obj",
@@ -557,7 +557,7 @@
 					var gradefive = data[0][4];
 					console.log("gradefive = "+gradefive);
 							
-					if(parseInt(k)==100.00){
+					
 						
 						if(basis=="msp"){
 							
@@ -620,12 +620,14 @@
 								$('#tdbaseprice').prop('readonly', true);
 						}
 					}
+		     }); 
+		}
 					else{
 						alert("addition should be 100!");
 					
 					}
 					
-				}	});  
+				 
  
   });
 }); 
