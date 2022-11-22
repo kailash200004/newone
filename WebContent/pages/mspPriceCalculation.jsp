@@ -106,7 +106,8 @@
 										<div class="col-sm-4 form-group">
 											<label>Jute Variety</label> <span class="text-danger">* </span>
 											<span id="errJuteVariety" name="errJuteVariety" class="text-danger "> </span>
-                                        	<select name="jutevariety" id="jutevariety" class="form-control" onclick="deleteErrorMsg()" required="required">                                        	<option value="">Select</option>
+                                        	<select name="jutevariety" id="jutevariety" class="form-control" onclick="deleteErrorMsg()" required="required">   
+                                        	<option disabled selected value>-Select-</option>
                                         	<option value="Bimli">Bimli</option>
                                         	<option value="Mesta">Mesta</option>
                                         	<option value="Tossa (New)">Tossa (New)</option>

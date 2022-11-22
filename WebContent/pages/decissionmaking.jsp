@@ -277,13 +277,13 @@ color: red;
 $(document).ready(function(){
 	 $("#approve").click(function(){
 		 var tally = $("#approve").val();
-		 alert(tally);
+		// alert(tally);
 		 $.ajax({
 				type:"GET",
 				url:"rmapproval.obj",
 				data:jQuery.param({"tallyno":tally ,"status" :"FA", "verified":1}),
 				success:function(result){
-					alert(result);
+					//alert(result);
 					if(result=="true")
 						{
 						alert("Succesfully Updated");
@@ -311,13 +311,13 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("#decline").click(function(){
 		 var tally = $("#decline").val();
-		 alert(tally);
+	//	 alert(tally);
 		 $.ajax({
 				type:"GET",
 				url:"rmapproval.obj",
 				data:jQuery.param({"tallyno":tally ,"status" :"DPCC", "verified":0}),
 				success:function(result){
-					alert(result);
+				//	alert(result);
 					if(result=="true")
 						{
 						alert("Succesfully Updated");

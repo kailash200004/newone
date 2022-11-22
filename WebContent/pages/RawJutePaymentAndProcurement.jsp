@@ -125,7 +125,7 @@
                                             <label>Tally Slip No.</label>
                                             <span class="text-danger">* </span>&nbsp; <span id="dubtally" name="dubtally" class="text-danger"></span> &nbsp;&nbsp;&nbsp;<span id="errtallyslipno" name="errtallyslipno"
 												class="text-danger"> </span>
-                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onkeyup="return validateTallySlipNo();deleteErrorMsg();" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
+                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onblur="return validateTallySlipNo();deleteErrorMsg();" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
                                         </div>
                                         
                                         <div class="col-sm-4 form-group">
@@ -239,7 +239,7 @@
                                         	 <input class="form-control" name="garsatRate" id="garsatRate" type="number" placeholder="Garsat Rate (Rs./Qtls.)"  readonly="true" onkeyup="deleteErrorMsg()" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
-											<label class="required">Varification Slip (330kb-1MB)</label>&nbsp; 
+											<label class="required">Varification Slip (330kb-1MB)</label><span class="text-danger">* </span>&nbsp; 
 											<span id="errtallySlipdoc" name="errtallySlipdoc" class="text-danger"> </span>
 													 <img id="imgPreview"  />
 												  <input class="form-control" required
@@ -520,6 +520,7 @@
 		var qntl=0;
 		
 		var variety = document.getElementById("jutevariety").value;	
+		console.log(variety);
 		var basis = document.getElementById("basis").value;	
 		var cropyr = document.getElementById("cropyr").value;	
 		var input = document.getElementsByName('test[]');
@@ -533,15 +534,10 @@
 				basis_no=1;
 				 
 			}
-		if(basis_no=="2" &&(variety=="Tossa"||variety=="White"))
-		{
-		variety="Tossa (New)";
-			variety="White (New)";
-		}
-	//	 alert(input);
+
 		for (var i = 0; i < input.length; i++) {
                a = input[i];
-             // alert(a.value);
+
          	  document.getElementById("g"+i).value = parseFloat(a.value);
               k +=  parseFloat(a.value);
              count++;
@@ -572,16 +568,20 @@
 				            	 				//console.log("rate= "+rate);
 				          			 				var  gradesPersent= parseFloat(((input[i].value*rate)/100));
 					        							   garsatrate += gradesPersent ;
+					        							   
+					        							   
 					      		
 										}
+										
 										//alert(gradesPersent);
 						 
-								 	} 	
+								 	} 	console.log("garsatrate="+garsatrate);
+								 	console.log("total="+total);
 						 				var netPercent = parseFloat(total/100);
-				
-						 				netAmount=(garsatrate * netPercent);
-						 				
-						 				document.getElementById("amountPayable").value = Math.round(netAmount,2);
+						 				console.log("netPercent="+netPercent);
+						 				netAmount=parseFloat(garsatrate * netPercent);
+						 				console.log("netAmount="+netAmount);
+						 				document.getElementById("amountPayable").value = netAmount;
 						
 										document.getElementById("garsatRate").value = Math.round(garsatrate,2);
 							}
@@ -617,6 +617,7 @@
 										}
 								
 								document.getElementById("tdbaseprice").value = Math.round(td,2);
+								document.getElementById("amountPayable").value = 0.0;
 								$('#tdbaseprice').prop('readonly', true);
 						}
 					}
@@ -647,7 +648,7 @@
 		
 		var tally = document.getElementById("tallyslipno").value;
 		var tallyLen = tally.length;
-		  if(tallyLen >= 5){
+		  if(tallyLen >= 6){
 			 
 			  $.ajax({
 					type:"GET",
@@ -668,6 +669,10 @@
 					}	
 			  });
 		 }  
+		  else
+			  {
+			  alert("Tally Slip No. should be of 6 digit");
+			  }
 	}
 	
 	</script>

@@ -87,10 +87,10 @@
 										<th>Rates </th> 										
 										<th>Bin No</th>
 									    <th>Jute Variety</th>
-									    <th>Net Quntity</th>
+									   <!--  <th>Net Quantity</th> -->
 									    <th>Gross Qty</th>
 										<th>Garsat Rate</th> 										
-										<th>Amount Payable</th>
+										<!-- <th>Amount Payable</th> -->
 										<th>Action</th>
 										
 							</tr>
@@ -101,6 +101,7 @@
 							for(RawJuteProcurementAndPayment verificationlists : verificationList){
 								
 								 if(i<=200){  
+									 
 							%>
 									<tr>
 										<td><%=i%></td>
@@ -111,10 +112,10 @@
 										<td><%=verificationlists.getRateslipno()%></td>
 									    <td><%=verificationlists.getBinno()%></td> 
 				                    	<td><%=verificationlists.getJutevariety()%></td>
-										<td><%=verificationlists.getNetquantity()%></td> 
+										<%-- <td><%=verificationlists.getNetquantity()%></td>  --%>
 										<td><%=verificationlists.getGrossquantity()%></td> 
 										<td><%=verificationlists.getGrasatrate()%></td>
-						               <td><%=verificationlists.getAmountpayable()%></td>
+						              <%--  <td><%=verificationlists.getAmountpayable()%></td> --%>
 						               <td><a href="verificationTallyslip.obj" class="btn btn-danger btn-sm btn-block">  <i  aria-hidden="true" style="font-size: 15px;"></i>Verify</a></td> 
 
 									</tr>
