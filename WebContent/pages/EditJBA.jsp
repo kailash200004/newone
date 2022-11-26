@@ -84,54 +84,54 @@
 																	<div class="col-sm-4 form-group ">
 																<label class="required">Jute Variety</label> 
 																<input class="form-control" type="text" value = "<%=jbapri.getJutevariety()%>"
-																		name="jutevariety"></textarea>
+																		name="jutevariety" readonly > 
 																</div>
 																							
                                                          <div class="col-sm-4 form-group">
 									<label class="required">Crop year</label> <input class="form-control"
-										type="text" name="cropyr" placeholder="CROP YEAR" value="<%=jbapri.getCropyr()%>"  >
+										type="text" name="cropyr" placeholder="CROP YEAR" value="<%=jbapri.getCropyr()%>" readonly >
 								</div>
 								
 								                <div class="col-sm-4 form-group">
 									<label class="required">Area Code</label> <input class="form-control"
-										type="text" name="areacode" placeholder="area  code" value="<%=jbapri.getAreaCode()%>"  >
+										type="text" name="areacode" placeholder="area  code" value="<%=jbapri.getAreaName()+","+jbapri.getAreaCode()%>" readonly >
 								</div>
 								
 														
 								<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 1	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp1()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 1	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp1()%>"
+								id="gradewisepp1" name="gradewisepp1"> 
 									</div>					
 															
 															
 								<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 2	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp2()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 2	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp2()%>"
+								id="gradewisepp2" name="gradewisepp2">
 									</div>
 									<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 3	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp3()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 3	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp3()%>"
+								id="gradewisepp3" name="gradewisepp3">
 									</div>
 									<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 4	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp4()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 4	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp4()%>"
+								id="gradewisepp4" name="gradewisepp4">
 									</div>
 									<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 5	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp5()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 5	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp5()%>"
+								id="gradewisepp5" name="gradewisepp5">
 									</div>
 									<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 6	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp6()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 6	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp6()%>"
+								id="gradewisepp6" name="gradewisepp6">
 									</div>
 									
 										<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 7	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp7()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 7	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp7()%>"
+								id="gradewisepp7" name="gradewisepp7">
 									</div>
 										<div class="col-sm-4 form-group ">
-							<label class="required">Grade Wise Price 8	</label> <input class="form-control" type="text" value = "<%=jbapri.getGradewisepp8()%>"
-								id="complete-address" name="gradewisepp"></textarea>
+							<label class="required">Grade Wise Price 8	</label> <input class="form-control" type="number" value = "<%=jbapri.getGradewisepp8()%>"
+								id="gradewisepp8" name="gradewisepp8">
 									</div>
 									
 									
@@ -141,8 +141,6 @@
 						<div class="row">
 										<div class="col-sm-4 form-group">
 											<button class="btn btn-primary" type="submit">Submit</button>
-											<button class="btn btn-primary" type="reset">Cancel</button>
-											
 										</div>
 									</div>
 							</form>

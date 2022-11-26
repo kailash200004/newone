@@ -106,9 +106,9 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	@Override
-	public boolean updateProcurementerror(String status, int verified, String tallyno, String error) {
+	public boolean updateProcurementerror(String status, int verified, String tallyno, String error,String region) {
 
-		return rawJuteProcurementAndPaymentDao.updateProcurementerror(status, verified,tallyno, error);
+		return rawJuteProcurementAndPaymentDao.updateProcurementerror(status, verified,tallyno, error,region);
 	}
 
 	@Override

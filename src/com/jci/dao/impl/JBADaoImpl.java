@@ -29,7 +29,7 @@ public class JBADaoImpl implements JbaDao {
 
 	@Override
 	public void create(JbaModel jbaP) {
-		currentSession().saveOrUpdate(jbaP);
+		currentSession().saveOrUpdate(jbaP);;
 
 	}
 

@@ -25,7 +25,7 @@ public interface RawJuteProcurementAndPaymentService {
 	public List <RawJuteProcurementAndPayment>farmerDetailsList();
 	public RawJuteProcurementAndPayment findbyTally(String tallyno);
 	public boolean updateProcurement(String status, int verified,String tallyno);
-	public boolean updateProcurementerror(String status, int verified,String tallyno,String error);
+	public boolean updateProcurementerror(String status, int verified,String tallyno,String error,String region);
 	public List <RawJuteProcurementAndPayment> jutelistbystatus(String status);
 	public boolean validateTally(String tally, String ro);
 }

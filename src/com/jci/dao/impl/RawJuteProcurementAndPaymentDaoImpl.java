@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -235,11 +237,12 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 	@Override
-	public boolean updateProcurementerror(String statuss, int verified,String tallyno,String error) {
+	public boolean updateProcurementerror(String statuss, int verified,String tallyno,String error,String region) {
+		 
 		Session session = sessionFactory.getCurrentSession();
 		boolean returnStatus=false;
 		try {
-			Query q=session.createQuery("update  RawJuteProcurementAndPayment set status ='"+statuss+"', is_varified ="+verified+" , reason = '"+error+"' where tallyslipno='"+tallyno+"'");
+			Query q=session.createQuery("update  RawJuteProcurementAndPayment set status ='"+statuss+"', is_varified ="+verified+" , reason = '"+error+"' where tallyslipno='"+tallyno+"' and regionId = '"+region+"'");
 			int status=q.executeUpdate();
 			if(status>=1) {
 				returnStatus =true;

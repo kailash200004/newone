@@ -47,14 +47,11 @@
 								<thead>
 									<tr>
 										<th>Sl.No</th>
-										
 										<th>Date</th>
-										<th>Grade Wise Price Details</th>
-										<!-- <th>ID</th>
 										<th>Jute Variety</th>
 										<th>Crop Year</th>
-										<th>Area code</th> 										
-										<th>Grade Wise Price</th> -->
+										<th>Area code</th> 
+										<th>Created on</th> 	
 										<th>Edit</th>
 										<th>Delete</th>									
 									</tr>
@@ -66,21 +63,15 @@
 							%>
 									<tr>
 										<td><%=i%></td>
-						                
 										<td><%=jbaList.getJbaDate()%></td>
-										<td><a href="http://49.50.79.121:8080/jciDocs/14.09.2022.jpg" target="_blank"><span>Grade Price</span></a></td>
-										
-										<%--  <td><%=jbaList.getId()%></td>
-				                    	<td><%=jbaList.getJutevariety()%></td>
+										<td><%=jbaList.getJutevariety()%></td>
 										 <td><%=jbaList.getCropyr()%>
-										<td><%=jbaList.getAreaCode()%></td> 
-										<td><%=jbaList.getGradeWisePrice()%></td>
-									    <!-- <td><a href="editJBAList.obj?id=<%=jbaList.getId()%>" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td> --> --%>
+										<td><%=jbaList.getAreaName()%></td> 
+										<td><%=jbaList.getCreateddate()%></td> 
 									    <td><a onClick="EditBtn_click(<%=jbaList.getId()%>)" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										<td><a href="JbaDelete.obj?id=<%=jbaList.getId()%>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 									</tr>
-											<!--<div class="sliderbox slider9"><a href="https://www.bobfinancial.com/documents/VoltasEMIOfferStoreList.pdf" target="_blank">&nbsp;</a></div>-->
-									
+											
 									<% 
 							i++; }
 							

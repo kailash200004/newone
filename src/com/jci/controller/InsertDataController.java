@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -774,63 +776,159 @@ public class InsertDataController {
 	@RequestMapping("saveJbaRate")
 	public ModelAndView saveJbaRate(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		try {
-			int creadtedby = 0;
+			 
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
+			int creadtedby = (int) request.getSession().getAttribute("userId");
+			String region = (String) request.getSession().getAttribute("region");
+			String dpcid = (String) request.getSession().getAttribute("dpcId");
 			String datejba = request.getParameter("datejba");
-			// System.out.println("datejba from controller is"+datejba);
 			String jutevariety = request.getParameter("jutevariety");
 			String areacode = request.getParameter("areacode");
 			String cropyr = request.getParameter("cropyr");
-
-			String gradewisepp = request.getParameter("gradewisepp");
-			String grade1 = request.getParameter("gradewisepp1");
-			String grade2 = request.getParameter("gradewisepp2");
-			String grade3 = request.getParameter("gradewisepp3");
-			String grade4 = request.getParameter("gradewisepp4");
-			String grade5 = request.getParameter("gradewisepp5");
-			String grade6 = request.getParameter("gradewisepp6");
-			String grade7 = request.getParameter("gradewisepp7");
-			String grade8 = request.getParameter("gradewisepp8");
-
-
-
-
-
+			
+			int northern = Integer.parseInt(request.getParameter("northernprice"));
+			int seminorthern = Integer.parseInt(request.getParameter("seminorthernprice"));
+			int bihar = Integer.parseInt(request.getParameter("biharprice"));
+			int other = Integer.parseInt(request.getParameter("otherprice"));
+			
+            int grade1,grade2,grade3,grade4,grade5,grade6,grade7,grade8;
+            if(jutevariety.equalsIgnoreCase("tossa"))
+            {
+            	System.out.println("tossa");
+            	grade1 =  Integer.parseInt(request.getParameter("gradewisepp1"));
+            	grade2 =  Integer.parseInt(request.getParameter("gradewisepp2"));
+            	grade3 =  Integer.parseInt(request.getParameter("gradewisepp3"));
+            	grade4 =  Integer.parseInt(request.getParameter("gradewisepp4"));
+            	grade5 =  Integer.parseInt(request.getParameter("gradewisepp5"));
+            	grade6 =  Integer.parseInt(request.getParameter("gradewisepp6"));
+            	grade7 =  Integer.parseInt(request.getParameter("gradewisepp7"));
+            	grade8 =  Integer.parseInt(request.getParameter("gradewisepp8"));
+            	 
+            }
+            else
+            {
+            	System.out.println("white"+request.getParameter("gradewisepp9"));
+            	grade1 =  Integer.parseInt(request.getParameter("gradewisepp9"));
+            	grade2 =  Integer.parseInt(request.getParameter("gradewisepp10"));
+            	grade3 =  Integer.parseInt(request.getParameter("gradewisepp11"));
+            	grade4 =  Integer.parseInt(request.getParameter("gradewisepp12"));
+            	grade5 =  Integer.parseInt(request.getParameter("gradewisepp13"));
+            	grade6 =  Integer.parseInt(request.getParameter("gradewisepp14"));
+            	grade7 =  Integer.parseInt(request.getParameter("gradewisepp15"));
+            	grade8 =  Integer.parseInt(request.getParameter("gradewisepp16"));
+            }
+			//South bengal
 			JbaModel jbapri = new JbaModel();
 			jbapri.setJbaDate(datejba);
 			jbapri.setJutevariety(jutevariety);
 			jbapri.setAreaCode(areacode);
+			jbapri.setAreaName("South Bengal");
 			jbapri.setCropyr(cropyr);
-			jbapri.setGradeWisePrice(gradewisepp);
-			if(grade1!=null) {
-
-				jbapri.setGradewisepp1(Double.parseDouble(grade1));
-			}
-
-			if(grade2!=null) {
-				jbapri.setGradewisepp2(Double.parseDouble(grade2));
-			}
-			if(grade3!=null) {
-
-				jbapri.setGradewisepp3(Double.parseDouble(grade3));
-			}
-			if(grade4!=null) {
-
-				jbapri.setGradewisepp4(Double.parseDouble(grade4));
-			}
-			if(grade5!=null) {
-
-				jbapri.setGradewisepp5(Double.parseDouble(grade5));
-			}
-			if(grade6!=null) {
-				jbapri.setGradewisepp6(Double.parseDouble(grade6));
-			}
-			if(grade7!=null) {
-				jbapri.setGradewisepp7(Double.parseDouble(grade7));
-			}
-			if(grade8!=null) {
-				jbapri.setGradewisepp8(Double.parseDouble(grade8));
-			}
+			jbapri.setCreadtedby(creadtedby);
+			jbapri.setCreateddate(date);
+			jbapri.setRegion(region);
+			jbapri.setDpcid(dpcid);
+			
+			if(grade1!=0) {jbapri.setGradewisepp1(grade1);}
+			if(grade2!=0) {jbapri.setGradewisepp2(grade2);}
+			if(grade3!=0) {jbapri.setGradewisepp3(grade3);}
+			if(grade4!=0) {jbapri.setGradewisepp4(grade4);}
+			if(grade5!=0) {jbapri.setGradewisepp5(grade5);}
+			if(grade6!=0) {jbapri.setGradewisepp6(grade6);}
+			if(grade7!=0) {jbapri.setGradewisepp7(grade7);}
+			if(grade8!=0) {jbapri.setGradewisepp8(grade8);}
 			jbaservice.create(jbapri);
+			
+			//Northern 
+			JbaModel jbanorth = new JbaModel();
+			jbanorth.setJbaDate(datejba);
+			jbanorth.setJutevariety(jutevariety);
+			jbanorth.setAreaCode("NB");
+			jbanorth.setAreaName("Northern");
+			jbanorth.setCropyr(cropyr);
+			jbanorth.setCreadtedby(creadtedby);
+			jbanorth.setCreateddate(date);
+			jbanorth.setRegion(region);
+			jbanorth.setDpcid(dpcid);
+			
+			if(grade1!=0) {jbanorth.setGradewisepp1(grade1+northern);}
+			if(grade2!=0) {jbanorth.setGradewisepp2(grade2+northern);}
+			if(grade3!=0) {jbanorth.setGradewisepp3(grade3+northern);}
+			if(grade4!=0) {jbanorth.setGradewisepp4(grade4+northern);}
+			if(grade5!=0) {jbanorth.setGradewisepp5(grade5+northern);}
+			if(grade6!=0) {jbanorth.setGradewisepp6(grade6+northern);}
+			if(grade7!=0) {jbanorth.setGradewisepp7(grade7+northern);}
+			if(grade8!=0) {jbanorth.setGradewisepp8(grade8+northern);}
+			jbaservice.create(jbanorth);
+			
+			//Semi northern 
+			JbaModel jbasn = new JbaModel();
+			jbasn.setJbaDate(datejba);
+			jbasn.setJutevariety(jutevariety);
+			jbasn.setAreaCode("SN");
+			jbasn.setAreaName("Semi Northern");
+			jbasn.setCropyr(cropyr);
+			jbasn.setCreadtedby(creadtedby);
+			jbasn.setCreateddate(date);
+			jbasn.setRegion(region);
+			jbasn.setDpcid(dpcid);
+			
+			if(grade1!=0) {jbasn.setGradewisepp1(grade1+seminorthern);}
+			if(grade2!=0) {jbasn.setGradewisepp2(grade2+seminorthern);}
+			if(grade3!=0) {jbasn.setGradewisepp3(grade3+seminorthern);}
+			if(grade4!=0) {jbasn.setGradewisepp4(grade4+seminorthern);}
+			if(grade5!=0) {jbasn.setGradewisepp5(grade5+seminorthern);}
+			if(grade6!=0) {jbasn.setGradewisepp6(grade6+seminorthern);}
+			if(grade7!=0) {jbasn.setGradewisepp7(grade7+seminorthern);}
+			if(grade8!=0) {jbasn.setGradewisepp8(grade8+seminorthern);}
+			jbaservice.create(jbasn);
+			
+			//bihar 
+			JbaModel jbabr = new JbaModel();
+			jbabr.setJbaDate(datejba);
+			jbabr.setJutevariety(jutevariety);
+			jbabr.setAreaCode("BH");
+			jbabr.setAreaName("Bihar");
+			jbabr.setCropyr(cropyr);
+			jbabr.setCreadtedby(creadtedby);
+			jbabr.setCreateddate(date);
+			jbabr.setRegion(region);
+			jbabr.setDpcid(dpcid);
+			
+			if(grade1!=0) {jbabr.setGradewisepp1(grade1+bihar);}
+			if(grade2!=0) {jbabr.setGradewisepp2(grade2+bihar);}
+			if(grade3!=0) {jbabr.setGradewisepp3(grade3+bihar);}
+			if(grade4!=0) {jbabr.setGradewisepp4(grade4+bihar);}
+			if(grade5!=0) {jbabr.setGradewisepp5(grade5+bihar);}
+			if(grade6!=0) {jbabr.setGradewisepp6(grade6+bihar);}
+			if(grade7!=0) {jbabr.setGradewisepp7(grade7+bihar);}
+			if(grade8!=0) {jbabr.setGradewisepp8(grade8+bihar);}
+			jbaservice.create(jbabr);
+			
+			//other 
+			JbaModel jbaot = new JbaModel();
+			jbaot.setJbaDate(datejba);
+			jbaot.setJutevariety(jutevariety);
+			jbaot.setAreaCode("OT");
+			jbaot.setAreaName("Other");
+			jbaot.setCropyr(cropyr);
+			jbaot.setCreadtedby(creadtedby);
+			jbaot.setCreateddate(date);
+			jbaot.setRegion(region);
+			jbaot.setDpcid(dpcid);
+			
+			if(grade1!=0) {jbaot.setGradewisepp1(grade1+other);}
+			if(grade2!=0) {jbaot.setGradewisepp2(grade2+other);}
+			if(grade3!=0) {jbaot.setGradewisepp3(grade3+other);}
+			if(grade4!=0) {jbaot.setGradewisepp4(grade4+other);}
+			if(grade5!=0) {jbaot.setGradewisepp5(grade5+other);}
+			if(grade6!=0) {jbaot.setGradewisepp6(grade6+other);}
+			if(grade7!=0) {jbaot.setGradewisepp7(grade7+other);}
+			if(grade8!=0) {jbaot.setGradewisepp8(grade8+other);}
+			jbaservice.create(jbaot);
+			
 			redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
 		} catch (Exception e) {
 			System.out.println(e);
@@ -867,58 +965,44 @@ public class InsertDataController {
 			String id = request.getParameter("id");
 			String datejba = request.getParameter("datejba");
 			String jutevariety = request.getParameter("jutevariety");
-			String areacode = request.getParameter("areacode");
-			String cropyr = request.getParameter("cropyr");
-			String gradewisepp = request.getParameter("gradewisepp");
-			String grade1 = request.getParameter("gradewisepp1");
-			String grade2 = request.getParameter("gradewisepp2");
-			String grade3 = request.getParameter("gradewisepp3");
-			String grade4 = request.getParameter("gradewisepp4");
-			String grade5 = request.getParameter("gradewisepp5");
-			String grade6 = request.getParameter("gradewisepp6");
-			String grade7 = request.getParameter("gradewisepp7");
-			String grade8 = request.getParameter("gradewisepp8");
+			String areaname = request.getParameter("areacode").split(",")[0];
+			String areacode = request.getParameter("areacode").split(",")[1];
+			String cropyr = request.getParameter("cropyr"); 
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
+			int creadtedby = (int) request.getSession().getAttribute("userId");
+			String region = (String) request.getSession().getAttribute("region");
+			String dpcid = (String) request.getSession().getAttribute("dpcId");
+			
+			double grade1 =  Double.parseDouble(request.getParameter("gradewisepp1"));
+			double grade2 =  Double.parseDouble(request.getParameter("gradewisepp2"));
+			double grade3 =  Double.parseDouble(request.getParameter("gradewisepp3"));
+			double grade4 =  Double.parseDouble(request.getParameter("gradewisepp4"));
+			double grade5 =  Double.parseDouble(request.getParameter("gradewisepp5"));
+			double grade6 =  Double.parseDouble(request.getParameter("gradewisepp6"));
+			double grade7 =  Double.parseDouble(request.getParameter("gradewisepp7"));
+			double grade8 =  Double.parseDouble(request.getParameter("gradewisepp8"));
 			JbaModel jbapri = new JbaModel();
 			jbapri.setId(Integer.parseInt(id));
 			jbapri.setJbaDate(datejba);
 			jbapri.setJutevariety(jutevariety);
+			jbapri.setAreaName(areaname);
 			jbapri.setAreaCode(areacode);
-
-
 			jbapri.setCropyr(cropyr);
-			jbapri.setGradeWisePrice(gradewisepp);
-if(grade1!=null) {
-
-				jbapri.setGradewisepp1(Double.parseDouble(grade1));
-			}
-
-			if(grade2!=null) {
-				jbapri.setGradewisepp2(Double.parseDouble(grade2));
-			}
-			if(grade3!=null) {
-
-				jbapri.setGradewisepp3(Double.parseDouble(grade3));
-			}
-			if(grade4!=null) {
-
-				jbapri.setGradewisepp4(Double.parseDouble(grade4));
-			}
-			if(grade5!=null) {
-
-				jbapri.setGradewisepp5(Double.parseDouble(grade5));
-			}
-			if(grade6!=null) {
-				jbapri.setGradewisepp6(Double.parseDouble(grade6));
-			}
-			if(grade7!=null) {
-				jbapri.setGradewisepp7(Double.parseDouble(grade7));
-			}
-			if(grade8!=null) {
-				jbapri.setGradewisepp8(Double.parseDouble(grade8));
-			}
-
-
-			// farmer Bank Document
+			jbapri.setCreadtedby(creadtedby);
+			jbapri.setCreateddate(date);
+			jbapri.setRegion(region);
+			jbapri.setDpcid(dpcid);
+			if(grade1!=0) {jbapri.setGradewisepp1(grade1);}
+			if(grade2!=0) {jbapri.setGradewisepp2(grade2);}
+			if(grade3!=0) {jbapri.setGradewisepp3(grade3);}
+			if(grade4!=0) {jbapri.setGradewisepp4(grade4);}
+			if(grade5!=0) {jbapri.setGradewisepp5(grade5);}
+			if(grade6!=0) {jbapri.setGradewisepp6(grade6);}
+			if(grade7!=0) {jbapri.setGradewisepp7(grade7);}
+			if(grade8!=0) {jbapri.setGradewisepp8(grade8);}
+            
 
 
 			jbaservice.create(jbapri);
@@ -2044,7 +2128,15 @@ if(grade1!=null) {
 			errors = errors.replace("</br>", "");
 			errors = errors.replace("'", "");
 		//	errors = errors.replace(" ", "");
-			boolean procupdate = rawJuteProcurAndPayService.updateProcurementerror(status, is_verified, tallyNo,errors.trim());
+			HttpSession session=request.getSession();
+			String dpcid="0000",region ="00";
+			if(session.getAttribute("dpcId")!=null){
+				 dpcid =  (String) session.getAttribute("dpcId");
+			}
+			if(session.getAttribute("region")!=null){
+				region =   (String) (session.getAttribute("region"));
+			}
+			boolean procupdate = rawJuteProcurAndPayService.updateProcurementerror(status, is_verified, tallyNo,errors.trim(),region);
             System.out.println(procupdate);
             if (procupdate) {
             	verifyTallySlipService.submitform(verifyTallySlip);

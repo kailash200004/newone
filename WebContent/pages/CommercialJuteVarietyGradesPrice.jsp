@@ -108,6 +108,7 @@ $(document).ready(function () {
     else {
         dateNewFormat += '-0' + onlyDate;
     }
+    
     var tommorowymd, tomdate,tommorowdate = new Date();
     tommorowdate.setDate(tommorowdate.getDate()+1);
     tommorowymd = tommorowdate.getFullYear() + '-'; 
@@ -131,7 +132,13 @@ $(document).ready(function () {
  
 
     $('#entryDate').val(dateNewFormat);
-    $('#effectDate').val(tommorowymd);
+ //   $('#effectDate').val(tommorowymd);
+ 
+ var option = "<option disabled selected value=''>-Select-</option> <option value="+dateNewFormat+">"+dateNewFormat+"</option> <option value= "+tommorowymd+">"+tommorowymd+" </option>"
+   // document.getElementById("d1").innerHTML = dateNewFormat;
+   // document.getElementById("d1n").innerHTML = dateNewFormat;
+   // document.getElementById("d2").innerHTML = tommorowymd;
+    document.getElementById("effectDate").innerHTML = option;
    // $("#centerordpc").chosen();
    
      
@@ -232,7 +239,11 @@ $(document).ready(function () {
                                         </div>
                                          <div class="col-sm-4 form-group">
                                             <label>Date of Effect</label>
-                                            <input type="text" name="effectDate" class="form-control"  id="effectDate"  readonly="true"> 
+                                           <!--  <input type="text" name="effectDate" class="form-control"  id="effectDate"  readonly="true">  -->
+                                            <select name="effectDate" id="effectDate" class="form-control" required>
+                                        	 
+                                        	 
+                                        	</select>
 											 
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -457,6 +468,7 @@ $(document).ready(function () {
 			  var cqty = $("#cqty").val();
 			 // var cprice = $("#cprice").val();
 			  var effectDate = $("#effectDate").val();
+			 // alert(effectDate);
 			  var entryDate = $("#entryDate").val();
 			  var grade0 = Number($("#grade0").val());
 			  var grade1 = Number($("#grade1").val());
@@ -626,7 +638,7 @@ $(document).ready(function () {
 						  }
 				  }
 			 
-			  if(zone!=null && jutevariety!="0"&& region!=null && cropyr!="0"&& dpc!="" &&cqty !="" && result){
+			  if(zone!=null && jutevariety!="0"&& region!=null && cropyr!="0"&& dpc!="" &&cqty !="" && result && effectDate !=null){
 				  
 				  dpc = dpc.toString();
 				  if(isNaN(grade6))

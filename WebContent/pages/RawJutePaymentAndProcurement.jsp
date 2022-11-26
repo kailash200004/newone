@@ -594,27 +594,38 @@
 								for (var i = 0; i < input.length; i++) {
 									for (var j = 0; j < data.length; j++){
 										
-										 gradesPersent= parseFloat(((input[i].value * data[0][i])/100));
-										 
-													if(data[0][i] > gradefive){
-														
-									     		  		 b[i]= parseFloat(data[0][i] - gradefive);
-									      			 		 console.log(" b"+[i]+" = "+b[i]);
-									      				 multi=(b[i] *  gradesPersent) ;
-									      				addition += multi;
-													}
+										 gradesPersent= parseFloat((input[i].value) /100);
+										 console.log("gradesPersent"+gradesPersent);
 													
-												else if(data[0][i] < gradefive){
-										  		  	 	b[i]= parseFloat(gradefive - data[0][i]);
-											      			 console.log(" b"+[i]+" = "+b[i]);
-											      		multi=(b[i] *  gradesPersent) ;
-											      		addition += multi;
-										      		
-													}
-												var garsatt=document.getElementById("garsatRate").value;
-												var td=	(garsatt - (addition/100));
+										if(data[0][i]!=0)
+										{
+											if(data[0][i] > gradefive){
+												b[i]= parseFloat(data[0][i]-gradefive);
+									      		console.log(" b"+[i]+" = "+b[i]);
+									      		multi=(b[i] *  gradesPersent) ;
+									      		console.log("multi"+multi);
+									      		addition += multi;
+									      		console.log("addition"+addition);
+												}
+											else if(data[0][i] < gradefive){
+												 b[i]= parseFloat(data[0][i]-gradefive);
+												console.log(" b"+[i]+" = "+b[i]);
+												multi=(b[i] *  gradesPersent) ;
+												console.log("multi"+multi);
+												addition += multi;
+												console.log("addition"+addition);
+												      		
+												}  
+											}
+													
+												  
+												
 											}
 										}
+								var garsatt=document.getElementById("garsatRate").value;
+								console.log("garsatt"+garsatt);
+							var td=	(garsatt - (addition));
+							console.log("td"+td);
 								
 								document.getElementById("tdbaseprice").value = Math.round(td,2);
 								document.getElementById("amountPayable").value = 0.0;
