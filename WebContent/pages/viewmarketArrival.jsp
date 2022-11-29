@@ -22,6 +22,32 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+    <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+ <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
+ <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="text/javascript"></script>  
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" />  
+ <script type="text/javascript">
+	$(document).ready(function ()  
+	{  
+		 $("#farmerVerific").DataTable({         
+	         scrollX: true,
+	         "pageLength": 50
+	       }); 
+	});  
+ </script>  
 </head>
 
 <body class="fixed-navbar">
@@ -50,10 +76,6 @@
 		                // out.println("== "+farmerno);
 						List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>) request.getAttribute("marketArrivalList");	
 						
-						for(MarketArrivalModel abc : allmarketArrivalList){
-							//out.println(abc.getJutevariety());
-							out.println(abc.getJutevariety());
-						}
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
@@ -66,15 +88,30 @@
 									<tr>
 										<th>Sl.No</th>
 										<th>DPC Name</th>
+										<th>Basis</th>
 										<th>Arrival Date</th>
-										
 										<th>Jute Variety</th>
 										<th>Crop Year</th> 										
 										<th>Arrived Quantity</th>
 										<th>Minimum Moisture</th>
 										<th>Maximum Moisture</th>
 								
-										
+										<th>Grade1</th>
+										<th>Grade2 </th>
+										<th>Grade3 </th>
+										<th>Grade4 </th>
+										<th>Grade5 </th>
+										<th>Grade6 </th>
+										<th>Grade7 </th>
+										<th>Grade8 </th>
+										<th>Grade_rate1 </th>
+										<th>Grade_rate2 </th>
+										<th>Grade_rate3 </th>
+										<th>Grade_rate4 </th>
+										<th>Grade_rate5 </th>
+										<th>Grade_rate6 </th>
+										<th>Grade_rate7 </th>
+										<th>Grade_rate8 </th>
 
 									</tr>
 								</thead>
@@ -89,11 +126,28 @@
 										<td><%=i%></td>
 										<td><%=marketArrivalList.getDpcnames()%></td>
 				                    	<td><%=marketArrivalList.getDatearrival()%></td>
+				                    	<td><%=marketArrivalList.getBasis()%></td>
 										 <td><%=marketArrivalList.getJutevariety()%>
 										<td><%=marketArrivalList.getCropyr()%></td> 
 										<td><%=marketArrivalList.getArrivedqty()%></td>
 										<td><%=marketArrivalList.getMixmois()%></td>
 										<td><%=marketArrivalList.getMaxmois()%></td>
+									<td><%=marketArrivalList.getGrade1()%></td>
+									<td><%=marketArrivalList.getGrade2()%></td>
+									<td><%=marketArrivalList.getGrade3()%></td>
+									<td><%=marketArrivalList.getGrade4()%></td>
+									<td><%=marketArrivalList.getGrade5()%></td>
+									<td><%=marketArrivalList.getGrade6()%></td>
+									<td><%=marketArrivalList.getGrade7()%></td>
+									<td><%=marketArrivalList.getGrade8()%></td>
+									<td><%=marketArrivalList.getGrade_rate1()%></td>
+									<td><%=marketArrivalList.getGrade_rate2()%></td>
+									<td><%=marketArrivalList.getGrade_rate3()%></td>
+									<td><%=marketArrivalList.getGrade_rate4()%></td>
+									<td><%=marketArrivalList.getGrade_rate5()%></td>
+									<td><%=marketArrivalList.getGrade_rate6()%></td>
+									<td><%=marketArrivalList.getGrade_rate7()%></td>
+									<td><%=marketArrivalList.getGrade_rate8()%></td>
 									
 										
 										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>

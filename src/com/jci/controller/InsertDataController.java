@@ -1532,7 +1532,7 @@ public class InsertDataController {
 		ModelAndView mv = new ModelAndView("viewmarketArrival");
 		List <MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAlldata();
 		//List<MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAll();
-		//System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList.toString());
+		System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList.toString());
 		mv.addObject("marketArrivalList", allmarketArrivalList);
 		//System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		//for(MarketArrivalModel abc: allmarketArrivalList) {
