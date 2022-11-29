@@ -76,8 +76,8 @@ body {
 				<ul class="nav-2-level ">
 
 					<li><a href="rulingMarketForm.obj">Ruling Market Rate at DPC</a></li>
-					<li><a href="viewRulingMarket.obj"> View Ruling Market List</a></li>
-					<li><a href="viewmarketArrival.obj">Ruling Market Rate at DPC</a></li>
+					<li><a href="viewmarketArrival.obj"> View Ruling Market List</a></li>
+					 
 					<li><a href="jbaRate.obj">JBA Rate</a></li>
 					<li><a href="JbaPriceList.obj">JBA List</a></li>
 					

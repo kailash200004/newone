@@ -164,22 +164,22 @@ $(document).ready(function () {
                                       <div class="row">
                                        <div class="col-sm-4 form-group" >
 											<label><b>Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="northernprice"  id ="northernprice" required="required"/></br> 
+											<label>Basis Price +</label><input  type="number" name="northernprice"  id ="northernprice" required="required" min="0"/></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Semi-Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="seminorthernprice"  id ="seminorthernprice" required="required"/></br> 
+											<label>Basis Price +</label><input  type="number" name="seminorthernprice"  id ="seminorthernprice" required="required" min="0" /></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Bihar Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="biharprice"  id ="biharprice" required="required"/></br> 
+											<label>Basis Price +</label><input  type="number" name="biharprice"  id ="biharprice" required="required" min="0"/></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Other State Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="otherprice"  id ="otherprice" required="required"/></br> 
+											<label>Basis Price +</label><input  type="number" name="otherprice"  id ="otherprice" required="required" min="0"/></br> 
 										</div>
                                     
                                     

@@ -1530,6 +1530,7 @@ public class InsertDataController {
 	public ModelAndView viewmarketArrival(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("viewmarketArrival");
 		List<MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAll();
+		System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList);
 		mv.addObject("marketArrivalList", allmarketArrivalList);
 		return mv;
 	}
