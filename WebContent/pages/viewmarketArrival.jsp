@@ -1,3 +1,4 @@
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
@@ -34,13 +35,25 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Farmer details</h1>
+                <h1 class="page-title">Market Arrival Details</h1>
                  
             </div>
 				
 				<%
-					List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>) request.getAttribute("marketArrivalList");	
 				
+	            	
+		            String dpcCenter = (String) session.getAttribute("dpc_center");
+		            String dpcid = (String) session.getAttribute("dpcId");
+		            	
+		            	
+		               //  List<String> farmerno= (List<String>) request.getAttribute("farmerNo");
+		                // out.println("== "+farmerno);
+						List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>) request.getAttribute("marketArrivalList");	
+						
+						for(MarketArrivalModel abc : allmarketArrivalList){
+							//out.println(abc.getJutevariety());
+							out.println(abc.getJutevariety());
+						}
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
@@ -54,12 +67,13 @@
 										<th>Sl.No</th>
 										<th>DPC Name</th>
 										<th>Arrival Date</th>
-									<th>Jute Variety</th>
+										
+										<th>Jute Variety</th>
 										<th>Crop Year</th> 										
 										<th>Arrived Quantity</th>
 										<th>Minimum Moisture</th>
 										<th>Maximum Moisture</th>
-										<th>Estimated Grade Out-turn</th>
+								
 										
 
 									</tr>
@@ -80,7 +94,7 @@
 										<td><%=marketArrivalList.getArrivedqty()%></td>
 										<td><%=marketArrivalList.getMixmois()%></td>
 										<td><%=marketArrivalList.getMaxmois()%></td>
-										<td><%=marketArrivalList.getEsgradeoutturn()%></td>
+									
 										
 										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>
 	<td><a href="bnaDelete.obj?id=<%=bnaList.getId()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> --%>

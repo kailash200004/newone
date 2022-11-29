@@ -170,13 +170,10 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, tallySlipImg from jciprocurement where farmerregno Not in (select farmerregno from verificationtallyslip)";
 	List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 	List<Object[]> res = new ArrayList<>();
-
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(queryStr);
-
 		res = query.list();
-		//final List<MyObject> list = new LinkedList<>();
 		for( Object[] o : res) {
 			RawJuteProcurementAndPayment raw = new RawJuteProcurementAndPayment();
 			String farmer = (String)o[0];
