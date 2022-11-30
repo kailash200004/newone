@@ -42,7 +42,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
  <script type="text/javascript">
 	$(document).ready(function ()  
 	{  
-		 $("#farmerVerific").DataTable({         
+		 $("#example-table").DataTable({         
 	         scrollX: true,
 	         "pageLength": 50
 	       }); 
@@ -125,8 +125,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<tr>
 										<td><%=i%></td>
 										<td><%=marketArrivalList.getDpcnames()%></td>
+								        <td><%=marketArrivalList.getBasis()%></td>
 				                    	<td><%=marketArrivalList.getDatearrival()%></td>
-				                    	<td><%=marketArrivalList.getBasis()%></td>
+
 										 <td><%=marketArrivalList.getJutevariety()%>
 										<td><%=marketArrivalList.getCropyr()%></td> 
 										<td><%=marketArrivalList.getArrivedqty()%></td>
