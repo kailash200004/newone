@@ -136,7 +136,7 @@
 												<%
 													if (baleData.getJute_variety() != null) {
 												%>
-												<option selected value="<%baleData.getJute_variety();%>"><%=baleData.getJute_variety()%></option>
+												<option selected value="<%=baleData.getJute_variety()%>"><%=baleData.getJute_variety()%></option>
 												<%
 													}
 												%>
@@ -150,7 +150,7 @@
 												<%
 													if (baleData.getJute_grade() != null) {
 												%>
-												<option selected value="<%baleData.getJute_grade();%>" ><%=baleData.getJute_grade()%></option>
+												<option selected value="<%=baleData.getJute_grade()%>" ><%=baleData.getJute_grade()%></option>
 												<%
 													}
 												%>
