@@ -1438,8 +1438,7 @@ public class InsertDataController {
 			marketArrival.setCropyr(cropyr);
 			marketArrival.setDatearrival(date1);
 			marketArrival.setDpcnames(dpcnames);
-		//	marketArrival.setEsgradeoutturn(esgradeoutturn);
-		//	marketArrival.setIpaddress(ipAddress);
+ 
 			marketArrival.setJutevariety(jutevariety);
 			marketArrival.setMaxmois(maxmois);
 			marketArrival.setMixmois(mixmois);
@@ -1528,10 +1527,17 @@ public class InsertDataController {
 
 	@RequestMapping("viewmarketArrival")
 	public ModelAndView viewmarketArrival(HttpServletRequest request) {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
 		ModelAndView mv = new ModelAndView("viewmarketArrival");
-		List<MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAll();
-		System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList);
+		List <MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAlldata();
+		//List<MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAll();
+		System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList.toString());
 		mv.addObject("marketArrivalList", allmarketArrivalList);
+		//System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		//for(MarketArrivalModel abc: allmarketArrivalList) {
+			//System.out.println("====   "+abc.getJutevariety());
+		//}
 		return mv;
 	}
 
