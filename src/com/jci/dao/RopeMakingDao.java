@@ -14,5 +14,5 @@ public interface RopeMakingDao {
 	public boolean submitform(RopeMakingModel ropeMakingModel);
 
 	public List <RopeMakingModel> ropeMakingList(int regionId);
-
+	public List <String> findBinno(String cropyr, String dpcid);
 }

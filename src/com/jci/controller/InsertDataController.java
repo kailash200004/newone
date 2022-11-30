@@ -348,28 +348,35 @@ public class InsertDataController {
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
 			String cropyr = request.getParameter("cropyr");
-			String placeofactivity = (String) request.getSession().getAttribute("dpcId");
+			//String placeofactivity = (String) request.getSession().getAttribute("dpcId");
 			String jutevariety = request.getParameter("jutevariety");
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
 			String balance = request.getParameter("balance");
-			String ipaddress = request.getParameter("ipaddress");
+			String regionId = request.getParameter("region_id");
+			String refid = request.getParameter("refid");
+			
 			String binno = request.getParameter("binno");
-			String rateSlipNoFrom = request.getParameter("rateslipno");
+		
 			RopeMakingModel addRopeMaking = new RopeMakingModel();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
+			
 			addRopeMaking.setBasis(basis);
 			addRopeMaking.setBinno(binno);
-			addRopeMaking.setCreadtedby(creadtedby);
-			// addRopeMaking.setCreateddate(createddate);
+			addRopeMaking.setCreadtedby(refid);
+			addRopeMaking.setRegion(regionId);
+			
 			addRopeMaking.setCropyr(cropyr);
 			addRopeMaking.setDatereport(new Date());
-			addRopeMaking.setIpaddress(ipaddress);
+			addRopeMaking.setCreadtedby(regionId);
 			addRopeMaking.setJutevariety(jutevariety);
-			addRopeMaking.setPlaceofactivity(placeofactivity);
+		//	addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setRopemade(ropemade);
 			addRopeMaking.setRopeused(ropeUsed);
 			addRopeMaking.setRope_balance(balance);
-			addRopeMaking.setCreateddate(new Date());
+			addRopeMaking.setCreateddate(date);
 			int ropemadeInt = Integer.parseInt(ropemade);
 			int ropeUsedInt = Integer.parseInt(ropeUsed);
 			if(ropemadeInt > ropeUsedInt) {
@@ -2628,29 +2635,37 @@ public class InsertDataController {
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
 			String cropyr = request.getParameter("cropyr");
+			System.out.println("cropyrsssssss"+ cropyr);
 			String placeofactivity = (String) request.getSession().getAttribute("dpcId");
 			String jutevariety = request.getParameter("jutevariety");
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
 			String balance = request.getParameter("balance");
-			String ipaddress = request.getParameter("ipaddress");
+			String regionId = request.getParameter("region_id");
+			String refid = request.getParameter("refid");
+			
 			String binno = request.getParameter("binno");
 			//String rateslipno = request.getParameter("rateslipno");
 			RopeMakingModel addRopeMaking = new RopeMakingModel();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
 			addRopeMaking.setRpmrefid(Integer.parseInt(id));
 			addRopeMaking.setBasis(basis);
 			addRopeMaking.setBinno(binno);
-			addRopeMaking.setCreadtedby(creadtedby);
-			// addRopeMaking.setCreateddate(createddate);
+			addRopeMaking.setCreadtedby(refid);
+			addRopeMaking.setRegion(regionId);
+			
 			addRopeMaking.setCropyr(cropyr);
+			
 			addRopeMaking.setDatereport(new Date());
-			addRopeMaking.setIpaddress(ipaddress);
+			addRopeMaking.setCreadtedby(regionId);
 			addRopeMaking.setJutevariety(jutevariety);
 			addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setRopemade(ropemade);
 			addRopeMaking.setRopeused(ropeUsed);
 			addRopeMaking.setRope_balance(balance);
-			addRopeMaking.setCreateddate(new Date());
+			addRopeMaking.setCreateddate(date);
 			ropeMakingService.create(addRopeMaking);
 			redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
@@ -3413,6 +3428,14 @@ public class InsertDataController {
 		Gson gson = new Gson();
 		
 		return rawJuteProcurAndPayService.validateTally(tallyslip, ro) + "";
+	}
+	@ResponseBody
+	@RequestMapping(value = "findBinno", method = RequestMethod.GET)
+	public String findBinno(HttpServletRequest request) {
+		Gson gson = new Gson();
+	//	System.out.println("=============>>>>>>>>>>>>>>>>>>>>>>>>"+request.getParameter("cropyr"));
+		List<String> result=ropeMakingService.findBinno(request.getParameter("cropyr"),request.getParameter("dpcid") );
+		return gson.toJson(result);
 	}
 
 }

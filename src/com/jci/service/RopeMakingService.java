@@ -14,5 +14,5 @@ public interface RopeMakingService {
 	public List <RopeMakingModel> getAll();
 	public boolean submitform(RopeMakingModel off);
 	public List <RopeMakingModel> ropeMakingList(int regionId);
-
+	public List <String> findBinno(String cropyr, String dpcid);
 }

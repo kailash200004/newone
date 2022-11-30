@@ -18,4 +18,5 @@ public interface UserRegistrationDao {
 	public String getUserDpc(int userId);
 	public String getUserRegion(int userId);
 	public String getdpc_center(String dpcIdd);
+	public int getRefId(String emailId);
 }

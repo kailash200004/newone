@@ -80,4 +80,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 	public String getdpc_center(String dpcIdd) {
 		return userRegistrationDao.getdpc_center(dpcIdd);
 	}
+	
+	@Override
+	public int getRefId(String emailId) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getRefId(emailId);
+	}
 }

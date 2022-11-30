@@ -54,4 +54,10 @@ public class RopeMakingSeviceImpl implements RopeMakingService {
 	public List<RopeMakingModel> ropeMakingList(int regionId) {
 		return ropeMakingDao.ropeMakingList(regionId);
 	}
+
+	@Override
+	public List<String> findBinno(String cropyr, String dpcid) {
+	
+		return ropeMakingDao.findBinno(cropyr,dpcid);
+	}
 }

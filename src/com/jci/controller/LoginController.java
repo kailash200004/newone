@@ -41,6 +41,7 @@ public class LoginController {
 
 			String ifExist =  userRegService.checkLogin(usrname, password);
 			int userId = userRegService.getUserId(usrname);
+			int refId = userRegService.getRefId(usrname);
 			String dpcIdd = userRegService.getUserDpc(userId);
 			String region = userRegService.getUserRegion(userId);
 			String dpc_center = userRegService.getdpc_center(dpcIdd);
@@ -53,6 +54,7 @@ public class LoginController {
 			session.setAttribute("region", region);
 		//	session.setAttribute("dpcId", dpcId);
 			session.setAttribute("zone", dpcId);
+			session.setAttribute("refId", refId);
 			session.setAttribute("dpc_center", dpc_center);
 			if(ifExist!=null)
 				return new ModelAndView("dashboard");
