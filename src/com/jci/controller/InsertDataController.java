@@ -1438,8 +1438,8 @@ public class InsertDataController {
 			marketArrival.setCropyr(cropyr);
 			marketArrival.setDatearrival(date1);
 			marketArrival.setDpcnames(dpcnames);
-			marketArrival.setEsgradeoutturn(esgradeoutturn);
-			marketArrival.setIpaddress(ipAddress);
+		//	marketArrival.setEsgradeoutturn(esgradeoutturn);
+		//	marketArrival.setIpaddress(ipAddress);
 			marketArrival.setJutevariety(jutevariety);
 			marketArrival.setMaxmois(maxmois);
 			marketArrival.setMixmois(mixmois);

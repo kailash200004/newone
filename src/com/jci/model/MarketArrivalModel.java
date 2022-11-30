@@ -18,7 +18,7 @@ public class MarketArrivalModel {
 	@Column(name = "mrarefid")
 	private int mrarefid;
 
-	@Column(name = "dpcnames")
+	@Column(name = "dpc_code")
 	private String dpcnames;
 
 	@Column(name = "datearrival")
@@ -39,42 +39,69 @@ public class MarketArrivalModel {
 	@Column(name = "maxmois")
 	private String maxmois;
 
-	@Column(name = "esgradeoutturn")
-	private String esgradeoutturn;
+	@Column(name = "region_id")
+	private String region_id;
 
 	@Column(name = "createddate")
 	private Date createddate;
 
-	@Column(name = "createdfrom")
-	private String createdfrom;
 
 	@Column(name = "creadtedby")
 	private int creadtedby;
 
-	@Column(name = "ipaddress")
-	private String ipaddress;
-
-	public MarketArrivalModel() {
-
-	}
-
-	public MarketArrivalModel(int mrarefid, String dpcnames, Date datearrival, String jutevariety, String cropyr,
-			String arrivedqty, String mixmois, String maxmois, String esgradeoutturn, Date createddate,
-			String createdfrom, int creadtedby, String ipaddress) {
-		this.mrarefid = mrarefid;
-		this.dpcnames = dpcnames;
-		this.datearrival = datearrival;
-		this.jutevariety = jutevariety;
-		this.cropyr = cropyr;
-		this.arrivedqty = arrivedqty;
-		this.mixmois = mixmois;
-		this.maxmois = maxmois;
-		this.esgradeoutturn = esgradeoutturn;
-		this.createddate = createddate;
-		this.createdfrom = createdfrom;
-		this.creadtedby = creadtedby;
-		this.ipaddress = ipaddress;
-	}
+	@Column(name = "no_arrival")
+	private String no_arrival;
+	
+	@Column(name = "basis")
+	private String basis;
+	
+	@Column(name = "grade1")
+	private String grade1;
+	
+	@Column(name = "grade2")
+	private String grade2;
+	
+	@Column(name = "grade3")
+	private String grade3;
+	
+	@Column(name = "grade4")
+	private String grade4;
+	
+	@Column(name = "grade5")
+	private String grade5;
+	
+	@Column(name = "grade6")
+	private String grade6;
+	
+	@Column(name = "grade7")
+	private String grade7;
+	
+	@Column(name = "grade8")
+	private String grade8;
+	
+	@Column(name = "grade_rate1")
+	private int grade_rate1;
+	
+	@Column(name = "grade_rate2")
+	private int grade_rate2;
+	
+	@Column(name = "grade_rate3")
+	private int grade_rate3;
+	
+	@Column(name = "grade_rate4")
+	private int grade_rate4;
+	
+	@Column(name = "grade_rate5")
+	private int grade_rate5;
+	
+	@Column(name = "grade_rate6")
+	private int grade_rate6;
+	
+	@Column(name = "grade_rate7")
+	private int grade_rate7;
+	
+	@Column(name = "grade_rate8")
+	private int grade_rate8;
 
 	public int getMrarefid() {
 		return mrarefid;
@@ -140,12 +167,12 @@ public class MarketArrivalModel {
 		this.maxmois = maxmois;
 	}
 
-	public String getEsgradeoutturn() {
-		return esgradeoutturn;
+	public String getRegion_id() {
+		return region_id;
 	}
 
-	public void setEsgradeoutturn(String esgradeoutturn) {
-		this.esgradeoutturn = esgradeoutturn;
+	public void setRegion_id(String region_id) {
+		this.region_id = region_id;
 	}
 
 	public Date getCreateddate() {
@@ -156,14 +183,6 @@ public class MarketArrivalModel {
 		this.createddate = createddate;
 	}
 
-	public String getCreatedfrom() {
-		return createdfrom;
-	}
-
-	public void setCreatedfrom(String createdfrom) {
-		this.createdfrom = createdfrom;
-	}
-
 	public int getCreadtedby() {
 		return creadtedby;
 	}
@@ -172,22 +191,156 @@ public class MarketArrivalModel {
 		this.creadtedby = creadtedby;
 	}
 
-	public String getIpaddress() {
-		return ipaddress;
+	public String getNo_arrival() {
+		return no_arrival;
 	}
 
-	public void setIpaddress(String ipaddress) {
-		this.ipaddress = ipaddress;
+	public void setNo_arrival(String no_arrival) {
+		this.no_arrival = no_arrival;
 	}
 
-	@Override
-	public String toString() {
-		return "MarketArrivalModel [mrarefid=" + mrarefid + ", dpcnames=" + dpcnames + ", datearrival=" + datearrival
-				+ ", jutevariety=" + jutevariety + ", cropyr=" + cropyr + ", arrivedqty=" + arrivedqty + ", mixmois="
-				+ mixmois + ", maxmois=" + maxmois + ", esgradeoutturn=" + esgradeoutturn + ", createddate="
-				+ createddate + ", createdfrom=" + createdfrom + ", creadtedby=" + creadtedby + ", ipaddress="
-				+ ipaddress + "]";
+	public String getBasis() {
+		return basis;
 	}
+
+	public void setBasis(String basis) {
+		this.basis = basis;
+	}
+
+	public String getGrade1() {
+		return grade1;
+	}
+
+	public void setGrade1(String grade1) {
+		this.grade1 = grade1;
+	}
+
+	public String getGrade2() {
+		return grade2;
+	}
+
+	public void setGrade2(String grade2) {
+		this.grade2 = grade2;
+	}
+
+	public String getGrade3() {
+		return grade3;
+	}
+
+	public void setGrade3(String grade3) {
+		this.grade3 = grade3;
+	}
+
+	public String getGrade4() {
+		return grade4;
+	}
+
+	public void setGrade4(String grade4) {
+		this.grade4 = grade4;
+	}
+
+	public String getGrade5() {
+		return grade5;
+	}
+
+	public void setGrade5(String grade5) {
+		this.grade5 = grade5;
+	}
+
+	public String getGrade6() {
+		return grade6;
+	}
+
+	public void setGrade6(String grade6) {
+		this.grade6 = grade6;
+	}
+
+	public String getGrade7() {
+		return grade7;
+	}
+
+	public void setGrade7(String grade7) {
+		this.grade7 = grade7;
+	}
+
+	public String getGrade8() {
+		return grade8;
+	}
+
+	public void setGrade8(String grade8) {
+		this.grade8 = grade8;
+	}
+
+	public int getGrade_rate1() {
+		return grade_rate1;
+	}
+
+	public void setGrade_rate1(int grade_rate1) {
+		this.grade_rate1 = grade_rate1;
+	}
+
+	public int getGrade_rate2() {
+		return grade_rate2;
+	}
+
+	public void setGrade_rate2(int grade_rate2) {
+		this.grade_rate2 = grade_rate2;
+	}
+
+	public int getGrade_rate3() {
+		return grade_rate3;
+	}
+
+	public void setGrade_rate3(int grade_rate3) {
+		this.grade_rate3 = grade_rate3;
+	}
+
+	public int getGrade_rate4() {
+		return grade_rate4;
+	}
+
+	public void setGrade_rate4(int grade_rate4) {
+		this.grade_rate4 = grade_rate4;
+	}
+
+	public int getGrade_rate5() {
+		return grade_rate5;
+	}
+
+	public void setGrade_rate5(int grade_rate5) {
+		this.grade_rate5 = grade_rate5;
+	}
+
+	public int getGrade_rate6() {
+		return grade_rate6;
+	}
+
+	public void setGrade_rate6(int grade_rate6) {
+		this.grade_rate6 = grade_rate6;
+	}
+
+	public int getGrade_rate7() {
+		return grade_rate7;
+	}
+
+	public void setGrade_rate7(int grade_rate7) {
+		this.grade_rate7 = grade_rate7;
+	}
+
+	public int getGrade_rate8() {
+		return grade_rate8;
+	}
+
+	public void setGrade_rate8(int grade_rate8) {
+		this.grade_rate8 = grade_rate8;
+	}
+	
+	 
+	
+	 
+
+
+	
 }
 
 
