@@ -2,6 +2,7 @@ package com.jci.service;
 
 import java.util.List;
 
+import com.jci.model.PurchaseCenterModel;
 import com.jci.model.RoDetailsModel;
 
 public interface PurchaseCenterService {
@@ -15,4 +16,5 @@ public interface PurchaseCenterService {
 	public List<String> purchaseCenter(String regionCode);
 	public List<String> dpcbyId(String dpc);
 	public List<String> getAllDpc();
+//	public List<PurchaseCenterModel>getCenterCodeByCode(int rocode);
 }

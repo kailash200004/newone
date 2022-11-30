@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jci.dao.PurchaseCenterDao;
+import com.jci.model.PurchaseCenterModel;
 import com.jci.model.RoDetailsModel;
 import com.jci.service.PurchaseCenterService;
 
@@ -73,5 +74,11 @@ public class PurchaseCenterServiceImpl implements PurchaseCenterService {
 	public List<String> getAllDpc() {
 		return purchaseCenterDao.getAllDpc();
 	}
+
+//	@Override
+//	public List<PurchaseCenterModel> getCenterCodeByCode(int rocode) {
+//		purchaseCenterDao.
+//		return null;
+//	}
 
 }
