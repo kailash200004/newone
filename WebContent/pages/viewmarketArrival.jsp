@@ -191,7 +191,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     <script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
     <script type="text/javascript">
-        $(function() {
+    /*  $(function() {
             $('#example-table').DataTable({
                 pageLength: 10,
                 //"ajax": './assets/demo/data/table_data.json',
@@ -201,9 +201,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     { "data": "extn" },
                     { "data": "start_date" },
                     { "data": "salary" }
-                ]*/
+                ]
             });
-        })
+        })*/
     </script>
 </body>
 
