@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jci.dao.BalePrepareDao;
 import com.jci.model.BalePreparation;
+import com.jci.model.PurchaseCenterModel;
 import com.jci.service.BalePrepareService;
 
 @Service
@@ -49,5 +50,7 @@ public class BalePrepareServiceImpl implements BalePrepareService	{
 	public boolean submitform(BalePreparation BalePreparation) {
 		return balePrepare.submitform(BalePreparation);
 	}
+
+	
 
 }

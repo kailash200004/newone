@@ -2,6 +2,7 @@ package com.jci.service;
 import java.util.List;
 
 import com.jci.model.BalePreparation;
+import com.jci.model.PurchaseCenterModel;
 
 public interface BalePrepareService {
 	public void create(BalePreparation BalePreparation);
@@ -11,4 +12,5 @@ public interface BalePrepareService {
 	public BalePreparation find(int id);
 	public List<BalePreparation> getAll();
 	public boolean submitform(BalePreparation Zone);
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.PurchaseCenterDao;
+import com.jci.model.PurchaseCenterModel;
 import com.jci.model.RoDetailsModel;
 
 @Transactional
@@ -98,7 +99,9 @@ public class PurchaseCenterDaoImpl implements PurchaseCenterDao {
 
 		return rows;
 	}
-
+	
+	
+	
 	@Override
 	public List<String> getAllDpc() {
 		List<String> result = new ArrayList<>();

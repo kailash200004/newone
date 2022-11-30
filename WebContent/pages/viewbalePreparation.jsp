@@ -61,9 +61,14 @@
 										<th>Bin Number</th> 										
 										<th>Jute Variety</th>
 										<th>Basis</th>
+										<th>Slip No From</th>
+										<th>Slip No To</th>
+										<th>Bale No</th>
 										<th>Packing Date</th>
-										<th></th>
-										<th></th>
+										<th>Place Of Packing</th>
+										<th>Jute Grade</th>
+										<!-- <th></th>
+										<th></th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -74,15 +79,20 @@
 									%>
 									<tr>
 										<td><%=i%></td>
-										<td><%=balePreparationLists.getCropYear()%></td>
-										<td><%=balePreparationLists.getBinNo()%></td>
-										<td><%=balePreparationLists.getJuteVariety()%></td>
+										<td><%=balePreparationLists.getCrop_year()%></td>
+										<td><%=balePreparationLists.getBin_no()%></td>
+										<td><%=balePreparationLists.getJute_variety()%></td>
 										<td><%=balePreparationLists.getBasis()%></td>
-										<%
+										<%-- <%
 											SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
 											String dates= formatter.format(balePreparationLists.getPackingDate());
-										%>
-										<td><%=dates%></td>
+										%> --%>
+										<td><%=balePreparationLists.getSlip_no_from()%></td>
+										<td><%=balePreparationLists.getSlip_no_to()%></td>
+										<td><%=balePreparationLists.getBale_no()%></td>
+										<td><%=balePreparationLists.getPacking_date()%></td>
+										<td><%=balePreparationLists.getPlace_of_packing()%></td>
+										<td><%=balePreparationLists.getJute_grade()%></td>
 			          					<td><a href="editBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 				                     	<td><a  href="deleteBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 									</tr>

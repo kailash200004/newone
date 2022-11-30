@@ -76,9 +76,31 @@
                                             </select> 
                                         </div> --%>
                                         
-                                       <div class="col-sm-4 form-group">
+                                        
+                                        <div class="col-sm-4 form-group">
+  										
+										<%-- <input class="form-control"  type="text" placeholder="Place of Purchase" value="<%=dpcCenter%>" onkeyup="deleteErrorMsg()" oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);" >
+      									<input class="form-control" name="dpcid" id="dpcid" type="hidden" value="<%=dpcid%>" > --%>
+     									                                       <div class="col-sm-4 form-group">
+                                            <label class="required">DPC Name</label> 
+											<select name="place_of_packing" id="place_of_packing" class="form-control">
+												<option value="">-Select-</option>
+												<%-- <option value="<%=dpcid%>"><%=dpcCenter%></option> --%>
+											</select>
+                                        </div>
+     									
+     									</div>
+                                       <!-- <div class="col-sm-4 form-group">
+                                            <label class="required">packing_date</label> 
+											<select name="packing_date" id="packing_date" class="form-control">
+												<option value="">-Select-</option>
+												<option value="2021-2022">2021-2022</option>
+												<option value="2022-2023">2022-2023</option>
+											</select>
+                                        </div> -->
+                                         <div class="col-sm-4 form-group">
                                             <label class="required">Crop Year</label> 
-											<select name="cropyr" id="cropyr" class="form-control">
+											<select name="crop_year" id="crop_year" class="form-control">
 												<option value="">-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
@@ -87,7 +109,7 @@
                                       
                                        <div class="col-sm-4 form-group">
                                              <label class="required">Bin number</label>
-                                        	 <input class="form-control" name="binnumb" id="binnumb" type="number" placeholder="Bin Number" required onkeyup="checkLen()" required>
+                                        	 <input class="form-control" name="bin_no" id="binnumb" type="number" placeholder="Bin Number" required onkeyup="checkLen()" required>
                                         </div> 
                                         
                                         <div class="col-sm-4 form-group">
@@ -101,21 +123,21 @@
                                         
                                         <div class="col-sm-4 form-group">
 											<label class="required">Jute Variety</label>
-                                        	<select name="jutevariety" id="jutevariety" class="form-control" required>
+                                        	<select name="jute_variety" id="jute_variety" class="form-control" required>
                                         		
                                         	</select>
 										</div> 
 										
 										<div class="col-sm-4 form-group">
 											<label class="required">Jute Grade</label>
-                                        	<select name="jutegarde" id="jutegarde" class="form-control" required>
+                                        	<select name="jute_grade" id="jute_grade" class="form-control" required>
                                         		
                                         	</select>
 										</div>
 										
 										<div class="col-sm-4 form-group">
 											<label class="required">Bale Check SlipNo.(From)</label>
-                                        	<input class="form-control" name="fromCheckSlipNo" id="fromCheckSlipNo" type="number" placeholder="Bale Check SlipNo" required onkeyup="baleFromLen()" min="0">
+                                        	<input class="form-control" name="slip_no_from" id="slip_no_from" type="number" placeholder="Bale Check SlipNo" required onkeyup="baleFromLen()" min="0">
 										</div>
                                     </div>
                                      
@@ -127,12 +149,12 @@
                                         
                                         <div class="col-sm-4 form-group">
 											<label class="required">Bale Check SlipNo.(To)</label>
-                                        	<input class="form-control" name="toCheckSlipNo" id="toCheckSlipNo" type="number" placeholder="Bale Check SlipNo" onblur="calculateNoOfBales()" min="0" required onkeyup="baleToLen()">
+                                        	<input class="form-control" name="slip_no_to" id="slip_no_to" type="number" placeholder="Bale Check SlipNo" onblur="calculateNoOfBales()" min="0" required onkeyup="baleToLen()">
 										</div>
 										
 										<div class="col-sm-4 form-group">
 											<label class="required">Total Bales</label>
-                                        	<input class="form-control" name="noOfBales" id="noOfBales" type="number" placeholder="Total bales" readonly required>
+                                        	<input class="form-control" name="bale_no" id="bale_no" type="number" placeholder="Total bales" readonly required>
 										</div>
                                     </div>
                                     
