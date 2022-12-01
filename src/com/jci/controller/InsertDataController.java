@@ -349,7 +349,7 @@ public class InsertDataController {
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
 			String cropyr = request.getParameter("cropyr");
-			String placeofactivity = (String) request.getSession().getAttribute("dpcId");
+			//String placeofactivity = (String) request.getSession().getAttribute("dpcId");
 			String jutevariety = request.getParameter("jutevariety");
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
@@ -373,7 +373,7 @@ public class InsertDataController {
 			addRopeMaking.setDatereport(new Date());
 			addRopeMaking.setCreadtedby(regionId);
 			addRopeMaking.setJutevariety(jutevariety);
-			addRopeMaking.setPlaceofactivity(placeofactivity);
+		//	addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setRopemade(ropemade);
 			addRopeMaking.setRopeused(ropeUsed);
 			addRopeMaking.setRope_balance(balance);
@@ -3475,6 +3475,14 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		Gson gson = new Gson();
 
 		return rawJuteProcurAndPayService.validateTally(tallyslip, ro) + "";
+	}
+	@ResponseBody
+	@RequestMapping(value = "findBinno", method = RequestMethod.GET)
+	public String findBinno(HttpServletRequest request) {
+		Gson gson = new Gson();
+	//	System.out.println("=============>>>>>>>>>>>>>>>>>>>>>>>>"+request.getParameter("cropyr"));
+		List<String> result=ropeMakingService.findBinno(request.getParameter("cropyr"),request.getParameter("dpcid") );
+		return gson.toJson(result);
 	}
 
 }

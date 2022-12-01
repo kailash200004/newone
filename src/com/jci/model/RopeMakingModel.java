@@ -27,6 +27,7 @@ public class RopeMakingModel {
 	@Column(name="region")
 	private String region;
 	
+	 
 	@Column(name="basis")
 	private String basis;
 	
@@ -45,10 +46,12 @@ public class RopeMakingModel {
 	@Column(name="createddate")
 	private String createddate;
 
+ 
 	
 	@Column(name="creadtedby")
 	private  String creadtedby;
 	
+ 
 	
 	@Column(name="ropemade")
 	private  String ropemade;
@@ -166,18 +169,22 @@ public class RopeMakingModel {
 		this.rope_balance = rope_balance;
 	}
 
+ 
 
 	public String getRegion() {
 		return region;
+ 
 	}
 
+ 
 	public void setRegion(String region) {
 		this.region = region;
+
 	}
 
-	
-	
+ 
 
     
 
 }
+

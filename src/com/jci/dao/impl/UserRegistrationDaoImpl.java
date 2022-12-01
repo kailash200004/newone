@@ -173,4 +173,21 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			System.out.println("dpccenter==============>>>>>>>>>>>>>>>>>>  "+dpc_center);
 			return dpc_center;
 	}	
+	
+	@Override
+	public int getRefId(String email) {
+		//String querystr = "select dpcId from jciumt where refid ='"+userId+"'";
+				String querystr = "select refid from jciumt where username='"+email+"'";
+				Session session = sessionFactory.getCurrentSession();
+				SQLQuery query = session.createSQLQuery(querystr);
+				List<Integer> userList = query.list();
+				System.out.println("refid===>>>>> "+userList);
+				if(!userList.isEmpty()) {
+					return userList.get(0);
+					//return "0";
+				}
+				else {
+					return 0;
+				}
+	}	
 }
