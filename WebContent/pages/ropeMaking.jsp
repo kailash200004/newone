@@ -142,7 +142,7 @@
                                         <div class="col-sm-4 form-group">
 
                                             <label class="required">Bin Number</label>
-						<select class="form-control" name="binno" id="binno">
+						<select class="form-control" name="binno" id="binno" >
 							<option disabled selected value>-Select-</option>
 										</select>
 			                         <!--  <input class="form-control" id="binno" name="binno" type="number" placeholder="Bin Number" required onkeyup="checkLen()" required>
@@ -153,7 +153,7 @@
 
                                                                            <label class="required">Crop Year</label>
 
-                                                                           <select name="cropyr" id="cropyr" class="form-control" required>
+                                                                           <select name="cropyr" id="cropyr" class="form-control"   required>
 
                                                                                   <option value="">-Select-</option>
 
@@ -405,11 +405,16 @@
 
        </script>
 
-<script>
-$("#cropyr").on("change", function() {
+ <script>
+$("#centerordpc").on("change", function() {
+
 	var cropyr=document.getElementById("cropyr").value;
-	  var dpcid=  '<%= (String)session.getAttribute("dpcId")%>';
-	//alert(cropyr);
+//	alert(cropyr);
+	  var dpcid= document.getElementById("centerordpc").value;
+	
+		//alert(dpcid);
+	  
+	
 	 $.ajax({
 		   type:"GET",
 		   url:"findBinno.obj",
@@ -429,13 +434,42 @@ $("#cropyr").on("change", function() {
 	   }); 
 });
 </script>
+<script>
+
+	$("#cropyr").on("change", function() {
+	var cropyr=document.getElementById("cropyr").value;
+	//alert(cropyr);
+	  var dpcid= document.getElementById("centerordpc").value;
+	
+	//	alert(dpcid);
+	  
+	
+	 $.ajax({
+		   type:"GET",
+		   url:"findBinno.obj",
+		   data:jQuery.param({"cropyr":cropyr, "dpcid":dpcid}),
+		   success:function(result){
+			   var data= jQuery.parseJSON(result);
+			   var html = "<option disabled selected value>-Select-</option>";
+			     for (var i = 0; i< data.length; i++){
+			    	 
+				 html += "<option value=" +data[i]+">"+data[i]+"</option>"
+				// alert(data);
+			   }
+			   $("#binno").html(html);
+		   
+	   }
+		   
+	   }); 
+	  }); 
+</script>
              <script>
 
        $(document).ready(function(){
-    	   var myVar = '<%= (int)session.getAttribute("refId")%>';
+    	   var myVar = '<%= (String) session.getAttribute("region")%>';
     	
     	   
-    	   alert(myVar);
+    //	   alert(myVar);
     	
     	   $.ajax({
     		   type:"GET",
