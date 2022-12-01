@@ -349,7 +349,7 @@ public class InsertDataController {
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
 			String cropyr = request.getParameter("cropyr");
-			//String placeofactivity = (String) request.getSession().getAttribute("dpcId");
+			String placeofactivity = request.getParameter("centerordpc");
 			String jutevariety = request.getParameter("jutevariety");
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
@@ -368,7 +368,7 @@ public class InsertDataController {
 			addRopeMaking.setBinno(binno);
 			addRopeMaking.setCreadtedby(refid);
 			addRopeMaking.setRegion(regionId);
-			
+			addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setCropyr(cropyr);
 			addRopeMaking.setDatereport(new Date());
 			addRopeMaking.setCreadtedby(regionId);
