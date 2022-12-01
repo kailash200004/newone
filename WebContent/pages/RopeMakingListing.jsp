@@ -50,12 +50,15 @@
 								<thead>
 									<tr>
 										<th>Sl.No</th>
+										<th>Place of activity</th>
+										<th>BIN No.</th>
+										<th>Crop Year</th>
 										<th>Basis</th>
 										<th>Jute Variety</th>
-										<th>BIN No.</th>
-										<!-- <th>Place of Activity</th> -->
 										<th>Rope Made</th>
-										<th></th>
+										<th>Rope Used</th>
+										<th>Rope Balance</th>
+										
 										<th></th>
 									</tr>
 								</thead>
@@ -67,11 +70,14 @@
 							%>
 									<tr>
 										<td><%=i%></td>
+										<td><%=ropeMakingListing.getPlaceofactivity()%></td>
+										<td><%=ropeMakingListing.getBinno()%>
+									    <td><%=ropeMakingListing.getCropyr()%>
 										<td><%=ropeMakingListing.getBasis()%></td>
 										<td><%=ropeMakingListing.getJutevariety()%>
-										<td><%=ropeMakingListing.getBinno()%>
-										<%-- <td><%=ropeMakingListing.getPlaceofactivity()%></td> --%>
 										<td><%=ropeMakingListing.getRopemade()%></td>
+										<td><%=ropeMakingListing.getRopeused()%></td>
+										<td><%=ropeMakingListing.getRope_balance()%></td>
 										<td><a href="editRopemaking.obj?id=<%=ropeMakingListing.getRpmrefid()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										<td><a onclick="return confirm('Are you sure you want to delete this item?');" href="deleteRopemaking.obj?id=<%=ropeMakingListing.getRpmrefid()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										

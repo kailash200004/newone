@@ -354,31 +354,38 @@ public class InsertDataController {
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
 			String balance = request.getParameter("balance");
-			String ipaddress = request.getParameter("ipaddress");
+			String regionId = request.getParameter("region_id");
+			String refid = request.getParameter("refid");
+			
 			String binno = request.getParameter("binno");
-			String rateSlipNoFrom = request.getParameter("rateslipno");
+		
 			RopeMakingModel addRopeMaking = new RopeMakingModel();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
+			
 			addRopeMaking.setBasis(basis);
 			addRopeMaking.setBinno(binno);
-			addRopeMaking.setCreadtedby(creadtedby);
-			// addRopeMaking.setCreateddate(createddate);
+			addRopeMaking.setCreadtedby(refid);
+			addRopeMaking.setRegion(regionId);
+			
 			addRopeMaking.setCropyr(cropyr);
 			addRopeMaking.setDatereport(new Date());
-			addRopeMaking.setIpaddress(ipaddress);
+			addRopeMaking.setCreadtedby(regionId);
 			addRopeMaking.setJutevariety(jutevariety);
 			addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setRopemade(ropemade);
 			addRopeMaking.setRopeused(ropeUsed);
 			addRopeMaking.setRope_balance(balance);
-			addRopeMaking.setCreateddate(new Date());
+			addRopeMaking.setCreateddate(date);
 			int ropemadeInt = Integer.parseInt(ropemade);
 			int ropeUsedInt = Integer.parseInt(ropeUsed);
-			if (ropemadeInt > ropeUsedInt) {
+			if(ropemadeInt > ropeUsedInt) {
 				ropeMakingService.create(addRopeMaking);
 				redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
-			} else {
+			}else {
 				redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-danger\"><b>OOps!</b> Rope made must be greater than rope used. </div>\r\n"
 								+ "");
@@ -1497,7 +1504,6 @@ public class InsertDataController {
 			marketArrival.setCropyr(cropyr);
 			marketArrival.setDatearrival(date1);
 			marketArrival.setDpcnames(dpcnames);
- 
 			marketArrival.setJutevariety(jutevariety);
 			marketArrival.setMaxmois(maxmois);
 			marketArrival.setMixmois(mixmois);
@@ -2673,41 +2679,52 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 	}
 
 	@RequestMapping("updateRopeMakingMid")
-	public ModelAndView updateRopeMakingMid(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public ModelAndView updateRopeMakingMid(HttpServletRequest request,RedirectAttributes redirectAttributes)
+	{
 		ModelAndView mv = new ModelAndView("editRopemaking");
 		try {
 			String id = request.getParameter("id");
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
+			System.out.println("basissssssss"+ basis);
 			String cropyr = request.getParameter("cropyr");
+			System.out.println("cropyrsssssss"+ cropyr);
 			String placeofactivity = (String) request.getSession().getAttribute("dpcId");
 			String jutevariety = request.getParameter("jutevariety");
+			System.out.println("jutevarietyssss"+ jutevariety);
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
 			String balance = request.getParameter("balance");
-			String ipaddress = request.getParameter("ipaddress");
+			String regionId = request.getParameter("region_id");
+			String refid = request.getParameter("refid");
+			
 			String binno = request.getParameter("binno");
-			// String rateslipno = request.getParameter("rateslipno");
+			//String rateslipno = request.getParameter("rateslipno");
 			RopeMakingModel addRopeMaking = new RopeMakingModel();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+     	    LocalDateTime now = LocalDateTime.now();
+     	    String date = dtf.format(now);
 			addRopeMaking.setRpmrefid(Integer.parseInt(id));
 			addRopeMaking.setBasis(basis);
 			addRopeMaking.setBinno(binno);
-			addRopeMaking.setCreadtedby(creadtedby);
-			// addRopeMaking.setCreateddate(createddate);
+			addRopeMaking.setCreadtedby(refid);
+			addRopeMaking.setRegion(regionId);
+			
 			addRopeMaking.setCropyr(cropyr);
+			
 			addRopeMaking.setDatereport(new Date());
-			addRopeMaking.setIpaddress(ipaddress);
+			addRopeMaking.setCreadtedby(regionId);
 			addRopeMaking.setJutevariety(jutevariety);
 			addRopeMaking.setPlaceofactivity(placeofactivity);
 			addRopeMaking.setRopemade(ropemade);
 			addRopeMaking.setRopeused(ropeUsed);
 			addRopeMaking.setRope_balance(balance);
-			addRopeMaking.setCreateddate(new Date());
+			addRopeMaking.setCreateddate(date);
 			ropeMakingService.create(addRopeMaking);
 			redirectAttributes.addFlashAttribute("msg",
-					"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
+				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
 			return new ModelAndView(new RedirectView("ropeMakingListing.obj"));
-		} catch (Exception e) {
+		} catch(Exception e){
 			System.out.println("Error in update Ropmaking");
 		}
 		return mv;

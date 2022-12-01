@@ -37,6 +37,14 @@
             <%
             	RopeMakingModel ropeMakingModel = (RopeMakingModel)request.getAttribute("editRopemaking");
 			%>
+			      <% 
+                
+            String dpcCenter = (String) session.getAttribute("dpc_center");
+            String dpcid = (String) session.getAttribute("dpcId");
+            String region_id = (String) session.getAttribute("region");
+            int refid = (int)session.getAttribute("userId");
+                
+            %>
             <div class="page-content fade-in-up">
                 <div class="row">
                     <div class="col-md-11">
@@ -49,38 +57,39 @@
                                             <label>Report Date</label>
                                             <input class="form-control" type="date" name="datereport" placeholder="Report Date" required>
                                         </div> -->
-                                        
+                                         <div class="col-sm-4 form-group">
+  <label>Place of activity</label>
+<input class="form-control"  type="text" placeholder="Place of Purchase" value="<%=dpcCenter%>" onkeyup="deleteErrorMsg()" oninput="javascript: if (this.value.length > 4) this.value = this.value.slice(0, 4);" readonly>
+      <input class="form-control" name="dpcid" id="dpcid" type="hidden" value="<%=dpcid%>" >
+      <input class="form-control" name="region_id" id="region_id" type="hidden" value="<%=region_id%>" >
+            <input class="form-control" name="refid" id="refid" type="hidden" value="<%=refid%>" >
+            <input class="form-control" name="id" id="id" type="hidden" value="<%=ropeMakingModel.getRpmrefid()%>" >
+            
+     </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Bin Number</label> 
 											<input class="form-control" id="binno" name="binno" type="number" placeholder="Bin Number" value="<%=ropeMakingModel.getBinno()%>" required onkeyup="checkLen()">
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>Crop Year</label> 
-											<select name="cropyr" id="cropyr" class="form-control" >
-												<% 
-                                        			if(ropeMakingModel.getCropyr()!=null){
-                                        		%>
-                                        				<option value="<%ropeMakingModel.getCropyr();%>" selected><%=ropeMakingModel.getCropyr()%></option>
-                                        		<%
-                                        			}
-                                        		 %>
+											<select name="cropyr" id="cropyr" class="form-control">
+	
+                                        		 												<option <%if(ropeMakingModel.getCropyr().equals("2021-2022")){out.print("selected");} %> value="2021-2022">2021-2022</option>
+												<option <%if(ropeMakingModel.getCropyr().equals("2022-2023")){out.print("selected");} %> value="2022-2023">2022-2023</option>
 											</select>
 										</div>
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
                                             <label>Basis</label>
                                             <select name="basis" id="basis" class="form-control" value="<%=ropeMakingModel.getBasis()%>">
-                                        		<% 
-                                        			if(ropeMakingModel.getBasis()!=null){
-                                        		%>
-                                        				<option value="<%ropeMakingModel.getBasis();%>" selected><%=ropeMakingModel.getBasis()%></option>
-                                        		<%
-                                        			}
-                                        		 %>
+                                          <option <%if(ropeMakingModel.getBasis().equals("msp")){out.print("selected");} %> value="msp">MSP</option>
+												<option <%if(ropeMakingModel.getBasis().equals("commercial")){out.print("selected");} %> value="commercial">Commercial</option>
                                         	 </select>
                                         </div>
-                                    </div>
+                               
                                     
-                                    <div class="row">
+                                    
                                        <%--  <div class="col-sm-4 form-group">
                                              <label>Place of activity</label>
                                         	 <select name="placeofactivity" id="placeofactivity" class="form-control">
@@ -100,30 +109,32 @@
                                         <div class="col-sm-4 form-group">
                                              <label>Jute Variety</label>
                                         <!-- <input class="form-control" name="jutevariety" type="text" placeholder="Jute Variety" required> -->
-	                                        <select name="jutevariety" id="jutevariety" class="form-control" value="<%=ropeMakingModel.getJutevariety()%>">
-	                                        	<% 
-                                        			if(ropeMakingModel.getJutevariety()!=null){
-                                        		%>
-                                        				<option value="<%ropeMakingModel.getJutevariety();%>" selected><%=ropeMakingModel.getJutevariety()%></option>
-                                        		<%
-                                        			}
-                                        		 %>
+	                                        <select name="jutevariety" id="jutevariety" class="form-control">
+	                                    
+												<option <%if(ropeMakingModel.getJutevariety().equals("Bimli")){out.print("selected");} %> value="Bimli">Bimli</option>
+												<option <%if(ropeMakingModel.getJutevariety().equals("Mesta")){out.print("selected");} %> value="Mesta">Mesta</option>
+												<option <%if(ropeMakingModel.getJutevariety().equals("Tossa")){out.print("selected");} %> value="Tossa">Tossa</option>
+												<option <%if(ropeMakingModel.getJutevariety().equals("White")){out.print("selected");} %> value="White">White</option>
+												<option <%if(ropeMakingModel.getJutevariety().equals("Tossa (New)")){out.print("selected");} %> value="Tossa (New)">Tossa (New)</option>
+												<option <%if(ropeMakingModel.getJutevariety().equals("White (New)")){out.print("selected");} %> value="White (New)"">White (New)"</option>
 	                                        </select>
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>Rope made</label>
-                                        	<input class="form-control" name="ropemade" id="ropemade" type="number" placeholder="Rope made" value="<%=ropeMakingModel.getRopemade()%>">
+                                        	<input class="form-control" name="ropemade" id="ropemade" type="number" placeholder="Rope made"  value="<%=ropeMakingModel.getRopemade()%>">
 										</div>
+										</div>
+										   <div class="row">
 										<div class="col-sm-4 form-group">
 											<label>Rope Used</label>
                                         	<input class="form-control" name="ropeUsed" id="ropeUsed" type="number" placeholder="Rope Used" onblur="calculateRope()" value="<%=ropeMakingModel.getRopeused()%>">
 										</div>
-                                    </div>
+                                    
 
-                                    <div class="row">
+                                 
  										<div class="col-sm-4 form-group">
 											<label>Balance</label>
-                                        	<input class="form-control" name="balance" id="balance"  type="number" placeholder="Rope balance" <%=ropeMakingModel.getRope_balance()%> readonly>
+                                        	<input class="form-control" name="balance" id="balance"  type="number" placeholder="Rope balance" value = "<%=ropeMakingModel.getRope_balance()%>" readonly>
 										</div>
                                     </div>                                    
                                     <div class="form-group col-sm-12">

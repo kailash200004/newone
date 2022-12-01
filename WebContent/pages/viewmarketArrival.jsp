@@ -112,6 +112,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<th>Grade_rate6 </th>
 										<th>Grade_rate7 </th>
 										<th>Grade_rate8 </th>
+										 
 
 									</tr>
 								</thead>
@@ -149,10 +150,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<td><%=marketArrivalList.getGrade_rate6()%></td>
 									<td><%=marketArrivalList.getGrade_rate7()%></td>
 									<td><%=marketArrivalList.getGrade_rate8()%></td>
-									
-										
+									<%-- <td><a href="bnaDelete.obj?id=<%=marketArrivalList.getMrarefid()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> 
+									 --%>	
 										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>
-	<td><a href="bnaDelete.obj?id=<%=bnaList.getId()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> --%>
+	--%>
  						 
 
 									</tr>

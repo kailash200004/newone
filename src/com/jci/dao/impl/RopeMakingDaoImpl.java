@@ -59,7 +59,45 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 	@Override
 	public List<RopeMakingModel> getAll() {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(RopeMakingModel.class);
-		List<RopeMakingModel> ll=c.list();
+		
+		List<Integer> result = new ArrayList<>();
+		String querystr = "select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<RopeMakingModel> ll = new ArrayList<>();
+		for(Object[] row: rows) {
+			
+			
+			int rpmrefid = (int)row[0];
+			String basis = (String)row[1];
+			String cropyr = (String)row[2];
+			String poa = (String)row[3];
+			String ropeUsed = (String)row[4];
+			String binNo = (String)row[5];
+			String juteVariety = (String)row[6];
+			String ropeMade = (String)row[7];
+			String crtddate = (String)row[8];
+			String crtdby = (String)row[9];
+			String ropeBalance = (String)row[10];
+			//String datereport = (String)row[11];
+			String region = (String)row[12]; 
+			String dpcName = (String)row[13];
+			RopeMakingModel rope = new RopeMakingModel();
+			rope.setBasis(basis);
+			rope.setBinno(binNo);
+			rope.setCreateddate(crtddate);
+			rope.setCropyr(cropyr);
+			rope.setPlaceofactivity(dpcName);
+			//rope.setDatereport(datereport);
+			rope.setRopeused(ropeUsed);
+			rope.setRope_balance(ropeBalance);
+			rope.setJutevariety(juteVariety);
+			rope.setRopemade(ropeMade);
+			rope.setRpmrefid(rpmrefid);
+			ll.add(rope);
+		}
 		return ll;
 	}
 
@@ -92,9 +130,9 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 			RopeMakingModel rope = new RopeMakingModel();
 			rope.setBasis(basis);
 			rope.setBinno(binNo);
-			rope.setCreateddate(new Date());
+			rope.setCreateddate("");
 			rope.setCropyr(cropyr);
-			rope.setDpc(dpcName);
+			rope.setPlaceofactivity(dpcName);
 			rope.setDatereport(new Date());
 			rope.setRopeused(ropeUsed);
 			rope.setRope_balance(ropeBalance);
@@ -102,44 +140,7 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 			rope.setRopemade(ropeMade);
 			rope.setRpmrefid(rpmrefid);
 			ll.add(rope);
-			//ropeMaking.add
-			//ropeMaking.add
-//			int F_ID = (int) row[0];
-//			String farmerName = (String) row[1];
-//			String address = (String) row[2];
-//			String mobile = (String)row[3];
-//			String branch = (String)row[11];
-//			String accountNumber = (String)row[13];
-//			String bankMandateForm= (String)row[15];
-//			String BankDoc= (String)row[16];
-//			String status = null;
-//			String vRegNo = (String)row[28];
-//			String vIFSC = (String) row[12];
-//			String REGno = (String)row[22];
-//			String RegBy = (String)row[6];
-//			String state = (String)row[43];
-//			String district = (String)row[28];
-//			String block = (String)row[30];
-//			int isVerified =0;
-//			if (row[17] !=null) {
-//				isVerified = (int) row[17];
-//			}
-//			FarmerRegModelDTO farmersDetailsDTO = new FarmerRegModelDTO();
-//			farmersDetailsDTO.setF_NAME(farmerName);
-//			farmersDetailsDTO.setF_ID(F_ID);
-//			farmersDetailsDTO.setAddress(address);
-//			farmersDetailsDTO.setF_MOBILE(mobile);
-//			farmersDetailsDTO.setF_BANK_BRANCH(branch);
-//			farmersDetailsDTO.setF_AC_NO(accountNumber);
-//			farmersDetailsDTO.setRegno(REGno);
-//			farmersDetailsDTO.setF_REG_BY(RegBy);
-//			farmersDetailsDTO.setF_BANK_DOC(BankDoc);
-//			farmersDetailsDTO.setIS_VERIFIED((int)isVerified);
-//			farmersDetailsDTO.setF_DOC_Mandate(bankMandateForm);
-//			farmersDetailsDTO.setState(state);
-//			farmersDetailsDTO.setDistrict(district);
-//			farmersDetailsDTO.setBlock(block);
-			// ll.add(farmersDetailsDTO);
+			 
 		}
 		 return ll;
 	}
