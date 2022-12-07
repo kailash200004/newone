@@ -69,8 +69,15 @@
 							JbaModel jbapri = (JbaModel) request.getAttribute("editJBAList");
 							%>
 							<div class="ibox-body">
+							<div class="row">
+							<div class="col-sm-4 form-group">
+							
+							<a href="JbaPriceList.obj">Go Back</a>
+							</div>
+					</div>
+						
 					<form action="saveJBAList.obj" method="POST">
-									<div class="row">
+								<div class="row">
 										<div class="col-sm-4 form-group">
 											<label>Date	</label> 
 											<input class=" form-control" type="hidden" name="id"

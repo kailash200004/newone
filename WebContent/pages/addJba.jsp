@@ -177,11 +177,11 @@ $(document).ready(function () {
 											<label>Basis Price +</label><input  type="number" name="biharprice"  id ="biharprice" required="required" min="0"/></br> 
 										</div>
 										
-										<div class="col-sm-4 form-group" >
+										<!-- <div class="col-sm-4 form-group" >
 											<label><b>Other State Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="otherprice"  id ="otherprice" required="required" min="0"/></br> 
+											<label>Basis Price +</label><input  type="number" name="otherprice"  id ="otherprice"  min="0"/></br> 
 										</div>
-                                    
+                                     -->
                                     
                                    
                                 

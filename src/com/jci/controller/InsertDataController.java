@@ -486,11 +486,11 @@ public class InsertDataController {
 			String F_MOBILE = request.getParameter("F_MOBILE");
 			String state = request.getParameter("state");
 			String F_District = request.getParameter("F_District");
-			System.out.print(" ...................." + F_District);
+		//	System.out.print(" ...................." + F_District);
 			String F_Block = request.getParameter("F_Block");
 			String F_Pincode = request.getParameter("pincode");
 			String police_station = request.getParameter("policestation");
-			System.out.print(" ...................." + police_station);
+		//	System.out.print(" ...................." + police_station);
 			String F_AC_NO = request.getParameter("F_AC_NO");
 			String bank_ac_type = request.getParameter("bank_ac_type");
 			String F_BANK_NAME = request.getParameter("F_BANK_NAME");
@@ -505,7 +505,7 @@ public class InsertDataController {
 			boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
 			String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
 			FarmerRegModel farmerRegModel = new FarmerRegModel();
-			System.out.println("==========>>>>>>>>>>>>>>>>  " + farmerName);
+		//System.out.println("==========>>>>>>>>>>>>>>>>  " + farmerName);
 			farmerRegModel.setF_NAME(farmerName);
 			farmerRegModel.setCaste(caste);
 			farmerRegModel.setGender(gender);
@@ -785,11 +785,11 @@ public class InsertDataController {
 			int northern = Integer.parseInt(request.getParameter("northernprice"));
 			int seminorthern = Integer.parseInt(request.getParameter("seminorthernprice"));
 			int bihar = Integer.parseInt(request.getParameter("biharprice"));
-			int other = Integer.parseInt(request.getParameter("otherprice"));
+		//	int other = Integer.parseInt(request.getParameter("otherprice"));
 
 			int grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8;
 			if (jutevariety.equalsIgnoreCase("tossa")) {
-				System.out.println("tossa");
+				//System.out.println("tossa");
 				grade1 = Integer.parseInt(request.getParameter("gradewisepp1"));
 				grade2 = Integer.parseInt(request.getParameter("gradewisepp2"));
 				grade3 = Integer.parseInt(request.getParameter("gradewisepp3"));
@@ -800,7 +800,7 @@ public class InsertDataController {
 				grade8 = Integer.parseInt(request.getParameter("gradewisepp8"));
 
 			} else {
-				System.out.println("white" + request.getParameter("gradewisepp9"));
+				//System.out.println("white" + request.getParameter("gradewisepp9"));
 				grade1 = Integer.parseInt(request.getParameter("gradewisepp9"));
 				grade2 = Integer.parseInt(request.getParameter("gradewisepp10"));
 				grade3 = Integer.parseInt(request.getParameter("gradewisepp11"));
@@ -963,43 +963,22 @@ public class InsertDataController {
 			jbaservice.create(jbabr);
 
 			// other
-			JbaModel jbaot = new JbaModel();
-			jbaot.setJbaDate(datejba);
-			jbaot.setJutevariety(jutevariety);
-			jbaot.setAreaCode("OT");
-			jbaot.setAreaName("Other");
-			jbaot.setCropyr(cropyr);
-			jbaot.setCreadtedby(creadtedby);
-			jbaot.setCreateddate(date);
-			jbaot.setRegion(region);
-			jbaot.setDpcid(dpcid);
-
-			if (grade1 != 0) {
-				jbaot.setGradewisepp1(grade1 + other);
-			}
-			if (grade2 != 0) {
-				jbaot.setGradewisepp2(grade2 + other);
-			}
-			if (grade3 != 0) {
-				jbaot.setGradewisepp3(grade3 + other);
-			}
-			if (grade4 != 0) {
-				jbaot.setGradewisepp4(grade4 + other);
-			}
-			if (grade5 != 0) {
-				jbaot.setGradewisepp5(grade5 + other);
-			}
-			if (grade6 != 0) {
-				jbaot.setGradewisepp6(grade6 + other);
-			}
-			if (grade7 != 0) {
-				jbaot.setGradewisepp7(grade7 + other);
-			}
-			if (grade8 != 0) {
-				jbaot.setGradewisepp8(grade8 + other);
-			}
-			jbaservice.create(jbaot);
-
+			/*
+			 * JbaModel jbaot = new JbaModel(); jbaot.setJbaDate(datejba);
+			 * jbaot.setJutevariety(jutevariety); jbaot.setAreaCode("OT");
+			 * jbaot.setAreaName("Other"); jbaot.setCropyr(cropyr);
+			 * jbaot.setCreadtedby(creadtedby); jbaot.setCreateddate(date);
+			 * jbaot.setRegion(region); jbaot.setDpcid(dpcid);
+			 * 
+			 * if (grade1 != 0) { jbaot.setGradewisepp1(grade1 + other); } if (grade2 != 0)
+			 * { jbaot.setGradewisepp2(grade2 + other); } if (grade3 != 0) {
+			 * jbaot.setGradewisepp3(grade3 + other); } if (grade4 != 0) {
+			 * jbaot.setGradewisepp4(grade4 + other); } if (grade5 != 0) {
+			 * jbaot.setGradewisepp5(grade5 + other); } if (grade6 != 0) {
+			 * jbaot.setGradewisepp6(grade6 + other); } if (grade7 != 0) {
+			 * jbaot.setGradewisepp7(grade7 + other); } if (grade8 != 0) {
+			 * jbaot.setGradewisepp8(grade8 + other); } jbaservice.create(jbaot);
+			 */
 			redirectAttributes.addFlashAttribute("msg",
 					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
 		} catch (Exception e) {
@@ -1161,16 +1140,16 @@ public class InsertDataController {
 
 			long time_difference = n.getTime() - d1.getTime();
 			long days_difference = TimeUnit.MILLISECONDS.toDays(time_difference) % 365;
-			System.out.println("days_difference " + days_difference);
+			//System.out.println("days_difference " + days_difference);
 
 			if ((days_difference == 1) || (days_difference == 0)) {
 				rawJuteProcAndPay.setStatus("DPC");
 				rawJuteProcAndPay.setIs_varified(0);
-				System.out.println("in   range");
+			//	System.out.println("in   range");
 			} else if (days_difference > 1) {
 				rawJuteProcAndPay.setStatus("RMA");
 				rawJuteProcAndPay.setIs_varified(0);
-				System.out.println("out range");
+			//	System.out.println("out range");
 			}
 
 			String grade0 = request.getParameter("g0");
@@ -1283,7 +1262,7 @@ public class InsertDataController {
 						"<div class=\"alert alert-warning\"><b>Oops! </b> Please enter correct registartion number.</div>\r\n"
 								+ "");
 			} else {
-				System.out.println("else part of controller");
+				//System.out.println("else part of controller");
 
 				rawJuteProcurAndPayService.create(rawJuteProcAndPay);
 				redirectAttributes.addFlashAttribute("msg",
@@ -1316,7 +1295,7 @@ public class InsertDataController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("procurementList=======>>>>>>  " + procurementList);
+		//System.out.println("procurementList=======>>>>>>  " + procurementList);
 		mv.addObject("procurementList", procurementList);
 		return mv;
 	}
@@ -1412,7 +1391,7 @@ public class InsertDataController {
 
 				DailyPurchase.setGrade8(Double.parseDouble(grade7));
 			}
-			System.out.println(DailyPurchase.toString());
+			//System.out.println(DailyPurchase.toString());
 			DailyPurchasefService.create(DailyPurchase);
 			redirectAttributes.addFlashAttribute("msg",
 					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
@@ -1509,7 +1488,7 @@ public class InsertDataController {
 			marketArrival.setMixmois(mixmois);
 			marketArrivalService.create(marketArrival);
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return new ModelAndView(new RedirectView("marketArrival.obj"));
 	}
@@ -1577,7 +1556,7 @@ public class InsertDataController {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return new ModelAndView(new RedirectView("UserRegistration.obj"));
 	}
@@ -1592,17 +1571,12 @@ public class InsertDataController {
 
 	@RequestMapping("viewmarketArrival")
 	public ModelAndView viewmarketArrival(HttpServletRequest request) {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
 		
 		ModelAndView mv = new ModelAndView("viewmarketArrival");
 		List <MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAlldata();
-		//List<MarketArrivalModel> allmarketArrivalList = marketArrivalService.getAll();
-		System.out.println("=======================>>>>>>>>>>  "+allmarketArrivalList.toString());
 		mv.addObject("marketArrivalList", allmarketArrivalList);
-		//System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		//for(MarketArrivalModel abc: allmarketArrivalList) {
-			//System.out.println("====   "+abc.getJutevariety());
-		//}
+		
 		return mv;
 	}
 
@@ -1735,7 +1709,7 @@ public class InsertDataController {
 			if (verifyRow) {
 				verifyFarmerService.submitform(verifyFarmer);
 			} else {
-				System.out.println("Duplicate verification record");
+				//System.out.println("Duplicate verification record");
 			}
 
 			List<FarmerRegModelDTO> allFarmersList = farmerRegService.verificationStatus();
@@ -1746,12 +1720,12 @@ public class InsertDataController {
 					&& farmerById.getIdentityProofType() != null && farmerById.getIdentityProofNumber() != null) {
 				Boolean result = farmerRegService.updateVerificationStatus(id);
 			} else {
-				System.out.println("1st else block");
+				//System.out.println("1st else block");
 			}
 
 			mv.addObject("allFarmersList", allFarmersList);
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		mv.addObject("msg", "success");
 		mv.addObject("farmerdetails", new FarmerRegModel());
@@ -1835,7 +1809,7 @@ public class InsertDataController {
 			addCommercialCeilingPriceIntimationModel.setCreateddate(new Date());
 			commercialCeilingPriceIntimationService.create(addCommercialCeilingPriceIntimationModel);
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return new ModelAndView(new RedirectView("CommercialCeilingPriceIntimations.obj"));
 
@@ -1880,7 +1854,7 @@ public class InsertDataController {
 			redirectAttributes.addFlashAttribute("msg",
 					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return new ModelAndView(new RedirectView("Distributionoftallyslips.obj"));
 
@@ -2215,7 +2189,7 @@ public class InsertDataController {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Error in tally slip verification form" + e.getLocalizedMessage());
+		//	System.out.println("Error in tally slip verification form" + e.getLocalizedMessage());
 			mv.addObject("msg",
 					"<div class=\"alert Alert-Failed\"><b>Failed !</b> Tally slip Verification Failed.</div>\r\n");
 		}
@@ -2274,7 +2248,7 @@ public class InsertDataController {
 			rulingMarket.setNoofarrival(noofarrival);
 			rulingMarketService.create(rulingMarket);
 		} catch (Exception e) {
-			System.out.println("Error in saving ruling market data");
+			//System.out.println("Error in saving ruling market data");
 		}
 		return mv;
 	}
@@ -2287,7 +2261,7 @@ public class InsertDataController {
 		try {
 
 		} catch (Exception e) {
-			System.out.println("Error in saving ruling market data");
+			//System.out.println("Error in saving ruling market data");
 		}
 		return mv;
 	}
@@ -2316,7 +2290,7 @@ public class InsertDataController {
 
 			batchService.create(batch);
 		} catch (Exception e) {
-			System.out.println("Error in saving ruling market data");
+			//System.out.println("Error in saving ruling market data");
 		}
 		return mv;
 	}
@@ -2356,7 +2330,7 @@ public class InsertDataController {
 			mv.addObject("viewBalePreparation", DeleteBalePreparation);
 			// return new ModelAndView(new RedirectView("deletemarketArival.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting bale preparation");
+			//System.out.println("Error in deleting bale preparation");
 		}
 		return mv;
 	}
@@ -2371,7 +2345,7 @@ public class InsertDataController {
 			mv.addObject("ropeLists", DeleteRopem);
 			return new ModelAndView(new RedirectView("ropeMakingListing.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting rope making");
+			//System.out.println("Error in deleting rope making");
 		}
 		return mv;
 	}
@@ -2387,7 +2361,7 @@ public class InsertDataController {
 			mv.addObject("dailyPurchaseList", allDailyPurchase);
 			return new ModelAndView(new RedirectView("dailyPurchaseList.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting daily purchase");
+			//System.out.println("Error in deleting daily purchase");
 		}
 		return mv;
 	}
@@ -2402,7 +2376,7 @@ public class InsertDataController {
 			mv.addObject("procurementList", DeletejuteProcu);
 			return new ModelAndView(new RedirectView("juteProcurementList.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting RawJuteProcurAndPay ");
+			//System.out.println("Error in deleting RawJuteProcurAndPay ");
 		}
 		return mv;
 	}
@@ -2417,7 +2391,7 @@ public class InsertDataController {
 			mv.addObject("verifyTallySliList", Deletetallyslip);
 			return new ModelAndView(new RedirectView("viewVerifiedTallySlipList.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in delete TallySlip");
+			//System.out.println("Error in delete TallySlip");
 		}
 		return mv;
 	}
@@ -2430,7 +2404,7 @@ public class InsertDataController {
 			RawJuteProcurementAndPayment juteProc = rawJuteProcurAndPayService.find(Integer.parseInt(id));
 			mv.addObject("juteProc", juteProc);
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return mv;
 	}
@@ -2487,7 +2461,7 @@ public class InsertDataController {
 			redirectAttributes.addFlashAttribute("msg",
 					"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n" + "");
 		} catch (Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return new ModelAndView(new RedirectView("juteProcurementList.obj"));
 	}
@@ -2513,7 +2487,7 @@ public class InsertDataController {
 			// return new ModelAndView(new RedirectView("juteProcurementList.obj"));
 		} catch (Exception e) {
 
-			System.out.println("Error in deleting distribution tally market");
+			//System.out.println("Error in deleting distribution tally market");
 		}
 		return mv;
 	}
@@ -2527,7 +2501,7 @@ public class InsertDataController {
 			List<CommercialJuteVarietyModel> deleteCommercialList = commercialJuteVarietyGradesPriceService.getAll();
 			mv.addObject("commercialList", deleteCommercialList);
 		} catch (Exception e) {
-			System.out.println("Error in deleting commercial price market");
+			//System.out.println("Error in deleting commercial price market");
 		}
 		return mv;
 	}
@@ -2544,7 +2518,7 @@ public class InsertDataController {
 					"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n" + "");
 			return new ModelAndView(new RedirectView("viewRulingMarket.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting ruling market");
+			//System.out.println("Error in deleting ruling market");
 		}
 		return mv;
 	}
@@ -2558,7 +2532,7 @@ public class InsertDataController {
 			mv.addObject("baleMod", baleMod);
 			return mv;
 		} catch (Exception e) {
-			System.out.println("Error in update bale preparation");
+			//System.out.println("Error in update bale preparation");
 		}
 		return mv;
 	}
@@ -2580,7 +2554,7 @@ public class InsertDataController {
 			String bale_no = request.getParameter("bale_no");
 			String jute_grade = request.getParameter("jute_grade");
 
-			System.out.println(">>>>>data>>>>>>>>>>>baleid:"+baleid+"place_of_packing:"+place_of_packing+"crop_year:"+crop_year+"bin_no:"+bin_no+"basis:"+basis+"jute_variety: "+jute_variety+"slip_no_from:"+slip_no_from+"slip_no_from:"+slip_no_from+"slip_no_to:"+slip_no_to+"bale_no:"+bale_no+"jute_grade:"+jute_grade);
+			//System.out.println(">>>>>data>>>>>>>>>>>baleid:"+baleid+"place_of_packing:"+place_of_packing+"crop_year:"+crop_year+"bin_no:"+bin_no+"basis:"+basis+"jute_variety: "+jute_variety+"slip_no_from:"+slip_no_from+"slip_no_from:"+slip_no_from+"slip_no_to:"+slip_no_to+"bale_no:"+bale_no+"jute_grade:"+jute_grade);
 			BalePreparation balePreparation = new BalePreparation();
 
 			balePreparation.setBaleId(Integer.parseInt(baleid));
@@ -2598,7 +2572,7 @@ public class InsertDataController {
 //           final String stringDate = dateFormat.format(utilDate);
 //           System.out.println("utilDate:" + stringDate);
 //           System.out.println("sqlDate:" + sqlDate);
-System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
+//System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			balePreparation.setPacking_date(sqlDate);
 
 			balePreparation.setPlace_of_packing(place_of_packing);
@@ -2662,7 +2636,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 				return new ModelAndView(new RedirectView("balePreparation.obj"));
 			}
 		} catch (Exception e) {
-			System.out.println("Error in update bale preparation");
+			//System.out.println("Error in update bale preparation");
 		}
 		return mv;
 	}
@@ -2686,12 +2660,12 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			String id = request.getParameter("id");
 			int creadtedby = 0;
 			String basis = request.getParameter("basis");
-			System.out.println("basissssssss"+ basis);
+		//	System.out.println("basissssssss"+ basis);
 			String cropyr = request.getParameter("cropyr");
-			System.out.println("cropyrsssssss"+ cropyr);
+			//System.out.println("cropyrsssssss"+ cropyr);
 			String placeofactivity = (String) request.getSession().getAttribute("dpcId");
 			String jutevariety = request.getParameter("jutevariety");
-			System.out.println("jutevarietyssss"+ jutevariety);
+			//System.out.println("jutevarietyssss"+ jutevariety);
 			String ropemade = request.getParameter("ropemade");
 			String ropeUsed = request.getParameter("ropeUsed");
 			String balance = request.getParameter("balance");
@@ -2725,7 +2699,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
 			return new ModelAndView(new RedirectView("ropeMakingListing.obj"));
 		} catch(Exception e){
-			System.out.println("Error in update Ropmaking");
+			//System.out.println("Error in update Ropmaking");
 		}
 		return mv;
 	}
@@ -2739,7 +2713,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			mv.addObject("dailyPurchase", dailyPurchase);
 			return mv;
 		} catch (Exception e) {
-			System.out.println("Error in edit DPC");
+			//System.out.println("Error in edit DPC");
 		}
 		return mv;
 	}
@@ -2792,7 +2766,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		}
 
 		catch (Exception e) {
-			System.out.println("Error in update DPC");
+		//	System.out.println("Error in update DPC");
 		}
 		return new ModelAndView(new RedirectView("dailyPurchaseList.obj"));
 	}
@@ -2833,7 +2807,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		List<String> result;
 		result = mSPPriceCalculationService.findGradeOfMSP(request.getParameter("variety"),
 				Integer.parseInt(request.getParameter("basis_no")));
-		System.out.println(result.size() + "");
+		//System.out.println(result.size() + "");
 		return gson.toJson(result);
 	}
 
@@ -2856,7 +2830,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 					"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n" + "");
 			return new ModelAndView(new RedirectView("ViewFarmerRegistration.obj"));
 		} catch (Exception e) {
-			System.out.println("Error in deleting ruling market");
+			//System.out.println("Error in deleting ruling market");
 		}
 		return mv;
 	}
@@ -2871,7 +2845,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			mv.addObject("distributiontally", distributiontallyslip);
 			return mv;
 		} catch (Exception e) {
-			System.out.println("Error in edit DPC");
+			//System.out.println("Error in edit DPC");
 		}
 		return mv;
 	}
@@ -2903,7 +2877,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			return new ModelAndView(new RedirectView("viewDistributionoftallyslips.obj"));
 
 		} catch (Exception e) {
-			System.out.println("Error in update Distribution Tally Slip");
+			//System.out.println("Error in update Distribution Tally Slip");
 		}
 		return mv;
 	}
@@ -2918,7 +2892,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 			mv.addObject("commercialCeilingprice", commercialCeilingPrice);
 			return mv;
 		} catch (Exception e) {
-			System.out.println("Error in edit CommercialCellingPriceIntimation");
+			//System.out.println("Error in edit CommercialCellingPriceIntimation");
 		}
 		return mv;
 	}
@@ -3356,7 +3330,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 //				"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n" + "");
 
 		} catch (Exception e) {
-			System.out.println(e + " Error in save bale preparation");
+		//	System.out.println(e + " Error in save bale preparation");
 			return new ModelAndView(new RedirectView("balePreparation.obj"));
 		}
 
@@ -3379,7 +3353,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		Gson gson = new Gson();
 		List<String> DaysCount = jbaservice.GetDayCountofJBA(request.getParameter("id"));
 		Integer DaysCount1 = Integer.parseInt(DaysCount.toString().replace("[", "").replace("]", ""));
-		System.out.println("Edit JBA LIST value is " + DaysCount1);
+	//	System.out.println("Edit JBA LIST value is " + DaysCount1);
 
 		return gson.toJson(DaysCount1);
 	}
@@ -3431,7 +3405,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		ModelAndView mv = new ModelAndView("decissionmaking");
 		int id = Integer.parseInt(request.getParameter("id"));
 		VerifyTallySlip vrf = verifyTallySlipService.find(id);
-		System.out.println(vrf.toString());
+		//System.out.println(vrf.toString());
 		RawJuteProcurementAndPayment raw = rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo());
 		System.out.println(raw.toString());
 		List<VerifyTallySlip> verifyList = verifyTallySlipService.getAll("RMD");
@@ -3450,7 +3424,7 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		int is_verified = Integer.parseInt(request.getParameter("verified"));
 		boolean raw = rawJuteProcurAndPayService.updateProcurement(status, is_verified, tally);
 		boolean ver = verifyTallySlipService.updatebyTally(status, is_verified, tally);
-		System.out.println("" + raw + "  " + ver);
+		//System.out.println("" + raw + "  " + ver);
 		if (raw && ver) {
 			return "true";
 		} else {
@@ -3484,5 +3458,12 @@ System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>"+sqlDate);
 		List<String> result=ropeMakingService.findBinno(request.getParameter("cropyr"),request.getParameter("dpcid") );
 		return gson.toJson(result);
 	}
-
+	@RequestMapping(value = "verificationTallyslip2", method = RequestMethod.GET)
+	public ModelAndView verifytallyslip(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		String tally = request.getParameter("tally");
+		mv.addObject("tallyslip", tally);
+		mv.setViewName("verifyTallySlip");
+		return mv;
+	}
 }

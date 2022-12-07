@@ -177,6 +177,13 @@ body {
   padding: 5px 10px;
   cursor: pointer
 }
+
+.scroll{
+float:left;
+width:1000px;
+overflow-y: auto;
+height: 614px;
+}
 </style>
 
 <script type="text/javascript">
@@ -280,7 +287,7 @@ body {
 			dpcCode = (String) session.getAttribute("dpcId");
 			String region = (String)session.getAttribute("region");
 			//String tally = (String)request.getAttribute("tally");
-			 
+			 String tally = (String)request.getAttribute("tallyslip");
 			%>
 			 
 			<div class="page-content fade-in-up">
@@ -291,7 +298,25 @@ body {
 								<!-- <div class="ibox-title">Basic form</div> -->
 								<span>${msg}</span>
 							</div>
-							<button id='turn'>
+							<div class="row">
+							<div class="col-sm-4 form-group">
+							
+							<a href="tallyapproval.obj">Go Back</a>
+							</div>
+					</div>
+							
+
+
+
+							<div class="ibox-body mainform">
+
+								<form action="saveTallySlipMid.obj" method="POST" name="myForm"
+									id="myForm" onsubmit="return validate()" autocomplete="off">
+									<span id="image"></span>
+											<div class="row">
+									<div class="col-sm-6 form-group scroll">
+									
+									<button id='turn'>
 									<img style="width: 20px;"
 										src="https://pic.onlinewebfonts.com/svg/img_313385.png">
 									Rotate
@@ -302,26 +327,15 @@ body {
                                width: 600px;  height: 400px; object-fit: fill;" />
 
 							</div>
-
-
-
-							<div class="ibox-body mainform">
-
-
-								<form action="saveTallySlipMid.obj" method="POST" name="myForm"
-									id="myForm" onsubmit="return validate()" autocomplete="off">
-									<span id="image"></span>
-
-									<div class="row">
-
-
-										<div class="col-sm-4 form-group">
+									</div>
+										<div class="col-sm-6 form-group scroll">
+										<div class="form-group">
 											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
 											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number"
+											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
 												min="0" onkeyup="deleteErrorMsg()">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<label>Farmer Registration No</label><span
 												class="text-danger">* </span>&nbsp; <span
 												id="errfarmerRegNo" name="errfarmerRegNo"
@@ -332,15 +346,14 @@ body {
 										</div>
 
 										
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<label>Date of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errdateOfPurchase" name="errdateOfPurchase"
 												class="text-danger"> </span> 
 												<input class="form-control"type="date" name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class=" form-group">
 											<label>Place of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errplaceOfPurchase"
 												name="errplaceOfPurchase" class="text-danger"> </span> 
@@ -350,7 +363,7 @@ body {
 												onkeyup="deleteErrorMsg()" readonly="readonly">
 										</div>
 
-										<div class="col-sm-4 form-group">
+										<div class=" form-group">
 											<label>Rate Slip Number</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errrateSlipNumber" name="errrateSlipNumber"
 												class="text-danger"> </span> <input class="form-control"
@@ -360,7 +373,7 @@ body {
 												oninput="javascript: if (this.value.length > 5) this.value = this.value.slice(0, 5);"
 												onkeyup="deleteErrorMsg()">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<label>Bin Number</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errbinNumber" name="errbinNumber"
 												class="text-danger"> </span> <input class="form-control"
@@ -369,9 +382,8 @@ body {
 												min="0"
 												oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class=" form-group">
 											<label>Net Quantity</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errnetQuantity" name="errnetQuantity"
 												class="text-danger"> </span> <input class="form-control"
@@ -379,14 +391,14 @@ body {
 												placeholder="Net Quantity" onkeyup="deleteErrorMsg()"
 												min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class=" form-group">
 											<label>Garsat Rate</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errgarsatRate" name="errgarsatRate"
 												class="text-danger"> </span> <input class="form-control"
 												type="number" name="garsatRate" id="garsatRate"
 												placeholder="Garsat Rate" onkeyup="deleteErrorMsg()" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<label>Amount Payable</label><span class="text-danger">*
 											</span>&nbsp; <span id="erramountPayable" name="erramountPayable"
 												class="text-danger"> </span> <input class="form-control"
@@ -395,9 +407,7 @@ body {
 												min="0">
 										</div>
 
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+										<div class=" form-group">
 											<label>Jute Variety</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety"
 												class="text-danger"> </span> 
@@ -414,7 +424,7 @@ body {
                                         	</select>
                                         	
 										</div>
-										<div class=" col-sm-4 form-group">
+										<div class="  form-group">
 											<label>Drum-wise Quantity</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errdrumWiseQuantity"
 												name="errdrumWiseQuantity" class="text-danger"> </span> <input
@@ -422,316 +432,298 @@ body {
 												id="drumWiseQuantity1" placeholder="Drum Wise Quantity 1"value="0"
 												min="0">
 										</div>
-										<div class="col-sm-4 form-group">
-											<label> &nbsp;</label> <input class="form-control"
+										<div class=" form-group">
+											<input class="form-control"
 												type="number" name="drumWiseQuantity2"
 												id="drumWiseQuantity2" placeholder="Drum Wise Quantity 2"value="0"
 												min="0">
 										</div>
-
-									</div>
-
-									<div class="row">
-										<div class="col-sm-4 form-group">
+										<div class=" form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity3" id="drumWiseQuantity3"value="0"
 												placeholder="Drum Wise Quantity 3" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity4" id="drumWiseQuantity4"value="0"
 												placeholder="Drum Wise Quantity 4" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class=" form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity5" id="drumWiseQuantity5"value="0"
 												placeholder="Drum Wise Quantity 5" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity6" id="drumWiseQuantity6"value="0"
 												placeholder="Drum Wise Quantity 6" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity7" id="drumWiseQuantity7"value="0"
 												placeholder="Drum Wise Quantity 7" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity8" id="drumWiseQuantity8"value="0"
 												placeholder="Drum Wise Quantity 8" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity9" id="drumWiseQuantity9"value="0"
 												placeholder="Drum Wise Quantity 9" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity10" id="drumWiseQuantity10"value="0"
 												placeholder="Drum Wise Quantity 10" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity11" id="drumWiseQuantity11"value="0"
 												placeholder="Drum Wise Quantity 11" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity12" id="drumWiseQuantity12"value="0"
 												placeholder="Drum Wise Quantity 12" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"value="0"
 												name="drumWiseQuantity13" id="drumWiseQuantity13"
 												placeholder="Drum Wise Quantity 13" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity14" id="drumWiseQuantity14"value="0"
 												placeholder="Drum Wise Quantity 14" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity15" id="drumWiseQuantity15"value="0"
 												placeholder="Drum Wise Quantity 15" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity16" id="drumWiseQuantity16"value="0"
 												placeholder="Drum Wise Quantity 16" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity17" id="drumWiseQuantity17"value="0"
 												placeholder="Drum Wise Quantity 17" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity18" id="drumWiseQuantity18"value="0"
 												placeholder="Drum Wise Quantity 18" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity19" id="drumWiseQuantity19"value="0"
 												placeholder="Drum Wise Quantity 19" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity20" id="drumWiseQuantity20"value="0"
 												placeholder="Drum Wise Quantity 20" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity21" id="drumWiseQuantity21"value="0"
 												placeholder="Drum Wise Quantity 21" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity22" id="drumWiseQuantity22"value="0"
 												placeholder="Drum Wise Quantity 22 " min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity23" id="drumWiseQuantity23"value="0"
 												placeholder="Drum Wise Quantity 23" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+								
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity24" id="drumWiseQuantity24"value="0"
 												placeholder="Drum Wise Quantity 24" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity25" id="drumWiseQuantity25"value="0"
 												placeholder="Drum Wise Quantity 25" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity26" id="drumWiseQuantity26"value="0"
 												placeholder="Drum Wise Quantity 26" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity27" id="drumWiseQuantity27"value="0"
 												placeholder="Drum Wise Quantity 27" min="0">
 										</div>
 
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity28" id="drumWiseQuantity28"value="0"
 												placeholder="Drum Wise Quantity 28" min="0">
 										</div>
 
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity29" id="drumWiseQuantity29"value="0"
 												placeholder="Drum Wise Quantity 29" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity30" id="drumWiseQuantity30"value="0"
 												placeholder="Drum Wise Quantity 30" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 
 											<input class="form-control" type="number"
 												name="drumWiseQuantity31" id="drumWiseQuantity31"value="0"
 												placeholder="Drum Wise Quantity 31" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity32" id="drumWiseQuantity32"value="0"
 												placeholder="Drum Wise Quantity 32" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity33" id="drumWiseQuantity33"value="0"
 												placeholder="Drum Wise Quantity 33" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 
 											<input class="form-control" type="number"
 												name="drumWiseQuantity34" id="drumWiseQuantity34"value="0"
 												placeholder="Drum Wise Quantity 34" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity35" id="drumWiseQuantity35"value="0"
 												placeholder="Drum Wise Quantity 35" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity36" id="drumWiseQuantity36"value="0"
 												placeholder="Drum Wise Quantity 36" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity37" id="drumWiseQuantity37"value="0"
 												placeholder="Drum Wise Quantity 37" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity38" id="drumWiseQuantity38"value="0"
 												placeholder="Drum Wise Quantity 38" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 
 											<input class="form-control" type="number"
 												name="drumWiseQuantity39" id="drumWiseQuantity39"value="0"
 												placeholder="Drum Wise Quantity 39" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity40" id="drumWiseQuantity40" value="0"
 												placeholder="Drum Wise Quantity 40" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity41" id="drumWiseQuantity41" value="0"
 												placeholder="Drum Wise Quantity 41" min="0">
 										</div>
 
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class=" form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity42" id="drumWiseQuantity42" value="0"
 												placeholder="Drum Wise Quantity 42" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity43" id="drumWiseQuantity43" value="0"
 												placeholder="Drum Wise Quantity 43" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity44" id="drumWiseQuantity44" value="0"
 												placeholder="Drum Wise Quantity 44" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity45" id="drumWiseQuantity45" value="0"
 												placeholder="Drum Wise Quantity 45" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity46" id="drumWiseQuantity46" value="0"
 												placeholder="Drum Wise Quantity 46" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number" value="0"
 												name="drumWiseQuantity47" id="drumWiseQuantity47"
 												placeholder="Drum Wise Quantity 47" min="0">
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
+									
+										<div class="form-group">
 											<input class="form-control" type="number" value="0"
 												name="drumWiseQuantity48" id="drumWiseQuantity48"
 												placeholder="Drum Wise Quantity 48" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number" value="0"
 												name="drumWiseQuantity49" id="drumWiseQuantity49"
 												placeholder="Drum Wise Quantity 49" min="0">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="number"
 												name="drumWiseQuantity50" id="drumWiseQuantity50" value="0"
 												placeholder="Drum Wise Quantity 50" min="0">
 										</div>
-									</div>
-                                         <div class="col-sm-4 form-group">
+									
+                                         <div class="form-group">
 											<input class="form-control" type="hidden"
 												name="error" id="error" value="">
 										</div>
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="hidden"
 												name="status" id="status" value="">
 										</div>
 										
-										<div class="col-sm-4 form-group">
+										<div class="form-group">
 											<input class="form-control" type="hidden"
 												name="grsqty" id="grsqty" value="0.0">
 										</div>
 										
-									<div class="row">
+									<div class="form-group">
 										<button class="btn btn-default" type="submit" id="enq_submit" style="margin-left: 15px; width: 120px;
                                         background: mediumseagreen;
                                         color: white;">Verify</button>
 									</div>
 									
-									 
+									 </div>
 										 		
-													
+										</div>			
 								</form>
 							</div>
 
@@ -1020,7 +1012,7 @@ body {
 						  {
 							var parsedJSON = JSON.parse(result);
                           
-							console.log("######"+result);
+							//console.log("######"+result);
                            	 
 							
 							 farmno = parsedJSON.farmerRegNo;

@@ -66,7 +66,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 		List<MarketArrivalModel> ll = new ArrayList<>();
 		List<Object[]> rows = new ArrayList<>();
 		//MarketArrivalModel maketarrival = new MarketArrivalModel();
-		String querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE";
+		String querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -82,7 +82,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 			String max= (String) row[7];
 			String ro= (String)row[8];
 			String centername= (String) row[29];
-			
+			String region_name =(String) row[30];
 			  BigDecimal grade1= (BigDecimal)row[12]; 
 			  BigDecimal grade2= (BigDecimal)row[13]; 
 			  BigDecimal grade3= (BigDecimal)row[14]; 
@@ -127,6 +127,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 			maketarrival.setGrade_rate7(grade_rate7);
 			maketarrival.setGrade_rate8(grade_rate8);
 			maketarrival.setBasis(basis);
+			maketarrival.setRegionName(region_name);
 			ll.add(maketarrival);	
 		}
 		System.out.println("=========== "+ll.toString());

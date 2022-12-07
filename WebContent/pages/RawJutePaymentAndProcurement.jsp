@@ -16,7 +16,10 @@
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
      <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -24,6 +27,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
+<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+	type="text/javascript"></script>
+<script
+	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+	type="text/javascript"></script>
 <!-- CORE SCRIPTS-->
 
   <link rel="stylesheet" href="assets/css/docsupport/style.css">
@@ -124,8 +136,9 @@
                                         <div class="col-sm-4 form-group">
                                             <label>Tally Slip No.</label>
                                             <span class="text-danger">* </span>&nbsp; <span id="dubtally" name="dubtally" class="text-danger"></span> &nbsp;&nbsp;&nbsp;<span id="errtallyslipno" name="errtallyslipno"
+												class="text-danger"> </span><span id="errortallyslipno" name="errortallyslipno"
 												class="text-danger"> </span>
-                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" placeholder="Tally Slip No." onblur="return validateTallySlipNo();deleteErrorMsg();" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
+                                            <input class="form-control" type="number" name="tallyslipno" id="tallyslipno" onblur="return length_tallySlip()" placeholder="Tally Slip No." onblur="return validateTallySlipNo();deleteErrorMsg();" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
                                         </div>
                                         
                                         <div class="col-sm-4 form-group">
@@ -169,8 +182,9 @@
                                         	<div class="col-sm-4 form-group">
 											<label>Rate Slip No.</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errrateslipno" name="errrateslipno"
+												class="text-danger"> </span><span id="errorrateslipno" name="errorrateslipno"
 												class="text-danger"> </span>
-                                        	<input class="form-control" name="rateslipno" id="rateslipno" type="number" placeholder="Rate Slip No."  onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 5) this.value = this.value.slice(0, 5);" >
+                                        	<input class="form-control" name="rateslipno" id="rateslipno" type="number" placeholder="Rate Slip No."  onblur="return length_rateSlip()" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);" >
 										</div>
 									</div>
                                    
@@ -339,6 +353,42 @@
 		}
 		
 	}
+	</script>
+	<script>
+	function length_rateSlip(){
+		var lengthr= $("#rateslipno").val();
+		console.log("lengthr "+lengthr);
+		if(lengthr.length< 3) {
+			console.log("lengthr if "+lengthr.length);
+			 document.getElementById("errorrateslipno").innerHTML = "Rate Slip Number should be between 3-6 digits!";
+			 $("#errorrateslipno").show();
+			  return false;
+		}
+		else if(lengthr.length >=3 || lengthr.length <= 6)  {
+			console.log("lengthr else "+lengthr.length);
+	   			  $("#errorrateslipno").hide();
+		}
+		
+	}
+	
+	</script>
+	<script>
+	function length_tallySlip(){
+		var lengthr= $("#tallyslipno").val();
+		console.log("lengthr "+lengthr);
+		if(lengthr.length< 3) {
+			console.log("lengthr if "+lengthr.length);
+			 document.getElementById("errortallyslipno").innerHTML = "Tally Slip Number should be between 3-6 digits!";
+			 $("#errortallyslipno").show();
+			  return false;
+		}
+		else if(lengthr.length >=3 || lengthr.length <= 6)  {
+			console.log("lengthr else "+lengthr.length);
+	   			  $("#errortallyslipno").hide();
+		}
+		
+	}
+	
 	</script>
 	<script type="text/javascript">
 	  

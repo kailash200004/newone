@@ -107,6 +107,20 @@ public class MarketArrivalModel {
 	@Transient
 	private String centername;
 
+	@Transient
+	private String regionName;
+
+	public String getRegionName() {
+		return regionName;
+	}
+
+
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+
 
 	public String getCentername() {
 		return centername;

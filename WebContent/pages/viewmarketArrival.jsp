@@ -87,6 +87,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 								<thead>
 									<tr>
 										<th>Sl.No</th>
+										<th> Region Name</th>
 										<th>DPC Name</th>
 										<th>Basis</th>
 										<th>Arrival Date</th>
@@ -125,6 +126,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 							%>
 									<tr>
 										<td><%=i%></td>
+										<td><%=marketArrivalList.getRegionName()%></td>
 										<td><%=marketArrivalList.getDpcnames()%></td>
 								        <td><%=marketArrivalList.getBasis()%></td>
 				                    	<td><%=marketArrivalList.getDatearrival()%></td>
