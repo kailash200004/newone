@@ -570,7 +570,7 @@
 		var qntl=0;
 		
 		var variety = document.getElementById("jutevariety").value;	
-		console.log(variety);
+		//console.log(variety);
 		var basis = document.getElementById("basis").value;	
 		var cropyr = document.getElementById("cropyr").value;	
 		var input = document.getElementsByName('test[]');
@@ -599,38 +599,26 @@
 				data: jQuery.param({ "variety": variety, "basis_no": basis_no, "cropyr":cropyr}),
 				success:function(result){
 					data = jQuery.parseJSON(result);
-					console.log("data = "+data);
-					var gradefive = data[0][4];
-					console.log("gradefive = "+gradefive);
-							
-					
-						
+					var gradefive = data[1][5];
+
 						if(basis=="msp"){
 							
-									for (var i = 0; i < input.length; i++) {
-										for( var j=0;j < data.length;j++){
+									for (var i = 1; i <= input.length; i++) {
+										for( var j=1;j <= data.length;j++){
 								 		 grade=data[j];
-							             // alert(grade);
-							              
-				            	 			//a = input[i].value.toFixed(2);
-				            	 			//alert(input[i]);
+
 				            	 				var rate = parseFloat(grade[i]);
-				            	 				//console.log("rate= "+rate);
+
 				          			 				var  gradesPersent= parseFloat(((input[i].value*rate)/100));
 					        							   garsatrate += gradesPersent ;
-					        							   
-					        							   
 					      		
 										}
 										
-										//alert(gradesPersent);
-						 
-								 	} 	console.log("garsatrate="+garsatrate);
-								 	console.log("total="+total);
+								 	} 	
 						 				var netPercent = parseFloat(total/100);
-						 				console.log("netPercent="+netPercent);
+						 				
 						 				netAmount=parseFloat(garsatrate * netPercent);
-						 				console.log("netAmount="+netAmount);
+						 		
 						 				document.getElementById("amountPayable").value = netAmount;
 						
 										document.getElementById("garsatRate").value = Math.round(garsatrate,2);
@@ -641,41 +629,39 @@
 							var addition=0;
 							var  gradesPersent;
 							var multi;
-								for (var i = 0; i < input.length; i++) {
-									for (var j = 0; j < data.length; j++){
+								for (var i = 1; i <= input.length; i++) {
+									for (var j = 1; j <= data.length; j++){
 										
 										 gradesPersent= parseFloat((input[i].value) /100);
-										 console.log("gradesPersent"+gradesPersent);
+										
 													
-										if(data[0][i]!=0)
+										if(data[1][i]!=0)
 										{
-											if(data[0][i] > gradefive){
-												b[i]= parseFloat(data[0][i]-gradefive);
-									      		console.log(" b"+[i]+" = "+b[i]);
+											if(data[1][i] > gradefive){
+												b[i]= parseFloat(data[1][i]-gradefive);
+									     
 									      		multi=(b[i] *  gradesPersent) ;
-									      		console.log("multi"+multi);
+									      
 									      		addition += multi;
-									      		console.log("addition"+addition);
+									      	
 												}
-											else if(data[0][i] < gradefive){
-												 b[i]= parseFloat(data[0][i]-gradefive);
-												console.log(" b"+[i]+" = "+b[i]);
+											else if(data[1][i] < gradefive){
+												 b[i]= parseFloat(data[1][i]-gradefive);
+										
 												multi=(b[i] *  gradesPersent) ;
-												console.log("multi"+multi);
+										
 												addition += multi;
-												console.log("addition"+addition);
+										
 												      		
 												}  
 											}
-													
-												  
-												
+			
 											}
 										}
 								var garsatt=document.getElementById("garsatRate").value;
-								console.log("garsatt"+garsatt);
+						
 							var td=	(garsatt - (addition));
-							console.log("td"+td);
+						
 								
 								document.getElementById("tdbaseprice").value = Math.round(td,2);
 								document.getElementById("amountPayable").value = 0.0;

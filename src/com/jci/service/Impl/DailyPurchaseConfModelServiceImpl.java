@@ -51,5 +51,11 @@ public class DailyPurchaseConfModelServiceImpl  implements DailyPurchaseModelCon
 		return dailyPurchaseConfDao.submitform(dailyPurchaseConfModel);
 	}
 
+	@Override
+	public List<DailyPurchaseConfModel> dpc2() {
+		return dailyPurchaseConfDao.dpc2();
+		
+	}
+
 
 }

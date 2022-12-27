@@ -126,25 +126,20 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	@Override
 	public List<String> findGradePriceJuteVariety(String variety, int basis_no, String cropyr, String dpcid) {
 
-
-
 		String querystr="";
 		List<String> result = new ArrayList<>();
 		int count=0;
 
 		if(basis_no==1) {
-		 querystr =  "SELECT grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
+		 querystr =  "SELECT top 1 effectDate, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
 		}
 		else if(basis_no==2) {
-			 querystr = "SELECT grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'";
+			 querystr = "SELECT top 1 effectDate, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
 			}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		result = query.list();
-	//	System.out.println("result========>>>>>>"+query.list());
-	//	 count = query.list().size();
-
 		return result;
 	}
 
@@ -185,7 +180,6 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 			int binno = (int)o[6];
 			String jutevariety = (String)o[7];
 			BigDecimal grossquantity = (BigDecimal)o[8];
-			//System.out.println("grossquantity  ====== "+grossquantity);
 			BigDecimal deductionquantity = (BigDecimal)o[9];
 			BigDecimal grasatrate = (BigDecimal)o[10];
 			BigDecimal amountpayable = (BigDecimal)o[11];

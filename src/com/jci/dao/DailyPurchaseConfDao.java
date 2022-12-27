@@ -13,5 +13,5 @@ public interface DailyPurchaseConfDao {
 	public DailyPurchaseConfModel find(int id);
 	public List <DailyPurchaseConfModel> getAll();
 	public boolean submitform(DailyPurchaseConfModel dailyPurchaseConfModel);
-
+	public  List<DailyPurchaseConfModel> dpc2();
 }

@@ -47,6 +47,33 @@ public class DailyPurchaseConfModel {
 
 	@Column(name="netquantity")
 	private double netquantity;
+	
+
+	@Column(name="grasatrate")
+	private double garsat;
+
+	public double getGarsat() {
+		return garsat;
+	}
+
+	public void setGarsat(double garsat) {
+		this.garsat = garsat;
+	}
+
+	
+	
+	@Column(name="td5base")
+	private double tdbase;
+	
+	public double getTd5base() {
+		return tdbase;
+	}
+
+	public void setTd5base(double tdbase) {
+		this.tdbase = tdbase;
+	}
+
+
 
 	@Column(name="fibervalue")
 	private int fibervalue;
@@ -316,5 +343,7 @@ public class DailyPurchaseConfModel {
 				+ ", grade7=" + grade7 + ", grade8=" + grade8 + ", ipaddress=" + ipaddress + ", createdby=" + createdby
 				+ ", rateslipno=" + rateslipno + "]";
 	}
+
+	
 
 }

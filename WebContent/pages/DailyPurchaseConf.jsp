@@ -152,6 +152,7 @@
                                           </div>
                                     <div class="form-group">
                                         <button class="btn btn-default" type="submit" id="submit">Submit</button>
+                                         <button class="btn btn-default" type="button" id="dpc">dpc</button>
                                     </div>
                                      
                                 </form>
@@ -294,6 +295,20 @@ $(binno).attr('maxlength',3);
 	});
 	
 	
+	</script>
+	<script>
+	$(document).ready(function(){
+		 $("#dpc").click(function(){
+		alert("yes");
+		$.ajax({
+			type:"GET",
+			url:"dpc2.obj",
+			
+			success:function(result){
+			}
+			});
+		});
+	});
 	</script>
 	<script type="text/javascript">
 	$(document).ready(function(){

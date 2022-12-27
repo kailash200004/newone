@@ -3367,27 +3367,17 @@ public class InsertDataController {
 //		Integer DaysCount1=Integer.parseInt(DaysCount.toString().replace("[", "").replace("]", ""));
 
 		String d = DaysCount.toString().replace("[", "").replace("]", "");
-		// String result = d.replaceAll("^\"|\"$", "");
-
-		/*
-		 * if (d.startsWith("\"")) { d = d.substring(1, d.length()); } if
-		 * (d.endsWith("\"")) { d = d.substring(0, d.length() - 1); }
-		 */
+		
 		return gson.toJson(d);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "transectionDetails", method = RequestMethod.GET)
 	public String transectionDetails(HttpServletRequest request) {
-		// ModelAndView mv= new ModelAndView("verifyTallySlip");
+		
 		String details = verifyTallySlipService.GettransectionDetails(request.getParameter("tallyslipNo"),
 				request.getParameter("region"));
 
-		// String detailss=details.toString().replace("[", "").replace("]", "");
-		// Gson gson = new Gson();
-		// mv.addObject("transectionDetails", details);
-		// mv.setViewName("verifyFarmer");
-		// System.out.println(details.toString());
 		return details;
 
 	}
@@ -3405,9 +3395,9 @@ public class InsertDataController {
 		ModelAndView mv = new ModelAndView("decissionmaking");
 		int id = Integer.parseInt(request.getParameter("id"));
 		VerifyTallySlip vrf = verifyTallySlipService.find(id);
-		//System.out.println(vrf.toString());
+		
 		RawJuteProcurementAndPayment raw = rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo());
-		System.out.println(raw.toString());
+	
 		List<VerifyTallySlip> verifyList = verifyTallySlipService.getAll("RMD");
 		mv.addObject("verifyTallySliList", verifyList);
 		mv.addObject("vrftally", vrf);
@@ -3465,5 +3455,13 @@ public class InsertDataController {
 		mv.addObject("tallyslip", tally);
 		mv.setViewName("verifyTallySlip");
 		return mv;
+	}
+	@RequestMapping(value = "dpc2", method = RequestMethod.GET)
+	public void dpc2(HttpServletRequest request) {
+		List<DailyPurchaseConfModel>dpclist = DailyPurchasefService.dpc2();
+		for(int i=0; i< dpclist.size(); i++) {
+		DailyPurchasefService.create(dpclist.get(i));
+			
+		}	
 	}
 }
