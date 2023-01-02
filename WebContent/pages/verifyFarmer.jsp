@@ -54,6 +54,7 @@
 	content: " *";
 	color: red;
 }
+
 </style>
 </head>
 <style>
@@ -141,7 +142,7 @@
 									%>
 									
 									</div>
-										<div class="col-sm-6">
+										<div class="col-sm-6 " >
 											<div class="form-group">
 											<label>Farmer Registration No</label> 
 											<input class="form-control" type="text" name="farmer_reg_no" id="farmer_reg_no" placeholder="Farmer Registration No" value="<%=farmerModel.getF_REG_NO()%>" readonly required>

@@ -267,6 +267,8 @@
 												class="text-danger"> </span>
 											<input class="form-control" name="amountPayable" id="amountPayable" type="number" placeholder="Amount Payable" readonly="true" onkeyup="deleteErrorMsg()">
                                         </div>
+                                        </div>
+                                               <div class="col-sm-4 form-group">
                                         <div id="tdd">
                                              <label >TD5 base price</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="errTD5baseprice" name="errTD5baseprice" onkeyup="deleteErrorMsg()"
@@ -475,7 +477,7 @@
 			$("#tdd").show();
 			$('#garsatRate').prop('readonly', false);
 			$('#tdbaseprice').prop('readonly', true);
-			  $ ("#amt").hide();
+			 
 	}
 			$.ajax({
 				type:"GET",
@@ -558,7 +560,7 @@
 	//alert("doc ready");
 	$("#farmerregno").chosen();
 	$("#farmerregno").addClass("chosen-select");
-	  $ ("#amt").hide();
+	 
 	  $("#tdd").hide();
   $("#calc").click(function(){
 	
@@ -599,10 +601,12 @@
 				data: jQuery.param({ "variety": variety, "basis_no": basis_no, "cropyr":cropyr}),
 				success:function(result){
 					data = jQuery.parseJSON(result);
-					var gradefive = data[1][5];
+					
 
 						if(basis=="msp"){
-							
+							var gradefive = data[0][4];
+							console.log(gradefive);
+							console.log(data);
 									for (var i = 1; i <= input.length; i++) {
 										for( var j=1;j <= data.length;j++){
 								 		 grade=data[j];
@@ -629,24 +633,26 @@
 							var addition=0;
 							var  gradesPersent;
 							var multi;
+							 gradefive = data[0][5];
+							console.log(data);
 								for (var i = 1; i <= input.length; i++) {
 									for (var j = 1; j <= data.length; j++){
 										
 										 gradesPersent= parseFloat((input[i].value) /100);
 										
 													
-										if(data[1][i]!=0)
+										if(data[0][i]!=0)
 										{
-											if(data[1][i] > gradefive){
-												b[i]= parseFloat(data[1][i]-gradefive);
+											if(data[0][i] > gradefive){
+												b[i]= parseFloat(data[0][i]-gradefive);
 									     
 									      		multi=(b[i] *  gradesPersent) ;
 									      
 									      		addition += multi;
 									      	
 												}
-											else if(data[1][i] < gradefive){
-												 b[i]= parseFloat(data[1][i]-gradefive);
+											else if(data[0][i] < gradefive){
+												 b[i]= parseFloat(data[0][i]-gradefive);
 										
 												multi=(b[i] *  gradesPersent) ;
 										
@@ -661,10 +667,14 @@
 								var garsatt=document.getElementById("garsatRate").value;
 						
 							var td=	(garsatt - (addition));
-						
+							var netPercent = parseFloat(total/100);
+			 				
+			 				netAmount=parseFloat(garsatrate * netPercent);
+			 		
+			 				document.getElementById("amountPayable").value = netAmount;
 								
 								document.getElementById("tdbaseprice").value = Math.round(td,2);
-								document.getElementById("amountPayable").value = 0.0;
+								
 								$('#tdbaseprice').prop('readonly', true);
 						}
 					}

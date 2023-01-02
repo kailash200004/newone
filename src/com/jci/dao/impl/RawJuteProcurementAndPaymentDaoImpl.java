@@ -131,15 +131,16 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		int count=0;
 
 		if(basis_no==1) {
-		 querystr =  "SELECT top 1 effectDate, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
+		 querystr =  "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
 		}
 		else if(basis_no==2) {
-			 querystr = "SELECT top 1 effectDate, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
+			 querystr = "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
 			}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		result = query.list();
+		System.out.println("rates result ================== >>>>>>>>>>>>>>>> "+ result);
 		return result;
 	}
 

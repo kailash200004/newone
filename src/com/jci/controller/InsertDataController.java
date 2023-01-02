@@ -3155,6 +3155,7 @@ public class InsertDataController {
 		List<String> result;
 		result = rawJuteProcurAndPayService.findGradePriceJuteVariety(request.getParameter("variety"),
 				Integer.parseInt(request.getParameter("basis_no")), request.getParameter("cropyr"), dpcid);
+		System.out.println("gson.toJson(result) ================== >>>>>>>>>>>>>>>> "+ gson.toJson(result));
 		return gson.toJson(result);
 	}
 

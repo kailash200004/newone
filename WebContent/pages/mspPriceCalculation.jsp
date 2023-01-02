@@ -106,7 +106,7 @@
 										<div class="col-sm-4 form-group">
 											<label>Jute Variety</label> <span class="text-danger">* </span>
 											<span id="errJuteVariety" name="errJuteVariety" class="text-danger "> </span>
-                                        	<select name="jutevariety" id="jutevariety" class="form-control" onclick="deleteErrorMsg()" required="required">   
+                                        	<select name="jutevariety" id="jutevariety" class="form-control"   onchange="return validatejute()" required>   
                                         	<option disabled selected value>-Select-</option>
                                         	<option value="Bimli">Bimli</option>
                                         	<option value="Mesta">Mesta</option>
@@ -433,6 +433,7 @@
 	
 	 
 <script>
+
 function validatejute() {
 	var jutevariety = document.getElementById("jutevariety").value;
 	var cropyr = document.getElementById("cropyr").value;
@@ -444,13 +445,14 @@ function validatejute() {
 				type:"GET",
 				url:"validatejutevariety.obj?jutevariety='"+jutevariety+"'&cropyr='"+cropyr+"'",
 				success:function(result){
-					document.getElementById("dubjuteVariety").value = result;
-					if(result == 'false'){
+					var data = result;
+				
+					if(data == 'false'){
 						document.getElementById("errJuteVariety").innerHTML ="Jute Variety Exists IN "+cropyr;
 						document.getElementById("submit").disabled = true;
 						return false;
 					}
-					else{
+					else if(data == 'true'){
 						document.getElementById("errJuteVariety").innerHTML = "";
 						document.getElementById("submit").disabled = false;
 						return true;
@@ -459,7 +461,7 @@ function validatejute() {
 				}
 		  });
 	 }
-}		
+}
 </script>
 
 	 
