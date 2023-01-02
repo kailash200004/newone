@@ -607,8 +607,8 @@
 							var gradefive = data[0][4];
 							console.log(gradefive);
 							console.log(data);
-									for (var i = 1; i <= input.length; i++) {
-										for( var j=1;j <= data.length;j++){
+									for (var i = 0; i < input.length; i++) {
+										for( var j=0;j < data.length;j++){
 								 		 grade=data[j];
 
 				            	 				var rate = parseFloat(grade[i]);
@@ -635,8 +635,8 @@
 							var multi;
 							 gradefive = data[0][5];
 							console.log(data);
-								for (var i = 1; i <= input.length; i++) {
-									for (var j = 1; j <= data.length; j++){
+								for (var i = 0; i < input.length; i++) {
+									for (var j = 0; j < data.length; j++){
 										
 										 gradesPersent= parseFloat((input[i].value) /100);
 										
@@ -669,7 +669,7 @@
 							var td=	(garsatt - (addition));
 							var netPercent = parseFloat(total/100);
 			 				
-			 				netAmount=parseFloat(garsatrate * netPercent);
+			 				netAmount=parseFloat(garsatt * netPercent);
 			 		
 			 				document.getElementById("amountPayable").value = netAmount;
 								

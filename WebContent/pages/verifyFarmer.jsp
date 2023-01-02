@@ -127,12 +127,12 @@
 									
 									<%
 									String filepath = "http://49.50.79.121:8080/FarmerRegistration/";
-									String imagepath =farmerModel.getF_DOC_Mandate() ;
-									if(farmerModel.getF_DOC_Mandate()!=null){
+									String imagepath =farmerModel.getF_BANK_DOC() ;
+									if(farmerModel.getF_BANK_DOC() !=null){
 										 //out.println("Bank Mandate Form Value is "+filepath+farmerModel.getF_DOC_Mandate() );
 										//filepath = BharatUtils.strToBase64Pdf(new File(imagepath));
 										%>
-											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_DOC_Mandate() %>" class="rotate90" />
+											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_BANK_DOC()  %>" class="rotate90" />
 										<%	
 									}else{
 										%>

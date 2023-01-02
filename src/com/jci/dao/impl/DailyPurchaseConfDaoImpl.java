@@ -150,10 +150,10 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setDatepurchase(datepurchase);
 			
 			if(basis=="commercial") {
-			querystr = "SELECT top 1 effectDate, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
+			querystr = "SELECT top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
 			}
 			else if(basis=="msp") {
-				querystr =  "SELECT  crop_yr, grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
+				querystr =  "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
 				
 			}
 			Session session1 = sessionFactory.getCurrentSession();
@@ -168,7 +168,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			for(Object[] p :prices) {
 			double gradefive=((BigDecimal) p[5]).doubleValue();
 			
-			for (j = 1; j <= result.get(i).length-6; j++){
+			for (j = 0; j < result.get(i).length-6; j++){
 				
 				
 						grade[j]= ((BigDecimal)o[j]).doubleValue();
