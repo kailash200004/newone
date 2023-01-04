@@ -149,10 +149,10 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setGrade8(grade8);
 			dailyPurchaseConfModel.setDatepurchase(datepurchase);
 			
-			if(basis=="commercial") {
+			if(basis.equalsIgnoreCase("commercial")) {
 			querystr = "SELECT top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
 			}
-			else if(basis=="msp") {
+			else if(basis.equalsIgnoreCase("msp")) {
 				querystr =  "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
 				
 			}
@@ -168,7 +168,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			for(Object[] p :prices) {
 			double gradefive=((BigDecimal) p[5]).doubleValue();
 			
-			for (j = 0; j < result.get(i).length-6; j++){
+			for (j = 0; j < 8; j++){
 				
 				
 						grade[j]= ((BigDecimal)o[j]).doubleValue();
@@ -204,7 +204,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			int one = query4.executeUpdate();
 			System.out.println("====================== " +one);
 			dailyPurchaseConfModel.setGarsat(garsat);
-			dailyPurchaseConfModel.setBasis("commercial");
+			dailyPurchaseConfModel.setBasis(basis);
 			dailyPurchaseConfModel.setCropyr(cropyr);
 			dailyPurchaseConfModel.setPlaceofpurchase(dpcid);
 			dailyPurchaseConfModel.setNetquantity(netqty);

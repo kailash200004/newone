@@ -93,7 +93,8 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 	@Override
 	public List <FarmerRegModelDTO> verificationStatus() {
 		List<Integer> result = new ArrayList<>();
-		String querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id";
+		//String querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id";
+		String querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -105,22 +106,43 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			String farmerName = (String) row[1];
 			String address = (String) row[2];
 			String mobile = (String)row[3];
-			String branch = (String)row[11];
-			String accountNumber = (String)row[13];
-			String bankMandateForm= (String)row[15];
-			String BankDoc= (String)row[16];
+			String branch = (String)row[4];
+			String accountNumber = (String)row[12];
+			String bankMandateForm = (String)row[13];
+			String BankDoc= (String)row[14];
 			String status = null;
-			String vRegNo = (String)row[28];
-			String vIFSC = (String) row[12];
-			String REGno = (String)row[22];
+			String vRegNo = (String)row[36];
+			String vIFSC = (String) row[37];
+			String REGno = (String)row[19];
 			String RegBy = (String)row[6];
 			String state = (String)row[43];
-			String district = (String)row[28];
-			String block = (String)row[30];
+			String district = (String)row[44];
+			String block = (String)row[26];
 			int isVerified =0;
-			if (row[17] !=null) {
-				isVerified = (int) row[17];
+			if (row[15] !=null) {
+				isVerified = (int) row[15];
+				
 			}
+			
+			/*
+			 * //int a= Integer.parseInt(districtid); String querystr1 =
+			 * " select state_name from tbl_states where id ="+stateid; Session session1 =
+			 * sessionFactory.getCurrentSession(); Transaction tx1 =
+			 * session1.beginTransaction(); SQLQuery query1 =
+			 * session1.createSQLQuery(querystr1); Object state= query1.list(); String
+			 * state_name= state.toString();
+			 * System.out.println("state_name=====================>>>>>>>>>>>  "+state_name)
+			 * ;
+			 * 
+			 * String querystr2 =
+			 * " select district_name from tbl_districts where id="+districtid; Session
+			 * session2 = sessionFactory.getCurrentSession(); Transaction tx2 =
+			 * session1.beginTransaction(); SQLQuery query2 =
+			 * session1.createSQLQuery(querystr2); Object district= query2.list(); String
+			 * district_name= district.toString();
+			 * System.out.println("district_name=====================>>>>>>>>>>>  "
+			 * +district_name);
+			 */
 			FarmerRegModelDTO farmersDetailsDTO = new FarmerRegModelDTO();
 			farmersDetailsDTO.setF_NAME(farmerName);
 			farmersDetailsDTO.setF_ID(F_ID);
@@ -134,6 +156,7 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			farmersDetailsDTO.setIS_VERIFIED(isVerified);
 			farmersDetailsDTO.setF_DOC_Mandate(bankMandateForm);
 			farmersDetailsDTO.setState(state);
+			
 			farmersDetailsDTO.setDistrict(district);
 			farmersDetailsDTO.setBlock(block);
 			ll.add(farmersDetailsDTO);

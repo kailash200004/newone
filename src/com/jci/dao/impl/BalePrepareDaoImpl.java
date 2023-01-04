@@ -20,7 +20,7 @@ import com.jci.model.RopeMakingModel;
 
 @Transactional
 @Repository
-public class BalePrepareDaoImpl implements BalePrepareDao {
+public class BalePrepareDaoImpl implements  BalePrepareDao {
 
 	@Autowired
 	SessionFactory sessionFactory;

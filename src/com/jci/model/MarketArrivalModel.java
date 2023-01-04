@@ -95,7 +95,7 @@ public class MarketArrivalModel {
 	private String maxmois;
  
 	@Column(name = "createddate")
-	private Date createddate;
+	private String createddate;
  
 	@Column(name = "creadtedby")
 	private int creadtedby;
@@ -140,11 +140,23 @@ public class MarketArrivalModel {
 
 
 
+	public String getCreateddate() {
+		return createddate;
+	}
+
+
+
+	public void setCreateddate(String createddate) {
+		this.createddate = createddate;
+	}
+
+
+
 	public MarketArrivalModel(int mrarefid, double grade1, double grade2, double grade3, double grade4, double grade5,
 			double grade6, double grade7, double grade8, int grade_rate1, int grade_rate2, int grade_rate3,
 			int grade_rate4, int grade_rate5, int grade_rate6, int grade_rate7, int grade_rate8, String dpcnames,
 			String region_id, Date datearrival, String basis, String jutevariety, String cropyr, String arrivedqty,
-			String mixmois, String maxmois, Date createddate, int creadtedby, String no_arrival) {
+			String mixmois, String maxmois, String createddate, int creadtedby, String no_arrival) {
 		super();
 		this.mrarefid = mrarefid;
 		this.grade1 = grade1;
@@ -491,15 +503,7 @@ public class MarketArrivalModel {
 
 
 
-	public Date getCreateddate() {
-		return createddate;
-	}
 
-
-
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
 
 
 
@@ -529,10 +533,6 @@ public class MarketArrivalModel {
 	
 	 
 }
-
-
-
-
 
 
 

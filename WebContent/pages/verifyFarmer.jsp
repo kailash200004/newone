@@ -127,13 +127,14 @@
 									
 									<%
 									String filepath = "http://49.50.79.121:8080/FarmerRegistration/";
-									String imagepath =farmerModel.getF_BANK_DOC() ;
-									if(farmerModel.getF_BANK_DOC() !=null){
+									String imagepath =farmerModel.getF_DOC_Mandate();
+									if(farmerModel.getF_DOC_Mandate()!=null){
 										 //out.println("Bank Mandate Form Value is "+filepath+farmerModel.getF_DOC_Mandate() );
 										//filepath = BharatUtils.strToBase64Pdf(new File(imagepath));
 										%>
-											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_BANK_DOC()  %>" class="rotate90" />
+											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_DOC_Mandate()  %>" class="rotate90" />
 										<%	
+										
 									}else{
 										%>
 											<img src="https://placehold.jp/960x450.png" class="rotate90"/>
@@ -163,10 +164,10 @@
 												<input type="text" class="form-control"   name="farmer_name" id="farmer_name" placeholder="Name of farmer" required >
 											</div>
 											
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label class="required">Address</label> <span class="err" name="address_span" id="address_span"></span>
 												<input class="form-control" type="text" name="address" id="address" placeholder="Address"  required>
-											</div>
+											</div> -->
 											
 											<div class="form-group">
 												<label class="required">Identity Proof Type</label> <span class="err" name="idProofType_span" id="idProofType_span"></span>
@@ -241,14 +242,14 @@
 			var fIfsc = document.getElementById("fIfsc").value;
 			var facNo = document.getElementById("facNo").value;
 			var fName = document.getElementById("fName").value;
-			var faddress = document.getElementById("faddress").value;
+			//var faddress = document.getElementById("faddress").value;
 			var fidProofType = document.getElementById("fidProofType").value;
 			var fidProofNo = document.getElementById("fidProofNo").value;
 			//alert(fidProofNo);
 			var ifsc_code = document.getElementById("ifsc_code").value;
 			var ac_no = document.getElementById("ac_no").value;
 			var farmer_name = document.getElementById("farmer_name").value;
-			var address = document.getElementById("address").value;
+			//var address = document.getElementById("address").value;
 			var idProofType = document.getElementById("idProofType").value;
 			var identityProofNo = document.getElementById("identityProofNo").value;
 		//	alert(identityProofNo);
@@ -273,11 +274,11 @@
 				return false;
 			//	document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 			}
-			else if(faddress.toUpperCase()!==address.toUpperCase()){
+			/* else if(faddress.toUpperCase()!==address.toUpperCase()){
 				document.getElementById("address_span").textContent= "Please check farmer address";
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 				return false;
-			}
+			} */
 			else if(fidProofType!==idProofType){
 				document.getElementById("idProofType_span").textContent= "Please check Id proof type";
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");

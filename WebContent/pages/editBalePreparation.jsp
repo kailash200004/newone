@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <html lang="en">
 <%@page import="com.jci.model.BalePreparationModel"%>
 <%@page import="com.jci.model.BalePreparation"%>
@@ -44,6 +45,20 @@
 			<div class="page-heading">
 				<h1 class="page-title">Bale Preparation</h1>
 			</div>
+			
+			<%
+				List<String> allDpcList = (List) request.getAttribute("allDpcList");
+			%>
+
+			<%
+			String dpcCenter = (String) session.getAttribute("dpc_center");
+
+			String dpcid = (String) session.getAttribute("dpcId");
+
+			String region_id = (String) session.getAttribute("region");
+
+			int refid = (int) session.getAttribute("refId");
+			%>
 			<%
 				BalePreparation baleData = (BalePreparation) request.getAttribute("baleMod");
 			
@@ -57,30 +72,23 @@
 								<form action="updateBalePreparation.obj" method="POST">
 									     <input type="hidden" id="baleId" name="baleId"value="<%=baleData.getBaleId()%>">
 										 <input type="hidden" id="juteVarietyjs"name="jute_variety"value="<%=baleData.getJute_variety()%>"> 
-										 <input type="hidden" id="place_of_packing"name="place_of_packing"value="<%=baleData.getPlace_of_packing()%>">
+										 <%-- <input type="hidden" id="place_of_packing"name="place_of_packing"value="<%=baleData.getPlace_of_packing()%>"> --%>
 										 
+										 <input class="form-control" name="dpcid" id="dpcid"
+											type="hidden" value="<%=dpcid%>"> <input
+											class="form-control" name="region_id" id="region_id"
+											type="hidden" value="<%=region_id%>"> <input
+											class="form-control" name="refid" id="refid" type="hidden"
+											value="<%=refid%>" >
 
 									<div class="row">
-										<!-- <div class="col-sm-4 form-group">
-											<label>Date of Packing</label> 
-											<input class="form-control" type="Date" name="packing_date" placeholder="Packing Date" required>
-										</div> -->
+									<div class="col-sm-4 form-group">
+											<label class="required">Packing Place</label> <select
+												name="place_of_packing" id="place_of_packing"class="form-control">
+												<option value="">-Select-</option>
 
-										<%--  <div class="col-sm-4 form-group">
-                                            <label>Place of Packing</label>
-                                            <!-- <input class="form-control" type="text" name="dpcname" placeholder="Place of Packing" required> -->
-                                             <select name="dpcname" id="dpcname" class="form-control">
-                                            	<%
-                                            		String[] str;
-	                                            	for(int i=0; i<allDpcList.size() ; i++){
-	                                            		str = allDpcList.get(i).split("-");
-	                                            %>
-	                                            <option value="<%=str[0]%>"><%=str[1]%></option>
-	                                            <% 
-	                                            	}
-	                                            %>		
-                                            </select> 
-                                        </div> --%>
+											</select>
+										</div>
 
 										<div class="col-sm-4 form-group">
 											<label>Crop Year</label> <select name="crop_year" id="cropyr"
@@ -105,8 +113,8 @@
 												placeholder="Bin Number" required onkeyup="checkLen()"
 												value="<%=baleData.getBin_no()%>">
 										</div>
-
-										<div class="col-sm-4 form-group">
+</div>
+									<div class="row">	<div class="col-sm-4 form-group">
 											<label>Basis</label> <select name="basis" id="basis"
 												class="form-control" value="<%=baleData.getBasis()%>">
 												<option value="">-Select-</option>
@@ -156,26 +164,20 @@
 												%>
 											</select>
 										</div>
-
+</div>
+									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label>Bale Check SlipNo.(From)</label> <input
 												class="form-control" name="slip_no_from"
-												id="fromCheckSlipNo" type="text"
+												id="slip_no_from" type="text"
 												placeholder="Bale Check SlipNo"
 												value="<%=baleData.getSlip_no_from()%>">
 										</div>
 
-									</div>
-
-									<div class="row">
-										<!-- <div class="col-sm-4 form-group">
-                                             <label>Jute Grade</label>
-                                        	 <input class="form-control" name="jutegrade" type="text" placeholder="Jute Grade" required>
-                                        </div>  -->
 
 										<div class="col-sm-4 form-group">
 											<label>Bale Check SlipNo.(To)</label> <input
-												class="form-control" name="slip_no_to" id="toCheckSlipNo"
+												class="form-control" name="slip_no_to" id="slip_no_to"
 												type="text" placeholder="Bale Check SlipNo"
 												onblur="calculateNoOfBales()"
 												value="<%=baleData.getSlip_no_to()%>">
@@ -183,14 +185,16 @@
 
 										<div class="col-sm-4 form-group">
 											<label>Total Bales</label> <input class="form-control"
-												name="bale_no" id="noOfBales" type="text"
+												name="bale_no" id="bale_no" type="text"
 												placeholder="Total bales"
 												value="<%=baleData.getBale_no()%>" readonly>
 										</div>
 									</div>
 
+									<div class="row">
 									<div class="form-group">
 										<button class="btn btn-default" type="submit">Submit</button>
+									</div>
 									</div>
 								</form>
 							</div>
@@ -205,7 +209,37 @@
 	</div>
 
 	<div class="sidenav-backdrop backdrop"></div>
+<script>
 
+       $(document).ready(function(){
+    	   var myVar = '<%=(String) session.getAttribute("region")%>';
+
+							//  alert(myVar);
+
+							$
+									.ajax({
+										type : "GET",
+										url : "findDpcByRegion.obj",
+										data : {
+											"id" : myVar
+										},
+										success : function(result) {
+
+											var data = jQuery.parseJSON(result);
+										
+											var html = "<option disabled selected value>-Select-</option>";
+											for (var i = 0; i < data.length; i++) {
+												console.log(data[i].split("-")[0]+ " "+ data[i].split("-")[1]);
+												html += "<option value="+ data[i].split("-")[0]+ ">"+ data[i].split("-")[1]+ "</option>"
+											}
+											$("#place_of_packing").html(html);
+
+										}
+
+									});
+
+						});
+	</script>
 	<script>
 		$(function() {
 			var dtToday = new Date();
@@ -223,8 +257,7 @@
 
 	<script>
 		$("#basis")
-				.on(
-						"change",
+				.on("change",
 						function() {
 							var msp_no;
 							var variety = (this.value);
@@ -248,13 +281,13 @@
 												html += "<option value="+sar+">"
 														+ data[i] + "</option>"
 											}
-											$("#jutevariety").html(html);
+											$("#jute_variety").html(html);
 										}
 									});
 						});
 	</script>
 	<script>
-		$("#jutevariety")
+		$("#jute_variety")
 				.on(
 						"change",
 						function() {
@@ -268,8 +301,7 @@
 							else if (basis == "msp")
 								basis_no = 1;
 							var variety = (this.value);
-							$
-									.ajax({
+							$.ajax({
 										type : "GET",
 										url : "findGradeOnJuteVariety.obj",
 										data : jQuery.param({
@@ -285,7 +317,7 @@
 												html += "<option value="+sar+">"
 														+ data[i] + "</option>"
 											}
-											$("#jutegarde").html(html);
+											$("#jute_grade").html(html);
 										}
 									});
 						});
@@ -293,32 +325,49 @@
 
 	<script>
 		function checkLen() {
-			var binnumber = document.getElementById("binnumb").value;
+			var binnumber = document.getElementById("bin_no").value;
 			var max_chars = 3;
 			// binnumber.value = binnumber.value.substr(0, max_chars);
 			if (binnumber.toString().length == 3) {
 				// alert("hell");
-				$("#binnumb").prop("type", "text");
-				$("#binnumb").attr("maxlength", "3");
-				$("#binnumb").attr("minlength", "1");
+				$("#bin_no").prop("type", "text");
+				$("#bin_no").attr("maxlength", "3");
+				$("#bin_no").attr("minlength", "1");
 			}
 		}
 	</script>
 
 	<script>
 		function calculateNoOfBales() {
-			var fromCheckSlipNo = document.getElementById("fromCheckSlipNo").value;
-			var toCheckSlipNo = document.getElementById("toCheckSlipNo").value;
+			var fromCheckSlipNo = document.getElementById("slip_no_from").value;
+			var toCheckSlipNo = document.getElementById("slip_no_to").value;
 			var noOfBales = (toCheckSlipNo - fromCheckSlipNo) + 1;
 			if (noOfBales >= 0) {
-				document.getElementById("noOfBales").value = noOfBales;
+				document.getElementById("bale_no").value = noOfBales;
 			} else {
 				alert("No of bales can not be negative or 0");
 				return false;
 			}
 		}
-	</script>
 
+		function baleFromLen() {
+			var binnumber = document.getElementById("slip_no_from").value;
+			if (binnumber.toString().length == 6) {
+				$("#slip_no_from").prop("type", "text");
+				$("#slip_no_from").attr("maxlength", "6");
+				$("#slip_no_from").attr("minlength", "1");
+			}
+		}
+
+		function baleToLen() {
+			var binnumber = document.getElementById("slip_no_to").value;
+			if (binnumber.toString().length == 6) {
+				$("#slip_no_to").prop("type", "text");
+				$("#slip_no_to").attr("maxlength", "6");
+				$("#slip_no_to").attr("minlength", "1");
+			}
+		}
+	</script>
 	<!-- PAGE LEVEL PLUGINS-->
 	<!-- CORE SCRIPTS-->
 	<script src="assets/js/app.min.js" type="text/javascript"></script>

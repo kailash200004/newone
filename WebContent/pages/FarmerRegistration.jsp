@@ -328,7 +328,7 @@
 											<label class="required">Registration Form (330kb-1MB)</label>&nbsp; 
 											<span id="errRegForm" name="errRegForm" class="text-danger"> </span>
 									 <img id="imgPreview"  />
-<input class="form-control" name="F_REG_FORM" type="file" oninput="validateREGFileType()" accept=".jpg,.jpeg,.png" placeholder="Registration Form" id="F_REG_FORM" onkeypress="deleteErrorMsg()">
+								<input class="form-control" name="F_REG_FORM" type="file" oninput="validateREGFileType()" accept=".jpg,.jpeg,.png" placeholder="Registration Form" id="F_REG_FORM" onkeypress="deleteErrorMsg()">
 										</div>
 							
 									</div>
@@ -1108,7 +1108,7 @@ $("#child").change(function(){
 </script> -->
 
 <script>
-$("#child").change(function(){
+$("#ParentMenuID").change(function(){
 	//alert("hello");
 	var val = $(this).val();	
 	console.log(val);

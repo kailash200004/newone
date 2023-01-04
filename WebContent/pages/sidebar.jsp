@@ -21,11 +21,18 @@ body {
 			
   <div class="admin-info">
   
-	<div class="font-strong"></i> Welcome <br>
+	<div class="font-strong">Welcome <br>
 	<span style="color: #ffc107;">
 	<%
 		String Email=(String)request.getSession().getAttribute("usrname");
 		out.print(Email);
+		if(Email==null){
+			
+		    String redirectURL = "http://localhost:8080/jciadmin/index.obj";
+		    response.sendRedirect(redirectURL);
+		
+		}
+		
   	%>
 	</span>
 	
@@ -44,7 +51,7 @@ body {
 					class="nav-label">Dashboard</span> </a></li>
 
 
-			<li><a href="javascript:;"><i
+			<li><a href="javascript:void(0);;"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">0. &nbsp;User Management</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -55,7 +62,7 @@ body {
 							User Registration</b></a></li>
 
 				</ul></li>
-			<li><a href="javascript:;"><i
+			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">1. &nbsp;Farmer Registration </span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -66,10 +73,11 @@ body {
 					<!--  <li>
                                 <a href="addFarmer.obj">Add Farmer</a>
                             </li> -->
-					<li><a href="FarmerRegistration.obj"><b>Farmer Registration</b></a></li>
-					<li><a href="ViewFarmerRegistration.obj"><b>View Farmer List Reg</b></a></li>
-				</ul></li>
-				<li><a href="javascript:;"><i
+					<li><a class="active" href="FarmerRegistration.obj"><b>Farmer Registration</b></a></li>
+					<li><a class="active" href="ViewFarmerRegistration.obj"><b>View Farmer List Reg</b></a></li>
+				</ul>
+				</li>
+				<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">2. &nbsp;Market Arrival</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -84,7 +92,7 @@ body {
 					
 				</ul></li>
 
-			<li><a href="javascript:;"><i
+			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">3. &nbsp;Raw Jute Procurement</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -111,7 +119,7 @@ body {
 					<li><a href="CommercialCeilingPriceIntimations.obj"><b>Commercial Ceiling Price Intimation</b></a></li>-->
 				
 				</ul></li>
-			<li><a href="javascript:;"><i
+			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">4. &nbsp;Progress of Assortment</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -127,7 +135,7 @@ body {
 				
 				
 				
-			<li><a href="javascript:;"><i
+			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">5.&nbsp;BIN Performance Calculation</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -138,7 +146,27 @@ body {
 					
 
 				</ul></li>
+				
+				<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">6.&nbsp;Contract</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level">
 
+					<li><a href="entry_derivativeprice.obj">Entry of Derivative Price</a></li>
+					<li><a href="entryderivativepricelist.obj">Entry of Derivative Price List</a></li>
+					<li><a href="contractgeneration.obj">Contract Generation</a></li>
+				</ul></li>
+				<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">7.&nbsp;Payment Arrangement</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level">
+
+					<li><a href="entryofpaymentinstrument.obj">Entry of Payment Instrument</a></li>
+					
+
+				</ul></li>
 
 
 
