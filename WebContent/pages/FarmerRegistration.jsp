@@ -309,11 +309,13 @@
 												placeholder="Farmer Bank Branch" id="F_BANK_BRANCH"
 												onchange="deleteErrorMsg()">
 										</div>
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Bank Document (330kb-1MB)</label>&nbsp;
 										 <span id="errBank" name="errBank"class="text-danger"> </span>
 										<img id="imgPreviewwbank"  />
-					<input class="form-control" name="F_BANK_DOC" type="file" oninput="validateBANKFileType()" accept=".jpg,.jpeg,.png" placeholder="Bank Document " id="F_BANK_DOC" onkeypress="deleteErrorMsg()">
+									<input class="form-control" name="F_BANK_DOC" type="file" oninput="validateBANKFileType()" accept=".jpg,.jpeg,.png" placeholder="Bank Document " id="F_BANK_DOC" onkeypress="deleteErrorMsg()">
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">Identity Proof (330kb-1MB)</label>&nbsp; 
@@ -322,8 +324,8 @@
 										<input class="form-control" name="F_ID_PROF" type="file" oninput="validateIDFileType()"
 											accept=".jpg,.jpeg,.png" placeholder="Identity Proof " id="F_ID_PROF" onkeypress="deleteErrorMsg()">
 										</div>
-									</div>
-									<div class="row">
+									
+									
 										<div class="col-sm-4 form-group">
 											<label class="required">Registration Form (330kb-1MB)</label>&nbsp; 
 											<span id="errRegForm" name="errRegForm" class="text-danger"> </span>

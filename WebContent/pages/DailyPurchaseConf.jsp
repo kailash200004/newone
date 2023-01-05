@@ -278,7 +278,7 @@ $(binno).attr('maxlength',3);
 			        	$('<div class="form-group">').appendTo('#form2');
 			        	$('<label/>').text(data[i]+" : ").appendTo('#form2');
 			        	// $('<br/>').appendTo('#form2');
-	 				    $('<input/>').attr({ type: 'text', id: 'grade'+i, name: 'test[]',value:'', min:'0', required:'true' ,oninput:'javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);' }).appendTo('#form2');
+	 				    $('<input/>').attr({ type: 'text', id: 'grade'+i, name: 'test[]',value:'0', min:'0', required:'true' ,oninput:'javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);' }).appendTo('#form2');
 	 				   
 	 				   $('</div>').appendTo('#form2');
 	 				    //$('<br/>').appendTo('#form2');
@@ -320,10 +320,7 @@ $(binno).attr('maxlength',3);
 				 a = input[i];
 	         	  document.getElementById("g"+i).value = parseFloat(a.value);
 			 }
-			  
-			
-			
-		    
+		   
 		  });
 		});
 	</script>

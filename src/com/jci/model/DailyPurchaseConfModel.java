@@ -22,7 +22,17 @@ public class DailyPurchaseConfModel {
 	private String formno;
 
 	@Column(name="datepurchase")
-	private Date datepurchase;
+	private String datepurchase;
+
+	public String getDatepurchase() {
+		return datepurchase;
+	}
+
+	public void setDatepurchase(String datepurchase) {
+		this.datepurchase = datepurchase;
+	}
+
+
 
 	@Column(name="basis")
 	private String basis;
@@ -115,7 +125,7 @@ public class DailyPurchaseConfModel {
 
 	}
 
-	public DailyPurchaseConfModel(int dpcid, String formno, Date datepurchase, String basis, String cropyr,
+	public DailyPurchaseConfModel(int dpcid, String formno, String datepurchase, String basis, String cropyr,
 			String placeofpurchase, int binno, String jutevariety, double gquantity, double dquantity,
 			double netquantity, int fibervalue, String ipaddresss, int createdby,
 			String ipaddress, String rateslipno) {
@@ -154,13 +164,7 @@ public class DailyPurchaseConfModel {
 		this.formno = formno;
 	}
 
-	public Date getDatepurchase() {
-		return datepurchase;
-	}
-
-	public void setDatepurchase(Date datepurchase) {
-		this.datepurchase = datepurchase;
-	}
+	
 
 	public String getBasis() {
 		return basis;

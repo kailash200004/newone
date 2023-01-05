@@ -1105,14 +1105,19 @@ public class InsertDataController
             final String grade6 = request.getParameter("g5");
             final String grade7 = request.getParameter("g6");
             final String grade8 = request.getParameter("g7");
-            System.out.println("grade0   " + grade0);
-            System.out.println("grade1   " + grade2);
-            System.out.println("grade2   " + grade3);
-            System.out.println("grade3   " + grade4);
-            System.out.println("grade4   " + grade5);
-            System.out.println("grade5   " + grade6);
-            System.out.println("grade6   " + grade7);
-            System.out.println("grade07   " + grade8);
+			
+			/*
+			 * System.out.println("grade0   " + grade0); System.out.println("grade1   " +
+			 * grade2); System.out.println("grade2   " + grade3);
+			 * System.out.println("grade3   " + grade4); System.out.println("grade4   " +
+			 * grade5); System.out.println("grade5   " + grade6);
+			 * System.out.println("grade6   " + grade7); System.out.println("grade07   " +
+			 * grade8);
+			 */
+         
+            
+            String datepurchase = request.getParameter("datepurchase");
+            System.out.println("datepurchase======================= "+datepurchase);
             final String formno = request.getParameter("formno");
             final String basis = request.getParameter("basis");
             final String cropyr = request.getParameter("cropyr");
@@ -1126,6 +1131,7 @@ public class InsertDataController
             final int createdBy = (int)request.getSession().getAttribute("userId");
             final String rateslipno = request.getParameter("rateslipno");
             final DailyPurchaseConfModel DailyPurchase = new DailyPurchaseConfModel();
+            DailyPurchase.setDatepurchase(datepurchase);
             DailyPurchase.setBasis(basis);
             DailyPurchase.setBinno(Integer.parseInt(binno));
             DailyPurchase.setCropyr(cropyr);

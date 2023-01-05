@@ -1,6 +1,7 @@
 package com.jci.dao.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -116,7 +117,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr1);
 		result = query.list();
-		
+		try {
 		for(int i=0; i<query.list().size(); i++) {
 			double multi=0.0;
 			double addition=0.0;
@@ -136,7 +137,10 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			double grade6=((BigDecimal)o[6]).doubleValue();
 			double grade7 =((BigDecimal)o[7]).doubleValue();
 			double grade8 =((BigDecimal)o[8]).doubleValue();
-			Date datepurchase =(Date)o[9];
+			  final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+			  
+			String datepurchase =(String)o[9];
+			
 			String basis= (String)o[14];
 		
 			dailyPurchaseConfModel.setGrade1(grade1);
@@ -214,6 +218,10 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		
 			dpclist.add(dailyPurchaseConfModel);
 	 }
+		}
+        catch (Exception e) {
+            System.out.println(e);
+        }
 	//	System.out.println("dpclist==============>>>>>>>>>>>> "+dpclist);
 		return dpclist;
 
