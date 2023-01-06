@@ -253,7 +253,7 @@
 								
 								<div class="col-sm-4 form-group">
 									<label>Bank Mandate Document </label> <input class="form-control"
-										name="F_DOC_Mandate" type="file" placeholder="Bank Mandate Document" id="F_DOC_Mandate" value="<%=editFarmer.getF_DOC_Mandate() %>" readonly><%=editFarmer.getF_DOC_Mandate() %> </input>
+										name="F_DOC_Mandate"  accept=".jpg,.jpeg,.png" type="file" placeholder="Bank Mandate Document" id="F_DOC_Mandate" value="<%=editFarmer.getF_DOC_Mandate() %>" ><%=editFarmer.getF_DOC_Mandate() %> </input>
 								</div>
 								</div>
 							<div class="row">

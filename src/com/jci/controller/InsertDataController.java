@@ -97,6 +97,7 @@ public class InsertDataController
     private static int count;
     private final String farmerUpload = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\";
     String slipUpload;
+    String mendate;
     private static Logger logger;
     @Autowired
     PincodeService pincodeService;
@@ -167,6 +168,7 @@ public class InsertDataController
     
     public InsertDataController() {
         this.slipUpload = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlip\\";
+        this.mendate = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\";
     }
     
     @RequestMapping({ "addGrower" })
@@ -1117,7 +1119,7 @@ public class InsertDataController
          
             
             String datepurchase = request.getParameter("datepurchase");
-            System.out.println("datepurchase======================= "+datepurchase);
+        //    System.out.println("datepurchase======================= "+datepurchase);
             final String formno = request.getParameter("formno");
             final String basis = request.getParameter("basis");
             final String cropyr = request.getParameter("cropyr");
@@ -1411,7 +1413,7 @@ public class InsertDataController
             String idProofTypeFinal;
             if (idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) {
                 idProofTypeFinal = idProofType;
-               
+                
             }
             else {
                 idProofTypeFinal = null;
@@ -1467,6 +1469,37 @@ public class InsertDataController
         return mv;
     }
     
+	/*
+	 * @RequestMapping({ "EditsaveFarmerRegistrationMid" }) public ModelAndView
+	 * EditsaveFarmerRegistrationMid(final HttpServletRequest request, final
+	 * RedirectAttributes redirectAttributes, @RequestParam("F_DOC_Mandate") final
+	 * MultipartFile F_DOC_Mandate) { final ModelAndView mv = new ModelAndView();
+	 * try { final int idPrimary =
+	 * Integer.parseInt(request.getParameter("idPrimary")); final FarmerRegModel
+	 * farmerRegModel = this.farmerRegService.find(idPrimary); File file = null;
+	 * String pathurl = ""; String url = ""; if (!F_DOC_Mandate.isEmpty()) { file =
+	 * new
+	 * File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_"
+	 * + F_DOC_Mandate.getOriginalFilename());
+	 * 
+	 * try {
+	 * 
+	 * final OutputStream os = new FileOutputStream(file);
+	 * os.write(F_DOC_Mandate.getBytes()); os.close(); } catch (Exception e) {
+	 * e.printStackTrace(); } pathurl = file.getAbsolutePath(); final String path =
+	 * url =F_DOC_Mandate.getOriginalFilename();
+	 * farmerRegModel.setF_DOC_Mandate(url);
+	 * 
+	 * } this.farmerRegService.create(farmerRegModel);
+	 * redirectAttributes.addFlashAttribute("msg",
+	 * (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record Edit successfully.</div>\r\n"
+	 * ); } catch (Exception e2) { System.out.println(e2);
+	 * redirectAttributes.addFlashAttribute("msg",
+	 * (Object)"<div class=\"alert alert-dange\"><b>Failure !</b> Error in saving record. Please try again</div>\r\n"
+	 * ); } return new ModelAndView((View)new
+	 * RedirectView("ViewFarmerRegistration.obj")); }
+	 */
+    
     @RequestMapping({ "EditsaveFarmerRegistrationMid" })
     public ModelAndView EditsaveFarmerRegistrationMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("F_DOC_Mandate") final MultipartFile F_DOC_Mandate) {
         final ModelAndView mv = new ModelAndView();
@@ -1477,18 +1510,22 @@ public class InsertDataController
             String pathurl = "";
             String url = "";
             if (!F_DOC_Mandate.isEmpty()) {
-                file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + F_DOC_Mandate.getOriginalFilename());
-                try {
-                    final OutputStream os = new FileOutputStream(file);
-                    os.write(F_DOC_Mandate.getBytes());
-                    os.close();
-                }
+              //  file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + F_DOC_Mandate.getOriginalFilename());
+            	 file = new File(this.mendate + F_DOC_Mandate.getOriginalFilename());
+                // file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\" + F_DOC_Mandate.getOriginalFilename());
+                 try {
+                 	 System.out.println("file=====>>>>>" + file);
+                     final OutputStream os = new FileOutputStream(file);
+                     os.write(F_DOC_Mandate.getBytes());
+                     os.close();
+                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
                 pathurl = file.getAbsolutePath();
-                final String path = url = "mandate_" + F_DOC_Mandate.getOriginalFilename();
+                final String path = url =F_DOC_Mandate.getOriginalFilename();
                 farmerRegModel.setF_DOC_Mandate(url);
+                
             }
             this.farmerRegService.create(farmerRegModel);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record Edit successfully.</div>\r\n");

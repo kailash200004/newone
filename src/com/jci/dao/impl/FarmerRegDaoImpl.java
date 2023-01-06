@@ -121,7 +121,7 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			int isVerified =0;
 			if (row[15] !=null) {
 				isVerified = (int) row[15];
-				
+				System.out.println("isVerified=================  "+isVerified);
 			}
 			
 			/*

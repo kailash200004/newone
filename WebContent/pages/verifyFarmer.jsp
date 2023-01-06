@@ -126,6 +126,7 @@
 									<div class="col-sm-6">
 									
 									<%
+								
 									String filepath = "http://49.50.79.121:8080/FarmerRegistration/";
 									String imagepath =farmerModel.getF_DOC_Mandate();
 									if(farmerModel.getF_DOC_Mandate()!=null){
@@ -225,11 +226,13 @@
     			 if(len==12){
     				 $("#identityProofNo").prop("type", "text");
     				 $("#identityProofNo").attr("maxlength", "12");
+    				 alert("yes");
     			 }
     		});
     	}else{
     		$("#identityProofNo").prop("type", "text");
     		$("#identityProofNo").attr("maxlength", "10");
+    		 alert("else");
     	}
     });
     </script>
