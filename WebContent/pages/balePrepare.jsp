@@ -117,11 +117,16 @@
 										</div>
 
 										<div class="col-sm-4 form-group">
-											<label class="required">Bin number</label> <input
+											<label class="required">Bin number</label> 
+											<select class="form-control" name="bin_no" id="bin_no" required>
+							<option disabled selected value>-Select-</option>
+										</select>
+											
+										<!-- 	<input
 												class="form-control" name="bin_no" id="binnumb"
 												type="number" placeholder="Bin Number" required
-												onkeyup="checkLen()" required>
-										</div>
+												onkeyup="checkLen()" required>-->
+										</div> 
 									</div>
 									<div class="row">
 										<div class="col-sm-4 form-group">
@@ -156,8 +161,8 @@
 												type="number" placeholder="Bale Check SlipNo" required
 												onkeyup="baleFromLen()" min="0">
 										</div>
-
-										<!-- <div class="col-sm-4 form-group">
+<!-- 
+										<div class="col-sm-4 form-group">
                                              <label>Jute Grade</label>
                                         	 <input class="form-control" name="jutegrade" type="text" placeholder="Jute Grade" required>
                                         </div>  -->
@@ -214,6 +219,54 @@
 		
 	</script>
 	<script>
+$("#crop_year").on("change", function() {
+	var cropyr=document.getElementById("crop_year").value;
+	  var dpcid=  document.getElementById("place_of_packing").value;
+	//alert(cropyr);
+	 $.ajax({
+		   type:"GET",
+		   url:"findBinno.obj",
+		   data:jQuery.param({"cropyr":cropyr, "dpcid":dpcid}),
+		   success:function(result){
+			   var data= jQuery.parseJSON(result);
+			   var html = "<option disabled selected value>-Select-</option>";
+			     for (var i = 0; i< data.length; i++){
+			    	 
+				 html += "<option value=" +data[i]+">"+data[i]+"</option>"
+				// alert(data);
+			   }
+			   $("#bin_no").html(html);
+		   
+	   }
+		   
+	   }); 
+});
+</script>
+<script>
+$("#place_of_packing").on("change", function() {
+	var cropyr=document.getElementById("crop_year").value;
+	  var dpcid=  document.getElementById("place_of_packing").value;
+	//alert(cropyr);
+	 $.ajax({
+		   type:"GET",
+		   url:"findBinno.obj",
+		   data:jQuery.param({"cropyr":cropyr, "dpcid":dpcid}),
+		   success:function(result){
+			   var data= jQuery.parseJSON(result);
+			   var html = "<option disabled selected value>-Select-</option>";
+			     for (var i = 0; i< data.length; i++){
+			    	 
+				 html += "<option value=" +data[i]+">"+data[i]+"</option>"
+				// alert(data);
+			   }
+			   $("#bin_no").html(html);
+		   
+	   }
+		   
+	   }); 
+});
+</script>
+	<script>
 	$("#basis").on("change", function() {
 		var msp_no;
 		var variety = (this.value);	
@@ -244,22 +297,19 @@
        $(document).ready(function(){
     	   var myVar = '<%=(String) session.getAttribute("region")%>';
 
-							//  alert(myVar);
+							 // alert(myVar);
 
 							$
 									.ajax({
 										type : "GET",
 										url : "findDpcByRegion.obj",
-										data : {
-											"id" : myVar
-										},
+										data : {"id" : myVar},
 										success : function(result) {
 
 											var data = jQuery.parseJSON(result);
 											var html = "<option disabled selected value>-Select-</option>";
 											for (var i = 0; i < data.length; i++) {
-												console
-														.log(data[i].split("-")[0]
+												console.log(data[i].split("-")[0]
 																+ " "
 																+ data[i]
 																		.split("-")[1]);

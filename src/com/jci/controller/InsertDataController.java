@@ -1445,7 +1445,7 @@ public class InsertDataController
             }
             final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus();
             final VerifyFarmerModel farmerById = this.verifyFarmerService.findbyReg(farmer_reg_no);
-            if (farmerById.getRegno() != null && farmerById.getIfsccode() != null && farmerById.getAccountno() != null && farmerById.getFarmername() != null && farmerById.getAddress() != null && farmerById.getIdentityProofType() != null && farmerById.getIdentityProofNumber() != null) {
+            if (farmerById.getRegno() != null && farmerById.getIfsccode() != null && farmerById.getAccountno() != null && farmerById.getFarmername() != null  && farmerById.getIdentityProofType() != null && farmerById.getIdentityProofNumber() != null) {
                 this.farmerRegService.updateVerificationStatus(id);
             }
             mv.addObject("allFarmersList", (Object)allFarmersList);
@@ -1469,6 +1469,7 @@ public class InsertDataController
         return mv;
     }
     
+	
 	/*
 	 * @RequestMapping({ "EditsaveFarmerRegistrationMid" }) public ModelAndView
 	 * EditsaveFarmerRegistrationMid(final HttpServletRequest request, final
@@ -1500,6 +1501,37 @@ public class InsertDataController
 	 * RedirectView("ViewFarmerRegistration.obj")); }
 	 */
     
+	/*
+	 * @RequestMapping({ "EditsaveFarmerRegistrationMid" }) public ModelAndView
+	 * EditsaveFarmerRegistrationMid(final HttpServletRequest request, final
+	 * RedirectAttributes redirectAttributes, @RequestParam("F_DOC_Mandate") final
+	 * MultipartFile F_DOC_Mandate) { final ModelAndView mv = new ModelAndView();
+	 * try { final int idPrimary =
+	 * Integer.parseInt(request.getParameter("idPrimary")); final FarmerRegModel
+	 * farmerRegModel = this.farmerRegService.find(idPrimary); File file = null;
+	 * String pathurl = ""; String url = ""; if (!F_DOC_Mandate.isEmpty()) { //file
+	 * = new File("C:\\New folder\\mandate_" + F_DOC_Mandate.getOriginalFilename());
+	 * // file = new File(this.mendate + F_DOC_Mandate.getOriginalFilename()); file
+	 * = new
+	 * File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\"
+	 * + F_DOC_Mandate.getOriginalFilename()); try {
+	 * System.out.println("file=====>>>>>" + file); final OutputStream os = new
+	 * FileOutputStream(file); os.write(F_DOC_Mandate.getBytes()); os.close(); }
+	 * catch (Exception e) { e.printStackTrace();
+	 * System.out.println("Exception=====>>>>>" + e.getLocalizedMessage()); }
+	 * pathurl = file.getAbsolutePath(); final String path = url
+	 * =F_DOC_Mandate.getOriginalFilename(); farmerRegModel.setF_DOC_Mandate(url);
+	 * 
+	 * } this.farmerRegService.create(farmerRegModel);
+	 * redirectAttributes.addFlashAttribute("msg",
+	 * (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record Edit successfully.</div>\r\n"
+	 * ); } catch (Exception e2) { System.out.println(e2);
+	 * redirectAttributes.addFlashAttribute("msg",
+	 * (Object)"<div class=\"alert alert-dange\"><b>Failure !</b> Error in saving record. Please try again</div>\r\n"
+	 * ); } return null;//new ModelAndView((View)new
+	 * RedirectView("ViewFarmerRegistration.obj")); }
+	 */
+    
     @RequestMapping({ "EditsaveFarmerRegistrationMid" })
     public ModelAndView EditsaveFarmerRegistrationMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("F_DOC_Mandate") final MultipartFile F_DOC_Mandate) {
         final ModelAndView mv = new ModelAndView();
@@ -1510,22 +1542,18 @@ public class InsertDataController
             String pathurl = "";
             String url = "";
             if (!F_DOC_Mandate.isEmpty()) {
-              //  file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + F_DOC_Mandate.getOriginalFilename());
-            	 file = new File(this.mendate + F_DOC_Mandate.getOriginalFilename());
-                // file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\" + F_DOC_Mandate.getOriginalFilename());
-                 try {
-                 	 System.out.println("file=====>>>>>" + file);
-                     final OutputStream os = new FileOutputStream(file);
-                     os.write(F_DOC_Mandate.getBytes());
-                     os.close();
-                 }
+                file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + F_DOC_Mandate.getOriginalFilename());
+                try {
+                    final OutputStream os = new FileOutputStream(file);
+                    os.write(F_DOC_Mandate.getBytes());
+                    os.close();
+                }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
                 pathurl = file.getAbsolutePath();
-                final String path = url =F_DOC_Mandate.getOriginalFilename();
+                final String path = url = "mandate_" + F_DOC_Mandate.getOriginalFilename();
                 farmerRegModel.setF_DOC_Mandate(url);
-                
             }
             this.farmerRegService.create(farmerRegModel);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record Edit successfully.</div>\r\n");
@@ -1536,6 +1564,7 @@ public class InsertDataController
         }
         return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
     }
+
     
     @RequestMapping({ "saveCommercialCeilingPriceIntimation" })
     public ModelAndView saveCommercialCeilingPriceIntimation(final HttpServletRequest request) {
@@ -2105,7 +2134,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "saveBinDetails" })
-    public ModelAndView saveBinDetails(final HttpServletRequest request) {
+    public ModelAndView saveBinDetails(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         final ModelAndView mv = new ModelAndView("bin");
         try {
             final String nameOfDpc = request.getParameter("dpcname");
@@ -2124,9 +2153,11 @@ public class InsertDataController
             batch.setCarryoverlossqty(carryForwardLoose);
             batch.setCarryropeqty(carryForwardRope);
             this.batchService.create(batch);
+            redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
+            
         }
         catch (Exception ex) {}
-        return mv;
+        return new ModelAndView((View)new RedirectView("bin.obj"));
     }
     
     @RequestMapping({ "binList" })

@@ -100,14 +100,14 @@ body {
 					<li><a href="mspPriceCalculation.obj"><b>MSP Grades Price </b></a></li>
 					<li><a href="commercialPriceCalculation.obj"><b>Commercial Ceiling Price Intimation </b></a></li>
 					<li><a href="rawJutePaymentAndProcurement.obj"><b>Raw Jute Procurement & Payment</b></a></li>
-					<li><a href="verificationTallyslip.obj"><b>Verification of Tally Slip</b></a></li>
+					<!-- <li><a href="verificationTallyslip.obj"><b>Verification of Tally Slip</b></a></li> -->
 					<li><a href="dailyPurchaseConf.obj"><b>Daily Purchase Confirmation</b></a></li>
 					<li><a href="Distributionoftallyslips.obj"><b>Distribution of tally Slip</b></a></li>
 				  	<li><a href="mspGradesPriceList.obj"><b>MSP Grades Price Listing </b></a></li>
 					<li><a href="viewCommercialCeilingPrice.obj"><b>View Commercial Ceiling Price Intimation</b></a></li>
 					<li><a href="tallyapproval.obj"><b>Verification Pending Tally Slip</b></a></li>
 					<li><a href="viewVerifiedTallySlipList.obj"><b>Verified Tally Slip List</b></a></li>
-					<li><a href="disputedtallyslip.obj"><b>Disputed Tally Slip List</b></a></li>
+			<li><a href="disputedtallyslip.obj"><b>Disputed Tally Slip List</b></a></li>
 					<!-- <li><a class="active" href="juteProcurementList.obj"><b>Jute Procurement List</b></a></li> -->
 					
 					<li><a href="dailyPurchaseList.obj"><b>Daily Purchase List</b></a></li>
@@ -128,7 +128,7 @@ body {
 					<li><a href="viewbalePreparation.obj"> View Bale Preperation</a></li>
 					<li><a href="addRopeMaking.obj">Rope Making</a></li>
 					<li><a href="ropeMakingListing.obj">View Rope Making</a></li>
-					<li><a href="#">Re-assortment</a></li>
+					<!-- <li><a href="#">Re-assortment</a></li> -->
 				</ul></li>
 
 			 
@@ -147,7 +147,7 @@ body {
 
 				</ul></li>
 				
-				<li><a href="javascript:void(0);"><i
+				<!-- <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">6.&nbsp;Contract</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -166,7 +166,7 @@ body {
 					<li><a href="entryofpaymentinstrument.obj">Entry of Payment Instrument</a></li>
 					
 
-				</ul></li>
+				</ul></li> -->
 
 
 

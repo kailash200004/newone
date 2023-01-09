@@ -92,7 +92,7 @@
 									<td><%=purList.getGquantity()%></td>
 									<td><%=purList.getDquantity()%></td>
 									<td><%=purList.getNetquantity()%></td>
-									<td><a href="editDpc.obj?id=<%=purList.getDpcid()%>" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+									<%-- <td><a href="editDpc.obj?id=<%=purList.getDpcid()%>" class="btn btn-warning btn-sm btn-block"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td> --%>
 									<td><a href="deleteDpc.obj?id=<%=purList.getDpcid()%>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 								</tr>
 							<% 
