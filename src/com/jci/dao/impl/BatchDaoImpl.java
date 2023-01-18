@@ -1,9 +1,17 @@
 package com.jci.dao.impl;
 
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.BatchDao;
 import com.jci.model.BatchIdentificationModel;
+import com.jci.model.BinListFromDbDTO;
+import com.jci.model.BinPurchaseMappingDTO;
 
 
 @Transactional
@@ -22,6 +32,11 @@ public class BatchDaoImpl implements BatchDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	private DataSource dataSource;
+
+	
 	protected Session currentSession(){
 		return sessionFactory.getCurrentSession();
 	}
@@ -80,4 +95,194 @@ public class BatchDaoImpl implements BatchDao {
 
 		return result;
 	}
+	
+	@Override
+	public List<String> FinddetailsbasedonBinNo(String BinNo) {
+		String querystr="";
+		List<String> result = new ArrayList<>();
+		//querystr = "select grasatrate,basis,jutevariety,netquantity,amountpayable from dbo.jciprocurement where binno='"+BinNo+"' ";
+		querystr="select Date_of_purchase,Dpc_code,Basis,Jute_Variety,Crop_Year,Bin_No,Total_Net_Qty,Total_Garsat_Rate,Total_Value from BIN_Purchase_Mappping where Bin_No='"+BinNo+"' ";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		result = query.list();	 
+		return result;
+	}
+	
+//	@Override
+//	public List<BinPurchaseMappingDTO> GetBinPurchasemappingdetails(String cropyr,String dadatepurchasetepurchase,String binNo) {
+//		String querystr="";
+//		List<BinPurchaseMappingDTO> result = new ArrayList<>();
+//		querystr = "select * from jcidpc where binno='1' AND cropyr='2023-2024' ";
+//			
+//		Session session = sessionFactory.getCurrentSession();
+//		Transaction tx = session.beginTransaction();
+//		SQLQuery query = session.createSQLQuery(querystr);
+//		result = query.list();	 
+//		return result;
+//	}
+	
+	@Override
+	public List<BinPurchaseMappingDTO> GetBinPurchasemappingdetails(String cropyr,String dadatepurchasetepurchase,String binNo) {
+		StringBuilder sb = new StringBuilder();
+		System.out.println("GetBinPurchasemappingdetails"+cropyr);
+		System.out.println("GetBinPurchasemappingdetails"+dadatepurchasetepurchase);
+		System.out.println("GetBinPurchasemappingdetails"+binNo);	
+
+		sb.append("select * from jciprocurement where binno='"+binNo+"' AND cropyr='"+cropyr+"' AND datepurchase='"+dadatepurchasetepurchase+"' ");
+		String sql = sb.toString();
+		List<BinPurchaseMappingDTO> ll = new ArrayList<>();		
+		try {
+			Connection connection =  dataSource.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			//preparedStatement.setString(1,BenefId);	
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){				 
+				BinPurchaseMappingDTO binPurchaseMappingDTO = new BinPurchaseMappingDTO();				
+				binPurchaseMappingDTO.setDate_of_purchase(rs.getString("datepurchase"));
+				binPurchaseMappingDTO.setDpc_code(rs.getString("placeofpurchase"));
+				binPurchaseMappingDTO.setBasis(rs.getString("basis"));
+				binPurchaseMappingDTO.setJute_Variety(rs.getString("jutevariety"));				
+				binPurchaseMappingDTO.setCrop_Year(rs.getString("cropyr"));
+				binPurchaseMappingDTO.setBinNo(rs.getString("binno"));
+				binPurchaseMappingDTO.setGrossQty(rs.getString("grossquantity"));				
+				binPurchaseMappingDTO.setDeductionQty(rs.getString("deductionquantity"));
+				binPurchaseMappingDTO.setNetQty(rs.getString("netquantity")); 				
+				binPurchaseMappingDTO.setGarsatRate(rs.getString("grasatrate"));
+				binPurchaseMappingDTO.setValue(rs.getString("amountpayable"));
+				
+				ll.add(binPurchaseMappingDTO);	
+			}
+
+		} catch (SQLException e) {
+			//Todo
+			System.out.println("Error from Function All Pending"+e.getMessage());
+		}
+		return ll;
+
+	}
+	
+	@Override
+	public List<String> GetTotalofPurchaseParams(String BinNo,String cropYr,String dateOfPurchase) {
+		System.out.println("GetTotalofPurchaseParams"+BinNo);
+		System.out.println("GetTotalofPurchaseParams"+cropYr);
+		System.out.println("GetTotalofPurchaseParams"+dateOfPurchase);	
+
+		String querystr="";
+		List<String> result = new ArrayList<>();
+		querystr = "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(amountpayable)TotalValue from jciprocurement where binno='"+BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
+			
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		result = query.list();	 
+		return result;
+	}
+	
+	@Override
+	public  List<String> InsertToBinPurchaseMapping(String Date_of_purchase,String Dpc_code,String Basis,String Jute_variety,String CropYr,String binNo,String TotalNetQty,String TotalGarsatRate,String TotalValue) {
+		List<String> result = new ArrayList<>();
+		int a=0;
+		//int TotalGarsatRatei=(Integer.p(TotalGarsatRate));
+        float TotalGarsatRatei = Float.parseFloat(TotalValue)/Float.parseFloat(TotalNetQty);
+        
+       //double roundOff = Math.round(TotalGarsatRatei* 100.0)/100.0;
+        BigDecimal ba = new BigDecimal(TotalGarsatRatei);
+        BigDecimal roundOff = ba.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        System.out.println("TotalValue"+TotalValue);
+        System.out.println("TotalNetQty"+TotalNetQty);
+        System.out.println("TotalGarsatRatei"+TotalGarsatRatei*100);
+        
+        
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		//System.out.println("id from JBA DAO Impl is"+jbaId);
+		Query query = session.createSQLQuery("{CALL [InsertIntoBinPurchasemapping](:P1,:P2,:P3,:P4,:P5,:P6,:P7,:P8,:P9)}");
+		query.setParameter("P1", Date_of_purchase);
+		query.setParameter("P2", Dpc_code);
+		query.setParameter("P3", Basis);
+		query.setParameter("P4", Jute_variety);
+		query.setParameter("P5", CropYr);
+		query.setParameter("P6", binNo);
+		query.setParameter("P7", Float.parseFloat(TotalNetQty)/100 );
+		//query.setParameter("P8", Float.parseFloat(TotalGarsatRate)/100);
+		query.setParameter("P8", TotalGarsatRatei*100);
+		query.setParameter("P9", TotalValue);		
+
+		List<String> results = query.list();
+		return results;
+
+	}
+	
+	@Override
+	public  List<String> CalculateGainBasedonBinFromproc(String FinYear,String binNO) {
+		List<String> result = new ArrayList<>();
+		int a=0;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		//System.out.println("id from JBA DAO Impl is"+jbaId);
+		Query query = session.createSQLQuery("{CALL [GetValue_fromBale_Preperation](:P1,:P2)}");
+		query.setParameter("P1", Integer.parseInt(binNO));
+		query.setParameter("P2", FinYear);
+		List<String> results = query.list();
+		return results;
+
+	}
+	
+	@Override
+	public  List<String> InsertTotalwithGaininBinTabledb(String FinYear,String binNO,String Fingain,String WeightGain) {
+		List<String> result = new ArrayList<>();
+		int a=0;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		//System.out.println("id from JBA DAO Impl is"+jbaId);
+		Query query = session.createSQLQuery("{CALL [InsertTotalWithGaininBinTable](:P1,:P2,:P3,:P4)}");
+		query.setParameter("P1", Integer.parseInt(binNO));
+		query.setParameter("P2", FinYear);
+		query.setParameter("P3", Fingain);
+		query.setParameter("P4", WeightGain);
+		List<String> results = query.list();
+		return results;
+
+	}
+	
+	 
+	
+	@Override
+	public List<BinListFromDbDTO> GetBinListFromDb() {
+		StringBuilder sb = new StringBuilder();
+		 
+
+		sb.append("select * from tbl_jci_bin");
+		String sql = sb.toString();
+		List<BinListFromDbDTO> ll = new ArrayList<>();		
+		try {
+			Connection connection =  dataSource.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			//preparedStatement.setString(1,BenefId);	
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){				 
+				BinListFromDbDTO binListFromDbDTO = new BinListFromDbDTO();				
+				binListFromDbDTO.setTotalValue(rs.getString("total_value"));
+				binListFromDbDTO.setTotalNetQty(rs.getString("total_netqty"));
+				binListFromDbDTO.setTotalGarset(rs.getString("total_garset"));
+				binListFromDbDTO.setBinNO(rs.getString("binNo"));
+				binListFromDbDTO.setCrop_Year(rs.getString("crop_yr"));
+				binListFromDbDTO.setFinGain(rs.getString("Fin_gain"));
+				binListFromDbDTO.setWeightGain(rs.getString("weight_gain"));
+				ll.add(binListFromDbDTO);	
+			}
+
+		} catch (SQLException e) {
+			//Todo
+			System.out.println("Error from Function All Pending"+e.getMessage());
+		}
+		return ll;
+
+	}
+	
+	
 }

@@ -253,7 +253,7 @@
                            });    
        });    
        </script>
-       <script>
+      <!--  <script>
        $(document).ready(function(){
          
         var dpcCode= $("#dpcname").val();
@@ -269,7 +269,7 @@
              }
       });
        });
-</script>
+</script> -->
 
 <script>
 $("#cropyr").on("change", function() {

@@ -8,6 +8,8 @@ import org.apache.log4j.LogManager;
 import com.jci.model.MSPPriceCalculationModel;
 import com.jci.model.RulingMarket;
 import com.jci.model.BatchIdentificationModel;
+import com.jci.model.BinListFromDbDTO;
+import com.jci.model.BinPurchaseMappingDTO;
 import com.jci.model.CommercialJuteVarietyModel;
 import com.jci.model.VerifyTallySlip;
 import com.jci.model.DistributionoftallyslipModel;
@@ -3018,6 +3020,7 @@ public class InsertDataController
     @RequestMapping(value = { "GetDpcName" }, method = { RequestMethod.GET })
     public String GetDpcName(final HttpServletRequest request) {
         final int dpcCode = Integer.parseInt(request.getParameter("dpcCode"));
+        
         final Gson gson = new Gson();
         final List<String> DaysCount = (List<String>)this.batchService.GetDpcNamefromId(Integer.parseInt(request.getParameter("dpcCode")));
         final String d = DaysCount.toString().replace("[", "").replace("]", "");
@@ -3103,11 +3106,134 @@ public class InsertDataController
     @RequestMapping(value = { "dpc2" }, method = { RequestMethod.GET })
     public void dpc2(final HttpServletRequest request) {
         final List<DailyPurchaseConfModel> dpclist = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.dpc2();
+        System.out.println("dpclist controlle = "+dpclist.size());
         for (int i = 0; i < dpclist.size(); ++i) {
             this.DailyPurchasefService.create((DailyPurchaseConfModel)dpclist.get(i));
         }
     }
-    
+    @ResponseBody
+	@RequestMapping(value = "GetdetailsbasedonBinNo", method = RequestMethod.GET)
+	public String GetdetailsbasedonBinNo(HttpServletRequest request) {
+		String str = request.getParameter("binNo");
+		Gson gson = new Gson();
+		List<String> DaysCount = batchService.FinddetailsbasedonBinNo(str);
+
+		String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
+		System.out.println("Bin No value from controller is" + DaysCount.toString());
+
+		return gson.toJson(DaysCount);
+	}
+
+	@RequestMapping("binPurchasemapping")
+	public ModelAndView binPurchasemapping(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("Bin_Purchase_mapping");
+		return mv;
+	}
+
+	@RequestMapping("BinPurchasemapping_mid")
+	public ModelAndView BinPurchasemapping_mid(HttpServletRequest request) {
+		String cropyr = request.getParameter("cropyr");
+		String dadatepurchasetepurchase = request.getParameter("datepurchase");
+		String binNo = request.getParameter("binNo");		
+		List<BinPurchaseMappingDTO> binPurchaseList = new ArrayList<>();
+		try {
+			binPurchaseList = batchService.GetBinPurchasemappingdetails(cropyr, dadatepurchasetepurchase, binNo);
+		} catch (Exception e) {
+			 //Todo
+		}		
+		ModelAndView mv = new ModelAndView("View_Purchase_Bin_Mapping");
+		mv.addObject("binPurchaseList", binPurchaseList);
+		return mv;
+	}
+	@ResponseBody
+	@RequestMapping(value = "caculateTotalBinPurchase", method = RequestMethod.GET)
+	public String caculateTotalBinPurchase(HttpServletRequest request) {
+		String binNo = request.getParameter("binNo");
+		String CropYr = request.getParameter("CropYr");
+		String dateOfPurch = request.getParameter("dateOfPurch");
+		Gson gson = new Gson();
+		
+		List<String> DaysCount = batchService.GetTotalofPurchaseParams(binNo, CropYr, dateOfPurch);
+		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
+		//System.out.println("Edit JBA LIST value is " + DaysCount1);
+		return gson.toJson(DaysCount);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "InsertIntoTablePurchaseMapping", method = RequestMethod.GET)
+	public String InsertIntoTablePurchaseMapping(HttpServletRequest request) {
+		String dateOfPurch = request.getParameter("dateOfPurch");
+		String dpcCode = request.getParameter("dpcCode");
+		String Basis = request.getParameter("Basis");
+		String JuteVariety = request.getParameter("JuteVariety");
+		String CropYr = request.getParameter("CropYr");
+		String binNo = request.getParameter("binNo");
+		
+		String totNetQty = request.getParameter("totNetQty");
+		String totGarsat = request.getParameter("totGarsat");
+		String totValue = request.getParameter("totValue");
+		
+		
+		Gson gson = new Gson();
+		
+		List<String> DaysCount = batchService.InsertToBinPurchaseMapping(dateOfPurch, dpcCode, Basis, JuteVariety, CropYr, binNo, totNetQty, totGarsat, totValue);
+		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
+		//System.out.println("Edit JBA LIST value is " + DaysCount1);
+		return gson.toJson(DaysCount);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "calculateGainFromproc", method = RequestMethod.GET)
+	public String calculateGainFromproc(HttpServletRequest request) {
+		String FinYear = request.getParameter("FinYear");
+		String binNO = request.getParameter("binNO");
+		
+		Gson gson = new Gson();
+		
+		List<String> DaysCount = batchService.CalculateGainBasedonBinFromproc(FinYear, binNO);
+		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
+		//System.out.println("Edit JBA LIST value is " + DaysCount1);
+		return gson.toJson(DaysCount);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "InsertBinDataTodb", method = RequestMethod.GET)
+	public String InsertBinDataTodb(HttpServletRequest request) {
+		String FinYear = request.getParameter("FinYear");
+		String binNO = request.getParameter("binNO");
+		
+		String FinGain = request.getParameter("FinGain");
+		String WeightGain = request.getParameter("WeightGain");
+		
+		Gson gson = new Gson();
+		
+		List<String> DaysCount = batchService.InsertTotalwithGaininBinTabledb(FinYear, binNO, FinGain, WeightGain);
+		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
+		//System.out.println("Edit JBA LIST value is " + DaysCount1);
+		return gson.toJson(DaysCount);
+	}
+	
+	@RequestMapping("BinListfromDb")
+	public ModelAndView BinListfromDb(HttpServletRequest request) {
+		 
+		List<BinListFromDbDTO> binPurchaseList = new ArrayList<>();
+		try {
+			binPurchaseList = batchService.GetBinListFromDb();
+		} catch (Exception e) {
+			 //Todo
+		}		
+		ModelAndView mv = new ModelAndView("ViewBinDataFromDb");
+		mv.addObject("binPurchaseList", binPurchaseList);
+		return mv;
+	}
+	 
+    @ResponseBody
+    @RequestMapping(value = "getbinno" , method =  RequestMethod.GET )
+    public String getbinno(final HttpServletRequest request) {
+        final String result = rawJuteProcurAndPayService.getbinno(request.getParameter("binno"));
+        return result;
+    }
+
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);

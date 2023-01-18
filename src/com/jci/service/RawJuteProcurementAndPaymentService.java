@@ -28,4 +28,5 @@ public interface RawJuteProcurementAndPaymentService {
 	public boolean updateProcurementerror(String status, int verified,String tallyno,String error,String region);
 	public List <RawJuteProcurementAndPayment> jutelistbystatus(String status);
 	public boolean validateTally(String tally, String ro);
+	public String getbinno(String binno);
 }

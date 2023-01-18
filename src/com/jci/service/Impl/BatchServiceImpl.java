@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.jci.dao.BatchDao;
 import com.jci.model.BatchIdentificationModel;
+import com.jci.model.BinListFromDbDTO;
+import com.jci.model.BinPurchaseMappingDTO;
 import com.jci.service.BatchIdentificationService;
 
 @Service
@@ -54,6 +56,51 @@ public class BatchServiceImpl implements BatchIdentificationService {
 	public List<String> GetDpcNamefromId(int dpcid) {
 		// TODO Auto-generated method stub
 		return batchdao.GetDpcNamefromId(dpcid);
+	}
+
+	@Override
+	public List<String> FinddetailsbasedonBinNo(String BinNo) {
+		// TODO Auto-generated method stub
+		return batchdao.FinddetailsbasedonBinNo(BinNo);
+	}
+
+	@Override
+	public List<BinPurchaseMappingDTO> GetBinPurchasemappingdetails(String cropyr, String dadatepurchasetepurchase,
+			String binNo) {
+		// TODO Auto-generated method stub
+		return batchdao.GetBinPurchasemappingdetails(cropyr, dadatepurchasetepurchase, binNo);
+	}
+
+	@Override
+	public List<String> GetTotalofPurchaseParams(String BinNo, String cropYr, String dateOfPurchase) {
+		// TODO Auto-generated method stub
+		return batchdao.GetTotalofPurchaseParams(BinNo, cropYr, dateOfPurchase);
+	}
+
+	@Override
+	public List<String> InsertToBinPurchaseMapping(String Date_of_purchase, String Dpc_code, String Basis,
+			String Jute_variety, String CropYr, String binNo, String TotalNetQty, String TotalGarsatRate,
+			String TotalValue) {
+		// TODO Auto-generated method stub
+		return batchdao.InsertToBinPurchaseMapping(Date_of_purchase, Dpc_code, Basis, Jute_variety, CropYr, binNo, TotalNetQty, TotalGarsatRate, TotalValue);
+	}
+
+	@Override
+	public List<String> CalculateGainBasedonBinFromproc(String FinYear, String binNO) {
+		// TODO Auto-generated method stub
+		return batchdao.CalculateGainBasedonBinFromproc(FinYear, binNO);
+	}
+
+	@Override
+	public List<String> InsertTotalwithGaininBinTabledb(String FinYear,String binNO,String Fingain,String WeightGain) {
+		// TODO Auto-generated method stub
+		return batchdao.InsertTotalwithGaininBinTabledb(FinYear, binNO, Fingain, WeightGain);
+	}
+
+	@Override
+	public List<BinListFromDbDTO> GetBinListFromDb() {
+		// TODO Auto-generated method stub
+		return batchdao.GetBinListFromDb();
 	}
 
 }

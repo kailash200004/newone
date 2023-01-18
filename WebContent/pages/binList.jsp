@@ -61,10 +61,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<th>Crop Year</th>
 										<th>Bin Number</th>
 										<th>Basis</th>
-										
 										<th>Jute Variety</th>
 										<th>Carry Loose</th>
-								     <th>Carry Rope</th> 
+								        <th>Carry Rope</th> 
 									
 								</thead>
 								<tbody>
@@ -77,10 +76,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<td><%=batchh.getDpcnames()%></td>
 										<td><%=batchh.getCropyr()%></td> 
 										<td><%=batchh.getBinnumber()%></td>
-										<td><%=batchh.getBasis()%><td>
-										
+										<td><%=batchh.getBasis()%></td>
 										<td><%=batchh.getJutevariety()%></td>
-											<td><%=batchh.getCarryoverlossqty()%></td>
+										<td><%=batchh.getCarryoverlossqty()%></td>
 										<td><%=batchh.getCarryropeqty()%></td>
 											
 										

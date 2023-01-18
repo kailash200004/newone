@@ -194,7 +194,7 @@
 											<label>Bin Number</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
 												class="text-danger"> </span>
-                                        	<input class="form-control" name="binno" id="binno"  type="number" placeholder="Bin Number" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
+                                        	<input class="form-control" name="binno" id="binno"  type="number" placeholder="Bin Number" onblur="binno_check()" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
 										</div>
                                      <div class="col-sm-4 form-group">
 											<label>Date of Purchase</label> 
@@ -555,6 +555,29 @@
 	
 	
 	</script>
+	<script>
+	 function  binno_check(){
+		 var basis;
+			var jutevariety;
+		 var binNo = document.getElementById("binno").value;
+		$.ajax({
+			type:"GET",
+			url:"getbinno.obj",
+			data: {"binno" :binNo}, 
+			success:function(result){
+				alert(result);
+				if(result !="" || result != null){
+					const myArray= result.split("-");
+	 					basis =myArray[0];
+	 					jutevariety = myArray[1];
+	 					console.log(basis);
+	 					console.log(jutevariety);
+ 					}
+			}
+		});
+		}
+		
+	</script>
 <script>
  $(document).ready(function(){
 	//alert("doc ready");
@@ -563,6 +586,8 @@
 	 
 	  $("#tdd").hide();
   $("#calc").click(function(){
+  
+  
 	
 	 	var k=0;
 		var a=0;
@@ -605,8 +630,8 @@
 
 						if(basis=="msp"){
 							var gradefive = data[0][4];
-							console.log(gradefive);
-							console.log(data);
+							//console.log(gradefive);
+							//console.log(data);
 									for (var i = 0; i < input.length; i++) {
 										for( var j=0;j < data.length;j++){
 								 		 grade=data[j];

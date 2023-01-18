@@ -365,10 +365,21 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		
 	}
 
+	@Override
+	public String getbinno(String binno) {
+	
+	 String basis_variety= null;
+	 String querystr= "SELECT top 1 basis, jutevariety FROM jciprocurement where binno = " +binno;
+	 Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows=query.list();
 
-
-
-
+		for(Object[] cart : rows) 
+			basis_variety= (cart[0].toString()+"-"+cart[1].toString());	
+	
+		return basis_variety;
+	}
 
 
 }

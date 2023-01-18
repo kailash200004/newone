@@ -140,10 +140,11 @@ body {
 					class="nav-label">5.&nbsp;BIN Performance Calculation</span> <i
 					class="fa fa-angle-left arrow"></i></a>
 				<ul class="nav-2-level ">
-
+				
 					<li><a href="bin.obj">Batch Identification Number</a></li>
 					<li><a href="binList.obj">BIN List</a></li>
-					
+					<li><a href="binPurchasemapping.obj">BIN Purchase Mapping</a></li>
+					<li><a href="BinListfromDb.obj">BIN List</a></li>
 
 				</ul></li>
 				

@@ -124,8 +124,11 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	
-
-
+	@Override
+	public String getbinno(String binno) {
+		return rawJuteProcurementAndPaymentDao.getbinno(binno);
+		
+	}
 
 
 

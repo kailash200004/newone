@@ -28,4 +28,5 @@ public interface RawJuteProcurementAndPaymentDao {
 	public RawJuteProcurementAndPayment findbyTally(String tallyno);
 	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status);
 	public boolean validateTally(String tally, String ro);
+	public String getbinno(String binno);
 }
