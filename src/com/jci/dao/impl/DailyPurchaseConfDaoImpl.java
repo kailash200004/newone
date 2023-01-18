@@ -186,7 +186,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 												      		multi=(difference[j] *  (grade[j]/100)) ;
 												      
 												      		addition += multi;
-											      		
+											     		
 																
 														//System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
 								      		
