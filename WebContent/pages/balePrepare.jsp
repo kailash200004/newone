@@ -243,6 +243,54 @@ $("#crop_year").on("change", function() {
 });
 </script>
 <script>
+	 //function  binno_check(){
+		 $("#bin_no").on("change", function(){
+			 alert("aagya");
+		 
+		 var basis;
+			var jutevariety;
+		 var binNo = document.getElementById("bin_no").value;
+		$.ajax({
+			type:"GET",
+			url:"getbinno.obj",
+			data: {"binno" :binNo}, 
+			success:function(result){
+				alert(result);
+				if(result != "null"){
+					alert("yes")
+					 $('#basis option[value=""]').remove();
+					
+					const myArray= result.split("-");
+	 					basis =myArray[0];
+	 					jutevariety = myArray[1];
+	 					var htm = "<option disabled selected value>-Select-</option>";
+	 					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
+						$("#jute_variety").html(htm);
+	 					
+	 					
+	 					
+	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
+							$("#basis").html(html);
+	 					
+			 				
+	 					
+	 					console.log(basis);
+	 					console.log(jutevariety);
+ 					}
+				else if (result == "null"){
+					alert("else");
+					var htm = "<option disabled selected value>-Select-</option>";
+ 					htm += '<option value="msp">MSP</option>'
+ 					htm += '<option value="commercial">Commercial</option>'
+					$("#basis").html(htm);
+				}
+			
+			}
+		});
+		});
+		
+	</script>
+<script>
 $("#place_of_packing").on("change", function() {
 	var cropyr=document.getElementById("crop_year").value;
 	  var dpcid=  document.getElementById("place_of_packing").value;
@@ -374,10 +422,7 @@ $("#place_of_packing").on("change", function() {
 	</script>
  	-->
 	<script>
-		$("#jute_variety")
-				.on(
-						"change",
-						function() {
+		$("#bin_no").on("select",function() {
 							var basis_no;
 							var grade;
 							var count = 0;
@@ -408,29 +453,6 @@ $("#place_of_packing").on("change", function() {
 											}
 											$("#jute_grade").html(html);
 
-											// alert(data);
-											/* count = data.length;
-											$('#lblName').text('Enter Grade Details');
-											 if(variety=='Bimli'){
-												$('#form2 input').remove();
-												$('#form2 label').remove();
-											}else if(variety=="Mesta"){
-												$('#form2 input').remove();
-												$('#form2 label').remove();
-											}
-											 else{
-												$('#form2 input ').remove();
-												$('#form2 label').remove();
-											} 
-											
-											for (i=0;i<data.length;i++){
-												$('<div class="form-group">').appendTo('#form2');
-												$('<label/>').text(data[i]+" : ").appendTo('#form2');
-												// $('<br/>').appendTo('#form2');
-											    $('<input/>').attr({ type: 'text', id: 'grade'+i, name: 'grade'+i,value:'' }).appendTo('#form2');
-											   $('</div>').appendTo('#form2');
-											    //$('<br/>').appendTo('#form2');
-											} */
 										}
 									});
 						});

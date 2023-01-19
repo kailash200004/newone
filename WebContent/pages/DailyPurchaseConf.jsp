@@ -56,13 +56,10 @@
                                             <input class="form-control"  name="datepurchase" id="datepurchase" placeholder="Date of Purchase" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
-                                             <label>Basis</label><span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis"
+                                            <label>Bin No.</label><span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
 												class="text-danger"  min="0"> </span>
-                                        	 <select name="basis" id="basis" class="form-control">
-                                        		<option value="">-Select-</option>
-                                        		<option value="msp">MSP</option>
-                                        		<option value="commercial">Commercial</option>
-                                        	</select>
+											 <input class="form-control" name="binno" id="binno" type="number" placeholder="binno" onblur="binno_check()" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);" required min="0">
+                                      
                                         	</div> 
                                         	
                                     </div>
@@ -87,11 +84,14 @@
 												 value="<%=dpcCenter%>" readonly>
                                         </div>
                                         <div class="col-sm-4 form-group">
-                                        
-                                        <label>Bin No.</label><span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
+                                          <label>Basis</label><span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis"
 												class="text-danger"  min="0"> </span>
-											 <input class="form-control" name="binno" id="binno" type="number" placeholder="binno" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);" required min="0">
-                                        </div>
+                                        	 <select name="basis" id="basis" class="form-control">
+                                        		<option value="">-Select-</option>
+                                        		<option value="msp">MSP</option>
+                                        		<option value="commercial">Commercial</option>
+                                        	</select>
+                                         </div>
                                     </div>
 
                                      <div class="row">
@@ -209,6 +209,51 @@ $(binno).attr('maxlength',3);
 			document.getElementById("errdeductionQuantity").innerHTML = "Deduction Quantity can not be greater than Gross Quantity!";
 		}
 	}
+	</script>
+	<script>
+	 function  binno_check(){
+		 var basis;
+			var jutevariety;
+		 var binNo = document.getElementById("binno").value;
+		$.ajax({
+			type:"GET",
+			url:"getbinno.obj",
+			data: {"binno" :binNo}, 
+			success:function(result){
+				//alert(result);
+				if(result != "null"){
+				//	alert("yes")
+					 $('#basis option[value=""]').remove();
+					// $("p").off("click");
+					const myArray= result.split("-");
+	 					basis =myArray[0];
+	 					jutevariety = myArray[1];
+	 					var htm = "<option disabled selected value>-Select-</option>";
+	 					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
+						$("#jutevariety").html(htm);
+	 					
+	 					
+	 					
+	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
+							$("#basis").html(html);
+	 					
+			 				
+	 					
+	 					console.log(basis);
+	 					console.log(jutevariety);
+ 					}
+				else if (result == "null"){
+					//alert("else");
+					var htm = "<option disabled selected value>-Select-</option>";
+ 					htm += '<option value="msp">MSP</option>'
+ 					htm += '<option value="commercial">Commercial</option>'
+					$("#basis").html(htm);
+				}
+			
+			}
+		});
+		}
+		
 	</script>
 	<script>
 	$("#basis").on("change", function() {

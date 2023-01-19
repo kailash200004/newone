@@ -176,28 +176,29 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 				
 				
 						grade[j]= ((BigDecimal)o[j]).doubleValue();
-					
+						System.out.println("grade[j]================>>>>>>>>>>>>>> "+grade[j]);
 								gradeprice[j]=((BigDecimal) p[j]).doubleValue();
-					
+								System.out.println("gradeprice[j]================>>>>>>>>>>>>>> "+gradeprice[j]);
 												if(grade[j]!=0)
 													{	
 															difference[j]= gradeprice[j]-gradefive ;
-												     
+															System.out.println("difference[j]================>>>>>>>>>>>>>> "+difference[j]);
 												      		multi=(difference[j] *  (grade[j]/100)) ;
 												      
 												      		addition += multi;
-											     		
+												      		
 																
-														//System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
+														System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
 								      		
 												}  
 												
 			}
-					//	System.out.println("addition outside================>>>>>>>>>>>>>> "+addition);
-						//System.out.println("garsat-addition================>>>>>>>>>>>>>> "+(garsat-addition));
+						System.out.println("addition outside================>>>>>>>>>>>>>> "+addition);
+						System.out.println("garsat-addition================>>>>>>>>>>>>>> "+(garsat-addition));
 						dailyPurchaseConfModel.setTd5base(garsat-addition);
-	
-				
+						dailyPurchaseConfModel.setFibervalue((netqty*garsat)/100);
+						
+					
 				
 			}
 			querystr4= "UPDATE jciprocurement SET flag_dpc2 = 1 WHERE ptsid in ("+ptsid+");";

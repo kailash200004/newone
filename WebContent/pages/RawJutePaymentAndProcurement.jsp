@@ -173,7 +173,7 @@
                                              <label>Basis</label>
                                              <span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis"
 												class="text-danger"> </span>
-                                        	 <select name="basis" id="basis" class="form-control">
+                                        	 <select name="basis" id="basis" class="form-control" >
                                         		<option value="">-Select-</option>
                                         		<option value="msp">MSP</option>
                                         		<option value="commercial">Commercial</option>
@@ -212,7 +212,7 @@
 											<label>Jute Variety</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errjutevariety" name="errjutevariety"
 												class="text-danger"> </span>
-                                        	<select name="jutevariety" id="jutevariety" class="form-control">
+                                        	<select name="jutevariety" id="jutevariety" class="form-control" >
                                         		<option value="">-Select-</option>
                                         	
                                         	</select>
@@ -377,15 +377,15 @@
 	<script>
 	function length_tallySlip(){
 		var lengthr= $("#tallyslipno").val();
-		console.log("lengthr "+lengthr);
+		//console.log("lengthr "+lengthr);
 		if(lengthr.length< 3) {
-			console.log("lengthr if "+lengthr.length);
+			//console.log("lengthr if "+lengthr.length);
 			 document.getElementById("errortallyslipno").innerHTML = "Tally Slip Number should be between 3-6 digits!";
 			 $("#errortallyslipno").show();
 			  return false;
 		}
 		else if(lengthr.length >=3 || lengthr.length <= 6)  {
-			console.log("lengthr else "+lengthr.length);
+			//console.log("lengthr else "+lengthr.length);
 	   			  $("#errortallyslipno").hide();
 		}
 		
@@ -459,7 +459,51 @@
 	}
 	
 	</script>
-	
+	<script>
+	 function  binno_check(){
+		 var basis;
+			var jutevariety;
+		 var binNo = document.getElementById("binno").value;
+		$.ajax({
+			type:"GET",
+			url:"getbinno.obj",
+			data: {"binno" :binNo}, 
+			success:function(result){
+			//	alert(result);
+				if(result != "null"){
+					//alert("yes")
+					 $('#basis option[value=""]').remove();
+					// $("p").off("click");
+					const myArray= result.split("-");
+	 					basis =myArray[0];
+	 					jutevariety = myArray[1];
+	 					var htm = "<option disabled selected value>-Select-</option>";
+	 					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
+						$("#jutevariety").html(htm);
+	 					
+	 					
+	 					
+	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
+							$("#basis").html(html);
+	 					
+			 				
+	 					
+	 					console.log(basis);
+	 					console.log(jutevariety);
+ 					}
+				else if (result == "null"){
+					//alert("else");
+					var htm = "<option disabled selected value>-Select-</option>";
+ 					htm += '<option value="msp">MSP</option>'
+ 					htm += '<option value="commercial">Commercial</option>'
+					$("#basis").html(htm);
+				}
+			
+			}
+		});
+		}
+		
+	</script>
 		<script>
 	$("#basis").on("change", function() {
 		var msp_no;
@@ -555,29 +599,7 @@
 	
 	
 	</script>
-	<script>
-	 function  binno_check(){
-		 var basis;
-			var jutevariety;
-		 var binNo = document.getElementById("binno").value;
-		$.ajax({
-			type:"GET",
-			url:"getbinno.obj",
-			data: {"binno" :binNo}, 
-			success:function(result){
-				alert(result);
-				if(result !="" || result != null){
-					const myArray= result.split("-");
-	 					basis =myArray[0];
-	 					jutevariety = myArray[1];
-	 					console.log(basis);
-	 					console.log(jutevariety);
- 					}
-			}
-		});
-		}
-		
-	</script>
+	
 <script>
  $(document).ready(function(){
 	//alert("doc ready");
@@ -630,8 +652,8 @@
 
 						if(basis=="msp"){
 							var gradefive = data[0][4];
-							//console.log(gradefive);
-							//console.log(data);
+							console.log(gradefive);
+							console.log(data);
 									for (var i = 0; i < input.length; i++) {
 										for( var j=0;j < data.length;j++){
 								 		 grade=data[j];
@@ -658,8 +680,9 @@
 							var addition=0;
 							var  gradesPersent;
 							var multi;
-							 gradefive = data[0][5];
-							console.log(data);
+							 gradefive = data[0][4];
+							console.log("data  "+data);
+							console.log("gradefive  "+gradefive);
 								for (var i = 0; i < input.length; i++) {
 									for (var j = 0; j < data.length; j++){
 										
@@ -686,12 +709,13 @@
 												      		
 												}  
 											}
-			
+										console.log("addition  "+addition);
 											}
 										}
 								var garsatt=document.getElementById("garsatRate").value;
 						
 							var td=	(garsatt - (addition));
+							console.log("td "+td);
 							var netPercent = parseFloat(total/100);
 			 				
 			 				netAmount=parseFloat(garsatt * netPercent);

@@ -86,7 +86,7 @@ public class DailyPurchaseConfModel {
 
 
 	@Column(name="fibervalue")
-	private int fibervalue;
+	private double fibervalue;
 
 	@Column(name="grade1")
 	private double grade1;
@@ -127,7 +127,7 @@ public class DailyPurchaseConfModel {
 
 	public DailyPurchaseConfModel(int dpcid, String formno, String datepurchase, String basis, String cropyr,
 			String placeofpurchase, int binno, String jutevariety, double gquantity, double dquantity,
-			double netquantity, int fibervalue, String ipaddresss, int createdby,
+			double netquantity, double fibervalue, String ipaddresss, int createdby,
 			String ipaddress, String rateslipno) {
 		this.dpcid = dpcid;
 		this.formno = formno;
@@ -230,12 +230,12 @@ public class DailyPurchaseConfModel {
 		this.netquantity = netquantity;
 	}
 
-	public int getFibervalue() {
+	public double getFibervalue() {
 		return fibervalue;
 	}
 
-	public void setFibervalue(int fibervalue) {
-		this.fibervalue = fibervalue;
+	public void setFibervalue(double d) {
+		this.fibervalue = d;
 	}
 
 
