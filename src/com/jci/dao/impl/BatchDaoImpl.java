@@ -170,8 +170,13 @@ public class BatchDaoImpl implements BatchDao {
 
 		String querystr="";
 		List<String> result = new ArrayList<>();
-		querystr = "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(amountpayable)TotalValue from jciprocurement where binno='"+BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
-			
+		/*
+		 * querystr =
+		 * "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(amountpayable)TotalValue from jciprocurement where binno='"
+		 * +BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
+		 */
+		querystr = "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(fibervalue)TotalValue from  jcidpc where binno='"+BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
+				 
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
