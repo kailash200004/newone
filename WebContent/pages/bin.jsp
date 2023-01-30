@@ -149,6 +149,11 @@
                                                                                   class="form-control" name="carryforwardRope" type="text"
                                                                                   placeholder="Carry-forward Rope Qty">
                                                                      </div>
+                                                                      <div class="col-sm-4 form-group">
+                                                                           <label>Date</label> <input
+                                                                                  class="form-control" name="date" type="Date"
+                                                                                  placeholder="Date">
+                                                                     </div>
                                                               </div>
                                                               <div class="form-group">
                                                                      <button class="btn btn-default" type="submit">Submit</button>

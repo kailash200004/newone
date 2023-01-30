@@ -27,7 +27,10 @@ public class BatchIdentificationModel {
 
 	@Column(name="jutevariety")
 	private String jutevariety;
-
+	
+	@Column(name = "date")
+	private String date;
+	
 	@Column(name="basis")
 	private String basis;
 
@@ -105,24 +108,35 @@ public class BatchIdentificationModel {
 
 	}
 
-	public BatchIdentificationModel(int binno, String dpcnames, String cropyr, String binnumber, String jutevariety,
-			String basis, String carryoverlossqty, String carryropeqty) {
-		this.id = binno;
+	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public BatchIdentificationModel(int id, String dpcnames, String cropyr, String binnumber, String jutevariety,
+			String date, String basis, String carryoverlossqty, String carryropeqty) {
+		super();
+		this.id = id;
 		this.dpcnames = dpcnames;
 		this.cropyr = cropyr;
 		this.binnumber = binnumber;
 		this.jutevariety = jutevariety;
+		this.date = date;
 		this.basis = basis;
 		this.carryoverlossqty = carryoverlossqty;
 		this.carryropeqty = carryropeqty;
-
 	}
 
 	@Override
 	public String toString() {
-		return "BalePreparationModel [binno=" + id + ", dpcnames=" + dpcnames + ", cropyr=" + cropyr
-				+ ", binnumber=" + binnumber + ", jutevariety=" + jutevariety + ", basis=" + basis + ", carryoverlossqty="
-				+ carryoverlossqty + ", carryropeqty=" + carryropeqty + "]";
+		return "BatchIdentificationModel [id=" + id + ", dpcnames=" + dpcnames + ", cropyr=" + cropyr + ", binnumber="
+				+ binnumber + ", jutevariety=" + jutevariety + ", date=" + date + ", basis=" + basis
+				+ ", carryoverlossqty=" + carryoverlossqty + ", carryropeqty=" + carryropeqty + "]";
 	}
 
 }

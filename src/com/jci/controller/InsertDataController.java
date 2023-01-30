@@ -2146,6 +2146,7 @@ public class InsertDataController
             final String basis = request.getParameter("basis");
             final String carryForwardLoose = request.getParameter("carryforwardloose");
             final String carryForwardRope = request.getParameter("carryforwardRope");
+            final String date = request.getParameter("date");
             final BatchIdentificationModel batch = new BatchIdentificationModel();
             batch.setDpcnames(nameOfDpc);
             batch.setCropyr(cropyear);
@@ -2154,6 +2155,7 @@ public class InsertDataController
             batch.setBasis(basis);
             batch.setCarryoverlossqty(carryForwardLoose);
             batch.setCarryropeqty(carryForwardRope);
+            batch.setDate(date);
             this.batchService.create(batch);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
             
