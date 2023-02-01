@@ -44,17 +44,6 @@ public class RawJuteProcurementAndPayment {
 	@Column(name = "slip_image")
 	private String slip_image;
 
-
-
-
-	public String getSlip_image() {
-		return slip_image;
-	}
-
-	public void setSlip_image(String slip_image) {
-		this.slip_image = slip_image;
-	}
-
 	@Column(name="datepurchase")
 	private Date datepurchase;
 
@@ -132,32 +121,19 @@ public class RawJuteProcurementAndPayment {
 	@Column(name="creadtedby")
 	private int creadtedby;
 
-
-
 	@Column(name="dateof_entry")
 	private Date dateof_entry;
 
 	@Column(name="td_base")
 	private String td_base;
 
-
-	@Column(name="reason")
-	private String reason;
-
-
-
-
-
-
-
-	public String getReason() {
-		return reason;
+	public String getSlip_image() {
+		return slip_image;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setSlip_image(String slip_image) {
+		this.slip_image = slip_image;
 	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -426,7 +402,7 @@ public class RawJuteProcurementAndPayment {
 				+ ", grade3=" + grade3 + ", grade4=" + grade4 + ", grade5=" + grade5 + ", grade6=" + grade6
 				+ ", grade7=" + grade7 + ", grade8=" + grade8 + ", createddate=" + createddate + ", createdfrom="
 				+ createdfrom + ", ipaddress=" + ipaddress + ", creadtedby=" + creadtedby + ", dateof_entry="
-				+ dateof_entry + ", td_base=" + td_base + ", reason=" + reason + "]";
+				+ dateof_entry + ", td_base=" + td_base + "]";
 	}
 
 

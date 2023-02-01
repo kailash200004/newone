@@ -1101,6 +1101,8 @@ public class InsertDataController
             if (ipAddress == null) {
                 ipAddress = request.getRemoteAddr();
             }
+            
+            String dpcid = (String)request.getSession().getAttribute("dpcId");
             final String grade0 = request.getParameter("g0");
             final String grade2 = request.getParameter("g1");
             final String grade3 = request.getParameter("g2");
@@ -1108,20 +1110,8 @@ public class InsertDataController
             final String grade5 = request.getParameter("g4");
             final String grade6 = request.getParameter("g5");
             final String grade7 = request.getParameter("g6");
-            final String grade8 = request.getParameter("g7");
-			
-			/*
-			 * System.out.println("grade0   " + grade0); System.out.println("grade1   " +
-			 * grade2); System.out.println("grade2   " + grade3);
-			 * System.out.println("grade3   " + grade4); System.out.println("grade4   " +
-			 * grade5); System.out.println("grade5   " + grade6);
-			 * System.out.println("grade6   " + grade7); System.out.println("grade07   " +
-			 * grade8);
-			 */
-         
-            
+            final String grade8 = request.getParameter("g7");	
             String datepurchase = request.getParameter("datepurchase");
-        //    System.out.println("datepurchase======================= "+datepurchase);
             final String formno = request.getParameter("formno");
             final String basis = request.getParameter("basis");
             final String cropyr = request.getParameter("cropyr");
@@ -1149,6 +1139,21 @@ public class InsertDataController
             DailyPurchase.setPlaceofpurchase(placeofpurchase);
             DailyPurchase.setCreatedby(createdBy);
             DailyPurchase.setRateslipno(rateslipno);
+            int basisNo=0;
+			if(basis.equalsIgnoreCase("commercial")) 
+				basisNo=2;
+			else if(basis.equalsIgnoreCase("msp")) 
+				basisNo=1;
+			  final List<String> result =(List<String>)this.rawJuteProcurAndPayService.findGradePriceJuteVariety(jutevariety, basisNo, cropyr, dpcid);
+			 
+			  final Gson gson = new Gson();
+			 String res= result.toString().replace("[", "").replace("]", "");
+			 List<String> rest= new ArrayList<String>();
+			 rest.add(gson.toJson((Object)result));
+			 System.out.println("result-===========------------=-=-=-=-=-=-=-=-==-=  "+res);
+		        System.out.println("gson.toJson(result) ================== >>>>>>>>>>>>>>>> " + gson.toJson((Object)result));
+		         
+			String price =gson.toJson(result);
             if (grade0 != null && grade0 != "0") {
                 DailyPurchase.setGrade1(Double.parseDouble(grade0));
             }
@@ -1173,6 +1178,15 @@ public class InsertDataController
             if (grade8 != null && grade8 != "0") {
                 DailyPurchase.setGrade8(Double.parseDouble(grade8));
             }
+            DailyPurchase.setGrade1xnetqty(Double.parseDouble(result.get(0))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade2xnetqty(Double.parseDouble(result.get(1))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade3xnetqty(Double.parseDouble(result.get(2))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade4xnetqty(Double.parseDouble(result.get(3))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade5xnetqty(Double.parseDouble(result.get(4))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade6xnetqty(Double.parseDouble(result.get(5))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade7xnetqty(Double.parseDouble(result.get(6))*Double.parseDouble(netquantity));
+            DailyPurchase.setGrade8xnetqty(Double.parseDouble(result.get(7))*Double.parseDouble(netquantity));
+            
             this.DailyPurchasefService.create(DailyPurchase);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
         }
@@ -1950,7 +1964,7 @@ public class InsertDataController
                 region = (String)session.getAttribute("region");
             }
             final boolean procupdate = this.rawJuteProcurAndPayService.updateProcurementerror(status, is_verified, tallyNo, errors.trim(), region);
-            System.out.println(procupdate);
+            //System.out.println(procupdate);
             if (procupdate) {
                 this.verifyTallySlipService.submitform(verifyTallySlip);
                 mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Tally slip verified successfully.</div>\r\n");
@@ -2399,7 +2413,7 @@ public class InsertDataController
             final String slip_no_to = request.getParameter("slip_no_to");
             final String bale_no = request.getParameter("bale_no");
             final String jute_grade = request.getParameter("jute_grade");
-            System.out.println(">>>>>data>>>>>>>>>>>baleid:" + baleid + "place_of_packing:" + place_of_packing + "crop_year:" + crop_year + "bin_no:" + bin_no + "basis:" + basis + "jute_variety: " + jute_variety + "slip_no_from:" + slip_no_from + "slip_no_from:" + slip_no_from + "slip_no_to:" + slip_no_to + "bale_no:" + bale_no + "jute_grade:" + jute_grade);
+          //  System.out.println(">>>>>data>>>>>>>>>>>baleid:" + baleid + "place_of_packing:" + place_of_packing + "crop_year:" + crop_year + "bin_no:" + bin_no + "basis:" + basis + "jute_variety: " + jute_variety + "slip_no_from:" + slip_no_from + "slip_no_from:" + slip_no_from + "slip_no_to:" + slip_no_to + "bale_no:" + bale_no + "jute_grade:" + jute_grade);
             final BalePreparation balePreparation = new BalePreparation();
             balePreparation.setBaleId(Integer.parseInt(baleid));
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -2408,7 +2422,7 @@ public class InsertDataController
             balePreparation.setCreation_date(date);
             final long millis = System.currentTimeMillis();
             final java.sql.Date sqlDate = new java.sql.Date(millis);
-            System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>" + sqlDate);
+          //  System.out.println(">>>>>>>>>>date>>>>>>>>>>>>>>>" + sqlDate);
             balePreparation.setPacking_date(sqlDate);
             balePreparation.setPlace_of_packing(place_of_packing);
             balePreparation.setCrop_year(crop_year);
@@ -2880,7 +2894,7 @@ public class InsertDataController
         final String dpcid = (String)request.getSession().getAttribute("dpcId");
         final Gson gson = new Gson();
         final List<String> result = (List<String>)this.rawJuteProcurAndPayService.findGradePriceJuteVariety(request.getParameter("variety"), Integer.parseInt(request.getParameter("basis_no")), request.getParameter("cropyr"), dpcid);
-        System.out.println("gson.toJson(result) ================== >>>>>>>>>>>>>>>> " + gson.toJson((Object)result));
+        //System.out.println("gson.toJson(result) ================== >>>>>>>>>>>>>>>> " + gson.toJson((Object)result));
         return gson.toJson((Object)result);
     }
     

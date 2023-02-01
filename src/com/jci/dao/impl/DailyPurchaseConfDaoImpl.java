@@ -117,12 +117,12 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		try {
 		//for(int i=0; i<query.list().size(); i++) {
 			for(Object[] o: result) {
-			System.out.println("=========>>>>>>>>>>>>query.list().size()  "+query.list().size());
+			//System.out.println("=========>>>>>>>>>>>>query.list().size()  "+query.list().size());
 			double multi=0.0;
 			double addition=0.0;
 			DailyPurchaseConfModel dailyPurchaseConfModel= new DailyPurchaseConfModel();
 			//Object[] o = result.get(i);
-			System.out.println("=========>>>>>>>>>>>>Object  "+o[0].toString());
+			//System.out.println("=========>>>>>>>>>>>>Object  "+o[0].toString());
 			double grade[] = new double[8]; 
 			String variety= (String)o[10];
 			String cropyr=(String)o[9];
@@ -176,38 +176,37 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 				
 				
 						grade[j]= ((BigDecimal)o[j]).doubleValue();
-						System.out.println("grade[j]================>>>>>>>>>>>>>> "+grade[j]);
+					//	System.out.println("grade[j]================>>>>>>>>>>>>>> "+grade[j]);
 								gradeprice[j]=((BigDecimal) p[j]).doubleValue();
-								System.out.println("gradeprice[j]================>>>>>>>>>>>>>> "+gradeprice[j]);
+							//	System.out.println("gradeprice[j]================>>>>>>>>>>>>>> "+gradeprice[j]);
 												if(grade[j]!=0)
 													{	
 															difference[j]= gradeprice[j]-gradefive ;
-															System.out.println("difference[j]================>>>>>>>>>>>>>> "+difference[j]);
+														//	System.out.println("difference[j]================>>>>>>>>>>>>>> "+difference[j]);
 												      		multi=(difference[j] *  (grade[j]/100)) ;
 												      
 												      		addition += multi;
 												      		
 																
-														System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
+														//System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
 								      		
 												}  
 												
 			}
-						System.out.println("addition outside================>>>>>>>>>>>>>> "+addition);
-						System.out.println("garsat-addition================>>>>>>>>>>>>>> "+(garsat-addition));
-						dailyPurchaseConfModel.setTd5base(garsat-addition);
-						dailyPurchaseConfModel.setFibervalue((netqty*garsat)/100);
 						
-					
+					//	System.out.println("addition outside================>>>>>>>>>>>>>> "+addition);
+					//	System.out.println("garsat-addition================>>>>>>>>>>>>>> "+(garsat-addition));
+						dailyPurchaseConfModel.setTd5base(garsat-addition);
+						
 				
 			}
 			querystr4= "UPDATE jciprocurement SET flag_dpc2 = 1 WHERE ptsid in ("+ptsid+");";
-			System.out.println("querystr3============>>>>>>>>>>>>>>  "+querystr4);
+			//System.out.println("querystr3============>>>>>>>>>>>>>>  "+querystr4);
 			Session session4 = sessionFactory.getCurrentSession();
 			Transaction tx4 = session4.beginTransaction();
 			SQLQuery query4 = session4.createSQLQuery(querystr4);
 			int one = query4.executeUpdate();
-			System.out.println("====================== " +one);
+			//System.out.println("====================== " +one);
 			dailyPurchaseConfModel.setGarsat(garsat);
 			dailyPurchaseConfModel.setBasis(basis);
 			dailyPurchaseConfModel.setCropyr(cropyr);
@@ -216,7 +215,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			
 			dailyPurchaseConfModel.setJutevariety(variety);
 			
-			System.out.println("dailyPurchaseConfModel============>>>>>>>>>>>>>>  "+dailyPurchaseConfModel.toString());
+			//System.out.println("dailyPurchaseConfModel============>>>>>>>>>>>>>>  "+dailyPurchaseConfModel.toString());
 			dpclist.add(dailyPurchaseConfModel);
 	 }
 		}

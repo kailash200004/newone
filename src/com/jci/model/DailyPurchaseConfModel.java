@@ -24,16 +24,7 @@ public class DailyPurchaseConfModel {
 	@Column(name="datepurchase")
 	private String datepurchase;
 
-	public String getDatepurchase() {
-		return datepurchase;
-	}
-
-	public void setDatepurchase(String datepurchase) {
-		this.datepurchase = datepurchase;
-	}
-
-
-
+	
 	@Column(name="basis")
 	private String basis;
 
@@ -58,33 +49,12 @@ public class DailyPurchaseConfModel {
 	@Column(name="netquantity")
 	private double netquantity;
 	
-
 	@Column(name="grasatrate")
 	private double garsat;
 
-	public double getGarsat() {
-		return garsat;
-	}
-
-	public void setGarsat(double garsat) {
-		this.garsat = garsat;
-	}
-
-	
-	
 	@Column(name="td5base")
 	private double tdbase;
 	
-	public double getTd5base() {
-		return tdbase;
-	}
-
-	public void setTd5base(double tdbase) {
-		this.tdbase = tdbase;
-	}
-
-
-
 	@Column(name="fibervalue")
 	private double fibervalue;
 
@@ -120,7 +90,31 @@ public class DailyPurchaseConfModel {
 
 	@Column(name="rateslipno")
 	private String rateslipno;
+	
+	@Column(name="grade1xnetqty")
+	private double grade1xnetqty;
 
+	@Column(name="grade2xnetqty")
+	private double grade2xnetqty;
+	
+	@Column(name="grade3xnetqty")
+	private double grade3xnetqty;
+	
+	@Column(name="grade4xnetqty")
+	private double grade4xnetqty;
+	
+	@Column(name="grade5xnetqty")
+	private double grade5xnetqty;
+	
+	@Column(name="grade6xnetqty")
+	private double grade6xnetqty;
+	
+	@Column(name="grade7xnetqty")
+	private double grade7xnetqty;
+	
+	@Column(name="grade8xnetqty")
+	private double grade8xnetqty;
+	
 	public DailyPurchaseConfModel() {
 
 	}
@@ -148,6 +142,22 @@ public class DailyPurchaseConfModel {
 		this.rateslipno = rateslipno;
 	}
 
+	public String getDatepurchase() {
+		return datepurchase;
+	}
+
+	public void setDatepurchase(String datepurchase) {
+		this.datepurchase = datepurchase;
+	}
+
+	public double getTd5base() {
+		return tdbase;
+	}
+
+	public void setTd5base(double tdbase) {
+		this.tdbase = tdbase;
+	}
+
 	public int getDpcid() {
 		return dpcid;
 	}
@@ -164,7 +174,13 @@ public class DailyPurchaseConfModel {
 		this.formno = formno;
 	}
 
-	
+	public double getGarsat() {
+		return garsat;
+	}
+
+	public void setGarsat(double garsat) {
+		this.garsat = garsat;
+	}
 
 	public String getBasis() {
 		return basis;
@@ -237,8 +253,6 @@ public class DailyPurchaseConfModel {
 	public void setFibervalue(double d) {
 		this.fibervalue = d;
 	}
-
-
 
 	public String getIpaddresss() {
 		return ipaddress;
@@ -335,19 +349,140 @@ public class DailyPurchaseConfModel {
 	public void setGrade8(double grade8) {
 		this.grade8 = grade8;
 	}
+	
+	public double getTdbase() {
+		return tdbase;
+	}
 
+	public void setTdbase(double tdbase) {
+		this.tdbase = tdbase;
+	}
+
+	
+
+	public DailyPurchaseConfModel(int dpcid, String formno, String datepurchase, String basis, String cropyr,
+			String placeofpurchase, int binno, String jutevariety, double gquantity, double dquantity,
+			double netquantity, double garsat, double tdbase, double fibervalue, double grade1, double grade2,
+			double grade3, double grade4, double grade5, double grade6, double grade7, double grade8, String ipaddress,
+			int createdby, String rateslipno, double grade1xnetqty, double grade2xnetqty, double grade3xnetqty,
+			double grade4xnetqty, double grade5xnetqty, double grade6xnetqty, double grade7xnetqty,
+			double grade8xnetqty) {
+		super();
+		this.dpcid = dpcid;
+		this.formno = formno;
+		this.datepurchase = datepurchase;
+		this.basis = basis;
+		this.cropyr = cropyr;
+		this.placeofpurchase = placeofpurchase;
+		this.binno = binno;
+		this.jutevariety = jutevariety;
+		this.gquantity = gquantity;
+		this.dquantity = dquantity;
+		this.netquantity = netquantity;
+		this.garsat = garsat;
+		this.tdbase = tdbase;
+		this.fibervalue = fibervalue;
+		this.grade1 = grade1;
+		this.grade2 = grade2;
+		this.grade3 = grade3;
+		this.grade4 = grade4;
+		this.grade5 = grade5;
+		this.grade6 = grade6;
+		this.grade7 = grade7;
+		this.grade8 = grade8;
+		this.ipaddress = ipaddress;
+		this.createdby = createdby;
+		this.rateslipno = rateslipno;
+		this.grade1xnetqty = grade1xnetqty;
+		this.grade2xnetqty = grade2xnetqty;
+		this.grade3xnetqty = grade3xnetqty;
+		this.grade4xnetqty = grade4xnetqty;
+		this.grade5xnetqty = grade5xnetqty;
+		this.grade6xnetqty = grade6xnetqty;
+		this.grade7xnetqty = grade7xnetqty;
+		this.grade8xnetqty = grade8xnetqty;
+	}
+
+	public double getGrade1xnetqty() {
+		return grade1xnetqty;
+	}
+
+	public void setGrade1xnetqty(double grade1xnetqty) {
+		this.grade1xnetqty = grade1xnetqty;
+	}
+
+	public double getGrade2xnetqty() {
+		return grade2xnetqty;
+	}
+
+	public void setGrade2xnetqty(double grade2xnetqty) {
+		this.grade2xnetqty = grade2xnetqty;
+	}
+
+	public double getGrade3xnetqty() {
+		return grade3xnetqty;
+	}
+
+	public void setGrade3xnetqty(double grade3xnetqty) {
+		this.grade3xnetqty = grade3xnetqty;
+	}
+
+	public double getGrade4xnetqty() {
+		return grade4xnetqty;
+	}
+
+	public void setGrade4xnetqty(double grade4xnetqty) {
+		this.grade4xnetqty = grade4xnetqty;
+	}
+
+	public double getGrade5xnetqty() {
+		return grade5xnetqty;
+	}
+
+	public void setGrade5xnetqty(double grade5xnetqty) {
+		this.grade5xnetqty = grade5xnetqty;
+	}
+
+	public double getGrade6xnetqty() {
+		return grade6xnetqty;
+	}
+
+	public void setGrade6xnetqty(double grade6xnetqty) {
+		this.grade6xnetqty = grade6xnetqty;
+	}
+
+	public double getGrade7xnetqty() {
+		return grade7xnetqty;
+	}
+
+	public void setGrade7xnetqty(double grade7xnetqty) {
+		this.grade7xnetqty = grade7xnetqty;
+	}
+
+	public double getGrade8xnetqty() {
+		return grade8xnetqty;
+	}
+
+	public void setGrade8xnetqty(double grade8xnetqty) {
+		this.grade8xnetqty = grade8xnetqty;
+	}
 
 	@Override
 	public String toString() {
 		return "DailyPurchaseConfModel [dpcid=" + dpcid + ", formno=" + formno + ", datepurchase=" + datepurchase
 				+ ", basis=" + basis + ", cropyr=" + cropyr + ", placeofpurchase=" + placeofpurchase + ", binno="
 				+ binno + ", jutevariety=" + jutevariety + ", gquantity=" + gquantity + ", dquantity=" + dquantity
-				+ ", netquantity=" + netquantity + ", fibervalue=" + fibervalue + ", grade1=" + grade1 + ", grade2="
-				+ grade2 + ", grade3=" + grade3 + ", grade4=" + grade4 + ", grade5=" + grade5 + ", grade6=" + grade6
-				+ ", grade7=" + grade7 + ", grade8=" + grade8 + ", ipaddress=" + ipaddress + ", createdby=" + createdby
-				+ ", rateslipno=" + rateslipno + "]";
+				+ ", netquantity=" + netquantity + ", garsat=" + garsat + ", tdbase=" + tdbase + ", fibervalue="
+				+ fibervalue + ", grade1=" + grade1 + ", grade2=" + grade2 + ", grade3=" + grade3 + ", grade4=" + grade4
+				+ ", grade5=" + grade5 + ", grade6=" + grade6 + ", grade7=" + grade7 + ", grade8=" + grade8
+				+ ", ipaddress=" + ipaddress + ", createdby=" + createdby + ", rateslipno=" + rateslipno
+				+ ", grade1xnetqty=" + grade1xnetqty + ", grade2xnetqty=" + grade2xnetqty + ", grade3xnetqty="
+				+ grade3xnetqty + ", grade4xnetqty=" + grade4xnetqty + ", grade5xnetqty=" + grade5xnetqty
+				+ ", grade6xnetqty=" + grade6xnetqty + ", grade7xnetqty=" + grade7xnetqty + ", grade8xnetqty="
+				+ grade8xnetqty + "]";
 	}
 
+	
 	
 
 }

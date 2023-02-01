@@ -652,8 +652,8 @@
 
 						if(basis=="msp"){
 							var gradefive = data[0][4];
-							console.log(gradefive);
-							console.log(data);
+							//console.log(gradefive);
+							//console.log(data);
 									for (var i = 0; i < input.length; i++) {
 										for( var j=0;j < data.length;j++){
 								 		 grade=data[j];
