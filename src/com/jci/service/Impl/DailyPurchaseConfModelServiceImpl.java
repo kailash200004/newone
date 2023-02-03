@@ -57,5 +57,10 @@ public class DailyPurchaseConfModelServiceImpl  implements DailyPurchaseModelCon
 		
 	}
 
+	@Override
+	public String findGradePriceJuteVariety(String variety, int msp_no, String cropyr, String dpcid) {
+		return dailyPurchaseConfDao.findGradePriceJuteVariety(variety,msp_no,cropyr,dpcid);	
+		}
+
 
 }

@@ -1057,6 +1057,44 @@ public class InsertDataController
             rawJuteProcAndPay.setTd_base(tdbaseprice);
             rawJuteProcAndPay.setTallyslipno(tallyslipno);
             final String amountPayable = request.getParameter("amountPayable");
+            int basisNo=0;
+			if(basis.equalsIgnoreCase("commercial")) 
+				basisNo=2;
+			else if(basis.equalsIgnoreCase("msp")) 
+				basisNo=1;
+			  final String result =this.DailyPurchasefService.findGradePriceJuteVariety(jutevariety, basisNo, cropyr, dpcid);
+			
+			  final Gson gson = new Gson();
+			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result);
+			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result.split(",")); 
+			 double[] prices=new double[8];
+			 prices[0]=Double.parseDouble(result.split(",")[0]);
+			 prices[1]=Double.parseDouble(result.split(",")[1]);
+			 prices[2]=Double.parseDouble(result.split(",")[2]);
+			 prices[3]=Double.parseDouble(result.split(",")[3]);
+			 prices[4]=Double.parseDouble(result.split(",")[4]);
+			 prices[5]=Double.parseDouble(result.split(",")[5]);
+			 prices[6]=Double.parseDouble(result.split(",")[6]);
+			 prices[7]=Double.parseDouble(result.split(",")[7]);
+     
+			
+			
+			 rawJuteProcAndPay.setGrade1xnetqty(prices[0]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade2xnetqty(prices[1]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade3xnetqty(prices[2]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade4xnetqty(prices[3]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade5xnetqty(prices[4]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade6xnetqty(prices[5]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade7xnetqty(prices[6]*Double.
+			  parseDouble(netquantity));
+			 rawJuteProcAndPay.setGrade8xnetqty(prices[7]*Double.
+			  parseDouble(netquantity));
             rawJuteProcAndPay.setAmountpayable((double)Float.parseFloat(amountPayable));
             if (farmerregno == null || farmerregno == "") {
                 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-warning\"><b>Oops! </b> Please enter correct registartion number.</div>\r\n");
@@ -1144,16 +1182,20 @@ public class InsertDataController
 				basisNo=2;
 			else if(basis.equalsIgnoreCase("msp")) 
 				basisNo=1;
-			  final List<String> result =(List<String>)this.rawJuteProcurAndPayService.findGradePriceJuteVariety(jutevariety, basisNo, cropyr, dpcid);
-			 
+			  final String result =this.DailyPurchasefService.findGradePriceJuteVariety(jutevariety, basisNo, cropyr, dpcid);
+			
 			  final Gson gson = new Gson();
-			 String res= result.toString().replace("[", "").replace("]", "");
-			 List<String> rest= new ArrayList<String>();
-			 rest.add(gson.toJson((Object)result));
-			 System.out.println("result-===========------------=-=-=-=-=-=-=-=-==-=  "+res);
-		        System.out.println("gson.toJson(result) ================== >>>>>>>>>>>>>>>> " + gson.toJson((Object)result));
-		         
-			String price =gson.toJson(result);
+			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result);
+			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result.split(",")); 
+			 double[] prices=new double[8];
+			 prices[0]=Double.parseDouble(result.split(",")[0]);
+			 prices[1]=Double.parseDouble(result.split(",")[1]);
+			 prices[2]=Double.parseDouble(result.split(",")[2]);
+			 prices[3]=Double.parseDouble(result.split(",")[3]);
+			 prices[4]=Double.parseDouble(result.split(",")[4]);
+			 prices[5]=Double.parseDouble(result.split(",")[5]);
+			 prices[6]=Double.parseDouble(result.split(",")[6]);
+			 prices[7]=Double.parseDouble(result.split(",")[7]);
             if (grade0 != null && grade0 != "0") {
                 DailyPurchase.setGrade1(Double.parseDouble(grade0));
             }
@@ -1178,15 +1220,26 @@ public class InsertDataController
             if (grade8 != null && grade8 != "0") {
                 DailyPurchase.setGrade8(Double.parseDouble(grade8));
             }
-            DailyPurchase.setGrade1xnetqty(Double.parseDouble(result.get(0))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade2xnetqty(Double.parseDouble(result.get(1))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade3xnetqty(Double.parseDouble(result.get(2))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade4xnetqty(Double.parseDouble(result.get(3))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade5xnetqty(Double.parseDouble(result.get(4))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade6xnetqty(Double.parseDouble(result.get(5))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade7xnetqty(Double.parseDouble(result.get(6))*Double.parseDouble(netquantity));
-            DailyPurchase.setGrade8xnetqty(Double.parseDouble(result.get(7))*Double.parseDouble(netquantity));
-            
+			
+			
+			  DailyPurchase.setGrade1xnetqty(prices[0]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade2xnetqty(prices[1]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade3xnetqty(prices[2]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade4xnetqty(prices[3]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade5xnetqty(prices[4]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade6xnetqty(prices[5]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade7xnetqty(prices[6]*Double.
+			  parseDouble(netquantity));
+			  DailyPurchase.setGrade8xnetqty(prices[7]*Double.
+			  parseDouble(netquantity));
+			 
+			 
             this.DailyPurchasefService.create(DailyPurchase);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
         }
@@ -2143,9 +2196,9 @@ public class InsertDataController
     
     @RequestMapping({ "bin" })
     public ModelAndView bin(final HttpServletRequest request) {
-        final List<RawJuteProcurementAndPayment> binNumberList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
+      //  final List<RawJuteProcurementAndPayment> binNumberList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
         final ModelAndView mv = new ModelAndView("bin");
-        mv.addObject("binNumberList", (Object)binNumberList);
+       // mv.addObject("binNumberList", (Object)binNumberList);
         return mv;
     }
     
@@ -2170,6 +2223,7 @@ public class InsertDataController
             batch.setCarryoverlossqty(carryForwardLoose);
             batch.setCarryropeqty(carryForwardRope);
             batch.setDate(date);
+            this.batchService.ropeAndJutePrice(jutevariety, basis);
             this.batchService.create(batch);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
             

@@ -68,7 +68,47 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		this.sessionFactory.getCurrentSession().save(dailyPurchaseConfModel);
 		return false;
 	}
+	@Override
+	public String findGradePriceJuteVariety(String variety, int basis_no, String cropyr, String dpcid) {
 
+		String querystr="";
+		List<Object[]> result = new ArrayList<>();
+		
+		int count=0;
+		double grade1= 0.0;
+		double grade2= 0.0;
+		double grade3= 0.0;
+		double grade4= 0.0;
+		double grade5= 0.0;
+		double grade6= 0.0;
+		double grade7= 0.0;
+		double grade8= 0.0;
+		if(basis_no==1) {
+		 querystr =  "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
+		}
+		else if(basis_no==2) {
+			 querystr = "SELECT  top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where effectDate <= GETDATE() and crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
+			}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		 result=query.list();
+		 for(Object[] o:result)
+		 {
+			 grade1= ((BigDecimal)o[0]).doubleValue();
+			 grade2= ((BigDecimal)o[1]).doubleValue();
+			 grade3= ((BigDecimal)o[2]).doubleValue();
+			 grade4= ((BigDecimal)o[3]).doubleValue();
+			 grade5= ((BigDecimal)o[4]).doubleValue();
+			 grade6= ((BigDecimal)o[5]).doubleValue();
+			 grade7= ((BigDecimal)o[6]).doubleValue();
+			 grade8= ((BigDecimal)o[7]).doubleValue();
+			 System.out.println("dailyresult=============================== "+grade1+","+grade2+","+grade3+","+grade4+","+grade5+","+grade6+","+grade7+","+grade8);
+			 
+		 }
+		
+		return (grade1+","+grade2+","+grade3+","+grade4+","+grade5+","+grade6+","+grade7+","+grade8);
+	}
 	@Override
 	public List<DailyPurchaseConfModel> dpc2() {
 		List<DailyPurchaseConfModel> dpclist = new ArrayList<>();

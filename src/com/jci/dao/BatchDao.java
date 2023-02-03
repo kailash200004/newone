@@ -25,4 +25,5 @@ public interface BatchDao {
 	public  List<String> InsertTotalwithGaininBinTabledb(String FinYear,String binNO,String Fingain,String WeightGain);
 	
 	public List<BinListFromDbDTO> GetBinListFromDb();
+	public String ropeAndJutePrice(String juteVariety, String basis);
 }

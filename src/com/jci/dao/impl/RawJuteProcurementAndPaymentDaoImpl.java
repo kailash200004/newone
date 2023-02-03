@@ -120,7 +120,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		result = query.list();
-
+		System.out.println("jute variety==================== "+result);
 		return result;
 	}
 	@Override
@@ -128,6 +128,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 
 		String querystr="";
 		List<String> result = new ArrayList<>();
+		
 		int count=0;
 
 		if(basis_no==1) {
@@ -140,7 +141,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		result = query.list();
-		System.out.println("rates result ================== >>>>>>>>>>>>>>>> "+ result);
+		System.out.println("jute Prices==================== "+result);
 		return result;
 	}
 
@@ -153,7 +154,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		Transaction tx= session.beginTransaction();
 		SQLQuery query= session.createSQLQuery(queryStr);
 		result = query.list();
-	//	System.out.println("result========>>>>>>"+query.list());
+		System.out.println("result========>>>>>>"+query.list());
 		return result;
 	}
 

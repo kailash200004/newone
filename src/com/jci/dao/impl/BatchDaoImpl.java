@@ -288,6 +288,35 @@ public class BatchDaoImpl implements BatchDao {
 		return ll;
 
 	}
+
+	@Override
+	public String ropeAndJutePrice(String juteVariety, String basis) {
+	if(basis.equalsIgnoreCase("msp")) {
+			
+		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) {
+			
+				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
+			}
+			
+		else if (juteVariety.equalsIgnoreCase("tossa (new)")||juteVariety.equalsIgnoreCase("white (new)")) {
+			
+				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
+			}
+	}
+	else if(basis.equalsIgnoreCase("commercial")) {
+			
+		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) {
+			
+				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;	
+			}
+			
+		else if (juteVariety.equalsIgnoreCase("tossa")||juteVariety.equalsIgnoreCase("white")) {
+			
+				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
+			}
+	}
+		return null;
+	}
 	
 	
 }

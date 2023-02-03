@@ -103,4 +103,10 @@ public class BatchServiceImpl implements BatchIdentificationService {
 		return batchdao.GetBinListFromDb();
 	}
 
+	@Override
+	public String ropeAndJutePrice(String juteVariety, String basis) {
+		// TODO Auto-generated method stub
+		return batchdao.ropeAndJutePrice(juteVariety, basis);
+	}
+
 }

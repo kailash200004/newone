@@ -126,6 +126,95 @@ public class RawJuteProcurementAndPayment {
 
 	@Column(name="td_base")
 	private String td_base;
+	
+	@Column(name="grade1xnetqty")
+	private double grade1xnetqty;
+
+	@Column(name="grade2xnetqty")
+	private double grade2xnetqty;
+	
+	@Column(name="grade3xnetqty")
+	private double grade3xnetqty;
+	
+	@Column(name="grade4xnetqty")
+	private double grade4xnetqty;
+	
+	@Column(name="grade5xnetqty")
+	private double grade5xnetqty;
+	
+	@Column(name="grade6xnetqty")
+	private double grade6xnetqty;
+	
+	@Column(name="grade7xnetqty")
+	private double grade7xnetqty;
+	
+	@Column(name="grade8xnetqty")
+	private double grade8xnetqty;
+	
+
+	public double getGrade1xnetqty() {
+		return grade1xnetqty;
+	}
+
+	public void setGrade1xnetqty(double grade1xnetqty) {
+		this.grade1xnetqty = grade1xnetqty;
+	}
+
+	public double getGrade2xnetqty() {
+		return grade2xnetqty;
+	}
+
+	public void setGrade2xnetqty(double grade2xnetqty) {
+		this.grade2xnetqty = grade2xnetqty;
+	}
+
+	public double getGrade3xnetqty() {
+		return grade3xnetqty;
+	}
+
+	public void setGrade3xnetqty(double grade3xnetqty) {
+		this.grade3xnetqty = grade3xnetqty;
+	}
+
+	public double getGrade4xnetqty() {
+		return grade4xnetqty;
+	}
+
+	public void setGrade4xnetqty(double grade4xnetqty) {
+		this.grade4xnetqty = grade4xnetqty;
+	}
+
+	public double getGrade5xnetqty() {
+		return grade5xnetqty;
+	}
+
+	public void setGrade5xnetqty(double grade5xnetqty) {
+		this.grade5xnetqty = grade5xnetqty;
+	}
+
+	public double getGrade6xnetqty() {
+		return grade6xnetqty;
+	}
+
+	public void setGrade6xnetqty(double grade6xnetqty) {
+		this.grade6xnetqty = grade6xnetqty;
+	}
+
+	public double getGrade7xnetqty() {
+		return grade7xnetqty;
+	}
+
+	public void setGrade7xnetqty(double grade7xnetqty) {
+		this.grade7xnetqty = grade7xnetqty;
+	}
+
+	public double getGrade8xnetqty() {
+		return grade8xnetqty;
+	}
+
+	public void setGrade8xnetqty(double grade8xnetqty) {
+		this.grade8xnetqty = grade8xnetqty;
+	}
 
 	public String getSlip_image() {
 		return slip_image;
@@ -402,7 +491,10 @@ public class RawJuteProcurementAndPayment {
 				+ ", grade3=" + grade3 + ", grade4=" + grade4 + ", grade5=" + grade5 + ", grade6=" + grade6
 				+ ", grade7=" + grade7 + ", grade8=" + grade8 + ", createddate=" + createddate + ", createdfrom="
 				+ createdfrom + ", ipaddress=" + ipaddress + ", creadtedby=" + creadtedby + ", dateof_entry="
-				+ dateof_entry + ", td_base=" + td_base + "]";
+				+ dateof_entry + ", td_base=" + td_base + ", grade1xnetqty=" + grade1xnetqty + ", grade2xnetqty="
+				+ grade2xnetqty + ", grade3xnetqty=" + grade3xnetqty + ", grade4xnetqty=" + grade4xnetqty
+				+ ", grade5xnetqty=" + grade5xnetqty + ", grade6xnetqty=" + grade6xnetqty + ", grade7xnetqty="
+				+ grade7xnetqty + ", grade8xnetqty=" + grade8xnetqty + "]";
 	}
 
 

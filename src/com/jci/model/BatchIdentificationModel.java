@@ -40,6 +40,12 @@ public class BatchIdentificationModel {
 	@Column(name="carryropeqty")
 	private  String carryropeqty;
 
+	@Column(name="loosejuteamount")
+	private  double loosejuteamount;
+	
+	@Column(name="ropeamount")
+	private  double ropeamount;
+	
 	public int getId() {
 		return id;
 	}
@@ -110,6 +116,22 @@ public class BatchIdentificationModel {
 
 	
 
+	public double getLoosejuteamount() {
+		return loosejuteamount;
+	}
+
+	public void setLoosejuteamount(double loosejuteamount) {
+		this.loosejuteamount = loosejuteamount;
+	}
+
+	public double getRopeamount() {
+		return ropeamount;
+	}
+
+	public void setRopeamount(double ropeamount) {
+		this.ropeamount = ropeamount;
+	}
+
 	public String getDate() {
 		return date;
 	}
@@ -132,11 +154,29 @@ public class BatchIdentificationModel {
 		this.carryropeqty = carryropeqty;
 	}
 
+	public BatchIdentificationModel(int id, String dpcnames, String cropyr, String binnumber, String jutevariety,
+			String date, String basis, String carryoverlossqty, String carryropeqty, double loosejuteamount,
+			double ropeamount) {
+		super();
+		this.id = id;
+		this.dpcnames = dpcnames;
+		this.cropyr = cropyr;
+		this.binnumber = binnumber;
+		this.jutevariety = jutevariety;
+		this.date = date;
+		this.basis = basis;
+		this.carryoverlossqty = carryoverlossqty;
+		this.carryropeqty = carryropeqty;
+		this.loosejuteamount = loosejuteamount;
+		this.ropeamount = ropeamount;
+	}
+
 	@Override
 	public String toString() {
 		return "BatchIdentificationModel [id=" + id + ", dpcnames=" + dpcnames + ", cropyr=" + cropyr + ", binnumber="
 				+ binnumber + ", jutevariety=" + jutevariety + ", date=" + date + ", basis=" + basis
-				+ ", carryoverlossqty=" + carryoverlossqty + ", carryropeqty=" + carryropeqty + "]";
+				+ ", carryoverlossqty=" + carryoverlossqty + ", carryropeqty=" + carryropeqty + ", loosejuteamount="
+				+ loosejuteamount + ", ropeamount=" + ropeamount + "]";
 	}
 
 }

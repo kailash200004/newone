@@ -13,4 +13,5 @@ public interface DailyPurchaseModelConfService {
 	public List <DailyPurchaseConfModel> getAll();
 	public boolean submitform(DailyPurchaseConfModel dailyPurchaseConfModel);
 	public List<DailyPurchaseConfModel> dpc2();
+	public String findGradePriceJuteVariety (String variety, int msp_no, String cropyr,String dpcid );
 }
