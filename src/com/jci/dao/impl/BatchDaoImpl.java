@@ -290,32 +290,58 @@ public class BatchDaoImpl implements BatchDao {
 	}
 
 	@Override
-	public String ropeAndJutePrice(String juteVariety, String basis) {
+	public String ropeAndJutePrice(String juteVariety, String basis,String binNumber) {
+		List<Object[]> ropeprice= new ArrayList<>();
+		List<Object[]> juteprice = new ArrayList<>();
+		String ropePrice=null;
+		String jutePrice=null;
+		
+
+		
+		
+		jutePrice= "select sum(fibervalue)/sum(netquantity)   FROM jcidpc where binno ='"+binNumber+"'";
+				
+				
+		  Session session = sessionFactory.getCurrentSession(); 
+		  Transaction tx=session.beginTransaction(); 
+		  SQLQuery query=session.createSQLQuery(jutePrice); 
+		  juteprice= query.list(); 
+		  String jute= juteprice.toString();
+		  
+		  System.out.println("priceOfJute====>>>> "+juteprice);
+		  
+		  
 	if(basis.equalsIgnoreCase("msp")) {
 			
-		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) {
+		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) 
+			ropePrice="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'"  ;		
 			
-				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
-			}
 			
-		else if (juteVariety.equalsIgnoreCase("tossa (new)")||juteVariety.equalsIgnoreCase("white (new)")) {
+		else if (juteVariety.equalsIgnoreCase("tossa (new)")||juteVariety.equalsIgnoreCase("white (new)")) 
+			ropePrice="select (sum(a.grade8xnetqty)+sum(b.grade8xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;		
 			
-				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
-			}
 	}
 	else if(basis.equalsIgnoreCase("commercial")) {
 			
-		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) {
+		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) 
+			ropePrice="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;	
 			
-				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;	
-			}
 			
-		else if (juteVariety.equalsIgnoreCase("tossa")||juteVariety.equalsIgnoreCase("white")) {
+		else if (juteVariety.equalsIgnoreCase("tossa")||juteVariety.equalsIgnoreCase("white")) 
+			ropePrice="select (sum(a.grade5xnetqty)+sum(b.grade5xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;		
 			
-				String querystr="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno" ;		
-			}
 	}
-		return null;
+				Session sessionn = sessionFactory.getCurrentSession();
+				Transaction txx= sessionn.beginTransaction();
+				SQLQuery querystr= sessionn.createSQLQuery(ropePrice);
+				ropeprice= querystr.list();
+				String rope= ropeprice.toString();
+				System.out.println("ropeprice====>>>> "+rope);
+				 if(ropeprice.isEmpty())
+			  
+			  
+			 
+		return (rope+","+jute);
 	}
 	
 	

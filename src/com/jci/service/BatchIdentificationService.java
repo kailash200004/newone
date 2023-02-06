@@ -27,5 +27,5 @@ public interface BatchIdentificationService {
 	List<String> CalculateGainBasedonBinFromproc(String FinYear, String binNO);
 	public  List<String> InsertTotalwithGaininBinTabledb(String FinYear,String binNO,String Fingain,String WeightGain);
 	public List<BinListFromDbDTO> GetBinListFromDb();
-	public String ropeAndJutePrice(String juteVariety, String basis);
+	public String ropeAndJutePrice(String juteVariety, String basis, String binnumber);
 }

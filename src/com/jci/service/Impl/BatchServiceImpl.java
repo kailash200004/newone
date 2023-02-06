@@ -104,9 +104,9 @@ public class BatchServiceImpl implements BatchIdentificationService {
 	}
 
 	@Override
-	public String ropeAndJutePrice(String juteVariety, String basis) {
+	public String ropeAndJutePrice(String juteVariety, String basis , String binnumber) {
 		// TODO Auto-generated method stub
-		return batchdao.ropeAndJutePrice(juteVariety, basis);
+		return batchdao.ropeAndJutePrice(juteVariety, basis,binnumber);
 	}
 
 }

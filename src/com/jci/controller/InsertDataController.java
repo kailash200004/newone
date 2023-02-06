@@ -2223,12 +2223,18 @@ public class InsertDataController
             batch.setCarryoverlossqty(carryForwardLoose);
             batch.setCarryropeqty(carryForwardRope);
             batch.setDate(date);
-            this.batchService.ropeAndJutePrice(jutevariety, basis);
+            String ropeAndjutePrice =this.batchService.ropeAndJutePrice(jutevariety, basis,binNumber);
+            double jutePrice= Double.parseDouble(ropeAndjutePrice.split(",")[1]);
+            double ropePrice= Double.parseDouble(ropeAndjutePrice.split(",")[0]);
+            batch.setLoosejuteamount(jutePrice*Double.parseDouble(carryForwardLoose));
+            batch.setRopeamount(ropePrice*Double.parseDouble(carryForwardRope));
             this.batchService.create(batch);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
             
         }
-        catch (Exception ex) {}
+        catch (Exception ex) {
+        	ex.printStackTrace();
+        }
         return new ModelAndView((View)new RedirectView("bin.obj"));
     }
     
