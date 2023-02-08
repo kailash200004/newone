@@ -2224,9 +2224,10 @@ public class InsertDataController
             batch.setCarryropeqty(carryForwardRope);
             batch.setDate(date);
             String ropeAndjutePrice =this.batchService.ropeAndJutePrice(jutevariety, basis,binNumber);
+         
             double jutePrice= Double.parseDouble(ropeAndjutePrice.split(",")[1]);
-            double ropePrice= Double.parseDouble(ropeAndjutePrice.split(",")[0]);
             batch.setLoosejuteamount(jutePrice*Double.parseDouble(carryForwardLoose));
+            double ropePrice= Double.parseDouble(ropeAndjutePrice.split(",")[0]);
             batch.setRopeamount(ropePrice*Double.parseDouble(carryForwardRope));
             this.batchService.create(batch);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
@@ -3215,7 +3216,7 @@ public class InsertDataController
 		try {
 			binPurchaseList = batchService.GetBinPurchasemappingdetails(cropyr, dadatepurchasetepurchase, binNo);
 		} catch (Exception e) {
-			 //Todo
+			 System.out.println(e.getStackTrace());
 		}		
 		ModelAndView mv = new ModelAndView("View_Purchase_Bin_Mapping");
 		mv.addObject("binPurchaseList", binPurchaseList);

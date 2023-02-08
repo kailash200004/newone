@@ -114,7 +114,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		List<String> result = new ArrayList<>();
 		int count=0;
 
-		String querystr = "SELECT grade FROM jcijutevariety where basis ='"+basis_no+"' and jutevariety like '"+ variety+"%'";
+		String querystr = "SELECT grade FROM jcijutevariety where basis ='"+basis_no+"' and jutevariety like '%"+variety+"%'";
 
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();

@@ -245,8 +245,6 @@ $("#crop_year").on("change", function() {
 <script>
 	 //function  binno_check(){
 		 $("#bin_no").on("change", function(){
-			 alert("aagya");
-		 
 		 var basis;
 			var jutevariety;
 		 var binNo = document.getElementById("bin_no").value;
@@ -255,9 +253,9 @@ $("#crop_year").on("change", function() {
 			url:"getbinno.obj",
 			data: {"binno" :binNo}, 
 			success:function(result){
-				alert(result);
+				//alert(result);
 				if(result != "null"){
-					alert("yes")
+					//alert("yes")
 					 $('#basis option[value=""]').remove();
 					
 					const myArray= result.split("-");
@@ -266,19 +264,41 @@ $("#crop_year").on("change", function() {
 	 					var htm = "<option disabled selected value>-Select-</option>";
 	 					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
 						$("#jute_variety").html(htm);
-	 					
-	 					
-	 					
+	 					if (basis == "commercial")
+							 var basis_no = '2';
+						else if (basis == "msp"||basis == "MSP")
+							var basis_no = '1';
+	 					console.log(basis_no);
 	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
 							$("#basis").html(html);
-	 					
+	 					$.ajax({
+							type : "GET",
+							url : "findGradeOnJuteVariety.obj",
+							data : jQuery.param({
+								"variety" : jutevariety,
+								"basis_no" : basis_no
+							}),
+							success : function(result) {
+								
+								var data = jQuery.parseJSON(result);
+							//	alert(data);
+								var html = "<option disabled selected value>-Select-</option>";
+								for (var i = 0; i < data.length; i++) {
+									var sar = data[i]
+									html += "<option value="+sar+">"
+											+ data[i] + "</option>"
+								}
+								$("#jute_grade").html(html);
+
+							}
+						});
 			 				
 	 					
 	 					console.log(basis);
 	 					console.log(jutevariety);
  					}
 				else if (result == "null"){
-					alert("else");
+					//alert("else");
 					var htm = "<option disabled selected value>-Select-</option>";
  					htm += '<option value="msp">MSP</option>'
  					htm += '<option value="commercial">Commercial</option>'
@@ -421,7 +441,7 @@ $("#place_of_packing").on("change", function() {
 	});	
 	</script>
  	-->
-	<script>
+	<!-- <script>
 		$("#bin_no").on("select",function() {
 							var basis_no;
 							var grade;
@@ -456,7 +476,7 @@ $("#place_of_packing").on("change", function() {
 										}
 									});
 						});
-	</script>
+	</script> -->
 	<script>
 		function checkLen() {
 			var binnumber = document.getElementById("bin_no").value;

@@ -106,11 +106,8 @@
 										<td><% out.print(DpcCode=priceListing.getDpc_code());%></td>
 										<td><% out.print(Basis=priceListing.getBasis());%></td>
 										<td><% out.print(juteVariety=priceListing.getJute_Variety());%></td>
-										<td>
-											<% out.print(CropYr=priceListing.getCrop_Year());%>
-										</td>
-										<td>
-											<% out.print(binNo=priceListing.getBinNo());%>
+										<td><% out.print(CropYr=priceListing.getCrop_Year());%></td>
+										<td><% out.print(binNo=priceListing.getBinNo());%>
 										</td>
 										<td><%=priceListing.getGrossQty()%></td>
 										<td><%=priceListing.getDeductionQty()%></td>

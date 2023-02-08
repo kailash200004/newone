@@ -129,7 +129,11 @@ public class BatchDaoImpl implements BatchDao {
 		System.out.println("GetBinPurchasemappingdetails"+dadatepurchasetepurchase);
 		System.out.println("GetBinPurchasemappingdetails"+binNo);	
 
-		sb.append("select * from jciprocurement where binno='"+binNo+"' AND cropyr='"+cropyr+"' AND datepurchase='"+dadatepurchasetepurchase+"' ");
+		/*
+		 * sb.append("select * from jciprocurement where binno='"+binNo+"' AND cropyr='"
+		 * +cropyr+"' AND datepurchase='"+dadatepurchasetepurchase+"' ");
+		 */
+		sb.append( "select * FROM jcidpc where binno='"+binNo+"' AND cropyr='"+cropyr+"'");
 		String sql = sb.toString();
 		List<BinPurchaseMappingDTO> ll = new ArrayList<>();		
 		try {
@@ -145,11 +149,11 @@ public class BatchDaoImpl implements BatchDao {
 				binPurchaseMappingDTO.setJute_Variety(rs.getString("jutevariety"));				
 				binPurchaseMappingDTO.setCrop_Year(rs.getString("cropyr"));
 				binPurchaseMappingDTO.setBinNo(rs.getString("binno"));
-				binPurchaseMappingDTO.setGrossQty(rs.getString("grossquantity"));				
-				binPurchaseMappingDTO.setDeductionQty(rs.getString("deductionquantity"));
+				binPurchaseMappingDTO.setGrossQty(rs.getString("gquantity"));				
+				binPurchaseMappingDTO.setDeductionQty(rs.getString("dquantity"));
 				binPurchaseMappingDTO.setNetQty(rs.getString("netquantity")); 				
 				binPurchaseMappingDTO.setGarsatRate(rs.getString("grasatrate"));
-				binPurchaseMappingDTO.setValue(rs.getString("amountpayable"));
+				binPurchaseMappingDTO.setValue(rs.getString("fibervalue"));
 				
 				ll.add(binPurchaseMappingDTO);	
 			}
@@ -232,6 +236,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
 		List<String> results = query.list();
+		System.out.println("results=============--------- "+results);
 		return results;
 
 	}
@@ -299,46 +304,47 @@ public class BatchDaoImpl implements BatchDao {
 
 		
 		
-		jutePrice= "select sum(fibervalue)/sum(netquantity)   FROM jcidpc where binno ='"+binNumber+"'";
+		jutePrice= "select cast(sum(fibervalue)/sum(netquantity)AS DECIMAL(20, 2))    FROM jcidpc where binno ='"+binNumber+"'";
 				
 				
 		  Session session = sessionFactory.getCurrentSession(); 
 		  Transaction tx=session.beginTransaction(); 
 		  SQLQuery query=session.createSQLQuery(jutePrice); 
 		  juteprice= query.list(); 
-		  String jute= juteprice.toString();
-		  
-		  System.out.println("priceOfJute====>>>> "+juteprice);
+		  String jute= juteprice.toString().replace("[", "").replace("]", "");;
+		  if(jute.contentEquals("null"))
+			  jute="0.0";
+		  System.out.println("priceOfJute====>>>> "+jute);
 		  
 		  
 	if(basis.equalsIgnoreCase("msp")) {
 			
 		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) 
-			ropePrice="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'"  ;		
+			ropePrice="select cast((sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity))AS DECIMAL(20, 2))  FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"' and  b.formno IS NULL"  ;		
 			
 			
 		else if (juteVariety.equalsIgnoreCase("tossa (new)")||juteVariety.equalsIgnoreCase("white (new)")) 
-			ropePrice="select (sum(a.grade8xnetqty)+sum(b.grade8xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;		
+			ropePrice="select cast((sum(a.grade8xnetqty)+sum(b.grade8xnetqty))/(sum(a.netquantity)+sum(b.netquantity))AS DECIMAL(20, 2)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"' and  b.formno IS NULL" ;		
 			
 	}
 	else if(basis.equalsIgnoreCase("commercial")) {
 			
 		if(juteVariety.equalsIgnoreCase("bimli")||juteVariety.equalsIgnoreCase("mesta")) 
-			ropePrice="select (sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;	
+			ropePrice="select cast((sum(a.grade6xnetqty)+sum(b.grade6xnetqty))/(sum(a.netquantity)+sum(b.netquantity))AS DECIMAL(20, 2)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"' and  b.formno IS NULL" ;	
 			
 			
 		else if (juteVariety.equalsIgnoreCase("tossa")||juteVariety.equalsIgnoreCase("white")) 
-			ropePrice="select (sum(a.grade5xnetqty)+sum(b.grade5xnetqty))/(sum(a.netquantity)+sum(b.netquantity)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"'" ;		
+			ropePrice="select cast((sum(a.grade5xnetqty)+sum(b.grade5xnetqty))/(sum(a.netquantity)+sum(b.netquantity))AS DECIMAL(20, 2)) FROM jciprocurement a join jcidpc b on a.binno=b.binno where b.binno='"+binNumber+"' and  b.formno IS NULL" ;		
 			
 	}
 				Session sessionn = sessionFactory.getCurrentSession();
 				Transaction txx= sessionn.beginTransaction();
 				SQLQuery querystr= sessionn.createSQLQuery(ropePrice);
 				ropeprice= querystr.list();
-				String rope= ropeprice.toString();
+				String rope= ropeprice.toString().replace("[", "").replace("]", "");
 				System.out.println("ropeprice====>>>> "+rope);
-				 if(ropeprice.isEmpty())
-			  
+				 if(rope.contentEquals("null") )
+					 rope="0.0";
 			  
 			 
 		return (rope+","+jute);
