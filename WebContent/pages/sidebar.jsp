@@ -50,7 +50,18 @@ body {
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">Dashboard</span> </a></li>
 
-
+			<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">Privileges</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level ">
+					<li><a href="userrole.obj">Add Role</a></li>
+					<li><a href="useraction.obj">Add Action</a></li>
+					<li><a href="userprivilige.obj">Add Privileges</a></li>
+					<li><a href="viewuserrole.obj">View User Role</a></li>
+					<!-- <li><a href="#">Re-assortment</a></li> -->
+				</ul></li>
+				
 			<li><a href="javascript:void(0);;"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">0. &nbsp;User Management</span> <i
@@ -146,6 +157,56 @@ body {
 					<li><a href="binPurchasemapping.obj">BIN Purchase Mapping</a></li>
 					<li><a href="BinListfromDb.obj">BIN List</a></li>
 
+				</ul></li>
+				<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">6.&nbsp;Contract</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level">
+					<li><a href="entryofpcso.obj">Entry of PCSO </a></li>
+					<li><a href="entry_derivativeprice.obj">Entry of
+							Derivative Price</a></li>
+					<li><a href="entryderivativepricelist.obj">Entry of
+							Derivative Price List</a></li>
+					<li><a href="contractgeneration.obj">Contract Generation</a></li>
+					<li><a href="viewcontractgeneration.obj">Contract
+							Generation List</a></li>
+				</ul></li>
+			<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">7.&nbsp;Payment Arrangement</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level ">
+
+					<li><a href="entryofpayment.obj">Entry of payment instrument</a></li>
+					<li><a href="HOdispatch.obj">HO Dispatch Instruction</a></li>
+					<li><a href="entryofsale.obj">Entry of Sale</a></li>
+					<li><a href="uploadingreceipt.obj">Uploading of receipt</a></li>
+					
+					
+
+				</ul></li>
+				
+				<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">8.&nbsp;Commercial / Daily Sales / Free
+						Sale</span> <i class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level">
+
+					<li><a href="entryofoperationcost.obj">Entry of Operation
+							Cost</a></li>
+					<li><a href="entryofoperationcostlist.obj">Entry of
+							Operation Cost List</a></li>
+
+					<li><a href="salespricecalculation.obj">Sale Price
+							Calculation</a></li>
+					<li><a href="salespricecalculationlist.obj">Sale Price
+							Calculation List</a></li>
+
+					<li><a href="contractgenerationcommercial.obj">Contract
+							Generation Commercial</a></li>
+					<li><a href="viewcontractgenerationcommercial.obj">Contract
+							Generation Commercial List</a></li>
 				</ul></li>
 				
 				<!-- <li><a href="javascript:void(0);"><i
