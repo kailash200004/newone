@@ -342,7 +342,7 @@ $("#dpcname").on("change", function() {
 				},
 				success:function(result){
 					data = jQuery.parseJSON(result);
-					alert(data.length);
+					//alert(data.length);
 			        var customers = new Array();
 			        customers.push(["SL.no","Basis", "Jute Variety", "Net Qty", "Amount Payable","Garsate Rate","Carry-forward Loose Jute Qty","Carry-forward Rope Qty"]);
 			        var j=0;

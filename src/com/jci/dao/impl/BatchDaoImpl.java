@@ -179,7 +179,7 @@ public class BatchDaoImpl implements BatchDao {
 		 * "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(amountpayable)TotalValue from jciprocurement where binno='"
 		 * +BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
 		 */
-		querystr = "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(fibervalue)TotalValue from  jcidpc where binno='"+BinNo+"' AND cropyr='"+cropYr+"' AND datepurchase='"+dateOfPurchase+"'";
+		querystr = "select SUM(grasatrate)TotalGarsate,SUM(netquantity)TotalNetQty,SUM(fibervalue)TotalValue from  jcidpc where binno='"+BinNo+"' AND cropyr='"+cropYr+"'";
 				 
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -220,6 +220,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P9", TotalValue);		
 
 		List<String> results = query.list();
+		System.out.println("binPurchaseMappingData===========-----  "+results);
 		return results;
 
 	}
@@ -236,7 +237,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
 		List<String> results = query.list();
-		System.out.println("results=============--------- "+results);
+		System.out.println("GetValue_fromBale_Preperation=============--------- "+results);
 		return results;
 
 	}
