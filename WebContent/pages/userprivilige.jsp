@@ -115,13 +115,17 @@
     	     $.get('userpriviligeajax.obj', {
     	roleId : cval
     	}, function(responseText) {
-    		var text= responseText.replace("[]","").replace("]","");
-    		const myArray= responseText.split(",");
-    		console.log(myArray);
-    	$("#useraction").html(responseText);
+    		var text= responseText.replace("[","").replace("]","");
+    		const userAction= text.split(",");
+    		console.log(">>>>> "+userAction);
+    	
     	});
-    	     alert(cval);
-    	     alert("hello");
+    	     $.get('userpriviligeajaxallData.obj', {
+    	     
+    	     	}, function(response) {
+    	     		alert(response)
+    	     	
+    	     	});
     	     
     	     
     	      

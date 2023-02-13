@@ -1,6 +1,7 @@
 package com.jci.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -549,25 +550,30 @@ public class InsertDataController_2 {
 	@ResponseBody
 	@RequestMapping(value="userpriviligeajax", method = RequestMethod.GET)
 	public String userpriviligeajax(HttpServletRequest request) {
-		ModelAndView mv= new ModelAndView();
 		 String uPri="";
-		String[] arrOfStr=null;
-		//ArrayList<UserPrivilege> uPri= new ArrayList<UserPrivilegeUtil>();
-	
 		int role_Id= 0;
 		try{
 			role_Id= Integer.parseInt(request.getParameter("roleId"));
 		  uPri= userpriviligeservice.getUserPrivilegeListing(role_Id);
-		
-	
-		 
-		  System.out.println("uPri================   "+uPri);
-			
-			
 		}catch(Exception ex){
 			System.out.println(ex.getStackTrace());
 		}
 		return uPri;
+	}
+	@ResponseBody
+	@RequestMapping(value="userpriviligeajaxallData", method= RequestMethod.GET)
+		public  List<String> getuserpriviligeajaxallData() {
+		 List<String> list=new ArrayList();
+		try {
+			list= userpriviligeservice.getuserpriviligeajaxallData();
+				System.out.println("allList============-------------   "+list);
+			}
+		
+		catch(Exception e) {
+			System.out.println(e.getStackTrace());
+			
+		}
+		return list;
 	}
 	
 }

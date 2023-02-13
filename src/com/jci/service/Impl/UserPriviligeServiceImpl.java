@@ -1,5 +1,7 @@
 package com.jci.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class UserPriviligeServiceImpl implements UserPriviligeService {
 		return userpriviligedao.getUserPrivilegeListing(role_Id);
 	}
 		
-	
+	public List<String> getuserpriviligeajaxallData() {
+		return userpriviligedao.getuserpriviligeajaxallData();
+	}
 
 }

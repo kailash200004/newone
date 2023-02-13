@@ -37,7 +37,7 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
 	       	   Transaction tx = session.beginTransaction();
 	       	   SQLQuery query = session.createSQLQuery(querystr);
 	       	   List<String> data = query.list();
-	       	System.out.println("data===>>>>> "+data);
+	       	System.out.println("action_permissions===>>>>> "+data);
 	       	if(!data.isEmpty()) {
 				return data.toString();
 				
@@ -49,5 +49,27 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
 	}
 
 	
-
+	public List<String> getuserpriviligeajaxallData() {
+		List<String> actions=new ArrayList();
+		List<Object[]> data= new ArrayList();
+		  try {
+		
+    	   String querystr = "select action_id,action_name from jciuseraction";
+    	   Session session = sessionFactory.getCurrentSession();
+    	   Transaction tx = session.beginTransaction();
+    	   SQLQuery query = session.createSQLQuery(querystr);
+    	   data = query.list();
+    	 for(Object[] o :data) {
+    		 int id=(int)o[0];
+    		 String a=(String)o[1];
+					System.out.println("action_name===>>>>> "+id+","+a);
+					actions.add(id+"-"+a);
+    	 }
+		}
+		
+		catch(Exception e) {
+    		System.out.println(e.getStackTrace());
+    	}
+		   return actions;
+}
 }
