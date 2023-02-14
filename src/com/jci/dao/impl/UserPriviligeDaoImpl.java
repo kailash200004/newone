@@ -63,7 +63,7 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
     		 int id=(int)o[0];
     		 String a=(String)o[1];
 					System.out.println("action_name===>>>>> "+id+","+a);
-					actions.add(id+"-"+a);
+					actions.add(id+":"+a);
     	 }
 		}
 		

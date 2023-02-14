@@ -29,6 +29,7 @@ import com.jci.service.UploadRecieptService;
 import com.jci.service.UserActionService;
 import com.jci.service.UserPriviligeService;
 import com.jci.service.UserRoleService;
+import com.google.gson.Gson;
 import com.jci.model.EntryofSaleModel;
 import com.jci.model.FarmerRegistrationModel;
 import com.jci.model.HODispatchInstructionModel;
@@ -562,18 +563,23 @@ public class InsertDataController_2 {
 	}
 	@ResponseBody
 	@RequestMapping(value="userpriviligeajaxallData", method= RequestMethod.GET)
-		public  List<String> getuserpriviligeajaxallData() {
+		public  String getuserpriviligeajaxallData() {
 		 List<String> list=new ArrayList();
+		 String res="";
+		 
 		try {
 			list= userpriviligeservice.getuserpriviligeajaxallData();
 				System.out.println("allList============-------------   "+list);
+				
 			}
 		
 		catch(Exception e) {
 			System.out.println(e.getStackTrace());
 			
 		}
-		return list;
+		final Gson gson = new Gson();
+        return gson.toJson((Object)list);
+		//return list;
 	}
 	
 }

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@ page import="java.sql.*"%>
+
 <%@page import="com.jci.model.UserRoleModel"%>
 <%@page import="com.jci.model.UserActionModel"%>
 <%@page import="java.util.List"%>
-<%@page import="org.apache.poi.util.SystemOutLogger"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.List"%>
-<%@page import="java.io.File"%>
+
 
 
 <head>
@@ -43,8 +40,7 @@
          <h1 class="page-title">User Role</h1>
 			
             <div class="page-content fade-in-up">
-                <div class="row">
-                    <div class="col-md-11">
+              
                         <div class="ibox">
                              <span>${msg}</span>
                             <div class="ibox-body">
@@ -74,8 +70,8 @@
                                         </div>
                                         
 
-								                              
-										
+								           </div>                   
+							     <div class="row">			
                 <div class="col-sm-4 form-group">                    
                                  
           <div id="useraction"></div>
@@ -83,12 +79,13 @@
 										
                                     </div>   
                                    
-                                 
-                                    
+                               </div>  
+                                         <div class="row">
 	                                                <div class="col-sm-4 form-group">                       
-                                    <div class="form-group">
+                              
                                   
                                         <button class="btn btn-default" type="submit" id="create">Create</button>
+                                    </div>
                                     </div>
                                     </div>
                                     </div>
@@ -111,23 +108,50 @@
 
     	$('select[name="userrole"]').on('change', function() {
     	     cval=this.value;
+    	     var userAction=new Array();
+    	     var allActions= new Array();
     	     //alert("set");
     	     $.get('userpriviligeajax.obj', {
     	roleId : cval
     	}, function(responseText) {
     		var text= responseText.replace("[","").replace("]","");
-    		const userAction= text.split(",");
+    		 userAction= text.split(",");
     		console.log(">>>>> "+userAction);
     	
     	});
-    	     $.get('userpriviligeajaxallData.obj', {
-    	     
-    	     	}, function(response) {
-    	     		alert(response)
+    	     $.ajax({
+    	    		 url:"userpriviligeajaxallData.obj",
+    	    		 type:"GET",
+    	    		 success:function(result){
+    	    var data=jQuery.parseJSON(result);
+    	     allActions = result.split(",");
+    	     console.log("allActions "+allActions);
+    	     	}
+    	     });
+    	     for(var j=0; j<userAction.length;j++){
+    	    	 var check="";
+    	     	for(var i=0; i<allActions.length;i++){
+    	     		if(userAction[j]==allActions[i])
+    	     			check="checked"
+    	     	}
+    	     	var container = document.createElement('div');
+    	        var checkboxContainer = document.createElement('div');
+    	        checkboxContainer.setAttribute('class', 'checkbox');
+    	        var label;
+    	        var checkBox;
+
+    	       
+    	        $('<div class="form-group">').appendTo('#useraction');
+	        	$('<label/>').text(" aa: ").appendTo('#useraction');
+	       
+				    $('<input/>').attr({ type: 'number', id: 'grade'+i, name: 'test[]',value:'0', min:'0'  }).appendTo('#useraction');
+				   
+				   $('</div>').appendTo('#useraction');
+    	        
+    	    //    $("#useraction").prepend(container);
+    	     }
     	     	
-    	     	});
-    	     
-    	     
+    	    
     	      
     	});  });</script>
     
