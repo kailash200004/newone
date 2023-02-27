@@ -50,7 +50,7 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Contract Generation </h1>
+				<h1 class="page-title">Contract Generation PCSO Wise</h1>
 			</div>
 
 			<div class="page-content fade-in-up">
@@ -62,27 +62,35 @@
 								<span>${msg}</span>
 								<form action="savecontractgeneration.obj" method="POST">
 									<div class="row">
+									
+									
 										<div class="col-sm-4 form-group">
-											<label class="required">Contract Number</label> <input
-												type="number" name="contract_number" id="contract_number"
-												class="form-control" placeholder="Contract Number" required>
+											<label class="required">PCSO Date</label> <input
+												type="date" name="pcso_date" id="pcso_date"
+												class="form-control" required>
+
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">Contract Quantity</label> <input
+												type="number" name="contract_Qty" id="contract_Qty"
+												class="form-control" placeholder="Contract Quantity" required>
 										</div>
 
+
 										<div class="col-sm-4 form-group">
+											<label class="required">(Contract Number) BT- </label> <input
+												class="form-control" name="contactnumber"
+												id="contactnumber" type="number" placeholder="Contract Number"
+												required>
+										</div>
+									</div>
+									<div class="row">
+									<div class="col-sm-4 form-group">
 											<label class="required">Contract Date</label> <input
 												type="date" name="contract_date" id="contract_date"
 												class="form-control" required>
 
 										</div>
-
-										<div class="col-sm-4 form-group">
-											<label class="required">Full Contract Number</label> <input
-												class="form-control" name="full_contactnumber"
-												id="full_contactnumber" type="number" placeholder="Full Contract Number"
-												required>
-										</div>
-									</div>
-									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Crop Year</label> <select
 												name="crop_year" id="crop_year" class="form-control"
@@ -92,15 +100,41 @@
 												<option value="2022-2023">2022-2023</option>
 												</select>
 										</div>
-
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
-											<label class="required">Variety-Grade Wise Quantity</label> <input
-												type="number" name="variety_gradewisequantity"
-												id="variety_gradewisequantity" class="form-control" placeholder="Variety-Grade Wise Quantity" required>
-
+											
+											<label class="required">TD1</label>
+											<input type="number" name="grade1" id="grade1"
+												class="form-control"  />
+												</div>
+											<label class="required">TD2_W1</label>
+											<input type="number" name="grade2" id="grade2"
+												class="form-control"  />
+												<label class="required">TD3_W2_M1_B1</label>
+											<input type="number" name="grade3" id="grade3"
+												class="form-control"  />
+												<label class="required">TD4_W3_M2_B2</label>
+											<input type="number" name="grade4" id="grade4"
+												class="form-control"  />
+												<label class="required">TD5_W4_M3_B3</label>
+											<input type="number" name="grade5" id="grade5"
+												class="form-control"  />
+												<label class="required">TD6_W5_M4_B4</label>
+											<input type="number" name="grade6" id="grade6"
+												class="form-control"  />
+												<label class="required">TD7_W6_M5_B5</label>
+											<input type="number" name="grade7" id="grade7"
+												class="form-control"  />
+												<label class="required">TD8_W7_M6_B6</label>
+											<input type="number" name="grade8" id="grade8"
+												class="form-control"  />
+												<label class="required">W8</label>
+											<input type="number" name="grade9" id="grade9"
+												class="form-control"  />
 										</div>
 
-										<div class="col-sm-4 form-group">
+										<!-- <div class="col-sm-4 form-group">
 											<label class="required">Type of Delivery</label> <select type="text"
 												name="delibry_type" id="delibry_type" class="form-control"
 												required>
@@ -108,7 +142,7 @@
 												<option value="Mill Delivery">Mill Delivery</option>
 												<option value="Ex-Godown">Ex-Godown</option>
 												</select>
-										</div>
+										</div> -->
 									</div>
 									<div class="row">
 										<div class="form-group">

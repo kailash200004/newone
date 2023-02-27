@@ -171,7 +171,76 @@
        </div>
 
        <div class="sidenav-backdrop backdrop"></div>
+<script>
 
+//function  binno_check(){
+	 $("#binno").on("change", function(){
+	 var basis;
+		var jutevariety;
+	 var binNo = document.getElementById("binno").value;
+	$.ajax({
+		type:"GET",
+		url:"getbinno.obj",
+		data: {"binno" :binNo}, 
+		success:function(result){
+			//alert(result);
+			if(result != "null"){
+				//alert("yes")
+				 $('#basis option[value=""]').remove();
+				
+				const myArray= result.split("-");
+					basis =myArray[0];
+					jutevariety = myArray[1];
+					var htm = "<option disabled selected value>-Select-</option>";
+					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
+					$("#jutevariety").html(htm);
+					if (basis == "commercial")
+						 var basis_no = '2';
+					else if (basis == "msp"||basis == "MSP")
+						var basis_no = '1';
+					console.log(basis_no);
+					var html = '<option value="'+basis+'">'+basis+"</option>"			
+						$("#basis").html(html);
+					$.ajax({
+						type : "GET",
+						url : "findGradeOnJuteVariety.obj",
+						data : jQuery.param({
+							"variety" : jutevariety,
+							"basis_no" : basis_no
+						}),
+						success : function(result) {
+							
+							var data = jQuery.parseJSON(result);
+						//	alert(data);
+							var html = "<option disabled selected value>-Select-</option>";
+							for (var i = 0; i < data.length; i++) {
+								var sar = data[i]
+								html += "<option value="+sar+">"
+										+ data[i] + "</option>"
+							}
+							$("#jute_grade").html(html);
+
+						}
+					});
+		 				
+					
+					console.log(basis);
+					console.log(jutevariety);
+				}
+			else if (result == "null"){
+				//alert("else");
+				var htm = "<option disabled selected value>-Select-</option>";
+				htm += '<option value="msp">MSP</option>'
+				htm += '<option value="commercial">Commercial</option>'
+				$("#basis").html(htm);
+			}
+		
+		}
+	});
+	});
+	
+
+</script>
        <script>
               $(function() {
                      var dtToday = new Date();

@@ -237,7 +237,52 @@ $(binno).attr('maxlength',3);
 	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
 							$("#basis").html(html);
 	 					
-			 				
+	 					var msp_no;
+	 					if(basis=="msp" ||basis=="MSP"){
+	 						 msp_no=1;
+	 					
+	 					}
+	 					else if(basis=="commercial"){
+	 						 msp_no=2;
+	 					}
+	 					$.ajax({
+	 						type:"GET",
+	 						url:"findGradeOnJuteVariety.obj",
+	 						data: jQuery.param({ "variety": jutevariety, "basis_no" : msp_no}) ,
+	 						success:function(result){
+	 							data = jQuery.parseJSON(result);
+	 							count = data.length;
+	 							$('#lblName').text('Enter Grade Percentage');
+	 							
+	 							 if(jutevariety=='Bimli'){
+	 								$('#form2 input').remove();
+	 								$('#form2 label').remove();
+	 								
+	 							}else if(jutevariety=="Mesta"){
+	 								$('#form2 input').remove();
+	 								$('#form2 label').remove();
+	 							}
+	 							 else{
+	 								$('#form2 input ').remove();
+	 								$('#form2 label').remove();
+	 							} 
+	 							
+	 					        for (i=0;i<data.length;i++){
+	 					        	$('<div class="form-group">').appendTo('#form2');
+	 					        	$('<label/>').text(data[i]+" : ").appendTo('#form2');
+	 					       
+	 			 				    $('<input/>').attr({ type: 'number', id: 'grade'+i, name: 'test[]',value:'0', min:'0'  }).appendTo('#form2');
+	 			 				   
+	 			 				   $('</div>').appendTo('#form2');
+	 			 				   
+	 			 				  
+	 					        }
+	 					       
+	 					        
+	 			 				 } 
+	 				
+	 					 
+	 						});	
 	 					
 	 					console.log(basis);
 	 					console.log(jutevariety);
@@ -248,6 +293,8 @@ $(binno).attr('maxlength',3);
  					htm += '<option value="msp">MSP</option>'
  					htm += '<option value="commercial">Commercial</option>'
 					$("#basis").html(htm);
+ 					$("#form2").html("");
+ 					$("#jutevariety").html("-Select-");
 				}
 			
 			}

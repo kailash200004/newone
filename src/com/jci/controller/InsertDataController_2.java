@@ -64,44 +64,213 @@ public class InsertDataController_2 {
 	
 	
 	
-    @RequestMapping("entryofpcso")
-    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
-          ModelAndView mv = new ModelAndView("entryofpcso");
-          return mv;
-    }
-    
-    
-    @RequestMapping("savepcsoentry")
-    public ModelAndView saveUserMid(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-          try {
-          
-               String referenceno = request.getParameter("referenceno");
-               String referencedate = request.getParameter("referencedate");
-               String pcsodate = request.getParameter("pcsodate");
-               String millcode = request.getParameter("millcode");
-               String totalallocation = request.getParameter("totalallocation");
-               
-               //EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
-               EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
-               entryofpcso.setReference_no(referenceno);
-               SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
-               Date refdate = formatter1.parse(referencedate);
-               entryofpcso.setReference_date(refdate);
-               Date pcsodt = formatter1.parse(pcsodate);
-               entryofpcso.setPcso_date(pcsodt);
-               entryofpcso.setMill_code(millcode);
-               entryofpcso.setTotal_allocation(totalallocation);
-               
-               pcsoentryservice.create(entryofpcso);
-               redirectAttributes.addFlashAttribute("msg",
-                               "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-                                          + "");
-          } catch (Exception e) {
-               System.out.println(e);
-          }
-          return new ModelAndView(new RedirectView("entryofpcso.obj"));
-    }
+	  @RequestMapping("entryofpcso")
 
+	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
+
+	          ModelAndView mv = new ModelAndView("entryofpcso");
+
+	          final List<EntryofpcsoModel> allentryofpcsolist = (List<EntryofpcsoModel>)this.pcsoentryservice.getAlldata();
+
+	          mv.addObject("entryofpcsolist", (Object)allentryofpcsolist);
+
+	          return mv;
+
+	    }
+    
+	  @RequestMapping("entryofpcsosave")
+
+	    public ModelAndView saveUserMid(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+
+	         ModelAndView mv= new ModelAndView("entryofpcsosave");
+
+	          try {
+
+	            
+
+	                List<EntryofpcsoModel> ll = new ArrayList<>();
+
+	                int c = 0;
+
+	                int count = Integer.valueOf(request.getParameter("count"));
+
+	                
+
+	               String referenceno = request.getParameter("referenceno");
+
+	               String referencedate = request.getParameter("referencedate");
+
+	               String pcsodate = request.getParameter("pcsodate");
+
+	               System.out.println("referencedate=================="+referencedate);
+
+	              
+
+	               for(int i = 0; i<count; i++)
+
+	                {
+
+	               EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
+
+	                       String millcode = request.getParameter("millcode"+c);
+
+	                       String millname = request.getParameter("millname"+c);
+
+	                       String tallocation = request.getParameter("totalallocation"+c);
+
+	                       entryofpcso.setReference_no(referenceno);
+
+	                   SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+
+	                   Date refdate = formatter1.parse(referencedate);
+
+	                   entryofpcso.setReference_date(refdate);
+
+	                   Date pcsodt = formatter1.parse(pcsodate);
+
+	                   entryofpcso.setPcso_date(pcsodt);
+
+	                       if(tallocation != "" && tallocation != null )
+
+	                       {
+
+	                              entryofpcso.setMill_code(millcode);
+
+	                              entryofpcso.setMill_name(millname);
+
+	                              entryofpcso.setTotal_allocation(tallocation);
+
+	                              System.out.println("mill code ----"+millcode+"mill name----"+millname+"allocation-----"+tallocation);
+
+	                            
+
+	                              ll.add(entryofpcso);
+
+	                       }
+
+	                       
+
+	                       c++;
+
+	                }
+
+	               mv.addObject("entryofpcso", (Object)ll);
+
+	               mv.addObject("referencedate", (Object)referencedate);
+
+	               mv.addObject("pcsodate", (Object)pcsodate);
+
+	             
+
+	                //System.out.println(" ll========="+ ll);
+
+	             //   System.out.println(" entryofpcso========="+ entryofpcso);
+
+	               //pcsoentryservice.create(entryofpcso);
+
+	              // redirectAttributes.addFlashAttribute("msg", "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+	          } catch (Exception e) {
+
+	               System.out.println(e);
+
+	          }
+
+	          return mv;
+
+	    }
+
+	 
+
+	 
+
+	 
+    
+	/*
+	 * @RequestMapping("savepcsoentry") public ModelAndView
+	 * saveUserMid(HttpServletRequest request, RedirectAttributes
+	 * redirectAttributes) { try {
+	 * 
+	 * String referenceno = request.getParameter("referenceno"); String
+	 * referencedate = request.getParameter("referencedate"); String pcsodate =
+	 * request.getParameter("pcsodate"); String millcode =
+	 * request.getParameter("millcode"); String totalallocation =
+	 * request.getParameter("totalallocation");
+	 * 
+	 * //EntryofpcsoModel entryofpcso = new EntryofpcsoModel(); EntryofpcsoModel
+	 * entryofpcso = new EntryofpcsoModel();
+	 * entryofpcso.setReference_no(referenceno); SimpleDateFormat formatter1 = new
+	 * SimpleDateFormat("yyyy-MM-dd"); Date refdate =
+	 * formatter1.parse(referencedate); entryofpcso.setReference_date(refdate); Date
+	 * pcsodt = formatter1.parse(pcsodate); entryofpcso.setPcso_date(pcsodt);
+	 * entryofpcso.setMill_code(millcode);
+	 * entryofpcso.setTotal_allocation(totalallocation);
+	 * 
+	 * pcsoentryservice.create(entryofpcso);
+	 * redirectAttributes.addFlashAttribute("msg",
+	 * "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
+	 * + ""); } catch (Exception e) { System.out.println(e); } return new
+	 * ModelAndView(new RedirectView("entryofpcso.obj")); }
+	 */
+
+	  @RequestMapping("saveentryofpcsodata")
+	    public ModelAndView entryofpcsosave(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	          try {
+	        	
+	        	   int c = 0;
+	        	   int count = Integer.valueOf(request.getParameter("count"));
+	        	   Date date = new Date();
+	               String referenceno = request.getParameter("refno");
+	               String referencedate = request.getParameter("refdate");
+	               String pcsodate = request.getParameter("pcsodate");
+	               double sumoftotalallocation = Double.parseDouble(request.getParameter("sumoftotalallocation"));
+	               
+	               for(int i = 0; i<count; i++)
+	        	   {
+	            	   EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
+	        		   String millcode = request.getParameter("millcode"+c);
+	        		   String millname = request.getParameter("millname"+c);
+	        		   String tallocation = request.getParameter("totalallocation"+c);
+	        		   entryofpcso.setReference_no(referenceno);
+	                   SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+	                   Date refdate = formatter1.parse(referencedate);
+	                   entryofpcso.setReference_date(refdate);
+	                   Date pcsodt = formatter1.parse(pcsodate);
+	                   entryofpcso.setPcso_date(pcsodt);
+	                   String createddate = formatter1.format(date);
+	                   entryofpcso.setCreated_date(createddate);
+	        		   entryofpcso.setMill_code(millcode);
+	        		   entryofpcso.setMill_name(millname);
+	        		   entryofpcso.setTotal_allocation(tallocation);
+	        		   entryofpcso.setContract_generated(0);
+	        		   entryofpcso.setSumof_totalallocation(sumoftotalallocation);
+	        		   pcsoentryservice.create(entryofpcso);
+	        		   c++;
+	        		   
+	        	   }
+	              
+					
+					  redirectAttributes.addFlashAttribute("msg",
+					  "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
+					  + "");
+					 
+	               }
+	          catch (Exception e)
+	          {
+	               System.out.println(e);
+	               e.printStackTrace();
+	          }
+	          return new ModelAndView(new RedirectView("entryofpcso.obj"));
+	    }
+
+	    
+	  
+	/*
+	 * @RequestMapping("pcsolist") public ModelAndView pcsolist(HttpServletRequest
+	 * request) { ModelAndView mv = new ModelAndView("PCSO_List");
+	 * List<EntryofpcsoModel> pcso = pcsoService.getAll(); mv.addObject("pcsolist",
+	 * pcso); return mv; }
+	 */
 	@RequestMapping("userprivilige")
 	public ModelAndView userpriviligeModel(HttpServletRequest request)
 	{

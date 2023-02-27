@@ -1,7 +1,22 @@
+
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
+<%@page import="java.io.File"%>
+
+<%@page import="com.jci.model.EntryofpcsoModel"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+	
+	<style>
+	.myname {
+   width: 100%;
+  height: 32px;
+} 
+ 
+	</style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
@@ -14,6 +29,7 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+     <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
 </head>
 <body class="fixed-navbar">
     <div class="page-wrapper">
@@ -28,6 +44,12 @@
             <div class="page-heading">
                 <h1 class="page-title">Entry of PCSO (Production Control cum Supply Order)</h1>
             </div>
+            
+            	<%
+				
+						List<EntryofpcsoModel> allentryofpcsolist = (List<EntryofpcsoModel>) request.getAttribute("entryofpcsolist");	
+						
+				%>
             <div class="page-content fade-in-up">
                 <div class="row">
                     <div class="col-md-11">
@@ -36,7 +58,7 @@
 								<span>${msg}</span>
 							</div>
                             <div class="ibox-body">
-                                <form action="savepcsoentry.obj" method="POST">
+                                <form action="entryofpcsosave.obj" method="POST">
                                     <div class="row">
                                         <div class="col-sm-4 form-group">
                                             <label>Reference.No.</label>
@@ -52,19 +74,41 @@
 											<label>PCSO Date</label> 
 											<input class="form-control" type="date" name="pcsodate" placeholder="PCSO Date" required>
 										</div>
-                                        
-                                         <div class="col-sm-4 form-group">
-                                            <label>Mill Code</label>
-                                            <input class="form-control" type="text" name="millcode" placeholder="Mill Code" required>
+										 </div><br>
+                                        <div class="row">
+                                        <div class="col-sm-4 form-group">
+                                             <label>Mill Code</label>
                                         </div>
-                                        
-                                         <div class="col-sm-4 form-group">
-                                            <label>Total Allocation (M.Ton)</label>
-                                            <input class="form-control" type="number" name="totalallocation" placeholder="Total Allocation" required>
+                                        <div class="col-sm-4 form-group">
+                                             <label>Mill Name</label>
                                         </div>
-                                    </div>                                    
+                                        <div class="col-sm-4 form-group">
+                                             <label>Total allocation</label>
+                                        </div>
+							<% 
+							int mill = 0;
+							for(EntryofpcsoModel entryofpcsolist : allentryofpcsolist){
+								
+							%>
+						      <div class="col-sm-4 form-group">
+						      <input type="text" class="myname" name="millcode<%=mill%>" id="millcode<%=mill%>" value="<%=entryofpcsolist.getMill_code() %>" readonly>
+							  </div>
+							  <div class="col-sm-4 form-group">
+							  <input type="text" class="myname" name="millname<%=mill%>" id="millname<%=mill%>" value="<%=entryofpcsolist.getMill_name() %>" readonly>
+							  </div>
+							  <div class="col-sm-4 form-group">
+							  <input type="number" step = "any" class="myname" name="totalallocation<%=mill%>" id="totalallocation<%=mill%>">
+							  </div>
+							<% 
+							mill++;
+							
+								  }  
+							
+							%>
+								 <input name="count" id="count" type="hidden" value="<%=mill%>" >
+                                                                       
                                     <div class="form-group col-sm-12">
-                                        <button class="btn btn-default" type="submit">Submit</button>
+                                        <button class="btn btn-default" type="submit" id="submit">Next</button>
                                     </div>
                                 </form>
                             </div>
@@ -89,6 +133,17 @@
     <!-- PAGE LEVEL PLUGINS-->
     <!-- CORE SCRIPTS-->
     <script src="assets/js/app.min.js" type="text/javascript"></script>
+    
+      	<script type="text/javascript">
+	$(document).ready(function(){
+		 $("#submit").click(function(){
+			
+		 });
+	 });
+	
+	</script>
+			
+		 }
     <!-- PAGE LEVEL SCRIPTS-->
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.jci.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class PcsoentryServiceImpl implements PcsoentryService {
 		// TODO Auto-generated method stub
 		pcsoentrydao.create(entryofpcso);
 		
+	}
+
+	public List<EntryofpcsoModel> getAlldata() {
+		// TODO Auto-generated method stub
+			return pcsoentrydao.getAlldata();
 	}
 
 }

@@ -110,6 +110,15 @@ input[type="radio"] {
 												<option disabled selected value>-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
+												<option value="2021-2022">2023-2024</option>
+												<option value="2022-2023">2024-2025</option>
+												<option value="2021-2022">2025-2026</option>
+												<option value="2022-2023">2026-2027</option>
+												<option value="2021-2022">2027-2028</option>
+												<option value="2022-2023">2028-2029</option>
+												<option value="2021-2022">2029-2030</option>
+												<option value="2022-2023">2030-2031</option>
+												
 											</select>
 										</div>
 
@@ -148,10 +157,10 @@ input[type="radio"] {
 
 									<div class="row">
 										<div class="col-sm-4 form-group">
-											<label>Delibry Type</label> <select name="delibry_type"
+											<label>Delivery Type</label> <select name="delibry_type"
 												id="delibry_type" class="form-control" required>
 												<option value="">-Select-</option>
-												<option value="mill">Mill</option>
+												<option value="mill">Mill Delivery</option>
 												<option value="ex-godown">Ex-Godown</option>
 											</select>
 
@@ -170,8 +179,8 @@ input[type="radio"] {
 											<label>Jute Grade</label> 
 											<table>
 											<tr><th></th><th>GR1</th><th>GR2</th><th>GR3</th><th>GR4</th><th>GR5</th><th>GR6</th></tr>
-											<tr><td>Tossa</td><td><input type="text" name="tgr1" class="form-control" ></td><td><input type="text" name="tgr2" class="form-control"></td><td><input type="text" name="tgr3" class="form-control" ></td><td><input type="text" name="tgr4" class="form-control"></td><td><input type="text" name="tgr5" class="form-control"></td></tr>
-											<tr><td>White</td><td><input type="text" name="wgr1" class="form-control" ></td><td><input type="text" name="wgr2" class="form-control"></td><td><input type="text" name="wgr3" class="form-control" ></td><td><input type="text" name="wgr4" class="form-control"></td><td><input type="text" name="wgr5" class="form-control"></td></tr>
+											<tr><td>Tossa (New)</td><td><input type="text" name="tgr1" class="form-control" ></td><td><input type="text" name="tgr2" class="form-control"></td><td><input type="text" name="tgr3" class="form-control" ></td><td><input type="text" name="tgr4" class="form-control"></td><td><input type="text" name="tgr5" class="form-control"></td></tr>
+											<tr><td>White (New)</td><td><input type="text" name="wgr1" class="form-control" ></td><td><input type="text" name="wgr2" class="form-control"></td><td><input type="text" name="wgr3" class="form-control" ></td><td><input type="text" name="wgr4" class="form-control"></td><td><input type="text" name="wgr5" class="form-control"></td></tr>
 											<tr><td>Mesta</td><td><input type="text" name="mgr1" class="form-control"  ><td><input type="text" name="mgr2" class="form-control"></td><td><input type="text" name="mgr3" class="form-control" ></td><td><input type="text" name="mgr4" class="form-control"></td><td><input type="text" name="mgr5" class="form-control"></td><td><input type="text" name="mgr6" class="form-control"></td></tr>
 											<tr><td>Bimli</td><td><input type="text" name="bgr1" class="form-control" ></td><td><input type="text" name="bgr2" class="form-control"></td><td><input type="text" name="bgr3" class="form-control" ></td><td><input type="text" name="bgr4" class="form-control"></td><td><input type="text" name="bgr5" class="form-control"></td><td><input type="text" name="bgr6" class="form-control"></td></tr>
 											</table>

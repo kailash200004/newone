@@ -10,6 +10,6 @@ public interface PCSOServices {
 	public PCSOModel edit(int id);
 	public void delete(int id);
 	public PCSOModel find(int id);
-	public List <PCSOModel> getAll();
+	//public List <EntryofpcsoModel> getAll();
 	public boolean submitform(PCSOModel pcso);
 }

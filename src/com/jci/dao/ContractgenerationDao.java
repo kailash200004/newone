@@ -3,6 +3,7 @@ package com.jci.dao;
 import java.util.List;
 
 import com.jci.model.Contractgeneration;
+import com.jci.model.ContractgenerationMillWise;
 
 public interface ContractgenerationDao {
 

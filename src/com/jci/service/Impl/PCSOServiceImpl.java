@@ -40,12 +40,10 @@ public class PCSOServiceImpl implements PCSOServices{
 		return null;
 	}
 
-	@Override
-	public List<PCSOModel> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/*
+	 * @Override public List<EntryofpcsoModel> getAll() { // TODO Auto-generated
+	 * method stub return null; }
+	 */
 	@Override
 	public boolean submitform(PCSOModel pcso) {
 		// TODO Auto-generated method stub

@@ -169,16 +169,13 @@
 												<option value="2022-2023">2022-2023</option>
 											</select>
                                         </div>
-                                    	<div class="col-sm-4 form-group">
-                                             <label>Basis</label>
-                                             <span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis"
+                                        <div class="col-sm-4 form-group">
+											<label>Bin Number</label>
+											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
 												class="text-danger"> </span>
-                                        	 <select name="basis" id="basis" class="form-control" >
-                                        		<option value="">-Select-</option>
-                                        		<option value="msp">MSP</option>
-                                        		<option value="commercial">Commercial</option>
-                                        	</select>
-                                        	</div> 
+                                        	<input class="form-control" name="binno" id="binno"  type="number" placeholder="Bin Number" onblur="binno_check()" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
+										</div>
+                                    	
                                         	<div class="col-sm-4 form-group">
 											<label>Rate Slip No.</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errrateslipno" name="errrateslipno"
@@ -191,11 +188,15 @@
                                     <div class="row">
                                    
 										<div class="col-sm-4 form-group">
-											<label>Bin Number</label>
-											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
+                                             <label>Basis</label>
+                                             <span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis"
 												class="text-danger"> </span>
-                                        	<input class="form-control" name="binno" id="binno"  type="number" placeholder="Bin Number" onblur="binno_check()" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
-										</div>
+                                        	 <select name="basis" id="basis" class="form-control" >
+                                        		<option value="">-Select-</option>
+                                        		<option value="msp">MSP</option>
+                                        		<option value="commercial">Commercial</option>
+                                        	</select>
+                                        	</div> 
                                      <div class="col-sm-4 form-group">
 											<label>Date of Purchase</label> 
 											<span class="text-danger">* </span>&nbsp; <span id="errdatepurchase" name="errdatepurchase"
@@ -486,10 +487,55 @@
 	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
 							$("#basis").html(html);
 	 					
-			 				
+	 					var msp_no;
+	 					if(basis=="msp" ||basis=="MSP"){
+	 						 msp_no=1;
 	 					
-	 					console.log(basis);
-	 					console.log(jutevariety);
+	 					}
+	 					else if(basis=="commercial"){
+	 						 msp_no=2;
+	 					}
+	 					$.ajax({
+	 						type:"GET",
+	 						url:"findGradeOnJuteVariety.obj",
+	 						data: jQuery.param({ "variety": jutevariety, "basis_no" : msp_no}) ,
+	 						success:function(result){
+	 							data = jQuery.parseJSON(result);
+	 							count = data.length;
+	 							$('#lblName').text('Enter Grade Percentage');
+	 							
+	 							 if(jutevariety=='Bimli'){
+	 								$('#form2 input').remove();
+	 								$('#form2 label').remove();
+	 								
+	 							}else if(jutevariety=="Mesta"){
+	 								$('#form2 input').remove();
+	 								$('#form2 label').remove();
+	 							}
+	 							 else{
+	 								$('#form2 input ').remove();
+	 								$('#form2 label').remove();
+	 							} 
+	 							
+	 					        for (i=0;i<data.length;i++){
+	 					        	$('<div class="form-group">').appendTo('#form2');
+	 					        	$('<label/>').text(data[i]+" : ").appendTo('#form2');
+	 					       
+	 			 				    $('<input/>').attr({ type: 'number', id: 'grade'+i, name: 'test[]',value:'0', min:'0'  }).appendTo('#form2');
+	 			 				   
+	 			 				   $('</div>').appendTo('#form2');
+	 			 				   
+	 			 				  
+	 					        }
+	 					       
+	 					        
+	 			 				 } 
+	 				
+	 					 
+	 						});	
+	 					
+	 					//console.log(basis);
+	 					//console.log(jutevariety);
  					}
 				else if (result == "null"){
 					//alert("else");
@@ -497,6 +543,9 @@
  					htm += '<option value="msp">MSP</option>'
  					htm += '<option value="commercial">Commercial</option>'
 					$("#basis").html(htm);
+ 					$("#form2").html("");
+ 					htm = '<option value="">-Select-</option>'			
+					$("#jutevariety").html(htm);
 				}
 			
 			}

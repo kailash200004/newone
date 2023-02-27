@@ -15,7 +15,7 @@ public class Entryofoperationcost {
 	private int eooc_id;
 	private String crop_year;
 	private String date_of_effect;
-	private String operation_cost;
+
 	private String insurance;
 	private String freight;
 	private String provision_from_claim;
@@ -24,6 +24,7 @@ public class Entryofoperationcost {
 	private String margin;
 	private String opportunity_cost;
 	private String created_date;
+	private String operation_cost;
 	public Entryofoperationcost() {
 		
 	

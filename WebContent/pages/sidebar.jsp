@@ -164,11 +164,13 @@ body {
 					class="fa fa-angle-left arrow"></i></a>
 				<ul class="nav-2-level">
 					<li><a href="entryofpcso.obj">Entry of PCSO </a></li>
-					<li><a href="entry_derivativeprice.obj">Entry of
+					<li><a href="pcsolist.obj">PCSO List</a></li>
+							<li><a href="entry_derivativeprice.obj">Entry of
 							Derivative Price</a></li>
 					<li><a href="entryderivativepricelist.obj">Entry of
 							Derivative Price List</a></li>
-					<li><a href="contractgeneration.obj">Contract Generation</a></li>
+					<li><a href="contractgenerationPCSOWise.obj">Contract Generation PCSO Wise</a></li>
+					<li><a href="contractgenerationMillWise.obj">Contract Generation Mill Wise</a></li>
 					<li><a href="viewcontractgeneration.obj">Contract
 							Generation List</a></li>
 				</ul></li>

@@ -221,6 +221,8 @@ public class BatchDaoImpl implements BatchDao {
 
 		List<String> results = query.list();
 		System.out.println("binPurchaseMappingData===========-----  "+results);
+		
+		CalculateGainBasedonBinFromproc(CropYr,binNo);
 		return results;
 
 	}
