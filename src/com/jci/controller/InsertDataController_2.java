@@ -242,7 +242,8 @@ public class InsertDataController_2 {
 	        		   entryofpcso.setMill_code(millcode);
 	        		   entryofpcso.setMill_name(millname);
 	        		   entryofpcso.setTotal_allocation(tallocation);
-	        		   entryofpcso.setContract_generated(0);
+	        		   entryofpcso.setMillwise_contract(0);
+	        		   entryofpcso.setPcsowise_contract(0);
 	        		   entryofpcso.setSumof_totalallocation(sumoftotalallocation);
 	        		   pcsoentryservice.create(entryofpcso);
 	        		   c++;
@@ -263,14 +264,12 @@ public class InsertDataController_2 {
 	          return new ModelAndView(new RedirectView("entryofpcso.obj"));
 	    }
 
-	    
-	  
-	/*
-	 * @RequestMapping("pcsolist") public ModelAndView pcsolist(HttpServletRequest
-	 * request) { ModelAndView mv = new ModelAndView("PCSO_List");
-	 * List<EntryofpcsoModel> pcso = pcsoService.getAll(); mv.addObject("pcsolist",
-	 * pcso); return mv; }
-	 */
+	  @RequestMapping("pcsolist") public ModelAndView pcsolist(HttpServletRequest
+	  request) { 
+		  ModelAndView mv = new ModelAndView("PCSO_List");
+	  List<Date> pcso = pcsoentryservice.getAll(); 
+	  mv.addObject("pcsolist",pcso); return mv; }
+	 
 	@RequestMapping("userprivilige")
 	public ModelAndView userpriviligeModel(HttpServletRequest request)
 	{

@@ -1,19 +1,25 @@
 package com.jci.dao.impl;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.PcsoentryDao;
 import com.jci.model.EntryofpcsoModel;
+import com.jci.model.PcsoDateModel;
 
 @Transactional
 @Repository
@@ -52,7 +58,48 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 			entryofpcsoModel.setMill_name(millname);
 			ll.add(entryofpcsoModel);
 		}
-		System.out.println("=========== "+ll.toString());
+		//System.out.println("=========== "+ll.toString());
+		return ll;
+	}
+
+	@Override
+	public List<Date> getAll() {
+		List<Date> ll = new ArrayList<>();
+		List<Date> rows = new ArrayList<>();
+		String querystr = "  select  pcso_date FROM jcientryofpcso";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		rows = query.list();
+		System.out.println("pcsolist-----------------        "+rows);
+		for(Date row: rows) {
+			
+			
+			ll.add((Date)row);
+		}
+		
+		return ll;
+	}
+
+	@Override
+	public List<PcsoDateModel> pcso_details(String pcso) {
+		List<PcsoDateModel> ll = new ArrayList<>();
+		List<Object[]> rows = new ArrayList<>();
+		 
+		String querystr = "  select  * FROM jcientryofpcso where pcso_date='"+pcso+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		rows = query.list();
+		System.out.println("pcsolist-----------------        "+rows);
+		for(Object[] row: rows) {
+			 PcsoDateModel model = new PcsoDateModel();
+			 model.setMill_code((String)row[4]);
+			 model.setName((String)row[5]);
+			 model.setQty(((BigDecimal)row[6]).doubleValue());
+			ll.add(model);
+		}
+		
 		return ll;
 	}
 

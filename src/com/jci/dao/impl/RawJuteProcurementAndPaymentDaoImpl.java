@@ -301,7 +301,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	@Override
 	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status) {
 
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, tallySlipImg from jciprocurement where status ='"+status+"'";
+		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"'";
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 

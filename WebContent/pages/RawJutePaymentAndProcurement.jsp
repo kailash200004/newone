@@ -490,10 +490,16 @@
 	 					var msp_no;
 	 					if(basis=="msp" ||basis=="MSP"){
 	 						 msp_no=1;
-	 					
+	 						$ ("#amt").show();
+	 						  $('#garsatRate').prop('readonly', true);
+	 							$("#tdd").hide();
 	 					}
 	 					else if(basis=="commercial"){
 	 						 msp_no=2;
+	 						$("#tdd").show();
+	 						$('#garsatRate').prop('readonly', false);
+	 						$('#tdbaseprice').prop('readonly', true);
+	 						 
 	 					}
 	 					$.ajax({
 	 						type:"GET",

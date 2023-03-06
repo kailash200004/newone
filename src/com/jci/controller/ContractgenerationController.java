@@ -11,18 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.google.gson.Gson;
 import com.jci.model.Contractgeneration;
 import com.jci.model.ContractgenerationMillWise;
 import com.jci.model.EntryofpcsoModel;
 import com.jci.model.FarmerRegistrationModel;
 import com.jci.model.JbaModel;
+import com.jci.model.PcsoDateModel;
 import com.jci.service.ContractgenerationMillWiseService;
 import com.jci.service.ContractgenerationService;
 import com.jci.service.PCSOServices;
+import com.jci.service.PcsoentryService;
 
 @Controller
 public class ContractgenerationController {
@@ -35,13 +39,83 @@ public class ContractgenerationController {
 	
 	@Autowired
 	PCSOServices pcsoService;
+	
+	@Autowired
+	PcsoentryService pcsoentryservice;
 
 	@RequestMapping("contractgenerationPCSOWise")
 	public ModelAndView contractgeneration(HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("contractgeneration");
+		List<Date> pcso= pcsoentryservice.getAll(); 
+		mv.addObject("pcso", (Object)pcso);
 		return mv;
 	}
+	
+	@RequestMapping("savecontractgenerationPcsoWise")
+	public ModelAndView savecontractgenerationMillWise(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
+		try {
+			Contractgeneration contractgenerationPsco = new Contractgeneration();
+			String pcso_date= request.getParameter("pcso_date");
+			String contract_Qty=request.getParameter("contract_Qty");
+			String contactnumber=request.getParameter("contactnumber");
+			String contract_date=request.getParameter("contract_date");
+			String crop_year=request.getParameter("crop_year"); 
+			String grade1= request.getParameter("grade1");
+			String grade2= request.getParameter("grade2");
+			String grade3= request.getParameter("grade3");
+			String grade4= request.getParameter("grade4");
+			String grade5= request.getParameter("grade5");
+			String grade6= request.getParameter("grade6");
+			String grade7= request.getParameter("grade7");
+			String grade8= request.getParameter("grade8");
+			String grade9= request.getParameter("grade9");
+			
+			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd"); 
+			
+			if(!grade1.isEmpty())
+				contractgenerationPsco.setGrade1_TD1(Double.parseDouble(grade1));
+			if(!grade2.isEmpty())
+				contractgenerationPsco.setGrade2_TD2_W1(Double.parseDouble(grade2));
+			if(!grade3.isEmpty())
+				contractgenerationPsco.setGrade3_TD3_W2_M1_B1(Double.parseDouble(grade3));
+			if(!grade4.isEmpty())
+				contractgenerationPsco.setGrade4_TD4_W3_M2_B2(Double.parseDouble(grade4));
+			if(!grade5.isEmpty())
+				contractgenerationPsco.setGrade5_TD5_W4_M3_B3(Double.parseDouble(grade5));
+			if(!grade6.isEmpty())
+				contractgenerationPsco.setGrade6_TD6_W5_M4_B4(Double.parseDouble(grade6));
+			if(!grade7.isEmpty())
+				contractgenerationPsco.setGrade7_TD7_W6_M5_B5(Double.parseDouble(grade7));
+			if(!grade8.isEmpty())
+				contractgenerationPsco.setGrade8_TD8_W7_M6_B6(Double.parseDouble(grade8));
+			if(!grade9.isEmpty())
+				contractgenerationPsco.setGrade8_W8(Double.parseDouble(grade9));
+		    Date currentdate = new Date();
+            String formattedDate = df.format(currentdate);
+            contractgenerationPsco.setCreated_date(formattedDate);
+            contractgenerationPsco.setPcso_Date(pcso_date);
+            contractgenerationPsco.setContract_date(contract_date);
+            contractgenerationPsco.setCrop_year(crop_year);
+            contractgenerationPsco.setContract_Qty(contract_Qty);
+            contractgenerationPsco.setContactnumber(contactnumber);
+			this.contractgenerationService.create(contractgenerationPsco);
+
+			redirectAttributes.addFlashAttribute("msg",
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ModelAndView(new RedirectView("contractgenerationPCSOWise.obj"));
+	}
+	
+	
+	@RequestMapping("contractgenerationMillWise")
+	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
+		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
+		return mv;
+	}
+	
 	@RequestMapping("savecontractgenerationMillWise")
 	public ModelAndView saveEDC(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
@@ -97,13 +171,9 @@ public class ContractgenerationController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return new ModelAndView(new RedirectView("contractgenerationPCSOWise.obj"));
+		return new ModelAndView(new RedirectView("contractgenerationMillWise.obj"));
 	}
-	@RequestMapping("contractgenerationMillWise")
-	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
-		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
-		return mv;
-	}
+	
 	@RequestMapping("viewcontractgeneration")
 	public ModelAndView viewFarmerList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("contractgenerationlist");
@@ -171,5 +241,24 @@ public class ContractgenerationController {
 	 * + ""); } catch (Exception e) { System.out.println(e); } return new
 	 * ModelAndView(new RedirectView("editcontractgeneration.obj")); }
 	 */
-
+	 @ResponseBody
+	 @RequestMapping(value = "pcsoDates" , method =  RequestMethod.GET )
+     public List<Date> pcsoDates(final HttpServletRequest request){
+		 List<Date> pcso= pcsoentryservice.getAll(); 
+		 return pcso;
+	 }
+	 
+	
+	 @ResponseBody
+	 @RequestMapping(value = "pcso_details" , method =  RequestMethod.GET )
+     public String pcso_details(final HttpServletRequest request){
+		 System.out.println("date= "+request.getParameter("pcso"));
+		 String list = request.getParameter("list");
+		 System.out.println("list= "+list);
+		 List<PcsoDateModel> pcso= pcsoentryservice.pcso_details((String)request.getParameter("pcso"));
+		
+		Gson gson= new Gson();
+		
+		 return gson.toJson(pcso);
+	 }
 }

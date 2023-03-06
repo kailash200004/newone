@@ -197,16 +197,18 @@ body {
 
 					<li><a href="entryofoperationcost.obj">Entry of Operation
 							Cost</a></li>
-					<li><a href="entryofoperationcostlist.obj">Entry of
-							Operation Cost List</a></li>
+					
 
 					<li><a href="salespricecalculation.obj">Sale Price
 							Calculation</a></li>
-					<li><a href="salespricecalculationlist.obj">Sale Price
-							Calculation List</a></li>
-
+					
 					<li><a href="contractgenerationcommercial.obj">Contract
 							Generation Commercial</a></li>
+							<li><a href="salespricecalculationlist.obj">Sale Price
+							Calculation List</a></li>
+							
+							<li><a href="entryofoperationcostlist.obj">Entry of
+							Operation Cost List</a></li>
 					<li><a href="viewcontractgenerationcommercial.obj">Contract
 							Generation Commercial List</a></li>
 				</ul></li>

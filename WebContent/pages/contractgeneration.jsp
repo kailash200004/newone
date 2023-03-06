@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+
+
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.*"%>
+<%@page import="java.io.File"%>
+
 <html lang="en">
 
 <head>
@@ -37,7 +43,19 @@
 	color: red;
 }
 </style>
+
+
 </head>
+<script type="text/javascript">
+	var list = "";
+	var data1 = "";
+	var data2 = "";
+	var data3 = "";
+	var data4 = "";
+	var data5 = "";
+	const final_list = new Array();
+	var pcso1;
+	</script>
 
 <body class="fixed-navbar">
 	<div class="page-wrapper">
@@ -60,14 +78,75 @@
 
 							<div class="ibox-body">
 								<span>${msg}</span>
-								<form action="savecontractgeneration.obj" method="POST">
+								<form action="savecontractgenerationPcsoWise.obj" method="POST">
 									<div class="row">
 									
 									
 										<div class="col-sm-4 form-group">
-											<label class="required">PCSO Date</label> <input
-												type="date" name="pcso_date" id="pcso_date"
-												class="form-control" required>
+											<label class="required">PCSO Date</label> 
+											<% List<Date> pcso=(List<Date>)request.getAttribute("pcso");
+											%>
+											<select class="form-control pcso" name="pcso_date" id="pcso_date" required>
+											<% for(int i=0; i< pcso.size(); i++){ %>
+											<option value="<%= pcso.get(i) %>"><%=pcso.get(i) %>
+											</option>
+											<%} %>
+											</select>
+											
+
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">PCSO Date</label> 
+											<% List<Date> pcso2=(List<Date>)request.getAttribute("pcso");
+											%>
+											<select class="form-control  pcso" name="pcso2_date" id="pcso2_date" required>
+											<% for(int i=0; i< pcso2.size(); i++){ %>
+											<option value="<%= pcso2.get(i) %>"><%=pcso2.get(i) %>
+											</option>
+											<%} %>
+											</select>
+											
+
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">PCSO Date</label> 
+											<% List<Date> pcso3=(List<Date>)request.getAttribute("pcso");
+											%>
+											<select class="form-control pcso" name="pcso3_date" id="pcso3_date" required>
+											<% for(int i=0; i< pcso3.size(); i++){ %>
+											<option value="<%= pcso3.get(i) %>"><%=pcso3.get(i) %>
+											</option>
+											<%} %>
+											</select>
+											
+
+										</div>
+										</div>
+										<div class="row">
+										<div class="col-sm-4 form-group">
+											<label class="required">PCSO Date</label> 
+											<% List<Date> pcso4=(List<Date>)request.getAttribute("pcso");
+											%>
+											<select class="form-control pcso" name="pcso4_date" id="pcso4_date" required>
+											<% for(int i=0; i< pcso4.size(); i++){ %>
+											<option value="<%= pcso.get(i) %>"><%=pcso.get(i) %>
+											</option>
+											<%} %>
+											</select>
+											
+
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">PCSO Date</label> 
+											<% List<Date> pcso5=(List<Date>)request.getAttribute("pcso");
+											%>
+											<select class="form-control pcso" name="pcso5_date" id="pcso5_date" required>
+											<% for(int i=0; i< pcso5.size(); i++){ %>
+											<option value="<%= pcso5.get(i) %>"><%=pcso5.get(i) %>
+											</option>
+											<%} %>
+											</select>
+											
 
 										</div>
 										<div class="col-sm-4 form-group">
@@ -75,16 +154,16 @@
 												type="number" name="contract_Qty" id="contract_Qty"
 												class="form-control" placeholder="Contract Quantity" required>
 										</div>
-
-
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">(Contract Number) BT- </label> <input
 												class="form-control" name="contactnumber"
 												id="contactnumber" type="number" placeholder="Contract Number"
 												required>
-										</div>
+										
 									</div>
-									<div class="row">
+								
 									<div class="col-sm-4 form-group">
 											<label class="required">Contract Date</label> <input
 												type="date" name="contract_date" id="contract_date"
@@ -100,6 +179,21 @@
 												<option value="2022-2023">2022-2023</option>
 												</select>
 										</div>
+										</div>
+										<div class="row">
+										
+										<div id="list"></div>
+										<div id="list1"></div>
+										<div id="list2"></div>
+										<div id="list3"></div>
+										<div id="list4"></div>
+										
+										<!-- <table>
+										<tr>
+										<td>abc</td></tr>
+										</table>
+										</div> -->
+										
 										</div>
 										<div class="row">
 										<div class="col-sm-4 form-group">
@@ -167,4 +261,147 @@
 
 	<!-- PAGE LEVEL SCRIPTS-->
 </body>
+<script>	
+
+ $(".pcso").on("change", function() {
+	//alert("yes");
+	pcso1= this.value;
+	//alert(pcso);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso":pcso1, "list":list},
+		success: function(result){
+			alert(result);
+			var htmlTable='<table><tr><th></th></tr>';
+			   var data1= jQuery.parseJSON(result);
+			   htmlTable+='<tr><th>Mill code</th><th>Mill Name</th><th>Total allocation</th></tr>';
+			   for (i=0;i<data1.length;i++){
+				   
+				   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td></tr>';
+		        }
+			   htmlTable+='</table>';
+			   $("#list").html(htmlTable);
+			  
+		       
+			
+		}
+	})
+	
+}); 
+	
+  $("#pcso2_date").on("change", function() {
+	
+	var pcso2= this.value;
+	//alert(pcso);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso":pcso2 , "list":list},
+		success: function(result){
+			alert(result);
+			var htmlTable='<table><tr><th></th></tr>';
+			   var data2= jQuery.parseJSON(result);
+			  
+			   htmlTable+='<tr><th>Mill code</th><th>Mill Name</th><th>'+pcso1+'</th><th>'+pcso2+'</th></tr>';
+			   for (i=0;i<data2.length;i++){
+				   for (i=0;i<data1.length;i++){
+					   
+					 if(data1[i]["mill_code"]===data2[j]["mill_code"]){
+						 htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
+					 }
+				
+			  }
+			}
+			   htmlTable+='</table>';
+			   $("#list").html(htmlTable);
+			  
+		       
+			
+		}
+	})
+	
+  });
+	
+ $("#pcso3_date").on("change", function() {
+	
+	var pcso= this.value;
+	
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso":pcso, "list":list},
+		success: function(result){
+			
+			var htmlTable='<table><tr><th></th></tr>';
+			   var data3= jQuery.parseJSON(result);
+			   for (i=0;i<data3.length;i++){
+				   
+				   htmlTable+='<tr><th>'+data3[i]["name"]+'</th></tr>';
+		        }
+			   htmlTable+='</table>';
+			   $("#list2").html(htmlTable);
+			  
+		       
+			
+		}
+	})
+	
+}); 
+	
+ $("#pcso4_date").on("change", function() {
+	alert("yes");
+	var pcso= this.value;
+	//alert(pcso);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso":pcso},
+		success: function(result){
+			//alert(result);
+			var htmlTable='<table><tr><th></th></tr>';
+			   var data4= jQuery.parseJSON(result);
+			   for (i=0;i<data4.length;i++){
+				   
+				   htmlTable+='<tr><th>'+data4[i]+'</th></tr>';
+		        }
+			   htmlTable+='</table>';
+			   $("#list3").html(htmlTable);
+			  
+		       
+			
+		}
+	})
+	
+}); 
+
+ $("#pcso5_date").on("change", function() {
+	alert("yes");
+	var pcso= this.value;
+	
+	//alert(pcso);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso":pcso},
+		success: function(result){
+			//alert(result);
+			var htmlTable='<table><tr><th></th></tr>';
+			   var data5= jQuery.parseJSON(result);
+			   for (i=0;i<data5.length;i++){
+				   
+				   htmlTable+='<tr><th>'+data5[i]+'</th></tr>';
+		        }
+			   htmlTable+='</table>';
+			   $("#list4").html(htmlTable);
+			  
+		       
+			
+		}
+	})
+	
+}); 
+
+
+	</script>
 </html>

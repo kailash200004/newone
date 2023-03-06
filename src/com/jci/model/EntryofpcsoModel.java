@@ -40,8 +40,11 @@ public class EntryofpcsoModel {
 	@Column(name = "created_date")
 	private String created_date;
 	
-	@Column(name = "contract_generated")
-	private int contract_generated;
+	@Column(name = "millwise_contract")
+	private int millwise_contract;
+	
+	@Column(name = "pcsowise_contract")
+	private int pcsowise_contract;
 	
 	@Column(name = "sumof_totalallocation")
 	private double sumof_totalallocation;
@@ -119,29 +122,39 @@ public class EntryofpcsoModel {
 		this.created_date = created_date;
 	}
 
-	
-	
-	public int getContract_generated() {
-		return contract_generated;
+	public int getMillwise_contract() {
+		return millwise_contract;
 	}
 
-	public void setContract_generated(int contract_generated) {
-		this.contract_generated = contract_generated;
+	public void setMillwise_contract(int millwise_contract) {
+		this.millwise_contract = millwise_contract;
 	}
 
+	public int getPcsowise_contract() {
+		return pcsowise_contract;
+	}
 
+	public void setPcsowise_contract(int pcsowise_contract) {
+		this.pcsowise_contract = pcsowise_contract;
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		return "EntryofpcsoModel [pcsorefid=" + pcsorefid + ", reference_no=" + reference_no + ", reference_date="
 				+ reference_date + ", pcso_date=" + pcso_date + ", mill_code=" + mill_code + ", mill_name=" + mill_name
-				+ ", total_allocation=" + total_allocation + ", created_date=" + created_date + ", contract_generated="
-				+ contract_generated + ", sumof_totalallocation=" + sumof_totalallocation + "]";
+				+ ", total_allocation=" + total_allocation + ", created_date=" + created_date + ", millwise_contract="
+				+ millwise_contract + ", pcsowise_contract=" + pcsowise_contract + ", sumof_totalallocation="
+				+ sumof_totalallocation + "]";
 	}
 
+
+	
 	
 	public EntryofpcsoModel(int pcsorefid, String reference_no, Date reference_date, Date pcso_date, String mill_code,
-			String mill_name, String total_allocation, String created_date, int contract_generated,
-			double sumof_totalallocation) {
+			String mill_name, String total_allocation, String created_date, int millwise_contract,
+			int pcsowise_contract, double sumof_totalallocation) {
 		super();
 		this.pcsorefid = pcsorefid;
 		this.reference_no = reference_no;
@@ -151,7 +164,8 @@ public class EntryofpcsoModel {
 		this.mill_name = mill_name;
 		this.total_allocation = total_allocation;
 		this.created_date = created_date;
-		this.contract_generated = contract_generated;
+		this.millwise_contract = millwise_contract;
+		this.pcsowise_contract = pcsowise_contract;
 		this.sumof_totalallocation = sumof_totalallocation;
 	}
 

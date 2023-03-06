@@ -1,8 +1,10 @@
 package com.jci.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.jci.model.EntryofpcsoModel;
+import com.jci.model.PcsoDateModel;
 
 public interface PcsoentryDao {
 
@@ -10,4 +12,7 @@ public interface PcsoentryDao {
 
 	public List<EntryofpcsoModel> getAlldata();
 
+	List<Date> getAll();
+	
+	public List<PcsoDateModel> pcso_details(String pcso);
 }
