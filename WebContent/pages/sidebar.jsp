@@ -154,7 +154,10 @@ body {
 				
 					<li><a href="bin.obj">Batch Identification Number</a></li>
 					<li><a href="binList.obj">BIN List</a></li>
+					
 					<li><a href="binPurchasemapping.obj">BIN Purchase Mapping</a></li>
+					
+					<li><a href="fingain.obj">FinGainAnd WeightGain</a></li>
 					<li><a href="BinListfromDb.obj">BIN List</a></li>
 
 				</ul></li>

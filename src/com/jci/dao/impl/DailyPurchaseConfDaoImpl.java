@@ -45,6 +45,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		return find(id);
 	}
 
+	
 	@Override
 	public void delete(int id) {
 		String hql = "Delete from dbo.jcidpc where dpcid = '"+id+"' " ;

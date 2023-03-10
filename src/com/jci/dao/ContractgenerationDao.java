@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jci.model.Contractgeneration;
 import com.jci.model.ContractgenerationMillWise;
+import com.jci.model.UpdatedContractQtyDTO;
 
 public interface ContractgenerationDao {
 
@@ -17,6 +18,7 @@ public interface ContractgenerationDao {
 
 	public Contractgeneration find(int id);
 
-	public List<Contractgeneration> getAll();
+	public UpdatedContractQtyDTO getAll(int id);
 
+	public List<UpdatedContractQtyDTO> getAllMills();
 }

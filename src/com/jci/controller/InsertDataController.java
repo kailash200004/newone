@@ -3259,6 +3259,12 @@ public class InsertDataController
 		return gson.toJson(DaysCount);
 	}
 	
+	@RequestMapping(value="fingain")
+	public ModelAndView fingain() {
+		ModelAndView mv = new ModelAndView("FinGainAnd WeightGain");
+		return mv;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "calculateGainFromproc", method = RequestMethod.GET)
 	public String calculateGainFromproc(HttpServletRequest request) {
@@ -3281,7 +3287,7 @@ public class InsertDataController
 		
 		String FinGain = request.getParameter("FinGain");
 		String WeightGain = request.getParameter("WeightGain");
-		
+		System.out.println("FinYear = "+FinYear+" binNO = "+binNO+" FinGain = "+FinGain+" WeightGain = "+WeightGain);
 		Gson gson = new Gson();
 		
 		List<String> DaysCount = batchService.InsertTotalwithGaininBinTabledb(FinYear, binNO, FinGain, WeightGain);

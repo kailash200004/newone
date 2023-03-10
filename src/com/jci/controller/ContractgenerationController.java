@@ -23,6 +23,7 @@ import com.jci.model.EntryofpcsoModel;
 import com.jci.model.FarmerRegistrationModel;
 import com.jci.model.JbaModel;
 import com.jci.model.PcsoDateModel;
+import com.jci.model.UpdatedContractQtyDTO;
 import com.jci.service.ContractgenerationMillWiseService;
 import com.jci.service.ContractgenerationService;
 import com.jci.service.PCSOServices;
@@ -110,9 +111,12 @@ public class ContractgenerationController {
 	}
 	
 	
-	@RequestMapping("contractgenerationMillWise")
+	@RequestMapping(value= {"contractgenerationMillWise"},  method = { RequestMethod.GET })
 	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
+		  int id = Integer.parseInt((String) request.getParameter("id"));
 		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
+		  UpdatedContractQtyDTO updatedContractQtyDTO = contractgenerationService.getAll(id);
+		  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
 		return mv;
 	}
 	
@@ -174,15 +178,17 @@ public class ContractgenerationController {
 		return new ModelAndView(new RedirectView("contractgenerationMillWise.obj"));
 	}
 	
-	@RequestMapping("viewcontractgeneration")
-	public ModelAndView viewFarmerList(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("contractgenerationlist");
-		List<Contractgeneration> contractgeneration = contractgenerationService.getAll();
-		mv.addObject("contractgenerationlist", contractgeneration);
-		return mv;
-	}
-
 	
+	  @RequestMapping(value= {"viewcontractgeneration"},  method = { RequestMethod.GET }) 
+	  
+	  public ModelAndView viewFarmerList(HttpServletRequest request) 
+	  {
+		  ModelAndView mv = new  ModelAndView("contractgenerationlist"); 
+	
+	  List<UpdatedContractQtyDTO> updatedContractQtyDTO = contractgenerationService.getAllMills();
+	  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
+	  return mv; }
+	 
 
 	
 	@RequestMapping("contractgenerationDelete")

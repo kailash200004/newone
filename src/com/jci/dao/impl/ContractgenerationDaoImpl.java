@@ -1,15 +1,20 @@
 package com.jci.dao.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.jci.dao.ContractgenerationDao;
 import com.jci.model.Contractgeneration;
+import com.jci.model.UpdatedContractQtyDTO;
 
 
 @Transactional
@@ -54,12 +59,46 @@ public class ContractgenerationDaoImpl implements ContractgenerationDao {
 	}
 
 	@Override
-	public List<Contractgeneration> getAll() {
+	public UpdatedContractQtyDTO getAll(int id) {
+		UpdatedContractQtyDTO updatedContractQtyDTO = new UpdatedContractQtyDTO();
+		String querystr =   "select * FROM updated_contract_qty where id="+id;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> data = query.list();
+		for(Object[] cart : data) {
+			
+			updatedContractQtyDTO.setId((int)cart[0]);
+			updatedContractQtyDTO.setContract_date((String)cart[1]);
+			updatedContractQtyDTO.setContract_no((int)cart[2]);
+			updatedContractQtyDTO.setMill_code((String)cart[3]);
+			updatedContractQtyDTO.setUpdated_qty(((BigDecimal)cart[4]).doubleValue());
+			
+		}
+		return updatedContractQtyDTO;
+	
+	}
 
-		List<Contractgeneration> ll;
-		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(Contractgeneration.class);
-		ll = c.list();
-		return ll;
+	@Override
+	public List<UpdatedContractQtyDTO> getAllMills() {
+
+		List<UpdatedContractQtyDTO> result = new ArrayList<>();
+		String querystr =   "select * FROM updated_contract_qty";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> data = query.list();
+		for(Object[] cart : data) {
+			UpdatedContractQtyDTO updatedContractQtyDTO = new UpdatedContractQtyDTO();
+			updatedContractQtyDTO.setId((int)cart[0]);
+			updatedContractQtyDTO.setContract_date((String)cart[1]);
+			updatedContractQtyDTO.setContract_no((int)cart[2]);
+			updatedContractQtyDTO.setMill_code((String)cart[3]);
+			updatedContractQtyDTO.setUpdated_qty(((BigDecimal)cart[4]).doubleValue());
+			result.add(updatedContractQtyDTO);
+		}
+		return result;
+	
 	}
 
 }

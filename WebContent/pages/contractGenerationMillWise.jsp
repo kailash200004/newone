@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="com.jci.model.UpdatedContractQtyDTO"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
+<%@page import="java.io.File"%>
 <html lang="en">
 
 <head>
@@ -52,7 +56,9 @@
 			<div class="page-heading">
 				<h1 class="page-title">Contract Generation Mill Wise</h1>
 			</div>
-
+<%
+					UpdatedContractQtyDTO updatedContractQtyDTO = (UpdatedContractQtyDTO) request.getAttribute("UpdatedContractQtyDTO");	
+				%>
 			<div class="page-content fade-in-up">
 				<div class="row">
 					<div class="col-md-11">
@@ -66,13 +72,13 @@
 									
 										<div class="col-sm-4 form-group">
 											<label class="required">Full Contract Number</label> <input
-												type="date" name="fullcontractNo" id="fullcontractNo"
+												type="text" name="fullcontractNo" id="fullcontractNo" value="JCI/<%=updatedContractQtyDTO.getMill_code()  %>/<%=updatedContractQtyDTO.getFin_yr()  %>/BT-<%=updatedContractQtyDTO.getContract_no()  %>"
 												class="form-control" required>
 
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">Contract Quantity</label> <input
-												type="number" name="contract_Qty" id="contract_Qty"
+												type="number" name="contract_Qty" id="contract_Qty" value="<%=updatedContractQtyDTO.getUpdated_qty()  %>"
 												class="form-control" placeholder="Contract Quantity" required>
 										</div>
 										<div class="col-sm-4 form-group">

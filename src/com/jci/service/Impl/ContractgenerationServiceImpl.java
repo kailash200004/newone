@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jci.dao.ContractgenerationDao;
 import com.jci.model.Contractgeneration;
+import com.jci.model.UpdatedContractQtyDTO;
 import com.jci.service.ContractgenerationService;
 
 @Service
@@ -46,9 +47,15 @@ public class ContractgenerationServiceImpl implements ContractgenerationService 
 	}
 
 	@Override
-	public List<Contractgeneration> getAll() {
+	public UpdatedContractQtyDTO getAll(int id) {
 
-		return this.contractgenerationDao.getAll();
+		return this.contractgenerationDao.getAll(id);
+	}
+
+	@Override
+	public List<UpdatedContractQtyDTO> getAllMills() {
+		// TODO Auto-generated method stub
+		return this.contractgenerationDao.getAllMills();
 	}
 
 }

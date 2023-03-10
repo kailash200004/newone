@@ -263,7 +263,7 @@
 </body>
 <script>	
 
- $(".pcso").on("change", function() {
+ $("#pcso_date").on("change", function() {
 	//alert("yes");
 	pcso1= this.value;
 	//alert(pcso);
@@ -274,7 +274,7 @@
 		success: function(result){
 			alert(result);
 			var htmlTable='<table><tr><th></th></tr>';
-			   var data1= jQuery.parseJSON(result);
+			    data1= jQuery.parseJSON(result);
 			   htmlTable+='<tr><th>Mill code</th><th>Mill Name</th><th>Total allocation</th></tr>';
 			   for (i=0;i<data1.length;i++){
 				   
@@ -289,7 +289,8 @@
 	})
 	
 }); 
-	
+	</script>
+	<script>
   $("#pcso2_date").on("change", function() {
 	
 	var pcso2= this.value;
@@ -298,20 +299,39 @@
 		type:'GET',
 		url:'pcso_details.obj',
 		data:{"pcso":pcso2 , "list":list},
-		success: function(result){
-			alert(result);
-			var htmlTable='<table><tr><th></th></tr>';
-			   var data2= jQuery.parseJSON(result);
-			  
-			   htmlTable+='<tr><th>Mill code</th><th>Mill Name</th><th>'+pcso1+'</th><th>'+pcso2+'</th></tr>';
-			   for (i=0;i<data2.length;i++){
-				   for (i=0;i<data1.length;i++){
-					   
-					 if(data1[i]["mill_code"]===data2[j]["mill_code"]){
-						 htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
-					 }
+		success: function(d){
+			alert(d);
+			var htmlTable='<table border="3px"><tr><th></th></tr>';
+			var htmlTable1='<table border="3px"><tr><th>PCSO2</th></tr>';
+			   data2= jQuery.parseJSON(d);
+			  const same = [];
+			  var j;
+			  var i;
+			  var isame;
+			  var jsame;
+			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">'+pcso1+'</th><th style="text-align:center">'+pcso2+'</th><th>Total</th></tr>';
+			   for (i=0;i<data1.length;i++){
+				   for (j=0;j<data2.length;j++){
 				
-			  }
+					 if(data1[i]["mill_code"]==data2[j]["mill_code"]){
+						// same[i] = data2[j]["mill_code"];
+						isame=i;
+						jsame=j;
+						 htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td><td style="text-align:center">'+(data2[j]["qty"]+data1[i]["qty"])+'</td></tr>';
+					 
+					 
+					}
+					 	 
+		} 			
+				   for (j=0;j<data2.length;j++){
+						 if(data2[j]["mill_code"] != same[i])
+						 htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
+						
+				   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">0</td></tr>';
+					 
+				   
+			   	
+			   }
 			}
 			   htmlTable+='</table>';
 			   $("#list").html(htmlTable);
@@ -322,7 +342,8 @@
 	})
 	
   });
-	
+	</script>
+	<script>
  $("#pcso3_date").on("change", function() {
 	
 	var pcso= this.value;

@@ -1,4 +1,4 @@
-<%@page import="com.jci.model.Contractgeneration"%>
+<%@page import="com.jci.model.UpdatedContractQtyDTO"%>
 <%@page import="com.jci.model.EntryDerivativePrice"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -72,7 +72,7 @@ $(document).ready(function() {
                 <h1 class="page-title">Contract Generation List</h1>
             </div>
 				<%
-					List<Contractgeneration> contractgenerationList = (List<Contractgeneration>) request.getAttribute("contractgenerationlist");	
+					List<UpdatedContractQtyDTO> updatedContractQtyDTO = (List<UpdatedContractQtyDTO>) request.getAttribute("UpdatedContractQtyDTO");	
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
@@ -87,31 +87,25 @@ $(document).ready(function() {
 										<th>Sl.No</th>
 										<th>Contract Number</th>
 										<th>Contract Date</th>
-										<th>Full Contact Number</th>
-										<th>Crop Year</th>
-										<th>Variety Grade Wise Quantity</th>
-										<th>Delibry Type</th>
-										<th></th>
-										<th></th>
-																								
+										<th>Mill Code </th>
+										<th>Updated Qty </th>														
 								</thead>
 								<tbody>
 									<% 
 									int i= 1;
-									for(Contractgeneration cglist : contractgenerationList){
+									for(UpdatedContractQtyDTO cglist : updatedContractQtyDTO){
 									%>
 									<tr>
 										<td><%=i%></td>
 									
-										<td><%=cglist.getContract_number()%></td>
+										<td><%=cglist.getContract_no()%></td>
 										<td><%=cglist.getContract_date()%></td>
-				                    	<td><%=cglist.getFull_contactnumber()%></td>
-										<td><%=cglist.getCrop_year()%></td>
-										<td><%=cglist.getVariety_gradewisequantity()%></td>
-										<td><%=cglist.getDelibry_type()%></td>
-										<td><a href="editcontractgeneration.obj?contract_id=<%=cglist.getContract_id()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
-										<td><a  href="contractgenerationDelete.obj?contract_id=<%=cglist.getContract_id()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+				                    	<td><%=cglist.getMill_code()%></td>
+										<td><%=cglist.getUpdated_qty()%></td>
 										
+										<td><a href="contractgenerationMillWise.obj?id=<%=cglist.getId()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+									<!--	<td><a  href="contractgenerationDelete.obj?contract_id=<%=cglist.getId()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+								-->		
 									</tr>
 									<% 
 							i++; }
