@@ -2,6 +2,7 @@ package com.jci.dao.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -88,6 +89,16 @@ public class ContractgenerationDaoImpl implements ContractgenerationDao {
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> data = query.list();
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		int year;
+		if(month >= Calendar.APRIL) {
+			year=cal.get(Calendar.YEAR);
+		}
+		else {
+			year=cal.get(Calendar.YEAR)-1;
+		}
+		String finYr= year+"-"+(year+1);
 		for(Object[] cart : data) {
 			UpdatedContractQtyDTO updatedContractQtyDTO = new UpdatedContractQtyDTO();
 			updatedContractQtyDTO.setId((int)cart[0]);
@@ -95,6 +106,7 @@ public class ContractgenerationDaoImpl implements ContractgenerationDao {
 			updatedContractQtyDTO.setContract_no((int)cart[2]);
 			updatedContractQtyDTO.setMill_code((String)cart[3]);
 			updatedContractQtyDTO.setUpdated_qty(((BigDecimal)cart[4]).doubleValue());
+			updatedContractQtyDTO.setFin_yr(finYr);
 			result.add(updatedContractQtyDTO);
 		}
 		return result;

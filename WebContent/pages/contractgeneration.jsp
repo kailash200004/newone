@@ -171,8 +171,8 @@
 
 										</div>
 										<div class="col-sm-4 form-group">
-											<label class="required">Crop Year</label> <select
-												name="crop_year" id="crop_year" class="form-control"
+											<label class="required">Crop Year</label> 
+											<select name="crop_year" id="crop_year" class="form-control"
 												required>
 												<option disabled selected value>-Select-</option>
 												<option value="2021-2022">2021-2022</option>
