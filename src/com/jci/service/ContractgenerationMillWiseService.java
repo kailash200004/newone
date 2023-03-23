@@ -19,4 +19,8 @@ public interface ContractgenerationMillWiseService {
 	public ContractgenerationMillWise find(int id);
 
 	public List<ContractgenerationMillWise> getAll();
+	
+	public List<String> derivativePrice(String type, String contract_no);
+	
+	public List<String> percentage(String contract_no);
 }

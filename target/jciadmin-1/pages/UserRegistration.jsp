@@ -1,6 +1,5 @@
-<%@page import="com.jci.model.RoleMasterModel"%>
+<%@page import="com.jci.model.UserRoleModel"%>
 <%@page import="com.jci.model.ZoneModel"%>
-
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,16 +144,16 @@
 										</div>
 									</div>
 									<div class="row"><div class="col-sm-4 form-group">
-											<label class="required">User Type</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
+											<label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
 											<%
-												List<RoleMasterModel> roleList = (List<RoleMasterModel>) request.getAttribute("roleList");
+												List<UserRoleModel> roleList = (List<UserRoleModel>) request.getAttribute("roleList");
 											%>
-											<select class="form-control" name="usertype" id="usertype">
+											<select class="form-control" name="role" id="role">
 												<option disabled selected value>-Select-</option>
 												<%
-													for (RoleMasterModel roleLists : roleList) {
+													for (UserRoleModel roleLists : roleList) {
 												%>
-												<option value="<%=roleLists.getRefid()%>"><%=roleLists.getRolename()%></option>
+												<option value="<%=roleLists.getRole_Id()%>"><%=roleLists.getRole_name()%></option>
 												<%
 													}
 												%>
@@ -184,6 +183,14 @@
 										
 										</div>
 										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">User Type</label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
+											<select class="form-control" name="usertype" id="usertype" required>
+												<option disabled selected value>-Select-</option>
+												<option>Web Portal</option>
+												<option>Mobile Application</option>
+											</select>
+										</div>
 									</div>
 <!-- 									<div class="row">
 									<div class="form-group">
@@ -191,7 +198,7 @@
 									</div>
 									</div> -->
 														<div class="row">
-								<div class="col-sm-4 form-group">
+								<div class="col-sm-12 form-group">
 								 <input type="submit" value="Submit" class="btn btn-primary">
 									<!-- <input class="btn btn-primary" type="submit" id="enq_submit">Submit</button> -->
 								</div>

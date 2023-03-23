@@ -160,6 +160,61 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		}
 	}
 
+	@Override
+	public int getUserRoleId(int userId) {
+		//String querystr = "select regionId from jciumt where username ='"+userId+"'";
+		//Session session = sessionFactory.getCurrentSession();
+
+		String querystr = "select roleId from jciumt where refid ='"+userId+"'";
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Integer> userList = query.list();
+		
+			int roleId = userList.get(0);
+			return roleId;
+		
+		
+	}
+	@Override
+	public UserRegistrationModel getuserprofile(int refid) {
+		List<UserRegistrationModel> result = new ArrayList<>();
+		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode where a.refid='"+refid+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		//UserRegistrationModel ll = new UserRegistrationModel();
+		UserRegistrationModel userRegistration = new UserRegistrationModel();
+		for(Object[] row: rows) {
+			String username =  (String) row[0];
+			String employeeid =  (String) row[1];
+			String email =  (String) row[2];
+			String employeename =  (String) row[3];
+			String mobileno =  (String) row[4];
+			String centername =  (String) row[5];
+			String roname =  (String) row[6];
+			String zonename =  (String) row[7];
+			
+			//System.out.println("zonessssss"+ zonename);
+			userRegistration.setUsername(username);
+			userRegistration.setEmployeeid(employeeid);
+			userRegistration.setEmail(email);
+			userRegistration.setEmployeename(employeename);
+			userRegistration.setMobileno(mobileno);
+			userRegistration.setCentername(centername);
+			userRegistration.setRoname(roname);
+			userRegistration.setZonename(zonename);
+			//ll
+			//ll.add(userRegistration);
+			
+	}
+	
+		 return userRegistration;
+	
+	
+			
+			
+	}	
 
 	@Override
 	public String getdpc_center(String dpcIdd) {
@@ -170,9 +225,10 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		dpc_center= dpc_center.replace("[", "");
 		dpc_center= dpc_center.replace("]", "");
 			
-			System.out.println("dpccenter==============>>>>>>>>>>>>>>>>>>  "+dpc_center);
+			//System.out.println("dpccenter==============>>>>>>>>>>>>>>>>>>  "+dpc_center);
 			return dpc_center;
 	}	
+	
 	
 	@Override
 	public int getRefId(String email) {

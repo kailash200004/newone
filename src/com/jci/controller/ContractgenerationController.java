@@ -114,6 +114,7 @@ public class ContractgenerationController {
 	@RequestMapping(value= {"contractgenerationMillWise"},  method = { RequestMethod.GET })
 	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
 		  int id = Integer.parseInt((String) request.getParameter("id"));
+		  System.out.println(id);
 		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
 		  UpdatedContractQtyDTO updatedContractQtyDTO = contractgenerationService.getAll(id);
 		  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
@@ -257,14 +258,28 @@ public class ContractgenerationController {
 	
 	 @ResponseBody
 	 @RequestMapping(value = "pcso_details" , method =  RequestMethod.GET )
-     public String pcso_details(final HttpServletRequest request){
-		 System.out.println("date= "+request.getParameter("pcso"));
-		 String list = request.getParameter("list");
-		 System.out.println("list= "+list);
-		 List<PcsoDateModel> pcso= pcsoentryservice.pcso_details((String)request.getParameter("pcso"));
-		
-		Gson gson= new Gson();
-		
+     public String pcso_details(final HttpServletRequest request){		
+		 String list = request.getParameter("list");		
+		 List<PcsoDateModel> pcso= pcsoentryservice.pcso_details((String)request.getParameter("pcso"))	;	
+		Gson gson= new Gson();		
 		 return gson.toJson(pcso);
 	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "derivativePrice" , method =  RequestMethod.GET )
+     public String derivativePrice(final HttpServletRequest request){
+		 List<String> result= contractgenerationMillWiseService.derivativePrice((String)request.getParameter("type"),(String)request.getParameter("contract_no"));		
+		Gson gson= new Gson();		
+		 return gson.toJson(result);
+	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "percentage" , method =  RequestMethod.GET )
+     public String percentage(final HttpServletRequest request){			
+		 List<String> result= contractgenerationMillWiseService.percentage((String)request.getParameter("contract_no"));		
+		Gson gson= new Gson();
+		
+		 return gson.toJson(result);
+	 }
+	 
 }

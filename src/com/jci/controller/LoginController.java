@@ -21,6 +21,7 @@ public class LoginController {
 	@RequestMapping("index")
 	public ModelAndView login(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("index");
+	
 		return mv;
 	}
 
@@ -37,15 +38,14 @@ public class LoginController {
 			String usrname =  request.getParameter("email");
 			String password = request.getParameter("password");
 			String dpcId = request.getParameter("dpcId");
-
-
 			String ifExist =  userRegService.checkLogin(usrname, password);
 			int userId = userRegService.getUserId(usrname);
+			int roleId = userRegService.getUserRoleId(userId);
 			int refId = userRegService.getRefId(usrname);
 			String dpcIdd = userRegService.getUserDpc(userId);
 			String region = userRegService.getUserRegion(userId);
 			String dpc_center = userRegService.getdpc_center(dpcIdd);
-		//System.out.println("userId==============>>>>>>>>>>>>>>>>> "+userId);
+		//System.out.println("roleId==============>>>>>>>>>>>>>>>>> "+roleId);
 		//	int dpcId = userRegService.getUserDpc(userId);
 		//	 System.out.println("==============>>>>>>>>>>>>>>>>>  userId "+userId+" dpcId "+dpcId+" region "+ region);
 			session.setAttribute("userId", userId);
@@ -55,6 +55,7 @@ public class LoginController {
 			session.setAttribute("region", region);
 		//	session.setAttribute("dpcId", dpcId);
 			session.setAttribute("zone", dpcId);
+			session.setAttribute("roleId", roleId);
 			session.setAttribute("refId", refId);
 			session.setAttribute("dpc_center", dpc_center);
 			if(ifExist!=null)

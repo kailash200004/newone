@@ -51,4 +51,18 @@ public class ContractgenerationMillWiseServiceimpl implements Contractgeneration
 		return contractgenerationMillWiseDao.getAll();
 	}
 
+	@Override
+	public List<String> derivativePrice(String type, String contract_no) {
+		// TODO Auto-generated method stub
+		return contractgenerationMillWiseDao.derivativePrice(type, contract_no);
+	}
+
+	@Override
+	public List<String> percentage(String contract_no) {
+		// TODO Auto-generated method stub
+		return contractgenerationMillWiseDao.percentage(contract_no);
+	}
+	
+	
+
 }

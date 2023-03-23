@@ -86,4 +86,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 		return userRegistrationDao.getRefId(emailId);
 	}
+	
+	@Override
+	public int getUserRoleId(int userId) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getUserRoleId(userId);
+	}
+	
+	@Override
+	public UserRegistrationModel getuserprofile(int refid) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getuserprofile(refid);
+	}
+
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@page import="com.jci.model.UserRegistrationModel"%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,9 @@
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -30,6 +33,11 @@
                     <span class="brand-mini">AC</span>
                 </a>
             </div>
+                  	<%
+					UserRegistrationModel userProfile = (UserRegistrationModel)request.getAttribute("profile");
+					
+				%>
+            
             <div class="flexbox flex-1">
                 <!-- START TOP-LEFT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
@@ -48,7 +56,7 @@
                             <img src="./assets/img/admin-avatar.png">
                             <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a>
+                            <a class="dropdown-item" href="userProfile.obj"><i class="fa fa-user"></i>Profile</a>
                             <li class="dropdown-divider"></li>
                             <a class="dropdown-item" href="index.obj"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>

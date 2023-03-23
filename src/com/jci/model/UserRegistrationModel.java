@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "jciumt", schema = "dbo")
@@ -23,6 +24,15 @@ public class UserRegistrationModel {
 	@Column(name="password")
 	private String password;
 
+	@Transient
+	String centername;
+	
+	@Transient
+	String roname;
+
+	@Transient
+	String zonename;
+	
 	@Column(name="datelastchangepassword")
 	private Date datelastchangepassword;
 
@@ -73,6 +83,9 @@ public class UserRegistrationModel {
 
 	@Column (name = "roleId")
 	private int roleId;
+	
+	@Column(name="role")
+	private String role;
 
 	public UserRegistrationModel() {
 
@@ -90,41 +103,48 @@ public class UserRegistrationModel {
 		return dpcId;
 	}
 
+	public String getRole() {
+		return role;
+	}
 
-
-
-
-
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public void setDpcId(String dpcId) {
 		this.dpcId = dpcId;
 	}
+	public String getCentername() {
+		return centername;
+	}
 
+	public void setCentername(String centername) {
+		this.centername = centername;
+	}
 
+	public String getRoname() {
+		return roname;
+	}
 
+	public void setRoname(String roname) {
+		this.roname = roname;
+	}
 
+	public String getZonename() {
+		return zonename;
+	}
 
-
+	public void setZonename(String zonename) {
+		this.zonename = zonename;
+	}
 
 	public int getRoleId() {
 		return roleId;
 	}
 
-
-
-
-
-
-
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
-
-
-
-
-
-
 
 	public int getRefid() {
 		return refid;
@@ -261,6 +281,11 @@ public class UserRegistrationModel {
 
 	public void setRegion(String region) {
 		this.region = region;
+	}
+	
+	public void add(UserRegistrationModel userRegistration) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

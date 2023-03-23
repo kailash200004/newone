@@ -15,7 +15,7 @@ public class UpdatedContractQtyDTO {
 	private String contract_date;
 	
 	@Column(name="contract_no")
-	private int contract_no;
+	private String contract_no;
 	
 	@Column(name="mill_code")
 	private String mill_code;
@@ -48,11 +48,11 @@ public class UpdatedContractQtyDTO {
 		this.contract_date = contract_date;
 	}
 
-	public int getContract_no() {
+	public String getContract_no() {
 		return contract_no;
 	}
 
-	public void setContract_no(int contract_no) {
+	public void setContract_no(String contract_no) {
 		this.contract_no = contract_no;
 	}
 
@@ -101,7 +101,7 @@ public class UpdatedContractQtyDTO {
 		
 	}
 
-	public UpdatedContractQtyDTO(int id, String contract_date, int contract_no, String mill_code, double updated_qty,
+	public UpdatedContractQtyDTO(int id, String contract_date, String contract_no, String mill_code, double updated_qty,
 			int created_by, String created_on, String fin_yr) {
 		super();
 		this.id = id;

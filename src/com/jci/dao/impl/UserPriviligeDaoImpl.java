@@ -32,12 +32,12 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
 	}
 
 	public String getUserPrivilegeListing(int role_Id) {
-	       	   String querystr = "select action_permissions from jciuserprivilege where role_Id='"+role_Id+"'";
+	       	   String querystr = "select top 1 action_permissions from jciuserprivilege where role_Id='"+role_Id+"' order by created_date desc";
 	       	   Session session = sessionFactory.getCurrentSession();
 	       	   Transaction tx = session.beginTransaction();
 	       	   SQLQuery query = session.createSQLQuery(querystr);
 	       	   List<String> data = query.list();
-	       	System.out.println("action_permissions===>>>>> "+data);
+	      // 	System.out.println("action_permissions===>>>>> "+data);
 	       	if(!data.isEmpty()) {
 				return data.toString();
 				
@@ -62,7 +62,7 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
     	 for(Object[] o :data) {
     		 int id=(int)o[0];
     		 String a=(String)o[1];
-					System.out.println("action_name===>>>>> "+id+","+a);
+					//System.out.println("action_name===>>>>> "+id+","+a);
 					actions.add(id+":"+a);
     	 }
 		}

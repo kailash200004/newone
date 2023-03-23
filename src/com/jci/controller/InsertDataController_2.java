@@ -288,7 +288,7 @@ public class InsertDataController_2 {
 		try {
 		
 			String userrole = request.getParameter("userrole");
-			String useraction = request.getParameter("useraction");
+			String useraction = request.getParameter("action");
 			
 			
 			UserPriviligeModel userprivilige = new UserPriviligeModel();
@@ -296,7 +296,7 @@ public class InsertDataController_2 {
 			userprivilige.setRole_Id(userrole);
 			userprivilige.setAction_permissions(useraction);
 			Date d2 = new Date();
-			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 			String formattedDate1 = dd.format(d2);
 			userprivilige.setCreated_date(formattedDate1);
 
@@ -310,7 +310,7 @@ public class InsertDataController_2 {
 	
 		} catch (Exception e)
 		{
-			System.out.println("++++++++++++++"+e);
+			//System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
 		return new ModelAndView(new RedirectView("userprivilige.obj"));
@@ -344,13 +344,13 @@ public class InsertDataController_2 {
 		try {
 		
 			String rolename = request.getParameter("rolename");
-			String usertype = request.getParameter("usertype");
+			//String usertype = request.getParameter("usertype");
 			
 			
 			UserRoleModel userrole = new UserRoleModel();
 			
 			userrole.setRole_name(rolename);
-			userrole.setUser_type(usertype);
+			userrole.setUser_type("1");
 			Date d2 = new Date();
 			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 			String formattedDate1 = dd.format(d2);
@@ -369,7 +369,7 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
-		return new ModelAndView(new RedirectView("userrole.obj"));
+		return new ModelAndView(new RedirectView("viewuserrole.obj"));
 	}
 	
 	@RequestMapping("useraction")
@@ -494,7 +494,7 @@ public class InsertDataController_2 {
 		     paymentinstrument.setGenerateddate(currdate);
 			
 			this.paymentinstrumentservice.create(paymentinstrument);
-			System.out.println(paymentinstrument);
+			//System.out.println(paymentinstrument);
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
@@ -584,7 +584,7 @@ public class InsertDataController_2 {
 			System.out.println("sldkfjdlf"+hodispatch);
 			
 			this.hodispatchservice.create(hodispatch);
-			System.out.println(hodispatch);
+			//System.out.println(hodispatch);
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
@@ -702,8 +702,8 @@ public class InsertDataController_2 {
 
 		
 			this.uploadrecieptservice.create(uploadrecipt);
-			System.out.println("uploadrecipt=============="+uploadrecipt);
-			System.out.println(uploadrecipt);
+			//System.out.println("uploadrecipt=============="+uploadrecipt);
+			//System.out.println(uploadrecipt);
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
@@ -737,7 +737,7 @@ public class InsertDataController_2 {
 		 
 		try {
 			list= userpriviligeservice.getuserpriviligeajaxallData();
-				System.out.println("allList============-------------   "+list);
+				//System.out.println("allList============-------------   "+list);
 				
 			}
 		

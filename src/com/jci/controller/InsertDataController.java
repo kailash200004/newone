@@ -18,10 +18,12 @@ import com.jci.model.VerifyFarmerModel;
 import com.jci.model.FarmerRegModelDTO;
 import com.jci.model.MarketArrivalModel;
 import com.jci.model.UserRegistrationModel;
+import com.jci.model.UserRoleModel;
 import com.jci.model.RoleMasterModel;
 import com.jci.model.ZoneModel;
 import com.jci.model.ProgOfAssortmentModel;
 import com.jci.model.DailyPurchaseConfModel;
+import com.jci.model.PurchaseCenterModel;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import com.jci.model.RawJuteProcurementAndPayment;
@@ -88,6 +90,8 @@ import com.jci.service.RopeMakingService;
 import com.jci.service.AddOrganisationService;
 import com.jci.service.FarmerRegistrationService;
 import com.jci.service.UserRegistrationService;
+import com.jci.service.UserRoleService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jci.service.PincodeService;
 import org.apache.log4j.Logger;
@@ -167,6 +171,8 @@ public class InsertDataController
     PoliceStationService PoliceStationService;
     @Autowired
     BalePrepareService balePrepareService;
+    @Autowired
+	UserRoleService userroleService;
     
     public InsertDataController() {
         this.slipUpload = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlip\\";
@@ -1300,10 +1306,10 @@ public class InsertDataController
     @RequestMapping({ "UserRegistration" })
     public ModelAndView userRegistration(final HttpServletRequest request) {
         final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
-        final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
+        final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
         final ModelAndView mv = new ModelAndView("UserRegistration");
         mv.addObject("zoneList", (Object)zoneList);
-        mv.addObject("roleList", (Object)roleList);
+        mv.addObject("roleList", (Object)alluserroleList);
         return mv;
     }
     
@@ -1326,6 +1332,7 @@ public class InsertDataController
             final String mobileno = request.getParameter("mobile");
             final String password = request.getParameter("password");
             final String usertype = request.getParameter("usertype");
+            final String role = request.getParameter("role");
             final String duplicateEmail = request.getParameter("emailCheck");
             final boolean duplicatemail = Boolean.parseBoolean(duplicateEmail);
             final UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -1343,10 +1350,11 @@ public class InsertDataController
                 userRegistration.setRegion(region);
                 userRegistration.setZone(zone);
             }
+            userRegistration.setRole(usertype);
             userRegistration.setRegistrationdate(new Date());
             userRegistration.setUsername(email);
             userRegistration.setUsertype(usertype);
-            userRegistration.setRoleId(Integer.parseInt(usertype));
+            userRegistration.setRoleId(Integer.parseInt(role));
             final boolean emailNotExist = this.UserRegistrationService.validateEmail(email);
             if (emailNotExist) {
                 this.UserRegistrationService.create(userRegistration);
@@ -3316,6 +3324,59 @@ public class InsertDataController
         final String result = rawJuteProcurAndPayService.getbinno(request.getParameter("binno"));
         return result;
     }
+    @ResponseBody
+	@RequestMapping(value = "userProfile", method = RequestMethod.GET)
+	public ModelAndView getuserprofile(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("userProfile");
+		int refid = (int) request.getSession().getAttribute("userId");
+		//String refid =	(String) request.getSession().getAttribute("refid");
+	System.out.println("refidssss"+ refid);
+		//int refidInt = Integer.parseInt(refid);
+		//System.out.println("intrefis"+ refidInt);
+		UserRegistrationModel profile=userRegService.getuserprofile(refid);
+		mv.addObject("profile", profile);
+		return mv;
+	}
+	
+
+	@RequestMapping("updateuserProfile")
+	public ModelAndView updateUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
+	{
+		ModelAndView mv = new ModelAndView("edituserProfile");
+		try {
+			
+			UserRegistrationModel userRegistration = new UserRegistrationModel();
+			String id = request.getParameter("id");
+			System.out.println(id);
+				String username =  request.getParameter("username"); //username
+				//System.out.println("=--================="+ username);  // employeeid
+				String employeeid = request.getParameter("employeeid");
+				//System.out.println("666666666666666666"+ employeeid);
+				String email = request.getParameter("emailAddress");
+				String employeename =  request.getParameter("employeename");
+				String mobileno =  request.getParameter("mobile");
+				String centername = request.getParameter("centerordpc");;
+				String roname =  request.getParameter("region");
+				String zonename = request.getParameter("zone");
+				//System.out.println("zonessssss"+ zonename);
+				userRegistration.setRefid(Integer.parseInt(id));
+				userRegistration.setUsername(username);
+				userRegistration.setEmployeeid(employeeid);
+				userRegistration.setEmail(email);
+				userRegistration.setEmployeename(employeename);
+				userRegistration.setMobileno(mobileno);
+				userRegistration.setCentername(centername);
+				userRegistration.setRoname(roname);
+				userRegistration.setZonename(zonename);
+				userRegService.create(userRegistration);
+			    redirectAttributes.addFlashAttribute("msg",
+				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
+			return new ModelAndView(new RedirectView("userProfile.obj"));
+		} catch(Exception e){
+			System.out.println("Error in update user profile"+ e.getStackTrace());
+		}
+		return mv;
+	}
 
     static {
         InsertDataController.count = 0;
