@@ -3295,7 +3295,7 @@ public class InsertDataController
 		
 		String FinGain = request.getParameter("FinGain");
 		String WeightGain = request.getParameter("WeightGain");
-		System.out.println("FinYear = "+FinYear+" binNO = "+binNO+" FinGain = "+FinGain+" WeightGain = "+WeightGain);
+		//System.out.println("FinYear = "+FinYear+" binNO = "+binNO+" FinGain = "+FinGain+" WeightGain = "+WeightGain);
 		Gson gson = new Gson();
 		
 		List<String> DaysCount = batchService.InsertTotalwithGaininBinTabledb(FinYear, binNO, FinGain, WeightGain);
@@ -3329,10 +3329,6 @@ public class InsertDataController
 	public ModelAndView getuserprofile(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("userProfile");
 		int refid = (int) request.getSession().getAttribute("userId");
-		//String refid =	(String) request.getSession().getAttribute("refid");
-	System.out.println("refidssss"+ refid);
-		//int refidInt = Integer.parseInt(refid);
-		//System.out.println("intrefis"+ refidInt);
 		UserRegistrationModel profile=userRegService.getuserprofile(refid);
 		mv.addObject("profile", profile);
 		return mv;
@@ -3343,23 +3339,34 @@ public class InsertDataController
 	public ModelAndView updateUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
 	{
 		ModelAndView mv = new ModelAndView("edituserProfile");
+		int refid = (int) request.getSession().getAttribute("userId");
+		UserRegistrationModel profile=userRegService.getuserprofile(refid);
+		 final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
+	        final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
+	        mv.addObject("zoneList", (Object)zoneList);
+	        mv.addObject("roleList", (Object)alluserroleList);
+		mv.addObject("profile", profile);
+		return mv;
+	}
+	
+	@RequestMapping("updatesaveuserProfile")
+	public ModelAndView updatesaveUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
+	{
+		ModelAndView mv = new ModelAndView("edituserProfile");
+		System.out.println("=============yes");
 		try {
-			
+			int refid = (int) request.getSession().getAttribute("userId");
+			UserRegistrationModel profile=userRegService.getuserprofile(refid);
 			UserRegistrationModel userRegistration = new UserRegistrationModel();
-			String id = request.getParameter("id");
-			System.out.println(id);
-				String username =  request.getParameter("username"); //username
-				//System.out.println("=--================="+ username);  // employeeid
+				String username =  request.getParameter("username"); 
 				String employeeid = request.getParameter("employeeid");
-				//System.out.println("666666666666666666"+ employeeid);
 				String email = request.getParameter("emailAddress");
 				String employeename =  request.getParameter("employeename");
 				String mobileno =  request.getParameter("mobile");
-				String centername = request.getParameter("centerordpc");;
+				String centername = request.getParameter("centerordpc");
 				String roname =  request.getParameter("region");
 				String zonename = request.getParameter("zone");
-				//System.out.println("zonessssss"+ zonename);
-				userRegistration.setRefid(Integer.parseInt(id));
+				userRegistration.setRefid(refid);
 				userRegistration.setUsername(username);
 				userRegistration.setEmployeeid(employeeid);
 				userRegistration.setEmail(email);
@@ -3368,6 +3375,16 @@ public class InsertDataController
 				userRegistration.setCentername(centername);
 				userRegistration.setRoname(roname);
 				userRegistration.setZonename(zonename);
+				userRegistration.setIs_active(1);
+				userRegistration.setUsertype(profile.getUsertype());
+				userRegistration.setPassword(profile.getPassword());
+		        userRegistration.setRegistrationdate(profile.getRegistrationdate());
+				userRegistration.setDpcId(profile.getDpcId());
+		        userRegistration.setDatelastchangepassword(profile.getDatelastchangepassword());
+		        userRegistration.setHo(profile.getHo());
+		        userRegistration.setIpaddress(profile.getIpaddress());
+		        userRegistration.setRoleId(profile.getRoleId());
+				
 				userRegService.create(userRegistration);
 			    redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
@@ -3377,7 +3394,25 @@ public class InsertDataController
 		}
 		return mv;
 	}
-
+	
+	  @RequestMapping({ "bnaDelete" })
+    public ModelAndView bnaDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+		  final ModelAndView mv = new ModelAndView("viewUserRegistration");
+        try {
+            final String id = request.getParameter("id");
+            this.UserRegistrationService.delete(Integer.parseInt(id));
+            final List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>)this.UserRegistrationService.getAll();
+            mv.addObject("UserRegistrationList", (Object)allUserRegistration);
+            redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n");
+            return new ModelAndView((View)new RedirectView("viewUserRegistration.obj"));
+          
+            
+            
+        }
+        catch (Exception ex) {
+            return mv;
+        }
+    }
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);

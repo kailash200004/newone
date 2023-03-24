@@ -29,7 +29,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 
 	@Override
 	public void create(UserRegistrationModel userRegistration) {
-		currentSession().save(userRegistration);
+		currentSession().saveOrUpdate(userRegistration);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	@Override
 	public void delete(int id) {
 		UserRegistrationModel farmerRegistrationModel = new UserRegistrationModel();
-		String hql = "Delete from dbo.bna where id = '"+id+"' " ;
+		String hql = "Delete from jciumt where refid = '"+id+"' " ;
 		this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 	}
 

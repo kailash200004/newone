@@ -63,7 +63,7 @@
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
-                   
+                    <span>${msg}</span>
                     <div class="ibox-body">
                     <div class="scrollmenu">
                          <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
@@ -73,11 +73,11 @@
 									<tr>
 										<th>Sl.No</th>
 										<th>EMS Name</th>
-										<!-- <th>Is HO</th>
+										<th>Is HO</th>
 									    <th>Zone</th>
 										<th>Region</th> 										
 										<th>DPC</th>
-									    <th>User Type</th> -->
+									    <th>User Type</th> 
 										<th>EMP ID</th>
 									    <th>EMP Name</th>
 										<th>EMP Email</th> 										
@@ -95,12 +95,12 @@
 										<td><%=i%></td>
 										<td><%=UserRegistrationList.getUsername()%></td>
 				
-				                    	<%-- <td><%=UserRegistrationList.getHo()%>
+				                    	<td><%=UserRegistrationList.getHo()%>
 				                    
 										<td><%=UserRegistrationList.getZone()%></td>
 										<td><%=UserRegistrationList.getRegion()%></td> 
 										<td><%=UserRegistrationList.getDpcId()%></td>
-									    <td><%=UserRegistrationList.getUsertype()%></td> --%>
+									    <td><%=UserRegistrationList.getUsertype()%></td>
 				                    	<td><%=UserRegistrationList.getEmployeeid()%></td>
 										<td><%=UserRegistrationList.getEmployeename()%></td>
 										<td><%=UserRegistrationList.getEmail()%></td> 
@@ -109,8 +109,8 @@
 						
 										
 										
-										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>
-	<td><a href="bnaDelete.obj?id=<%=bnaList.getId()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> --%>
+										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td> --%>
+	<td><a href="bnaDelete.obj?id=<%=UserRegistrationList.getRefid()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td>
  						 
 
 									</tr>
