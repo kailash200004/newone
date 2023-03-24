@@ -82,7 +82,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
-                   
+                    <span>${msg}</span>
                     <div class="ibox-body">
                         <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
 

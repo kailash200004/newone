@@ -143,7 +143,8 @@
 											</select>
 										</div>
 									</div>
-									<div class="row"><div class="col-sm-4 form-group">
+									<div class="row">
+									<div class="col-sm-4 form-group">
 											<label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
 											<%
 												List<UserRoleModel> roleList = (List<UserRoleModel>) request.getAttribute("roleList");
