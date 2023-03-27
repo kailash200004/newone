@@ -82,6 +82,8 @@
 									    <th>EMP Name</th>
 										<th>EMP Email</th> 										
 										<th>Mobile Number</th>
+										<th>Role</th>
+										
 							</tr>
 								</thead>
 								<tbody>
@@ -97,19 +99,23 @@
 				
 				                    	<td><%=UserRegistrationList.getHo()%>
 				                    
-										<td><%=UserRegistrationList.getZone()%></td>
-										<td><%=UserRegistrationList.getRegion()%></td> 
-										<td><%=UserRegistrationList.getDpcId()%></td>
+										<td><%=UserRegistrationList.getZonename()%></td>
+										<td><%=UserRegistrationList.getRoname()%></td> 
+										<td><%=UserRegistrationList.getCentername()%></td>
 									    <td><%=UserRegistrationList.getUsertype()%></td>
 				                    	<td><%=UserRegistrationList.getEmployeeid()%></td>
 										<td><%=UserRegistrationList.getEmployeename()%></td>
 										<td><%=UserRegistrationList.getEmail()%></td> 
 										<td><%=UserRegistrationList.getMobileno()%></td>
+										
+										<td><%=UserRegistrationList.getRoles_name()%></td>
+							
 						
 						
 										
 										
 										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td> --%>
+										<td><a href="updateuserProfile.obj?id=<%=UserRegistrationList.getRefid()%>"><button class="btn btn-default" type="button">Edit</button></a></td>
 	<td><a href="bnaDelete.obj?id=<%=UserRegistrationList.getRefid()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td>
  						 
 

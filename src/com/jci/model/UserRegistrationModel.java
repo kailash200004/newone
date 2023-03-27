@@ -86,6 +86,9 @@ public class UserRegistrationModel {
 	
 	@Column(name="role")
 	private String role;
+	
+	@Column(name="roles_name")
+	private String roles_name;
 
 	public UserRegistrationModel() {
 
@@ -288,24 +291,38 @@ public class UserRegistrationModel {
 		
 	}
 
+	public String getRoles_name() {
+		return roles_name;
+	}
+
+	public void setRoles_name(String roles_name) {
+		this.roles_name = roles_name;
+	}
+
 	@Override
 	public String toString() {
 		return "UserRegistrationModel [refid=" + refid + ", username=" + username + ", password=" + password
+				+ ", centername=" + centername + ", roname=" + roname + ", zonename=" + zonename
 				+ ", datelastchangepassword=" + datelastchangepassword + ", updatedat=" + updatedat
 				+ ", registrationdate=" + registrationdate + ", lockedchances=" + lockedchances + ", is_active="
 				+ is_active + ", ipaddress=" + ipaddress + ", ho=" + ho + ", zone=" + zone + ", region=" + region
 				+ ", dpcId=" + dpcId + ", employeeid=" + employeeid + ", employeename=" + employeename + ", email="
-				+ email + ", mobileno=" + mobileno + ", usertype=" + usertype + ", roleId=" + roleId + "]";
+				+ email + ", mobileno=" + mobileno + ", usertype=" + usertype + ", roleId=" + roleId + ", role=" + role
+				+ ", roles_name=" + roles_name + "]";
 	}
 
-	public UserRegistrationModel(int refid, String username, String password, Date datelastchangepassword,
-			Date updatedat, Date registrationdate, int lockedchances, int is_active, String ipaddress, int ho,
-			String zone, String region, String dpcId, String employeeid, String employeename, String email,
-			String mobileno, String usertype, int roleId) {
+	public UserRegistrationModel(int refid, String username, String password, String centername, String roname,
+			String zonename, Date datelastchangepassword, Date updatedat, Date registrationdate, int lockedchances,
+			int is_active, String ipaddress, int ho, String zone, String region, String dpcId, String employeeid,
+			String employeename, String email, String mobileno, String usertype, int roleId, String role,
+			String roles_name) {
 		super();
 		this.refid = refid;
 		this.username = username;
 		this.password = password;
+		this.centername = centername;
+		this.roname = roname;
+		this.zonename = zonename;
 		this.datelastchangepassword = datelastchangepassword;
 		this.updatedat = updatedat;
 		this.registrationdate = registrationdate;
@@ -322,12 +339,8 @@ public class UserRegistrationModel {
 		this.mobileno = mobileno;
 		this.usertype = usertype;
 		this.roleId = roleId;
+		this.role = role;
+		this.roles_name = roles_name;
 	}
-
-
-
-
-
-
 
 }

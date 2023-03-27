@@ -29,7 +29,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 
 	@Override
 	public void create(UserRegistrationModel userRegistration) {
-		currentSession().saveOrUpdate(userRegistration);
+		currentSession().save(userRegistration);
 	}
 
 	@Override
@@ -54,13 +54,51 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		return (UserRegistrationModel) currentSession().get(UserRegistrationModel.class, id);
 	}
 
+	/*
+	 * @Override public List<UserRegistrationModel> getAll() { Criteria c =
+	 * this.sessionFactory.getCurrentSession().createCriteria(UserRegistrationModel.
+	 * class); List<UserRegistrationModel> ll=c.list(); return ll; }
+	 */
+	
 	@Override
 	public List<UserRegistrationModel> getAll() {
-		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(UserRegistrationModel.class);
-		List<UserRegistrationModel> ll=c.list();
-		return ll;
+		List<UserRegistrationModel> result = new ArrayList<>();
+		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		//UserRegistrationModel ll = new UserRegistrationModel();
+		UserRegistrationModel userRegistration = new UserRegistrationModel();
+		for(Object[] row: rows) {
+			String username =  (String) row[0];
+			String employeeid =  (String) row[1];
+			String email =  (String) row[2];
+			String employeename =  (String) row[3];
+			String mobileno =  (String) row[4];
+			String centername =  (String) row[5];
+			String roname =  (String) row[6];
+			String zonename =  (String) row[7];
+			int id =  (int) row[8];
+			String rolename =  (String) row[9];
+			String usertype =  (String) row[10];
+			//System.out.println("zonessssss"+ zonename);
+			userRegistration.setRefid(id);;
+			userRegistration.setUsername(username);
+			userRegistration.setEmployeeid(employeeid);
+			userRegistration.setEmail(email);
+			userRegistration.setEmployeename(employeename);
+			userRegistration.setMobileno(mobileno);
+			userRegistration.setCentername(centername);
+			userRegistration.setRoname(roname);
+			userRegistration.setZonename(zonename);
+			userRegistration.setRoles_name(rolename);
+			userRegistration.setUsertype(usertype);
+			result.add(userRegistration);
+		}
+		return result;
 	}
-
+	
 	@Override
 	public boolean submitform(UserRegistrationModel userRegistration) {
 		this.sessionFactory.getCurrentSession().save(userRegistration);
@@ -178,7 +216,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	@Override
 	public UserRegistrationModel getuserprofile(int refid) {
 		List<UserRegistrationModel> result = new ArrayList<>();
-		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode where a.refid='"+refid+"'";
+		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.refid='"+refid+"'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -194,8 +232,10 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			String centername =  (String) row[5];
 			String roname =  (String) row[6];
 			String zonename =  (String) row[7];
-			
+			int id =  (int) row[8];
+			String rolename =  (String) row[9];
 			//System.out.println("zonessssss"+ zonename);
+			userRegistration.setRefid(id);;
 			userRegistration.setUsername(username);
 			userRegistration.setEmployeeid(employeeid);
 			userRegistration.setEmail(email);
@@ -204,8 +244,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			userRegistration.setCentername(centername);
 			userRegistration.setRoname(roname);
 			userRegistration.setZonename(zonename);
-			//ll
-			//ll.add(userRegistration);
+			userRegistration.setRoles_name(rolename);
 			
 	}
 	

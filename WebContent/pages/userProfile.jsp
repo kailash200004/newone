@@ -86,9 +86,9 @@
                                              <label>Employee Name</label>
                                         <input class="form-control"  name="employeename" type="text" placeholder="Employee Name" id="employeename" value="<%=userProfile.getEmployeename()%>" readonly>
                                         </div>
-                                        <div class="col-sm-4 form-group">
-											<label>Center Name</label>
-                                        	<input class="form-control"  name="centerordpc" id="centerordpc" placeholder="Rope made"  value="<%=userProfile.getCentername()%>" readonly>
+                                       <div class="col-sm-4 form-group">
+											<label>Zone Name</label>
+                                        	<input class="form-control"  name="zone" id="zone" placeholder="Rope balance" value = "<%=userProfile.getZonename()%>" readonly>
 										</div>
 													<div class="col-sm-4 form-group">
 											<label>Region Name</label>
@@ -98,20 +98,18 @@
 										</div>
 										   <div class="row">
 							
-
-                                 
- 										<div class="col-sm-4 form-group">
-											<label>Zone Name</label>
-                                        	<input class="form-control"  name="zone" id="zone" placeholder="Rope balance" value = "<%=userProfile.getZonename()%>" readonly>
+										 <div class="col-sm-4 form-group">
+											<label>Center Name</label>
+                                        	<input class="form-control"  name="centerordpc" id="centerordpc" placeholder="Rope made"  value="<%=userProfile.getCentername()%>" readonly>
 										</div>
-										
 											<div class="col-sm-4 form-group">
 											<label>Mobile Number</label>
                                         	<input class="form-control"  id="mobile" name="mobile" placeholder="Mobile Number" value = "<%=userProfile.getMobileno()%>" readonly>
 										</div>
+										
                                     </div>                                    
                                     <div class="form-group col-sm-12">
-                                     <a href="updateuserProfile.obj?id=<%=(int)session.getAttribute("refId")%>"><button class="btn btn-default" type="button">Edit</button></a>
+                                     <a href="editprofile.obj?id=<%=(int)session.getAttribute("refId")%>"><button class="btn btn-default" type="button">Edit</button></a>
                                     </div>
                                 </form>
                             </div>
