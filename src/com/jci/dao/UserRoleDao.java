@@ -11,7 +11,7 @@ import com.jci.model.UserRoleModel;
 public interface UserRoleDao {
 
 	void create(UserRoleModel userrole);
-
+	public boolean validateRole(String role);
 	public List<UserRoleModel> getAll();
 
 }

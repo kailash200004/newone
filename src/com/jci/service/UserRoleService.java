@@ -9,7 +9,7 @@ import com.jci.model.UserRoleModel;
 public interface UserRoleService {
 
 	void create(UserRoleModel userrole);
-
+	boolean validateRole(String role);
 	List<UserRoleModel> getAll();
 
 }

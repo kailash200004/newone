@@ -59,7 +59,8 @@
             </div>
 				
 				<%
-					List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>) request.getAttribute("UserRegistrationList");	
+					List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>) request.getAttribute("UserRegistrationList");
+			
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">

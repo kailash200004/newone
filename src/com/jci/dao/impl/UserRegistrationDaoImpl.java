@@ -68,9 +68,10 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> rows = query.list();
-		//UserRegistrationModel ll = new UserRegistrationModel();
-		UserRegistrationModel userRegistration = new UserRegistrationModel();
+		System.out.println(rows);
+	
 		for(Object[] row: rows) {
+			UserRegistrationModel userRegistration = new UserRegistrationModel();
 			String username =  (String) row[0];
 			String employeeid =  (String) row[1];
 			String email =  (String) row[2];

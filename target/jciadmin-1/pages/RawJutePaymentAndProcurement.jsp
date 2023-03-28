@@ -360,15 +360,12 @@
 	<script>
 	function length_rateSlip(){
 		var lengthr= $("#rateslipno").val();
-		console.log("lengthr "+lengthr);
 		if(lengthr.length< 3) {
-			console.log("lengthr if "+lengthr.length);
 			 document.getElementById("errorrateslipno").innerHTML = "Rate Slip Number should be between 3-6 digits!";
 			 $("#errorrateslipno").show();
 			  return false;
 		}
 		else if(lengthr.length >=3 || lengthr.length <= 6)  {
-			console.log("lengthr else "+lengthr.length);
 	   			  $("#errorrateslipno").hide();
 		}
 		
@@ -378,15 +375,12 @@
 	<script>
 	function length_tallySlip(){
 		var lengthr= $("#tallyslipno").val();
-		//console.log("lengthr "+lengthr);
 		if(lengthr.length< 3) {
-			//console.log("lengthr if "+lengthr.length);
 			 document.getElementById("errortallyslipno").innerHTML = "Tally Slip Number should be between 3-6 digits!";
 			 $("#errortallyslipno").show();
 			  return false;
 		}
 		else if(lengthr.length >=3 || lengthr.length <= 6)  {
-			//console.log("lengthr else "+lengthr.length);
 	   			  $("#errortallyslipno").hide();
 		}
 		

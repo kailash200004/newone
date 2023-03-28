@@ -111,14 +111,14 @@ $(document).ready(function () {
                         <div class="ibox">
                              <span>${msg}</span>
                             <div class="ibox-body">
-                                <form action="saveuserrole.obj" method="POST" name="myForm" onsubmit="return validate()">
+                                <form action="saveuserrole.obj" method="POST" name="myForm"  onsubmit="return validateRole(this)">
                                     <div class="row">
                                         <div class="col-sm-4 form-group">
                                            <!--  <label>JBA Date</label>
                                             <input class="form-control" type="date" name="datejba" placeholder="JaBA Date" required> -->
                                         
-                                           <label>Role Name</label>
-                                         <input type="text" name="rolename" id="rolename" class="form-control" placeholder="Role Name"  required/>
+                                           <label>Role Name</label><span id="errrole" name="errrole" class="text-danger"></span>
+                                         <input type="text" name="rolename" id="rolename" onkeyup="return validateRole();" class="form-control" placeholder="Role Name"  required/>
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
                                    
@@ -150,6 +150,35 @@ $(document).ready(function () {
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
+   <script>
+
+function validateRole(form) {
+	var rolename = document.getElementById("rolename").value;
+	var data;
+		 $.ajax({
+				type:"GET",
+				url:"validateRole.obj",
+				data:{"rolename":rolename},
+				success:function(result){
+					data =result;
+			
+				
+				if (data === 'false'){
+				document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Role already Exists!";
+				return false;
+				}
+				else if (data === 'true'){
+					document.getElementById("errrole").innerHTML = "";
+					return true;
+				}
+				
+				}	
+		  }); 
+		 
+		 
+}
+	
+</script>
    
 </body>
 </html>

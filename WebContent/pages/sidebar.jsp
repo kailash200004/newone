@@ -77,8 +77,8 @@ body {
 					<li class="nav-label" data-pre="1" id="o1"><a href="userrole.obj" ><b><i class="sidebar-item-icon fa fa-th-large"></i>Add Role</b></a></li>
 					<li class="nav-label" data-pre="2" id="o2"><a href="useraction.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Add Action</b></a></li>
 					<li class="nav-label" data-pre="3" id="o3"><a href="userprivilige.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Add Privileges</b></a></li>
-					<li class="nav-label" data-pre="4" id="o4"><a href="viewuserrole.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View User Role</b></a></li>
-					
+					<!-- <li class="nav-label" data-pre="4" id="o4"><a href="viewuserrole.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View User Role</b></a></li>
+					 -->
 				</ul><!-- </li> -->
 				
 			<!-- <li><a href="javascript:void(0);;"><i class="sidebar-item-icon fa fa-th-large"></i> <span
@@ -150,7 +150,7 @@ body {
 					<li  data-pre="30" id="o30"><a href="binList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN List</b></a></li>				
 					<li  data-pre="31" id="o31"><a href="binPurchasemapping.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN Purchase Mapping</b></a></li>				
 					<li  data-pre="32" id="o32"><a href="fingain.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>FinGainAnd WeightGain</b></a></li>
-					<li  data-pre="33" id="o33"><a href="BinListfromDb.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN List</b></a></li>
+					<li  data-pre="33" id="o33"><a href="BinListfromDb.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN Gain List</b></a></li>
 
 				</ul><!-- </li> -->
 				<!-- <li><a href="javascript:void(0);"><i
@@ -206,7 +206,7 @@ $(document).ready(function(){
 
 		$(document).ready(function() {
 		for(var i=1; i<51;i++){
-			$("#o"+i).show();
+			$("#o"+i).hide();
 			
 			}
 			//alert("yes");

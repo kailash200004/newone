@@ -3,6 +3,7 @@ com\jci\dao\impl\UserRoleDaoImpl.class
 com\jci\model\JbaModel.class
 com\jci\service\PurchaseCenterService.class
 com\jci\model\Contractgenerationcommercial.class
+com\jci\model\PcsoDateModel.class
 com\jci\dao\SalepricecalculationDao.class
 com\jci\dao\impl\PcsoentryDaoImpl.class
 com\jci\service\ProgOfAssortmentService.class
@@ -166,6 +167,7 @@ com\jci\dao\VerifyFarmerDao.class
 com\jci\model\RopeMakingModel.class
 com\jci\service\ZoneService.class
 com\jci\service\BatchIdentificationService.class
+com\jci\model\UpdatedContractQtyDTO.class
 com\jci\dao\BatchDao.class
 com\jci\service\Impl\PaymentInstrumentServiceImpl.class
 com\jci\dao\impl\RulingMarketDaoImpl.class

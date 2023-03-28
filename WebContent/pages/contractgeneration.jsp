@@ -304,42 +304,59 @@
 			var htmlTable='<table border="3px"><tr><th></th></tr>';
 			var htmlTable1='<table border="3px"><tr><th>PCSO2</th></tr>';
 			   data2= jQuery.parseJSON(d);
-			  const same = [];
+			  const isame = [];
+			  const jsame = [];
 			  var j;
 			  var i;
-			  var isame;
-			  var jsame;
+			 
 			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">'+pcso1+'</th><th style="text-align:center">'+pcso2+'</th><th>Total</th></tr>';
 			   for (i=0;i<data1.length;i++){
 				   for (j=0;j<data2.length;j++){
 				
 					 if(data1[i]["mill_code"]==data2[j]["mill_code"]){
 						// same[i] = data2[j]["mill_code"];
-						isame=i;
-						jsame=j;
+						isame.push(j);
+						jsame.push(i);
 						 htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td><td style="text-align:center">'+(data2[j]["qty"]+data1[i]["qty"])+'</td></tr>';
 					 
 					 
 					}
-					 	 
+			 }	 	 
 		} 			
-				   for (j=0;j<data2.length;j++){
-						 if(data2[j]["mill_code"] != same[i])
-						 htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
+				   for (i=0;i<data2.length;i++){
+					   for (var z=0; z<isame.length; z++){
+						   if(i == z){
+							   continue;
+						   }
+						   else{
+							   htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
+					  		 }
+					   }
+				   }
+					   for (j=0;j<data1.length;j++){
+						   for (var z=0; z<jsame.length; z++){
+							   if(j == z){
+								   continue;
+							   }
+							   else{
+								 
+								   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">0</td></tr>';	
+							   }
+						   }
 						
-				   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">0</td></tr>';
+					   }
 					 
 				   
 			   	
-			   }
-			}
+			   
+			
 			   htmlTable+='</table>';
 			   $("#list").html(htmlTable);
 			  
-		       
+		}   
 			
-		}
-	})
+		
+	});
 	
   });
 	</script>

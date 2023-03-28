@@ -66,12 +66,11 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 	public List<Date> getAll() {
 		List<Date> ll = new ArrayList<>();
 		List<Date> rows = new ArrayList<>();
-		String querystr = "  select  pcso_date FROM jcientryofpcso";
+		String querystr = "  select  distinct(pcso_date) FROM jcientryofpcso";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		rows = query.list();
-		System.out.println("pcsolist-----------------        "+rows);
 		for(Date row: rows) {
 			
 			
@@ -91,7 +90,6 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		rows = query.list();
-		System.out.println("pcsolist-----------------        "+rows);
 		for(Object[] row: rows) {
 			 PcsoDateModel model = new PcsoDateModel();
 			 model.setMill_code((String)row[4]);

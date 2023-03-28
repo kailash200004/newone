@@ -102,7 +102,7 @@ public class InsertDataController_2 {
 
 	               String pcsodate = request.getParameter("pcsodate");
 
-	               System.out.println("referencedate=================="+referencedate);
+	              
 
 	              
 
@@ -140,8 +140,7 @@ public class InsertDataController_2 {
 
 	                              entryofpcso.setTotal_allocation(tallocation);
 
-	                              System.out.println("mill code ----"+millcode+"mill name----"+millname+"allocation-----"+tallocation);
-
+	                             
 	                            
 
 	                              ll.add(entryofpcso);
@@ -344,26 +343,16 @@ public class InsertDataController_2 {
 		try {
 		
 			String rolename = request.getParameter("rolename");
-			//String usertype = request.getParameter("usertype");
-			
-			
-			UserRoleModel userrole = new UserRoleModel();
-			
+			UserRoleModel userrole = new UserRoleModel();			
 			userrole.setRole_name(rolename);
 			userrole.setUser_type("1");
 			Date d2 = new Date();
 			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 			String formattedDate1 = dd.format(d2);
-			userrole.setCreated_date(formattedDate1);
-
-			
-			
-			this.userroleService.create(userrole);
-			
+			userrole.setCreated_date(formattedDate1);			
+			this.userroleService.create(userrole);		
 			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
-								+ "");
-	
+						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"+ "");
 		} catch (Exception e)
 		{
 			System.out.println("++++++++++++++"+e);
@@ -371,6 +360,14 @@ public class InsertDataController_2 {
 		}
 		return new ModelAndView(new RedirectView("viewuserrole.obj"));
 	}
+	
+	 @ResponseBody
+	    @RequestMapping(value = { "validateRole" }, method = { RequestMethod.GET })
+	    public String validateRole(final HttpServletRequest request) {
+	        final Gson gson = new Gson();
+	        return this.userroleService.validateRole(request.getParameter("rolename")) + "";
+	    }
+	    
 	
 	@RequestMapping("useraction")
 	public ModelAndView useractionModel(HttpServletRequest request)

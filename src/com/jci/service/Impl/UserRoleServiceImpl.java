@@ -25,4 +25,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userroledao.getAll();
 	}
 
+	@Override
+	public boolean validateRole(String role) {
+		return userroledao.validateRole(role);
+	}
+
 }
