@@ -143,8 +143,6 @@
 												<option id="Female" value="Female">Female</option>
 											</select>
 										</div>
-									</div>
-									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Address</label> &nbsp;&nbsp;&nbsp; <span
 												id="errAdd" name="errAdd" class="text-danger"> </span> <input
@@ -152,6 +150,9 @@
 												placeholder="Farmer Address" id="F_ADDRESS"
 												onkeyup="deleteErrorMsg()">
 										</div>
+									</div>
+									<div class="row">
+										
 										<!-- <div class="col-sm-4 form-group">
 											<label class="required">Address 2</label> &nbsp;&nbsp;&nbsp;
 											<span id="errAdds" name="errAdds" class="text-danger">
@@ -196,7 +197,8 @@
 												
 											</select>
 										</div>
-										
+										</div>
+										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Police Station</label> &nbsp;
 											<span id="errPoliceStation"name="errPoliceStation" class="text-danger"> </span>
@@ -211,10 +213,8 @@
 										<div class="col-sm-4 form-group">
 											<label class="required">Pincode</label>
 											<span id="errPincode" name="errPincode" class="text-danger">
-											</span> <input type="number" min="0"  inputmode="numeric" pattern="[0-9]{6}" maxlength="6" class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >										</div>
-										
-									</div>
-									<div class="row">
+											</span> <input type="number" min="0"  inputmode="numeric" pattern="[0-9]{6}" maxlength="6" class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >										
+											</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">Identity Type </label>&nbsp;&nbsp;&nbsp; 
 											<span id="errIdtype" name="errIdtype"
@@ -226,6 +226,9 @@
 												<option id="VoterId" value="Voter Id">Voter Id</option>
 											</select>
 										</div>
+									</div>
+									<div class="row">
+										
 										<div class="col-sm-4 form-group">
 											<label class="required">Identity Proof No.</label>&nbsp;&nbsp;&nbsp;
 											 <span id="errIdProfno" name="errIdProfno"class="text-danger"> </span> 
@@ -243,16 +246,16 @@
 												<option value="No">No</option>
 											</select>
 										</div>
-
-									</div>
-									<div class="row">
-
-										<div class="col-sm-4 form-group">
+									<div class="col-sm-4 form-group">
 											<label class="required">Land Holding (Bigha)</label> &nbsp;&nbsp;&nbsp;
 									 <span id="errLand" name="errLand" class="text-danger"> </span>
 									  <input class="form-control"  name="land_holding" type="number"placeholder="Land Holding (Bigha)" min=0 step="0.01" 
 		             				 id="land_holding" onchange="deleteErrorMsg()">
 										</div>
+									</div>
+									<div class="row">
+
+										
 										<div class="col-sm-4 form-group">
 											<label class="required">Mobile Number</label>&nbsp;&nbsp;&nbsp;
 											<span id="errMob" name="errMob" class="text-danger"> </span>
@@ -273,15 +276,16 @@
 											</select>
 											<!-- <input class="form-control" name="bank_ac_type" type="text" placeholder="Bank Account Type"> -->
 										</div>
-									</div>
-									<div class="row">
-
 										<div class="col-sm-4 form-group">
 											<label class="required">Bank A/C No.</label> &nbsp;  
 											<span id="dubAcc" name="dubAcc" class="text-danger"></span> &nbsp;&nbsp;&nbsp;
 											<span id="errAccNo" name="errAccNo"class="text-danger"> </span> 
 											<input class="form-control" name="F_AC_NO" type="text"  placeholder="Farmer Bank Ac No." id="F_AC_NO" onkeypress="return onlyNumberKey(event)" onchange="deleteErrorMsg()" onkeyup="validateAccount()" minlength="6" maxlength="18">
 										</div>
+									</div>
+									<div class="row">
+
+										
 										
 										<div class="col-sm-4 form-group">
 											<label class="required">Bank IFSC</label>&nbsp;&nbsp;&nbsp; <span
@@ -298,9 +302,6 @@
 												placeholder="Bank Name" id="F_BANK_NAME"
 												onchange="deleteErrorMsg()">
 										</div>
-									</div>
-									<div class="row">
-
 										<div class="col-sm-4 form-group">
 											<label class="required">Bank Branch</label>&nbsp;&nbsp;&nbsp;
 											<span id="errbnkBranch" name="errbnkBranch"
@@ -309,7 +310,11 @@
 												placeholder="Farmer Bank Branch" id="F_BANK_BRANCH"
 												onchange="deleteErrorMsg()">
 										</div>
-										</div>
+									</div>
+									
+
+										
+									
 										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">Bank Document (330kb-1MB)</label>&nbsp;

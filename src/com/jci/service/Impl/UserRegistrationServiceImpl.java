@@ -98,5 +98,16 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 		return userRegistrationDao.getuserprofile(refid);
 	}
+	@Override
+	
+	public boolean validateUserMobile(String mobileNo) {
+		return userRegistrationDao.validateUserMobile(mobileNo);
+	}
+
+	@Override
+	public boolean validateEmployeeid(String employeeid) {
+		return userRegistrationDao.validateEmployeeid(employeeid);
+	
+	}
 
 }

@@ -63,7 +63,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	@Override
 	public List<UserRegistrationModel> getAll() {
 		List<UserRegistrationModel> result = new ArrayList<>();
-		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
+		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -83,6 +83,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			int id =  (int) row[8];
 			String rolename =  (String) row[9];
 			String usertype =  (String) row[10];
+			int ho =  (int) row[11];
 			//System.out.println("zonessssss"+ zonename);
 			userRegistration.setRefid(id);;
 			userRegistration.setUsername(username);
@@ -95,6 +96,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			userRegistration.setZonename(zonename);
 			userRegistration.setRoles_name(rolename);
 			userRegistration.setUsertype(usertype);
+			userRegistration.setHo(ho);
 			result.add(userRegistration);
 		}
 		return result;
@@ -117,7 +119,12 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		boolean isPresent = rows.isEmpty();
 		if(isPresent) {
 			return null;
-		}else {
+		}
+		else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application"))
+		{
+			return null;
+		}
+		else {
 			return rows.get(0)[13].toString();
 		}
 	}
@@ -285,5 +292,41 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 				else {
 					return 0;
 				}
+	}
+
+
+	@Override
+	public boolean validateUserMobile(String mobileNo) {
+		List<Integer> result = new ArrayList<>();
+		String querystr = "select * from jciumt where mobileno ='"+mobileNo+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		boolean isPresent = rows.isEmpty();
+		if(isPresent) {
+			return true;
+		}else {
+			return false;
+		}
+	
+	}	
+	
+	
+	@Override
+	public boolean validateEmployeeid(String employeeid) {
+		List<Integer> result = new ArrayList<>();
+		String querystr = "select * from jciumt where employeeid ='"+employeeid+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		boolean isPresent = rows.isEmpty();
+		if(isPresent) {
+			return true;
+		}else {
+			return false;
+		}
+	
 	}	
 }

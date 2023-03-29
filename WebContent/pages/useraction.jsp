@@ -108,14 +108,9 @@ $(document).ready(function () {
                                             <input class="form-control" type="date" name="datejba" placeholder="JaBA Date" required> -->
                                         
                                            <label>Action Name</label>
-                                         <input type="text" name="actionname" id="actionname" class="form-control" placeholder="Action Name"  required/>
+                                         <input type="text" name="actionname" id="actionname" class="form-control" placeholder="Action Name" oninput="allow_alphabets(this)"  required/>
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
-                                        
-                                        
-								                              
-										
-                                   
                                        <div class="col-sm-4 form-group">
                                             <label>Action Status</label> 
 											<select name="actionstatus" id="actionstatus" class="form-control" required="required">
@@ -124,14 +119,7 @@ $(document).ready(function () {
 												<option value="0">Deactive</option>
 											</select>
                                         </div>
-          
-										
-										
-                                    </div>   
-                                   
-                                 
-                                    
-	                                                                      
+                                    </div>                                 
                                     <div class="form-group">
                                         <button class="btn btn-default" type="submit">Create</button>
                                     </div>
@@ -149,9 +137,15 @@ $(document).ready(function () {
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
+    
+     <script>
+    function allow_alphabets(element){
+        let textInput = element.value;
+        textInput = textInput.replace(/[^A-Za-z ]*$/gm, ""); 
+        element.value = textInput;
+    }
+</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
-	
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>

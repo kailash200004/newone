@@ -21,4 +21,6 @@ public interface UserRegistrationService {
 	public int getRefId(String emailId);
 	public int getUserRoleId(int userId);
 	public UserRegistrationModel getuserprofile(int refid);
+	public boolean validateUserMobile(String mobileNo);
+	public boolean validateEmployeeid(String employeeid);
 }

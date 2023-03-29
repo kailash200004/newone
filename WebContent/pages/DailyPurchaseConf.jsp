@@ -56,7 +56,7 @@
                                         <div class="col-sm-4 form-group">
                                             <label>Date of purchase</label><span class="text-danger">* </span>&nbsp; <span id="errdatepurchase" name="errdatepurchase"
 												class="text-danger"> </span>
-                                            <input class="form-control"  name="datepurchase" id="datepurchase" placeholder="Date of Purchase" min="0">
+                                            <input readonly class="form-control"  name="datepurchase" id="datepurchase" placeholder="Date of Purchase" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Bin No.</label><span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"

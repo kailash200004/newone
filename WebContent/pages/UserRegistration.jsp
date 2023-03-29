@@ -65,6 +65,11 @@
   }
  
 </style>
+<script>
+var flag;
+var hasError1 = false;
+var hasError2 = false;
+</script>
 </head>
 
 <body class="fixed-navbar">
@@ -162,7 +167,7 @@
 										</div>
 										
 										<div class="col-sm-4 form-group">
-											<label class="required">EMP ID</label>  &nbsp;&nbsp;&nbsp; <span id="errID" name="errID" class="text-danger"> </span>
+											<label class="required">EMP ID</label>  &nbsp;&nbsp;&nbsp; <span id="errID" name="errID" class="text-danger"> </span><span id="errID1" name="errID1" class="text-danger"> </span>
 											<input class="form-control" name="employeeid" type="text" placeholder="Employee Id" id="employeeid">
 										</div>
 										<div class="col-sm-4 form-group">
@@ -177,7 +182,7 @@
 											<span  style="color: red; font-size: 13px;" id="EmailError">Please enter a valid Email</span> 
 										</div>
 										<div class="col-sm-4 form-group">
-											<label class="required">Mobile Number</label>  &nbsp;&nbsp;&nbsp; <span id="errMobile" name="errMobile" class="text-danger"> </span>
+											<label class="required">Mobile Number</label>  &nbsp;&nbsp;&nbsp; <span id="errMobile" name="errMobile" class="text-danger"> </span><span id="errMobile1" name="errMobile1" class="text-danger"> </span>
 										<div class="input-group-prepend">										 
     										<span class="input-group-text" id="basic-addon1">+91</span>
 											<input class="form-control" type="tel" maxlength="10" minlength="10" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"" id="mobile" name="mobile" title="10 digit mobile number" placeholder="Mobile Number">
@@ -200,7 +205,7 @@
 									</div> -->
 														<div class="row">
 								<div class="col-sm-12 form-group">
-								 <input type="submit" value="Submit" class="btn btn-primary">
+								 <input type="submit" value="Submit" id="submit" class="btn btn-primary">
 									<!-- <input class="btn btn-primary" type="submit" id="enq_submit">Submit</button> -->
 								</div>
 							</div>
@@ -231,6 +236,84 @@
      });
 	
 	</script>
+	<script>
+	$(document).ready(function () {
+		$("#mobile").keyup(function() {
+	var mobileno = document.getElementById("mobile").value;
+	flag =  false;
+	 
+	var molilelen = mobileno.length;
+	if(molilelen==10){
+		$("#F_MOBILE").prop("type", "text");
+		$("#F_MOBILE").attr("maxlength", "10");
+		$("#F_MOBILE").attr("minlength", "10");
+		flag =  true;
+		 $.ajax({
+				type:"GET",
+				url:"validateUserMobile.obj",
+				data:{"mobileno":mobileno},
+				success:function(result){
+					if(result === 'false'){
+					document.getElementById("errMobile1").innerHTML = "Duplicate mobile number";
+					hasError1 = true;
+				
+					 $(':input[type="submit"]').prop('disabled', true);
+					
+				}else{
+					document.getElementById("errMobile1").innerHTML = "";
+					if(hasError2 == false)
+					 $(':input[type="submit"]').prop('disabled', false);
+					hasError1 = false;
+					
+					}
+					}
+		  	});
+		}
+	 }); 
+	}); 
+		</script>
+		<script>
+		$(document).ready(function () {
+		$("#employeeid").keyup(function() {
+			var employeeid = document.getElementById("employeeid").value;
+		   
+				 $.ajax({
+						type:"GET",
+						url:"validateEmployeeid.obj",
+						data:{"employeeid":employeeid},
+						success:function(result){
+							if(result === 'false'){
+							document.getElementById("errID1").innerHTML = "Duplicate Employee ID";
+							hasError2 = true;
+						
+							 $(':input[type="submit"]').prop('disabled', true);
+						}else{
+							document.getElementById("errID1").innerHTML = "";
+							hasError2 = false;
+							if(hasError1 == false)
+							 $(':input[type="submit"]').prop('disabled', false);
+						}
+					}
+						
+				  }); 
+				
+			});
+		
+		
+		}); 
+		
+</script>
+<script>
+$(document).ready(function () {
+if(hasError == true){
+	alert("if "+hasError);
+	 $(':input[type="submit"]').prop('disabled', true);
+}
+else{
+	$(':input[type="submit"]').prop('disabled', false);
+}
+});
+</script>
 	<script>
 	 function validate() {
 	

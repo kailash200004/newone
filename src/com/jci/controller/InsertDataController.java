@@ -430,6 +430,10 @@ public class InsertDataController
                 mname = M_NAME.trim();
                 farmerName = fname + " " + mname;
             }
+            else if ((M_NAME == "" || M_NAME == null) && (L_NAME == "" || L_NAME == null) && (F_NAME != "" || F_NAME != null))  {
+            	
+                farmerName = fname;
+            }
             final String caste = request.getParameter("caste");
             final String gender = request.getParameter("gender");
             final String F_ADDRESS = request.getParameter("F_ADDRESS");
@@ -1331,6 +1335,7 @@ public class InsertDataController
             final String password = request.getParameter("password");
             final String usertype = request.getParameter("usertype");
             final String role = request.getParameter("role");
+            final String username = request.getParameter("username");
             final String duplicateEmail = request.getParameter("emailCheck");
             final boolean duplicatemail = Boolean.parseBoolean(duplicateEmail);
             final UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -1350,7 +1355,7 @@ public class InsertDataController
             }
             userRegistration.setRole(role);
             userRegistration.setRegistrationdate(new Date());
-            userRegistration.setUsername(email);
+            userRegistration.setUsername(username);
             userRegistration.setUsertype(usertype);
             userRegistration.setRoleId(Integer.parseInt(role));
             final boolean emailNotExist = this.UserRegistrationService.validateEmail(email);
@@ -3446,6 +3451,21 @@ public class InsertDataController
             return mv;
         }
     }
+	  
+	  @ResponseBody
+	    @RequestMapping(value = { "validateEmployeeid" }, method = { RequestMethod.GET })
+	    public String validateEmployeeid(final HttpServletRequest request) {
+	        final Gson gson = new Gson();
+	        return this.UserRegistrationService.validateEmployeeid(request.getParameter("employeeid")) + "";
+	    }
+	  
+	  
+	  @ResponseBody
+	    @RequestMapping(value = { "validateUserMobile" }, method = { RequestMethod.GET })
+	    public String validateUserMobile(final HttpServletRequest request) {
+	        final Gson gson = new Gson();
+	        return this.UserRegistrationService.validateUserMobile(request.getParameter("mobileno")) + "";
+	    }
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);

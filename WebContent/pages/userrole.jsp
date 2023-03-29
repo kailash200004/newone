@@ -118,7 +118,7 @@ $(document).ready(function () {
                                             <input class="form-control" type="date" name="datejba" placeholder="JaBA Date" required> -->
                                         
                                            <label>Role Name</label><span id="errrole" name="errrole" class="text-danger"></span>
-                                         <input type="text" name="rolename" id="rolename" onkeyup="return validateRole();" class="form-control" placeholder="Role Name"  required/>
+                                         <input type="text" name="rolename" id="rolename" onkeyup="return validateRole();" class="form-control" placeholder="Role Name" oninput="allow_alphabets(this)"  required/>
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
                                    
@@ -165,11 +165,11 @@ function validateRole(form) {
 				
 				if (data === 'false'){
 				document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Role already Exists!";
-				return false;
+				 $(':input[type="submit"]').prop('disabled', true);
 				}
 				else if (data === 'true'){
 					document.getElementById("errrole").innerHTML = "";
-					return true;
+					 $(':input[type="submit"]').prop('disabled', false);
 				}
 				
 				}	
@@ -179,6 +179,12 @@ function validateRole(form) {
 }
 	
 </script>
-   
+   <script>
+    function allow_alphabets(element){
+        let textInput = element.value;
+        textInput = textInput.replace(/[^A-Za-z ]*$/gm, ""); 
+        element.value = textInput;
+    }
+</script>
 </body>
 </html>
