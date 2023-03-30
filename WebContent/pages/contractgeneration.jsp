@@ -55,6 +55,10 @@
 	var data5 = "";
 	const final_list = new Array();
 	var pcso1;
+	var pcso2;
+	var pcso3;
+	var pcso4;
+	var pcso5;
 	</script>
 
 <body class="fixed-navbar">
@@ -78,15 +82,17 @@
 
 							<div class="ibox-body">
 								<span>${msg}</span>
-								<form action="savecontractgenerationPcsoWise.obj" method="POST">
+								<!--  <form action="savecontractgenerationPcsoWise.obj" method="POST"> -->
 									<div class="row">
 									
 									
 										<div class="col-sm-4 form-group">
-											<label class="required">PCSO Date</label> 
+											<label class="required">PCSO Date</label>
+											 
 											<% List<Date> pcso=(List<Date>)request.getAttribute("pcso");
 											%>
 											<select class="form-control pcso" name="pcso_date" id="pcso_date" required>
+												<option disabled selected value>-Select-</option>
 											<% for(int i=0; i< pcso.size(); i++){ %>
 											<option value="<%= pcso.get(i) %>"><%=pcso.get(i) %>
 											</option>
@@ -97,9 +103,11 @@
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">PCSO Date</label> 
+										
 											<% List<Date> pcso2=(List<Date>)request.getAttribute("pcso");
 											%>
 											<select class="form-control  pcso" name="pcso2_date" id="pcso2_date" required>
+												<option disabled selected value>-Select-</option>
 											<% for(int i=0; i< pcso2.size(); i++){ %>
 											<option value="<%= pcso2.get(i) %>"><%=pcso2.get(i) %>
 											</option>
@@ -110,9 +118,11 @@
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">PCSO Date</label> 
+											
 											<% List<Date> pcso3=(List<Date>)request.getAttribute("pcso");
 											%>
 											<select class="form-control pcso" name="pcso3_date" id="pcso3_date" required>
+											<option disabled selected value>-Select-</option>
 											<% for(int i=0; i< pcso3.size(); i++){ %>
 											<option value="<%= pcso3.get(i) %>"><%=pcso3.get(i) %>
 											</option>
@@ -125,9 +135,11 @@
 										<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">PCSO Date</label> 
+											
 											<% List<Date> pcso4=(List<Date>)request.getAttribute("pcso");
 											%>
 											<select class="form-control pcso" name="pcso4_date" id="pcso4_date" required>
+											<option disabled selected value>-Select-</option>
 											<% for(int i=0; i< pcso4.size(); i++){ %>
 											<option value="<%= pcso.get(i) %>"><%=pcso.get(i) %>
 											</option>
@@ -138,10 +150,13 @@
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">PCSO Date</label> 
+											
 											<% List<Date> pcso5=(List<Date>)request.getAttribute("pcso");
 											%>
 											<select class="form-control pcso" name="pcso5_date" id="pcso5_date" required>
+											<option disabled selected value>-Select-</option>
 											<% for(int i=0; i< pcso5.size(); i++){ %>
+											
 											<option value="<%= pcso5.get(i) %>"><%=pcso5.get(i) %>
 											</option>
 											<%} %>
@@ -188,6 +203,8 @@
 										<div id="list3"></div>
 										<div id="list4"></div>
 										
+										<div id="list5"></div>
+										
 										<!-- <table>
 										<tr>
 										<td>abc</td></tr>
@@ -199,32 +216,32 @@
 										<div class="col-sm-4 form-group">
 											
 											<label class="required">TD1</label>
-											<input type="number" name="grade1" id="grade1"
+											<input type="number" name="grade1" id="grade1" value ='0'
 												class="form-control"  />
-												</div>
+												
 											<label class="required">TD2_W1</label>
-											<input type="number" name="grade2" id="grade2"
+											<input type="number" name="grade2" id="grade2" value ='0'
 												class="form-control"  />
 												<label class="required">TD3_W2_M1_B1</label>
-											<input type="number" name="grade3" id="grade3"
+											<input type="number" name="grade3" id="grade3" value ='0'
 												class="form-control"  />
 												<label class="required">TD4_W3_M2_B2</label>
-											<input type="number" name="grade4" id="grade4"
+											<input type="number" name="grade4" id="grade4" value ='0'
 												class="form-control"  />
 												<label class="required">TD5_W4_M3_B3</label>
-											<input type="number" name="grade5" id="grade5"
+											<input type="number" name="grade5" id="grade5" value ='0'
 												class="form-control"  />
 												<label class="required">TD6_W5_M4_B4</label>
-											<input type="number" name="grade6" id="grade6"
+											<input type="number" name="grade6" id="grade6" value ='0'
 												class="form-control"  />
 												<label class="required">TD7_W6_M5_B5</label>
-											<input type="number" name="grade7" id="grade7"
+											<input type="number" name="grade7" id="grade7" value ='0'
 												class="form-control"  />
 												<label class="required">TD8_W7_M6_B6</label>
-											<input type="number" name="grade8" id="grade8"
+											<input type="number" name="grade8" id="grade8" value ='0'
 												class="form-control"  />
 												<label class="required">W8</label>
-											<input type="number" name="grade9" id="grade9"
+											<input type="number" name="grade9" id="grade9" value ='0'
 												class="form-control"  />
 										</div>
 
@@ -240,10 +257,10 @@
 									</div>
 									<div class="row">
 										<div class="form-group">
-											<button class="btn btn-success" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit" value="Submit"  id="submit">Submit</button>
 										</div>
 									</div>
-								</form>
+								<!--  </form>-->
 							</div>
 						</div>
 					</div>
@@ -263,183 +280,311 @@
 </body>
 <script>	
 
- $("#pcso_date").on("change", function() {
+$("#pcso_date").on("change", function() {
 	//alert("yes");
 	pcso1= this.value;
-	//alert(pcso);
+	var array = [];
+	array.push(pcso1);
+	//alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
-		data:{"pcso":pcso1, "list":list},
+		data:{"pcso1":JSON.stringify(array)},
 		success: function(result){
 			alert(result);
-			var htmlTable='<table><tr><th></th></tr>';
-			    data1= jQuery.parseJSON(result);
-			   htmlTable+='<tr><th>Mill code</th><th>Mill Name</th><th>Total allocation</th></tr>';
+		
+			var htmlTable='<table border="3px" id="table_tr">';
+			   var data1= jQuery.parseJSON(result);
+			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Total allocation</th></tr>';
 			   for (i=0;i<data1.length;i++){
 				   
 				   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td></tr>';
 		        }
 			   htmlTable+='</table>';
 			   $("#list").html(htmlTable);
-			  
+			   var tableToSave='<table border="3px" id="tableData">';
+				for (i=0;i<data1.length;i++){
+					
+				tableToSave += '<tr><td>'+data1[i]["mill_code"]+'</td><td>'+data1[i]["qty"]+'</td></tr>';
+				
+				}
+				tableToSave += '</table>';
+				 $("#list5").html(tableToSave);
 		       
 			
 		}
-	})
+	});
 	
 }); 
-	</script>
-	<script>
-  $("#pcso2_date").on("change", function() {
+
+$("#pcso2_date").on("change", function() {
 	
-	var pcso2= this.value;
-	//alert(pcso);
+	 pcso2= this.value;
+	//alert(pcso2);
+	var array = [];
+	array.push(pcso1);
+	array.push(pcso2);
+	//alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
-		data:{"pcso":pcso2 , "list":list},
+		data:{"pcso1":JSON.stringify(array) },
 		success: function(d){
+			//console.log(d);
 			alert(d);
-			var htmlTable='<table border="3px"><tr><th></th></tr>';
-			var htmlTable1='<table border="3px"><tr><th>PCSO2</th></tr>';
-			   data2= jQuery.parseJSON(d);
-			  const isame = [];
-			  const jsame = [];
-			  var j;
-			  var i;
-			 
-			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">'+pcso1+'</th><th style="text-align:center">'+pcso2+'</th><th>Total</th></tr>';
-			   for (i=0;i<data1.length;i++){
-				   for (j=0;j<data2.length;j++){
-				
-					 if(data1[i]["mill_code"]==data2[j]["mill_code"]){
-						// same[i] = data2[j]["mill_code"];
-						isame.push(j);
-						jsame.push(i);
-						 htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td><td style="text-align:center">'+(data2[j]["qty"]+data1[i]["qty"])+'</td></tr>';
-					 
-					 
-					}
-			 }	 	 
-		} 			
-				   for (i=0;i<data2.length;i++){
-					   for (var z=0; z<isame.length; z++){
-						   if(i == z){
-							   continue;
-						   }
-						   else{
-							   htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
-					  		 }
-					   }
-				   }
-					   for (j=0;j<data1.length;j++){
-						   for (var z=0; z<jsame.length; z++){
-							   if(j == z){
-								   continue;
-							   }
-							   else{
-								 
-								   htmlTable+='<tr><td style="text-align:center">'+data1[i]["mill_code"]+'</td><td style="text-align:center">'+data1[i]["name"]+'</td><td style="text-align:center">'+data1[i]["qty"]+'</td><td style="text-align:center">0</td></tr>';	
-							   }
-						   }
-						
-					   }
-					 
-				   
-			   	
-			   
+			var htmlTable='<table border="3px" id="table_tr">';
+			//var htmlTable1='<table border="3px"><tr><th>PCSO2</th></tr>';
+			  var data2= jQuery.parseJSON(d);
+			  
+		
+			  htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">'+pcso1+'</th><th style="text-align:center">'+pcso2+'</th><th>Total</th></tr>';
 			
+					  for(j=0; j<data2.length; j++){
+				  var allocate = data2[j]["date_wise"];
+						
+						 var myarray=allocate.split(",")[0]; 
+						 var myarray1=allocate.split(",")[1];
+						 
+						 if(typeof myarray == "undefined"){
+							// alert("myarray is undefined");
+						  myarray=0;
+						 }
+					
+						 if(typeof myarray1 == "undefined"){
+							  myarray1=0;
+							//  alert("myarray1 is undefined");
+							 }
+						 
+							 htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">'+myarray1+'</td><td style="text-align:center">'+myarray+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
+							 
+				   }
+				   htmlTable+='</table>';
+				   $("#list").html(htmlTable);
+			  
+				   var tableToSave='<table border="3px" id="tableData">';
+					for (i=0;i<data2.length;i++){
+						
+					tableToSave += '<tr><td>'+data2[i]["mill_code"]+'</td><td>'+data2[i]["qty"]+'</td></tr>';
+					
+					}
+					tableToSave += '</table>';	
+					 $("#list5").html(tableToSave);
+		}			
+	
+		
+	});
+}); 
+
+
+ $("#pcso3_date").on("change", function() {
+	// alert("yes");
+	// alert(pcso2);
+	 pcso3= this.value;
+	//alert(pcso3);
+	var array = [];
+	array.push(pcso1);
+	array.push(pcso2);
+	array.push(pcso3);
+	//alert(array);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso1":JSON.stringify(array)},
+		success: function(a){
+			//console.log(a);
+			alert(a);
+			var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
+			   var data3= jQuery.parseJSON(a);
+			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';
+				
+			   for (j=0;j<data3.length;j++){
+				   
+				   htmlTable+='<tr><td style="text-align:center">'+data3[j]["mill_code"]+'</td><td style="text-align:center">'+data3[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data3[j]["date_wise"]+'</td><td style="text-align:center">'+data3[j]["qty"]+'</td></tr>';
+		        }
+			   htmlTable+='</table>';
+			   $("#list").html(htmlTable);
+			   
+			   var tableToSave='<table border="3px" id="tableData">';
+				for (i=0;i<data3.length;i++){
+					
+				tableToSave += '<tr><td>'+data3[i]["mill_code"]+'</td><td>'+data3[i]["qty"]+'</td></tr>';
+				
+				}
+				tableToSave += '</table>'; 
+				 $("#list5").html(tableToSave);
+			
+		}
+	});
+	
+}); 
+
+ $("#pcso4_date").on("change", function() {
+	//alert("yes");
+	
+	 pcso4= this.value;
+	//alert(pcso4);
+	var array = [];
+	array.push(pcso1);
+	array.push(pcso2);
+	array.push(pcso3);
+	array.push(pcso4);
+	//alert(array);
+	alert(pcso);
+	$.ajax({
+		type:'GET',
+		url:'pcso_details.obj',
+		data:{"pcso1":JSON.stringify(array)},
+		success: function(result){
+			alert(result);
+		var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
+			   var data4= jQuery.parseJSON(result);
+			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';
+				
+			   for (j=0;j<data4.length;j++){
+				   
+				   htmlTable+='<tr><td style="text-align:center">'+data4[j]["mill_code"]+'</td><td style="text-align:center">'+data4[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data4[j]["date_wise"]+'</td><td style="text-align:center">'+data4[j]["qty"]+'</td></tr>';
+		        }
 			   htmlTable+='</table>';
 			   $("#list").html(htmlTable);
 			  
-		}   
-			
-		
+		       
+			   var tableToSave='<table border="3px" id="tableData">';
+				for (i=0;i<data4.length;i++){
+					
+				tableToSave += '<tr><td>'+data4[i]["mill_code"]+'</td><td>'+data4[i]["qty"]+'</td></tr>';
+				
+				}
+				tableToSave += '</table>';
+				 $("#list5").html(tableToSave);
+		}
 	});
-	
-  });
-	</script>
-	<script>
- $("#pcso3_date").on("change", function() {
-	
-	var pcso= this.value;
-	
-	$.ajax({
-		type:'GET',
-		url:'pcso_details.obj',
-		data:{"pcso":pcso, "list":list},
-		success: function(result){
-			
-			var htmlTable='<table><tr><th></th></tr>';
-			   var data3= jQuery.parseJSON(result);
-			   for (i=0;i<data3.length;i++){
-				   
-				   htmlTable+='<tr><th>'+data3[i]["name"]+'</th></tr>';
-		        }
-			   htmlTable+='</table>';
-			   $("#list2").html(htmlTable);
-			  
-		       
-			
-		}
-	})
-	
-}); 
-	
- $("#pcso4_date").on("change", function() {
-	alert("yes");
-	var pcso= this.value;
-	//alert(pcso);
-	$.ajax({
-		type:'GET',
-		url:'pcso_details.obj',
-		data:{"pcso":pcso},
-		success: function(result){
-			//alert(result);
-			var htmlTable='<table><tr><th></th></tr>';
-			   var data4= jQuery.parseJSON(result);
-			   for (i=0;i<data4.length;i++){
-				   
-				   htmlTable+='<tr><th>'+data4[i]+'</th></tr>';
-		        }
-			   htmlTable+='</table>';
-			   $("#list3").html(htmlTable);
-			  
-		       
-			
-		}
-	})
 	
 }); 
 
  $("#pcso5_date").on("change", function() {
-	alert("yes");
-	var pcso= this.value;
+		//alert("yes");
+		
+		 pcso5= this.value;
+		//alert(pcso5);
+		var array = [];
+		array.push(pcso1);
+		array.push(pcso2);
+		array.push(pcso3);
+		array.push(pcso4);
+		array.push(pcso5);
+		//alert(array);
 	
 	//alert(pcso);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
-		data:{"pcso":pcso},
+		data:{"pcso1":JSON.stringify(array)},
 		success: function(result){
-			//alert(result);
-			var htmlTable='<table><tr><th></th></tr>';
+			alert(result);
+			var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
 			   var data5= jQuery.parseJSON(result);
-			   for (i=0;i<data5.length;i++){
+			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';
+				
+  for (j=0;j<data5.length;j++){
 				   
-				   htmlTable+='<tr><th>'+data5[i]+'</th></tr>';
+				   htmlTable+='<tr><td style="text-align:center">'+data5[j]["mill_code"]+'</td><td style="text-align:center">'+data5[j]["name"]+'</td><td style="text-align:center">0</td><td style="text-align:center">'+data5[j]["date_wise"]+'</td><td style="text-align:center">'+data5[j]["qty"]+'</td></tr>';
 		        }
 			   htmlTable+='</table>';
-			   $("#list4").html(htmlTable);
+			   $("#list").html(htmlTable);
 			  
-		       
-			
+			   var tableToSave='<table border="3px" id="tableData">';
+				for (i=0;i<data5.length;i++){
+					
+				tableToSave += '<tr><td>'+data5[i]["mill_code"]+'</td><td>'+data5[i]["qty"]+'</td></tr>';
+				
+				}
+				tableToSave += '</table>'; 
+				// $("#list5").html(tableToSave);
 		}
-	})
+	});
 	
-}); 
+});  
 
+	
+		 $("#submit").click(function(){
+			 // alert("test");
+			  
+			  var contractQuants = $("#contract_Qty").val();			  
+			  var contactnumber = $("#contactnumber").val();			  
+			  var contractdate = $("#contract_date").val();
+			  var cropyear = $("#crop_year").val();
+			  var millcode = $("#mill_code").val();
+			  var totalallocate = $("#date_wise").val();
+			  var grade1 = $("#grade1").val();
+				  var grade2 = $("#grade2").val();
+				  var grade3 = $("#grade3").val();
+				  var grade4 = $("#grade4").val();
+				  var grade5 = $("#grade5").val();
+				  var grade6 = $("#grade6").val();
+				  var grade7 = $("#grade7").val();
+				  var grade8 = $("#grade8").val();
+				  var grade9 = $("#grade9").val();
+			  
+			  var result = true;
+			  
+			  $.ajax({
+					type:"POST",
+					url:"savecontractgenerationPcsoWise.obj",
+					data:{"contractQuants":contractQuants ,"contactnumber" :contactnumber, "contractdate":contractdate,"cropyear":cropyear,"millcode":millcode,"date":totalallocate, "grade1":grade1,"grade2":grade2,"grade3":grade3,
+						"grade4":grade4,"grade5":grade5,"grade6":grade6,"grade7":grade7,"grade9":grade9,"grade8":grade8},
+					success:function(result){
+						//location.reload(true)
+					//	$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+						//alert("Result Saved Succesfully");
+		 				//var data= jQuery.parseJSON(result);
+	 	 			
+			  
+				 
+					}
+				});
+			  if(result){
+				  for(var w=0; w< document.getElementById("tableData").rows.length; w++){
+						// alert("millcode : "+document.getElementById("tableData").rows[w].cells[0].innerHTML+ " qty : "+document.getElementById("tableData").rows[w].cells[1].innerHTML);
+					  $.ajax({
+							type:"POST",
+							url:"saveUpdatedQty.obj",
+							data:{"millcode":document.getElementById("tableData").rows[w].cells[0].innerHTML ,"qty" :document.getElementById("tableData").rows[w].cells[1].innerHTML,"contactnumber" :contactnumber, "contractdate":contractdate,"cropyear":cropyear},
+							success:function(result){
+								location.reload(true)
+								$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Table saved successfully.</div>\r\n");
+								alert("Result Saved Succesfully");
+				 				//var data= jQuery.parseJSON(result);
+			 	 				 
+							}			
+						});
+					  }
+				//  alert("Fill the mandatory fields.");
+				  }
+			  
+			
+			
+	    
+	  });
+	
+</script>
+			  
+			  
+			  
+ <script>
+ function removeTableTr(){
+	 
+	 var seen = {};
+	 $('table#table_tr tr').each(function() {
+	   var txt = $(this).text();
+	   if (seen[txt])
+	     $(this).remove();
+	   else
+	     seen[txt] = true;
+	 });
+	 
+	 console.log(seen);
+	 
+ }
 
 	</script>
 </html>

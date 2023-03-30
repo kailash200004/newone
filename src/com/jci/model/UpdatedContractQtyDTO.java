@@ -1,9 +1,15 @@
 package com.jci.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
-
+@Entity
+@Table(name = "updated_contract_qty", schema = "dbo")
 public class UpdatedContractQtyDTO {
 
 	@Id
@@ -21,7 +27,7 @@ public class UpdatedContractQtyDTO {
 	private String mill_code;
 	
 	@Column(name="updated_qty")
-	private double updated_qty;
+	private String updated_qty;
 	
 	@Column(name="created_by")
 	private int created_by;
@@ -52,8 +58,8 @@ public class UpdatedContractQtyDTO {
 		return contract_no;
 	}
 
-	public void setContract_no(String contract_no) {
-		this.contract_no = contract_no;
+	public void setContract_no(String contactnumber) {
+		this.contract_no = contactnumber;
 	}
 
 	public String getMill_code() {
@@ -64,12 +70,12 @@ public class UpdatedContractQtyDTO {
 		this.mill_code = mill_code;
 	}
 
-	public double getUpdated_qty() {
+	public String getUpdated_qty() {
 		return updated_qty;
 	}
 
-	public void setUpdated_qty(double updated_qty) {
-		this.updated_qty = updated_qty;
+	public void setUpdated_qty(String totalallocate) {
+		this.updated_qty = totalallocate;
 	}
 
 	public int getCreated_by() {
@@ -101,7 +107,7 @@ public class UpdatedContractQtyDTO {
 		
 	}
 
-	public UpdatedContractQtyDTO(int id, String contract_date, String contract_no, String mill_code, double updated_qty,
+	public UpdatedContractQtyDTO(int id, String contract_date, String contract_no, String mill_code, String updated_qty,
 			int created_by, String created_on, String fin_yr) {
 		super();
 		this.id = id;

@@ -67,19 +67,13 @@ public class ContractgenerationDaoImpl implements ContractgenerationDao {
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> data = query.list();
-		try {
 		for(Object[] cart : data) {
 			
 			updatedContractQtyDTO.setId((int)cart[0]);
 			updatedContractQtyDTO.setContract_date((String)cart[1]);
 			updatedContractQtyDTO.setContract_no((String)cart[2]);
 			updatedContractQtyDTO.setMill_code((String)cart[3]);
-			updatedContractQtyDTO.setUpdated_qty(((BigDecimal)cart[4]).doubleValue());
-			
-		}
-		
-		}catch(Exception e) {
-			System.out.println(e.getStackTrace());
+			updatedContractQtyDTO.setUpdated_qty((String)cart[4]);
 			
 		}
 		return updatedContractQtyDTO;
@@ -111,12 +105,18 @@ public class ContractgenerationDaoImpl implements ContractgenerationDao {
 			updatedContractQtyDTO.setContract_date((String)cart[1]);
 			updatedContractQtyDTO.setContract_no((String)cart[2]);
 			updatedContractQtyDTO.setMill_code((String)cart[3]);
-			updatedContractQtyDTO.setUpdated_qty(((BigDecimal)cart[4]).doubleValue());
+			updatedContractQtyDTO.setUpdated_qty((String)cart[4]);
 			updatedContractQtyDTO.setFin_yr(finYr);
 			result.add(updatedContractQtyDTO);
 		}
 		return result;
 	
+	}
+
+	@Override
+	public void create(UpdatedContractQtyDTO updatedcontractqtyDTO) {
+		currentSession().save(updatedcontractqtyDTO);
+		
 	}
 
 }

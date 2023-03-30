@@ -58,4 +58,10 @@ public class ContractgenerationServiceImpl implements ContractgenerationService 
 		return this.contractgenerationDao.getAllMills();
 	}
 
+	@Override
+	public void create(UpdatedContractQtyDTO updatedcontractqtyDTO) {
+		this.contractgenerationDao.create(updatedcontractqtyDTO);
+		
+	}
+
 }

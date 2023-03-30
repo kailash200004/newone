@@ -47,7 +47,7 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		rows = query.list();
-		System.out.println(rows);
+		//System.out.println(rows);
 		for(Object[] row: rows) {
 			int childid= (int) row[0];
 			String millcode= (String) row[1];
@@ -71,6 +71,7 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		rows = query.list();
+		//System.out.println("pcsolist-----------------        "+rows);
 		for(Date row: rows) {
 			
 			
@@ -81,23 +82,26 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 	}
 
 	@Override
-	public List<PcsoDateModel> pcso_details(String pcso) {
+	public List<PcsoDateModel> pcso_details(String pcso1) {
 		List<PcsoDateModel> ll = new ArrayList<>();
 		List<Object[]> rows = new ArrayList<>();
 		 
-		String querystr = "  select  * FROM jcientryofpcso where pcso_date='"+pcso+"'";
+		String querystr = "select  mill_name, mill_code,Sum(total_allocation) as total, allocation = cast(  STUFF((Select ',' + CONVERT(varchar(110),total_allocation,250) from [XMWJCI].[dbo].[jcientryofpcso] b where b.mill_code =  a.mill_code and b.pcso_date in ("+pcso1+") for XML PATH ('')),1,1,'' ) as varchar(110))  from  [XMWJCI].[dbo].[jcientryofpcso] a where a.pcso_date in("+pcso1+") group by a.mill_name, a.mill_code";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
+	//	System.out.println("pcsolistsffggsss-----------------        "+querystr);
 		rows = query.list();
+	//	System.out.println("pcsolistssss-----------------        "+rows.size());
 		for(Object[] row: rows) {
 			 PcsoDateModel model = new PcsoDateModel();
-			 model.setMill_code((String)row[4]);
-			 model.setName((String)row[5]);
-			 model.setQty(((BigDecimal)row[6]).doubleValue());
+			 model.setMill_code((String)row[1]);
+			 //System.out.println(row.toString());
+			 model.setName((String)row[0]);
+			 model.setQty(((BigDecimal)row[2]).doubleValue());
+			 model.setDate_wise((String)row[3]);
 			ll.add(model);
 		}
-		
 		return ll;
 	}
 

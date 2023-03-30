@@ -16,9 +16,6 @@
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -41,7 +38,20 @@
 </style>
  <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
  <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="text/javascript"></script>  
- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" />  
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" /> 
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"> 
  
  <script type="text/javascript">
 	$(document).ready(function ()  
@@ -52,6 +62,56 @@
 	       }); 
 	});  
  </script>  
+ 
+ <!-- ................Scripting........... -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('body').on('click', '#selectAll', function() {
+			//alert("ani");
+			if ($(this).hasClass('allChecked')) {
+				$('input[type="checkbox"]', '#verifiedlist').prop('checked', false);
+			} else {
+				$('input[type="checkbox"]', '#verifiedlist').prop('checked', true);
+			}
+			$(this).toggleClass('allChecked');
+		});
+
+		var array = [];
+
+		$('#submit').click(function() {
+			
+			$("input[name='checkbox']:checked").each(function() {
+				array.push($(this).val());
+			});
+			if (Array.isArray(array) && array.length) {
+				$("#kycmodal").modal('show');
+			} else {
+				alert("CheckBox Not Selected !..Please Select");
+				return false;
+			}
+		       $.ajax({
+		              type:'POST',
+		              url:'update_paymentstatus.obj',
+		              data:{"tallyno":JSON.stringify(array)},
+		              success:function(result){
+							alert("hello"+result);
+							//$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+							//alert("Result Saved Succesfully");
+			 				//var data= jQuery.parseJSON(result);
+		 	 				 
+						}	
+		       });
+		       alert("Invoice Generated,Mail has been sent to your gmail account!!!");
+		       location.reload();
+			//alert("hello"+ array);
+		});
+		
+	});
+	</script>
+	
+ 
+ 
 </head>
 
 <body class="fixed-navbar">
@@ -79,8 +139,10 @@
 			 
                     <div class="table-responsive" style="margin-top: 20px;"> 
                          <table id="verifiedlist"  class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+					
 								<thead>
 									<tr>
+									    <th class="text-center">Select All<br><input type="checkbox" id="selectAll" name="allcb"></th>
 									    <th>S No.</th>
 										<th>Tally SlipNo</th>
 										<th>Farmer Reg No</th> 
@@ -93,7 +155,6 @@
 									    <th>Gross Qty</th>
 										<th>Garsat Rate</th> 										
 										<th>Amount Payable</th>
-										
 							</tr>
 								</thead>
 								<tbody>
@@ -104,6 +165,7 @@
 								 if(i<=200){  
 							%>
 									<tr>
+									<td class="text-center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=verificationlists.getTallyNo()%>" ></td>
 										<td><%=i%></td>
 										<td><%=verificationlists.getTallyNo()%></td>
 				                    	<td><%=verificationlists.getFarmerRegNo()%> 
@@ -115,8 +177,9 @@
 										<td><%=verificationlists.getNetquantity()%></td> 
 										<td><%=verificationlists.getGrossqty()%></td> 
 										<td><%=verificationlists.getGarsatrate()%></td>
-						               <td><%=verificationlists.getAmountpayable()%></td>
-						               <!--  <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
+						                <td><%=verificationlists.getAmountpayable()%></td>
+						              <!-- <td><a href="update_paymentstatus.obj?tallyno=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">Payment</a></td>
+						                 <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
 										<%-- <td><a onclick="return confirm('Are you sure you want to delete this item?');" href="deletetallyslip.obj?id=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td> --%>
 						
 										
@@ -132,9 +195,11 @@
 							
 							%>
 								</tbody>
-   
+                     
                         </table>
+                        <input type="submit" value="Payment Submit"class="btn btn-primary" id="submit">
                         </div>
+                        
                      
             <!-- END PAGE CONTENT-->
             <%@ include file="footer.jsp"%>

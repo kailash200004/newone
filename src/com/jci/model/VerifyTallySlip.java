@@ -221,6 +221,9 @@ public class VerifyTallySlip {
 
 	@Column(name = "drumWiseQuantity50")
 	private double drumWiseQuantity50;
+	
+	@Column(name = "payment_status")
+	private int payment_status;
 
 	@Transient
 	String dop;
@@ -1618,6 +1621,28 @@ public class VerifyTallySlip {
 		this.drumWiseQuantity50 = drumWiseQuantity50;
 	}
 
+	
+	
+
+
+
+
+
+
+	public int getPayment_status() {
+		return payment_status;
+	}
+
+
+
+
+
+
+
+	public void setPayment_status(int payment_status) {
+		this.payment_status = payment_status;
+	}
+
 
 
 
@@ -1627,6 +1652,7 @@ public class VerifyTallySlip {
 	public VerifyTallySlip() {
 
 	}
+
 
 
 
@@ -1666,11 +1692,19 @@ public class VerifyTallySlip {
 				+ ", drumWiseQuantity44=" + drumWiseQuantity44 + ", drumWiseQuantity45=" + drumWiseQuantity45
 				+ ", drumWiseQuantity46=" + drumWiseQuantity46 + ", drumWiseQuantity47=" + drumWiseQuantity47
 				+ ", drumWiseQuantity48=" + drumWiseQuantity48 + ", drumWiseQuantity49=" + drumWiseQuantity49
-				+ ", drumWiseQuantity50=" + drumWiseQuantity50 + "]";
+				+ ", drumWiseQuantity50=" + drumWiseQuantity50 + ", payment_status=" + payment_status + ", dop=" + dop
+				+ ", popname=" + popname + "]";
 	}
 
-	public VerifyTallySlip(String tallyslipno, String farmerRegNo, String tallyNo, Date puchasedate, int rateslipno,
-			int binno, String jutevariety, double netquantity, double garsatrate, double amountpayable, int createdby,
+
+
+
+
+
+
+	public VerifyTallySlip(int tallyid, String farmerRegNo, String tallyNo, Date puchasedate, String errors,
+			String status, int is_varified, int rateslipno, int binno, String jutevariety, double netquantity,
+			double garsatrate, String tallySlipImg, double grossqty, double amountpayable, int createdby,
 			String placeOfPurchase, double drumWiseQuantity1, double drumWiseQuantity2, double drumWiseQuantity3,
 			double drumWiseQuantity4, double drumWiseQuantity5, double drumWiseQuantity6, double drumWiseQuantity7,
 			double drumWiseQuantity8, double drumWiseQuantity9, double drumWiseQuantity10, double drumWiseQuantity11,
@@ -1683,16 +1717,23 @@ public class VerifyTallySlip {
 			double drumWiseQuantity36, double drumWiseQuantity37, double drumWiseQuantity38, double drumWiseQuantity39,
 			double drumWiseQuantity40, double drumWiseQuantity41, double drumWiseQuantity42, double drumWiseQuantity43,
 			double drumWiseQuantity44, double drumWiseQuantity45, double drumWiseQuantity46, double drumWiseQuantity47,
-			double drumWiseQuantity48, double drumWiseQuantity49, double drumWiseQuantity50, double grossQty) {
+			double drumWiseQuantity48, double drumWiseQuantity49, double drumWiseQuantity50, int payment_status,
+			String dop, String popname) {
+		super();
 		this.tallyid = tallyid;
 		this.farmerRegNo = farmerRegNo;
 		this.tallyNo = tallyNo;
 		this.puchasedate = puchasedate;
+		this.errors = errors;
+		this.status = status;
+		this.is_varified = is_varified;
 		this.rateslipno = rateslipno;
 		this.binno = binno;
 		this.jutevariety = jutevariety;
 		this.netquantity = netquantity;
 		this.garsatrate = garsatrate;
+		this.tallySlipImg = tallySlipImg;
+		this.grossqty = grossqty;
 		this.amountpayable = amountpayable;
 		this.createdby = createdby;
 		this.placeOfPurchase = placeOfPurchase;
@@ -1746,6 +1787,15 @@ public class VerifyTallySlip {
 		this.drumWiseQuantity48 = drumWiseQuantity48;
 		this.drumWiseQuantity49 = drumWiseQuantity49;
 		this.drumWiseQuantity50 = drumWiseQuantity50;
-//		this.grossQty = grossQty;
+		this.payment_status = payment_status;
+		this.dop = dop;
+		this.popname = popname;
 	}
+
+
+
+
+
+
+
 }

@@ -21,4 +21,6 @@ public interface ContractgenerationDao {
 	public UpdatedContractQtyDTO getAll(int id);
 
 	public List<UpdatedContractQtyDTO> getAllMills();
+
+	public void create(UpdatedContractQtyDTO updatedcontractqtyDTO);
 }

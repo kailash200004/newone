@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.jci.dao.VerificationTallySlipDao;
 import com.jci.model.FarmerRegistrationModel;
+import com.jci.model.PaymentprocesstellyslipModel;
 import com.jci.model.VerifyTallySlip;
 
 @Transactional
@@ -68,7 +69,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	public List<VerifyTallySlip> getAll(String status) {
 	List<VerifyTallySlip> r = new ArrayList<>();
 	List<Object[]> result = new ArrayList<>();
-	String querystr = "Select * from verificationtallyslip where status='"+status+"'";
+	String querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0'";
 
 	Session session = sessionFactory.getCurrentSession();
 	Transaction tx = session.beginTransaction();
@@ -195,6 +196,57 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			System.out.println(e.getLocalizedMessage());
 		}
 		return returnStatus;
+	}
+
+	@Override
+	public PaymentprocesstellyslipModel updatepaymentstatusbytally(String tno) {
+		// TODO Auto-generated method stub
+		tno=tno.replace("\"","");
+		List<Object[]> list = new ArrayList();
+		PaymentprocesstellyslipModel paymentdetails = new PaymentprocesstellyslipModel();
+		try {
+			
+			String hql = "update verificationtallyslip set payment_status = 1 where tallyNo ="+tno;
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+			
+			//List<PaymentprocesstellyslipModel> paymentdetails = new ArrayList<>();
+
+			String querystr = "select v.puchasedate,v.amountpayable,j.F_BANK_IFSC,j.F_AC_NO,j.bank_ac_type,j.F_NAME,j.F_BANK_BRANCH,j.F_BANK_NAME from verificationtallyslip v left join jcirmt j on j.F_REG_NO = v.farmerregno where v.tallyNo ="+tno;
+	                           
+			Session session = sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(querystr);
+			list = query.list();
+			Date date = new Date();
+			for( Object[] row : list) {
+				
+				paymentdetails.setPurchase_date((Date)row[0]);
+				paymentdetails.setAmount(((BigDecimal)row[1]).doubleValue());
+				paymentdetails.setBeneficiary_IFSC_code((String)row[2]);
+				paymentdetails.setBeneficiaryAC_No((String)row[3]);
+				paymentdetails.setAC_type((String)row[4]);
+				paymentdetails.setBeneficiary_name((String)row[5]);
+				paymentdetails.setBeneficiary_branch((String)row[6]);
+				paymentdetails.setBeneficiary_bank((String)row[7]);
+				paymentdetails.setDebitAC_no("0060104000299190");
+				paymentdetails.setSender("JCI");
+				paymentdetails.setDate(date);
+			}
+			
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(e.getLocalizedMessage());
+		}
+		return paymentdetails;
+	}
+
+	@Override
+	public void savepaymentdata(PaymentprocesstellyslipModel createpayment) {
+		// TODO Auto-generated method stub
+		currentSession().save(createpayment);
+		
 	}
 
 

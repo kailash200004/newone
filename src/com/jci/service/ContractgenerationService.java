@@ -6,7 +6,7 @@ import com.jci.model.Contractgeneration;
 import com.jci.model.UpdatedContractQtyDTO;
 
 public interface ContractgenerationService {
-	public void create(Contractgeneration contractgeneration);
+	public void create(UpdatedContractQtyDTO updatedcontractqtyDTO);
 
 	public void update(Contractgeneration contractgeneration);
 
@@ -19,4 +19,6 @@ public interface ContractgenerationService {
 	public UpdatedContractQtyDTO getAll(int id);
 	
 	public List<UpdatedContractQtyDTO> getAllMills();
+
+	public void create(Contractgeneration contractgenerationPsco);
 }

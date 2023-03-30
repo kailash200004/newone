@@ -2,6 +2,7 @@ package com.jci.dao;
 
 import java.util.List;
 
+import com.jci.model.PaymentprocesstellyslipModel;
 import com.jci.model.VerifyTallySlip;
 
 public interface VerificationTallySlipDao {
@@ -15,4 +16,6 @@ public interface VerificationTallySlipDao {
 	public String GettransectionDetails(String tallyNo, String region);
 	//public  VerifyTallySlip findByTally(String tallyslipno);
 	public boolean updatebyTally(String status, int verified,String tallyno);
+	public PaymentprocesstellyslipModel updatepaymentstatusbytally(String tno);
+	public void savepaymentdata(PaymentprocesstellyslipModel createpayment);
 }

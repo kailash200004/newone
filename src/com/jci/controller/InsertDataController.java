@@ -17,6 +17,7 @@ import com.jci.model.CommercialCeilingPriceIntimationModel;
 import com.jci.model.VerifyFarmerModel;
 import com.jci.model.FarmerRegModelDTO;
 import com.jci.model.MarketArrivalModel;
+import com.jci.model.PaymentprocesstellyslipModel;
 import com.jci.model.UserRegistrationModel;
 import com.jci.model.UserRoleModel;
 import com.jci.model.RoleMasterModel;
@@ -29,6 +30,8 @@ import java.util.concurrent.TimeUnit;
 import com.jci.model.RawJuteProcurementAndPayment;
 import com.jci.model.JbaModel;
 import com.jci.model.AreaDetailCode;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import com.jci.model.BalePreparation;
 import javax.servlet.http.HttpSession;
@@ -57,12 +60,15 @@ import com.jci.model.DistrictModel;
 import com.jci.model.StateList;
 import com.jci.model.PincodeModel;
 import java.util.List;
+import java.util.Random;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import com.jci.service.BalePrepareService;
 import com.jci.service.PoliceStationService;
 import com.jci.service.blockService;
+import com.jci.service.Impl.SendMail;
 import com.jci.service.CommercialJuteVarietyGradesPriceService;
 import com.jci.service.MSPPriceCalculationService;
 import com.jci.service.RulingMarketService;
@@ -93,9 +99,19 @@ import com.jci.service.UserRegistrationService;
 import com.jci.service.UserRoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
 import com.jci.service.PincodeService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 @Controller
 public class InsertDataController
@@ -1859,6 +1875,7 @@ public class InsertDataController
             verifyTallySlip.setRateslipno(Integer.parseInt(rateSlipNumber));
             verifyTallySlip.setBinno(Integer.parseInt(binNumber));
             verifyTallySlip.setJutevariety(juteVariety);
+            verifyTallySlip.setPayment_status(0);
             if (drumWiseQuantity1 != "" && drumWiseQuantity1 != null) {
                 verifyTallySlip.setDrumWiseQuantity1(Double.parseDouble(drumWiseQuantity1));
             }
@@ -3465,6 +3482,136 @@ public class InsertDataController
 	        final Gson gson = new Gson();
 	        return this.UserRegistrationService.validateUserMobile(request.getParameter("mobileno")) + "";
 	    }
+	  
+	    @Value("${upload.tallyexcel}")
+	    String path;
+	    @RequestMapping(value = { "update_paymentstatus" }, method = { RequestMethod.POST })
+	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
+	    
+	     String usrname = (String) session.getAttribute("usrname");  
+	    Random num = new Random();
+	    int x= num.nextInt(50);
+	    
+	     //String FileName = "http:\\49.50.79.121:8080\\TallySlipPayment\\"+usrname+"_"+ currentdate11 +"_Payment_slip.xlsx";
+	    
+	     String tno ="";
+	    String tallyno = request.getParameter("tallyno");
+	    tallyno = tallyno.replaceAll("\\[","").replaceAll("\\]","");
+	    String[] tally = tallyno.split(",");
+	    //System.out.println("tallyno============="+tallyno);
+	    List<PaymentprocesstellyslipModel> list = new ArrayList();
+	    PaymentprocesstellyslipModel p1 = new PaymentprocesstellyslipModel();
+	    for(int i=0;i<tally.length;i++)
+	    {
+	           tno = tally[i];
+	           p1 = this.verifyTallySlipService.updatepaymentstatus(tno);
+	           tno = "";
+	           list.add(p1);
+	           //System.out.println("PaymentprocesstellyslipModel+++++"+p1);
+	    }
+	    String filename = "";
+	    try {
+	         String[] columns = {"Amount","Debit A/C No","Beneficiary IFSC code","Beneficiary A/C No","A/C type","Beneficiary Name","Beneficiary Branch","JCI Ref","Sender","Beneficiary Bank","Purchase Date","UTR No","Date"};
+	         usrname = usrname+x+"payment_slip.xlsx";
+	         filename = path+usrname;
+	         Workbook workbook = new XSSFWorkbook(); 
+	          Sheet sheet = workbook.createSheet();
+	         
+	          Font headerFont = workbook.createFont();
+	         headerFont.setBold(true);
+	         headerFont.setFontHeightInPoints((short)11);
+	         headerFont.setColor(IndexedColors.BLACK.getIndex());
+	         
+	          CellStyle headerCellStyle = workbook.createCellStyle();
+	         headerCellStyle.setFont(headerFont);
+	         
+	          
+	          Row headerRow =sheet.createRow(0);
+	         
+	          for(int j=0; j < columns.length; j++)
+	         {
+	                Cell cell = headerRow.createCell(j);
+	                cell.setCellValue(columns[j]);
+	                cell.setCellStyle(headerCellStyle);
+	         }
+	         
+	          int rownum = 1; 
+	         
+	          for(PaymentprocesstellyslipModel paymentlist : list)
+	         {
+	                //save data to database
+	                PaymentprocesstellyslipModel createpayment = new PaymentprocesstellyslipModel();
+	                createpayment.setAmount(paymentlist.getAmount());
+	                createpayment.setDebitAC_no(paymentlist.getDebitAC_no());
+	         createpayment.setBeneficiary_IFSC_code(paymentlist.getBeneficiary_IFSC_code());
+	              createpayment.setBeneficiaryAC_No(paymentlist.getBeneficiaryAC_No());
+	                createpayment.setAC_type(paymentlist.getAC_type());
+	              createpayment.setBeneficiary_name(paymentlist.getBeneficiary_name());
+	              createpayment.setBeneficiary_branch(paymentlist.getBeneficiary_branch());
+	                createpayment.setJCI_Ref("JCI Ref");
+	                createpayment.setSender(paymentlist.getSender());
+	              createpayment.setBeneficiary_bank(paymentlist.getBeneficiary_bank());
+	                createpayment.setPurchase_date(paymentlist.getPurchase_date());
+	                createpayment.setUTR_no("UTR NO");
+	                createpayment.setDate(paymentlist.getDate());
+	                createpayment.setExcel_link(filename);
+	                verifyTallySlipService.savedata(createpayment);
+	                
+	                
+	                //create excel data 
+	                Row row = sheet.createRow(rownum++);
+	              row.createCell(0).setCellValue(String.valueOf(paymentlist.getAmount()));
+	                row.createCell(1).setCellValue(paymentlist.getDebitAC_no()); 
+	               row.createCell(2).setCellValue(paymentlist.getBeneficiary_IFSC_code());  
+	               row.createCell(3).setCellValue(paymentlist.getBeneficiaryAC_No());  
+	                row.createCell(4).setCellValue(paymentlist.getAC_type());  
+	               row.createCell(5).setCellValue(paymentlist.getBeneficiary_name());  
+	               row.createCell(6).setCellValue(paymentlist.getBeneficiary_branch()); 
+	                row.createCell(7).setCellValue("JCI Ref"); 
+	                row.createCell(8).setCellValue(paymentlist.getSender());  
+	               row.createCell(9).setCellValue(paymentlist.getBeneficiary_bank());  
+	                
+	                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
+	                String purchasedate = dateFormat.format(paymentlist.getPurchase_date()); 
+	                row.createCell(10).setCellValue(purchasedate);  
+	                row.createCell(11).setCellValue("UTR NO");
+	                String currentdate = dateFormat.format(paymentlist.getDate());
+	                row.createCell(12).setCellValue(currentdate); 
+	          }
+	         
+	          for(int j=0; j < columns.length; j++)
+	         {
+	                sheet.autoSizeColumn(j);
+	         }
+	         FileOutputStream fileOut = new FileOutputStream(filename);  
+	          workbook.write(fileOut); 
+	          fileOut.close();
+	         workbook.close();
+	         
+	       }   
+	        catch (Exception e)   
+	        {  
+	              e.printStackTrace();  
+	         } 
+	     
+	     
+	     System.out.println("PaymentprocesstellyslipModel+++++"+list);
+	           
+	             //SMTP Mail
+	       SendMail sendMail = new SendMail();
+	              String toEmail = "vishal.vishwakarma@cyfuture.com";
+	              String subject = "Invoice Generated";
+	              String body = "PFA This is your payment details . ";
+	              
+	              sendMail.sendEmail(toEmail, body, subject, filename, usrname);
+	              System.out.println("mail triggered");
+	           
+	     // return new ModelAndView(new RedirectView("verifiedTallySlipList.obj"));
+	              String a ="success";
+	              return a;
+	    }
+
+	  
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);
