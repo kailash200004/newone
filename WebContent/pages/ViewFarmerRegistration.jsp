@@ -123,6 +123,19 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 											}
 										%>
 										
+										<% 
+											if(farmerRegModelList.getIS_VERIFIED()==0)
+											{
+										%>
+												<td><a href="editFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>"/>Edit</a></td>
+										<% 
+											}else{
+										%>
+												<td></td>
+										<%
+											}
+										%>
+										
 									<%--	<td>
 											 <%
 												if(farmerRegModelList.getIS_VERIFIED()==1){
@@ -139,7 +152,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 											%> 
 										</td> --%>
 										
-										<td><a href="editFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>"/>Edit</a></td>
+										
 										<td><a href="deleteFarmer.obj?id=<%=farmerRegModelList.getF_ID()%>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										</tr>
 									<%

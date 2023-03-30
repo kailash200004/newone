@@ -995,7 +995,7 @@ $("#ParentMenuID").change(function(){
 
 <script type="text/javascript">
 
-$(document).ready((){
+$(document).ready(()=>{
     $('#F_REG_FORM').change(function(){
       const file = this.files[0];
       console.log(file);

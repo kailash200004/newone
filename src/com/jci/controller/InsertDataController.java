@@ -1075,8 +1075,6 @@ public class InsertDataController
 			  final String result =this.DailyPurchasefService.findGradePriceJuteVariety(jutevariety, basisNo, cropyr, dpcid);
 			
 			  final Gson gson = new Gson();
-			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result);
-			 System.out.println("result ================== >>>>>>>>>>>>>>>> " + result.split(",")); 
 			 double[] prices=new double[8];
 			 prices[0]=Double.parseDouble(result.split(",")[0]);
 			 prices[1]=Double.parseDouble(result.split(",")[1]);
@@ -1633,6 +1631,7 @@ public class InsertDataController
                 }
                 pathurl = file.getAbsolutePath();
                 final String path = url = "mandate_" + F_DOC_Mandate.getOriginalFilename();
+                farmerRegModel.setIS_VERIFIED(0);
                 farmerRegModel.setF_DOC_Mandate(url);
             }
             this.farmerRegService.create(farmerRegModel);
