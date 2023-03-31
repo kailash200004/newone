@@ -8,9 +8,16 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>JCI | CMS</title>
     <!-- GLOBAL MAINLY STYLES-->
-    <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+   <link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="build/css/intlTelInput.css">
+<link rel="stylesheet" href="build/css/demo.css">
+<link
+	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
+	rel="stylesheet">
     <!-- PLUGINS STYLES-->
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
@@ -20,29 +27,38 @@
      <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="build/css/intlTelInput.css">
+<link rel="stylesheet" href="build/css/demo.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
+	rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
 <script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
 <script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
 <script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
-<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
-	type="text/javascript"></script>
-<script
+<!-- <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+	type="text/javascript"></script> -->
+	<link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link href="./assets/vendors/themify-icons/css/themify-icons.css"
+	rel="stylesheet" />
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>  --> 
+
+<!-- <script
 	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script>
+	type="text/javascript"></script> -->
 <!-- CORE SCRIPTS-->
 
   <link rel="stylesheet" href="assets/css/docsupport/style.css">
   <link rel="stylesheet" href="assets/css/docsupport/prism.css">
   <link rel="stylesheet" href="assets/css/chosen.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
   
   
 
@@ -172,6 +188,7 @@
                                         <div class="col-sm-4 form-group">
 											<label>Bin Number</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
+												class="text-danger"> </span><span id="errbinNo" name="errbinNo"
 												class="text-danger"> </span>
                                         	<input class="form-control" name="binno" id="binno"  type="number" placeholder="Bin Number" onblur="binno_check()" onkeyup="deleteErrorMsg()" min="0" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
 										</div>
@@ -226,13 +243,13 @@
                                              <label>Gross Quantity (in Kgs.)</label>
                                              <span class="text-danger">* </span>&nbsp; <span id="errgquantity" name="errgquantity"
 												class="text-danger"> </span>
-                                        	 <input class="form-control" id="gquantity" name="gquantity"  placeholder="Gross Quantity (in Kgs.)"  onkeyup="netQuantity();deleteErrorMsg();"  type="number" min="0" >
+                                        	 <input class="form-control" id="gquantity" name="gquantity"  placeholder="Gross Quantity (in Kgs.)" step="0.01" onkeyup="netQuantity();deleteErrorMsg();"  type="number" min="0" >
                                         </div>
                                         <div class="col-sm-4 form-group">
                                              <label>Deduction Quantity (in Kgs.)</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="errdeductionQuantity" name="errdeductionQuantity"
 												class="text-danger"> </span>
-											<input class="form-control" id="deductionQuantity" name="deductionQuantity"  placeholder="Deduction Quantity (in Kgs.)"  onkeyup="netQuantity();"  type="number" min="0">
+											<input class="form-control" id="deductionQuantity" name="deductionQuantity" step="0.01" placeholder="Deduction Quantity (in Kgs.)"  onkeyup="netQuantity();"  type="number" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
                                              <label>Net Quantity (in Kgs.)</label>  
@@ -244,14 +261,11 @@
                                     
                                      <div class="row">
                                      
-                                    	
-                                     
-                                        
                                      	<div class="col-sm-4 form-group">
                                              <label>Garsat Rate (Rs./Qtls.)</label>
                                              <span class="text-danger">* </span>&nbsp; <span id="errgarsatRate" name="errgarsatRate"
 												class="text-danger"> </span>
-                                        	 <input class="form-control" name="garsatRate" id="garsatRate" type="number" placeholder="Garsat Rate (Rs./Qtls.)"  readonly="true" onkeyup="deleteErrorMsg()" min="0">
+                                        	 <input class="form-control" name="garsatRate" id="garsatRate" type="number" step="0.01" placeholder="Garsat Rate (Rs./Qtls.)"  readonly="true" onkeyup="deleteErrorMsg()" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label class="required">Varification Slip (330kb-1MB)</label><span class="text-danger">* </span>&nbsp; 
@@ -266,7 +280,7 @@
                                              <label >Amount Payable</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="erramountPayable" name="erramountPayable" onkeyup="deleteErrorMsg()"
 												class="text-danger"> </span>
-											<input class="form-control" name="amountPayable" id="amountPayable" type="number" placeholder="Amount Payable" readonly="true" onkeyup="deleteErrorMsg()">
+											<input class="form-control" name="amountPayable" id="amountPayable" type="number" placeholder="Amount Payable" readonly="true" onkeyup="deleteErrorMsg()" step="0.01">
                                         </div>
                                         </div>
                                                <div class="col-sm-4 form-group">
@@ -292,8 +306,8 @@
                                     </div>
                                    
                                   <div class="form-group"> 
-                                    <button class="btn btn-default" type="button"    id = "calc">Calculate</button>
-                                     <button class="btn btn-default" type="submit" id="button">Submit</button>
+                                    <button class="btn btn-primary" type="button"    id = "calc">Calculate</button>
+                                     <button class="btn btn-primary" type="submit" id="button">Submit</button>
                                     </div>
                                     <div class="form-group"> 
                                    <input type="hidden" id="g0" name="g0" value="0">
@@ -326,6 +340,58 @@
     <script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
 </body>
+
+<script>
+	$('#amountPayable').on('change', function() {
+		
+	    var amountPayable = document.getElementById('amountPayable').value;
+	    
+	    var amountPayable = parseFloat(amountPayable).toFixed(2);
+	     $('input[name=amountPayable').val(amountPayable);
+	})
+	</script>
+	
+	<script>
+	$('#garsatRate').on('change', function() {
+		
+	    var garsatRate = document.getElementById('garsatRate').value;
+	    
+	    var garsatRate = parseFloat(garsatRate).toFixed(2);
+	     $('input[name=garsatRate').val(garsatRate);
+	})
+	</script>
+	
+	
+	<script>
+	$('#deductionQuantity').on('change', function() {
+		
+	    var deductionQuantity = document.getElementById('deductionQuantity').value;
+	    
+	    var deductionQuantity = parseFloat(deductionQuantity).toFixed(2);
+	     $('input[name=deductionQuantity').val(deductionQuantity);
+	     var netquantity = document.getElementById('netquantity').value;
+		    
+		    var netquantity = parseFloat(netquantity).toFixed(2);
+		     $('input[name=netquantity').val(netquantity);
+	})
+	</script>
+	
+	<script>
+	$('#gquantity').on('change', function() {
+		
+	    var gquantity = document.getElementById('gquantity').value;
+	    
+	    var gquantity = parseFloat(gquantity).toFixed(2);
+	     $('input[name=gquantity').val(gquantity);
+	     var netquantity = document.getElementById('netquantity').value;
+		    
+		    var netquantity = parseFloat(netquantity).toFixed(2);
+		     $('input[name=netquantity').val(netquantity);
+	})
+	</script>
+	
+	
+	
 	<script>
     function allow_alphabets(element){
         let textInput = element.value;
@@ -354,7 +420,6 @@
 			document.getElementById("netquantity").value ="";
 			document.getElementById("errdeductionQuantity").innerHTML = "Deduction Quantity can not be greater than Gross Quantity!";
 		}
-		
 	}
 	</script>
 	<script>
@@ -368,7 +433,6 @@
 		else if(lengthr.length >=3 || lengthr.length <= 6)  {
 	   			  $("#errorrateslipno").hide();
 		}
-		
 	}
 	
 	</script>
@@ -383,15 +447,12 @@
 		else if(lengthr.length >=3 || lengthr.length <= 6)  {
 	   			  $("#errortallyslipno").hide();
 		}
-		
 	}
 	
 	</script>
 	<script type="text/javascript">
-	  
 	$(document).ready(function(){
 		  $('#farmerregno').on('change', function(evt, params) {
-			 
 			  var farmerNo = $("#farmerregno").chosen().val().toString();
 			  if(farmerNo.length==11){
 		        	 $.ajax({
@@ -405,8 +466,6 @@
 		 					else{
 		 						var data= jQuery.parseJSON(result);
 			 					for (var i = 0; i< data.length; i++){
-			 						
-			 						
 				 					document.getElementById("regFarmer").innerHTML = "<b>Farmer's Name:-</b>   "+data[i].split("-")[0]+"<br>";
 				 					 
 				 					document.getElementById("regMolile").innerHTML = "<b>Mobile No.:-</b>  "+data[i].split("-")[1]+"<br>";
@@ -419,9 +478,6 @@
 		        }
 			   
 			  });
-		  
-		    
-		    
 		});
 	</script>
 	<script>
@@ -439,8 +495,6 @@
 	 					else{
 	 						var data= jQuery.parseJSON(result);
 		 					for (var i = 0; i< data.length; i++){
-		 						
-		 						
 			 					document.getElementById("regFarmer").innerHTML = "<b>Farmer's Name:-</b>   "+data[i].split("-")[0]+"<br>";
 			 					 
 			 					document.getElementById("regMolile").innerHTML = "<b>Mobile No.:-</b>  "+data[i].split("-")[1]+"<br>";
@@ -454,6 +508,7 @@
 	}
 	
 	</script>
+
 	<script>
 	 function  binno_check(){
 		 var basis;
@@ -464,23 +519,18 @@
 			url:"getbinno.obj",
 			data: {"binno" :binNo}, 
 			success:function(result){
-			//	alert(result);
-				if(result != "null"){
+				if(result != "null" && result != "empty"){
 					//alert("yes")
 					 $('#basis option[value=""]').remove();
-					// $("p").off("click");
+					 $("#errbinNo").html("");
 					const myArray= result.split("-");
 	 					basis =myArray[0];
 	 					jutevariety = myArray[1];
 	 					var htm = "<option disabled selected value>-Select-</option>";
 	 					htm = '<option value="'+jutevariety+'">'+jutevariety+"</option>"			
 						$("#jutevariety").html(htm);
-	 					
-	 					
-	 					
 	 					var html = '<option value="'+basis+'">'+basis+"</option>"			
 							$("#basis").html(html);
-	 					
 	 					var msp_no;
 	 					if(basis=="msp" ||basis=="MSP"){
 	 						 msp_no=1;
@@ -493,8 +543,8 @@
 	 						$("#tdd").show();
 	 						$('#garsatRate').prop('readonly', false);
 	 						$('#tdbaseprice').prop('readonly', true);
-	 						 
 	 					}
+	 					
 	 					$.ajax({
 	 						type:"GET",
 	 						url:"findGradeOnJuteVariety.obj",
@@ -516,7 +566,6 @@
 	 								$('#form2 input ').remove();
 	 								$('#form2 label').remove();
 	 							} 
-	 							
 	 					        for (i=0;i<data.length;i++){
 	 					        	$('<div class="form-group">').appendTo('#form2');
 	 					        	$('<label/>').text(data[i]+" : ").appendTo('#form2');
@@ -524,21 +573,12 @@
 	 			 				    $('<input/>').attr({ type: 'number', id: 'grade'+i, name: 'test[]',value:'0', min:'0'  }).appendTo('#form2');
 	 			 				   
 	 			 				   $('</div>').appendTo('#form2');
-	 			 				   
-	 			 				  
 	 					        }
-	 					       
-	 					        
 	 			 				 } 
-	 				
-	 					 
 	 						});	
-	 					
-	 					//console.log(basis);
-	 					//console.log(jutevariety);
+
  					}
 				else if (result == "null"){
-					//alert("else");
 					var htm = "<option disabled selected value>-Select-</option>";
  					htm += '<option value="msp">MSP</option>'
  					htm += '<option value="commercial">Commercial</option>'
@@ -546,7 +586,23 @@
  					$("#form2").html("");
  					htm = '<option value="">-Select-</option>'			
 					$("#jutevariety").html(htm);
+ 					
+ 					$("#errbinNo").html("Bin has been closed! ");
+ 					
 				}
+				else if (result == "empty"){
+					var htm = "<option disabled selected value>-Select-</option>";
+ 					htm += '<option value="msp">MSP</option>'
+ 					htm += '<option value="commercial">Commercial</option>'
+					$("#basis").html(htm);
+ 					$("#form2").html("");
+ 					htm = '<option value="">-Select-</option>'			
+					$("#jutevariety").html(htm);
+ 					
+ 					$("#errbinNo").html("");
+ 					
+				}
+			
 			
 			}
 		});

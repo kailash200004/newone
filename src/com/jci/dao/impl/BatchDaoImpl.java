@@ -125,14 +125,7 @@ public class BatchDaoImpl implements BatchDao {
 	@Override
 	public List<BinPurchaseMappingDTO> GetBinPurchasemappingdetails(String cropyr,String dadatepurchasetepurchase,String binNo) {
 		StringBuilder sb = new StringBuilder();
-		System.out.println("GetBinPurchasemappingdetails"+cropyr);
-		System.out.println("GetBinPurchasemappingdetails"+dadatepurchasetepurchase);
-		System.out.println("GetBinPurchasemappingdetails"+binNo);	
 
-		/*
-		 * sb.append("select * from jciprocurement where binno='"+binNo+"' AND cropyr='"
-		 * +cropyr+"' AND datepurchase='"+dadatepurchasetepurchase+"' ");
-		 */
 		sb.append( "select * FROM jcidpc where binno='"+binNo+"' AND cropyr='"+cropyr+"'");
 		String sql = sb.toString();
 		List<BinPurchaseMappingDTO> ll = new ArrayList<>();		
@@ -154,7 +147,10 @@ public class BatchDaoImpl implements BatchDao {
 				binPurchaseMappingDTO.setNetQty(rs.getString("netquantity")); 				
 				binPurchaseMappingDTO.setGarsatRate(rs.getString("grasatrate"));
 				binPurchaseMappingDTO.setValue(rs.getString("fibervalue"));
-				
+				/*
+				 * binPurchaseMappingDTO.setGrossQty(rs.getString("fibervalue"));
+				 * binPurchaseMappingDTO.setNetQty(rs.getString("fibervalue"));
+				 */
 				ll.add(binPurchaseMappingDTO);	
 			}
 
@@ -168,9 +164,11 @@ public class BatchDaoImpl implements BatchDao {
 	
 	@Override
 	public List<String> GetTotalofPurchaseParams(String BinNo,String cropYr,String dateOfPurchase) {
-		System.out.println("GetTotalofPurchaseParams"+BinNo);
-		System.out.println("GetTotalofPurchaseParams"+cropYr);
-		System.out.println("GetTotalofPurchaseParams"+dateOfPurchase);	
+		/*
+		 * System.out.println("GetTotalofPurchaseParams"+BinNo);
+		 * System.out.println("GetTotalofPurchaseParams"+cropYr);
+		 * System.out.println("GetTotalofPurchaseParams"+dateOfPurchase);
+		 */
 
 		String querystr="";
 		List<String> result = new ArrayList<>();
@@ -220,7 +218,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P9", TotalValue);		
 
 		List<String> results = query.list();
-		System.out.println("binPurchaseMappingData===========-----  "+results);
+		//System.out.println("binPurchaseMappingData===========-----  "+results);
 		
 		CalculateGainBasedonBinFromproc(CropYr,binNo);
 		return results;
@@ -238,8 +236,9 @@ public class BatchDaoImpl implements BatchDao {
 		Query query = session.createSQLQuery("{CALL [GetValue_fromBale_Preperation](:P1,:P2)}");
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
+		System.out.println("GetValue_fromBale_Preperation=============--------- "+query.list());
 		List<String> results = query.list();
-		System.out.println("GetValue_fromBale_Preperation=============--------- "+results);
+		
 		return results;
 
 	}
@@ -286,6 +285,7 @@ public class BatchDaoImpl implements BatchDao {
 				binListFromDbDTO.setCrop_Year(rs.getString("crop_yr"));
 				binListFromDbDTO.setFinGain(rs.getString("Fin_gain"));
 				binListFromDbDTO.setWeightGain(rs.getString("weight_gain"));
+				
 				ll.add(binListFromDbDTO);	
 			}
 
@@ -317,7 +317,7 @@ public class BatchDaoImpl implements BatchDao {
 		  String jute= juteprice.toString().replace("[", "").replace("]", "");;
 		  if(jute.contentEquals("null"))
 			  jute="0.0";
-		  System.out.println("priceOfJute====>>>> "+jute);
+		 // System.out.println("priceOfJute====>>>> "+jute);
 		  
 		  
 	if(basis.equalsIgnoreCase("msp")) {
@@ -345,7 +345,7 @@ public class BatchDaoImpl implements BatchDao {
 				SQLQuery querystr= sessionn.createSQLQuery(ropePrice);
 				ropeprice= querystr.list();
 				String rope= ropeprice.toString().replace("[", "").replace("]", "");
-				System.out.println("ropeprice====>>>> "+rope);
+				//System.out.println("ropeprice====>>>> "+rope);
 				 if(rope.contentEquals("null") )
 					 rope="0.0";
 			  

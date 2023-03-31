@@ -17,7 +17,40 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
- 
+ <script>
+
+       $(document).ready(function(){
+    	   var myVar = '<%=(String) session.getAttribute("region")%>';
+
+							  //alert(myVar);
+
+							$.ajax({
+										type : "GET",
+										url : "findDpcByRegion.obj",
+										data : {"id" : myVar},
+										success : function(result) {
+
+											var data = jQuery.parseJSON(result);
+											var html = "<option disabled selected value>-Select-</option>";
+											for (var i = 0; i < data.length; i++) {
+												console.log(data[i].split("-")[0]
+																+ " "
+																+ data[i]
+																		.split("-")[1]);
+												html += "<option value="
+														+ data[i].split("-")[0]
+														+ ">"
+														+ data[i].split("-")[1]
+														+ "</option>"
+											}
+											$("#place_of_packing").html(html);
+
+										}
+
+									});
+
+						});
+	</script>
     <script>
     
 	function binno_check(){
@@ -40,7 +73,7 @@
     		    		url: 'InsertBinDataTodb.obj',
     		    		data:{"FinYear":finyr, "binNO":binno,"FinGain":data[0][0], "WeightGain":data[0][1]},
     		    		success: function(data1){
-    		    			
+    		    			alert("Finacial Gain and Weight gain has been Calculated");
     		    		}
     		    	});	
     		    	
@@ -51,6 +84,33 @@
 	}
     
     </script>
+    <script>
+    $(document).ready(function(){
+$("#FinYear").on("change", function() {
+	var cropyr=document.getElementById("FinYear").value;
+	  var dpcid=  document.getElementById("place_of_packing").value;
+	//alert(cropyr);
+	//alert("dpcid  "+dpcid);
+	 $.ajax({
+		   type:"GET",
+		   url:"findBinno.obj",
+		   data:jQuery.param({"cropyr":cropyr, "dpcid":dpcid}),
+		   success:function(result){
+			   var data= jQuery.parseJSON(result);
+			   var html = "<option disabled selected value>-Select-</option>";
+			     for (var i = 0; i< data.length; i++){
+			    	 
+				 html += "<option value=" +data[i]+">"+data[i]+"</option>"
+				// alert(data);
+			   }
+			   $("#binNO").html(html);
+		   
+	   }
+		   
+	   }); 
+});
+    });
+</script>
 </head>
 
 <body class="fixed-navbar">
@@ -74,6 +134,15 @@
                             <div class="ibox-body">
                                 <form method="POST">
                                     <div class="row">
+                                    <div class="col-sm-4 form-group">
+											<label class="required">Packing Place</label> <select
+												name="place_of_packing" id="place_of_packing"
+												class="form-control">
+												<option value="">-Select-</option>
+
+											</select>
+										</div>
+                                    
                                         <div class="col-sm-4 form-group">
                                             <label>Financial Year</label>
                                             <select class="form-control" name="FinYear"  id= "FinYear"  placeholder="Financial Year" required>
@@ -96,9 +165,7 @@
 												class="text-danger"> </span>
                       
                                         	 <select class="form-control" name="binNO" id="binNO" onblur="binno_check()">
-                                                                           <option disabled selected value>-Select-</option>
-                                                                           <option  value="321">-321-</option>
-                                                                     </select>
+                                                                          
 										</div>
                                     	
                                         

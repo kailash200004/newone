@@ -30,7 +30,6 @@ import java.util.concurrent.TimeUnit;
 import com.jci.model.RawJuteProcurementAndPayment;
 import com.jci.model.JbaModel;
 import com.jci.model.AreaDetailCode;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import com.jci.model.BalePreparation;
@@ -61,7 +60,6 @@ import com.jci.model.StateList;
 import com.jci.model.PincodeModel;
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
@@ -97,10 +95,8 @@ import com.jci.service.AddOrganisationService;
 import com.jci.service.FarmerRegistrationService;
 import com.jci.service.UserRegistrationService;
 import com.jci.service.UserRoleService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-
 import com.jci.service.PincodeService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -479,7 +475,6 @@ public class InsertDataController
             final boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
             final String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
             final FarmerRegModel farmerRegModel = new FarmerRegModel();
-          //  System.out.println("==========>>>>>>>>>>>>>>>>  " + farmerName);
             farmerRegModel.setF_NAME(farmerName);
             farmerRegModel.setCaste(caste);
             farmerRegModel.setGender(gender);
@@ -1497,13 +1492,7 @@ public class InsertDataController
                 farmerNameFinal = null;
               
             }
-			/*
-			 * String farmerAddressFinal; if (address.equalsIgnoreCase(farmerAddressDb)) {
-			 * farmerAddressFinal = address;
-			 * System.out.println("address===================>>>>>>>>>>>> "+address); } else
-			 * { farmerAddressFinal = null;
-			 * System.out.println("address===================>>>>>>>>>>>>null "); }
-			 */
+			
             String idProofTypeFinal;
             if (idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) {
                 idProofTypeFinal = idProofType;
@@ -1524,7 +1513,6 @@ public class InsertDataController
             }
             final VerifyFarmerModel verifyFarmer = new VerifyFarmerModel();
             verifyFarmer.setAccountno(accNoDbFinal);
-        //    verifyFarmer.setAddress(farmerAddressFinal);
             verifyFarmer.setFarmername(farmerNameFinal);
             verifyFarmer.setIfsccode(ifscDbFinal);
             verifyFarmer.setRegno(farmerRegNoFinal);
@@ -1803,7 +1791,6 @@ public class InsertDataController
             String errors = request.getParameter("error");
             final String status = request.getParameter("status");
             final String grsqty = request.getParameter("grsqty");
-            System.out.println("errors" + errors + "   status=" + status);
             int is_verified = 0;
             if (status.equalsIgnoreCase("FA")) {
                 is_verified = 1;
@@ -2213,7 +2200,7 @@ public class InsertDataController
             }
             this.marketArrivalService.create(rulingMarket);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
-            System.out.println(rulingMarket);
+            
         }
         catch (Exception e) {
             System.out.println("Error in saving ruling market data    " + e);
@@ -2244,7 +2231,9 @@ public class InsertDataController
             final BatchIdentificationModel batch = new BatchIdentificationModel();
             batch.setDpcnames(nameOfDpc);
             batch.setCropyr(cropyear);
-            batch.setBinnumber(binNumber);
+            int bin = Integer.parseInt(binNumber)+1;
+            String binno =String.valueOf(bin);
+            batch.setBinnumber(binno);
             batch.setJutevariety(jutevariety);
             batch.setBasis(basis);
             batch.setCarryoverlossqty(carryForwardLoose);
@@ -3210,7 +3199,6 @@ public class InsertDataController
     @RequestMapping(value = { "dpc2" }, method = { RequestMethod.GET })
     public void dpc2(final HttpServletRequest request) {
         final List<DailyPurchaseConfModel> dpclist = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.dpc2();
-        System.out.println("dpclist controlle = "+dpclist.size());
         for (int i = 0; i < dpclist.size(); ++i) {
             this.DailyPurchasefService.create((DailyPurchaseConfModel)dpclist.get(i));
         }
@@ -3221,10 +3209,7 @@ public class InsertDataController
 		String str = request.getParameter("binNo");
 		Gson gson = new Gson();
 		List<String> DaysCount = batchService.FinddetailsbasedonBinNo(str);
-
 		String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
-		System.out.println("Bin No value from controller is" + DaysCount.toString());
-
 		return gson.toJson(DaysCount);
 	}
 
@@ -3256,10 +3241,7 @@ public class InsertDataController
 		String CropYr = request.getParameter("CropYr");
 		String dateOfPurch = request.getParameter("dateOfPurch");
 		Gson gson = new Gson();
-		
 		List<String> DaysCount = batchService.GetTotalofPurchaseParams(binNo, CropYr, dateOfPurch);
-		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
-		//System.out.println("Edit JBA LIST value is " + DaysCount1);
 		return gson.toJson(DaysCount);
 	}
 	
@@ -3272,17 +3254,11 @@ public class InsertDataController
 		String JuteVariety = request.getParameter("JuteVariety");
 		String CropYr = request.getParameter("CropYr");
 		String binNo = request.getParameter("binNo");
-		
 		String totNetQty = request.getParameter("totNetQty");
 		String totGarsat = request.getParameter("totGarsat");
 		String totValue = request.getParameter("totValue");
-		
-		
 		Gson gson = new Gson();
-		
 		List<String> DaysCount = batchService.InsertToBinPurchaseMapping(dateOfPurch, dpcCode, Basis, JuteVariety, CropYr, binNo, totNetQty, totGarsat, totValue);
-		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
-		//System.out.println("Edit JBA LIST value is " + DaysCount1);
 		return gson.toJson(DaysCount);
 	}
 	
@@ -3297,12 +3273,8 @@ public class InsertDataController
 	public String calculateGainFromproc(HttpServletRequest request) {
 		String FinYear = request.getParameter("FinYear");
 		String binNO = request.getParameter("binNO");
-		
 		Gson gson = new Gson();
-		
 		List<String> DaysCount = batchService.CalculateGainBasedonBinFromproc(FinYear, binNO);
-		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
-		//System.out.println("Edit JBA LIST value is " + DaysCount1);
 		return gson.toJson(DaysCount);
 	}
 	
@@ -3311,15 +3283,10 @@ public class InsertDataController
 	public String InsertBinDataTodb(HttpServletRequest request) {
 		String FinYear = request.getParameter("FinYear");
 		String binNO = request.getParameter("binNO");
-		
 		String FinGain = request.getParameter("FinGain");
 		String WeightGain = request.getParameter("WeightGain");
-		//System.out.println("FinYear = "+FinYear+" binNO = "+binNO+" FinGain = "+FinGain+" WeightGain = "+WeightGain);
 		Gson gson = new Gson();
-		
 		List<String> DaysCount = batchService.InsertTotalwithGaininBinTabledb(FinYear, binNO, FinGain, WeightGain);
-		//String DaysCount1 = DaysCount.toString().replace("[", "").replace("]", "");
-		//System.out.println("Edit JBA LIST value is " + DaysCount1);
 		return gson.toJson(DaysCount);
 	}
 	
@@ -3330,7 +3297,7 @@ public class InsertDataController
 		try {
 			binPurchaseList = batchService.GetBinListFromDb();
 		} catch (Exception e) {
-			 //Todo
+			 System.out.println(e.getLocalizedMessage());
 		}		
 		ModelAndView mv = new ModelAndView("ViewBinDataFromDb");
 		mv.addObject("binPurchaseList", binPurchaseList);
@@ -3343,6 +3310,7 @@ public class InsertDataController
         final String result = rawJuteProcurAndPayService.getbinno(request.getParameter("binno"));
         return result;
     }
+    
     @ResponseBody
 	@RequestMapping(value = "userProfile", method = RequestMethod.GET)
 	public ModelAndView getuserprofile(HttpServletRequest request) {
@@ -3367,17 +3335,14 @@ public class InsertDataController
 	public ModelAndView updateProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
 	{
 		ModelAndView mv = new ModelAndView("userProfile");
-		//System.out.println("=============yes");
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
-		//	System.out.println("refid=============   "+refid);
 			UserRegistrationModel userRegistration = userRegService.find(refid);
 
 				String mobileno =  request.getParameter("mobile");
 				String password =  request.getParameter("password");
 				userRegistration.setRefid(refid);
 				userRegistration.setMobileno(mobileno);
-				
 				if(!password.isEmpty()) {
 					userRegistration.setPassword(password);
 					userRegistration.setDatelastchangepassword(new Date());
@@ -3411,10 +3376,8 @@ public class InsertDataController
 	public ModelAndView updatesaveUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
 	{
 		ModelAndView mv = new ModelAndView("edituserProfile");
-		//System.out.println("=============yes");
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
-		//	System.out.println("refid=============   "+refid);
 			UserRegistrationModel userRegistration = userRegService.find(refid);
 				String username =  request.getParameter("username"); 
 				String employeeid = request.getParameter("employeeid");
@@ -3447,7 +3410,6 @@ public class InsertDataController
 		}
 		return mv;
 	}
-
 	
 	  @RequestMapping({ "bnaDelete" })
     public ModelAndView bnaDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
@@ -3459,9 +3421,6 @@ public class InsertDataController
             mv.addObject("UserRegistrationList", (Object)allUserRegistration);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n");
             return new ModelAndView((View)new RedirectView("viewUserRegistration.obj"));
-          
-            
-            
         }
         catch (Exception ex) {
             return mv;
@@ -3487,18 +3446,14 @@ public class InsertDataController
 	    String path;
 	    @RequestMapping(value = { "update_paymentstatus" }, method = { RequestMethod.POST })
 	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
-	    
-	     String usrname = (String) session.getAttribute("usrname");  
+	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayment\\";
+	    	String usrname = (String) session.getAttribute("usrname");  
 	    Random num = new Random();
 	    int x= num.nextInt(50);
-	    
-	     //String FileName = "http:\\49.50.79.121:8080\\TallySlipPayment\\"+usrname+"_"+ currentdate11 +"_Payment_slip.xlsx";
-	    
 	     String tno ="";
 	    String tallyno = request.getParameter("tallyno");
 	    tallyno = tallyno.replaceAll("\\[","").replaceAll("\\]","");
 	    String[] tally = tallyno.split(",");
-	    //System.out.println("tallyno============="+tallyno);
 	    List<PaymentprocesstellyslipModel> list = new ArrayList();
 	    PaymentprocesstellyslipModel p1 = new PaymentprocesstellyslipModel();
 	    for(int i=0;i<tally.length;i++)
@@ -3507,39 +3462,30 @@ public class InsertDataController
 	           p1 = this.verifyTallySlipService.updatepaymentstatus(tno);
 	           tno = "";
 	           list.add(p1);
-	           //System.out.println("PaymentprocesstellyslipModel+++++"+p1);
 	    }
 	    String filename = "";
 	    try {
 	         String[] columns = {"Amount","Debit A/C No","Beneficiary IFSC code","Beneficiary A/C No","A/C type","Beneficiary Name","Beneficiary Branch","JCI Ref","Sender","Beneficiary Bank","Purchase Date","UTR No","Date"};
 	         usrname = usrname+x+"payment_slip.xlsx";
-	         filename = path+usrname;
+	         filename = path1+usrname;
 	         Workbook workbook = new XSSFWorkbook(); 
 	          Sheet sheet = workbook.createSheet();
-	         
 	          Font headerFont = workbook.createFont();
 	         headerFont.setBold(true);
 	         headerFont.setFontHeightInPoints((short)11);
 	         headerFont.setColor(IndexedColors.BLACK.getIndex());
-	         
 	          CellStyle headerCellStyle = workbook.createCellStyle();
 	         headerCellStyle.setFont(headerFont);
-	         
-	          
 	          Row headerRow =sheet.createRow(0);
-	         
 	          for(int j=0; j < columns.length; j++)
 	         {
 	                Cell cell = headerRow.createCell(j);
 	                cell.setCellValue(columns[j]);
 	                cell.setCellStyle(headerCellStyle);
 	         }
-	         
 	          int rownum = 1; 
-	         
 	          for(PaymentprocesstellyslipModel paymentlist : list)
 	         {
-	                //save data to database
 	                PaymentprocesstellyslipModel createpayment = new PaymentprocesstellyslipModel();
 	                createpayment.setAmount(paymentlist.getAmount());
 	                createpayment.setDebitAC_no(paymentlist.getDebitAC_no());
@@ -3556,9 +3502,6 @@ public class InsertDataController
 	                createpayment.setDate(paymentlist.getDate());
 	                createpayment.setExcel_link(filename);
 	                verifyTallySlipService.savedata(createpayment);
-	                
-	                
-	                //create excel data 
 	                Row row = sheet.createRow(rownum++);
 	              row.createCell(0).setCellValue(String.valueOf(paymentlist.getAmount()));
 	                row.createCell(1).setCellValue(paymentlist.getDebitAC_no()); 
@@ -3570,7 +3513,6 @@ public class InsertDataController
 	                row.createCell(7).setCellValue("JCI Ref"); 
 	                row.createCell(8).setCellValue(paymentlist.getSender());  
 	               row.createCell(9).setCellValue(paymentlist.getBeneficiary_bank());  
-	                
 	                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
 	                String purchasedate = dateFormat.format(paymentlist.getPurchase_date()); 
 	                row.createCell(10).setCellValue(purchasedate);  
@@ -3578,7 +3520,6 @@ public class InsertDataController
 	                String currentdate = dateFormat.format(paymentlist.getDate());
 	                row.createCell(12).setCellValue(currentdate); 
 	          }
-	         
 	          for(int j=0; j < columns.length; j++)
 	         {
 	                sheet.autoSizeColumn(j);
@@ -3587,26 +3528,16 @@ public class InsertDataController
 	          workbook.write(fileOut); 
 	          fileOut.close();
 	         workbook.close();
-	         
 	       }   
 	        catch (Exception e)   
 	        {  
 	              e.printStackTrace();  
 	         } 
-	     
-	     
-	     System.out.println("PaymentprocesstellyslipModel+++++"+list);
-	           
-	             //SMTP Mail
 	       SendMail sendMail = new SendMail();
 	              String toEmail = "vishal.vishwakarma@cyfuture.com";
 	              String subject = "Invoice Generated";
 	              String body = "PFA This is your payment details . ";
-	              
 	              sendMail.sendEmail(toEmail, body, subject, filename, usrname);
-	              System.out.println("mail triggered");
-	           
-	     // return new ModelAndView(new RedirectView("verifiedTallySlipList.obj"));
 	              String a ="success";
 	              return a;
 	    }

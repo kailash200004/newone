@@ -370,6 +370,12 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	public String getbinno(String binno) {
 	
 	 String basis_variety= "null";
+	 String querystr1= "select * from tbl_jci_bin where binNo = '" +binno+"'";
+	 Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx1 = session1.beginTransaction();
+		SQLQuery query1 = session1.createSQLQuery(querystr1);
+		List<Object[]> rows1=query1.list();
+		if(rows1.isEmpty()) {
 	 String querystr= "SELECT top 1 basis, jutevariety FROM jciprocurement where binno = '" +binno+"'";
 	 Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -378,9 +384,12 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		if(!rows.isEmpty()) {
 		for(Object[] cart : rows) 
 			basis_variety= (cart[0].toString()+"-"+cart[1].toString());	
+			}
+		else basis_variety ="empty";
 		}
-	
-		return basis_variety;}
+		else basis_variety = "null";
+		return basis_variety;
+		}
 
 
 

@@ -311,7 +311,7 @@ $("#cropyr").on("change", function() {
 $("#dpcname").on("change", function() {
 	var cropyr=document.getElementById("cropyr").value;
 	  var dpcid=  document.getElementById("dpcname").value;
-	alert(cropyr);
+	//alert(cropyr);
 	 $.ajax({
 		   type:"GET",
 		   url:"findBinno.obj",

@@ -104,8 +104,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			 grade6= ((BigDecimal)o[5]).doubleValue();
 			 grade7= ((BigDecimal)o[6]).doubleValue();
 			 grade8= ((BigDecimal)o[7]).doubleValue();
-			 System.out.println("dailyresult=============================== "+grade1+","+grade2+","+grade3+","+grade4+","+grade5+","+grade6+","+grade7+","+grade8);
-			 
+		
 		 }
 		
 		return (grade1+","+grade2+","+grade3+","+grade4+","+grade5+","+grade6+","+grade7+","+grade8);
@@ -120,8 +119,6 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		int j;
 		List<Object[]> result1 = new ArrayList<>();
 		List<Object[]> result = new ArrayList<>();
-		
-		
 		querystr2= "select ptsid from jciprocurement where flag_dpc2 = 0 group by ptsid,datepurchase,cropyr,jutevariety,placeofpurchase ";
 		Session session2 = sessionFactory.getCurrentSession();
 		Transaction tx2 = session2.beginTransaction();
@@ -130,40 +127,34 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		String ptsid = result1.toString(); 
 		ptsid = result1.toString() .replace("]", "");
 		ptsid = ptsid.toString() .replace("[", "");
-		System.out.println("ptsid============>>>>>>>>>>>>>>  "+ptsid);
-			
-
-		querystr1 = "select  (sum(x.g1)/sum(x.netqty))as g11, (sum(x.g2)/sum(x.netqty)) as g22, (sum(x.g3)/sum(x.netqty))as g33, (sum(x.g4)/sum(x.netqty))as g44, (sum(x.g5)/sum(x.netqty))as g55, (sum(x.g6)/sum(x.netqty))as g66, (sum(x.g7)/sum(x.netqty)) as g77, (sum(x.g8)/sum(x.netqty)) as g88,x.datepurchase,x.cropyr,x.jutevariety,x.placeofpurchase,sum(x.netqty)as netqty, x.basis as basis, (sum(x.value)/sum(x.netqty))as garsat, x.binno, x.amountpayable \r\n" + 
-				"		\r\n" + 
-				"								from\r\n" + 
-				"								(select netquantity as netqty,(grasatrate*netquantity)as value,\r\n" + 
-				"								(grade1 * netquantity) as g1,\r\n" + 
-				"								(grade2 * netquantity) as g2,\r\n" + 
-				"								(grade3 * netquantity) as g3,\r\n" + 
-				"								(grade4 * netquantity) as g4,\r\n" + 
-				"								(grade5 * netquantity) as g5,\r\n" + 
-				"								(grade6 * netquantity) as g6,\r\n" + 
-				"								(grade7 * netquantity) as g7,\r\n" + 
-				"								(grade8 * netquantity) as g8,\r\n" + 
-				"								datepurchase, cropyr,jutevariety,placeofpurchase, basis, binno, amountpayable from [XMWJCI].[dbo].[jciprocurement]\r\n" + 
-				"								where flag_dpc2 = 0\r\n" + 
-				"								group by grade1, grade2, grade3,grade4, grade5, grade6, grade7, grade8, netquantity,grasatrate,datepurchase,cropyr,jutevariety,placeofpurchase, basis, binno, amountpayable)x \r\n" + 
-				"								group by x.datepurchase,x.cropyr,x.jutevariety,x.placeofpurchase, x.basis, x.binno, x.amountpayable\r\n" + 
-				"								;";
+		querystr1 = "select  (sum(x.g1)/sum(x.netqty))as g11, (sum(x.g2)/sum(x.netqty)) as g22, (sum(x.g3)/sum(x.netqty))as g33, (sum(x.g4)/sum(x.netqty))as g44, (sum(x.g5)/sum(x.netqty))as g55, (sum(x.g6)/sum(x.netqty))as g66, (sum(x.g7)/sum(x.netqty)) as g77, (sum(x.g8)/sum(x.netqty)) as g88,x.datepurchase,x.cropyr,x.jutevariety,x.placeofpurchase,sum(x.netqty)as netqty, x.basis as basis, (sum(x.value)/sum(x.netqty))as garsat, x.binno, x.amountpayable,sum(x.gross)as gross, sum(x.deduction)as deduction  \n"
+				+ "					 \n"
+				+ "												from \n"
+				+ "												(select netquantity as netqty, grossquantity as gross,deductionquantity as deduction,(grasatrate*netquantity)as value,\n"
+				+ "												(grade1 * netquantity) as g1, \n"
+				+ "												(grade2 * netquantity) as g2, \n"
+				+ "												(grade3 * netquantity) as g3, \n"
+				+ "												(grade4 * netquantity) as g4, \n"
+				+ "												(grade5 * netquantity) as g5,  \n"
+				+ "												(grade6 * netquantity) as g6,  \n"
+				+ "												(grade7 * netquantity) as g7,  \n"
+				+ "												(grade8 * netquantity) as g8, \n"
+				+ "												datepurchase, cropyr,jutevariety,placeofpurchase, basis, binno, amountpayable from [XMWJCI].[dbo].[jciprocurement]\n"
+				+ "												where flag_dpc2 = 0 \n"
+				+ "												group by grade1, grade2, grade3,grade4, grade5, grade6, grade7, grade8, netquantity,grasatrate,datepurchase,cropyr,jutevariety,placeofpurchase, basis, binno, amountpayable, grossquantity, deductionquantity)x \n"
+				+ "												group by x.datepurchase,x.cropyr,x.jutevariety,x.placeofpurchase, x.basis, x.binno, x.amountpayable, x.gross, x.deduction\n"
+				+ "												";
 		
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr1);
 		result = query.list();
 		try {
-		//for(int i=0; i<query.list().size(); i++) {
+
 			for(Object[] o: result) {
-			//System.out.println("=========>>>>>>>>>>>>query.list().size()  "+query.list().size());
 			double multi=0.0;
 			double addition=0.0;
 			DailyPurchaseConfModel dailyPurchaseConfModel= new DailyPurchaseConfModel();
-			//Object[] o = result.get(i);
-			//System.out.println("=========>>>>>>>>>>>>Object  "+o[0].toString());
 			double grade[] = new double[8]; 
 			String variety= (String)o[10];
 			String cropyr=(String)o[9];
@@ -178,12 +169,9 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			double grade5 =((BigDecimal)o[5]).doubleValue();
 			double grade6 =((BigDecimal)o[6]).doubleValue();
 			double grade7 =((BigDecimal)o[7]).doubleValue();
-			  final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
-			  
-			  String datepurchase =formatter1.format(o[8]);
-			
+			final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+			String datepurchase =formatter1.format(o[8]);
 			String basis= (String)o[13];
-		
 			dailyPurchaseConfModel.setGrade1(grade0);
 			dailyPurchaseConfModel.setGrade2(grade1);
 			dailyPurchaseConfModel.setGrade3(grade2);
@@ -194,6 +182,8 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setGrade8(grade7);
 			dailyPurchaseConfModel.setDatepurchase(datepurchase);
 			dailyPurchaseConfModel.setBinno((int)o[15]);
+			dailyPurchaseConfModel.setGquantity(((BigDecimal)o[17]).doubleValue());
+			dailyPurchaseConfModel.setDquantity(((BigDecimal)o[18]).doubleValue());
 			dailyPurchaseConfModel.setFibervalue(((BigDecimal)o[16]).doubleValue());
 			if(basis.equalsIgnoreCase("commercial")) {
 			querystr = "SELECT top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where effectDate <= GETDATE() and crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
@@ -218,20 +208,14 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 				
 				
 						grade[j]= ((BigDecimal)o[j]).doubleValue();
-					//	System.out.println("grade[j]================>>>>>>>>>>>>>> "+grade[j]);
 								gradeprice[j]=((BigDecimal) p[j]).doubleValue();
-							//	System.out.println("gradeprice[j]================>>>>>>>>>>>>>> "+gradeprice[j]);
 												if(grade[j]!=0)
 													{	
 															difference[j]= gradeprice[j]-gradefive ;
-														//	System.out.println("difference[j]================>>>>>>>>>>>>>> "+difference[j]);
+														
 												      		multi=(difference[j] *  (grade[j]/100)) ;
 												      
 												      		addition += multi;
-												      		
-																
-														//System.out.println("addition inside================>>>>>>>>>>>>>> "+addition);
-								      		
 												}  
 												
 			}
@@ -243,35 +227,26 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setGrade6xnetqty(grade5*gradeprice[5]);
 			dailyPurchaseConfModel.setGrade7xnetqty(grade6*gradeprice[6]);
 			dailyPurchaseConfModel.setGrade8xnetqty(grade7*gradeprice[7]);
-						System.out.println("addition outside================>>>>>>>>>>>>>> "+addition);
-						System.out.println("garsat-addition================>>>>>>>>>>>>>> "+(garsat-addition));
-						dailyPurchaseConfModel.setTd5base(garsat-addition);
-						
-				
+			dailyPurchaseConfModel.setTd5base(garsat-addition);
+							
 			}
 			querystr4= "UPDATE jciprocurement SET flag_dpc2 = 1 WHERE ptsid in ("+ptsid+");";
-			//System.out.println("querystr3============>>>>>>>>>>>>>>  "+querystr4);
 			Session session4 = sessionFactory.getCurrentSession();
 			Transaction tx4 = session4.beginTransaction();
 			SQLQuery query4 = session4.createSQLQuery(querystr4);
 			int one = query4.executeUpdate();
-			//System.out.println("====================== " +one);
 			dailyPurchaseConfModel.setGarsat(garsat);
 			dailyPurchaseConfModel.setBasis(basis);
 			dailyPurchaseConfModel.setCropyr(cropyr);
 			dailyPurchaseConfModel.setPlaceofpurchase(dpcid);
 			dailyPurchaseConfModel.setNetquantity(netqty);
-			
 			dailyPurchaseConfModel.setJutevariety(variety);
-			
-			//System.out.println("dailyPurchaseConfModel============>>>>>>>>>>>>>>  "+dailyPurchaseConfModel.toString());
 			dpclist.add(dailyPurchaseConfModel);
 	 }
 		}
         catch (Exception e) {
             System.out.println(e);
         }
-	//	System.out.println("dpclist==============>>>>>>>>>>>> "+dpclist);
 		return dpclist;
 
 	
