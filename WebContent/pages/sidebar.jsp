@@ -192,6 +192,8 @@ body {
 					<li  data-pre="48" id="o48"><a href="salespricecalculationlist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Sale Price Calculation List</b></a></li>
 					<li  data-pre="49" id="o49"><a href="entryofoperationcostlist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Operation Cost List</b></a></li>
 					<li  data-pre="50" id="o50"><a href="viewcontractgenerationcommercial.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation Commercial List</b></a></li>
+					<li  data-pre="52" id="o52"><a href="MSPgradesCombination.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>MSP Grades Combination</b></a></li>
+				
 				</ul><!-- </li> -->
 		
 	</div>

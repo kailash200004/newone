@@ -192,6 +192,14 @@
 												<option disabled selected value>-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
+												<option value="2022-2023">2023-2024</option>
+												<option value="2022-2023">2024-2025</option>
+												<option value="2022-2023">2025-2026</option>
+												<option value="2022-2023">2026-2027</option>
+												<option value="2022-2023">2027-2028</option>
+												<option value="2022-2023">2028-2029</option>
+												<option value="2022-2023">2029-2030</option>
+												<option value="2022-2023">2030-2031</option>
 												</select>
 										</div>
 										</div>
@@ -215,7 +223,7 @@
 										<div class="row">
 										<div class="col-sm-4 form-group">
 											
-											<label class="required">TD1</label>
+											<!-- <label class="required">TD1</label>
 											<input type="number" name="grade1" id="grade1" value ='0'
 												class="form-control"  />
 												
@@ -242,18 +250,9 @@
 												class="form-control"  />
 												<label class="required">W8</label>
 											<input type="number" name="grade9" id="grade9" value ='0'
-												class="form-control"  />
+												class="form-control"  /> -->
 										</div>
 
-										<!-- <div class="col-sm-4 form-group">
-											<label class="required">Type of Delivery</label> <select type="text"
-												name="delibry_type" id="delibry_type" class="form-control"
-												required>
-											<option disabled selected value>-Select-</option>
-												<option value="Mill Delivery">Mill Delivery</option>
-												<option value="Ex-Godown">Ex-Godown</option>
-												</select>
-										</div> -->
 									</div>
 									<div class="row">
 										<div class="form-group">
@@ -281,11 +280,10 @@
 <script>	
 
 $("#pcso_date").on("change", function() {
-	//alert("yes");
 	pcso1= this.value;
 	var array = [];
 	array.push(pcso1);
-	//alert(array);
+	alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
@@ -320,20 +318,16 @@ $("#pcso_date").on("change", function() {
 $("#pcso2_date").on("change", function() {
 	
 	 pcso2= this.value;
-	//alert(pcso2);
 	var array = [];
 	array.push(pcso1);
 	array.push(pcso2);
-	//alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array) },
 		success: function(d){
-			//console.log(d);
 			alert(d);
 			var htmlTable='<table border="3px" id="table_tr">';
-			//var htmlTable1='<table border="3px"><tr><th>PCSO2</th></tr>';
 			  var data2= jQuery.parseJSON(d);
 			  
 		
@@ -346,13 +340,11 @@ $("#pcso2_date").on("change", function() {
 						 var myarray1=allocate.split(",")[1];
 						 
 						 if(typeof myarray == "undefined"){
-							// alert("myarray is undefined");
 						  myarray=0;
 						 }
 					
 						 if(typeof myarray1 == "undefined"){
 							  myarray1=0;
-							//  alert("myarray1 is undefined");
 							 }
 						 
 							 htmlTable+='<tr><td style="text-align:center">'+data2[j]["mill_code"]+'</td><td style="text-align:center">'+data2[j]["name"]+'</td><td style="text-align:center">'+myarray1+'</td><td style="text-align:center">'+myarray+'</td><td style="text-align:center">'+data2[j]["qty"]+'</td></tr>';
@@ -377,21 +369,16 @@ $("#pcso2_date").on("change", function() {
 
 
  $("#pcso3_date").on("change", function() {
-	// alert("yes");
-	// alert(pcso2);
 	 pcso3= this.value;
-	//alert(pcso3);
 	var array = [];
 	array.push(pcso1);
 	array.push(pcso2);
 	array.push(pcso3);
-	//alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array)},
 		success: function(a){
-			//console.log(a);
 			alert(a);
 			var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
 			   var data3= jQuery.parseJSON(a);
@@ -462,19 +449,14 @@ $("#pcso2_date").on("change", function() {
 }); 
 
  $("#pcso5_date").on("change", function() {
-		//alert("yes");
-		
 		 pcso5= this.value;
-		//alert(pcso5);
 		var array = [];
 		array.push(pcso1);
 		array.push(pcso2);
 		array.push(pcso3);
 		array.push(pcso4);
 		array.push(pcso5);
-		//alert(array);
-	
-	//alert(pcso);
+
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
@@ -499,16 +481,13 @@ $("#pcso2_date").on("change", function() {
 				
 				}
 				tableToSave += '</table>'; 
-				// $("#list5").html(tableToSave);
+				
 		}
 	});
-	
 });  
 
-	
 		 $("#submit").click(function(){
-			 // alert("test");
-			  
+		
 			  var contractQuants = $("#contract_Qty").val();			  
 			  var contactnumber = $("#contactnumber").val();			  
 			  var contractdate = $("#contract_date").val();
@@ -538,13 +517,11 @@ $("#pcso2_date").on("change", function() {
 						//alert("Result Saved Succesfully");
 		 				//var data= jQuery.parseJSON(result);
 	 	 			
-			  
-				 
 					}
 				});
 			  if(result){
 				  for(var w=0; w< document.getElementById("tableData").rows.length; w++){
-						// alert("millcode : "+document.getElementById("tableData").rows[w].cells[0].innerHTML+ " qty : "+document.getElementById("tableData").rows[w].cells[1].innerHTML);
+					
 					  $.ajax({
 							type:"POST",
 							url:"saveUpdatedQty.obj",
@@ -553,17 +530,13 @@ $("#pcso2_date").on("change", function() {
 								location.reload(true)
 								$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Table saved successfully.</div>\r\n");
 								alert("Result Saved Succesfully");
-				 				//var data= jQuery.parseJSON(result);
+				 			
 			 	 				 
 							}			
 						});
 					  }
-				//  alert("Fill the mandatory fields.");
 				  }
 			  
-			
-			
-	    
 	  });
 	
 </script>

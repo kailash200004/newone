@@ -222,7 +222,7 @@ $(document).ready(function(){
 				  }
 				  
 				  var totalaction = ress.substring(0, ress.length-1);
-				  alert("action"+totalaction);
+				//  alert("action"+totalaction);
 				  document.getElementById("action").value=totalaction;
 				  return true;
 			 });

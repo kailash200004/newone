@@ -100,7 +100,6 @@ $(document).ready(function() {
 									%>
 									<tr>
 										<td><%=i%></td>
-									
 										<td><%=cglist.getContract_no()%></td>
 										<td><%=cglist.getContract_date()%></td>
 				                    	<td><%=cglist.getMill_code()%></td>

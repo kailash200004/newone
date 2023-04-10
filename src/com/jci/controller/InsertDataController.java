@@ -3446,7 +3446,7 @@ public class InsertDataController
 	    String path;
 	    @RequestMapping(value = { "update_paymentstatus" }, method = { RequestMethod.POST })
 	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
-	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayment\\";
+	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments";
 	    	String usrname = (String) session.getAttribute("usrname");  
 	    Random num = new Random();
 	    int x= num.nextInt(50);

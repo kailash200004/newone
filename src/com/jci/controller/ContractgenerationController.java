@@ -160,15 +160,8 @@ public class ContractgenerationController {
          contractgenerationPsco.setCrop_year(cropyear);
          contractgenerationPsco.setContract_Qty(contractQuants);
          contractgenerationPsco.setContactnumber(contactnumber);
-                  /*
-                  * updatedcontractqtyDTO.setContract_date(contractdate);
-                  * updatedcontractqtyDTO.setContract_no(contactnumber);
-                  * updatedcontractqtyDTO.setMill_code(millcode);
-                  * updatedcontractqtyDTO.setUpdated_qty(totalallocate);
-                  */
-                  this.contractgenerationService.create(contractgenerationPsco);
-                  //this.contractgenerationService.create(updatedcontractqtyDTO);
-
+         this.contractgenerationService.create(contractgenerationPsco);
+         
                   redirectAttributes.addFlashAttribute("msg",
                                "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
            } catch (Exception e) {
@@ -182,25 +175,21 @@ public class ContractgenerationController {
            try {
            
                   UpdatedContractQtyDTO updatedcontractqtyDTO = new UpdatedContractQtyDTO();
-
                   String contactnumber=request.getParameter("contactnumber");
                   String contractdate=request.getParameter("contractdate");
                   String cropyear=request.getParameter("cropyear");
                   String millcode=request.getParameter("millcode"); 
                   String qty= request.getParameter("qty");
                   SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd"); 
-                  
                   Date currentdate = new Date();
 		         String formattedDate = df.format(currentdate);
 		         updatedcontractqtyDTO.setCreated_on(formattedDate);
 		         updatedcontractqtyDTO.setFin_yr(cropyear);
 		         updatedcontractqtyDTO.setContract_no(contactnumber);
 		         updatedcontractqtyDTO.setMill_code(millcode);
-		         updatedcontractqtyDTO.setUpdated_qty((qty));
+		         updatedcontractqtyDTO.setUpdated_qty(Double.parseDouble(qty));
                   this.contractgenerationService.create(updatedcontractqtyDTO);
-
-                  redirectAttributes.addFlashAttribute("msg",
-                               "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+                  redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
            } catch (Exception e) {
                   System.out.println(e);
            }
@@ -238,7 +227,6 @@ public class ContractgenerationController {
 			String grade7= request.getParameter("grade7");
 			String grade8= request.getParameter("grade8");
 			String grade9= request.getParameter("grade9");
-			
 			SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd"); 
 			contractgenerationMill.setFull_contract_no(fullcontractNo);
 			contractgenerationMill.setContract_qty(contract_Qty);

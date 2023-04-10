@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.jci.model.UploadingReceiptModel;
 import com.jci.model.UserActionModel;
 import com.jci.model.UserPriviligeModel;
 import com.jci.model.UserRoleModel;
+import com.jci.model.labelGenerationModel;
 import com.jci.service.EntryofsaleService;
 import com.jci.service.HoDispatchService;
 import com.jci.service.PaymentInstrumentService;
@@ -29,6 +31,7 @@ import com.jci.service.UploadRecieptService;
 import com.jci.service.UserActionService;
 import com.jci.service.UserPriviligeService;
 import com.jci.service.UserRoleService;
+import com.jci.service.labelGenerationService;
 import com.google.gson.Gson;
 import com.jci.model.EntryofSaleModel;
 import com.jci.model.FarmerRegistrationModel;
@@ -62,129 +65,58 @@ public class InsertDataController_2 {
 	@Autowired
 	PcsoentryService pcsoentryservice;
 	
-	
+	@Autowired
+	labelGenerationService labelgenerationService;
 	
 	  @RequestMapping("entryofpcso")
-
 	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
-
 	          ModelAndView mv = new ModelAndView("entryofpcso");
-
 	          final List<EntryofpcsoModel> allentryofpcsolist = (List<EntryofpcsoModel>)this.pcsoentryservice.getAlldata();
-
 	          mv.addObject("entryofpcsolist", (Object)allentryofpcsolist);
-
 	          return mv;
-
 	    }
     
 	  @RequestMapping("entryofpcsosave")
-
 	    public ModelAndView saveUserMid(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
 	         ModelAndView mv= new ModelAndView("entryofpcsosave");
-
 	          try {
-
-	            
-
-	                List<EntryofpcsoModel> ll = new ArrayList<>();
-
+	            	List<EntryofpcsoModel> ll = new ArrayList<>();
 	                int c = 0;
-
-	                int count = Integer.valueOf(request.getParameter("count"));
-
-	                
-
+	                int count = Integer.valueOf(request.getParameter("count"));	                
 	               String referenceno = request.getParameter("referenceno");
-
 	               String referencedate = request.getParameter("referencedate");
-
 	               String pcsodate = request.getParameter("pcsodate");
-
-	              
-
-	              
-
 	               for(int i = 0; i<count; i++)
-
 	                {
-
 	               EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
-
-	                       String millcode = request.getParameter("millcode"+c);
-
-	                       String millname = request.getParameter("millname"+c);
-
-	                       String tallocation = request.getParameter("totalallocation"+c);
-
-	                       entryofpcso.setReference_no(referenceno);
-
-	                   SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
-
-	                   Date refdate = formatter1.parse(referencedate);
-
-	                   entryofpcso.setReference_date(refdate);
-
-	                   Date pcsodt = formatter1.parse(pcsodate);
-
-	                   entryofpcso.setPcso_date(pcsodt);
-
-	                       if(tallocation != "" && tallocation != null )
-
+	               String millcode = request.getParameter("millcode"+c);
+	               String millname = request.getParameter("millname"+c);
+	               String tallocation = request.getParameter("totalallocation"+c);
+	               entryofpcso.setReference_no(referenceno);
+	               SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+	               Date refdate = formatter1.parse(referencedate);
+	               entryofpcso.setReference_date(refdate);
+	               Date pcsodt = formatter1.parse(pcsodate);
+	               entryofpcso.setPcso_date(pcsodt);
+	               		if(tallocation != "" && tallocation != null )
 	                       {
-
 	                              entryofpcso.setMill_code(millcode);
-
 	                              entryofpcso.setMill_name(millname);
-
-	                              entryofpcso.setTotal_allocation(tallocation);
-
-	                             
-	                            
-
+	                              entryofpcso.setTotal_allocation(tallocation);	                            	                           
 	                              ll.add(entryofpcso);
-
 	                       }
-
-	                       
-
 	                       c++;
-
 	                }
-
 	               mv.addObject("entryofpcso", (Object)ll);
-
 	               mv.addObject("referencedate", (Object)referencedate);
-
 	               mv.addObject("pcsodate", (Object)pcsodate);
 
-	             
-
-	                //System.out.println(" ll========="+ ll);
-
-	             //   System.out.println(" entryofpcso========="+ entryofpcso);
-
-	               //pcsoentryservice.create(entryofpcso);
-
-	              // redirectAttributes.addFlashAttribute("msg", "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
-
 	          } catch (Exception e) {
-
 	               System.out.println(e);
-
 	          }
-
 	          return mv;
-
 	    }
 
-	 
-
-	 
-
-	 
-    
 	/*
 	 * @RequestMapping("savepcsoentry") public ModelAndView
 	 * saveUserMid(HttpServletRequest request, RedirectAttributes
@@ -223,7 +155,6 @@ public class InsertDataController_2 {
 	               String referencedate = request.getParameter("refdate");
 	               String pcsodate = request.getParameter("pcsodate");
 	               double sumoftotalallocation = Double.parseDouble(request.getParameter("sumoftotalallocation"));
-	               
 	               for(int i = 0; i<count; i++)
 	        	   {
 	            	   EntryofpcsoModel entryofpcso = new EntryofpcsoModel();
@@ -246,10 +177,7 @@ public class InsertDataController_2 {
 	        		   entryofpcso.setSumof_totalallocation(sumoftotalallocation);
 	        		   pcsoentryservice.create(entryofpcso);
 	        		   c++;
-	        		   
 	        	   }
-	              
-					
 					  redirectAttributes.addFlashAttribute("msg",
 					  "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
 					  + "");
@@ -285,24 +213,16 @@ public class InsertDataController_2 {
 	public ModelAndView saveuserprivilige(HttpServletRequest request, RedirectAttributes redirectAttributes)
 	{
 		try {
-		
 			String userrole = request.getParameter("userrole");
 			String useraction = request.getParameter("action");
-			
-			
 			UserPriviligeModel userprivilige = new UserPriviligeModel();
-			
 			userprivilige.setRole_Id(userrole);
 			userprivilige.setAction_permissions(useraction);
 			Date d2 = new Date();
 			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 			String formattedDate1 = dd.format(d2);
 			userprivilige.setCreated_date(formattedDate1);
-
-			
-			
 			this.userpriviligeservice.create(userprivilige);
-			
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
 								+ "");
@@ -315,16 +235,12 @@ public class InsertDataController_2 {
 		return new ModelAndView(new RedirectView("userprivilige.obj"));
 	}
 	
-	
-	
 	@RequestMapping("userrole")
 	public ModelAndView userroleModel(HttpServletRequest request)
 	{
 		ModelAndView mv = new ModelAndView("userrole");
-		 
 		return mv;
 	}
-	
 	
 	@RequestMapping("viewuserrole")
 	public ModelAndView viewuserroleModel(HttpServletRequest request)
@@ -332,7 +248,6 @@ public class InsertDataController_2 {
 		ModelAndView mv = new ModelAndView("viewuserrole");
 		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
 		 mv.addObject("userroleList", (Object)alluserroleList);
-	
 		return mv;
 	}
 	
@@ -380,7 +295,6 @@ public class InsertDataController_2 {
 	public ModelAndView saveuseraction(HttpServletRequest request, RedirectAttributes redirectAttributes)
 	{
 		try {
-		
 			String actionname = request.getParameter("actionname");
 			String actionstatus = request.getParameter("actionstatus");
 			
@@ -392,11 +306,7 @@ public class InsertDataController_2 {
 			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 			String formattedDate1 = dd.format(d2);
 			useraction.setCreated_date(formattedDate1);
-
-			
-			
 			this.useractionservice.create(useraction);
-			
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
 								+ "");
@@ -485,13 +395,11 @@ public class InsertDataController_2 {
 				  Date dateofexpiry1 = formatter1.parse(dateofexpiry);
 				  paymentinstrument.setDateofexpiry(dateofexpiry1);
 				}
-		
 			 Date date= new Date();
 			 String currdate = date.toString();
 		     paymentinstrument.setGenerateddate(currdate);
-			
+	
 			this.paymentinstrumentservice.create(paymentinstrument);
-			//System.out.println(paymentinstrument);
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
@@ -578,13 +486,8 @@ public class InsertDataController_2 {
 			hodispatch.setJutegrade6(gprice6);
 			hodispatch.setJutegrade7(gprice7);
 			hodispatch.setJutegrade8(gprice8);
-			System.out.println("sldkfjdlf"+hodispatch);
-			
 			this.hodispatchservice.create(hodispatch);
-			//System.out.println(hodispatch);
-			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-								+ "");
+			redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"+ "");
 	
 		} catch (Exception e)
 		{
@@ -623,14 +526,12 @@ public class InsertDataController_2 {
 			String jutegrade = request.getParameter("jutegrade");
 			String nominalweight = request.getParameter("nominalweight");
 			String quantity = request.getParameter("quantity");
-			String rateperquintals = request.getParameter("rateperquintals");
-			
+			String rateperquintals = request.getParameter("rateperquintals");	
 			if(lotno =="")
 			{
 				lotno ="0";
 			}
-			EntryofSaleModel entryofsale = new EntryofSaleModel();
-			
+			EntryofSaleModel entryofsale = new EntryofSaleModel();	
 			entryofsale.setDpcno(dpc10no);
 			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 			Date dpcdate = formatter1.parse(dpc10date);
@@ -654,10 +555,7 @@ public class InsertDataController_2 {
 			entryofsale.setRateperquintals(rateperquintals);
 			
 			this.entryofsaleservice.create(entryofsale);
-			System.out.println("entryofsale=============="+entryofsale);
-			System.out.println(entryofsale);
-			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
+			redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
 	
 		} catch (Exception e)
@@ -684,8 +582,6 @@ public class InsertDataController_2 {
 			String jutevariety = request.getParameter("jutevariety");
 			String jutegrade = request.getParameter("jutegrade");
 			String actualweight = request.getParameter("actualweight");
-		
-
 			UploadingReceiptModel uploadrecipt = new UploadingReceiptModel();
 			Date d2 = new Date();
 			uploadrecipt.setDpc_number(dpc10no);
@@ -695,12 +591,7 @@ public class InsertDataController_2 {
 			uploadrecipt.setJute_grade(jutegrade);
 			uploadrecipt.setActual_weight(actualweight);
 			uploadrecipt.setReciept_date(formattedDate1);
-			
-
-		
 			this.uploadrecieptservice.create(uploadrecipt);
-			//System.out.println("uploadrecipt=============="+uploadrecipt);
-			//System.out.println(uploadrecipt);
 			redirectAttributes.addFlashAttribute("msg",
 						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
 								+ "");
@@ -734,8 +625,7 @@ public class InsertDataController_2 {
 		 
 		try {
 			list= userpriviligeservice.getuserpriviligeajaxallData();
-				//System.out.println("allList============-------------   "+list);
-				
+			
 			}
 		
 		catch(Exception e) {
@@ -744,7 +634,60 @@ public class InsertDataController_2 {
 		}
 		final Gson gson = new Gson();
         return gson.toJson((Object)list);
-		//return list;
+		
 	}
 	
+	
+	@RequestMapping("MSPgradesCombination")
+	public ModelAndView MSPgradesCombination(HttpServletRequest request)
+	{
+		ModelAndView mv = new ModelAndView("MSPgradesCombination");
+		return mv;
+	}
+
+	
+	  @RequestMapping("savegradesCombination") public ModelAndView
+	  savegradesCombination(HttpServletRequest request, RedirectAttributes
+	  redirectAttributes,HttpSession session) {
+	 try { labelGenerationModel
+	  labelgenerationModel = new labelGenerationModel(); 
+	  String basis = request.getParameter("basis"); 
+	  String cropyr = request.getParameter("cropyr"); 
+	  String label1 = request.getParameter("textbox1"); 
+	  String label2 = request.getParameter("textbox2"); 
+	  String label3 = request.getParameter("textbox3"); 
+	  String label4 = request.getParameter("textbox4"); 
+	  String label5 = request.getParameter("textbox5"); 
+	  String label6 = request.getParameter("textbox6"); 
+	  String label7 = request.getParameter("textbox7"); 
+	  String label8 = request.getParameter("textbox8"); 
+	  String label9 = request.getParameter("textbox9"); 
+	  String label10 = request.getParameter("textbox10"); 
+	  labelgenerationModel.setLabel1(label1);
+	  labelgenerationModel.setLabel2(label2);
+	  labelgenerationModel.setLabel3(label3);
+	  labelgenerationModel.setLabel4(label4);
+	  labelgenerationModel.setLabel5(label5);
+	  labelgenerationModel.setLabel6(label6);
+	  labelgenerationModel.setLabel7(label7);
+	  labelgenerationModel.setLabel8(label8);
+	  labelgenerationModel.setLabel9(label9);
+	  labelgenerationModel.setLabel10(label10); 
+	  labelgenerationModel.setBasis(basis);
+	  labelgenerationModel.setCreatedBy((String)session.getAttribute("usrname")+"  role id{"+session.getAttribute("roleId")+"}");
+	  labelgenerationModel.setCreatedOn(new Date());
+	  labelgenerationModel.setCropyr(cropyr);
+	  
+	  this.labelgenerationService.create(labelgenerationModel);
+	  
+	  redirectAttributes.addFlashAttribute("msg",
+	  "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
+	  + "");
+	  
+	  } catch (Exception e) { 
+		  System.out.println("++++++++++++++"+e);
+	  e.printStackTrace(); 
+	  } 
+	 return new ModelAndView(new RedirectView("MSPgradesCombination.obj")); }
+	 
 }

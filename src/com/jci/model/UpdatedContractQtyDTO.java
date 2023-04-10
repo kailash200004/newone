@@ -27,7 +27,7 @@ public class UpdatedContractQtyDTO {
 	private String mill_code;
 	
 	@Column(name="updated_qty")
-	private String updated_qty;
+	private double updated_qty;
 	
 	@Column(name="created_by")
 	private int created_by;
@@ -70,12 +70,12 @@ public class UpdatedContractQtyDTO {
 		this.mill_code = mill_code;
 	}
 
-	public String getUpdated_qty() {
+	public double getUpdated_qty() {
 		return updated_qty;
 	}
 
-	public void setUpdated_qty(String totalallocate) {
-		this.updated_qty = totalallocate;
+	public void setUpdated_qty(double d) {
+		this.updated_qty = d;
 	}
 
 	public int getCreated_by() {
@@ -107,7 +107,7 @@ public class UpdatedContractQtyDTO {
 		
 	}
 
-	public UpdatedContractQtyDTO(int id, String contract_date, String contract_no, String mill_code, String updated_qty,
+	public UpdatedContractQtyDTO(int id, String contract_date, String contract_no, String mill_code, double updated_qty,
 			int created_by, String created_on, String fin_yr) {
 		super();
 		this.id = id;
