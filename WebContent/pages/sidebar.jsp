@@ -50,7 +50,7 @@ body {
 		out.println(Email);
 		//out.println(roleid);
 		if(Email==null){
-			
+			//String redirectURL = "http://49.50.79.121:8080/jcicms/index.obj";
 		    String redirectURL = "http://localhost:8080/jciadmin/index.obj";
 		    response.sendRedirect(redirectURL);
 		

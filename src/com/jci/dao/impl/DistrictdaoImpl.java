@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,6 +69,17 @@ public class DistrictdaoImpl implements DistrictDao {
 		this.sessionFactory.getCurrentSession().saveOrUpdate(off);
 		return false;
 	}
+	
+	@Override
+	public List<String> findByDistrictId(String dids) {
+		String querystr = "select district_name from tbl_districts where id in ("+dids+")";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<String> rows = query.list();
+		return rows;
+	}
+
 	/*
 	 * @Override public List<String> getAllFilledPosition(String id) { //return
 	 * productdao.getAll(); // List<ProductModel> val = new ArrayList<>(); // String

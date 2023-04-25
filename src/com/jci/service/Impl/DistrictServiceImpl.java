@@ -60,6 +60,14 @@ public class DistrictServiceImpl implements DistrictService {
 	}
 
 	@Override
+	public List<String> findByDistrictId(String dids) {
+		List<String> findByDistrictId = distrdao.findByDistrictId(dids);
+		System.out.println("findByDistrictId service"+findByDistrictId);
+		return findByDistrictId;
+	}
+
+	
+	@Override
 	public List<String> getAllFilledPosition(String id) {
 		return distrdao.getAllFilledPosition(id);
 	}

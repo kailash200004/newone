@@ -13,5 +13,5 @@ public interface DistrictService {
 	public List <DistrictModel> getAll();
 	public boolean submitform(DistrictModel off);
 	public List <String> getAllFilledPosition(String id);
-
+	public List<String> findByDistrictId(String dids);
 }

@@ -153,7 +153,7 @@
 												<label class="required">IFSC Code</label> <span class="err" name="ifsc_span" id="ifsc_span"></span>
 												<input class="form-control" oninput="this.value = this.value.toUpperCase()" maxlength="11" name="ifsc_code" type="text"
 												placeholder="IFSC Code" id="ifsc_code"
-												onchange="deleteErrorMsg()" required>							
+												 required>							
 											</div>
 											<div class="form-group">
 												<label class="required">Bank A/C Number</label> 
@@ -161,7 +161,7 @@
 											     <input class="form-control" min="0" name="ac_no" type="number" placeholder="Bank A/C Number" id="ac_no" required oninput="javascript: if (this.value.length > 18) this.value = this.value.slice(0, 18);">
 											</div>
 											<div class="form-group">
-												<label class="required">Name of farmer</label>  <span class="err" name="name_span" id="name_span"></span>
+												<label class="required">Name of farmer<!-- (Separated by '-'. Example: xyz-xyz-xyz) --></label>  <span class="err" name="name_span" id="name_span"></span>
 												<input type="text" class="form-control"   name="farmer_name" id="farmer_name" placeholder="Name of farmer" required >
 											</div>
 											
@@ -226,13 +226,13 @@
     			 if(len==12){
     				 $("#identityProofNo").prop("type", "text");
     				 $("#identityProofNo").attr("maxlength", "12");
-    				 alert("yes");
+    			//	 alert("yes");
     			 }
     		});
     	}else{
     		$("#identityProofNo").prop("type", "text");
     		$("#identityProofNo").attr("maxlength", "10");
-    		 alert("else");
+    		// alert("else");
     	}
     });
     </script>
@@ -242,61 +242,85 @@
 
 	<script>
 		function validate(){
+			var missing=false;
+	
 			var fIfsc = document.getElementById("fIfsc").value;
 			var facNo = document.getElementById("facNo").value;
 			var fName = document.getElementById("fName").value;
-			//var faddress = document.getElementById("faddress").value;
 			var fidProofType = document.getElementById("fidProofType").value;
 			var fidProofNo = document.getElementById("fidProofNo").value;
-			//alert(fidProofNo);
 			var ifsc_code = document.getElementById("ifsc_code").value;
 			var ac_no = document.getElementById("ac_no").value;
 			var farmer_name = document.getElementById("farmer_name").value;
-			//var address = document.getElementById("address").value;
 			var idProofType = document.getElementById("idProofType").value;
 			var identityProofNo = document.getElementById("identityProofNo").value;
-		//	alert(identityProofNo);
-			// console.log("from db==="+"fIfsc "+fIfsc+" facNo "+facNo+" fName "+fName+" faddress "+faddress+" fidProofType "+fidProofType+" fidProofNo "+fidProofNo);
-			// console.log("from form==="+"ifsc_code "+ifsc_code+" ac_no "+ac_no+" farmer_name "+farmer_name+" address "+address+" fidProofType "+idProofType+" identityProofNo "+identityProofNo);
-
+		
 			if(fIfsc!==ifsc_code){
+			
 				document.getElementById("ifsc_span").textContent= "Please check IFSC code";
-				return false;
+				//return false;
+				missing = true;
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 			}
- 
-			else if(facNo!==ac_no){
- 
+			else{
+				document.getElementById("ifsc_span").textContent= "";
+				
+			}
+			if(facNo!==ac_no){
+				
 				document.getElementById("ac_span").textContent= "Please check account number";
-				return false;
+				missing = true;
+				
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 			}
- 
-			else if(fName.toUpperCase()!==farmer_name.toUpperCase()){
+			else{
+				
+				document.getElementById("ac_span").textContent= "";
+			}
+			if(fName.toUpperCase()!==farmer_name.toUpperCase()){
+				
 				document.getElementById("name_span").textContent= "Please check farmer name";
-				return false;
-			//	document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				missing = true;
+				//return false;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+		else{
+				
+			document.getElementById("name_span").textContent= "";
 			}
 			/* else if(faddress.toUpperCase()!==address.toUpperCase()){
 				document.getElementById("address_span").textContent= "Please check farmer address";
-				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 				return false;
 			} */
-			else if(fidProofType!==idProofType){
+			if(fidProofType!==idProofType){
+				missing = true;
 				document.getElementById("idProofType_span").textContent= "Please check Id proof type";
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-				return false;
+				//return false;
 			}
-			else if(fidProofNo.toUpperCase()!=identityProofNo.toUpperCase()){
+			else{
+				document.getElementById("idProofType_span").textContent= "";
+			}
+			if(fidProofNo!=identityProofNo){
+				missing = true;
 				document.getElementById("idProofNo_span").textContent= "Please check proof no";
-			//	document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-				return false;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				//return false;
 			}
+			else{
+				document.getElementById("idProofNo_span").textContent= "";
+				
+			}
+			if(missing == true)
+				{
+				return false;
+				}
 		}
 		
 	</script>
 	
-	<script>
+	<!-- <script>
 	$(document).ready(function(){
 		$("#ac_no").keyup(function() {
 			var value = $(this).val();
@@ -311,7 +335,7 @@
 		   
 		});
 	});
-	</script>
+	</script> -->
 	
 	<script src="./assets/vendors/jquery/dist/jquery.min.js"
 		type="text/javascript"></script>
@@ -336,7 +360,6 @@
 	<!-- PAGE LEVEL PLUGINS-->
 	<!-- CORE SCRIPTS-->
 	<script src="assets/js/app.min.js" type="text/javascript"></script>
-
 
 </body>
 </html>

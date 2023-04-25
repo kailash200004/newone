@@ -111,17 +111,17 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			String bankMandateForm = (String)row[13];
 			String BankDoc= (String)row[14];
 			String status = null;
-			String vRegNo = (String)row[36];
-			String vIFSC = (String) row[37];
+			String vRegNo = (String)row[37];
+			String vIFSC = (String) row[38];
 			String REGno = (String)row[19];
 			String RegBy = (String)row[6];
-			String state = (String)row[43];
-			String district = (String)row[44];
+			String state = (String)row[44];
+			String district = (String)row[45];
 			String block = (String)row[26];
 			int isVerified =0;
 			if (row[15] !=null) {
 				isVerified = (int) row[15];
-				System.out.println("isVerified=================  "+isVerified);
+				//System.out.println("isVerified=================  "+isVerified);
 			}
 			
 			/*

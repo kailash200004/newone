@@ -28,7 +28,8 @@
                             <a class="dropdown-item" href="userProfile.obj"><i class="fa fa-user"></i>Profile</a>
                             
                             <li class="dropdown-divider"></li>
-                            <a class="dropdown-item" href="index.obj"><i class="fa fa-power-off"></i>Logout</a>
+                            <!-- <a class="dropdown-item" href="index.obj"><i class="fa fa-power-off"></i>Logout</a> -->
+                             <a class="dropdown-item" href="logout.obj"><i class="fa fa-power-off"></i>Logout</a>
                         </ul>
                     </li>
                 </ul>

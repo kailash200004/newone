@@ -283,13 +283,13 @@ $("#pcso_date").on("change", function() {
 	pcso1= this.value;
 	var array = [];
 	array.push(pcso1);
-	alert(array);
+	//alert(array);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array)},
 		success: function(result){
-			alert(result);
+			//alert(result);
 		
 			var htmlTable='<table border="3px" id="table_tr">';
 			   var data1= jQuery.parseJSON(result);
@@ -326,7 +326,7 @@ $("#pcso2_date").on("change", function() {
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array) },
 		success: function(d){
-			alert(d);
+	//		alert(d);
 			var htmlTable='<table border="3px" id="table_tr">';
 			  var data2= jQuery.parseJSON(d);
 			  
@@ -379,7 +379,7 @@ $("#pcso2_date").on("change", function() {
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array)},
 		success: function(a){
-			alert(a);
+		//	alert(a);
 			var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
 			   var data3= jQuery.parseJSON(a);
 			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';
@@ -416,13 +416,13 @@ $("#pcso2_date").on("change", function() {
 	array.push(pcso3);
 	array.push(pcso4);
 	//alert(array);
-	alert(pcso);
+	//alert(pcso);
 	$.ajax({
 		type:'GET',
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array)},
 		success: function(result){
-			alert(result);
+			//alert(result);
 		var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
 			   var data4= jQuery.parseJSON(result);
 			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';
@@ -462,7 +462,7 @@ $("#pcso2_date").on("change", function() {
 		url:'pcso_details.obj',
 		data:{"pcso1":JSON.stringify(array)},
 		success: function(result){
-			alert(result);
+		//	alert(result);
 			var htmlTable='<table border="3px" id="table_tr"><tr><th></th></tr>';
 			   var data5= jQuery.parseJSON(result);
 			   htmlTable+='<tr><th style="text-align:center">Mill code</th><th style="text-align:center">Mill Name</th><th style="text-align:center">Date1 Allocation</th><th style="text-align:center">Date2 Allocation</th><th>Total</th></tr>';

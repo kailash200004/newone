@@ -14,4 +14,5 @@ public interface DistrictDao {
 	public List <DistrictModel> getAll();
 	public List<String> getAllFilledPosition(String id);
 	public boolean submitform(DistrictModel off);
+	public List<String> findByDistrictId(String dids);
 }

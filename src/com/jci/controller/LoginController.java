@@ -45,21 +45,18 @@ public class LoginController {
 			String dpcIdd = userRegService.getUserDpc(userId);
 			String region = userRegService.getUserRegion(userId);
 			String dpc_center = userRegService.getdpc_center(dpcIdd);
-		//System.out.println("roleId==============>>>>>>>>>>>>>>>>> "+roleId);
-		//	int dpcId = userRegService.getUserDpc(userId);
-		//	 System.out.println("==============>>>>>>>>>>>>>>>>>  userId "+userId+" dpcId "+dpcId+" region "+ region);
 			session.setAttribute("userId", userId);
 			session.setAttribute("usrname", usrname);
 			session.setAttribute("dpcId", dpcIdd);
-		//	request.getSession().setAttribute("DPCID", dpcIdd);
 			session.setAttribute("region", region);
-		//	session.setAttribute("dpcId", dpcId);
 			session.setAttribute("zone", dpcId);
 			session.setAttribute("roleId", roleId);
 			session.setAttribute("refId", refId);
 			session.setAttribute("dpc_center", dpc_center);
-			if(ifExist!=null)
+			if(ifExist!=null && !ifExist.equalsIgnoreCase("mobile"))
 				return new ModelAndView("dashboard");
+			else if(ifExist.equalsIgnoreCase("mobile"))
+				mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
 			else
 			{
 				mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n");
@@ -69,6 +66,5 @@ public class LoginController {
 		}
 		return mv;
 	}
-	
 	
 }

@@ -122,7 +122,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		}
 		else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application"))
 		{
-			return null;
+			return "mobile";
 		}
 		else {
 			return rows.get(0)[13].toString();

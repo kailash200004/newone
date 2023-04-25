@@ -726,9 +726,9 @@ var F_REG_FORM = document.forms["myForm"]["F_REG_FORM"].value;
 
 <script>
     function allow_alphabets(element){
-        let textInput = element.value;
-        textInput = textInput.replace(/[^A-Za-z ]*$/gm, ""); 
-        element.value = textInput;
+      let textInput = element.value;
+        textInput = textInput.replace(/[^A-Za-z ]+$/gm, ""); 
+        element.value = textInput; 
     }
 </script>
 	<script>

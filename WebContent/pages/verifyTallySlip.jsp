@@ -872,7 +872,6 @@ height: 614px;
 		 if (farmerRegNo !== farmno) {
 
 			 mismatch= false;
-			//alert("mismatch farmer");
 			errors += "Farmer registration number didn't match! </br> ";
 			 
 		}  if (dateOfPurchase !== dop) {
@@ -915,16 +914,10 @@ height: 614px;
 			 mismatch= false;
 			errors += "Gross quantity didn't match! </br> ";
 			}
- // alert(mismatch);
- // alert(missing);
 	   if(missing)
 		 {
-		
-		// alert("missing");
 			 if(mismatch)
 				 {
-				// alert("mismatch");
-				 
 				 document.forms["myForm"]["error"].value  = "";
 				 document.forms["myForm"]["grsqty"].value  = sum_gross;
 				 document.forms["myForm"]["status"].value = 'FA';
@@ -992,29 +985,17 @@ height: 614px;
   
 <script>
 	function transection() {
- 
-     //  alert("act");
 		 tallyNo = document.forms["myForm"]["tallyNo"].value;
 		 if (tallyNo.length >= 3) {
             var reg = '<%=region%>';
-
-			//alert("tallyNo.length " + tallyNo.length);
-			//alert("inside tallyslip2");
-			// $("#uploadedImage").attr("src","/Users/animeshanand/Pictures/jciimage/Image.jpeg");
 			 $.ajax({
 						type : "GET",
 						url : "transectionDetails.obj",
 						data : jQuery.param({"tallyslipNo" : tallyNo,"region" : reg}),
 						success : function(result) {
-						//	alert(result);
-						
 						if(result)
 						  {
 							var parsedJSON = JSON.parse(result);
-                          
-							//console.log("######"+result);
-                           	 
-							
 							 farmno = parsedJSON.farmerRegNo;
 							 tallyno = parsedJSON.tallyNo;
 							 dop = parsedJSON.dop;
@@ -1022,7 +1003,6 @@ height: 614px;
 							 bin = parsedJSON.binno;
 							 jutevar = parsedJSON.jutevariety;
 							 ntqty = parsedJSON.netquantity.toFixed(3);
-							 //alert(ntqty);
 							 grate = parsedJSON.garsatrate.toFixed(3);
 							 tallyimage = parsedJSON.tallySlipImg;
 							 grossqty =  parsedJSON.grossqty.toFixed(3);
@@ -1033,7 +1013,6 @@ height: 614px;
 							 $("#placeOfPurchase").attr("value",pop);
 							 $("#popname").attr("value",popname);
 							 magnify("uploadedImage", 2);
-							//alert("inside transaction date = "+grossqty+"  amt pay = "+amtpay+"   bin = "+bin+" pop = "+pop);
 						  }
 						else{
 							alert("No data found for the entered Tally slip.");

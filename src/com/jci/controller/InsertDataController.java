@@ -36,6 +36,8 @@ import com.jci.model.BalePreparation;
 import javax.servlet.http.HttpSession;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
 import com.jci.model.FarmerRegModel;
 import java.io.File;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +65,8 @@ import java.util.Random;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.jci.service.BalePrepareService;
 import com.jci.service.PoliceStationService;
 import com.jci.service.blockService;
@@ -425,25 +429,32 @@ public class InsertDataController
             final String F_NAME = request.getParameter("F_NAME");
             final String M_NAME = request.getParameter("M_NAME");
             final String L_NAME = request.getParameter("L_NAME");
-            String farmerName = "";
-            final String fname = F_NAME.trim();
+            String farmerName="";
+            final String fname = F_NAME.replaceAll("\\s", "");
+            if(!fname.equalsIgnoreCase(""))
+            farmerName = fname;
             String mname = "";
             String lname = "";
-            if ((M_NAME == "" || M_NAME == null) && (L_NAME != "" || L_NAME != null)) {
-                lname = L_NAME.trim();
-                farmerName = fname + " " + lname;
+            if ((M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
+                lname = L_NAME.replaceAll("\\s", "");
+                if(!lname.equalsIgnoreCase(""))
+                farmerName = farmerName + "-" + lname;
             }
-            if ((M_NAME != "" || M_NAME != null) && (L_NAME != "" || L_NAME != null)) {
-                mname = M_NAME.trim();
-                lname = L_NAME.trim();
-                farmerName = fname + " " + mname + " " + lname;
+            else if ((!M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
+                mname = M_NAME.replaceAll("\\s", "");
+                lname = L_NAME.replaceAll("\\s", "");
+                if(!mname.equalsIgnoreCase(""))
+                farmerName = farmerName + "-" + mname;
+                if(!lname.equalsIgnoreCase(""))
+                	farmerName = farmerName + "-" + lname;
             }
-            else if ((M_NAME != "" || M_NAME != null) && (L_NAME == "" || L_NAME == null)) {
-                mname = M_NAME.trim();
-                farmerName = fname + " " + mname;
+            else if (!M_NAME.isEmpty() && L_NAME.isEmpty()) {
+                mname = M_NAME.replaceAll("\\s", "");
+                if(!mname.equalsIgnoreCase(""))
+                farmerName = farmerName + "-" + mname;
             }
-            else if ((M_NAME == "" || M_NAME == null) && (L_NAME == "" || L_NAME == null) && (F_NAME != "" || F_NAME != null))  {
-            	
+            else if ((M_NAME.isEmpty()) && (L_NAME.isEmpty()) && (!F_NAME.isEmpty()))  {
+            	if(!fname.equalsIgnoreCase(""))
                 farmerName = fname;
             }
             final String caste = request.getParameter("caste");
@@ -3542,7 +3553,20 @@ public class InsertDataController
 	              return a;
 	    }
 
-	  
+	    @RequestMapping("logout")
+	    public void logoutSession(HttpServletRequest request, HttpServletResponse resp) throws IOException {
+	    HttpSession session = request.getSession(false);
+	    if (null != session) {
+	 //   System.out.println("Session id : newtradeaction : "+session.getId());
+	    if (null != session.getAttribute("usrname")) {
+	    session.setAttribute("usrname", null);
+	    session.removeAttribute("usrname");
+	    }
+	    }
+	  //  System.out.println("logoutsuccessfully.....!");
+	    resp.sendRedirect("index.obj");
+	    }
+ 
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);
