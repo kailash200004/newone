@@ -229,7 +229,6 @@ com\jci\dao\AddOrganizationDao.class
 com\jci\controller\ContractgenerationcommercialController.class
 com\jci\service\Impl\PoliceStationServiceImpl.class
 com\jci\service\ContractgenerationcommercialService.class
-com\jci\controller\EntryDerivativeController.class
 com\jci\dao\impl\DistrictdaoImpl.class
 com\jci\dao\impl\FarmerRegDaoImpl.class
 com\jci\dao\UserActionDao.class

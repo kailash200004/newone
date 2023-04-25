@@ -5,7 +5,7 @@
 	<groupId>jciadmin</groupId>
 	<artifactId>jciadmin</artifactId>
 	<packaging>war</packaging>
-	<description>PNB Admin</description>
+	<description>JCI Admin</description>
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.0.4.RELEASE</org.springframework-version>
