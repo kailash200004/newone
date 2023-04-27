@@ -612,7 +612,8 @@ public class InsertDataController
     @RequestMapping({ "rawJutePaymentAndProcurement" })
     public ModelAndView rawJutePaymentAndProcurement(final HttpServletRequest request) {
         final ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");
-        final List<String> farmerNo = (List<String>)this.rawJuteProcurAndPayService.getfarmerno();
+        
+        final List<String> farmerNo = (List<String>)this.rawJuteProcurAndPayService.getfarmerno((String)request.getSession().getAttribute("dpcId"));
         mv.addObject("farmerNo", (Object)farmerNo);
         return mv;
     }
@@ -3176,7 +3177,8 @@ public class InsertDataController
     @RequestMapping({ "tallyapproval" })
     public ModelAndView tallyapproval(final HttpServletRequest request) {
         final ModelAndView mv = new ModelAndView("tallyapproval");
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV");
+
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",(String)request.getSession().getAttribute("dpcId"));
         mv.addObject("juteList", (Object)juteList);
         return mv;
     }
@@ -3553,19 +3555,16 @@ public class InsertDataController
 	              return a;
 	    }
 
-	    @RequestMapping("logout")
-	    public void logoutSession(HttpServletRequest request, HttpServletResponse resp) throws IOException {
-	    HttpSession session = request.getSession(false);
-	    if (null != session) {
-	 //   System.out.println("Session id : newtradeaction : "+session.getId());
-	    if (null != session.getAttribute("usrname")) {
-	    session.setAttribute("usrname", null);
-	    session.removeAttribute("usrname");
-	    }
-	    }
-	  //  System.out.println("logoutsuccessfully.....!");
-	    resp.sendRedirect("index.obj");
-	    }
+		/*
+		 * @RequestMapping("logout") public void logoutSession(HttpServletRequest
+		 * request, HttpServletResponse resp) throws IOException { HttpSession session =
+		 * request.getSession(false); if (null != session) { //
+		 * System.out.println("Session id : newtradeaction : "+session.getId()); if
+		 * (null != session.getAttribute("usrname")) { session.setAttribute("usrname",
+		 * null); session.removeAttribute("usrname"); } } //
+		 * System.out.println("logoutsuccessfully.....!");
+		 * resp.sendRedirect("index.obj"); }
+		 */
  
     static {
         InsertDataController.count = 0;

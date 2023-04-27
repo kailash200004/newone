@@ -23,7 +23,7 @@
            
 			
         </div>
-        <form id="login-form" action="loginAction.obj" method="post">
+        <form id="login-form" action="loginAction.obj" method="post" >
             <h2 class="login-title">Sign In</h2>
 			<center><img src="assets\img\logos\main_logo.png"></center>
             <div class="form-group">
@@ -32,13 +32,13 @@
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
                     	
                     	<span> ${msg}</span>
-                    <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+                    <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-                    <input class="form-control" type="password" name="password" placeholder="Password">
+                    <input class="form-control" type="password" name="password" placeholder="Password" >
                 </div>
             </div>           
             <div class="form-group">

@@ -57,7 +57,7 @@ public class DistrictdaoImpl implements DistrictDao {
 
 	@Override
 	public List<DistrictModel> getAll() {
-		System.out.println("Hello From StateListModel");
+	//	System.out.println("Hello From StateListModel");
 		List<DistrictModel> ll;
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(DistrictModel.class);
 		ll=c.list();

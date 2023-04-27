@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jci.service.UserRegistrationService;
 
@@ -30,6 +32,12 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
+	
+	/*
+	 * @RequestMapping("dashboard") public ModelAndView dashboard(HttpServletRequest
+	 * request){ System.out.println("dashboard"); ModelAndView mv = new
+	 * ModelAndView("dashboard"); return mv; }
+	 */
 
 	@RequestMapping("loginAction")
 	public ModelAndView loginDetailsCheck(HttpServletRequest request, RedirectAttributes redirectAttributes, HttpSession session){
@@ -53,14 +61,27 @@ public class LoginController {
 			session.setAttribute("roleId", roleId);
 			session.setAttribute("refId", refId);
 			session.setAttribute("dpc_center", dpc_center);
-			if(ifExist!=null && !ifExist.equalsIgnoreCase("mobile"))
+			/*
+			 * if(ifExist!=null && !ifExist.equalsIgnoreCase("mobile")) return new
+			 * ModelAndView("dashboard"); //return new ModelAndView((View)new
+			 * RedirectView("dashboard.obj")); else if(ifExist.equalsIgnoreCase("mobile")) {
+			 * mv.addObject("msg",
+			 * "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n"
+			 * );
+			 * 
+			 * } else if(ifExist.equalsIgnoreCase("null")) {
+			 * System.out.println("ifExist=====   "+ifExist); mv.addObject("msg",
+			 * "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n"
+			 * ); }
+			 */
+
+			if(ifExist!=null)
 				return new ModelAndView("dashboard");
-			else if(ifExist.equalsIgnoreCase("mobile"))
-				mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
 			else
 			{
 				mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n");
 			}
+
 		}catch(Exception e) {
 			System.out.println(e);
 		}

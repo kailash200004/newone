@@ -82,9 +82,9 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	@Override
-	public List<String> getfarmerno() {
+	public List<String> getfarmerno(String dpc) {
 
-		return rawJuteProcurementAndPaymentDao.getfarmerno();
+		return rawJuteProcurementAndPaymentDao.getfarmerno(dpc);
 	}
 
 	@Override
@@ -112,9 +112,9 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status) {
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, String dpcid) {
 
-		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status);
+		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, dpcid);
 	}
 
 	@Override

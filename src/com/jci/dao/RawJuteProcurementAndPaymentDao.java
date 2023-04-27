@@ -21,12 +21,12 @@ public interface RawJuteProcurementAndPaymentDao {
 	public List<String> findJuteOnBasis(int msp_no);
 	public List<String> findGradeOnJuteVariety (String variety, int msp_no);
 	public List<String> findGradePriceJuteVariety (String variety, int msp_no, String cropyr,String dpcid );
-	public List<String> getfarmerno();
+	public List<String> getfarmerno(String dpc);
 	public List <RawJuteProcurementAndPayment>farmerDetailsList();
 	public boolean updateProcurement(String status, int verified,String tallyno);
 	public boolean updateProcurementerror(String status, int verified,String tallyno,String error,String region);
 	public RawJuteProcurementAndPayment findbyTally(String tallyno);
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status);
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, String dpcid);
 	public boolean validateTally(String tally, String ro);
 	public String getbinno(String binno);
 }

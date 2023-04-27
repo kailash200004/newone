@@ -299,7 +299,7 @@ $(document).ready(function () {
         // alert(grade4);
          //alert(typeof grade0);
          if(grade4==0 ){
-        	 alert("Pls fill the Grade Price...!!!");
+        	 alert("Pls fill the Grade 5 Price...!!!");
          	result = false;
          }
 		

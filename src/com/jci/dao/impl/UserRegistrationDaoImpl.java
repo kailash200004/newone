@@ -116,14 +116,16 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> rows = query.list();
+		
 		boolean isPresent = rows.isEmpty();
 		if(isPresent) {
+			
 			return null;
 		}
-		else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application"))
-		{
-			return "mobile";
-		}
+		/*
+		 * else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application")) {
+		 * return "mobile"; }
+		 */
 		else {
 			return rows.get(0)[13].toString();
 		}

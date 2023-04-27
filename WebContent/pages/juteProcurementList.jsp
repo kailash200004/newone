@@ -67,7 +67,7 @@ $(document).ready(function() {
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Jute Procurement Listingssss</h1>
+                <h1 class="page-title">Jute Procurement Listings</h1>
             </div>
 				<%
 					List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>) request.getAttribute("procurementList");	
@@ -119,7 +119,7 @@ $(document).ready(function() {
 										<td><%=juteListing.getBinno()%></td>
 										<td><%=juteListing.getJutevariety()%></td>
 										<td><%=juteListing.getGrossquantity()%></td>
-									<td><%=juteListing.getDeductionquantity()%></td>
+										<td><%=juteListing.getDeductionquantity()%></td>
 										<td><%=juteListing.getNetquantity()%></td>
 										<td><%=juteListing.getGrasatrate()%></td>
 										<td><%=juteListing.getAmountpayable()%></td> 

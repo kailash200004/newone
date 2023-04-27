@@ -360,7 +360,7 @@ height: 614px;
 												<input class="form-control" type="hidden" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
 												onkeyup="deleteErrorMsg()" readonly="readonly">
 												<input class="form-control" type="text" name="popname" id="popname" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" readonly="readonly">
+												onkeyup="deleteErrorMsg()">
 										</div>
 
 										<div class=" form-group">

@@ -146,10 +146,10 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 	@Override
-	public List<String> getfarmerno() {
+	public List<String> getfarmerno(String dpc) {
 		String queryStr="";
 		List<String> result = new ArrayList<>();
-		queryStr= "select DISTINCT F_REG_NO from jcirmt where IS_VERIFIED=1";
+		queryStr= "select DISTINCT F_REG_NO from jcirmt where IS_VERIFIED=1 and dpc_id ='"+dpc+"'";
 		Session session= sessionFactory.getCurrentSession();
 		Transaction tx= session.beginTransaction();
 		SQLQuery query= session.createSQLQuery(queryStr);
@@ -299,9 +299,9 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status) {
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status , String dpcid) {
 
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"'";
+		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 
