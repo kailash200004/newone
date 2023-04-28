@@ -96,10 +96,11 @@ var hasError2 = false;
 							<div class="ibox-body">
 								<form action="saveUserMid.obj" method="POST" name="myForm"  onsubmit="return validate()" >
 								<input type="hidden" name="emailCheck" id="emailCheck">
+									<input type="hidden" name="dubName" id="dubName">
 									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Name</label>  &nbsp;&nbsp;&nbsp; <span id="errName" name="errName" class="text-danger"> </span>
-											<input class="form-control" name="username" id="username" type="text" placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg">
+											<input class="form-control" name="username" id="username" type="text" placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Password</label>  &nbsp;&nbsp;&nbsp; <span id="errPass" name="errPass" class="text-danger"> </span>
@@ -159,11 +160,12 @@ var hasError2 = false;
 												<%
 													for (UserRoleModel roleLists : roleList) {
 												%>
-												<option value="<%=roleLists.getRole_Id()%>"><%=roleLists.getRole_name()%></option>
+												<option  data-id="<%=roleLists.getRole_name()%>" value="<%=roleLists.getRole_Id()%>"><%=roleLists.getRole_name()%></option>
 												<%
 													}
 												%>
 											</select>
+											<input class="form-control" type="hidden" name="rolename" id="rolename">
 										</div>
 										
 										<div class="col-sm-4 form-group">
@@ -172,7 +174,7 @@ var hasError2 = false;
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">EMP Name</label>  &nbsp;&nbsp;&nbsp; <span id="errEMP" name="errEMP" class="text-danger"> </span>
-											<input class="form-control" name="employeename" type="text" placeholder="Employee Name" id="employeename">
+											<input class="form-control" name="employeename" type="text" placeholder="Employee Name" id="employeename" oninput="allow_alphabets(this)">
 										</div>
 									</div>
 									<div class="row">
@@ -271,6 +273,14 @@ var hasError2 = false;
 		}
 	 }); 
 	}); 
+		</script>
+		<script>
+		$(document).ready(function () {
+		$('#role').change(function(){
+	
+			document.getElementById("rolename").value = $(this).find(':selected').attr('data-id');
+			});
+		});
 		</script>
 		<script>
 		$(document).ready(function () {
@@ -692,6 +702,37 @@ function validatemail(){
 	
 }
 </script>
+	<script>
+	function deleteErrorMsg(){
+		
+	
+	var username = document.getElementById("username").value;
+	var flag = false;
+	var name = username.length;
+
+	if(name != " ")
+		{
+		
+			  $.ajax({
+					type:"GET",
+					url:"validateusername.obj",
+					data:{"username":username},
+					success:function(result){
+						document.getElementById("dubName").value = result;
+						if(result == 'false'){
+							document.getElementById("errName").innerHTML = " User Name Already Exists!";
+						}
+						else{
+							document.getElementById("errName").innerHTML = "";
+						}
+					}
+			  });
+		 
+	
+		}
+	}
+	
+		</script>
 
 	<!-- END PAGA BACKDROPS-->
 	<!-- CORE PLUGINS-->

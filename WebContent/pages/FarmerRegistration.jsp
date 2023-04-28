@@ -213,7 +213,7 @@
 										<div class="col-sm-4 form-group">
 											<label class="required">Pincode</label>
 											<span id="errPincode" name="errPincode" class="text-danger">
-											</span> <input type="number" min="0"  inputmode="numeric" pattern="[0-9]{6}" maxlength="6" class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >										
+											</span> <input type="number" min="0"  inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6"  class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >										
 											</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">Identity Type </label>&nbsp;&nbsp;&nbsp; 
@@ -662,7 +662,7 @@ var policestation = document.forms["myForm"]["policestation"].value;
                $("#errPoliceStation").hide();
         }
 var pincode = document.forms["myForm"]["pincode"].value;
-        if(pincode.length>1){
+        if(pincode.length == 6){
             $("#errPincode").hide();
         }
  

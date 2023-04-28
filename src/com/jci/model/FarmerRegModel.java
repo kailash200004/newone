@@ -108,6 +108,9 @@ public class FarmerRegModel {
 	private int IS_VERIFIED;
 
 
+	@Column(name = "dpc_id")
+	private String dpc_id ; 
+	
 	@Column(name="police_station")
 	private String police_station;
 
@@ -203,9 +206,13 @@ public class FarmerRegModel {
 		F_District = f_District;
 	}
 
+	public String getDpc_id() {
+		return dpc_id;
+	}
 
-
-
+	public void setDpc_id(String dpc_id) {
+		this.dpc_id = dpc_id;
+	}
 
 	public void setF_Address2(String f_Address2) {
 		F_Address2 = f_Address2;
@@ -219,11 +226,13 @@ public class FarmerRegModel {
 		F_Pincode = f_Pincode;
 	}
 
+	
 	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
-			String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY,String F_Block ,String f_STATE,String f_District,String f_I_CARE_REGISTERED, String land_holding,
-			String f_MOBILE, String f_AC_NO, String bank_ac_type, String f_BANK_NAME, String f_BANK_BRANCH,
-			String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH, String f_REG_NO,
-			String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2, String f_Pincode) {
+			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String f_District,
+			String f_I_CARE_REGISTERED, String land_holding, String f_MOBILE, String f_AC_NO, String bank_ac_type,
+			String f_BANK_NAME, String f_BANK_BRANCH, String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM,
+			String f_DOC_PATH, String f_REG_NO, String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2,
+			String f_Pincode, int iS_VERIFIED, String dpc_id, String police_station) {
 		super();
 		F_ID = f_ID;
 		F_NAME = f_NAME;
@@ -231,9 +240,12 @@ public class FarmerRegModel {
 		this.gender = gender;
 		F_ADDRESS = f_ADDRESS;
 		F_ID_PROF_TYPE = f_ID_PROF_TYPE;
+		F_Block = f_Block;
 		F_ID_PROF = f_ID_PROF;
 		F_ID_PROF_NO = f_ID_PROF_NO;
 		F_REG_BY = f_REG_BY;
+		F_STATE = f_STATE;
+		F_District = f_District;
 		F_I_CARE_REGISTERED = f_I_CARE_REGISTERED;
 		this.land_holding = land_holding;
 		F_MOBILE = f_MOBILE;
@@ -250,12 +262,9 @@ public class FarmerRegModel {
 		F_VERFIED_DATE = f_VERFIED_DATE;
 		F_Address2 = f_Address2;
 		F_Pincode = f_Pincode;
-		F_STATE = f_STATE;
-
-		F_District = f_District;
-		F_Block = F_Block;
-
-
+		IS_VERIFIED = iS_VERIFIED;
+		this.dpc_id = dpc_id;
+		this.police_station = police_station;
 	}
 
 	public Date getF_VERFIED_DATE() {
@@ -503,9 +512,10 @@ public class FarmerRegModel {
 				+ ", F_BANK_IFSC=" + F_BANK_IFSC + ", F_BANK_DOC=" + F_BANK_DOC + ", F_REG_FORM=" + F_REG_FORM
 				+ ", F_DOC_PATH=" + F_DOC_PATH + ", F_REG_NO=" + F_REG_NO + ", F_DOC_Mandate=" + F_DOC_Mandate
 				+ ", F_VERFIED_DATE=" + F_VERFIED_DATE + ", F_Address2=" + F_Address2 + ", F_Pincode=" + F_Pincode
-				+ ", IS_VERIFIED=" + IS_VERIFIED + ", police_station=" + police_station + "]";
+				+ ", IS_VERIFIED=" + IS_VERIFIED + ", dpc_id=" + dpc_id + ", police_station=" + police_station + "]";
 	}
 
+	
 
 
 }

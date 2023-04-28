@@ -42,7 +42,7 @@
             String dpcCenter = (String) session.getAttribute("dpc_center");
             String dpcid = (String) session.getAttribute("dpcId");
             String region_id = (String) session.getAttribute("region");
-            int refid = (int)session.getAttribute("refId");
+            int refid2 = (int)session.getAttribute("refId");
                 
             %>
             <div class="page-content fade-in-up">

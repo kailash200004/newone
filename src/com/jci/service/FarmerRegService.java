@@ -14,7 +14,7 @@ public interface FarmerRegService {
 	public List <FarmerRegModel> getAll();
 	public boolean submitform(FarmerRegModel off);
 	boolean validateMobile(String mobileNo);
-	public List<FarmerRegModelDTO> verificationStatus();
+	public List<FarmerRegModelDTO> verificationStatus(String dpcid);
 	public boolean updateVerificationStatus(int id);
 	boolean validateAccount(String accountNo);
 	boolean validateAdhar(String aadharNo);

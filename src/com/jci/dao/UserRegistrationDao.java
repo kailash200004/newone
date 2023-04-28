@@ -14,7 +14,7 @@ public interface UserRegistrationDao {
 	public boolean submitform(UserRegistrationModel userRegistration);
 	public String loginCheck(String userName, String password);
 	public boolean validateEmail(String Email);
-	public int getUserId(String Email);
+	public String getUserId(int refid);
 	public String getUserDpc(int userId);
 	public String getUserRegion(int userId);
 	public String getdpc_center(String dpcIdd);
@@ -23,4 +23,5 @@ public interface UserRegistrationDao {
 	public UserRegistrationModel getuserprofile(int refid);
 	public boolean validateUserMobile(String mobileNo);
 	public boolean validateEmployeeid(String employeeid);
+	public boolean validateusername(String username);
 }

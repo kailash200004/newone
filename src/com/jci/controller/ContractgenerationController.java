@@ -47,9 +47,13 @@ public class ContractgenerationController {
 
 	@RequestMapping("contractgenerationPCSOWise")
 	public ModelAndView contractgeneration(HttpServletRequest req) {
+		  String username =(String)req.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("contractgeneration");
 		List<Date> pcso= pcsoentryservice.getAll(); 
 		mv.addObject("pcso", (Object)pcso);
+		 if(username == null) {
+         	mv = new ModelAndView("index");
+             }
 		return mv;
 	}
 	
@@ -110,7 +114,7 @@ public class ContractgenerationController {
 	 */
 	@RequestMapping("savecontractgenerationPcsoWise")
     public ModelAndView savecontractgenerationMillWise(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		  String username =(String)request.getSession().getAttribute("usrname");
            try {
                   Contractgeneration contractgenerationPsco = new Contractgeneration();
            //     UpdatedContractQtyDTO updatedcontractqtyDTO = new UpdatedContractQtyDTO();
@@ -167,13 +171,15 @@ public class ContractgenerationController {
            } catch (Exception e) {
                   System.out.println(e);
            }
+           if(username == null) {
+           	return new ModelAndView("index");
+               }
            return new ModelAndView(new RedirectView("contractgenerationPCSOWise.obj"));
     }
 	@RequestMapping("saveUpdatedQty")
     public ModelAndView saveUpdatedQty(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		  String username =(String)request.getSession().getAttribute("usrname");
            try {
-           
                   UpdatedContractQtyDTO updatedcontractqtyDTO = new UpdatedContractQtyDTO();
                   String contactnumber=request.getParameter("contactnumber");
                   String contractdate=request.getParameter("contractdate");
@@ -193,22 +199,29 @@ public class ContractgenerationController {
            } catch (Exception e) {
                   System.out.println(e);
            }
+           if(username == null) {
+           	return new ModelAndView("index");
+               }
            return new ModelAndView(new RedirectView("contractgenerationPCSOWise.obj"));
     }
 
 
 	@RequestMapping(value= {"contractgenerationMillWise"},  method = { RequestMethod.GET })
 	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
+		  String username =(String)request.getSession().getAttribute("usrname");
 		  int id = Integer.parseInt((String) request.getParameter("id"));
 		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
 		  UpdatedContractQtyDTO updatedContractQtyDTO = contractgenerationService.getAll(id);
 		  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
+		  if(username == null) {
+          	mv = new ModelAndView("index");
+              }
 		return mv;
 	}
 	
 	@RequestMapping("savecontractgenerationMillWise")
 	public ModelAndView saveEDC(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		  String username =(String)request.getSession().getAttribute("usrname");
 		try {
 			ContractgenerationMillWise contractgenerationMill = new ContractgenerationMillWise();
 			String fullcontractNo= request.getParameter("fullcontractNo");
@@ -260,6 +273,9 @@ public class ContractgenerationController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		 if(username == null) {
+         	return new ModelAndView("index");
+             }
 		return new ModelAndView(new RedirectView("contractgenerationMillWise.obj"));
 	}
 	
@@ -269,33 +285,44 @@ public class ContractgenerationController {
 	  public ModelAndView viewFarmerList(HttpServletRequest request) 
 	  {
 		  ModelAndView mv = new  ModelAndView("contractgenerationlist"); 
-	
+		  String username =(String)request.getSession().getAttribute("usrname");
 	  List<UpdatedContractQtyDTO> updatedContractQtyDTO = contractgenerationService.getAllMills();
 	  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
-	  return mv; }
+	  if(username == null) {
+      	mv= new ModelAndView("index");
+          }
+	  return mv;
+	  }
 	 
 
 	
 	@RequestMapping("contractgenerationDelete")
 	public ModelAndView contractgenerationDelete(HttpServletRequest request, RedirectAttributes redirectAttributes)
 			throws ParseException {
+		  String username =(String)request.getSession().getAttribute("usrname");
 		int contract_id = Integer.parseInt(request.getParameter("contract_id"));
 		this.contractgenerationService.delete(contract_id);
 
 		redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n" + "");
+		 if(username == null) {
+         	return new ModelAndView("index");
+             }
 		return new ModelAndView(new RedirectView("viewcontractgeneration.obj"));
 	}
 	
 	@RequestMapping(value = { "editcontractgeneration" }, method = { RequestMethod.GET })
 	public ModelAndView editcontractgeneration(final HttpServletRequest request) {
-		
-		final ModelAndView mv = new ModelAndView("editcontractgeneration");
+		  String username =(String)request.getSession().getAttribute("usrname");
+		  ModelAndView mv = new ModelAndView("editcontractgeneration");
 		if (request.getParameter("contract_id") != null) {
 			final int contract_id = Integer.parseInt(request.getParameter("contract_id"));
 			final Contractgeneration contractgeneration = this.contractgenerationService.find(contract_id);
 			mv.addObject("contractgeneration", contractgeneration);
 		}
+		 if(username == null) {
+         	mv= new ModelAndView("index");
+             }
 		return mv;
 	}
 	/*
@@ -343,6 +370,7 @@ public class ContractgenerationController {
 	 @ResponseBody
 	 @RequestMapping(value = "pcso_details" , method =  RequestMethod.GET )
      public String pcso_details(final HttpServletRequest request){
+		  
 		 String outerArray = request.getParameter("pcso1");
 		 outerArray = outerArray.replaceAll("/", "'").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\"", "'");
 		final String[] bpArr = outerArray.split(",");
@@ -355,6 +383,7 @@ public class ContractgenerationController {
 	 @ResponseBody
 	 @RequestMapping(value = "derivativePrice" , method =  RequestMethod.GET )
      public String derivativePrice(final HttpServletRequest request){
+
 		 List<String> result= contractgenerationMillWiseService.derivativePrice((String)request.getParameter("type"),(String)request.getParameter("contract_no"));		
 		Gson gson= new Gson();		
 		 return gson.toJson(result);
@@ -362,7 +391,8 @@ public class ContractgenerationController {
 	 
 	 @ResponseBody
 	 @RequestMapping(value = "percentage" , method =  RequestMethod.GET )
-     public String percentage(final HttpServletRequest request){			
+     public String percentage(final HttpServletRequest request){		
+		 
 		 List<String> result= contractgenerationMillWiseService.percentage((String)request.getParameter("contract_no"));		
 		Gson gson= new Gson();
 		

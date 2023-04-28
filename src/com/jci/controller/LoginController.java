@@ -33,54 +33,63 @@ public class LoginController {
 		return mv;
 	}
 	
-	/*
-	 * @RequestMapping("dashboard") public ModelAndView dashboard(HttpServletRequest
-	 * request){ System.out.println("dashboard"); ModelAndView mv = new
-	 * ModelAndView("dashboard"); return mv; }
-	 */
+	
+	  @RequestMapping("dashboardview") 
+	  public ModelAndView dashboardview(HttpServletRequest request){ 
+		  System.out.println("dashboard"); 
+			String username =(String)request.getSession().getAttribute("usrname");
+		  ModelAndView mv = new ModelAndView("dashboard");
+		  if(username == null) {
+          	mv = new ModelAndView("index");
+              }
+		  return mv; 
+		  }
+	 
 
 	@RequestMapping("loginAction")
 	public ModelAndView loginDetailsCheck(HttpServletRequest request, RedirectAttributes redirectAttributes, HttpSession session){
 		ModelAndView mv = new ModelAndView("index");
+		
 		try {
 			String usrname =  request.getParameter("email");
 			String password = request.getParameter("password");
+			if(usrname != null && password != null) {
 			String dpcId = request.getParameter("dpcId");
 			String ifExist =  userRegService.checkLogin(usrname, password);
-			int userId = userRegService.getUserId(usrname);
-			int roleId = userRegService.getUserRoleId(userId);
-			int refId = userRegService.getRefId(usrname);
-			String dpcIdd = userRegService.getUserDpc(userId);
-			String region = userRegService.getUserRegion(userId);
-			String dpc_center = userRegService.getdpc_center(dpcIdd);
-			session.setAttribute("userId", userId);
-			session.setAttribute("usrname", usrname);
-			session.setAttribute("dpcId", dpcIdd);
-			session.setAttribute("region", region);
-			session.setAttribute("zone", dpcId);
-			session.setAttribute("roleId", roleId);
-			session.setAttribute("refId", refId);
-			session.setAttribute("dpc_center", dpc_center);
-			/*
-			 * if(ifExist!=null && !ifExist.equalsIgnoreCase("mobile")) return new
-			 * ModelAndView("dashboard"); //return new ModelAndView((View)new
-			 * RedirectView("dashboard.obj")); else if(ifExist.equalsIgnoreCase("mobile")) {
-			 * mv.addObject("msg",
-			 * "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n"
-			 * );
-			 * 
-			 * } else if(ifExist.equalsIgnoreCase("null")) {
-			 * System.out.println("ifExist=====   "+ifExist); mv.addObject("msg",
-			 * "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n"
-			 * ); }
-			 */
+			String username =(String)request.getSession().getAttribute("usrname");
+			  if(ifExist!=null && ifExist.equalsIgnoreCase("mobile")) { 
+				  mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
+			  
+			  } else if(ifExist == null){
+			  
+			  mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n"); 
+			  }
+			 
+			  else
+				{
 
-			if(ifExist!=null)
-				return new ModelAndView("dashboard");
-			else
-			{
-				mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n");
-			}
+					int refId = userRegService.getRefId(usrname);
+					int roleId = userRegService.getUserRoleId(refId);
+					String rolename = userRegService.getUserId(refId);
+					String dpcIdd = userRegService.getUserDpc(refId);
+					String region = userRegService.getUserRegion(refId);
+					String dpc_center = userRegService.getdpc_center(dpcIdd);
+					session.setAttribute("userId", refId);
+					session.setAttribute("usrname", usrname);
+					session.setAttribute("dpcId", dpcIdd);
+					session.setAttribute("region", region);
+					session.setAttribute("zone", dpcId);
+					session.setAttribute("roleId", roleId);
+					session.setAttribute("refId", refId);
+					session.setAttribute("rolename", rolename);
+					session.setAttribute("dpc_center", dpc_center);
+					
+					  mv= new ModelAndView( (View)new RedirectView("dashboardview.obj")); 
+					 
+				}
+				
+			}	  
+			  
 
 		}catch(Exception e) {
 			System.out.println(e);

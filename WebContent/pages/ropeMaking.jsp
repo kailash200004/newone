@@ -93,7 +93,7 @@
 
           String region_id = (String) session.getAttribute("region");
 
-            int refid = (int)session.getAttribute("refId");
+            int refid2 = (int)session.getAttribute("refId");
 
             %>
 

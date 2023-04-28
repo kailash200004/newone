@@ -68,7 +68,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> rows = query.list();
-		System.out.println(rows);
+		//System.out.println(rows);
 	
 		for(Object[] row: rows) {
 			UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -119,13 +119,12 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		
 		boolean isPresent = rows.isEmpty();
 		if(isPresent) {
-			
 			return null;
 		}
-		/*
-		 * else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application")) {
-		 * return "mobile"; }
-		 */
+		
+		  else if(rows.get(0)[16].toString().equalsIgnoreCase("Mobile Application")) {
+		  return "mobile"; }
+		 
 		else {
 			return rows.get(0)[13].toString();
 		}
@@ -146,23 +145,15 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	}
 
 	@Override
-	public int getUserId(String Email) {
-		String querystr = "select refid from jciumt where username ='"+Email+"'";
+	public String getUserId(int refid) {
+		String userrole="";
+		String querystr = "select roles_name from jciumt where refid ='"+refid+"'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
-		List<Integer> userList = query.list();
-		if(userList.size()>1) {
-			Log.info("two users exist of same email Id");
-			return 0;
-		}
-		else if(userList.size()==1){
-			int userIdString = userList.get(0);
-			return userIdString;
-		}
-		else {
-			Log.info("no user exist with such id");
-			return 0;
-		}
+		List<String> userList = query.list();
+	//	System.out.println("userList====   "+userList);
+			userrole = userList.get(0);
+		 return userrole;
 	}
 
 	@Override
@@ -286,7 +277,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 				Session session = sessionFactory.getCurrentSession();
 				SQLQuery query = session.createSQLQuery(querystr);
 				List<Integer> userList = query.list();
-				System.out.println("refid===>>>>> "+userList);
+				//System.out.println("refid===>>>>> "+userList);
 				if(!userList.isEmpty()) {
 					return userList.get(0);
 					//return "0";
@@ -331,4 +322,21 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		}
 	
 	}	
+	
+	@Override
+	public boolean validateusername(String username) {
+		List<String> result = new ArrayList<>();
+		String querystr = "select * from jciumt where username ='"+username+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		boolean isPresent = rows.isEmpty();
+		if(isPresent) {
+			return true;
+		}else {
+			return false;
+		}
+	
+	}
 }

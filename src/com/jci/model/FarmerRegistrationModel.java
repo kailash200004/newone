@@ -62,13 +62,19 @@ public class FarmerRegistrationModel {
 	@Column(name = "ipaddress")
 	private String ipaddress ;
 
+	@Column(name = "dpc_id")
+	private String dpc_id ;
+	
 	public FarmerRegistrationModel() {
 
 	}
 
+	
+
 	public FarmerRegistrationModel(int infoid, String firstname, String lastname, String useremail, int roleid,
 			int orgid, Date createddate, String mobileno, int status, int enabled, Date infoupdate, String city,
-			String state, String majorwork, String ipaddress) {
+			String state, String majorwork, String ipaddress, String dpc_id) {
+		super();
 		this.infoid = infoid;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -84,7 +90,21 @@ public class FarmerRegistrationModel {
 		this.state = state;
 		this.majorwork = majorwork;
 		this.ipaddress = ipaddress;
+		this.dpc_id = dpc_id;
 	}
+
+
+
+	public String getDpc_id() {
+		return dpc_id;
+	}
+
+
+
+	public void setDpc_id(String dpc_id) {
+		this.dpc_id = dpc_id;
+	}
+
 
 
 	public int getInfoid() {
@@ -209,13 +229,16 @@ public class FarmerRegistrationModel {
 		this.ipaddress = ipaddress;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "FarmerRegistrationModel [infoid=" + infoid + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", useremail=" + useremail + ", roleid=" + roleid + ", orgid=" + orgid + ", createddate="
 				+ createddate + ", mobileno=" + mobileno + ", status=" + status + ", enabled=" + enabled
 				+ ", infoupdate=" + infoupdate + ", city=" + city + ", state=" + state + ", majorwork=" + majorwork
-				+ ", ipaddress=" + ipaddress + "]";
+				+ ", ipaddress=" + ipaddress + ", dpc_id=" + dpc_id + "]";
 	}
 
+	
 }

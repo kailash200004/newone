@@ -24,15 +24,17 @@ public class SalepricecalculationController {
 
 	@RequestMapping("salespricecalculation")
 	public ModelAndView salespricecalculation(HttpServletRequest request) {
-
+		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("salepricecalculation");
-
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 
 	@RequestMapping("savesalespricecalculation")
 	public ModelAndView saveSalepriceCalculation(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		 String username =(String)request.getSession().getAttribute("usrname");
 		try {
 
 			Salepricecalculation salepricecalculation = new Salepricecalculation();
@@ -54,16 +56,10 @@ public class SalepricecalculationController {
 			String marketlevy = request.getParameter("");
 			String opportunitycostm_argin = request.getParameter("opportunitycostm_argin");
 			String td_five_baseprice = request.getParameter("td_five_baseprice");
-			
 			Date currentdate = new Date();
-	          
-            
             SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd"); 
-           
             String formattedDate = df.format(currentdate);
-          
-               String date1=salepricecalculation.setCreated_date(formattedDate);
-
+            String date1=salepricecalculation.setCreated_date(formattedDate);
 			salepricecalculation.setCrop_year(crop_year);
 			salepricecalculation.setCenter(center);
 			salepricecalculation.setSale_quantity(sale_quantity);
@@ -88,35 +84,43 @@ public class SalepricecalculationController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("salespricecalculation.obj"));
 	}
 
 	@RequestMapping("salespricecalculationlist")
 	public ModelAndView salespricecalculationList(HttpServletRequest request) {
-
+		 String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("salepricecalculationlist");
 		List<Salepricecalculation> salepricecalculation = this.salepricecalculationService.getAll();
 		mv.addObject("salepricecalculationlist", salepricecalculation);
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 
 	@RequestMapping("salespricecalculationedit")
 	public ModelAndView salespricecalculationEdit(HttpServletRequest request) {
-
+		 String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("salepricecalculationedit");
-		
-	if (request.getParameter("spc_id") != null) {
+		if (request.getParameter("spc_id") != null) {
 		final int spc_id = Integer.parseInt(request.getParameter("spc_id"));
 		final Salepricecalculation salepricecalculation = this.salepricecalculationService.find(spc_id);
 		mv.addObject("salepricecalculation", salepricecalculation);
 	}
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 	return mv;
 	
 	
 	}	
 	@RequestMapping("updatesalespricecalculation")
 	public ModelAndView updateSalepriceCalculation(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		 String username =(String)request.getSession().getAttribute("usrname");
 		try {
 			int spc_id = Integer.parseInt(request.getParameter("spc_id"));
 			Salepricecalculation salepricecalculation = this.salepricecalculationService.find(spc_id);
@@ -138,7 +142,6 @@ public class SalepricecalculationController {
 			String marketlevy = request.getParameter("");
 			String opportunitycostm_argin = request.getParameter("opportunitycostm_argin");
 			String td_five_baseprice = request.getParameter("td_five_baseprice");
-
 			salepricecalculation.setCrop_year(crop_year);
 			salepricecalculation.setCenter(center);
 			salepricecalculation.setSale_quantity(sale_quantity);
@@ -163,16 +166,23 @@ public class SalepricecalculationController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("salespricecalculationlist.obj"));
 	}
 	
 	@RequestMapping("salespricecalculationdelete")
 	public ModelAndView salespricecalculationDelete(HttpServletRequest request ,RedirectAttributes redirectAttributes) {
+		 String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryderivativepricelist");
 		int spc_id = Integer.parseInt(request.getParameter("spc_id"));
 		salepricecalculationService.delete(spc_id);
 		redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n" + "");
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("salespricecalculationlist.obj"));
 	
 	}	

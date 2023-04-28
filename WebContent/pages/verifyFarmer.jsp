@@ -161,7 +161,7 @@
 											     <input class="form-control" min="0" name="ac_no" type="number" placeholder="Bank A/C Number" id="ac_no" required oninput="javascript: if (this.value.length > 18) this.value = this.value.slice(0, 18);">
 											</div>
 											<div class="form-group">
-												<label class="required">Name of farmer (Separated by '-'. Example: xyz-xyz-xyz) </label>  <span class="err" name="name_span" id="name_span"></span>
+												<label class="required">Name of farmer </label>  <span class="err" name="name_span" id="name_span"></span>
 												<input type="text" class="form-control"   name="farmer_name" id="farmer_name" placeholder="Name of farmer" required >
 											</div>
 											

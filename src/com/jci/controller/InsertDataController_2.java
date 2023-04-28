@@ -70,15 +70,20 @@ public class InsertDataController_2 {
 	
 	  @RequestMapping("entryofpcso")
 	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
+		  String username =(String)request.getSession().getAttribute("usrname");
 	          ModelAndView mv = new ModelAndView("entryofpcso");
 	          final List<EntryofpcsoModel> allentryofpcsolist = (List<EntryofpcsoModel>)this.pcsoentryservice.getAlldata();
 	          mv.addObject("entryofpcsolist", (Object)allentryofpcsolist);
+	          if(username == null) {
+			     	mv = new ModelAndView("index");
+			         }
 	          return mv;
 	    }
     
 	  @RequestMapping("entryofpcsosave")
 	    public ModelAndView saveUserMid(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 	         ModelAndView mv= new ModelAndView("entryofpcsosave");
+	         String username =(String)request.getSession().getAttribute("usrname");
 	          try {
 	            	List<EntryofpcsoModel> ll = new ArrayList<>();
 	                int c = 0;
@@ -114,6 +119,9 @@ public class InsertDataController_2 {
 	          } catch (Exception e) {
 	               System.out.println(e);
 	          }
+	          if(username == null) {
+			     	mv = new ModelAndView("index");
+			         }
 	          return mv;
 	    }
 
@@ -146,6 +154,7 @@ public class InsertDataController_2 {
 
 	  @RequestMapping("saveentryofpcsodata")
 	    public ModelAndView entryofpcsosave(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		  String username =(String)request.getSession().getAttribute("usrname");
 	          try {
 	        	
 	        	   int c = 0;
@@ -188,30 +197,42 @@ public class InsertDataController_2 {
 	               System.out.println(e);
 	               e.printStackTrace();
 	          }
+	          if(username == null) {
+			     	return new ModelAndView("index");
+			         }
 	          return new ModelAndView(new RedirectView("entryofpcso.obj"));
 	    }
 
-	  @RequestMapping("pcsolist") public ModelAndView pcsolist(HttpServletRequest
-	  request) { 
+	  @RequestMapping("pcsolist") 
+	  public ModelAndView pcsolist(HttpServletRequest request) { 
+		  String username =(String)request.getSession().getAttribute("usrname");
 		  ModelAndView mv = new ModelAndView("PCSO_List");
 	  List<Date> pcso = pcsoentryservice.getAll(); 
-	  mv.addObject("pcsolist",pcso); return mv; }
+	  mv.addObject("pcsolist",pcso); 
+	  if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
+	  return mv; 
+	  }
 	 
 	@RequestMapping("userprivilige")
 	public ModelAndView userpriviligeModel(HttpServletRequest request)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userprivilige");
 		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
 		 mv.addObject("userroleList", (Object)alluserroleList);
 		 final List<UserActionModel> alluseractionlist = (List<UserActionModel>)this.useractionservice.getAll();
 		 mv.addObject("useractionlist", (Object)alluseractionlist);
+		 if(username == null) {
+		     	mv = new ModelAndView("index");
+		         }
 		 return mv;
 	}
 	
 	@RequestMapping("saveuserprivilige")  
 	
 	public ModelAndView saveuserprivilige(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{			String username =(String)request.getSession().getAttribute("usrname");
 		try {
 			String userrole = request.getParameter("userrole");
 			String useraction = request.getParameter("action");
@@ -232,29 +253,39 @@ public class InsertDataController_2 {
 			//System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("userprivilige.obj"));
 	}
 	
 	@RequestMapping("userrole")
 	public ModelAndView userroleModel(HttpServletRequest request)
-	{
+	{   String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userrole");
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 	
 	@RequestMapping("viewuserrole")
 	public ModelAndView viewuserroleModel(HttpServletRequest request)
 	{
+		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("viewuserrole");
 		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
 		 mv.addObject("userroleList", (Object)alluserroleList);
+		 if(username == null) {
+		     	mv = new ModelAndView("index");
+		         }
 		return mv;
 	}
 	
 	 
 	@RequestMapping("saveuserrole")  
 	public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		try {
 		
 			String rolename = request.getParameter("rolename");
@@ -273,12 +304,16 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("viewuserrole.obj"));
 	}
 	
 	 @ResponseBody
 	    @RequestMapping(value = { "validateRole" }, method = { RequestMethod.GET })
 	    public String validateRole(final HttpServletRequest request) {
+		 String username =(String)request.getSession().getAttribute("usrname");
 	        final Gson gson = new Gson();
 	        return this.userroleService.validateRole(request.getParameter("rolename")) + "";
 	    }
@@ -286,14 +321,17 @@ public class InsertDataController_2 {
 	
 	@RequestMapping("useraction")
 	public ModelAndView useractionModel(HttpServletRequest request)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("useraction");
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 	
 	@RequestMapping("saveuseraction")  
 	public ModelAndView saveuseraction(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		try {
 			String actionname = request.getParameter("actionname");
 			String actionstatus = request.getParameter("actionstatus");
@@ -316,21 +354,27 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("useraction.obj"));
 	}
 	
 	
 	@RequestMapping("entryofpayment")
 	public ModelAndView EntryofpiModel(HttpServletRequest request)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryofpaymentinstrument");
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 	
 	
 	@RequestMapping("saveentryofpaymentinstrument")  
 	public ModelAndView saveentryofPI(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		try {
 		
 			String fullcontractno = request.getParameter("fullcontractno");
@@ -409,20 +453,26 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("entryofpayment.obj"));
 	}
 	
 	
 	@RequestMapping("HOdispatch")
 	public ModelAndView HODispatchInstructionModel(HttpServletRequest request)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("HOdispatchinstruction");
+		if(username == null) {
+	     	mv = new ModelAndView("index");
+	         }
 		return mv;
 	}
 	
 	@RequestMapping("savehodispatch")  
 	public ModelAndView hoDispatchInstruction(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		try 
 		{
 			String fullcontractno = request.getParameter("fullcontractno");
@@ -494,19 +544,25 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		if(username == null) {
+	     	return new ModelAndView("index");
+	         }
 		return new ModelAndView(new RedirectView("HOdispatch.obj"));
 	}
 	
 	@RequestMapping("entryofsale")
 	public ModelAndView EntryofSaleForm(HttpServletRequest request)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryofsale");
+		 if(username == null) {
+		     	mv = new ModelAndView("index");
+		         }
 		return mv;
 	}
 	
 	@RequestMapping("saveentryofsale")  
 	public ModelAndView saveEntryofsale(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		try 
 		{
 			String dpc10no = request.getParameter("dpc10no");
@@ -563,19 +619,25 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		 if(username == null) {
+		     	return new ModelAndView("index");
+		         }
 		return new ModelAndView(new RedirectView("entryofsale.obj"));
 	}
 	
 	@RequestMapping("uploadingreceipt")
 	public ModelAndView UploadingofreceiptBos(HttpServletRequest request)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("uploadingofreceiptbos");
+		 if(username == null) {
+		     	mv = new ModelAndView("index");
+		         }
 		return mv;
 	}
 	
 	@RequestMapping("saveuploadingreceipt")  
 	public ModelAndView uploadingreceipt(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{
+	{		String username =(String)request.getSession().getAttribute("usrname");
 		try 
 		{
 			String dpc10no = request.getParameter("dpc10no");
@@ -601,6 +663,9 @@ public class InsertDataController_2 {
 			System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
+		 if(username == null) {
+		     	return new ModelAndView("index");
+		         }
 		return new ModelAndView(new RedirectView("uploadingreceipt.obj"));
 	}
 	
@@ -640,45 +705,48 @@ public class InsertDataController_2 {
 	
 	@RequestMapping("MSPgradesCombination")
 	public ModelAndView MSPgradesCombination(HttpServletRequest request)
-	{
+	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("MSPgradesCombination");
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 
 	
-	  @RequestMapping("savegradesCombination") public ModelAndView
-	  savegradesCombination(HttpServletRequest request, RedirectAttributes
-	  redirectAttributes,HttpSession session) {
-	 try { labelGenerationModel
-	  labelgenerationModel = new labelGenerationModel(); 
-	  String basis = request.getParameter("basis"); 
-	  String cropyr = request.getParameter("cropyr"); 
-	  String label1 = request.getParameter("textbox1"); 
-	  String label2 = request.getParameter("textbox2"); 
-	  String label3 = request.getParameter("textbox3"); 
-	  String label4 = request.getParameter("textbox4"); 
-	  String label5 = request.getParameter("textbox5"); 
-	  String label6 = request.getParameter("textbox6"); 
-	  String label7 = request.getParameter("textbox7"); 
-	  String label8 = request.getParameter("textbox8"); 
-	  String label9 = request.getParameter("textbox9"); 
-	  String label10 = request.getParameter("textbox10"); 
-	  labelgenerationModel.setLabel1(label1);
-	  labelgenerationModel.setLabel2(label2);
-	  labelgenerationModel.setLabel3(label3);
-	  labelgenerationModel.setLabel4(label4);
-	  labelgenerationModel.setLabel5(label5);
-	  labelgenerationModel.setLabel6(label6);
-	  labelgenerationModel.setLabel7(label7);
-	  labelgenerationModel.setLabel8(label8);
-	  labelgenerationModel.setLabel9(label9);
-	  labelgenerationModel.setLabel10(label10); 
-	  labelgenerationModel.setBasis(basis);
-	  labelgenerationModel.setCreatedBy((String)session.getAttribute("usrname")+"  role id{"+session.getAttribute("roleId")+"}");
-	  labelgenerationModel.setCreatedOn(new Date());
-	  labelgenerationModel.setCropyr(cropyr);
-	  
-	  this.labelgenerationService.create(labelgenerationModel);
+	  @RequestMapping("savegradesCombination") 
+	  public ModelAndView savegradesCombination(HttpServletRequest request, RedirectAttributes redirectAttributes,HttpSession session) {
+		  String username =(String)request.getSession().getAttribute("usrname");
+		  try { 
+				 labelGenerationModel labelgenerationModel = new labelGenerationModel(); 
+			  String basis = request.getParameter("basis"); 
+			  String cropyr = request.getParameter("cropyr"); 
+			  String label1 = request.getParameter("textbox1"); 
+			  String label2 = request.getParameter("textbox2"); 
+			  String label3 = request.getParameter("textbox3"); 
+			  String label4 = request.getParameter("textbox4"); 
+			  String label5 = request.getParameter("textbox5"); 
+			  String label6 = request.getParameter("textbox6"); 
+			  String label7 = request.getParameter("textbox7"); 
+			  String label8 = request.getParameter("textbox8"); 
+			  String label9 = request.getParameter("textbox9"); 
+			  String label10 = request.getParameter("textbox10"); 
+			  labelgenerationModel.setLabel1(label1);
+			  labelgenerationModel.setLabel2(label2);
+			  labelgenerationModel.setLabel3(label3);
+			  labelgenerationModel.setLabel4(label4);
+			  labelgenerationModel.setLabel5(label5);
+			  labelgenerationModel.setLabel6(label6);
+			  labelgenerationModel.setLabel7(label7);
+			  labelgenerationModel.setLabel8(label8);
+			  labelgenerationModel.setLabel9(label9);
+			  labelgenerationModel.setLabel10(label10); 
+			  labelgenerationModel.setBasis(basis);
+			  labelgenerationModel.setCreatedBy((String)session.getAttribute("usrname")+"  role id{"+session.getAttribute("roleId")+"}");
+			  labelgenerationModel.setCreatedOn(new Date());
+			  labelgenerationModel.setCropyr(cropyr);
+			  
+			  this.labelgenerationService.create(labelgenerationModel);
 	  
 	  redirectAttributes.addFlashAttribute("msg",
 	  "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
@@ -688,6 +756,9 @@ public class InsertDataController_2 {
 		  System.out.println("++++++++++++++"+e);
 	  e.printStackTrace(); 
 	  } 
+	 if(username == null) {
+     	return new ModelAndView("index");
+         }
 	 return new ModelAndView(new RedirectView("MSPgradesCombination.obj")); }
 	 
 }

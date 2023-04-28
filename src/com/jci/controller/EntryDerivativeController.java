@@ -37,9 +37,13 @@ public class EntryDerivativeController {
 
 	@RequestMapping("entry_derivativeprice")
 	public ModelAndView ViewEDPrice(HttpServletRequest request) {
+		String username =(String)request.getSession().getAttribute("usrname");
 		List<StateList> Liststate = stateList.getAll();
 		ModelAndView mv = new ModelAndView("entry_derivativeprice");
 		mv.addObject("Liststate", Liststate);
+		 if(username == null) {
+         	mv = new ModelAndView("index");
+             }
 		return mv;
 	}
 
@@ -163,20 +167,22 @@ public class EntryDerivativeController {
 
 	@RequestMapping("editentryderivativeprice")
 	public ModelAndView editEDP(HttpServletRequest request) {
+		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("editentryderivativeprice");
 		int der_id = Integer.parseInt(request.getParameter("der_id"));
-
 		EntryDerivativePrice entryDerivativePrice = this.entryDerivativePriceService.findEDPBYId(der_id);
-
 		mv.addObject("derivativePrice", entryDerivativePrice);
 		List<StateList> liststate = stateList.getAll();
 		mv.addObject("Liststate", liststate);
+		 if(username == null) {
+	         	mv = new ModelAndView("index");
+	             }
 		return mv;
 	}
 
 	@RequestMapping("updateEDPrice")
 	public ModelAndView updateEDC(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+		String username =(String)request.getSession().getAttribute("usrname");
 		try {
 			int der_id = Integer.parseInt(request.getParameter("der_id"));
 		//	System.out.println("===id model==>>>>>>>>>>>=== " + der_id);
@@ -207,9 +213,6 @@ public class EntryDerivativeController {
 			String bgr4 = request.getParameter("bgr4");
 			String bgr5 = request.getParameter("bgr5");
 			String bgr6 = request.getParameter("bgr6");
-
-		//	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + crop_year + "" + delibry_type + "" + state + "" + district);
-
 			entryDerivativePrice.setDer_id(der_id);
 			entryDerivativePrice.setCrop_year(crop_year);
 			entryDerivativePrice.setDelibry_type(delibry_type);
@@ -217,7 +220,6 @@ public class EntryDerivativeController {
 			entryDerivativePrice.setDistrict(district);
 			entryDerivativePrice.setCrop_year(crop_year);
 			entryDerivativePrice.setDelibry_type(delibry_type);
-
 			entryDerivativePrice.setTgr1(tgr1);
 			entryDerivativePrice.setTgr2(tgr2);
 			entryDerivativePrice.setTgr3(tgr3);
@@ -240,36 +242,42 @@ public class EntryDerivativeController {
 			entryDerivativePrice.setBgr4(bgr4);
 			entryDerivativePrice.setBgr5(bgr5);
 			entryDerivativePrice.setBgr6(bgr6);
-
-			//System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + entryDerivativePrice);
 			this.entryDerivativePriceService.update(entryDerivativePrice);
-
 			redirectAttributes.addFlashAttribute("msg",
 					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		 if(username == null) {
+	         	return new ModelAndView("index");
+	             }
 		return new ModelAndView(new RedirectView("entryderivativepricelist.jsp.obj"));
 	}
 
 	@RequestMapping("entryderivativepricelist")
 	public ModelAndView EntryDerivativePrice(HttpServletRequest request) {
-
+		String username =(String)request.getSession().getAttribute("usrname");
 		List<EntryDerivativePrice> edp = entryDerivativePriceService.getAllEDP();
 		ModelAndView mv = new ModelAndView("entryderivativepricelist");
 		mv.addObject("edp", edp);
-
+		 if(username == null) {
+	         	mv = new ModelAndView("index");
+	             }
 		return mv;
 	}
 
 	@RequestMapping("entryderivativepriceDelete")
 	public ModelAndView entryderivativepriceDelete(HttpServletRequest request, RedirectAttributes redirectAttributes)
 			throws ParseException {
+		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryderivativepricelist");
 		int id = Integer.parseInt(request.getParameter("der_id"));
 		entryDerivativePriceService.delete(id);
 		redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n" + "");
+		 if(username == null) {
+	         	return new ModelAndView("index");
+	             }
 		return new ModelAndView(new RedirectView("entryderivativepricelist.obj"));
 
 	}

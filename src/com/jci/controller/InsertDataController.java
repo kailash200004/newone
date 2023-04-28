@@ -193,9 +193,11 @@ public class InsertDataController
     public InsertDataController() {
         this.slipUpload = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlip\\";
         this.mendate = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\";
+        
     }
     
     @RequestMapping({ "addGrower" })
+    
     public ModelAndView Dashboard(final HttpServletRequest request) {
         final ModelAndView mv = new ModelAndView("dashboard");
         return mv;
@@ -208,31 +210,53 @@ public class InsertDataController
     }
     
     @RequestMapping({ "dashboard" })
+   
     public ModelAndView dashboard(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("dashboard");
+    	 String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("dashboard");
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "FarmerRegistration" })
     public ModelAndView FarmerRegistration(final HttpServletRequest request) {
+    	String usersession =(String)request.getSession().getAttribute("usrname");
         final List<PincodeModel> pincodeList = (List<PincodeModel>)this.pincodeService.getAll();
         final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
         final List<DistrictModel> DistrictList = (List<DistrictModel>)this.distric.getAll();
-        final ModelAndView mv = new ModelAndView("FarmerRegistration");
+        ModelAndView mv = new ModelAndView("FarmerRegistration");
+        if(usersession == null) {
+        mv = new ModelAndView("index");
+        }
         mv.addObject("pincodeList", (Object)pincodeList);
         mv.addObject("Liststate", (Object)Liststate);
         mv.addObject("DistrictList", (Object)DistrictList);
         return mv;
     }
+    @ResponseBody
+    @RequestMapping(value = { "validateusername" }, method = { RequestMethod.GET })
+    public String validateusername(final HttpServletRequest request) {
+        final Gson gson = new Gson();
+        return this.UserRegistrationService.validateusername(request.getParameter("username")) + "";
+    }
+    
     
     @RequestMapping({ "addFarmer" })
     public ModelAndView addFarmer(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("addFarmer");
+    	 String username =(String)request.getSession().getAttribute("usrname");
+         ModelAndView mv = new ModelAndView("addFarmer");
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveFarmerMid" })
     public ModelAndView saveFarmer(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	 String username =(String)request.getSession().getAttribute("usrname");
+    	 
         try {
             final String firstname = request.getParameter("firstname");
             final String lastname = request.getParameter("lastname");
@@ -269,41 +293,62 @@ public class InsertDataController
         catch (Exception e) {
             InsertDataController.logger.fatal((Object)e);
         }
+        if(username == null) {
+            return new ModelAndView("index");
+            }
+        else
         return new ModelAndView((View)new RedirectView("addFarmer.obj"));
     }
     
     @RequestMapping({ "viewFarmerList" })
     public ModelAndView viewFarmerList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("ViewFarmer");
+    	 String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("ViewFarmer");
         final List<FarmerRegistrationModel> allFarmersList = (List<FarmerRegistrationModel>)this.farmerRegistrationService.getAll();
         mv.addObject("farmersList", (Object)allFarmersList);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "addOrganisation" })
     public ModelAndView addOrganisation(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("addOrganisation");
+    	 String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("addOrganisation");
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "addRopeMaking" })
     public ModelAndView addRopeMaking(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("ropeMaking");
+    	String username =(String)request.getSession().getAttribute("usrname");
+         ModelAndView mv = new ModelAndView("ropeMaking");
         final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
         mv.addObject("allDpcList", (Object)allDpcList);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "allOrganisationList" })
     public ModelAndView allOrganisationList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("organisationLists");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("organisationLists");
         final List<AddOrganizationModel> organisationList = (List<AddOrganizationModel>)this.addOrganisationService.getAll();
         mv.addObject("organisationLists", (Object)organisationList);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveOrganizationMid" })
     public ModelAndView saveFarmerMid(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             final String organizationtypename = request.getParameter("organizationtypename");
             final String organizationtypedisplayname = request.getParameter("organizationtypedisplayname");
@@ -320,19 +365,27 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+            return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("addOrganisation.obj"));
     }
     
     @RequestMapping({ "ropeMakingListing" })
     public ModelAndView ropeMaking(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("RopeMakingListing");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("RopeMakingListing");
         final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll();
         mv.addObject("ropeLists", (Object)ropeList);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveRopeMakingMid" })
     public ModelAndView saveRopeMakingMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             final int creadtedby = 0;
             final String basis = request.getParameter("basis");
@@ -375,17 +428,25 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+            return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("addRopeMaking.obj"));
     }
     
     @RequestMapping({ "jciSales" })
     public ModelAndView jciSales(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("addJciSales");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("addJciSales");
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveSalesMid" })
     public ModelAndView saveSales(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             final int uniqueNumber = Integer.parseInt(request.getParameter("uniqueNumber"));
             final String juteVariety = request.getParameter("jutevariety");
@@ -400,19 +461,27 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("addJciSales.obj"));
     }
     
     @RequestMapping({ "farmerRegistration" })
     public ModelAndView farmerRegistration(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("FarmerRegistration");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("FarmerRegistration");
         mv.addObject("dpcCode", (Object)"0122");
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @ResponseBody
     @RequestMapping(value = { "pIcon" }, method = { RequestMethod.GET })
     public String getFoosBySimplePath(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final String str = request.getParameter("F_District");
         final Gson gson = new Gson();
         return gson.toJson((Object)this.distric.getAllFilledPosition(str));
@@ -420,38 +489,41 @@ public class InsertDataController
     
     @RequestMapping({ "saveFarmerRegistrationMid" })
     public ModelAndView FarmerRegistrationSave(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("F_ID_PROF") final MultipartFile F_ID_PROF, @RequestParam("F_BANK_DOC") final MultipartFile F_BANK_DOC, @RequestParam("F_REG_FORM") final MultipartFile F_REG_FORM) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final File theDir = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\");
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
         final ModelAndView mv = new ModelAndView();
         try {
+        	String dpc= (String)request.getSession().getAttribute("dpcId");
             final String F_NAME = request.getParameter("F_NAME");
             final String M_NAME = request.getParameter("M_NAME");
             final String L_NAME = request.getParameter("L_NAME");
             String farmerName="";
-            final String fname = F_NAME.replaceAll("\\s", "");
-            if(!fname.equalsIgnoreCase(""))
-            farmerName = fname;
             String mname = "";
             String lname = "";
+            final String fname = F_NAME.replaceAll("\\s", "");
+            if(!fname.equalsIgnoreCase("") && fname != null)
+            farmerName = fname;
+            
             if ((M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                 lname = L_NAME.replaceAll("\\s", "");
                 if(!lname.equalsIgnoreCase(""))
-                farmerName = farmerName + "-" + lname;
+                farmerName = farmerName + " " + lname;
             }
             else if ((!M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                 mname = M_NAME.replaceAll("\\s", "");
                 lname = L_NAME.replaceAll("\\s", "");
                 if(!mname.equalsIgnoreCase(""))
-                farmerName = farmerName + "-" + mname;
+                farmerName = farmerName + " " + mname;
                 if(!lname.equalsIgnoreCase(""))
-                	farmerName = farmerName + "-" + lname;
+                	farmerName = farmerName + " " + lname;
             }
             else if (!M_NAME.isEmpty() && L_NAME.isEmpty()) {
                 mname = M_NAME.replaceAll("\\s", "");
                 if(!mname.equalsIgnoreCase(""))
-                farmerName = farmerName + "-" + mname;
+                farmerName = farmerName + " " + mname;
             }
             else if ((M_NAME.isEmpty()) && (L_NAME.isEmpty()) && (!F_NAME.isEmpty()))  {
             	if(!fname.equalsIgnoreCase(""))
@@ -510,6 +582,7 @@ public class InsertDataController
             farmerRegModel.setF_Address2(F_Address2);
             farmerRegModel.setF_Pincode(F_Pincode);
             farmerRegModel.setIS_VERIFIED(0);
+            farmerRegModel.setDpc_id(dpc);
             File file = null;
             String pathurl = "";
             try {
@@ -599,11 +672,15 @@ public class InsertDataController
             System.out.println(e3);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Oops !</b> Error in saving record. Please try again</div>\r\n");
         }
+        if(username == null) {
+            return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("FarmerRegistration.obj"));
     }
     
     @RequestMapping({ "abc" })
     public String abc(final HttpServletRequest request) {
+    	
         final String regno = this.farmerRegService.findRegno("0212", "05");
       //  System.out.println("regno = " + regno);
         return null;
@@ -611,72 +688,105 @@ public class InsertDataController
     
     @RequestMapping({ "rawJutePaymentAndProcurement" })
     public ModelAndView rawJutePaymentAndProcurement(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");
         
         final List<String> farmerNo = (List<String>)this.rawJuteProcurAndPayService.getfarmerno((String)request.getSession().getAttribute("dpcId"));
         mv.addObject("farmerNo", (Object)farmerNo);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "balePreparation" })
     public ModelAndView balePreparation(final HttpServletRequest request, final HttpSession session) {
-        final ModelAndView mv = new ModelAndView("balePrepare");
+    	String username =(String)request.getSession().getAttribute("usrname");
+         ModelAndView mv = new ModelAndView("balePrepare");
         final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
         mv.addObject("allDpcList", (Object)allDpcList);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveBalePreparation" })
     public ModelAndView saveBalePreparation(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	 if(username == null) {
+             return new ModelAndView("index");
+             }
         return new ModelAndView((View)new RedirectView("balePreparation.obj"));
     }
     
     @RequestMapping({ "BaleDelete" })
     public ModelAndView locatorDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) throws ParseException {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("BalePrepList");
         final int id = Integer.parseInt(request.getParameter("id"));
         this.balepreparationservice.delete(id);
         final List<BalePreparation> bale = (List<BalePreparation>)this.balepreparationservice.getAll();
         mv.addObject("baleslis", (Object)bale);
         redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n");
+        if(username == null) {
+           return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("BalePreparationList.obj"));
     }
     
     @RequestMapping({ "BalePreparationList" })
     public ModelAndView BalePreparationList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("BalePrepList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("BalePrepList");
         final List<BalePreparation> bale = (List<BalePreparation>)this.balepreparationservice.getAll();
         mv.addObject("baleslis", (Object)bale);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping(value = { "editBaleList" }, method = { RequestMethod.GET })
     public ModelAndView editBaleList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("EditBale");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("EditBale");
         if (request.getParameter("id") != null) {
             final int id = Integer.parseInt(request.getParameter("id"));
             final BalePreparation editBaleList = this.balepreparationservice.find(id);
             mv.addObject("editBaleList", (Object)editBaleList);
         }
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveBaleList" })
     public ModelAndView saveBaleList(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView();
+        if(username == null) {
+            return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("BalePreparationList.obj"));
     }
     
     @RequestMapping({ "jbaRate" })
     public ModelAndView jbaRate(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final List<AreaDetailCode> AreaCode = (List<AreaDetailCode>)this.areaService.getAll();
-        final ModelAndView mv = new ModelAndView("addJba");
+        ModelAndView mv = new ModelAndView("addJba");
         mv.addObject("AreaCode", (Object)AreaCode);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveJbaRate" })
     public ModelAndView saveJbaRate(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname"); 
         try {
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             final LocalDateTime now = LocalDateTime.now();
@@ -864,30 +974,42 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+            return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("jbaRate.obj"));
     }
     
     @RequestMapping({ "JbaPriceList" })
     public ModelAndView JbaPriceList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("JBAList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("JBAList");
         final List<JbaModel> jbapri = (List<JbaModel>)this.jbaservice.getAll();
         mv.addObject("jbaList", (Object)jbapri);
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping(value = { "editJBAList" }, method = { RequestMethod.GET })
     public ModelAndView editJBAList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("EditJBA");
+        ModelAndView mv = new ModelAndView("EditJBA");
+        String username =(String)request.getSession().getAttribute("usrname");
         if (request.getParameter("id") != null) {
             final int id = Integer.parseInt(request.getParameter("id"));
             final JbaModel editJBAList = this.jbaservice.find(id);
             mv.addObject("editJBAList", (Object)editJBAList);
         }
+        if(username == null) {
+            mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveJBAList" })
     public ModelAndView saveJBAList(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView();
         try {
             final String id = request.getParameter("id");
@@ -952,11 +1074,15 @@ public class InsertDataController
             System.out.println(e);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-dange\"><b>Failure!</b> Error While saving record. Please try againn</div>\r\n");
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("JbaPriceList.obj"));
     }
     
     @RequestMapping({ "JbaDelete" })
     public ModelAndView JbaDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) throws ParseException {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("JBAList");
         final int id = Integer.parseInt(request.getParameter("id"));
         this.jbaservice.delete(id);
@@ -964,12 +1090,16 @@ public class InsertDataController
         final List<JbaModel> jbap = (List<JbaModel>)this.jbaservice.getAll();
         mv.addObject("baleslis", (Object)jbap);
         redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n");
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("JbaPriceList.obj"));
     }
     
     @RequestMapping({ "rawJuteProcurementAndPaymentMid" })
     public ModelAndView rawJuteProcurementAndPaymentMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("tallySlipdoc") final MultipartFile tallySlipdoc) {
-        final File theDir = new File(this.slipUpload);
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	final File theDir = new File(this.slipUpload);
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
@@ -1138,12 +1268,16 @@ public class InsertDataController
         catch (Exception e2) {
             System.out.println(e2.getLocalizedMessage());
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("rawJutePaymentAndProcurement.obj"));
     }
     
     @RequestMapping({ "juteProcurementList" })
     public ModelAndView juteProcurementList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("juteProcurementList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("juteProcurementList");
         List<RawJuteProcurementAndPayment> procurementList = new ArrayList<RawJuteProcurementAndPayment>();
         try {
             procurementList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.farmerDetailsList();
@@ -1152,17 +1286,25 @@ public class InsertDataController
             System.out.println(e);
         }
         mv.addObject("procurementList", (Object)procurementList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "dailyPurchaseConf" })
     public ModelAndView dailyPurchaseConf(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("DailyPurchaseConf");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("DailyPurchaseConf");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "dailyPurchaseMid" })
     public ModelAndView dailyPurchaseMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             String ipAddress = null;
             final String getWay = request.getHeader("VIA");
@@ -1180,7 +1322,7 @@ public class InsertDataController
             final String grade6 = request.getParameter("g5");
             final String grade7 = request.getParameter("g6");
             final String grade8 = request.getParameter("g7");	
-            String datepurchase = request.getParameter("datepurchase");
+            final String datepurchase = request.getParameter("datepurchase");
             final String formno = request.getParameter("formno");
             final String basis = request.getParameter("basis");
             final String cropyr = request.getParameter("cropyr");
@@ -1275,19 +1417,27 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("dailyPurchaseConf.obj"));
     }
     
     @RequestMapping({ "dailyPurchaseList" })
     public ModelAndView dailyPurchaseList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
         final List<DailyPurchaseConfModel> purchaseList = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.getAll();
         mv.addObject("dailyPurchaseList", (Object)purchaseList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveBalePreparationMid" })
     public ModelAndView saveBalePreparationMid(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             String ipAddress = null;
             final String getWay = request.getHeader("VIA");
@@ -1323,21 +1473,29 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("balePreparation.obj"));
     }
     
     @RequestMapping({ "UserRegistration" })
     public ModelAndView userRegistration(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
         final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
-        final ModelAndView mv = new ModelAndView("UserRegistration");
+        ModelAndView mv = new ModelAndView("UserRegistration");
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)alluserroleList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveUserMid" })
     public ModelAndView saveUserMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             String ipAddress = null;
             final String getWay = request.getHeader("VIA");
@@ -1356,7 +1514,8 @@ public class InsertDataController
             final String password = request.getParameter("password");
             final String usertype = request.getParameter("usertype");
             final String role = request.getParameter("role");
-            final String username = request.getParameter("username");
+            final String username1 = request.getParameter("username");
+            final String rolename = request.getParameter("rolename");
             final String duplicateEmail = request.getParameter("emailCheck");
             final boolean duplicatemail = Boolean.parseBoolean(duplicateEmail);
             final UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -1368,6 +1527,7 @@ public class InsertDataController
             userRegistration.setHo(Integer.parseInt(ho));
             userRegistration.setIpaddress(ipAddress);
             userRegistration.setIs_active(1);
+            userRegistration.setRoles_name(rolename);
             userRegistration.setMobileno(mobileno);
             userRegistration.setPassword(password);
             if (!ho.equals("1")) {
@@ -1376,7 +1536,7 @@ public class InsertDataController
             }
             userRegistration.setRole(role);
             userRegistration.setRegistrationdate(new Date());
-            userRegistration.setUsername(username);
+            userRegistration.setUsername(username1);
             userRegistration.setUsertype(usertype);
             userRegistration.setRoleId(Integer.parseInt(role));
             final boolean emailNotExist = this.UserRegistrationService.validateEmail(email);
@@ -1389,70 +1549,99 @@ public class InsertDataController
             }
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("UserRegistration.obj"));
     }
     
     @ResponseBody
     @RequestMapping(value = { "findRoByZone" }, method = { RequestMethod.GET })
     public String findRoByZone(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final Gson gson = new Gson();
         return gson.toJson((Object)this.roService.zonecode(request.getParameter("id")));
     }
     
     @RequestMapping({ "viewmarketArrival" })
     public ModelAndView viewmarketArrival(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewmarketArrival");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewmarketArrival");
         final List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>)this.marketArrivalService.getAlldata();
         mv.addObject("marketArrivalList", (Object)allmarketArrivalList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "ViewFarmerRegistration" })
     public ModelAndView viewFarmerLists(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
-        final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus();
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
+        String dcpid = (String)request.getSession().getAttribute("dpcId");
+        final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus(dcpid);
         mv.addObject("allFarmersList", (Object)allFarmersList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "viewjcisales" })
     public ModelAndView viewsalesList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewjcisales");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewjcisales");
         final List<SalesModel> allviewsalesList = (List<SalesModel>)this.salesService.getAll();
         mv.addObject("salesList", (Object)allviewsalesList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @ResponseBody
     @RequestMapping({ "findDpcByRegion" })
     public String findDpcByRegion(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final Gson gson = new Gson();
         return gson.toJson((Object)this.purchaseCenterService.purchaseCenter(request.getParameter("id")));
     }
     
     @RequestMapping({ "editFarmer" })
     public ModelAndView editFarmer(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewbalePreparation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewbalePreparation");
         final int id = Integer.parseInt(request.getParameter("id"));
         final List<ProgOfAssortmentModel> allbalePreparationList = (List<ProgOfAssortmentModel>)this.progOfAssortmentService.getAll();
         mv.addObject("balePreparationList", (Object)allbalePreparationList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping(value = { "verifyFarmer2" }, method = { RequestMethod.GET })
     public ModelAndView verifyFarmer(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView();
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView();
         final int id = Integer.parseInt(request.getParameter("id"));
         final FarmerRegModel farmerDetails = this.farmerRegService.find(id);
         mv.addObject("farmerDetails", (Object)farmerDetails);
         mv.setViewName("verifyFarmer");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping(value = { "saveVerification" }, method = { RequestMethod.POST })
     public ModelAndView saveVerification(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
+       
         try {
+        	
             final int id = Integer.parseInt(request.getParameter("id"));
             final String farmer_reg_no = request.getParameter("farmer_reg_no");
             final String ifsc_code = request.getParameter("ifsc_code");
@@ -1537,22 +1726,29 @@ public class InsertDataController
             if (verifyRow) {
                 this.verifyFarmerService.submitform(verifyFarmer);
             }
-            final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus();
+            String dcpid= (String)request.getSession().getAttribute("dpcId");
+            final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus(dcpid);
             final VerifyFarmerModel farmerById = this.verifyFarmerService.findbyReg(farmer_reg_no);
             if (farmerById.getRegno() != null && farmerById.getIfsccode() != null && farmerById.getAccountno() != null && farmerById.getFarmername() != null  && farmerById.getIdentityProofType() != null && farmerById.getIdentityProofNumber() != null) {
                 this.farmerRegService.updateVerificationStatus(id);
             }
             mv.addObject("allFarmersList", (Object)allFarmersList);
         }
-        catch (Exception ex) {}
+        catch (Exception ex) { 
+        	
+        }
         mv.addObject("msg", (Object)"success");
         mv.addObject("farmerdetails", (Object)new FarmerRegModel());
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
     }
     
     @RequestMapping(value = { "editFarmerReg" }, method = { RequestMethod.GET })
     public ModelAndView editFarmerReg(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("editfarmerRegistration");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editfarmerRegistration");
         if (request.getParameter("id") != null) {
             final int id = Integer.parseInt(request.getParameter("id"));
             final FarmerRegModel farmerDetailsById = this.farmerRegService.find(id);
@@ -1560,6 +1756,9 @@ public class InsertDataController
             mv.addObject("Liststate", (Object)Liststate);
             mv.addObject("farmerDetailsById", (Object)farmerDetailsById);
         }
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -1629,6 +1828,7 @@ public class InsertDataController
     @RequestMapping({ "EditsaveFarmerRegistrationMid" })
     public ModelAndView EditsaveFarmerRegistrationMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("F_DOC_Mandate") final MultipartFile F_DOC_Mandate) {
         final ModelAndView mv = new ModelAndView();
+        String username =(String)request.getSession().getAttribute("usrname");
         try {
             final int idPrimary = Integer.parseInt(request.getParameter("idPrimary"));
             final FarmerRegModel farmerRegModel = this.farmerRegService.find(idPrimary);
@@ -1657,12 +1857,16 @@ public class InsertDataController
             System.out.println(e2);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-dange\"><b>Failure !</b> Error in saving record. Please try again</div>\r\n");
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
     }
 
     
     @RequestMapping({ "saveCommercialCeilingPriceIntimation" })
     public ModelAndView saveCommercialCeilingPriceIntimation(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
             final String dpccode = request.getParameter("dpccode");
@@ -1686,17 +1890,25 @@ public class InsertDataController
             this.commercialCeilingPriceIntimationService.create(addCommercialCeilingPriceIntimationModel);
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("CommercialCeilingPriceIntimations.obj"));
     }
     
     @RequestMapping({ "CommercialCeilingPriceIntimations" })
     public ModelAndView CommercialCeilingPriceIntimations(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("CommercialCeilingPriceIntimations");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("CommercialCeilingPriceIntimations");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "Distributionoftallyslips" })
     public ModelAndView Distributionoftallyslips(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("Distributionoftallyslips");
         final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
         final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
@@ -1707,6 +1919,7 @@ public class InsertDataController
     
     @RequestMapping({ "saveDistributionoftallyslip" })
     public ModelAndView saveDistributionoftallyslip(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
             final String dpccode = request.getParameter("dpccode");
@@ -1726,14 +1939,22 @@ public class InsertDataController
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("Distributionoftallyslips.obj"));
     }
     
     @RequestMapping({ "viewDistributionoftallyslips" })
     public ModelAndView viewDistributionoftallyslips(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
         final List<DistributionoftallyslipModel> allDistributionoftallyslips = (List<DistributionoftallyslipModel>)this.distributionoftallyslipService.getAll();
         mv.addObject("DistributionoftallyslipsList", (Object)allDistributionoftallyslips);
+        
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -1747,15 +1968,20 @@ public class InsertDataController
     
     @RequestMapping({ "viewUserRegistration" })
     public ModelAndView viewUserRegistration(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewUserRegistration");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewUserRegistration");
         final List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>)this.UserRegistrationService.getAll();
         mv.addObject("UserRegistrationList", (Object)allUserRegistration);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @ResponseBody
     @RequestMapping(value = { "validateMobile" }, method = { RequestMethod.GET })
     public String validateMobile(final HttpServletRequest request) {
+    	
         final Gson gson = new Gson();
         return this.farmerRegService.validateMobile(request.getParameter("mobileno")) + "";
     }
@@ -1763,6 +1989,7 @@ public class InsertDataController
     @ResponseBody
     @RequestMapping(value = { "validateEmail" }, method = { RequestMethod.GET })
     public String validateEmail(final HttpServletRequest request) {
+    	
         final Gson gson = new Gson();
         return this.UserRegistrationService.validateEmail(request.getParameter("Email")) + "";
     }
@@ -1776,23 +2003,32 @@ public class InsertDataController
     
     @RequestMapping({ "viewProcurementList" })
     public ModelAndView viewProcurementList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("procurementList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("procurementList");
         final List<RawJuteProcurementAndPayment> allProcurementList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
         mv.addObject("procurementList", (Object)allProcurementList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "verificationTallyslip" })
     public ModelAndView verificationTallyslips(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("verifyTallySlip");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("verifyTallySlip");
         final String tally = request.getParameter("tally");
         mv.addObject("tally", (Object)tally);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveTallySlipMid" })
     public ModelAndView saveTallySlipMid(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("verifyTallySlip");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("verifyTallySlip");
         try {
             final String farmerRegNo = request.getParameter("farmerRegNo");
             final String tallyNo = request.getParameter("tallyNo");
@@ -2055,34 +2291,50 @@ public class InsertDataController
         catch (Exception e) {
             mv.addObject("msg", (Object)"<div class=\"alert Alert-Failed\"><b>Failed !</b> Tally slip Verification Failed.</div>\r\n");
         }
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "viewVerifiedTallySlipList" })
     public ModelAndView viewVerifiedTallySlipList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("verifiedTallySlipList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("verifiedTallySlipList");
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA");
         mv.addObject("verifyTallySliList", (Object)verifyList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "viewCommercialCeilingPrice" })
     public ModelAndView viewCommercialCeilingPrice(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
         final List<CommercialJuteVarietyModel> commercialList = (List<CommercialJuteVarietyModel>)this.commercialJuteVarietyGradesPriceService.getAll();
         mv.addObject("commercialList", (Object)commercialList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "rulingMarketForm" })
     public ModelAndView rulingMarket(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("rulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("rulingMarket");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveRulingMarketMid" })
     public ModelAndView saveRulingMarketMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("rulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("rulingMarket");
         try {
             String dpcname = request.getParameter("dpcid");
             String region_id = request.getParameter("region_id");
@@ -2217,19 +2469,27 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println("Error in saving ruling market data    " + e);
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("rulingMarketForm.obj"));
     }
     
     @RequestMapping({ "bin" })
     public ModelAndView bin(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
       //  final List<RawJuteProcurementAndPayment> binNumberList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
-        final ModelAndView mv = new ModelAndView("bin");
+        ModelAndView mv = new ModelAndView("bin");
        // mv.addObject("binNumberList", (Object)binNumberList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "saveBinDetails" })
     public ModelAndView saveBinDetails(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("bin");
         try {
             final String nameOfDpc = request.getParameter("dpcname");
@@ -2264,36 +2524,52 @@ public class InsertDataController
         catch (Exception ex) {
         	ex.printStackTrace();
         }
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("bin.obj"));
     }
     
     @RequestMapping({ "binList" })
     public ModelAndView binList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("binList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("binList");
         final List<BatchIdentificationModel> batch = (List<BatchIdentificationModel>)this.batchService.getAll();
         mv.addObject("batch", (Object)batch);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "viewRulingMarket" })
     public ModelAndView viewRulingMarket(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewRulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+         ModelAndView mv = new ModelAndView("viewRulingMarket");
         final List<RulingMarket> rulingList = (List<RulingMarket>)this.rulingMarketService.getAll();
         mv.addObject("rulingList", (Object)rulingList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "viewbalePreparation" })
     public ModelAndView viewbalePreparation(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewbalePreparation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewbalePreparation");
         final List<BalePreparation> viewBale = (List<BalePreparation>)this.balePrepareService.getAll();
         mv.addObject("viewBalePreparation", (Object)viewBale);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "deleteBaleP" })
     public ModelAndView deleteBaleP(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewbalePreparation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewbalePreparation");
         try {
             final String id = request.getParameter("id");
             this.balePreparationService.delete(Integer.parseInt(id));
@@ -2301,17 +2577,24 @@ public class InsertDataController
             mv.addObject("viewBalePreparation", (Object)DeleteBalePreparation);
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "deleteRopemaking" })
     public ModelAndView deleteRopemaking(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("RopeMakingListing");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("RopeMakingListing");
         try {
             final String id = request.getParameter("id");
             this.ropeMakingService.delete(Integer.parseInt(id));
             final List<RopeMakingModel> DeleteRopem = (List<RopeMakingModel>)this.ropeMakingService.getAll();
             mv.addObject("ropeLists", (Object)DeleteRopem);
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("ropeMakingListing.obj"));
         }
         catch (Exception ex) {
@@ -2321,12 +2604,16 @@ public class InsertDataController
     
     @RequestMapping({ "deleteDpc" })
     public ModelAndView deleteDpc(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView();
         try {
             final String id = request.getParameter("id");
             this.DailyPurchasefService.delete(Integer.parseInt(id));
             final List<DailyPurchaseConfModel> allDailyPurchase = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.getAll();
             mv.addObject("dailyPurchaseList", (Object)allDailyPurchase);
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("dailyPurchaseList.obj"));
         }
         catch (Exception ex) {
@@ -2336,12 +2623,16 @@ public class InsertDataController
     
     @RequestMapping({ "deletejuteprocurement" })
     public ModelAndView deletejuteprocurement(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView();
         try {
             final String id = request.getParameter("id");
             this.rawJuteProcurAndPayService.delete(Integer.parseInt(id));
             final List<RawJuteProcurementAndPayment> DeletejuteProcu = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
             mv.addObject("procurementList", (Object)DeletejuteProcu);
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("juteProcurementList.obj"));
         }
         catch (Exception ex) {
@@ -2351,12 +2642,16 @@ public class InsertDataController
     
     @RequestMapping({ "deletetallyslip" })
     public ModelAndView deletetallyslip(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView();
         try {
             final String id = request.getParameter("id");
             this.verifyTallySlipService.delete(Integer.parseInt(id));
             final List<VerifyTallySlip> Deletetallyslip = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("");
             mv.addObject("verifyTallySliList", (Object)Deletetallyslip);
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewVerifiedTallySlipList.obj"));
         }
         catch (Exception ex) {
@@ -2366,18 +2661,23 @@ public class InsertDataController
     
     @RequestMapping({ "editjuteprocurement" })
     public ModelAndView editjuteprocurement(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("editJuteProcurement");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editJuteProcurement");
         try {
             final String id = request.getParameter("id");
             final RawJuteProcurementAndPayment juteProc = this.rawJuteProcurAndPayService.find(Integer.parseInt(id));
             mv.addObject("juteProc", (Object)juteProc);
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "updateJuteProcurement" })
     public ModelAndView updateJuteProcurement(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         try {
             String ipAddress = null;
             final String getWay = request.getHeader("VIA");
@@ -2419,22 +2719,30 @@ public class InsertDataController
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success!</b> Record updated successfully.</div>\r\n");
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("juteProcurementList.obj"));
     }
     
     @RequestMapping(value = { "verifyFarmer2_landscape" }, method = { RequestMethod.GET })
     public ModelAndView verifyFarmer2_landscape(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView();
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView();
         final int id = Integer.parseInt(request.getParameter("id"));
         final FarmerRegModel farmerDetails = this.farmerRegService.find(id);
         mv.addObject("farmerDetails", (Object)farmerDetails);
         mv.setViewName("verifyFarmer2_landscape");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "deletedistributiontally" })
     public ModelAndView deletedistributiontally(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
         try {
             final String id = request.getParameter("id");
             this.distributionoftallyslipService.delete(Integer.parseInt(id));
@@ -2442,12 +2750,16 @@ public class InsertDataController
             mv.addObject("DistributionoftallyslipsList", (Object)Deletedistributiontally);
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "deletecommercialprice" })
     public ModelAndView deletecommercialprice(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
         try {
             final String id = request.getParameter("id");
             this.commercialJuteVarietyGradesPriceService.delete(Integer.parseInt(id));
@@ -2455,18 +2767,25 @@ public class InsertDataController
             mv.addObject("commercialList", (Object)deleteCommercialList);
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "deleteRulingMarket" })
     public ModelAndView deleteRulingMarket(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("viewRulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewRulingMarket");
         try {
             final String id = request.getParameter("id");
             this.rulingMarketService.delete(Integer.parseInt(id));
             final List<RulingMarket> rulingList = (List<RulingMarket>)this.rulingMarketService.getAll();
             mv.addObject("rulingList", (Object)rulingList);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> List deleted successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewRulingMarket.obj"));
         }
         catch (Exception ex) {
@@ -2476,11 +2795,15 @@ public class InsertDataController
     
     @RequestMapping({ "editBaleP" })
     public ModelAndView editBaleP(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editBalePreparation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+       ModelAndView mv = new ModelAndView("editBalePreparation");
         try {
             final String id = request.getParameter("id");
             final BalePreparation baleMod = this.balepreparationservice.find(Integer.parseInt(id));
             mv.addObject("baleMod", (Object)baleMod);
+            if(username == null) {
+            	mv = new ModelAndView("index");
+                }
             return mv;
         }
         catch (Exception ex) {
@@ -2490,6 +2813,7 @@ public class InsertDataController
     
     @RequestMapping({ "updateBalePreparation" })
     public ModelAndView updateBalePreparation(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("editBalePreparation");
         try {
             final String baleid = request.getParameter("baleId");
@@ -2534,6 +2858,9 @@ public class InsertDataController
                 return new ModelAndView((View)new RedirectView("viewbalePreparation.obj"));
             }
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>OOps!</b> Error in record saving. </div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("balePreparation.obj"));
         }
         catch (Exception e) {
@@ -2544,18 +2871,23 @@ public class InsertDataController
     
     @RequestMapping(value = { "editRopemaking" }, method = { RequestMethod.GET })
     public ModelAndView editRopemaking(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("editRopemaking");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editRopemaking");
         if (request.getParameter("id") != null) {
             final int id = Integer.parseInt(request.getParameter("id"));
             final RopeMakingModel editRopmaking = this.ropeMakingService.find(id);
             mv.addObject("editRopemaking", (Object)editRopmaking);
         }
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "updateRopeMakingMid" })
     public ModelAndView updateRopeMakingMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editRopemaking");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editRopemaking");
         try {
             final String id = request.getParameter("id");
             final int creadtedby = 0;
@@ -2589,6 +2921,9 @@ public class InsertDataController
             addRopeMaking.setCreateddate(date);
             this.ropeMakingService.create(addRopeMaking);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("ropeMakingListing.obj"));
         }
         catch (Exception ex) {
@@ -2598,11 +2933,15 @@ public class InsertDataController
     
     @RequestMapping({ "editDpc" })
     public ModelAndView editDpc(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editDailypurchase");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editDailypurchase");
         try {
             final String id = request.getParameter("id");
             final DailyPurchaseConfModel dailyPurchase = this.DailyPurchasefService.find(Integer.parseInt(id));
             mv.addObject("dailyPurchase", (Object)dailyPurchase);
+            if(username == null) {
+            	mv = new ModelAndView("index");
+                }
             return mv;
         }
         catch (Exception ex) {
@@ -2612,6 +2951,7 @@ public class InsertDataController
     
     @RequestMapping({ "updateDailyPurchase" })
     public ModelAndView updateDailyPurchase(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
         try {
             final String id = request.getParameter("id");
@@ -2654,12 +2994,16 @@ public class InsertDataController
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
         }
         catch (Exception ex) {}
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("dailyPurchaseList.obj"));
     }
     
     @ResponseBody
     @RequestMapping({ "validateFarmer" })
     public String farmerNoVarification(final HttpServletRequest request) {
+    	
         final ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");
         final Gson gson = new Gson();
         final String farmerNo = request.getParameter("farmerNo");
@@ -2693,12 +3037,14 @@ public class InsertDataController
     
     @RequestMapping({ "mspPriceCalculation" })
     public ModelAndView mspPriceCalculation(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("mspPriceCalculation");
         return mv;
     }
     
     @RequestMapping({ "deleteFarmer" })
     public ModelAndView deleteFarmer(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
         try {
             final String id = request.getParameter("id");
@@ -2706,6 +3052,9 @@ public class InsertDataController
             final List<FarmerRegModel> allFarmersList = (List<FarmerRegModel>)this.farmerRegService.getAll();
             mv.addObject("allFarmersList", (Object)allFarmersList);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
         }
         catch (Exception ex) {
@@ -2715,11 +3064,15 @@ public class InsertDataController
     
     @RequestMapping({ "editdistributiontally" })
     public ModelAndView editdistributiontally(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("editDistributiontallyslip");
         try {
             final String id = request.getParameter("id");
             final DistributionoftallyslipModel distributiontallyslip = this.distributionoftallyslipService.find(Integer.parseInt(id));
             mv.addObject("distributiontally", (Object)distributiontallyslip);
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return mv;
         }
         catch (Exception ex) {
@@ -2729,6 +3082,7 @@ public class InsertDataController
     
     @RequestMapping({ "updateDistributionoftallyslip" })
     public ModelAndView updateDistributionoftallyslip(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+    	String username =(String)request.getSession().getAttribute("usrname");
         final ModelAndView mv = new ModelAndView("editdistributiontally");
         try {
             final String id = request.getParameter("id");
@@ -2749,6 +3103,9 @@ public class InsertDataController
             updateDistributionoftallyslipModel.setCreateddate(new Date());
             this.distributionoftallyslipService.create(updateDistributionoftallyslipModel);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewDistributionoftallyslips.obj"));
         }
         catch (Exception ex) {
@@ -2758,11 +3115,15 @@ public class InsertDataController
     
     @RequestMapping({ "editcommercialprice" })
     public ModelAndView editcommercialprice(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editcommercialprice");
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editcommercialprice");
         try {
             final String id = request.getParameter("id");
             final CommercialCeilingPriceIntimationModel commercialCeilingPrice = this.commercialCeilingPriceIntimationService.find(Integer.parseInt(id));
             mv.addObject("commercialCeilingprice", (Object)commercialCeilingPrice);
+            if(username == null) {
+            	mv = new ModelAndView("index");
+                }
             return mv;
         }
         catch (Exception ex) {
@@ -2772,7 +3133,8 @@ public class InsertDataController
     
     @RequestMapping({ "updateCommercialCeilingPriceIntimation" })
     public ModelAndView updateCommercialCeilingPriceIntimation(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editcommercialprice");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	final ModelAndView mv = new ModelAndView("editcommercialprice");
         try {
             final String id = request.getParameter("id");
             final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -2797,6 +3159,9 @@ public class InsertDataController
             updateCommercialCeilingPriceIntimationModel.setCreateddate(new Date());
             this.commercialCeilingPriceIntimationService.create(updateCommercialCeilingPriceIntimationModel);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewCommercialCeilingPrice.obj"));
         }
         catch (Exception e) {
@@ -2807,7 +3172,8 @@ public class InsertDataController
     
     @RequestMapping({ "saveGradePriceOfMSP" })
     public ModelAndView saveGradePriceOfMSP(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("mspPriceCalculation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("mspPriceCalculation");
         try {
             final String jutevariety = request.getParameter("jutevariety");
             final String cropyr = request.getParameter("cropyr");
@@ -2869,6 +3235,9 @@ public class InsertDataController
         catch (Exception e) {
             System.out.println(e);
         }
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -2883,11 +3252,15 @@ public class InsertDataController
     
     @RequestMapping({ "editRulingMarket" })
     public ModelAndView editRulingMarket(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editRulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("editRulingMarket");
         try {
             final String id = request.getParameter("id");
             final RulingMarket rulingMarket = this.rulingMarketService.find(Integer.parseInt(id));
             mv.addObject("rulingMarket", (Object)rulingMarket);
+            if(username == null) {
+            	mv = new ModelAndView("index");
+                }
             return mv;
         }
         catch (Exception e) {
@@ -2898,17 +3271,22 @@ public class InsertDataController
     
     @RequestMapping({ "commercialPriceCalculation" })
     public ModelAndView commercialPriceCalculation(final HttpServletRequest request) {
-        final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
         final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
-        final ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
+        ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)roleList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping(value = { "saveGradePriceOfCommercial" }, method = { RequestMethod.POST })
     public ModelAndView saveGradePriceOfCommercial(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
         try {
             final String zone = request.getParameter("zone");
             final String region = request.getParameter("region");
@@ -2973,6 +3351,9 @@ public class InsertDataController
             System.out.println(e.getLocalizedMessage());
         }
         redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+        if(username == null) {
+        	return new ModelAndView("index");
+            }
         return new ModelAndView((View)new RedirectView("commercialPriceCalculation.obj"));
     }
     
@@ -2989,15 +3370,20 @@ public class InsertDataController
     
     @RequestMapping({ "mspGradesPriceList" })
     public ModelAndView mspGradesPriceList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("mspGradesPriceList");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("mspGradesPriceList");
         final List<MSPPriceCalculationModel> msppriceList = (List<MSPPriceCalculationModel>)this.mSPPriceCalculationService.getAll();
         mv.addObject("msppriceList", (Object)msppriceList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "updateRulingMarket" })
     public ModelAndView updateRulingMarket(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("editRulingMarket");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("editRulingMarket");
         try {
             final String id = request.getParameter("id");
             //System.out.println(id);
@@ -3026,6 +3412,9 @@ public class InsertDataController
             updaterulingMarket.setNoofarrival(noofarrival);
             this.rulingMarketService.create(updaterulingMarket);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewRulingMarket.obj"));
         }
         catch (Exception e) {
@@ -3053,7 +3442,8 @@ public class InsertDataController
     
     @RequestMapping({ "saveBale" })
     public ModelAndView saveBale(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
-        final ModelAndView mv = new ModelAndView("balePreparation");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	final ModelAndView mv = new ModelAndView("balePreparation");
         try {
             final String place_of_packing = request.getParameter("place_of_packing");
             final String crop_year = request.getParameter("crop_year");
@@ -3095,6 +3485,9 @@ public class InsertDataController
                 return new ModelAndView((View)new RedirectView("balePreparation.obj"));
             }
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>OOps!</b> Error in record saving. </div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("balePreparation.obj"));
         }
         catch (Exception e) {
@@ -3141,15 +3534,20 @@ public class InsertDataController
     
     @RequestMapping({ "disputedtallyslip" })
     public ModelAndView viewDisputedTallySlipList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("disputedtallyslip");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("disputedtallyslip");
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD");
         mv.addObject("verifyTallySliList", (Object)verifyList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
     @RequestMapping({ "decissionmaking" })
     public ModelAndView decissionmakingTallySlipList(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("decissionmaking");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("decissionmaking");
         final int id = Integer.parseInt(request.getParameter("id"));
         final VerifyTallySlip vrf = this.verifyTallySlipService.find(id);
         final RawJuteProcurementAndPayment raw = this.rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo());
@@ -3157,6 +3555,9 @@ public class InsertDataController
         mv.addObject("verifyTallySliList", (Object)verifyList);
         mv.addObject("vrftally", (Object)vrf);
         mv.addObject("raw", (Object)raw);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -3176,10 +3577,14 @@ public class InsertDataController
     
     @RequestMapping({ "tallyapproval" })
     public ModelAndView tallyapproval(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView("tallyapproval");
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("tallyapproval");
 
         final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",(String)request.getSession().getAttribute("dpcId"));
         mv.addObject("juteList", (Object)juteList);
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -3202,10 +3607,14 @@ public class InsertDataController
     
     @RequestMapping(value = { "verificationTallyslip2" }, method = { RequestMethod.GET })
     public ModelAndView verifytallyslip(final HttpServletRequest request) {
-        final ModelAndView mv = new ModelAndView();
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView();
         final String tally = request.getParameter("tally");
         mv.addObject("tallyslip", (Object)tally);
         mv.setViewName("verifyTallySlip");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
         return mv;
     }
     
@@ -3228,12 +3637,17 @@ public class InsertDataController
 
 	@RequestMapping("binPurchasemapping")
 	public ModelAndView binPurchasemapping(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("Bin_Purchase_mapping");
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 
 	@RequestMapping("BinPurchasemapping_mid")
 	public ModelAndView BinPurchasemapping_mid(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		String cropyr = request.getParameter("cropyr");
 		String dadatepurchasetepurchase = request.getParameter("datepurchase");
 		String binNo = request.getParameter("binNo");		
@@ -3244,12 +3658,16 @@ public class InsertDataController
 			 System.out.println(e.getStackTrace());
 		}		
 		ModelAndView mv = new ModelAndView("View_Purchase_Bin_Mapping");
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		mv.addObject("binPurchaseList", binPurchaseList);
 		return mv;
 	}
 	@ResponseBody
 	@RequestMapping(value = "caculateTotalBinPurchase", method = RequestMethod.GET)
 	public String caculateTotalBinPurchase(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		String binNo = request.getParameter("binNo");
 		String CropYr = request.getParameter("CropYr");
 		String dateOfPurch = request.getParameter("dateOfPurch");
@@ -3261,6 +3679,7 @@ public class InsertDataController
 	@ResponseBody
 	@RequestMapping(value = "InsertIntoTablePurchaseMapping", method = RequestMethod.GET)
 	public String InsertIntoTablePurchaseMapping(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		String dateOfPurch = request.getParameter("dateOfPurch");
 		String dpcCode = request.getParameter("dpcCode");
 		String Basis = request.getParameter("Basis");
@@ -3276,8 +3695,12 @@ public class InsertDataController
 	}
 	
 	@RequestMapping(value="fingain")
-	public ModelAndView fingain() {
+	public ModelAndView fingain(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("FinGainAnd WeightGain");
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 	
@@ -3305,7 +3728,7 @@ public class InsertDataController
 	
 	@RequestMapping("BinListfromDb")
 	public ModelAndView BinListfromDb(HttpServletRequest request) {
-		 
+		String username =(String)request.getSession().getAttribute("usrname");
 		List<BinListFromDbDTO> binPurchaseList = new ArrayList<>();
 		try {
 			binPurchaseList = batchService.GetBinListFromDb();
@@ -3314,6 +3737,9 @@ public class InsertDataController
 		}		
 		ModelAndView mv = new ModelAndView("ViewBinDataFromDb");
 		mv.addObject("binPurchaseList", binPurchaseList);
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 	 
@@ -3327,26 +3753,34 @@ public class InsertDataController
     @ResponseBody
 	@RequestMapping(value = "userProfile", method = RequestMethod.GET)
 	public ModelAndView getuserprofile(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userProfile");
 		int refid = (int) request.getSession().getAttribute("userId");
 		UserRegistrationModel profile=userRegService.getuserprofile(refid);
 		mv.addObject("profile", profile);
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 	
     @ResponseBody
    	@RequestMapping(value = "editprofile", method = RequestMethod.GET)
    	public ModelAndView geteditprofile(HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
    		ModelAndView mv = new ModelAndView("editprofile");
    		int refid = (int) request.getSession().getAttribute("userId");
    		UserRegistrationModel profile=userRegService.getuserprofile(refid);
    		mv.addObject("profile", profile);
+   		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
    		return mv;
    	}
 	
 	@RequestMapping("updatesaveProfile")
 	public ModelAndView updateProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
-	{
+	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userProfile");
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
@@ -3368,12 +3802,15 @@ public class InsertDataController
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 
 	@RequestMapping("updateuserProfile")
 	public ModelAndView updateUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
-	{
+	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("edituserProfile");
 		int refid = Integer.parseInt(request.getParameter("id"));
 		UserRegistrationModel profile=userRegService.getuserprofile(refid);
@@ -3382,17 +3819,20 @@ public class InsertDataController
 	        mv.addObject("zoneList", (Object)zoneList);
 	        mv.addObject("roleList", (Object)alluserroleList);
 		mv.addObject("profile", profile);
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 	
 	@RequestMapping("updatesaveuserProfile")
 	public ModelAndView updatesaveUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
-	{
+	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("edituserProfile");
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
 			UserRegistrationModel userRegistration = userRegService.find(refid);
-				String username =  request.getParameter("username"); 
+				String username1 =  request.getParameter("username"); 
 				String employeeid = request.getParameter("employeeid");
 				String email = request.getParameter("emailAddress");
 				String employeename =  request.getParameter("employeename");
@@ -3403,7 +3843,7 @@ public class InsertDataController
 				String role = request.getParameter("role");
 				String usertype = request.getParameter("usertype");
 				userRegistration.setRefid(refid);
-				userRegistration.setUsername(username);
+				userRegistration.setUsername(username1);
 				userRegistration.setEmployeeid(employeeid);
 				userRegistration.setEmail(email);
 				userRegistration.setEmployeename(employeename);
@@ -3421,20 +3861,28 @@ public class InsertDataController
 		} catch(Exception e){
 			System.out.println("Error in update user profile"+ e.getStackTrace());
 		}
+		if(username == null) {
+        	mv = new ModelAndView("index");
+            }
 		return mv;
 	}
 	
 	  @RequestMapping({ "bnaDelete" })
     public ModelAndView bnaDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
 		  final ModelAndView mv = new ModelAndView("viewUserRegistration");
+		  String username =(String)request.getSession().getAttribute("usrname");
         try {
             final String id = request.getParameter("id");
             this.UserRegistrationService.delete(Integer.parseInt(id));
             final List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>)this.UserRegistrationService.getAll();
             mv.addObject("UserRegistrationList", (Object)allUserRegistration);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n");
+            if(username == null) {
+            	return new ModelAndView("index");
+                }
             return new ModelAndView((View)new RedirectView("viewUserRegistration.obj"));
         }
+        
         catch (Exception ex) {
             return mv;
         }
@@ -3459,6 +3907,7 @@ public class InsertDataController
 	    String path;
 	    @RequestMapping(value = { "update_paymentstatus" }, method = { RequestMethod.POST })
 	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
+	    	String username =(String)request.getSession().getAttribute("usrname");
 	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments";
 	    	String usrname = (String) session.getAttribute("usrname");  
 	    Random num = new Random();

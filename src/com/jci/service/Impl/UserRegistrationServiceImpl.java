@@ -61,8 +61,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 	}
 
 	@Override
-	public int getUserId(String Email) {
-		return userRegistrationDao.getUserId(Email);
+	public String getUserId(int refid) {
+		return userRegistrationDao.getUserId(refid);
 	}
 
 	@Override
@@ -109,5 +109,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		return userRegistrationDao.validateEmployeeid(employeeid);
 	
 	}
-
+	
+	@Override
+	public boolean validateusername(String username) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.validateusername(username);
+	}
 }
