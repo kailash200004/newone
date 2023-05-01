@@ -1344,7 +1344,7 @@ public class InsertDataController
             DailyPurchase.setFibervalue(Integer.parseInt(fibervalue));
             DailyPurchase.setFormno(formno);
             DailyPurchase.setGquantity(Double.parseDouble(gquantity));
-            DailyPurchase.setIpaddresss(ipAddress);
+            DailyPurchase.setIpaddress(ipAddress);
             DailyPurchase.setJutevariety(jutevariety);
             DailyPurchase.setNetquantity(Double.parseDouble(netquantity));
             DailyPurchase.setPlaceofpurchase(placeofpurchase);
@@ -2374,7 +2374,7 @@ public class InsertDataController
             String graderate8 = request.getParameter("rate7");
             final MarketArrivalModel rulingMarket = new MarketArrivalModel();
             if (noarrival.equals("1")) {
-                dpcname = "0";
+               // dpcname = "0";
                 region_id = "0";
                 created_by = 0;
                 basis = "0";
@@ -2983,7 +2983,7 @@ public class InsertDataController
             DailyPurchase.setFibervalue(Integer.parseInt(fibervalue));
             DailyPurchase.setFormno(formno);
             DailyPurchase.setGquantity(Double.parseDouble(gquantity));
-            DailyPurchase.setIpaddresss(ipAddress);
+            DailyPurchase.setIpaddress(ipAddress);
             DailyPurchase.setJutevariety(jutevariety);
             DailyPurchase.setNetquantity(Double.parseDouble(netquantity));
             DailyPurchase.setPlaceofpurchase(placeofpurchase);

@@ -332,7 +332,7 @@ height: 614px;
 										<div class="form-group">
 											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
 											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
+											<input class="form-control" type="number" oninput="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
 												min="0" onkeyup="deleteErrorMsg()">
 										</div>
 										<div class="form-group">
@@ -995,6 +995,7 @@ height: 614px;
 						success : function(result) {
 						if(result)
 						  {
+							alert("inside if block"+tallyNo);
 							var parsedJSON = JSON.parse(result);
 							 farmno = parsedJSON.farmerRegNo;
 							 tallyno = parsedJSON.tallyNo;
@@ -1013,18 +1014,21 @@ height: 614px;
 							 $("#placeOfPurchase").attr("value",pop);
 							 $("#popname").attr("value",popname);
 							 magnify("uploadedImage", 2);
+							 document.getElementById("errtallyNo").innerHTML ="";
 						  }
 						else{
-							alert("No data found for the entered Tally slip.");
+							
+							alert("inside else block"+tallyNo);
+						 document.getElementById("errtallyNo").innerHTML ="No data found for the entered Tally slip.";
 						}
 							
-						
+			
 							
 						}
 					});
 
 		}
-
+		 
 	}
 </script>
  
@@ -1039,7 +1043,7 @@ height: 614px;
 		}
 		let tallyNo = document.forms["myForm"]["tallyNo"].value;
 		if (tallyNo.length > 1) {
-			$("#errtallyNo").hide();
+			//$("#errtallyNo").hide();
 		}
 		let dateOfPurchase = document.forms["myForm"]["dateOfPurchase"].value;
 		if (dateOfPurchase.length > 1) {

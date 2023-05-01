@@ -227,7 +227,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setGrade6xnetqty(grade5*gradeprice[5]);
 			dailyPurchaseConfModel.setGrade7xnetqty(grade6*gradeprice[6]);
 			dailyPurchaseConfModel.setGrade8xnetqty(grade7*gradeprice[7]);
-			dailyPurchaseConfModel.setTd5base(garsat-addition);
+			dailyPurchaseConfModel.setTdbase(garsat-addition);
 							
 			}
 			querystr4= "UPDATE jciprocurement SET flag_dpc2 = 1 WHERE ptsid in ("+ptsid+");";

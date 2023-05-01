@@ -166,18 +166,18 @@ $(document).ready(function () {
                                       </div>
                                       <div class="row">
                                        <div class="col-sm-4 form-group" >
-											<label><b>Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="northernprice"  id ="northernprice" required="required" min="0"/></br> 
+											<label><b>Northern Base Pricesss</b></label></br>
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="northernprice"  id ="northernprice" required="required" minlength="0"/></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Semi-Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="seminorthernprice"  id ="seminorthernprice" required="required" min="0" /></br> 
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="seminorthernprice"  id ="seminorthernprice" required="required" minlength="0"  /></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Bihar Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="biharprice"  id ="biharprice" required="required" min="0"/></br> 
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="biharprice"  id ="biharprice" required="required" minlength="0" /></br> 
 										</div>
 										
 										<!-- <div class="col-sm-4 form-group" >

@@ -83,10 +83,12 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 			String ropeBalance = (String)row[10];
 			//String datereport = (String)row[11];
 			String region = (String)row[12]; 
-			String dpcName = (String)row[13];
+			String dpcName = (String)row[15];
 			RopeMakingModel rope = new RopeMakingModel();
 			rope.setBasis(basis);
 			rope.setBinno(binNo);
+			System.out.println("place of activity"+poa);
+		
 			rope.setCreateddate(crtddate);
 			rope.setCropyr(cropyr);
 			rope.setPlaceofactivity(dpcName);
@@ -99,6 +101,7 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 			ll.add(rope);
 		}
 		return ll;
+		
 	}
 
 	@Override
