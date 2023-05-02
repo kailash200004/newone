@@ -100,7 +100,8 @@ var hasError2 = false;
 									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Name</label>  &nbsp;&nbsp;&nbsp; <span id="errName" name="errName" class="text-danger"> </span>
-											<input class="form-control" name="username" id="username" type="text" placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
+											<input class="form-control" name="username" id="username" type="text" oninvalid="this.setCustomValidity('Please enter a valid Email')" oninput="this.setCustomValidity('')" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"  placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
+												<span  style="color: red; font-size: 13px;" id="usenameError">Please enter a valid Email</span> 
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Password</label>  &nbsp;&nbsp;&nbsp; <span id="errPass" name="errPass" class="text-danger"> </span>
@@ -175,6 +176,7 @@ var hasError2 = false;
 										<div class="col-sm-4 form-group">
 											<label class="required">EMP Name</label>  &nbsp;&nbsp;&nbsp; <span id="errEMP" name="errEMP" class="text-danger"> </span>
 											<input class="form-control" name="employeename" type="text" placeholder="Employee Name" id="employeename" oninput="allow_alphabets(this)">
+															
 										</div>
 									</div>
 									<div class="row">
@@ -555,6 +557,29 @@ $(document).ready(function() {
 });
 </script>
 
+
+		<script>
+$(document).ready(function() {
+	
+	  $("#usenameError").hide();
+   	  $('#username').keyup(function() { 
+        $("#usenameError").hide();
+        var hasError = false;
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+        var emailaddressVal = $("#username").val();
+        if(emailaddressVal == '') {
+            $("#usenameError").show();
+            hasError = true;
+        } 
+        else if(!emailReg.test(emailaddressVal)) {
+        	$("#usenameError").show();
+            hasError = true;
+        }
+        if(hasError == true) { return false; }
+ 
+    });
+});
+</script>
   <div class="sidenav-backdrop backdrop"></div>
 <!--      <script>
 		$(document).ready(function() {

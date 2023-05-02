@@ -1496,6 +1496,10 @@ public class InsertDataController
     @RequestMapping({ "saveUserMid" })
     public ModelAndView saveUserMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
     	String username =(String)request.getSession().getAttribute("usrname");
+		
+		  int isho =(int)request.getSession().getAttribute("ho");
+		  System.out.println("isho"+isho);
+		 
         try {
             String ipAddress = null;
             final String getWay = request.getHeader("VIA");
@@ -1503,7 +1507,7 @@ public class InsertDataController
             if (ipAddress == null) {
                 ipAddress = request.getRemoteAddr();
             }
-            final String ho = request.getParameter("ho");
+            final String ho = request.getParameter("isho");
             final String zone = request.getParameter("zone");
             final String region = request.getParameter("region");
             final String centerordpc = request.getParameter("centerordpc");
