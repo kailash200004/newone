@@ -374,8 +374,9 @@ public class InsertDataController
     @RequestMapping({ "ropeMakingListing" })
     public ModelAndView ropeMaking(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
+     	String placeofactivity =(String)request.getSession().getAttribute("placeofactivity");
         ModelAndView mv = new ModelAndView("RopeMakingListing");
-        final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll();
+        final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll(placeofactivity);
         mv.addObject("ropeLists", (Object)ropeList);
         if(username == null) {
             mv = new ModelAndView("index");
@@ -1497,8 +1498,7 @@ public class InsertDataController
     public ModelAndView saveUserMid(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
     	String username =(String)request.getSession().getAttribute("usrname");
 		
-		  int isho =(int)request.getSession().getAttribute("ho");
-		  System.out.println("isho"+isho);
+	
 		 
         try {
             String ipAddress = null;
@@ -1507,7 +1507,7 @@ public class InsertDataController
             if (ipAddress == null) {
                 ipAddress = request.getRemoteAddr();
             }
-            final String ho = request.getParameter("isho");
+            final String ho = request.getParameter("ho");
             final String zone = request.getParameter("zone");
             final String region = request.getParameter("region");
             final String centerordpc = request.getParameter("centerordpc");
@@ -2590,11 +2590,12 @@ public class InsertDataController
     @RequestMapping({ "deleteRopemaking" })
     public ModelAndView deleteRopemaking(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	String placeofactivity =(String)request.getSession().getAttribute("placeofactivity");
         ModelAndView mv = new ModelAndView("RopeMakingListing");
         try {
             final String id = request.getParameter("id");
             this.ropeMakingService.delete(Integer.parseInt(id));
-            final List<RopeMakingModel> DeleteRopem = (List<RopeMakingModel>)this.ropeMakingService.getAll();
+            final List<RopeMakingModel> DeleteRopem = (List<RopeMakingModel>)this.ropeMakingService.getAll(placeofactivity);
             mv.addObject("ropeLists", (Object)DeleteRopem);
             if(username == null) {
             	return new ModelAndView("index");

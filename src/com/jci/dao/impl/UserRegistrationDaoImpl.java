@@ -128,6 +128,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		else {
 			return rows.get(0)[13].toString();
 		}
+		
 	}
 
 	@Override
@@ -339,4 +340,26 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 		}
 	
 	}
+
+
+		@Override
+		public int getis_ho(String usrname)
+		{
+			String querystr = "select ho from jciumt where username='"+usrname+"'";
+			Session session = sessionFactory.getCurrentSession();
+			SQLQuery query = session.createSQLQuery(querystr);
+			List<Integer> userList = query.list();
+			//System.out.println("refid===>>>>> "+userList);
+			if(!userList.isEmpty())
+			{
+				return userList.get(0);
+				//return "0";
+			}
+			else
+			{
+				return 3;
+			}
+		}
+	
+	
 }

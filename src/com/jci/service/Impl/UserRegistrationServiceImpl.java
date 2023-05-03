@@ -115,4 +115,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 		return userRegistrationDao.validateusername(username);
 	}
+
+	@Override
+	public int getis_ho(String usrname) {
+		// TODO Auto-generated method stub
+	   return userRegistrationDao.getis_ho(usrname);
+	}
 }

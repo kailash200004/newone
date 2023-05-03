@@ -24,4 +24,5 @@ public interface UserRegistrationService {
 	public boolean validateUserMobile(String mobileNo);
 	public boolean validateEmployeeid(String employeeid);
 	public boolean validateusername(String username);
+	public int getis_ho(String usrname);
 }

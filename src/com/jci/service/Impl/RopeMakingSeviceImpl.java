@@ -40,10 +40,7 @@ public class RopeMakingSeviceImpl implements RopeMakingService {
 		return ropeMakingDao.find(id);
 	}
 
-	@Override
-	public List<RopeMakingModel> getAll() {
-		return ropeMakingDao.getAll();
-	}
+
 
 	@Override
 	public boolean submitform(RopeMakingModel off) {
@@ -60,4 +57,13 @@ public class RopeMakingSeviceImpl implements RopeMakingService {
 	
 		return ropeMakingDao.findBinno(cropyr,dpcid);
 	}
+	@Override
+	public List<RopeMakingModel> getAll(String placeofactivity) {
+		return ropeMakingDao.getAll(placeofactivity);
+	}
+
+
+
+
+
 }

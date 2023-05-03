@@ -159,7 +159,7 @@ body {
 					class="fa fa-angle-left arrow"></i></a> -->
 				<ul class="nav-2-level">
 					<li  data-pre="34" id="o34"><a href="entryofpcso.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of PCSO</b> </a></li>
-					<li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li>
+					<!-- <li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li> -->
 					<li  data-pre="36" id="o36"><a href="entry_derivativeprice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price</b></a></li>
 					<li  data-pre="37" id="o37"><a href="entryderivativepricelist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price List</b></a></li>
 					<li  data-pre="38" id="o38"><a href="contractgenerationPCSOWise.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation PCSO Wise</b></a></li>

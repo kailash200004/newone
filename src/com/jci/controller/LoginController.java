@@ -74,6 +74,8 @@ public class LoginController {
 					String dpcIdd = userRegService.getUserDpc(refId);
 					String region = userRegService.getUserRegion(refId);
 					String dpc_center = userRegService.getdpc_center(dpcIdd);
+					int is_ho = userRegService.getis_ho(usrname);
+					session.setAttribute("is_ho", is_ho);
 					session.setAttribute("userId", refId);
 					session.setAttribute("usrname", usrname);
 					session.setAttribute("dpcId", dpcIdd);

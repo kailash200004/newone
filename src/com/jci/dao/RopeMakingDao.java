@@ -10,9 +10,10 @@ public interface RopeMakingDao {
 	public RopeMakingModel edit(int id);
 	public void delete(int id);
 	public RopeMakingModel find(int id);
-	public List <RopeMakingModel> getAll();
+
 	public boolean submitform(RopeMakingModel ropeMakingModel);
 
 	public List <RopeMakingModel> ropeMakingList(int regionId);
 	public List <String> findBinno(String cropyr, String dpcid);
+	public List<RopeMakingModel> getAll(String placeofactivity);
 }

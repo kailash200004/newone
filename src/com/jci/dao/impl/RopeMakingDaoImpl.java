@@ -3,7 +3,8 @@ package com.jci.dao.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -20,7 +21,9 @@ import com.jci.model.RopeMakingModel;
 @Transactional
 @Repository
 public class RopeMakingDaoImpl implements RopeMakingDao{
-
+	
+	@Autowired
+	private HttpServletRequest request;
 	@Autowired
 	SessionFactory sessionFactory;
 	protected Session currentSession(){
@@ -56,53 +59,44 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 		return (RopeMakingModel) currentSession().get(RopeMakingModel.class, id);
 	}
 
-	@Override
-	public List<RopeMakingModel> getAll() {
-		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(RopeMakingModel.class);
+	/*
+	 * @Override public List<RopeMakingModel> getAll(String placeofactivity) {
+	 * Criteria c =
+	 * this.sessionFactory.getCurrentSession().createCriteria(RopeMakingModel.class)
+	 * ;
+	 * 
+	 * List<Integer> result = new ArrayList<>(); HttpSession
+	 * session1=request.getSession(false); String querystr = ""; int is_ho =
+	 * (int)session1.getAttribute("is_ho"); System.out.println("is_hois_ho"+is_ho);
+	 * if(is_ho == 1) { querystr =
+	 * "select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE"
+	 * ; }else {
+	 * querystr="select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE where a.placeofactivity='"
+	 * +placeofactivity+"'"; } Session session = sessionFactory.getCurrentSession();
+	 * Transaction tx = session.beginTransaction(); SQLQuery query =
+	 * session.createSQLQuery(querystr); List<Object[]> rows = query.list();
+	 * List<RopeMakingModel> ll = new ArrayList<>(); for(Object[] row: rows) {
+	 * 
+	 * 
+	 * int rpmrefid = (int)row[0]; String basis = (String)row[1]; String cropyr =
+	 * (String)row[2]; String poa = (String)row[3]; String ropeUsed =
+	 * (String)row[4]; String binNo = (String)row[5]; String juteVariety =
+	 * (String)row[6]; String ropeMade = (String)row[7]; String crtddate =
+	 * (String)row[8]; String crtdby = (String)row[9]; String ropeBalance =
+	 * (String)row[10]; //String datereport = (String)row[11]; String region =
+	 * (String)row[12]; String dpcName = (String)row[15]; RopeMakingModel rope = new
+	 * RopeMakingModel(); rope.setBasis(basis); rope.setBinno(binNo);
+	 * System.out.println("place of activity"+poa);
+	 * 
+	 * rope.setCreateddate(crtddate); rope.setCropyr(cropyr);
+	 * rope.setPlaceofactivity(dpcName); //rope.setDatereport(datereport);
+	 * rope.setRopeused(ropeUsed); rope.setRope_balance(ropeBalance);
+	 * rope.setJutevariety(juteVariety); rope.setRopemade(ropeMade);
+	 * rope.setRpmrefid(rpmrefid); ll.add(rope); } return ll;
+	 * }
+	 */
 		
-		List<Integer> result = new ArrayList<>();
-		String querystr = "select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE";
-		Session session = sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery(querystr);
-		List<Object[]> rows = query.list();
-		List<RopeMakingModel> ll = new ArrayList<>();
-		for(Object[] row: rows) {
-			
-			
-			int rpmrefid = (int)row[0];
-			String basis = (String)row[1];
-			String cropyr = (String)row[2];
-			String poa = (String)row[3];
-			String ropeUsed = (String)row[4];
-			String binNo = (String)row[5];
-			String juteVariety = (String)row[6];
-			String ropeMade = (String)row[7];
-			String crtddate = (String)row[8];
-			String crtdby = (String)row[9];
-			String ropeBalance = (String)row[10];
-			//String datereport = (String)row[11];
-			String region = (String)row[12]; 
-			String dpcName = (String)row[15];
-			RopeMakingModel rope = new RopeMakingModel();
-			rope.setBasis(basis);
-			rope.setBinno(binNo);
-			System.out.println("place of activity"+poa);
-		
-			rope.setCreateddate(crtddate);
-			rope.setCropyr(cropyr);
-			rope.setPlaceofactivity(dpcName);
-			//rope.setDatereport(datereport);
-			rope.setRopeused(ropeUsed);
-			rope.setRope_balance(ropeBalance);
-			rope.setJutevariety(juteVariety);
-			rope.setRopemade(ropeMade);
-			rope.setRpmrefid(rpmrefid);
-			ll.add(rope);
-		}
-		return ll;
-		
-	}
+	
 
 	@Override
 	public boolean submitform(RopeMakingModel ropeMakingModel) {
@@ -159,6 +153,63 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 //System.out.println("====================>>>>>>>>>>>>>>>>>>>result  "+result);
 		return result;
 	}
+
+	@Override
+	public List<RopeMakingModel> getAll(String placeofactivity) {
+Criteria c = this.sessionFactory.getCurrentSession().createCriteria(RopeMakingModel.class);
+		
+		List<Integer> result = new ArrayList<>();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1) {
+	 querystr = "select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE";
+		}else {
+			querystr="select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE where a.placeofactivity='"+placeofactivity+"'";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<RopeMakingModel> ll = new ArrayList<>();
+		for(Object[] row: rows) {
+			
+			
+			int rpmrefid = (int)row[0];
+			String basis = (String)row[1];
+			String cropyr = (String)row[2];
+			String poa = (String)row[3];
+			String ropeUsed = (String)row[4];
+			String binNo = (String)row[5];
+			String juteVariety = (String)row[6];
+			String ropeMade = (String)row[7];
+			String crtddate = (String)row[8];
+			String crtdby = (String)row[9];
+			String ropeBalance = (String)row[10];
+			//String datereport = (String)row[11];
+			String region = (String)row[12]; 
+			String dpcName = (String)row[15];
+			RopeMakingModel rope = new RopeMakingModel();
+			rope.setBasis(basis);
+			rope.setBinno(binNo);
+			System.out.println("place of activity"+poa);
+		
+			rope.setCreateddate(crtddate);
+			rope.setCropyr(cropyr);
+			rope.setPlaceofactivity(dpcName);
+			//rope.setDatereport(datereport);
+			rope.setRopeused(ropeUsed);
+			rope.setRope_balance(ropeBalance);
+			rope.setJutevariety(juteVariety);
+			rope.setRopemade(ropeMade);
+			rope.setRpmrefid(rpmrefid);
+			ll.add(rope);
+		}
+		return ll;
+		
+	}
+
 
 
 }
