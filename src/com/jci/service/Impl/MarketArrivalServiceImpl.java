@@ -41,8 +41,8 @@ public class MarketArrivalServiceImpl implements MarketArrivalService{
 	}
 
 	@Override
-	public List<MarketArrivalModel> getAlldata() {
-		return marketArrivalDao.getAlldata();
+	public List<MarketArrivalModel> getAlldata(String dpc_code) {
+		return marketArrivalDao.getAlldata(dpc_code);
 	}
 
 	@Override

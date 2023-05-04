@@ -10,7 +10,7 @@ public interface VerifyTallySlipService {
 	public VerifyTallySlip edit(int id);
 	public void delete(int id);
 	public VerifyTallySlip find(int id);
-	public List<VerifyTallySlip> getAll(String status);
+	public List<VerifyTallySlip> getAll(String status, String dpcId);
 	public boolean submitform(VerifyTallySlip VerifyTallySlip);
 
 	public String GettransectionDetails(String tallyNo, String region);

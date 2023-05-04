@@ -41,8 +41,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 	}
 
 	@Override
-	public List<UserRegistrationModel> getAll() {
-		return userRegistrationDao.getAll();
+	public List<UserRegistrationModel> getAll( String dpcId) {
+		return userRegistrationDao.getAll(dpcId);
 	}
 
 	@Override

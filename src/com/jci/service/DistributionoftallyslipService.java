@@ -11,7 +11,7 @@ public interface DistributionoftallyslipService {
 	public DistributionoftallyslipModel edit(int id);
 	public void delete(int id);
 	public DistributionoftallyslipModel find(int id);
-	public List <DistributionoftallyslipModel> getAll();
+	public List <DistributionoftallyslipModel> getAll(String dpcId);
 	public boolean submitform(DistributionoftallyslipModel distributionoftallyslipModel);
 
 }

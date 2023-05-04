@@ -11,7 +11,7 @@ public interface BalePrepareDao {
 	public BalePreparation edit(int id);
 	public void delete(int id);
 	public BalePreparation find(int id);
-	public List <BalePreparation> getAll();
+	public List <BalePreparation> getAll(String place_of_packing);
 	public boolean submitform(BalePreparation BalePreparation);
 
 }

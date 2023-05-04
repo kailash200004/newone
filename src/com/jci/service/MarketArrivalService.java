@@ -9,6 +9,6 @@ public interface MarketArrivalService {
 	public MarketArrivalModel edit(int id);
 	public void delete(int id);
 	public MarketArrivalModel find(int id);
-	public List <MarketArrivalModel> getAlldata();
+	public List <MarketArrivalModel> getAlldata(String dpc_code);
 	public boolean submitform(MarketArrivalModel marketArrival);
 }

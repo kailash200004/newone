@@ -529,12 +529,13 @@ $("#pcso2_date").on("change", function() {
 							success:function(result){
 								location.reload(true)
 								$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Table saved successfully.</div>\r\n");
-								alert("Result Saved Succesfully");
+								
 				 			
 			 	 				 
 							}			
 						});
 					  }
+				  alert("Result Saved Succesfully");
 				  }
 			  
 	  });

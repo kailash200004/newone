@@ -3,6 +3,9 @@ package com.jci.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -20,9 +23,13 @@ import com.jci.model.JbaModel;
 @Transactional
 @Repository
 public class JBADaoImpl implements JbaDao {
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
 	protected Session currentSession(){
 		return sessionFactory.getCurrentSession();
 	}
@@ -60,9 +67,64 @@ public class JBADaoImpl implements JbaDao {
 	}
 
 	@Override
-	public List<JbaModel> getAll() {
+	public List<JbaModel> getAll(String dpcid) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(JbaModel.class);
-		List<JbaModel> ll=c.list();
+		List<Integer> result = new ArrayList<>();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1) {
+			querystr = "select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE";
+		}else {
+			querystr="select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE where a.dpcid='"+dpcid+"'";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<JbaModel> ll= new ArrayList<>();
+		for(Object[] row: rows) {
+			
+			int jbaid = (int)row[0];
+			String jbaDate = (String)row[1];
+			String jutevariety = (String)row[2];
+			String cropyr = (String)row[3];
+			String areaCode = (String)row[4];
+			String createddate = (String)row[5];
+			int creadtedby = (int)row[6];
+			/*
+			 * double gradewisepp1 = (double)row[7]; double gradewisepp2 = (double)row[8];
+			 * double gradewisepp3 = (double)row[9]; double gradewisepp4 = (double)row[10];
+			 * double gradewisepp5 = (double)row[11]; double gradewisepp6 = (double)row[12];
+			 * double gradewisepp7 = (double)row[13]; double gradewisepp8 = (double)row[14];
+			 */
+			String region = (String)row[15];
+			String dpcId = (String)row[16];
+			String area_name = (String)row[17]; 
+			String dpcName = (String)row[18];
+			
+			JbaModel  jba= new JbaModel();
+			jba.setAreaCode(areaCode);
+			jba.setAreaName(area_name);
+			jba.setCreadtedby(creadtedby);
+			jba.setCreateddate(createddate);
+			jba.setCropyr(cropyr);
+			jba.setDpcid(dpcid);
+			/*
+			 * jba.setGradewisepp1(gradewisepp1); jba.setGradewisepp2(gradewisepp2);
+			 * jba.setGradewisepp3(gradewisepp3); jba.setGradewisepp4(gradewisepp4);
+			 * jba.setGradewisepp5(gradewisepp5); jba.setGradewisepp6(gradewisepp6);
+			 * jba.setGradewisepp7(gradewisepp7); jba.setGradewisepp8(gradewisepp8);
+			 */
+			jba.setJbaDate(jbaDate);
+			jba.setJutevariety(jutevariety);
+			jba.setRegion(region);
+			
+			
+			ll.add(jba);
+		}
+		
 		return ll;
 	}
 

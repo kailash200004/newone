@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -26,6 +29,9 @@ import com.jci.model.MarketArrivalModel;
 @Repository
 public class MarketArrivalDaoImpl implements MarketArrivalDao{
 
+	@Autowired
+	private HttpServletRequest request;
+	
 	@Autowired
 	SessionFactory sessionFactory;
 	protected Session currentSession(){
@@ -62,11 +68,19 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 	}
 
 	@Override
-	public List<MarketArrivalModel> getAlldata() {
+	public List<MarketArrivalModel> getAlldata(String dpc_code) {
 		List<MarketArrivalModel> ll = new ArrayList<>();
 		List<Object[]> rows = new ArrayList<>();
-		//MarketArrivalModel maketarrival = new MarketArrivalModel();
-		String querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid";
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1)
+		{
+ querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid";
+		}else {
+			querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid where a.dpc_code = '"+dpc_code+"' ";
+		}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

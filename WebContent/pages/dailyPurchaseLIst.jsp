@@ -68,7 +68,7 @@
 										<th>Jute Variety</th>
 										<th>Bin</th>
 										<th>Crop Year</th> 	
-										<th>Fiber Value</th>		
+										<!-- <th>Fiber Value</th> -->		
 										<th>Date of purchase</th>	
 										<th>Rate Slip No.</th>					
 										<th>DPC</th>
@@ -88,7 +88,7 @@
 									<td><%=purList.getJutevariety()%></td>
 			                    	<td><%=purList.getBinno()%></td>
 									<td><%=purList.getCropyr()%></td>
-									<td><%=purList.getFibervalue()%></td>
+									<%-- <td><%=purList.getFibervalue()%></td> --%>
 									<td><%=purList.getDatepurchase()%></td>
 									<td><%=purList.getRateslipno()%></td>
 									<td><%=purList.getDpcid()%></td> 

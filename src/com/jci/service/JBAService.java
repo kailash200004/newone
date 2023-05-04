@@ -10,7 +10,7 @@ public interface JBAService {
 	public JbaModel edit(int id);
 	public void delete(int id);
 	public JbaModel find(int id);
-	public List <JbaModel> getAll();
+	public List <JbaModel> getAll(String dpcid);
 	public boolean submitform(JbaModel off);
 	public void create(JbaModel jbapri);
 

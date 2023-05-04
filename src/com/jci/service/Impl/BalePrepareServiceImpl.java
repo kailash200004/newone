@@ -42,8 +42,8 @@ public class BalePrepareServiceImpl implements BalePrepareService	{
 	}
 
 	@Override
-	public List<BalePreparation> getAll() {
-		return balePrepare.getAll();
+	public List<BalePreparation> getAll(String place_of_packing) {
+		return balePrepare.getAll(place_of_packing);
 	}
 
 	@Override

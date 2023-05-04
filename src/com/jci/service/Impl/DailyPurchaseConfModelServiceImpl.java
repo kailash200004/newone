@@ -42,8 +42,8 @@ public class DailyPurchaseConfModelServiceImpl  implements DailyPurchaseModelCon
 	}
 
 	@Override
-	public List<DailyPurchaseConfModel> getAll() {
-		return dailyPurchaseConfDao.getAll();
+	public List<DailyPurchaseConfModel> getAll(String dpcid) {
+		return dailyPurchaseConfDao.getAll(dpcid);
 	}
 
 	@Override

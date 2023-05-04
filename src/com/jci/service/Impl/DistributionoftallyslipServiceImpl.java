@@ -46,8 +46,8 @@ public class DistributionoftallyslipServiceImpl implements Distributionoftallysl
 	}
 
 	@Override
-	public List<DistributionoftallyslipModel> getAll() {
-		return distributionoftallyslipDao.getAll();
+	public List<DistributionoftallyslipModel> getAll(String dpcId) {
+		return distributionoftallyslipDao.getAll(dpcId);
 	}
 
 	@Override

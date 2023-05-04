@@ -42,8 +42,8 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	}
 
 	@Override
-	public List<VerifyTallySlip> getAll(String status) {
-		return VerificationTallySlipDao.getAll(status);
+	public List<VerifyTallySlip> getAll(String status, String dpcId) {
+		return VerificationTallySlipDao.getAll(status, dpcId);
 	}
 
 	@Override

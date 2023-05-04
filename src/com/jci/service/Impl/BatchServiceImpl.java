@@ -43,8 +43,8 @@ public class BatchServiceImpl implements BatchIdentificationService {
 	}
 
 	@Override
-	public List<BatchIdentificationModel> getAll() {
-		return batchdao.getAll();
+	public List<BatchIdentificationModel> getAll(String dpcId) {
+		return batchdao.getAll(dpcId);
 	}
 
 	@Override

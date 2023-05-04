@@ -45,7 +45,6 @@
 <script>
 
 $(document).ready(function() {
-	alert();
     var table = $('#example-table').DataTable( {
         scrollY:        "300px",
         scrollX:        true,
@@ -142,21 +141,6 @@ $(document).ready(function() {
     <!-- CORE SCRIPTS-->
     <script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
-    <script type="text/javascript">
-        $(function() {
-            $('#example-table').DataTable({
-                pageLength: 10,
-                //"ajax": './assets/demo/data/table_data.json',
-                /*"columns": [
-                    { "S": "name" },
-                    { "data": "office" },
-                    { "data": "extn" },
-                    { "data": "start_date" },
-                    { "data": "salary" }
-                ]*/
-            });
-        })
-    </script>
 </body>
 
 </html>

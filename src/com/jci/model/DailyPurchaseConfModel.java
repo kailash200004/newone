@@ -41,10 +41,10 @@ public class DailyPurchaseConfModel {
 	private String jutevariety;
 
 	@Column(name="gquantity")
-	private double gquantity;
+	private String gquantity;
 
 	@Column(name="dquantity")
-	private double dquantity;
+	private String dquantity;
 
 	@Column(name="netquantity")
 	private double netquantity;
@@ -56,7 +56,7 @@ public class DailyPurchaseConfModel {
 	private double tdbase;
 	
 	@Column(name="fibervalue")
-	private double fibervalue;
+	private int fibervalue;
 
 	@Column(name="grade1")
 	private double grade1;
@@ -183,19 +183,19 @@ public class DailyPurchaseConfModel {
 		this.jutevariety = jutevariety;
 	}
 
-	public double getGquantity() {
+	public String getGquantity() {
 		return gquantity;
 	}
 
-	public void setGquantity(double gquantity) {
+	public void setGquantity(String gquantity) {
 		this.gquantity = gquantity;
 	}
 
-	public double getDquantity() {
+	public String getDquantity() {
 		return dquantity;
 	}
 
-	public void setDquantity(double dquantity) {
+	public void setDquantity(String dquantity) {
 		this.dquantity = dquantity;
 	}
 
@@ -223,11 +223,11 @@ public class DailyPurchaseConfModel {
 		this.tdbase = tdbase;
 	}
 
-	public double getFibervalue() {
+	public int getFibervalue() {
 		return fibervalue;
 	}
 
-	public void setFibervalue(double fibervalue) {
+	public void setFibervalue(int fibervalue) {
 		this.fibervalue = fibervalue;
 	}
 
@@ -242,7 +242,6 @@ public class DailyPurchaseConfModel {
 	public double getGrade2() {
 		return grade2;
 	}
-
 
 	public void setGrade2(double grade2) {
 		this.grade2 = grade2;
@@ -384,25 +383,9 @@ public class DailyPurchaseConfModel {
 		this.grade8xnetqty = grade8xnetqty;
 	}
 
-
-	@Override
-	public String toString() {
-		return "DailyPurchaseConfModel [dpcid=" + dpcid + ", formno=" + formno + ", datepurchase=" + datepurchase
-				+ ", basis=" + basis + ", cropyr=" + cropyr + ", placeofpurchase=" + placeofpurchase + ", binno="
-				+ binno + ", jutevariety=" + jutevariety + ", gquantity=" + gquantity + ", dquantity=" + dquantity
-				+ ", netquantity=" + netquantity + ", garsat=" + garsat + ", tdbase=" + tdbase + ", fibervalue="
-				+ fibervalue + ", grade1=" + grade1 + ", grade2=" + grade2 + ", grade3=" + grade3 + ", grade4=" + grade4
-				+ ", grade5=" + grade5 + ", grade6=" + grade6 + ", grade7=" + grade7 + ", grade8=" + grade8
-				+ ", ipaddress=" + ipaddress + ", createdby=" + createdby + ", rateslipno=" + rateslipno
-				+ ", grade1xnetqty=" + grade1xnetqty + ", grade2xnetqty=" + grade2xnetqty + ", grade3xnetqty="
-				+ grade3xnetqty + ", grade4xnetqty=" + grade4xnetqty + ", grade5xnetqty=" + grade5xnetqty
-				+ ", grade6xnetqty=" + grade6xnetqty + ", grade7xnetqty=" + grade7xnetqty + ", grade8xnetqty="
-				+ grade8xnetqty + "]";
-	}
-
 	public DailyPurchaseConfModel(int dpcid, String formno, String datepurchase, String basis, String cropyr,
-			String placeofpurchase, int binno, String jutevariety, double gquantity, double dquantity,
-			double netquantity, double garsat, double tdbase, double fibervalue, double grade1, double grade2,
+			String placeofpurchase, int binno, String jutevariety, String gquantity, String dquantity,
+			double netquantity, double garsat, double tdbase, int fibervalue, double grade1, double grade2,
 			double grade3, double grade4, double grade5, double grade6, double grade7, double grade8, String ipaddress,
 			int createdby, String rateslipno, double grade1xnetqty, double grade2xnetqty, double grade3xnetqty,
 			double grade4xnetqty, double grade5xnetqty, double grade6xnetqty, double grade7xnetqty,
@@ -445,4 +428,4 @@ public class DailyPurchaseConfModel {
 	
 	
 
-}
+	}

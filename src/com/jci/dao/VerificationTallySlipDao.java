@@ -11,7 +11,7 @@ public interface VerificationTallySlipDao {
 	public VerifyTallySlip edit(int id);
 	public void delete(int id);
 	public VerifyTallySlip find(int id);
-	public List <VerifyTallySlip> getAll(String status);
+	public List <VerifyTallySlip> getAll(String status, String dpcId);
 	public boolean submitform(VerifyTallySlip verifyTallySlip);
 	public String GettransectionDetails(String tallyNo, String region);
 	//public  VerifyTallySlip findByTally(String tallyslipno);

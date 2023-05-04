@@ -10,7 +10,7 @@ public interface UserRegistrationDao {
 	public UserRegistrationModel edit(int id);
 	public void delete(int id);
 	public UserRegistrationModel find(int id);
-	public List <UserRegistrationModel> getAll();
+	public List <UserRegistrationModel> getAll( String dpcId);
 	public boolean submitform(UserRegistrationModel userRegistration);
 	public String loginCheck(String userName, String password);
 	public boolean validateEmail(String Email);

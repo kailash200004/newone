@@ -1,10 +1,17 @@
 package com.jci.dao.impl;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +23,9 @@ import com.jci.model.DistributionoftallyslipModel;
 @Repository
 
 public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDao {
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -52,11 +62,50 @@ public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDa
 	}
 
 	@Override
-	public List<DistributionoftallyslipModel> getAll() {
+	public List<DistributionoftallyslipModel> getAll(String dpcId) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(DistributionoftallyslipModel.class);
-		List<DistributionoftallyslipModel> ll=c.list();
+		List<Integer> result = new ArrayList<>();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1)
+		{
+	querystr = "  SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE;";
+		}else {
+			querystr = "SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE where bale.dpccode = '"+dpcId+"'";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<DistributionoftallyslipModel> ll = new ArrayList<>();
+		for(Object[] row: rows) {
+			
+			String dpcName = (String)row[0];
+			int refid = (int)row[1];
+			String dpccode = (String)row[2];
+			Date dateofreceipt = (Date)row[3];
+			String slipreceived = (String)row[4];
+			String seriesstartfrom = (String)row[5];
+			String seriestoend = (String)row[6];
+			//Date createddate = (Date)row[7];
+
+			DistributionoftallyslipModel distribtally = new DistributionoftallyslipModel();
+		//
+			distribtally.setDateofreceipt(dateofreceipt);
+			distribtally.setDpccode(dpccode);
+			distribtally.setRefid(refid);
+			distribtally.setSeriesstartfrom(seriesstartfrom);
+			distribtally.setSeriestoend(seriestoend);
+			distribtally.setSlipreceived(slipreceived);
+	        
+			ll.add(distribtally);
+		}
 		return ll;
 	}
+
+	
 
 	@Override
 	public boolean submitform(DistributionoftallyslipModel distributionoftallyslipModel) {

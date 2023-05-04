@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.hibernate.Criteria;
@@ -21,14 +23,20 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.BatchDao;
+import com.jci.model.BalePreparation;
 import com.jci.model.BatchIdentificationModel;
 import com.jci.model.BinListFromDbDTO;
 import com.jci.model.BinPurchaseMappingDTO;
+import com.jci.model.UserRegistrationModel;
 
 
 @Transactional
 @Repository
 public class BatchDaoImpl implements BatchDao {
+	
+	@Autowired
+	private HttpServletRequest request;
+
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -69,9 +77,45 @@ public class BatchDaoImpl implements BatchDao {
 	}
 
 	@Override
-	public List<BatchIdentificationModel> getAll() {
+	public List<BatchIdentificationModel> getAll(String dpcId) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(BatchIdentificationModel.class);
-		List<BatchIdentificationModel> ll=c.list();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1)
+		{
+	querystr = "SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername";
+		}else {
+			querystr = "SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername where pur.CENTER_CODE = '"+dpcId+"'";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<BatchIdentificationModel> ll = new ArrayList<>();
+		for(Object[] row: rows) {
+			BatchIdentificationModel binmodel = new BatchIdentificationModel();
+			
+			String dpcname =  (String) row[2];
+			String jutevariety =  (String) row[2];
+			String basis =  (String) row[4];
+			String cropyear =  (String) row[5];
+			String carrylose =  (String) row[6];
+			String carryrope =  (String) row[7];
+			String bin =  (String) row[12];
+			
+			binmodel.setDpcnames(dpcname);
+			binmodel.setJutevariety(jutevariety);
+			binmodel.setBasis(basis);
+			binmodel.setCropyr(cropyear);
+			binmodel.setCarryoverlossqty(carrylose);
+			binmodel.setCarryropeqty(carryrope);
+			binmodel.setBinnumber(bin);
+			
+			ll.add(binmodel);
+		}
+
 		return ll;
 	}
 

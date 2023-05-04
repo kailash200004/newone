@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -25,6 +28,9 @@ import com.jci.model.VerifyTallySlip;
 @Transactional
 @Repository
 public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -66,11 +72,19 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	 */
 
 	@Override
-	public List<VerifyTallySlip> getAll(String status) {
+	public List<VerifyTallySlip> getAll(String status, String dpcId) {
 	List<VerifyTallySlip> r = new ArrayList<>();
 	List<Object[]> result = new ArrayList<>();
-	String querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0'";
-
+	HttpSession session1=request.getSession(false); 
+	String querystr = "";
+	int is_ho = (int)session1.getAttribute("is_ho");
+	System.out.println("is_hois_ho"+is_ho);
+	if(is_ho == 1)
+	{
+	 querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0'";
+	}else {
+		querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0' and placeOfPurchase ='"+dpcId+"'";
+	}
 	Session session = sessionFactory.getCurrentSession();
 	Transaction tx = session.beginTransaction();
 	SQLQuery query = session.createSQLQuery(querystr);

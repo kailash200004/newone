@@ -3,6 +3,9 @@ package com.jci.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -19,6 +22,10 @@ import com.jci.model.UserRegistrationModel;
 @Transactional
 @Repository
 public class UserRegistrationDaoImpl implements UserRegistrationDao{
+	
+
+	@Autowired
+	private HttpServletRequest request;
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -61,9 +68,21 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	 */
 	
 	@Override
-	public List<UserRegistrationModel> getAll() {
+	public List<UserRegistrationModel> getAll( String dpcId) {
 		List<UserRegistrationModel> result = new ArrayList<>();
-		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1)
+		{
+ querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
+		}else
+		{
+			 querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.dpcId ='"+dpcId+"'";
+		}
+		
+		
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

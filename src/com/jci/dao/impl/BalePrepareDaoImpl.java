@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -22,6 +25,8 @@ import com.jci.model.RopeMakingModel;
 @Repository
 public class BalePrepareDaoImpl implements  BalePrepareDao {
 
+	@Autowired
+	private HttpServletRequest request;
 	@Autowired
 	SessionFactory sessionFactory;
 	protected Session currentSession(){
@@ -56,11 +61,20 @@ public class BalePrepareDaoImpl implements  BalePrepareDao {
 	}
 
 	@Override
-	public List<BalePreparation> getAll() {
+	public List<BalePreparation> getAll(String place_of_packing) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(BalePreparation.class);
 		
 		List<Integer> result = new ArrayList<>();
-		String querystr = "SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcibalepreparation bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE";
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1)
+		{
+	querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE";
+		}else {
+			querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE where bale.place_of_packing = '"+place_of_packing+"'";
+		}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

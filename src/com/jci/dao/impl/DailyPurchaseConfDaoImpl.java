@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -17,12 +20,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.DailyPurchaseConfDao;
 import com.jci.model.DailyPurchaseConfModel;
+import com.jci.model.JbaModel;
 import com.jci.model.RawJuteProcurementAndPayment;
 
 @Transactional
 @Repository
 public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 
+	@Autowired
+	private HttpServletRequest request;
+	
 	@Autowired
 	SessionFactory sessionFactory;
 	protected Session currentSession(){
@@ -58,11 +65,64 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 	}
 
 	@Override
-	public List<DailyPurchaseConfModel> getAll() {
+	public List<DailyPurchaseConfModel> getAll(String dpcid) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(DailyPurchaseConfModel.class);
-		List<DailyPurchaseConfModel> ll=c.list();
+
+		List<Integer> result = new ArrayList<>();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "";
+		int is_ho = (int)session1.getAttribute("is_ho");
+		System.out.println("is_hois_ho"+is_ho);
+		if(is_ho == 1) {
+			querystr = "select a.*, b.centername  from jcidpc a left Join jcipurchasecenter b on a.placeofpurchase = b.CENTER_CODE";
+		}else {
+			querystr="select a.*, b.centername  from jcidpc a left Join jcipurchasecenter b on a.placeofpurchase = b.CENTER_CODE where a.placeofpurchase='"+dpcid+"'";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		List<DailyPurchaseConfModel> ll= new ArrayList<>();
+		for(Object[] row: rows) {
+			
+			int dpcids = (int)row[0];
+			String datepurchase = (String)row[2];
+			String basis = (String)row[3];
+			String cropyr = (String)row[4];
+			//String createddate = (String)row[5];
+			int binno = (int)row[6];
+			String jutevariety = (String)row[7];
+			String gquantity = (String)row[8];
+			String dquantity = (String)row[9];
+			double netquantity = (((BigDecimal)row[10]).doubleValue());
+			//int fibervalue = (int)row[11];
+			String rateslipno = (String)row[15];
+	
+			DailyPurchaseConfModel  dailypur= new DailyPurchaseConfModel();
+			dailypur.setDpcid(dpcids);
+			dailypur.setDatepurchase(datepurchase);
+			dailypur.setBasis(basis);
+			dailypur.setCropyr(cropyr);
+			dailypur.setBinno(binno);
+			dailypur.setGquantity(gquantity);
+			dailypur.setDquantity(dquantity);
+			dailypur.setNetquantity(netquantity);
+			//dailypur.setFibervalue(fibervalue);
+			dailypur.setRateslipno(rateslipno);
+			dailypur.setJutevariety(jutevariety);
+
+			
+			ll.add(dailypur);
+		}
+		
 		return ll;
 	}
+		
+		
+		
+		
+	
+	
 
 	@Override
 	public boolean submitform(DailyPurchaseConfModel dailyPurchaseConfModel) {
@@ -182,9 +242,9 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 			dailyPurchaseConfModel.setGrade8(grade7);
 			dailyPurchaseConfModel.setDatepurchase(datepurchase);
 			dailyPurchaseConfModel.setBinno((int)o[15]);
-			dailyPurchaseConfModel.setGquantity(((BigDecimal)o[17]).doubleValue());
-			dailyPurchaseConfModel.setDquantity(((BigDecimal)o[18]).doubleValue());
-			dailyPurchaseConfModel.setFibervalue(((BigDecimal)o[16]).doubleValue());
+			dailyPurchaseConfModel.setGquantity((String)o[17]);
+			dailyPurchaseConfModel.setDquantity((String)o[18]);
+			dailyPurchaseConfModel.setFibervalue((int)o[16]);
 			if(basis.equalsIgnoreCase("commercial")) {
 			querystr = "SELECT top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where effectDate <= GETDATE() and crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
 			}

@@ -209,9 +209,9 @@ public class ContractgenerationController {
 	@RequestMapping(value= {"contractgenerationMillWise"},  method = { RequestMethod.GET })
 	public ModelAndView contractgenerationMillWise(HttpServletRequest request) {
 		  String username =(String)request.getSession().getAttribute("usrname");
-		  int id = Integer.parseInt((String) request.getParameter("id"));
+		 // int id = Integer.parseInt((String) request.getParameter("id"));
 		ModelAndView mv= new ModelAndView("contractGenerationMillWise");
-		  UpdatedContractQtyDTO updatedContractQtyDTO = contractgenerationService.getAll(id);
+		  UpdatedContractQtyDTO updatedContractQtyDTO = contractgenerationService.getAll(3);
 		  mv.addObject("UpdatedContractQtyDTO", updatedContractQtyDTO); 
 		  if(username == null) {
           	mv = new ModelAndView("index");

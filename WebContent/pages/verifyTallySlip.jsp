@@ -200,7 +200,8 @@ height: 614px;
 	});
 </script>
  <script>
- function magnify(imgID, zoom) {
+ function magnify(imgID, zoom)
+ {
 	  var img, glass, w, h, bw;
 	  img = document.getElementById(imgID);
 	  /*create magnifier glass:*/
@@ -221,39 +222,42 @@ height: 614px;
 	  /*and also for touch screens:*/
 	  glass.addEventListener("touchmove", moveMagnifier);
 	  img.addEventListener("touchmove", moveMagnifier);
-	  function moveMagnifier(e) {
-	    var pos, x, y;
-	    /*prevent any other actions that may occur when moving over the image*/
-	    e.preventDefault();
-	    /*get the cursor's x and y positions:*/
-	    pos = getCursorPos(e);
-	    x = pos.x;
-	    y = pos.y;
-	    /*prevent the magnifier glass from being positioned outside the image:*/
-	    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
-	    if (x < w / zoom) {x = w / zoom;}
-	    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
-	    if (y < h / zoom) {y = h / zoom;}
-	    /*set the position of the magnifier glass:*/
-	    glass.style.left = (x - w) + "px";
-	    glass.style.top = (y - h) + "px";
-	    /*display what the magnifier glass "sees":*/
-	    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
-	  }
-	  function getCursorPos(e) {
-	    var a, x = 0, y = 0;
-	    e = e || window.event;
-	    /*get the x and y positions of the image:*/
-	    a = img.getBoundingClientRect();
-	    /*calculate the cursor's x and y coordinates, relative to the image:*/
-	    x = e.pageX - a.left;
-	    y = e.pageY - a.top;
-	    /*consider any page scrolling:*/
-	    x = x - window.pageXOffset;
-	    y = y - window.pageYOffset;
-	    return {x : x, y : y};
-	  }
+		  function moveMagnifier(e) 
+		  {
+			    var pos, x, y;
+			    /*prevent any other actions that may occur when moving over the image*/
+			    e.preventDefault();
+			    /*get the cursor's x and y positions:*/
+			    pos = getCursorPos(e);
+			    x = pos.x;
+			    y = pos.y;
+			    /*prevent the magnifier glass from being positioned outside the image:*/
+			    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+			    if (x < w / zoom) {x = w / zoom;}
+			    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+			    if (y < h / zoom) {y = h / zoom;}
+			    /*set the position of the magnifier glass:*/
+			    glass.style.left = (x - w) + "px";
+			    glass.style.top = (y - h) + "px";
+			    /*display what the magnifier glass "sees":*/
+			    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+		  }
+		  function getCursorPos(e)
+		  {
+			    var a, x = 0, y = 0;
+			    e = e || window.event;
+			    /*get the x and y positions of the image:*/
+			    a = img.getBoundingClientRect();
+			    /*calculate the cursor's x and y coordinates, relative to the image:*/
+			    x = e.pageX - a.left;
+			    y = e.pageY - a.top;
+			    /*consider any page scrolling:*/
+			    x = x - window.pageXOffset;
+			    y = y - window.pageYOffset;
+			    return {x : x, y : y};
+		  }
 	} 
+
  </script>
  <script type="text/javascript">
  var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg, popname  ;
@@ -332,8 +336,9 @@ height: 614px;
 										<div class="form-group">
 											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
 											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" oninput="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
+											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
 												min="0" onkeyup="deleteErrorMsg()">
+
 										</div>
 										<div class="form-group">
 											<label>Farmer Registration No</label><span
@@ -782,26 +787,16 @@ height: 614px;
 </body>
  
 <script>
-	//$(document).ready(function(){
-	//	  $("#enq_submit").click(function(){
 	function validate() {
-     // alert("hiiii");
 	let	 farmerRegNo = document.forms["myForm"]["farmerRegNo"].value;
-	 
 	let	 tallyNo = document.forms["myForm"]["tallyNo"].value;
-	//alert(tallyNo);
 	let	dateOfPurchase = document.forms["myForm"]["dateOfPurchase"].value;
-	//alert(dateOfPurchase);
 	let	 placeOfPurchase = document.forms["myForm"]["placeOfPurchase"].value;
-	//alert(placeOfPurchase);
 	let	 rateSlipNumber = Number(document.forms["myForm"]["rateSlipNumber"].value);
 	let	 binNumber = Number(document.forms["myForm"]["binNumber"].value);
 	let	 juteVariety = document.forms["myForm"]["juteVariety"].value;
-	//alert(juteVariety);
-		// let drumWiseQuantity = document.forms["myForm"]["drumWiseQuantity"].value; 
 	let	 netQuantity =  Number(document.forms["myForm"]["netQuantity"].value);
 	netQuantity =  netQuantity.toFixed(3);
-	//alert(""+  netQuantity)  ;
 	let	 garsatRate = Number(document.forms["myForm"]["garsatRate"].value);
 	garsatRate = garsatRate.toFixed(3);
 	let	 amountPayable = Number(document.forms["myForm"]["amountPayable"].value);
@@ -811,7 +806,6 @@ height: 614px;
 	sum_gross += Number(document.getElementById("drumWiseQuantity"+i).value);
     }
     sum_gross = sum_gross.toFixed(3);
-  //  alert(sum_gross);
 	 
 	var errors= "";
 	var missing= true;
@@ -995,7 +989,6 @@ height: 614px;
 						success : function(result) {
 						if(result)
 						  {
-							alert("inside if block"+tallyNo);
 							var parsedJSON = JSON.parse(result);
 							 farmno = parsedJSON.farmerRegNo;
 							 tallyno = parsedJSON.tallyNo;
@@ -1014,16 +1007,11 @@ height: 614px;
 							 $("#placeOfPurchase").attr("value",pop);
 							 $("#popname").attr("value",popname);
 							 magnify("uploadedImage", 2);
-							 document.getElementById("errtallyNo").innerHTML ="";
 						  }
 						else{
 							
-							alert("inside else block"+tallyNo);
-						 document.getElementById("errtallyNo").innerHTML ="No data found for the entered Tally slip.";
-						}
-							
-			
-							
+							alert("No data found for the entered Tally slip.");
+							}
 						}
 					});
 
