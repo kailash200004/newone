@@ -64,6 +64,12 @@ public class JBAServiceImpl implements JBAService {
 		return  jbadao.findGradeOnJuteVariety(jvariety);
 	}
 
+	@Override
+	public List<JbaModel> getAll() {
+		// TODO Auto-generated method stub
+		return  jbadao.getAll();
+	}
+
 
 
 

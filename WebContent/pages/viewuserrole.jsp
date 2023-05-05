@@ -97,6 +97,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<tr>
 										<th>Sl.No</th>
 										<th>Role Name</th>
+										<th>Delete Role</th>
 									<!-- 	<th>User Type</th> -->
 										
 										
@@ -114,6 +115,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<tr>
 										<td><%=i%></td>
 										<td><%=userrole.getRole_name()%></td>
+										<td><a href="deleterolename.obj?rolename=<%=userrole.getRole_name()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this Role name')">Delete</a></td>
+ 	
 										<%-- <td><%=userrole.getUser_type()%></td> --%>
 								       
 				                  

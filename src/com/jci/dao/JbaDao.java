@@ -16,6 +16,7 @@ public interface JbaDao {
 
 	public List <String>  GetDayCountofJBA(String jbaId);
 	public List<String> findGradeOnJuteVariety(String jvariety);
+	public List<JbaModel> getAll();
 
 
 

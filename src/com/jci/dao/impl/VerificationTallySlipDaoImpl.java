@@ -216,6 +216,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	public PaymentprocesstellyslipModel updatepaymentstatusbytally(String tno) {
 		// TODO Auto-generated method stub
 		tno=tno.replace("\"","");
+		System.out.println("verification dao tno = "+tno);
 		List<Object[]> list = new ArrayList();
 		PaymentprocesstellyslipModel paymentdetails = new PaymentprocesstellyslipModel();
 		try {
@@ -258,8 +259,14 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 
 	@Override
 	public void savepaymentdata(PaymentprocesstellyslipModel createpayment) {
+		System.out.println("createpayment = "+createpayment.toString());
 		// TODO Auto-generated method stub
+		try {
 		currentSession().save(createpayment);
+		}
+		catch (Exception e) {
+			System.out.println("savepayment method = "+e.getLocalizedMessage());
+		}
 		
 	}
 

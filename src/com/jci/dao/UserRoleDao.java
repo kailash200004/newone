@@ -13,5 +13,6 @@ public interface UserRoleDao {
 	void create(UserRoleModel userrole);
 	public boolean validateRole(String role);
 	public List<UserRoleModel> getAll();
+	void deleteuserrole(String roelname);
 
 }

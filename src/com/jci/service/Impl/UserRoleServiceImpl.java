@@ -30,4 +30,10 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userroledao.validateRole(role);
 	}
 
+	@Override
+	public void deleteUserName(String roelname) {
+		// TODO Auto-generated method stub
+		 userroledao.deleteuserrole(roelname);
+	}
+
 }

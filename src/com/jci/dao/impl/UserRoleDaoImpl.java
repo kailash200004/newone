@@ -52,4 +52,11 @@ public class UserRoleDaoImpl implements UserRoleDao {
 			return false;
 		}
 	}
+	
+	@Override
+	public void deleteuserrole(String roelname) {
+			String hql = "Delete from jciuserrole where role_name = '"+roelname+"' " ;
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+		
+	}
 }

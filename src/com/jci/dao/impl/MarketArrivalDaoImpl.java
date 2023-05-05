@@ -77,9 +77,9 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 		System.out.println("is_hois_ho"+is_ho);
 		if(is_ho == 1)
 		{
- querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid";
+ querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE";
 		}else {
-			querystr = "Select a.*, b.centername, c.roname from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE join jcirodetails c on a.region_id= c.roid where a.dpc_code = '"+dpc_code+"' ";
+			querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE  where a.dpc_code = '"+dpc_code+"'";
 		}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();

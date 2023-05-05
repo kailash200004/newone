@@ -180,6 +180,7 @@
                                             <span class="text-danger">* </span>&nbsp; <span id="errcropyr" name="errcropyr"
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
+												<option value="">-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
 												<option value="2022-2023">2023-2024</option>

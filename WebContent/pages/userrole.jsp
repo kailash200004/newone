@@ -135,6 +135,8 @@ $(document).ready(function () {
                                                                  
                                     <div class="form-group">
                                         <button class="btn btn-default" type="submit">Create</button>
+                                        <a href="viewuserrole.obj" class="btn btn-default">View Roles</a>
+ 	
                                     </div>
                                 </form>
                                  

@@ -113,7 +113,7 @@
 									<input type="hidden" name="fIfsc" id="fIfsc" value="<%=farmerModel.getF_BANK_IFSC()%>">
 									<input type="hidden" name="facNo" id="facNo" value="<%=farmerModel.getF_AC_NO()%>">
 									<input type="hidden" name="fName" id="fName" value="<%=farmerModel.getF_NAME()%>">
-									<input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>">
+								<%-- 	<input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>"> --%>
 									<input type="hidden" name="fidProofType" id="fidProofType" value="<%=farmerModel.getF_ID_PROF_TYPE()%>">
 									<input type="hidden" name="fidProofNo" id="fidProofNo" value="<%=farmerModel.getF_ID_PROF_NO()%>">
 									<div class="">
@@ -170,12 +170,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-sm-6">
+										<!-- <div class="col-sm-6">
 												<div class="form-group">
 											<label>Address</label> <span class="err" name="address_span" id="address_span"></span> 
 											<input class="form-control" type="text" name="address" id="address" placeholder="Address" value="" required>
 											</div>
-										</div>
+										</div> -->
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Identity Proof Type</label> <span class="err" name="idProofType_span" id="idProofType_span"></span>
@@ -185,16 +185,15 @@
 													<option id="VoterId" value="Voter Id">Voter Id</option>
 												</select>
 											</div>
-										</div>										
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
+										</div>	
+																				<div class="col-sm-6">
 											<div class="form-group">
 												<label>Identity Proof Number</label> <span class="err" id="idProofNo_span" name="idProofNo_span"></span>
 												<input class="form-control"	type="text" name="identityProofNo" id="identityProofNo" placeholder="Identity Proof Number" value="" required>
 											</div>	
-										</div>							
+										</div>									
 									</div>
+
 									<div class="col-sm-6">
 									 	<div class="form-group">
 											<button class="btn btn-default" type="submit" id="enq_submit"  >Verify</button>

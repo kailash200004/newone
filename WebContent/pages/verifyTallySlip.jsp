@@ -375,7 +375,7 @@ height: 614px;
 												type="number" name="rateSlipNumber" id="rateSlipNumber"
 												placeholder="Rate Slip number" onkeyup="deleteErrorMsg()"
 												min="0"
-												oninput="javascript: if (this.value.length > 5) this.value = this.value.slice(0, 5);"
+												oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);"
 												onkeyup="deleteErrorMsg()">
 										</div>
 										<div class="form-group">

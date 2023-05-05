@@ -987,12 +987,17 @@ public class InsertDataController
         ModelAndView mv = new ModelAndView("JBAList");
         String dpcid =(String)request.getSession().getAttribute("dpcId");
         final List<JbaModel> jbapri = (List<JbaModel>)this.jbaservice.getAll(dpcid);
+        final List<JbaModel> jbapril = (List<JbaModel>)this.jbaservice.getAll();
         mv.addObject("jbaList", (Object)jbapri);
+        mv.addObject("jbaLists", (Object)jbapril);
         if(username == null) {
             mv = new ModelAndView("index");
             }
         return mv;
     }
+    
+    
+
     
     @RequestMapping(value = { "editJBAList" }, method = { RequestMethod.GET })
     public ModelAndView editJBAList(final HttpServletRequest request) {
@@ -3931,10 +3936,8 @@ public class InsertDataController
 	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
 	    	String a = "";
 	    	try {
-	    		
-	    	
 	    	String username =(String)request.getSession().getAttribute("usrname");
-	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments";
+	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
 	    	String usrname = (String) session.getAttribute("usrname");  
 	    Random num = new Random();
 	    int x= num.nextInt(50);
@@ -3944,10 +3947,13 @@ public class InsertDataController
 	    String[] tally = tallyno.split(",");
 	    List<PaymentprocesstellyslipModel> list = new ArrayList();
 	    PaymentprocesstellyslipModel p1 = new PaymentprocesstellyslipModel();
+	    System.out.println("tally length = "+tally.length);
 	    for(int i=0;i<tally.length;i++)
 	    {
 	           tno = tally[i];
+	   	    System.out.println("tno = "+tno);
 	           p1 = this.verifyTallySlipService.updatepaymentstatus(tno);
+	           System.out.println("p1 = "+p1.toString());
 	           tno = "";
 	           list.add(p1);
 	    }
@@ -3989,7 +3995,13 @@ public class InsertDataController
 	                createpayment.setUTR_no("UTR NO");
 	                createpayment.setDate(paymentlist.getDate());
 	                createpayment.setExcel_link(filename);
+	                System.out.println("create payment controller = "+createpayment.toString());
+	                try {
 	                verifyTallySlipService.savedata(createpayment);
+	                }catch (Exception e) {
+						System.out.println("controlelr exc = "+e.getLocalizedMessage());
+					}
+	                
 	                Row row = sheet.createRow(rownum++);
 	              row.createCell(0).setCellValue(String.valueOf(paymentlist.getAmount()));
 	                row.createCell(1).setCellValue(paymentlist.getDebitAC_no()); 
@@ -4033,6 +4045,21 @@ public class InsertDataController
 	         } 
 	    	return a;
 	    }
+	    
+		@RequestMapping("deleterolename")
+		public ModelAndView deleterolename(HttpServletRequest request,RedirectAttributes redirectAttributes)
+		{
+			String username =(String)request.getSession().getAttribute("usrname");
+			ModelAndView mv = new ModelAndView("viewuserrole");
+			String roelname = request.getParameter("rolename");
+		    this.userroleService.deleteUserName(roelname);
+		    final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
+			 mv.addObject("userroleList", (Object)alluserroleList);
+			 if(username == null) {
+			     	mv = new ModelAndView("index");
+			         }
+			return mv;
+		}
 
 		/*
 		 * @RequestMapping("logout") public void logoutSession(HttpServletRequest

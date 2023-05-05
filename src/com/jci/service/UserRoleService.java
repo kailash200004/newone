@@ -11,5 +11,6 @@ public interface UserRoleService {
 	void create(UserRoleModel userrole);
 	boolean validateRole(String role);
 	List<UserRoleModel> getAll();
+	void deleteUserName(String roelname);
 
 }

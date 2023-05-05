@@ -105,6 +105,7 @@ public class JBADaoImpl implements JbaDao {
 			String dpcName = (String)row[18];
 			
 			JbaModel  jba= new JbaModel();
+			jba.setId(jbaid);
 			jba.setAreaCode(areaCode);
 			jba.setAreaName(area_name);
 			jba.setCreadtedby(creadtedby);
@@ -166,6 +167,13 @@ public class JBADaoImpl implements JbaDao {
 		result = query.list();
 
 		return result;
+	}
+
+	@Override
+	public List<JbaModel> getAll() {
+		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(JbaModel.class);
+		List<JbaModel> ll=c.list();
+		return ll;
 	}
 
 
