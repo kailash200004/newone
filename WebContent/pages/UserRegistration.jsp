@@ -98,10 +98,15 @@ var hasError2 = false;
 								<input type="hidden" name="emailCheck" id="emailCheck">
 									<input type="hidden" name="dubName" id="dubName">
 									<div class="row">
-										<div class="col-sm-4 form-group">
+										<!-- <div class="col-sm-4 form-group">
 											<label class="required">EMS Name</label>  &nbsp;&nbsp;&nbsp; <span id="errName" name="errName" class="text-danger"> </span>
 											<input class="form-control" name="username" id="username" type="text" oninvalid="this.setCustomValidity('Please enter a valid Email')" oninput="this.setCustomValidity('')" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"  placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
 												<span  style="color: red; font-size: 13px;" id="usenameError">Please enter a valid Email</span> 
+										</div> -->
+										<div class="col-sm-4 form-group">
+											<label class="required">EMS Name</label>  &nbsp;&nbsp;&nbsp; <span id="errName" name="errName" class="text-danger"> </span>
+											<input class="form-control" name="username" id="username" type="text" oninvalid="this.setCustomValidity('Please enter a valid EMS Name')" oninput="this.setCustomValidity('')"  placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
+												<span  style="color: red; font-size: 13px;" id="usenameError">Please enter a valid EMS Name</span> 
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Password</label>  &nbsp;&nbsp;&nbsp; <span id="errPass" name="errPass" class="text-danger"> </span>
@@ -571,10 +576,10 @@ $(document).ready(function() {
             $("#usenameError").show();
             hasError = true;
         } 
-        else if(!emailReg.test(emailaddressVal)) {
+   /*      else if(!emailReg.test(emailaddressVal)) {
         	$("#usenameError").show();
             hasError = true;
-        }
+        } */
         if(hasError == true) { return false; }
  
     });

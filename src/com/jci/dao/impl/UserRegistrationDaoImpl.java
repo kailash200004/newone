@@ -130,7 +130,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	@Override
 	public  String loginCheck(String userName, String password) {
 		List<Integer> result = new ArrayList<>();
-		String querystr = "select * from jciumt where username ='"+userName+"' and password ='"+password+"'";
+		String querystr = "select * from jciumt where email ='"+userName+"' and password ='"+password+"'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -293,7 +293,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 	@Override
 	public int getRefId(String email) {
 		//String querystr = "select dpcId from jciumt where refid ='"+userId+"'";
-				String querystr = "select refid from jciumt where username='"+email+"'";
+				String querystr = "select refid from jciumt where email='"+email+"'";
 				Session session = sessionFactory.getCurrentSession();
 				SQLQuery query = session.createSQLQuery(querystr);
 				List<Integer> userList = query.list();
