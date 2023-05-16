@@ -72,7 +72,7 @@
                                             <label>Crop Year</label> <span class="text-danger">* </span>&nbsp; <span id="errcropyr" name="errcropyr"
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
-												<option value="">-Select-</option>
+												<option Selected Disabled value="">-Select-</option>
 											    <option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
 												<option value="2023-2024">2023-2024</option>
@@ -194,7 +194,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <script>
-$( "#datepurchase" ).datepicker({ maxDate: '0' , minDate: '-1',dateFormat: 'yy-mm-dd'});
+$( "#datepurchase" ).datepicker({ maxDate: '0' , minDate: '-1',dateFormat: 'dd-mm-yy'});
 $(binno).attr('maxlength',3);
 </script>
 
@@ -402,12 +402,13 @@ $(binno).attr('maxlength',3);
 	<script>
 	$(document).ready(function(){
 		 $("#dpc").click(function(){
-		alert("yes");
+		//alert("yes");
 		$.ajax({
 			type:"GET",
 			url:"dpc2.obj",
 			
 			success:function(result){
+				alert("record saved");
 			}
 			});
 		});

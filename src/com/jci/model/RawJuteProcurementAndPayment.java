@@ -45,7 +45,7 @@ public class RawJuteProcurementAndPayment {
 	private String slip_image;
 
 	@Column(name="datepurchase")
-	private Date datepurchase;
+	private String datepurchase;
 
 	@Column(name="basis")
 	private String basis;
@@ -271,12 +271,12 @@ public class RawJuteProcurementAndPayment {
 		this.formno = formno;
 	}
 
-	public Date getDatepurchase() {
+	public String getDatepurchase() {
 		return datepurchase;
 	}
 
-	public void setDatepurchase(Date datepurchase) {
-		this.datepurchase = datepurchase;
+	public void setDatepurchase(String datepurchase2) {
+		this.datepurchase = datepurchase2;
 	}
 
 	public String getBasis() {

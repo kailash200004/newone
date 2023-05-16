@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "jcibalepreparation", schema = "dbo")
@@ -61,30 +62,25 @@ public class BalePreparation {
 	@Column(name="jute_grade")
 	private  String jute_grade;
 
+	@Transient
+	private String region;
+	
+	
+	public String getRegion() {
+		return region;
+	}
+
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+
 	public BalePreparation() {
 		super();
 	}
 
-	public BalePreparation(int baleId, Date packing_date, String crop_year, String bin_no, String basis,
-			String jute_variety, String slip_no_from, String slip_no_to, int bale_no, int created_by, int status,
-			String creation_date, String place_of_packing, String jute_grade) {
-		super();
-		this.baleId = baleId;
-		this.packing_date = packing_date;
-		this.crop_year = crop_year;
-		this.bin_no = bin_no;
-		this.basis = basis;
-		this.jute_variety = jute_variety;
-		this.slip_no_from = slip_no_from;
-		this.slip_no_to = slip_no_to;
-		this.bale_no = bale_no;
-		this.created_by = created_by;
-		this.status = status;
-		this.creation_date = creation_date;
-		this.place_of_packing = place_of_packing;
-		this.jute_grade = jute_grade;
-	}
-
+	
 	public int getBaleId() {
 		return baleId;
 	}
@@ -197,13 +193,38 @@ public class BalePreparation {
 		this.jute_grade = jute_grade;
 	}
 
+	public BalePreparation(int baleId, Date packing_date, String crop_year, String bin_no, String basis,
+			String jute_variety, String slip_no_from, String slip_no_to, int bale_no, int created_by, int status,
+			String creation_date, String place_of_packing, String jute_grade, String region) {
+		super();
+		this.baleId = baleId;
+		this.packing_date = packing_date;
+		this.crop_year = crop_year;
+		this.bin_no = bin_no;
+		this.basis = basis;
+		this.jute_variety = jute_variety;
+		this.slip_no_from = slip_no_from;
+		this.slip_no_to = slip_no_to;
+		this.bale_no = bale_no;
+		this.created_by = created_by;
+		this.status = status;
+		this.creation_date = creation_date;
+		this.place_of_packing = place_of_packing;
+		this.jute_grade = jute_grade;
+		this.region = region;
+	}
+
+
 	@Override
 	public String toString() {
 		return "BalePreparation [baleId=" + baleId + ", packing_date=" + packing_date + ", crop_year=" + crop_year
 				+ ", bin_no=" + bin_no + ", basis=" + basis + ", jute_variety=" + jute_variety + ", slip_no_from="
 				+ slip_no_from + ", slip_no_to=" + slip_no_to + ", bale_no=" + bale_no + ", created_by=" + created_by
 				+ ", status=" + status + ", creation_date=" + creation_date + ", place_of_packing=" + place_of_packing
-				+ ", jute_grade=" + jute_grade + "]";
+				+ ", jute_grade=" + jute_grade + ", region=" + region + "]";
 	}
+
+
+	
 
 }

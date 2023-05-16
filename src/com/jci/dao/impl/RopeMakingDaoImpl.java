@@ -145,7 +145,7 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 	@Override
 	public List<String> findBinno(String cropyr, String dpcid) {
 		List<String> result = new ArrayList<>();
-		String querystr = "select distinct(binno) from jciprocurement where placeofpurchase='"+dpcid+"' and cropyr='"+cropyr+"'and binno not in(select binNo from tbl_jci_bin)";
+		String querystr = "select distinct(binno) from jcidpc where placeofpurchase='"+dpcid+"' and cropyr='"+cropyr+"'and binno not in(select binNo from tbl_jci_bin)";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

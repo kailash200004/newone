@@ -74,7 +74,7 @@ public class MarketArrivalModel {
 	private String region_id;
 
 	@Column(name = "datearrival")
-	private Date datearrival;
+	private String datearrival;
 	
 	@Column(name = "basis")
 	private String basis;
@@ -155,7 +155,7 @@ public class MarketArrivalModel {
 	public MarketArrivalModel(int mrarefid, double grade1, double grade2, double grade3, double grade4, double grade5,
 			double grade6, double grade7, double grade8, int grade_rate1, int grade_rate2, int grade_rate3,
 			int grade_rate4, int grade_rate5, int grade_rate6, int grade_rate7, int grade_rate8, String dpcnames,
-			String region_id, Date datearrival, String basis, String jutevariety, String cropyr, String arrivedqty,
+			String region_id, String datearrival, String basis, String jutevariety, String cropyr, String arrivedqty,
 			String mixmois, String maxmois, String createddate, int creadtedby, String no_arrival) {
 		super();
 		this.mrarefid = mrarefid;
@@ -419,14 +419,14 @@ public class MarketArrivalModel {
 
 
 
-	public Date getDatearrival() {
+	public String getDatearrival() {
 		return datearrival;
 	}
 
 
 
-	public void setDatearrival(Date datearrival) {
-		this.datearrival = datearrival;
+	public void setDatearrival(String datearrival2) {
+		this.datearrival = datearrival2;
 	}
 
 

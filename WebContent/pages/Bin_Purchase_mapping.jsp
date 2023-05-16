@@ -112,7 +112,7 @@
 										 
 										 <div class="col-sm-4 form-group">
                                             <label>Date of purchase</label><span class="text-danger">* </span>&nbsp;  
-                                            <input class="form-control" type="date" name="datepurchase" id="datepurchase" placeholder="Date of Purchase">
+                                            <input class="form-control" readonly name="datepurchase" id="datepurchase" placeholder="Date of Purchase">
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>Select BIN Number</label> 
@@ -390,5 +390,13 @@ $("#dpcname").on("change", function() {
 	});	
 	</script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+	$( "#datepurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+
+	</script>
 </body>
 </html>

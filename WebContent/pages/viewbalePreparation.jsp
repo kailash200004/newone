@@ -55,21 +55,21 @@
                     <span>${msg}</span>
                     <div class="ibox-body">
                         <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-
-
+							<%
+							int ho= (int)session.getAttribute("is_ho");
+							if (ho==1){
+							%>
+								
 								<thead>
 									<tr>
 										<th>S.No.</th> 
-										<th>Crop Year</th>
-										<th>Bin Number</th> 										
-										<th>Jute Variety</th>
-										<th>Basis</th>
-										<th>Slip No From</th>
-										<th>Slip No To</th>
-										<th>Bale No</th>
-										<th>Packing Date</th>
+									
 										<th>Place Of Packing</th>
+										<th>Packing Date</th>									
+										
 										<th>Jute Grade</th>
+										<th>Bale No</th>							
+										<th>Crop Year</th> 	
 										<!-- <th></th>
 										<th></th> -->
 									</tr>
@@ -82,28 +82,65 @@
 									%>
 									<tr>
 										<td><%=i%></td>
-										<td><%=balePreparationLists.getCrop_year()%></td>
-										<td><%=balePreparationLists.getBin_no()%></td>
-										<td><%=balePreparationLists.getJute_variety()%></td>
-										<td><%=balePreparationLists.getBasis()%></td>
-										<%-- <%
-											SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-											String dates= formatter.format(balePreparationLists.getPackingDate());
-										%> --%>
-										<td><%=balePreparationLists.getSlip_no_from()%></td>
-										<td><%=balePreparationLists.getSlip_no_to()%></td>
-										<td><%=balePreparationLists.getBale_no()%></td>
-										<td><%=balePreparationLists.getPacking_date()%></td>
 										<td><%=balePreparationLists.getPlace_of_packing()%></td>
+										<td><%=balePreparationLists.getPacking_date()%></td>
+										
 										<td><%=balePreparationLists.getJute_grade()%></td>
+										<td><%=balePreparationLists.getBale_no()%></td>
+										<td><%=balePreparationLists.getCrop_year()%></td>
 			          					<td><a href="editBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 				                     	<td><a  href="deleteBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 									</tr>
-									<% 
+									<%
 							i++; }
+							
 							%>
 								</tbody>
-   
+   		<% 
+							 }
+							else{
+								%>
+									
+									<thead>
+										<tr>
+											<th>S.No.</th> 
+										
+											<th>Packing Date</th>									
+											
+											<th>Jute Grade</th>
+											<th>Bale No</th>							
+											<th>Crop Year</th> 	
+											<!-- <th></th>
+											<th></th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<% 
+										int i= 1;
+										for(BalePreparation balePreparationLists : viewBalePreparation){
+										
+										%>
+										<tr>
+											<td><%=i%></td>
+											
+											<td><%=balePreparationLists.getPacking_date()%></td>
+											
+											<td><%=balePreparationLists.getJute_grade()%></td>
+											<td><%=balePreparationLists.getBale_no()%></td>
+											<td><%=balePreparationLists.getCrop_year()%></td>
+				          					<td><a href="editBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+					                     	<td><a  href="deleteBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+										</tr>
+										<%
+								i++; }
+								
+								%>
+									</tbody>
+	   		<% 
+								 }
+								
+								%>
+							
                         </table>
                     </div>
                 </div>

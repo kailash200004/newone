@@ -83,11 +83,7 @@
 
 									<div class="row">
 									<div class="col-sm-4 form-group">
-											<label class="required">Packing Place</label> <select
-												name="place_of_packing" id="place_of_packing"class="form-control">
-												<option value="">-Select-</option>
-
-											</select>
+											<label class="required">Packing Place</label> <input class="form-control" name="place_of_packing" id="place_of_packing" type="text" value="<%=dpcCenter%>" readonly>
 										</div>
 
 										<div class="col-sm-4 form-group">

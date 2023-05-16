@@ -122,14 +122,14 @@ $(document).ready(function () {
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
                                    
-                                      <!--  <div class="col-sm-4 form-group">
+                                       <div class="col-sm-4 form-group">
                                             <label>User Type</label> 
 											<select name="usertype" id="usertype" class="form-control" required="required">
 												<option disabled selected value>-Select-</option>
 												<option value="Web">Web User</option>
 												<option value="Mobile">Mobile User</option>
 											</select>
-                                        </div -->
+                                        </div>
           
                                     </div>   
                                                                  
@@ -152,7 +152,7 @@ $(document).ready(function () {
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
-   <script>
+<!--    <script>
 
 function validateRole(form) {
 	var rolename = document.getElementById("rolename").value;
@@ -180,7 +180,7 @@ function validateRole(form) {
 		 
 }
 	
-</script>
+</script> -->
    <script>
     function allow_alphabets(element){
         let textInput = element.value;

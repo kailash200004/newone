@@ -64,7 +64,19 @@
 	            String dpcCenter = (String) session.getAttribute("dpc_center");
 	            String dpcid = (String) session.getAttribute("dpcId");
 	            LocalDate date = LocalDate.now();
+	            
             %>
+            
+            <script>
+            $(document).ready(function(){
+            	var day = <%= LocalDate.now().getDayOfMonth() %>
+            	var month = <%= LocalDate.now().getMonthValue() %>
+            	var year = <%= LocalDate.now().getYear() %>
+            	var fulldate = day+"-"+month+"-"+year;
+            	$('#datearrival').val(fulldate);
+            	
+            });
+            </script>
             <div class="page-content fade-in-up">
                 <div class="row">
                     <div class="col-md-11">
@@ -93,10 +105,10 @@
                                         <div class="col-sm-4 form-group">
 												<label>Date of Arrival</label> 
 												<span class="text-danger">* </span>&nbsp; <span id="errdatepurchase" name="errdatepurchase" class="text-danger"> </span>
-												<input class="form-control" name="datearrival" id="datearrival" placeholder="Date of Arrival" value="<%=date%>"type="date" readonly>
+												<input class="form-control" name="datearrival" id="datearrival" placeholder="Date of Arrival" value="<%=date%>"type="text" readonly>
 										</div>
 										
-										<div class="col-sm-4 form-group">
+										<!-- <div class="col-sm-4 form-group">
 	                                             <label>Basis</label>
 	                                              <span class="text-danger">* </span>&nbsp; <span id="errbasis" name="errbasis" class="text-danger"> </span>
 	                                        	 <select name="basis" id="basis" class="form-control taxtbox" required>
@@ -104,7 +116,7 @@
 	                                        		<option value="msp">MSP</option>
 	                                        		<option value="commercial">Commercial</option>
 	                                        	</select>
-                                        </div> 
+                                        </div>  -->
                                    </div>
                                     
                                    <div class="row">
@@ -112,7 +124,14 @@
 												<label>Jute Variety</label>
 												<span class="text-danger">* </span>&nbsp; <span id="errjutevariety" name="errjutevariety" class="text-danger"> </span>
 	                                        	<select name="jutevariety" id="jutevariety" class="form-control taxtbox" required>
+	                                        
 	                                        	  <option value="">-Select-</option>
+													<option value="Bimli">Bimli</option>
+													<option value="Mesta">Mesta</option>
+													<option value="Tossa">Tossa</option>
+													<option value="White">White</option>
+													<option value="Tossa (New)">Tossa (New)</option>
+													<option value="White (New)">White (New)</option>
 	                                        	</select>
 										 </div>
 	                                       
@@ -120,8 +139,7 @@
 	                                            <label>Crop Year</label> 
 	                                            <span class="text-danger">* </span>&nbsp; <span id="errcropyr" name="errcropyr" class="text-danger"> </span>
 												<select name="cropyr" id="cropyr" class="form-control taxtbox" required>
-													<option value="">-Select-</option>
-												
+													<option value="">-Select-</option>											
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
 												<option value="2023-2024">2023-2024</option>
@@ -490,7 +508,7 @@
 		
    </script>
    
-   <script type="text/javascript">
+<!--    <script type="text/javascript">
 	$("#basis").on("change", function() {
 		var msp_no;
 		var variety = (this.value);	
@@ -520,7 +538,7 @@
 			});
 		 
 	});
-	</script>
+	</script> -->
 	
 	<script>
 	$("#jutevariety").on("change", function() {

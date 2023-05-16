@@ -23,7 +23,7 @@ public class DistributionoftallyslipModel {
 	private String dpccode;
 
 	@Column(name = "dateofreceipt")
-	private Date dateofreceipt;
+	private String dateofreceipt;
 
 	@Column(name = "slipreceived")
 	private String slipreceived;
@@ -57,11 +57,11 @@ public class DistributionoftallyslipModel {
 		this.dpccode = dpccode;
 	}
 
-	public Date getDateofreceipt() {
+	public String getDateofreceipt() {
 		return dateofreceipt;
 	}
 
-	public void setDateofreceipt(Date dateofreceipt) {
+	public void setDateofreceipt(String dateofreceipt) {
 		this.dateofreceipt = dateofreceipt;
 	}
 

@@ -50,8 +50,10 @@
  <link rel="stylesheet" href="assets/css/magnify.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
    
-
- 
+<!-- date picker -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">>
  
 <!-- <script src="assets/css/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
 <script src="assets/js/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
@@ -199,6 +201,9 @@ height: 614px;
 		// $('.zoom').magnify();
 	});
 </script>
+
+
+
  <script>
  function magnify(imgID, zoom)
  {
@@ -272,7 +277,7 @@ height: 614px;
 
 
   
-<body class="fixed-navbar">
+<body class="fixed-navbar" onload="transection()">
 
 	<div class="page-wrapper">
 		<!-- START HEADER-->
@@ -336,8 +341,8 @@ height: 614px;
 										<div class="form-group">
 											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
 											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
-												min="0" onkeyup="deleteErrorMsg()">
+											<input class="form-control" type="number" Readonly name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
+												min="0" >
 
 										</div>
 										<div class="form-group">
@@ -355,7 +360,7 @@ height: 614px;
 											<label>Date of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errdateOfPurchase" name="errdateOfPurchase"
 												class="text-danger"> </span> 
-												<input class="form-control"type="date" name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
+												<input class="form-control" readonly name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
 										</div>
 									
 										<div class=" form-group">
@@ -363,9 +368,9 @@ height: 614px;
 											</span>&nbsp; <span id="errplaceOfPurchase"
 												name="errplaceOfPurchase" class="text-danger"> </span> 
 												<input class="form-control" type="hidden" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" readonly="readonly">
+												onkeyup="deleteErrorMsg()" Readonly>
 												<input class="form-control" type="text" name="popname" id="popname" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()">
+												onkeyup="deleteErrorMsg()" Readonly>
 										</div>
 
 										<div class=" form-group">
@@ -1078,6 +1083,19 @@ height: 614px;
 		}
 
 	}
+	
+	
+	
+	</script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+	$( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+
+	</script>
 </script>
  
   <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
@@ -1086,12 +1104,7 @@ height: 614px;
       
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
  
-<!--  <script>
-  $(document).ready(function(){
-	// alert("date");
-    $("#dateOfPurchase").datepicker({ dateFormat: 'dd-mm-yy'});
-  });
-  </script>  -->
+ 
 
 
 </html>

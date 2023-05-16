@@ -154,17 +154,16 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 
 
 			VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
-			Date date = (Date)row[0];
+			String date = (String)row[0];
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			String dateString = format.format(date);
-			System.out.println(dateString);
-            try {
-				date       = format.parse ( dateString );
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			verifyTallySlip.setDop(dateString);
+			/*
+			 * String dateString = format.format(date); System.out.println(dateString);
+			 */
+			/*
+			 * try { date = format.parse ( dateString ); } catch (ParseException e) { //
+			 * TODO Auto-generated catch block e.printStackTrace(); }
+			 */
+			verifyTallySlip.setDop(date);
 			verifyTallySlip.setRateslipno((int)row[1]);
 			verifyTallySlip.setBinno((int)row[2]);
 			verifyTallySlip.setNetquantity(((BigDecimal)row[3]).doubleValue());
@@ -181,7 +180,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			//r.add(verifyTallySlip);
            Gson gson = new Gson();
            gson.toJson(verifyTallySlip);
-           System.out.println("================>>>>>>>>>>>result  "+gson.toJson(verifyTallySlip));
+          // System.out.println("================>>>>>>>>>>>result  "+gson.toJson(verifyTallySlip));
 		return 	gson.toJson(verifyTallySlip);
 		}
 		else

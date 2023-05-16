@@ -91,11 +91,11 @@
                                         <div class="col-sm-4 form-group">
                                             <label>Date of Receipt</label> <span class="text-danger">* </span>&nbsp; <span id="errdateofreceipt" name="errdateofreceipt"
 												class="text-danger"> </span>
-                                            <input class="form-control" name="dateofreceipt" id="dateofreceipt" placeholder="Date of Receipt" required>
+                                            <input class="form-control" name="dateofreceipt" id="dateofreceipt" placeholder="Date of Receipt" required readonly>
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>No. of slip received</label>  <span class="text-danger">* </span>&nbsp; <span id="errslipreceived" name="errslipreceived" class="text-danger"> </span>
-											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onkeyup ="slipNo();">
+											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onkeyup ="slipNo();" >
 										</div>
                                     </div>
                                     
@@ -147,7 +147,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-$( "#dateofreceipt" ).datepicker({ maxDate: '0' , minDate: '0',dateFormat: 'yy-mm-dd'});
+$( "#dateofreceipt" ).datepicker({ maxDate: '0' , minDate: '0',dateFormat: 'dd-mm-yy'});
 </script>
 <script>
  function validate() {

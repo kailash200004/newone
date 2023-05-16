@@ -11,6 +11,7 @@ public interface BalePrepareService {
 	public void delete(int id);
 	public BalePreparation find(int id);
 	public List<BalePreparation> getAll(String place_of_packing);
+	public List<BalePreparation> getAlldata();
 	public boolean submitform(BalePreparation Zone);
 	
 }

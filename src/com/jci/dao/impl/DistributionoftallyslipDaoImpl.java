@@ -85,7 +85,7 @@ public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDa
 			String dpcName = (String)row[0];
 			int refid = (int)row[1];
 			String dpccode = (String)row[2];
-			Date dateofreceipt = (Date)row[3];
+			String dateofreceipt = (String)row[3];
 			String slipreceived = (String)row[4];
 			String seriesstartfrom = (String)row[5];
 			String seriestoend = (String)row[6];

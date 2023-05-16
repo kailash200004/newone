@@ -226,7 +226,7 @@
 											<label>Date of Purchase</label> 
 											<span class="text-danger">* </span>&nbsp; <span id="errdatepurchase" name="errdatepurchase"
 												class="text-danger"> </span>
-											<input class="form-control" name="datepurchase" id="datepurchase" placeholder="Date of Purchase" type="date">
+											<input class="form-control" name="datepurchase" id="datepurchase"  placeholder="dd-mm-yyyy" value="" readonly>
 										</div>
                                          <!--    <div class="col-sm-4 form-group">
                                             <label>Form No.</label>
@@ -296,7 +296,7 @@
                                              <label >TD5 base price</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="errTD5baseprice" name="errTD5baseprice" onkeyup="deleteErrorMsg()"
 												class="text-danger"> </span>
-											<input class="form-control" name="tdbaseprice" id="tdbaseprice" type="number" placeholder="TD5 base price"  onkeyup="deleteErrorMsg()" min="0">
+											<input class="form-control" name="tdbaseprice" id="tdbaseprice" type="number" placeholder="TD5 base price"  onkeyup="deleteErrorMsg()" min="0" step="0.01">
                                         </div>
                                     	
                                     </div>
@@ -712,7 +712,13 @@
 	
 	
 	</script>
-	
+	<script>
+	/* function dateformat(){
+		const date = $("#datepurchase").val().split("-");
+		alert(date[2]+"-"+date[1]+"-"+date[0]);
+		$("#datepurchase").val(date[2]+"-"+date[1]+"-"+date[0])
+	} */
+	</script>
 <script>
  $(document).ready(function(){
 	//alert("doc ready");
@@ -732,11 +738,20 @@
 		var qntl=0;
 		
 		var variety = document.getElementById("jutevariety").value;	
-		//console.log(variety);
-		var basis = document.getElementById("basis").value;	
+		if(variety == ""  || variety == null)
+			alert("Please select a jute variety.")
+			
+		var basis = document.getElementById("basis").value;
+		
 		var cropyr = document.getElementById("cropyr").value;	
+		if(cropyr == ""  || cropyr == null)
+			alert("Please select a crop year.")
+			
 		var input = document.getElementsByName('test[]');
+		
 		var total=parseFloat(document.getElementById("netquantity").value);
+		if(total == ""  || cropyr == null)
+			alert("Please fill net quantity.")
 		
 		if(basis=="commercial"){
 			
@@ -774,18 +789,18 @@
 				            	 				var rate = parseFloat(grade[i]);
 
 				          			 				var  gradesPersent= parseFloat(((input[i].value*rate)/100));
-					        							   garsatrate += gradesPersent ;
-					      		
+				          			 				garsatrate  = parseFloat(garsatrate)+ gradesPersent ;
+				          			 				//alert("garsatrate = "+garsatrate);
 										}
 										
 								 	} 	
 						 				var netPercent = parseFloat(total/100);
 						 				
 						 				netAmount=parseFloat(garsatrate * netPercent);
-						 		
-						 				document.getElementById("amountPayable").value = netAmount;
-						
-										document.getElementById("garsatRate").value = Math.round(garsatrate,2);
+						 				
+						 				document.getElementById("amountPayable").value = 	Math.round((netAmount + Number.EPSILON) * 100) / 100;
+						 				//alert("garsatrate = "+garsatrate);
+										document.getElementById("garsatRate").value = Math.round((garsatrate + Number.EPSILON) * 100) / 100;
 							}
 						
 						else if(basis=="commercial"){
@@ -794,8 +809,8 @@
 							var  gradesPersent;
 							var multi;
 							 gradefive = data[0][4];
-							console.log("data  "+data);
-							console.log("gradefive  "+gradefive);
+							//console.log("data  "+data);
+							//console.log("gradefive  "+gradefive);
 								for (var i = 0; i < input.length; i++) {
 									for (var j = 0; j < data.length; j++){
 										
@@ -822,18 +837,18 @@
 												      		
 												}  
 											}
-										console.log("addition  "+addition);
+										//console.log("addition  "+addition);
 											}
 										}
 								var garsatt=document.getElementById("garsatRate").value;
 						
 							var td=	(garsatt - (addition));
-							console.log("td "+td);
+							//console.log("td "+td);
 							var netPercent = parseFloat(total/100);
 			 				
 			 				netAmount=parseFloat(garsatt * netPercent);
 			 		
-			 				document.getElementById("amountPayable").value = netAmount;
+			 				document.getElementById("amountPayable").value = Math.round(netAmount,2);
 								
 								document.getElementById("tdbaseprice").value = Math.round(td,2);
 								
@@ -858,7 +873,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-//$( "#datepurchase" ).datepicker({ dateFormat: 'mm-dd-yy'    });
+$( "#datepurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
 
 </script>
 	<script>

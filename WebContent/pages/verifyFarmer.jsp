@@ -40,6 +40,8 @@
 	rel="stylesheet" />
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="assets/css/zoom.css"> 
+ <link rel="stylesheet" href="assets/css/magnify.css">s
 <!-- PLUGINS STYLES-->
 <!-- THEME STYLES-->
 <link href="assets/css/main.min.css" rel="stylesheet" />
@@ -54,7 +56,35 @@
 	content: " *";
 	color: red;
 }
+.img-magnifier-container {
+  position:relative;
+}
 
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 100px;
+  height: 100px;
+}
+.glass {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: crosshair;
+  
+  /* Multiple box shadows to achieve the glass effect */
+  box-shadow:
+    0 0 0 7px rgba(255, 255, 255, 0.85),
+    0 0 7px 7px rgba(0, 0, 0, 0.25), 
+    inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+  
+  /* hide the glass by default */
+  display: none;
+}
 </style>
 </head>
 <style>
@@ -70,6 +100,79 @@
   margin-left: -$gutter / 2;
 } */
 </style>
+ <script type="text/javascript">
+	$(document).ready(function() {
+		$('#turn').on('click', function() {
+			var angle = ($('#uploadedImage').data('angle') + 90) || 90;
+			$('#uploadedImage').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage').data('angle', angle);
+		});
+		
+		// $('.zoom').magnify();
+	});
+</script>
+ <script>
+ function magnify(imgID, zoom)
+ {
+	  var img, glass, w, h, bw;
+	  img = document.getElementById(imgID);
+	  /*create magnifier glass:*/
+	  glass = document.createElement("DIV");
+	  glass.setAttribute("class", "img-magnifier-glass");
+	  /*insert magnifier glass:*/
+	  img.parentElement.insertBefore(glass, img);
+	  /*set background properties for the magnifier glass:*/
+	  glass.style.backgroundImage = "url('" + img.src + "')";
+	  glass.style.backgroundRepeat = "no-repeat";
+	  glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+	  bw = 3;
+	  w = glass.offsetWidth / 2;
+	  h = glass.offsetHeight / 2;
+	  /*execute a function when someone moves the magnifier glass over the image:*/
+	  glass.addEventListener("mousemove", moveMagnifier);
+	  img.addEventListener("mousemove", moveMagnifier);
+	  /*and also for touch screens:*/
+	  glass.addEventListener("touchmove", moveMagnifier);
+	  img.addEventListener("touchmove", moveMagnifier);
+		  function moveMagnifier(e) 
+		  {
+			    var pos, x, y;
+			    /*prevent any other actions that may occur when moving over the image*/
+			    e.preventDefault();
+			    /*get the cursor's x and y positions:*/
+			    pos = getCursorPos(e);
+			    x = pos.x;
+			    y = pos.y;
+			    /*prevent the magnifier glass from being positioned outside the image:*/
+			    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+			    if (x < w / zoom) {x = w / zoom;}
+			    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+			    if (y < h / zoom) {y = h / zoom;}
+			    /*set the position of the magnifier glass:*/
+			    glass.style.left = (x - w) + "px";
+			    glass.style.top = (y - h) + "px";
+			    /*display what the magnifier glass "sees":*/
+			    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+		  }
+		  function getCursorPos(e)
+		  {
+			    var a, x = 0, y = 0;
+			    e = e || window.event;
+			    /*get the x and y positions of the image:*/
+			    a = img.getBoundingClientRect();
+			    /*calculate the cursor's x and y coordinates, relative to the image:*/
+			    x = e.pageX - a.left;
+			    y = e.pageY - a.top;
+			    /*consider any page scrolling:*/
+			    x = x - window.pageXOffset;
+			    y = y - window.pageYOffset;
+			    return {x : x, y : y};
+		  }
+	} 
+
+ </script>
 <body class="fixed-navbar">
 	<div class="page-wrapper">
 		<!-- START HEADER-->
@@ -103,12 +206,11 @@
 							<%
 								String id=request.getParameter("id");
 							%>
-								<a href="verifyFarmer2_landscape.obj?id=<%=id%>">
-									<span>
-									<img style="width: 20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
-									  Rotate Page
-									</span>								
-								</a>
+								
+								
+								
+								
+							
 								<%
 							%>
 							
@@ -133,7 +235,13 @@
 										 //out.println("Bank Mandate Form Value is "+filepath+farmerModel.getF_DOC_Mandate() );
 										//filepath = BharatUtils.strToBase64Pdf(new File(imagepath));
 										%>
-											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_DOC_Mandate()  %>" class="rotate90" />
+											<button id='turn'>
+									<img style="width: 20px;"
+										src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+									Rotate
+								</button>
+							<div  class="img-magnifier-container">
+											<img name="uploadedImage" id="uploadedImage" src="<%=filepath+farmerModel.getF_DOC_Mandate()  %>" class="rotate90" class="magniflier"/>
 										<%	
 										
 									}else{
@@ -142,7 +250,7 @@
 										<%
 									}
 									%>
-									
+									</div>
 									</div>
 										<div class="col-sm-6 " >
 											<div class="form-group">

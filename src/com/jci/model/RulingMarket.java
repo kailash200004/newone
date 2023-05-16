@@ -25,7 +25,7 @@ public class RulingMarket {
 	private String noofarrival;
 
 	@Column(name="dateofarrival")
-	private Date dateofarrival;
+	private String dateofarrival;
 
 	@Column(name="jutevariety")
 	private String jutevariety;
@@ -64,7 +64,7 @@ public class RulingMarket {
 
 	}
 
-	public RulingMarket(int jcirulingmarketid, String dpcname, String noofarrival, Date dateofarrival,
+	public RulingMarket(int jcirulingmarketid, String dpcname, String noofarrival, String dateofarrival,
 			String jutevariety, String cropyear, double arrivedquantity, int minmoisture, int maxmoisture,
 			int gradewisefield, int gradewiserate, int estimatedgradecomposition, int createdby, Date createddate,
 			int status) {
@@ -109,11 +109,11 @@ public class RulingMarket {
 		this.noofarrival = noofarrival;
 	}
 
-	public Date getDateofarrival() {
+	public String getDateofarrival() {
 		return dateofarrival;
 	}
 
-	public void setDateofarrival(Date dateofarrival) {
+	public void setDateofarrival(String dateofarrival) {
 		this.dateofarrival = dateofarrival;
 	}
 

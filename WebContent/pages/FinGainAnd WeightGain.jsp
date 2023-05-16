@@ -65,15 +65,16 @@
     		success: function(result){
     			//alert(result);
     			var data= jQuery.parseJSON(result);
-    		
+    			//alert( data[0][0] + " "+data[0][1] );
     			// alert( fingain + " "+weightgain );
     			 $.ajax({
-    				    
+    				 
     		    		type: 'GET',
     		    		url: 'InsertBinDataTodb.obj',
     		    		data:{"FinYear":finyr, "binNO":binno,"FinGain":data[0][0], "WeightGain":data[0][1]},
     		    		success: function(data1){
     		    			alert("Finacial Gain and Weight gain has been Calculated");
+    		    			
     		    		}
     		    	});	
     		    	
@@ -164,15 +165,17 @@ $("#FinYear").on("change", function() {
 											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
 												class="text-danger"> </span>
                       
-                                        	 <select class="form-control" name="binNO" id="binNO" onblur="binno_check()">
-                                                                          
+                                        	 <select class="form-control" name="binNO" id="binNO" >
+                                                                          </select>
 										</div>
                                     	
                                         
                                     </div>
-                                     
-                                    <div class="form-group">
-                                        <button class="btn btn-default" type="submit" id="submit" >Submit</button>
+                                        <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                   
+                                        <button class="btn btn-default" type="button" id="submit" onclick="binno_check()">Calculate</button>
+                                    </div>
                                     </div>
                                 </form>
                             </div>

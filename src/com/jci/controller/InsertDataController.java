@@ -1221,7 +1221,7 @@ public class InsertDataController
             rawJuteProcAndPay.setRateslipno(Integer.parseInt(rateslipno));
             rawJuteProcAndPay.setDeductionquantity((double)Float.parseFloat(dquantity));
             rawJuteProcAndPay.setGrasatrate((double)Float.parseFloat(garsatRate));
-            rawJuteProcAndPay.setDatepurchase(d1);
+            rawJuteProcAndPay.setDatepurchase(datepurchase);
             rawJuteProcAndPay.setFarmerregno(farmerregno);
             rawJuteProcAndPay.setCreadtedby(createdBy);
             rawJuteProcAndPay.setDateof_entry(new Date());
@@ -1943,7 +1943,7 @@ public class InsertDataController
             final String seriestoend = request.getParameter("seriestoend");
             final DistributionoftallyslipModel addDistributionoftallyslipModel = new DistributionoftallyslipModel();
             addDistributionoftallyslipModel.setDpccode(dpccode);
-            addDistributionoftallyslipModel.setDateofreceipt(date1);
+            addDistributionoftallyslipModel.setDateofreceipt(dateofreceipt);
             addDistributionoftallyslipModel.setSlipreceived(slipreceived);
             addDistributionoftallyslipModel.setSeriesstartfrom(seriesstartfrom);
             addDistributionoftallyslipModel.setSeriestoend(seriestoend);
@@ -2366,7 +2366,7 @@ public class InsertDataController
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             final LocalDateTime now = LocalDateTime.now();
             String dateTime = dtf.format(now);
-            String basis = request.getParameter("basis");
+			String basis = request.getParameter("basis"); 
             String jutevariety = request.getParameter("jutevariety");
             String cropyear = request.getParameter("cropyr");
             String arrivedquantity = request.getParameter("arrivedquantity");
@@ -2421,7 +2421,7 @@ public class InsertDataController
             rulingMarket.setRegion_id(region_id);
             rulingMarket.setNo_arrival(noarrival);
             rulingMarket.setCreadtedby(created_by);
-            rulingMarket.setDatearrival(date1);
+            rulingMarket.setDatearrival(datearrival);
             rulingMarket.setBasis(basis);
             rulingMarket.setJutevariety(jutevariety);
             rulingMarket.setCropyr(cropyear);
@@ -2576,9 +2576,15 @@ public class InsertDataController
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewbalePreparation");
         String place_of_packing =(String)request.getSession().getAttribute("dpcId");
-        
-     
-        final List<BalePreparation> viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing);
+        int is_ho = (int)request.getSession().getAttribute("is_ho");
+         List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
+		if(is_ho == 1)
+		{
+			  viewBale = (List<BalePreparation>)this.balePrepareService.getAlldata();
+		}
+		else {
+			viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing);
+		}
         mv.addObject("viewBalePreparation", (Object)viewBale);
         if(username == null) {
         	mv = new ModelAndView("index");
@@ -3120,7 +3126,7 @@ public class InsertDataController
             final DistributionoftallyslipModel updateDistributionoftallyslipModel = new DistributionoftallyslipModel();
             updateDistributionoftallyslipModel.setRefid(Integer.parseInt(id));
             updateDistributionoftallyslipModel.setDpccode(dpccode);
-            updateDistributionoftallyslipModel.setDateofreceipt(date1);
+            updateDistributionoftallyslipModel.setDateofreceipt(dateofreceipt);
             updateDistributionoftallyslipModel.setSlipreceived(slipreceived);
             updateDistributionoftallyslipModel.setSeriesstartfrom(seriesstartfrom);
             updateDistributionoftallyslipModel.setSeriestoend(seriestoend);

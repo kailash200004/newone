@@ -88,49 +88,50 @@
 <script>
 $(document).ready(function () {
     var dateNewFormat, onlyDate, today = new Date();
-    dateNewFormat = today.getFullYear() + '-'; 
+    onlyDate = today.getDate();
+    if (onlyDate.toString().length == 2) {
+
+        dateNewFormat =  onlyDate+ '-';
+    }
+    else {
+        dateNewFormat = '0' + onlyDate+ '-';
+    }
+     
    //  alert(today.getMonth()+1);
      var month1 = (today.getMonth() + 1);
     // alert(month1);
     if (month1.toString().length== 2) {
      //alert("if");
-        dateNewFormat += (today.getMonth() + 1);
+        dateNewFormat += (today.getMonth() + 1)+ '-';
     }
     else {
-        dateNewFormat += '0' + (today.getMonth() + 1);
+        dateNewFormat += '0' + (today.getMonth() + 1)+ '-';
     }
 
-    onlyDate = today.getDate();
-    if (onlyDate.toString().length == 2) {
-
-        dateNewFormat += "-" + onlyDate;
-    }
-    else {
-        dateNewFormat += '-0' + onlyDate;
-    }
+    dateNewFormat += today.getFullYear();
     
     var tommorowymd, tomdate,tommorowdate = new Date();
     tommorowdate.setDate(tommorowdate.getDate()+1);
-    tommorowymd = tommorowdate.getFullYear() + '-'; 
-    tommonth = (tommorowdate.getMonth() + 1);
-    if (tommonth.toString().length == 2) {
-
-    	tommorowymd += (tommorowdate.getMonth() + 1);
-    }
-    else {
-    	tommorowymd += '0' + (tommorowdate.getMonth() + 1);
-    }
-
     tomdate = tommorowdate.getDate();
     if (tomdate.toString().length == 2) {
 
-    	tommorowymd += "-" + tomdate;
+    	tommorowymd = tomdate+ '-';
     }
     else {
-    	tommorowymd += '-' + tomdate;
+    	tommorowymd = '0' + tomdate+ '-';
     }
- 
+    tommonth = (tommorowdate.getMonth() + 1);
+    if (tommonth.toString().length == 2) {
 
+    	tommorowymd += (tommorowdate.getMonth() + 1)+ '-';
+    }
+    else {
+    	tommorowymd += '0' + (tommorowdate.getMonth() + 1)+ '-';
+    }
+
+   
+ 
+    tommorowymd += tommorowdate.getFullYear(); 
     $('#entryDate').val(dateNewFormat);
  //   $('#effectDate').val(tommorowymd);
  
@@ -661,7 +662,7 @@ $(document).ready(function () {
 				  {
 				  grade7="0";
 				  }
-				  //alert(dpc);
+				  alert(dpc);
 					$.ajax({
 						type:"POST",
 						url:"saveGradePriceOfCommercial.obj",

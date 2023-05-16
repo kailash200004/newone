@@ -2,7 +2,9 @@ package com.jci.dao.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpSession;
 
@@ -120,7 +122,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
 		result = query.list();
-		System.out.println("jute variety==================== "+result);
+		//System.out.println("jute variety==================== "+result);
 		return result;
 	}
 	@Override
@@ -159,55 +161,59 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 
-	@Override
-	public List<RawJuteProcurementAndPayment> farmerDetailsList() {
-
-		List<RawJuteProcurementAndPayment> list =new ArrayList<>();
-
-	String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, tallySlipImg from jciprocurement where farmerregno Not in (select farmerregno from verificationtallyslip)";
-	List<RawJuteProcurementAndPayment> result = new ArrayList<>();
-	List<Object[]> res = new ArrayList<>();
-		Session session = sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery(queryStr);
-		res = query.list();
-		for( Object[] o : res) {
-			RawJuteProcurementAndPayment raw = new RawJuteProcurementAndPayment();
-			String farmer = (String)o[0];
-			Date datepurchase = (Date)o[1];
-			String basis = (String)o[2];
-			String cropyr = (String)o[3];
-			String placeofpurchase = (String)o[4];
-			int rateslipno = (int)o[5];
-			int binno = (int)o[6];
-			String jutevariety = (String)o[7];
-			BigDecimal grossquantity = (BigDecimal)o[8];
-			BigDecimal deductionquantity = (BigDecimal)o[9];
-			BigDecimal grasatrate = (BigDecimal)o[10];
-			BigDecimal amountpayable = (BigDecimal)o[11];
-			int ptsid = (int)o[12];
-			String tallyslip =  (String)o[13];
-			raw.setFarmerregno(farmer);
-			raw.setDatepurchase(datepurchase);
-			raw.setBasis(basis);
-			raw.setCropyr(cropyr);
-			raw.setPlaceofpurchase(placeofpurchase);
-			raw.setRateslipno(rateslipno);
-			raw.setBinno(binno);
-			raw.setJutevariety(jutevariety);
-			raw.setGrossquantity(grossquantity.doubleValue());
-			raw.setDeductionquantity(deductionquantity.doubleValue());
-			raw.setGrasatrate(grasatrate.doubleValue());
-			raw.setAmountpayable(amountpayable.doubleValue());
-			raw.setPtsid(ptsid);
-			raw.setTallyslipno(tallyslip);
-			result.add(raw);
-			//System.out.println("farmer  ====== "+farmer);
-		}
-
-		  return result;
-
-	}
+	
+	  @Override public List<RawJuteProcurementAndPayment> farmerDetailsList() {
+	  
+	  List<RawJuteProcurementAndPayment> list =new ArrayList<>();
+	  
+	  String
+	  queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, tallySlipImg from jciprocurement where farmerregno Not in (select farmerregno from verificationtallyslip)"; 
+	  List<RawJuteProcurementAndPayment> result = new ArrayList<>();
+	  List<Object[]> res = new ArrayList<>(); 
+	  Session session =
+	  sessionFactory.getCurrentSession(); 
+	  Transaction tx = session.beginTransaction(); 
+	  SQLQuery query = session.createSQLQuery(queryStr);
+	  res = query.list(); 
+	  for( Object[] o : res)
+	  { 
+		  RawJuteProcurementAndPayment raw = new RawJuteProcurementAndPayment();
+	  
+	  String farmer = (String)o[0]; 
+	  String datepurchase = (String)o[1]; 
+	  String basis = (String)o[2]; 
+	  String cropyr = (String)o[3]; 
+	  String placeofpurchase = (String)o[4]; 
+	  int rateslipno = (int)o[5]; 
+	  int binno = (int)o[6]; 
+	  String jutevariety = (String)o[7]; 
+	  BigDecimal grossquantity = (BigDecimal)o[8];
+	  BigDecimal deductionquantity = (BigDecimal)o[9]; 
+	  BigDecimal grasatrate = (BigDecimal)o[10]; 
+	  BigDecimal amountpayable = (BigDecimal)o[11]; 
+	  int ptsid = (int)o[12]; 
+	  String tallyslip = (String)o[13]; 
+	  raw.setFarmerregno(farmer);
+	  raw.setDatepurchase(datepurchase); 
+	  raw.setBasis(basis);
+	  raw.setCropyr(cropyr);
+	  raw.setPlaceofpurchase(placeofpurchase);
+	  raw.setRateslipno(rateslipno); 
+	  raw.setBinno(binno);
+	  raw.setJutevariety(jutevariety);
+	  raw.setGrossquantity(grossquantity.doubleValue());
+	  raw.setDeductionquantity(deductionquantity.doubleValue());
+	  raw.setGrasatrate(grasatrate.doubleValue());
+	  raw.setAmountpayable(amountpayable.doubleValue()); 
+	  raw.setPtsid(ptsid);
+	  raw.setTallyslipno(tallyslip); 
+	  result.add(raw);
+	  //System.out.println("farmer  ====== "+farmer); }
+	  }
+	  return result;
+	  
+	  }
+	
 
 	@Override
 	public boolean updateProcurement(String statuss, int verified,String tallyno) {
@@ -264,7 +270,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 
 				RawJuteProcurementAndPayment raw = new RawJuteProcurementAndPayment();
 				String farmer = (String)o[0];
-				Date datepurchase = (Date)o[1];
+				String datepurchase = (String)o[1];
 				String basis = (String)o[2];
 				String cropyr = (String)o[3];
 				String placeofpurchase = (String)o[4];
@@ -313,7 +319,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 
 				RawJuteProcurementAndPayment raw = new RawJuteProcurementAndPayment();
 				String farmer = (String)o[0];
-				Date datepurchase = (Date)o[1];
+				String datepurchase = (String)o[1];
 				String basis = (String)o[2];
 				String cropyr = (String)o[3];
 				String placeofpurchase = (String)o[4];

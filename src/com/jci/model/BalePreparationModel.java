@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "jcibin", schema = "dbo")
@@ -37,6 +38,10 @@ public class BalePreparationModel {
 	@Column(name="carryropeqty")
 	private  String carryropeqty;
 
+	@Transient
+	private String region;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -105,9 +110,18 @@ public class BalePreparationModel {
 
 	}
 
-	public BalePreparationModel(int binno, String dpcnames, String cropyr, String binnumber, String jutevariety,
-			String basis, String carryoverlossqty, String carryropeqty) {
-		this.id = binno;
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public BalePreparationModel(int id, String dpcnames, String cropyr, String binnumber, String jutevariety,
+			String basis, String carryoverlossqty, String carryropeqty, String region) {
+		super();
+		this.id = id;
 		this.dpcnames = dpcnames;
 		this.cropyr = cropyr;
 		this.binnumber = binnumber;
@@ -115,14 +129,17 @@ public class BalePreparationModel {
 		this.basis = basis;
 		this.carryoverlossqty = carryoverlossqty;
 		this.carryropeqty = carryropeqty;
-
+		this.region = region;
 	}
 
 	@Override
 	public String toString() {
-		return "BalePreparationModel [binno=" + id + ", dpcnames=" + dpcnames + ", cropyr=" + cropyr
-				+ ", binnumber=" + binnumber + ", jutevariety=" + jutevariety + ", basis=" + basis + ", carryoverlossqty="
-				+ carryoverlossqty + ", carryropeqty=" + carryropeqty + "]";
+		return "BalePreparationModel [id=" + id + ", dpcnames=" + dpcnames + ", cropyr=" + cropyr + ", binnumber="
+				+ binnumber + ", jutevariety=" + jutevariety + ", basis=" + basis + ", carryoverlossqty="
+				+ carryoverlossqty + ", carryropeqty=" + carryropeqty + ", region=" + region + "]";
 	}
 
+	
+
+	
 }

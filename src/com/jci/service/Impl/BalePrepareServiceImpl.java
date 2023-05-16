@@ -51,6 +51,9 @@ public class BalePrepareServiceImpl implements BalePrepareService	{
 		return balePrepare.submitform(BalePreparation);
 	}
 
-	
+	@Override
+	public List<BalePreparation> getAlldata() {
+		return balePrepare.getAlldata();
 
+	}
 }

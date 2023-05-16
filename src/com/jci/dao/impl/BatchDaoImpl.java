@@ -262,7 +262,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P9", TotalValue);		
 
 		List<String> results = query.list();
-		//System.out.println("binPurchaseMappingData===========-----  "+results);
+		System.out.println("binPurchaseMappingData===========-----  "+results);
 		
 		CalculateGainBasedonBinFromproc(CropYr,binNo);
 		return results;
@@ -280,9 +280,10 @@ public class BatchDaoImpl implements BatchDao {
 		Query query = session.createSQLQuery("{CALL [GetValue_fromBale_Preperation](:P1,:P2)}");
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
-		System.out.println("GetValue_fromBale_Preperation=============--------- "+query.list());
-		List<String> results = query.list();
 		
+		
+		List<String> results = query.list();
+	
 		return results;
 
 	}

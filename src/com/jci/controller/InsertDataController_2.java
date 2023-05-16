@@ -287,11 +287,11 @@ public class InsertDataController_2 {
 	public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes)
 	{		String username =(String)request.getSession().getAttribute("usrname");
 		try {
-		
+			String usertype = request.getParameter("usertype");
 			String rolename = request.getParameter("rolename");
 			UserRoleModel userrole = new UserRoleModel();			
 			userrole.setRole_name(rolename);
-			userrole.setUser_type("1");
+			userrole.setUser_type(usertype);
 			Date d2 = new Date();
 			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 			String formattedDate1 = dd.format(d2);

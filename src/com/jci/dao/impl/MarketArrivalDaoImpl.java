@@ -88,7 +88,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 		System.out.println(rows);
 		for(Object[] row: rows) {
 			int id= (int) row[0];
-			Date datearrival= (Date) row[2];
+			String datearrival= (String) row[2];
 			String jutevariety= (String) row[3];
 			String cropyr= (String) row[4];
 			String arrivedqty= (String) row[5];
@@ -144,7 +144,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 			maketarrival.setRegionName(region_name);
 			ll.add(maketarrival);	
 		}
-		System.out.println("=========== "+ll.toString());
+		
 		return ll;
 	}
 
