@@ -84,14 +84,22 @@ public class UserRegistrationModel {
 	@Column (name = "roleId")
 	private int roleId;
 	
-	@Column(name="role")
-	private String role;
-	
 	@Column(name="roles_name")
 	private String roles_name;
+	
+	@Column(name="role_type")
+	private String role_type;
 
 	public UserRegistrationModel() {
 
+	}
+
+	public String getRole_type() {
+		return role_type;
+	}
+
+	public void setRole_type(String role_type) {
+		this.role_type = role_type;
 	}
 
 	public Date getUpdatedat() {
@@ -106,13 +114,7 @@ public class UserRegistrationModel {
 		return dpcId;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+	
 
 	public void setDpcId(String dpcId) {
 		this.dpcId = dpcId;
@@ -307,15 +309,15 @@ public class UserRegistrationModel {
 				+ ", registrationdate=" + registrationdate + ", lockedchances=" + lockedchances + ", is_active="
 				+ is_active + ", ipaddress=" + ipaddress + ", ho=" + ho + ", zone=" + zone + ", region=" + region
 				+ ", dpcId=" + dpcId + ", employeeid=" + employeeid + ", employeename=" + employeename + ", email="
-				+ email + ", mobileno=" + mobileno + ", usertype=" + usertype + ", roleId=" + roleId + ", role=" + role
-				+ ", roles_name=" + roles_name + "]";
+				+ email + ", mobileno=" + mobileno + ", usertype=" + usertype + ", roleId=" + roleId + ", roles_name=" + roles_name
+				+ ", role_type=" + role_type + "]";
 	}
 
 	public UserRegistrationModel(int refid, String username, String password, String centername, String roname,
 			String zonename, Date datelastchangepassword, Date updatedat, Date registrationdate, int lockedchances,
 			int is_active, String ipaddress, int ho, String zone, String region, String dpcId, String employeeid,
 			String employeename, String email, String mobileno, String usertype, int roleId, String role,
-			String roles_name) {
+			String role_type) {
 		super();
 		this.refid = refid;
 		this.username = username;
@@ -339,8 +341,10 @@ public class UserRegistrationModel {
 		this.mobileno = mobileno;
 		this.usertype = usertype;
 		this.roleId = roleId;
-		this.role = role;
 		this.roles_name = roles_name;
+		this.role_type = role_type;
 	}
+
+
 
 }

@@ -67,6 +67,7 @@
 </style>
 <script>
 var flag;
+var hasError = false;
 var hasError1 = false;
 var hasError2 = false;
 </script>
@@ -113,17 +114,33 @@ var hasError2 = false;
 											<input id="password" type="password" class="form-control" name="password" value="" placeholde="Password" >
 											 <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 										</div>
-										<div class="col-sm-4 form-group"> 
+										<!-- <div class="col-sm-4 form-group"> 
 											<label class="required" class="required">Is HO</label> &nbsp;&nbsp;&nbsp; <span id="errho" name="errho" class="text-danger"> </span> 
 											<select class="form-control" name="ho" id="ho">
 												<option disabled selected value>-Select-</option>
 												<option value="1">Yes</option>
 												<option value="0">No</option>
 											</select>
-										</div>
+										</div> -->
+										<div class="col-sm-4 form-group">
+                                                                        <label class="required">User Type</label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
+                                                                        <select class="form-control" name="usertype" id="usertype"  required>
+                                                                               <option disabled selected value>-Select-</option>
+                                                                               <option value="Web User">Web User</option>
+                                                                               <option value="Mobile User">Mobile User</option>
+                                                                        </select>
+                                                                  </div>
+										
 									</div>
 									<div class="row">
-										
+										<div class="col-sm-4 form-group">
+                                              <label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
+                                              <select id="role" name ="role" class="form-control" >
+                                                    <option disabled selected value>-Select-</option>
+                                              
+                                              </select>
+                                                  <input class="form-control" type="hidden" name="roletype" id="roletype">               
+                                        </div>
 										<div class="col-sm-4 form-group">
 											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
 											<%
@@ -148,15 +165,10 @@ var hasError2 = false;
 												<option disabled selected value>-Select-</option>
 											</select>
 										</div>
-										<div class="col-sm-4 form-group">
-											<label id="dpclabel" class="required">DPC</label> &nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
-											<select class="form-control" name="centerordpc" id="centerordpc">
-												<option disabled selected value>-Select-</option>
-											</select>
-										</div>
+										
 									</div>
 									<div class="row">
-									<div class="col-sm-4 form-group">
+									<%-- <div class="col-sm-4 form-group">
 											<label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
 											<%
 												List<UserRoleModel> roleList = (List<UserRoleModel>) request.getAttribute("roleList");
@@ -172,6 +184,12 @@ var hasError2 = false;
 												%>
 											</select>
 											<input class="form-control" type="hidden" name="rolename" id="rolename">
+										</div> --%>
+										<div class="col-sm-4 form-group">
+											<label id="dpclabel" class="required">DPC</label> &nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
+											<select class="form-control" name="centerordpc" id="centerordpc">
+												<option disabled selected value>-Select-</option>
+											</select>
 										</div>
 										
 										<div class="col-sm-4 form-group">
@@ -198,14 +216,7 @@ var hasError2 = false;
 										
 										</div>
 										</div>
-										<div class="col-sm-4 form-group">
-											<label class="required">User Type</label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
-											<select class="form-control" name="usertype" id="usertype" required>
-												<option disabled selected value>-Select-</option>
-												<option>Web Portal</option>
-												<option>Mobile Application</option>
-											</select>
-										</div>
+										
 									</div>
 <!-- 									<div class="row">
 									<div class="form-group">
@@ -230,6 +241,78 @@ var hasError2 = false;
 	</div>
 		
 	<div class="sidenav-backdrop backdrop"></div>
+	       <script>
+       $("#usertype").on("change", function(){
+       
+             var user_type;
+             var variety = document.getElementById("usertype").value;
+       
+             if(variety=="Web User"){
+                    user_type="Web User";
+             }
+             
+             else if(variety=="Mobile User"){
+                    user_type="Mobile User";
+             }
+             
+                      $.ajax({
+                                 type:"GET",
+                                 url:"getuserrole.obj",
+                                 data:{"user_type":user_type},
+                                 success:function(result){
+                                       var data= jQuery.parseJSON(result);
+                                       console.log(data);
+                                        var html = "<option disabled selected value>-Select-</option>";
+                                     for (var i = 0; i< data.length; i++){
+                                        html += '<option  data-id="'+data[i].split("-")[1]+'" value="' +data[i].split("-")[0]+ '">'+data[i].split("-")[0]+'</option>'
+                                       
+                                         
+                                   } 
+                                 $("#role").html(html);
+                                 }
+                      });
+       
+       });
+</script>
+	
+	<script>
+       $("#role").change(function () {
+             
+             var val = $('#role option:selected').data("id");
+             document.getElementById("roletype").value =  val;
+             alert(val);
+             if(val=="HO"){
+                    $("#zoneLabel, #regionLabel, #dpclabel").hide();
+                    $("#zone, #region, #centerordpc").hide();
+
+             }
+             if(val=="ZO"){
+                    $("#zoneLabel").show();
+                    $("#zone").show();
+                    $("#regionLabel, #dpclabel").hide();
+                    $("#region, #centerordpc").hide();
+             }
+             
+             if(val=="RO"){
+                    $("#zoneLabel, #regionLabel").show();
+                    $("#zone, #region").show();
+                    $("#dpclabel").hide();
+                    $("#centerordpc").hide();
+             }
+             
+             if(val=="DPC"){
+                    $("#zoneLabel, #regionLabel, #dpclabel").show();
+                    $("#zone, #region, #centerordpc").show();
+       
+             }
+             
+             document.getElementById("roletype").value =  $('#role option:selected').data("id");
+             
+     });
+       
+       </script>
+       
+	
 	<script>
 	 $("#ho").change(function () {
 		//var val = this.val;
@@ -281,14 +364,14 @@ var hasError2 = false;
 	 }); 
 	}); 
 		</script>
-		<script>
+		<!-- <script>
 		$(document).ready(function () {
 		$('#role').change(function(){
 	
 			document.getElementById("rolename").value = $(this).find(':selected').attr('data-id');
 			});
 		});
-		</script>
+		</script> -->
 		<script>
 		$(document).ready(function () {
 		$("#employeeid").keyup(function() {
@@ -320,17 +403,7 @@ var hasError2 = false;
 		}); 
 		
 </script>
-<script>
-$(document).ready(function () {
-if(hasError == true){
-	alert("if "+hasError);
-	 $(':input[type="submit"]').prop('disabled', true);
-}
-else{
-	$(':input[type="submit"]').prop('disabled', false);
-}
-});
-</script>
+
 	<script>
 	 function validate() {
 	
@@ -355,13 +428,8 @@ else{
 			document.getElementById("password").focus();
 			return false;
 	     }
-		  else if(ho == ""){
-				 document.getElementById("errho").innerHTML = "Ho can not be empty!";
-				document.getElementById("ho").focus();
-				return false;
-		  }
-		  else if(ho==0){
-			  if(zone == ""){
+		 
+		  else if(zone == ""){
 				    
 				  document.getElementById("errZone").innerHTML = "Zone can not be empty!";
 					document.getElementById("zone").focus();
@@ -388,7 +456,7 @@ else{
 				document.getElementById("employeeid").focus();
 				return false;
 		     }
-			  else if(employeename == ""){
+		  else if(employeename == ""){
 					 document.getElementById("errEMP").innerHTML = "Employeename can not be empty!";
 					document.getElementById("employeename").focus();
 					return false;
@@ -404,43 +472,8 @@ else{
 				document.getElementById("mobile").focus();
 				return false;
 		  }
-			  
-			  }
 	  
-		  else if(ho==1){
-			   
-		    if(usertype == ""){
-				 document.getElementById("errType").innerHTML = "Usertype can not be empty!";
-				document.getElementById("usertype").focus();
-				return false;
-		  }
-		  else if(employeeid == ""){
-				 document.getElementById("errID").innerHTML = "Employeeid can not be empty!";
-				document.getElementById("employeeid").focus();
-				return false;
-		     }
-			  else if(employeename == ""){
-					 document.getElementById("errEMP").innerHTML = "Employeename can not be empty!";
-					document.getElementById("employeename").focus();
-					return false;
-			  }
 		  
-		  else if(emailAddress == ""){
-				 document.getElementById("errEmail").innerHTML = "Email Address can not be empty!";
-				document.getElementById("emailAddress").focus();
-				return false;
-		  }
-		  else if(mobile == ""){
-				 document.getElementById("errMobile").innerHTML = "Mobile No. can not be empty!";
-				document.getElementById("mobile").focus();
-				return false;
-		  }
-			  
-			  }
-	  
-	 
-	  
-
 }
 	  </script>
 	  
@@ -454,19 +487,8 @@ function deleteErrorMsg(){
 }
 	  
 </script> 
-	  
-<!-- <script>
-function deleteErrorMsg(){
-        
- var username = document.forms["myForm"]["username"].value;
-        if(username.length>2){
-               $("#errName").hide();
-        }
-}
-	  
-</script> -->
 
-	<script>
+<script>
 		$("#zone").on("change", function() {
 			var id = (this.value);
 			//alert(id);
@@ -545,7 +567,7 @@ $(document).ready(function() {
 	  $("#EmailError").hide();
    	  $('#emailAddress').keyup(function() { 
         $("#EmailError").hide();
-        var hasError = false;
+       
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
         var emailaddressVal = $("#emailAddress").val();
         if(emailaddressVal == '') {
@@ -561,9 +583,19 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+$(document).ready(function () {
+if(hasError == true){
+	alert("if "+hasError);
+	 $(':input[type="submit"]').prop('disabled', true);
+}
+else{
+	$(':input[type="submit"]').prop('disabled', false);
+}
+});
+</script>
 
-
-		<script>
+<!-- 		<script>
 $(document).ready(function() {
 	
 	  $("#usenameError").hide();
@@ -584,7 +616,7 @@ $(document).ready(function() {
  
     });
 });
-</script>
+</script> -->
   <div class="sidenav-backdrop backdrop"></div>
 <!--      <script>
 		$(document).ready(function() {

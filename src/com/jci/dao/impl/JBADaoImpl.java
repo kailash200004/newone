@@ -144,7 +144,7 @@ public class JBADaoImpl implements JbaDao {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		System.out.println("id from JBA DAO Impl is"+jbaId);
+		//System.out.println("id from JBA DAO Impl is"+jbaId);
 		Query query = session.createSQLQuery("{CALL GetDatediffWithCurrentDt(:PID)}");
 		query.setParameter("PID", jbaId);
 

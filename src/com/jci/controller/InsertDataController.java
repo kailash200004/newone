@@ -1515,7 +1515,7 @@ public class InsertDataController
             if (ipAddress == null) {
                 ipAddress = request.getRemoteAddr();
             }
-            final String ho = request.getParameter("ho");
+          //  final String ho = request.getParameter("ho");
             final String zone = request.getParameter("zone");
             final String region = request.getParameter("region");
             final String centerordpc = request.getParameter("centerordpc");
@@ -1527,7 +1527,7 @@ public class InsertDataController
             final String usertype = request.getParameter("usertype");
             final String role = request.getParameter("role");
             final String username1 = request.getParameter("username");
-            final String rolename = request.getParameter("rolename");
+            final String roletype = request.getParameter("roletype");
             final String duplicateEmail = request.getParameter("emailCheck");
             final boolean duplicatemail = Boolean.parseBoolean(duplicateEmail);
             final UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -1536,21 +1536,23 @@ public class InsertDataController
             userRegistration.setEmail(email);
             userRegistration.setEmployeeid(employeeid);
             userRegistration.setEmployeename(employeename);
-            userRegistration.setHo(Integer.parseInt(ho));
+           // userRegistration.setHo(Integer.parseInt(ho));
             userRegistration.setIpaddress(ipAddress);
             userRegistration.setIs_active(1);
-            userRegistration.setRoles_name(rolename);
+            userRegistration.setUsertype(usertype);
             userRegistration.setMobileno(mobileno);
             userRegistration.setPassword(password);
-            if (!ho.equals("1")) {
-                userRegistration.setRegion(region);
-                userRegistration.setZone(zone);
-            }
-            userRegistration.setRole(role);
+			/*
+			 * if (!ho.equals("1")) { userRegistration.setRegion(region);
+			 * userRegistration.setZone(zone); }
+			 */
+            userRegistration.setRoles_name(role);
+            userRegistration.setRole_type(roletype);
             userRegistration.setRegistrationdate(new Date());
             userRegistration.setUsername(username1);
             userRegistration.setUsertype(usertype);
-            userRegistration.setRoleId(Integer.parseInt(role));
+            
+           // userRegistration.setRoleId(Integer.parseInt(role));
             final boolean emailNotExist = this.UserRegistrationService.validateEmail(email);
             if (emailNotExist) {
                 this.UserRegistrationService.create(userRegistration);
@@ -1560,7 +1562,9 @@ public class InsertDataController
                 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-warning\"><b>OOps!</b> Duplicate email id.</div>\r\n");
             }
         }
-        catch (Exception ex) {}
+        catch (Exception ex) {
+        	ex.printStackTrace();
+        }
         if(username == null) {
         	return new ModelAndView("index");
             }
@@ -1983,11 +1987,14 @@ public class InsertDataController
     @RequestMapping({ "viewUserRegistration" })
     public ModelAndView viewUserRegistration(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
-        ModelAndView mv = new ModelAndView("viewUserRegistration");
+    	 ModelAndView mv = new ModelAndView("viewUserRegistration");
+    	if(username != null) {
+       
         String dpcId =(String)request.getSession().getAttribute("dpcId");
         final List<UserRegistrationModel> allUserRegistration = (List<UserRegistrationModel>)this.UserRegistrationService.getAll(dpcId);
         mv.addObject("UserRegistrationList", (Object)allUserRegistration);
-        if(username == null) {
+    	}
+        else{
         	mv = new ModelAndView("index");
             }
         return mv;
@@ -3884,7 +3891,7 @@ public class InsertDataController
 				userRegistration.setZone(zonename);
 				userRegistration.setRegion(roname);
 				userRegistration.setUsertype(usertype);
-				userRegistration.setRole(role);
+				userRegistration.setRoles_name(role);
 				userRegistration.setUpdatedat(new Date());
 				userRegService.update(userRegistration);
 			    redirectAttributes.addFlashAttribute("msg",
@@ -4077,7 +4084,16 @@ public class InsertDataController
 		 * System.out.println("logoutsuccessfully.....!");
 		 * resp.sendRedirect("index.obj"); }
 		 */
- 
+		 @ResponseBody
+		    @RequestMapping(value = { "getuserrole" }, method = { RequestMethod.GET })
+		    public String getuserrole(final HttpServletRequest request) {
+		       List<String> result = new ArrayList<String>();
+		        final Gson gson = new Gson();
+		        result = (List<String>)this.userroleService.getuserrole(request.getParameter("user_type")) ;
+		        return gson.toJson((Object)result);
+		       
+		    }
+
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);

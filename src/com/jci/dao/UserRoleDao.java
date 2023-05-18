@@ -14,5 +14,8 @@ public interface UserRoleDao {
 	public boolean validateRole(String role);
 	public List<UserRoleModel> getAll();
 	void deleteuserrole(String roelname);
+    public List<String> getuserrole(String user_type);
+
+
 
 }

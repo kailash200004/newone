@@ -154,7 +154,7 @@ $(document).ready(function(){
 																let cvalue ="cvalue";
 																var count = 0;
 																$.each(allActions,function(key,value) {
-																	console.log(value);
+																	//console.log(value);
 																var keys=value.split(":")[0].replace('["',"").replace('"',"");
 																values=value.split(":")[1].replace('"]',"").replace('"',"");
 															//	console.log("keys--=========>>>"+keys);

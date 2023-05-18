@@ -35,5 +35,13 @@ public class UserRoleServiceImpl implements UserRoleService {
 		// TODO Auto-generated method stub
 		 userroledao.deleteuserrole(roelname);
 	}
+	
+    @Override
+    public List<String> getuserrole(String user_type) {
+           // TODO Auto-generated method stub
+           return userroledao.getuserrole(user_type);
+           
+    }
+
 
 }

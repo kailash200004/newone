@@ -83,8 +83,8 @@
 											<input class=" form-control" type="hidden" name="id"
 																value="<%=jbapri.getId()%>" readonly>
 																<input class="form-control"
-																	type="date" name="datejba"
-																	value="<%=jbapri.getJbaDate()%>" id="datejba"
+																	 name="datejba"
+																	value="<%out.println(jbapri.getJbaDate());%>" id="datejba"
 																	placeholder="JBA Date" readonly>
 																	</div>		
 																	

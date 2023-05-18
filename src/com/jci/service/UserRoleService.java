@@ -12,5 +12,5 @@ public interface UserRoleService {
 	boolean validateRole(String role);
 	List<UserRoleModel> getAll();
 	void deleteUserName(String roelname);
-
+    public List<String> getuserrole(String user_type);
 }

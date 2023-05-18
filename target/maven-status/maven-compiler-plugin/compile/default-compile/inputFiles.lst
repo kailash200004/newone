@@ -4,6 +4,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\ProgOfAssortmentDaoImpl.j
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\UserRegistrationDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\BalePrepareDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\PaymentInstrumentdao.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\labelGenerationService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\CommercialJuteVarietyGradesPriceDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\VerifyTallySlipServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\SalepricecalculationService.java
@@ -41,6 +42,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\MarketArrivalModel.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\PaymentInstrumentModel.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\VerificationTallySlipDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\BalePreparationService.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\labelGenerationModel.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\RopeMakingDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\PcsoentryDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\StateService.java
@@ -49,6 +51,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\BlockDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\BatchIdentificationService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\ContractgenerationService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\RulingMarketDaoImpl.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\PaymentprocesstellyslipModel.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\FarmerRegModelDTO.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\PCSOServices.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\PcsoentryDao.java
@@ -66,6 +69,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\VerifyFarmerService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\FarmerRegistrationServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\JbaDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\blockModel.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\labelGenerationDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\DailyPurchaseConfModel.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\RulingMarketServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\RulingMarketDao.java
@@ -82,6 +86,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\DistributionoftallyslipModel
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\RopeMakingSeviceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\BatchDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\UploadRecieptService.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\SendMail.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\DistrictDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\RawJuteProcurementAndPaymentService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\VerificationTallySlipDaoImpl.java
@@ -108,6 +113,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\VerifyFarmerDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\EntryofoperationcostDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\FarmerRegServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\EntryofsaleServiceImpl.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\labelGenerationDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\DailyPurchaseConfModelServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\ContractgenerationServiceImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\EntryofsaledaoImpl.java
@@ -172,6 +178,7 @@ C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\JuteVarietyGrades.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\model\Contractgenerationcommercial.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\MarketArrivalService.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\RoDetailsDaoimpl.java
+C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\service\Impl\labelGenerationServiceimpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\ProgOfAssortmentDao.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\impl\DistributionoftallyslipDaoImpl.java
 C:\Users\jyoti.mishra\git\JCI-CMS\src\com\jci\dao\BalePrepareDao.java

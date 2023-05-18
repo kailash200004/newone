@@ -234,8 +234,8 @@ $.ajax({
 					
 					var keys=value.split(":")[0].replace('["',"").replace('"',"");
 					values=value.split(":")[1].replace('"]',"").replace('"',"");
-					console.log("keys"+ keys);
-					console.log("values "+values);
+				//	console.log("keys"+ keys);
+				//	console.log("values "+values);
 
 
 					for(var j=0;j<userAction.length;j++){
