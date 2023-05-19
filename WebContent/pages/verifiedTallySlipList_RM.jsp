@@ -62,29 +62,59 @@
 	       }); 
 	});  
  </script>  
-    <script>
-	function updatefastatus(tallyno) {
-		//alert(tallyno);
+ 
+ <!-- ................Scripting........... -->
+<script type="text/javascript">
+	$(document).ready(function() {
 		
-		$.ajax({
-			type:"GET",
-			url:"setFaStatus.obj",
-			data:{"tallyno":tallyno},
-			success:function(result){
-				
- 				   var data= jQuery.parseJSON(result);
-			}			
+		$('body').on('click', '#selectAll', function() {
+			//alert("ani");
+			if ($(this).hasClass('allChecked')) {
+				$('input[type="checkbox"]', '#verifiedlist').prop('checked', false);
+			} else {
+				$('input[type="checkbox"]', '#verifiedlist').prop('checked', true);
+			}
+			$(this).toggleClass('allChecked');
+		});
+
+		var array = [];
+
+		$('#submit').click(function() {
+			
+			$("input[name='checkbox']:checked").each(function() {
+				array.push($(this).val());
+			});
+			if (Array.isArray(array) && array.length) {
+				$("#kycmodal").modal('show');
+			} else {
+				alert("CheckBox Not Selected !..Please Select");
+				return false;
+			}
+		       $.ajax({
+		              type:'POST',
+		              url:'update_paymentstatus.obj',
+		              data:{"tallyno":JSON.stringify(array)},
+		              success:function(result){
+							alert("hello"+result);
+							//$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+							//alert("Result Saved Succesfully");
+			 				//var data= jQuery.parseJSON(result);
+		 	 				 
+						}	
+		       });
+		       alert("Invoice Generated,Mail has been sent to your gmail account!!!");
+		       location.reload();
+			//alert("hello"+ array);
 		});
 		
-		 window.location.reload();
-	}
+	});
 	</script>
- <!-- ................Scripting........... -->
+	
  
  
 </head>
 
-<body class="fixed-navbar" onload="enablebutton()">
+<body class="fixed-navbar">
     <div class="page-wrapper">
         <!-- START HEADER-->
          <%@ include file="header.jsp"%>
@@ -95,13 +125,13 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Verified Tally Slip</h1>
+                <h1 class="page-title">Verified Tally Slip RM</h1>
                  
             </div>
 				
 				<%
 				 
-				List<VerifyTallySlip> 	 verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
+				List<VerifyTallySlip> 	 verificationList = (List<VerifyTallySlip>) request.getAttribute("verifiedTallyforRM");
 				 if(verificationList==null){
 					 verificationList = new ArrayList();
 				 }
@@ -112,8 +142,8 @@
 					
 								<thead>
 									<tr>
+									    <th class="text-center">Select All<br><input type="checkbox" id="selectAll" name="allcb"></th>
 									    <th>S No.</th>
-									    <th>Verify</th>
 										<th>Tally SlipNo</th>
 										<th>Farmer Reg No</th> 
 										<th>Place of Purchase</th> 
@@ -128,36 +158,16 @@
 							</tr>
 								</thead>
 								<tbody>
-									<%
-									double minvalue = 0;
-									int totalplist = 0;
-									double verifyed = 0;
+									<% 
 									int i= 1;
 							for(VerifyTallySlip verificationlists : verificationList){
+								
 								 if(i<=200){  
-									 String facheckflag = verificationlists.getFacheck_flag();
-									 totalplist++;
 							%>
 									<tr>
+									<td class="text-center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=verificationlists.getTallyNo()%>" ></td>
 										<td><%=i%></td>
-									<% 
-									if(facheckflag =="checked" || facheckflag != null)
-									{
-										verifyed++;
-									%>
-										  <td><button type="button" class="btn btn-success btn-sm">verified</button></td>
-									
-									<% 
-									}else{
-								    %>
-									<td><button type="button" class="btn btn-danger btn-sm" onclick="updatefastatus('<%=verificationlists.getTallyNo()%>')">verify</button></td>
-									<%		
-									}
-									%>
-									
-									  
-									
-										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
+										<td><%=verificationlists.getTallyNo()%></td>
 				                    	<td><%=verificationlists.getFarmerRegNo()%> 
 				                    	<td><%=verificationlists.getPlaceOfPurchase()%> 
 										<td><%=verificationlists.getDop()%></td> 
@@ -181,22 +191,24 @@
 									</tr>
 									<% 
 								  }  
-							          i++; 
-							   }
-							minvalue = totalplist * 50 / 100 ;
+							i++; }
 							
 							%>
 								</tbody>
                      
                         </table>
-                        <input type="submit" value="Submit"class="btn btn-primary" id="submit">
+	                        <div class="row">
+	                        <div class="col-sm-3 form-group">
+	                        </div>
+	                            <div class="col-sm-3 form-group">
+			                        <input type="submit" value="Process Through RO"class="btn btn-primary" id="submit">
+			                    </div>
+			                    <div class="col-sm-3 form-group">    
+			                        <input type="submit" value="Process Through HO"class="btn btn-primary" id="submit">
+	                            </div>
+	                        </div>
                         </div>
                         
-                     
-                     
-                     
-                       <!--Popup for CEFC bhel -->
-                     
                      
             <!-- END PAGE CONTENT-->
             <%@ include file="footer.jsp"%>
@@ -209,39 +221,6 @@
     <div class="sidenav-backdrop backdrop"></div>
     
     <!-- END PAGA BACKDROPS-->
-       <script type="text/javascript">
-       function enablebutton()
-       {
-    	   var minvalue = '<%= minvalue %>';
-    	   var verifyed = '<%= verifyed %>';
-    	   if(verifyed >= minvalue)
-    		   {
-    		   document.getElementById("submit").disabled = false;
-    		   }else
-    			   {
-    			   document.getElementById("submit").disabled = true;
-    			   }
-       }
-       </script>
-       
-       	<script type="text/javascript">
-		     $(document).ready(function(){
-			 $("#submit").click(function(){
-				 
-					$.ajax({
-						type:"GET",
-						url:"setStatusRMZM.obj",
-						success:function(result){
-			 		    var data= jQuery.parseJSON(result);
-			 		    alert("Payment In Progress!!")
-			 		   window.location.reload();
-						}			
-					});
-					
-			 });
-		     });
-       </script>
- 
     <!-- CORE PLUGINS-->
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
@@ -253,6 +232,7 @@
     <!-- CORE SCRIPTS-->
     <script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
+  
 </body>
 
 </html>

@@ -56,6 +56,29 @@ public class VerifyTallySlip {
 	@Column(name = "tallySlipImg")
 	private String tallySlipImg;
 
+	@Column(name = "facheck_flag")
+	private String facheck_flag;
+
+	@Column(name = "region_id")
+	private String region_id;
+	
+	
+
+	public String getRegion_id() {
+		return region_id;
+	}
+
+	public void setRegion_id(String region_id) {
+		this.region_id = region_id;
+	}
+
+	public String getFacheck_flag() {
+		return facheck_flag;
+	}
+
+	public void setFacheck_flag(String facheck_flag) {
+		this.facheck_flag = facheck_flag;
+	}
 
 
 	private double grossqty;
@@ -1656,51 +1679,42 @@ public class VerifyTallySlip {
 
 
 
-
-
-
-
 	@Override
 	public String toString() {
 		return "VerifyTallySlip [tallyid=" + tallyid + ", farmerRegNo=" + farmerRegNo + ", tallyNo=" + tallyNo
 				+ ", puchasedate=" + puchasedate + ", errors=" + errors + ", status=" + status + ", is_varified="
 				+ is_varified + ", rateslipno=" + rateslipno + ", binno=" + binno + ", jutevariety=" + jutevariety
 				+ ", netquantity=" + netquantity + ", garsatrate=" + garsatrate + ", tallySlipImg=" + tallySlipImg
-				+ ", grossqty=" + grossqty + ", amountpayable=" + amountpayable + ", createdby=" + createdby
-				+ ", placeOfPurchase=" + placeOfPurchase + ", drumWiseQuantity1=" + drumWiseQuantity1
-				+ ", drumWiseQuantity2=" + drumWiseQuantity2 + ", drumWiseQuantity3=" + drumWiseQuantity3
-				+ ", drumWiseQuantity4=" + drumWiseQuantity4 + ", drumWiseQuantity5=" + drumWiseQuantity5
-				+ ", drumWiseQuantity6=" + drumWiseQuantity6 + ", drumWiseQuantity7=" + drumWiseQuantity7
-				+ ", drumWiseQuantity8=" + drumWiseQuantity8 + ", drumWiseQuantity9=" + drumWiseQuantity9
-				+ ", drumWiseQuantity10=" + drumWiseQuantity10 + ", drumWiseQuantity11=" + drumWiseQuantity11
-				+ ", drumWiseQuantity12=" + drumWiseQuantity12 + ", drumWiseQuantity13=" + drumWiseQuantity13
-				+ ", drumWiseQuantity14=" + drumWiseQuantity14 + ", drumWiseQuantity15=" + drumWiseQuantity15
-				+ ", drumWiseQuantity16=" + drumWiseQuantity16 + ", drumWiseQuantity17=" + drumWiseQuantity17
-				+ ", drumWiseQuantity18=" + drumWiseQuantity18 + ", drumWiseQuantity19=" + drumWiseQuantity19
-				+ ", drumWiseQuantity20=" + drumWiseQuantity20 + ", drumWiseQuantity21=" + drumWiseQuantity21
-				+ ", drumWiseQuantity22=" + drumWiseQuantity22 + ", drumWiseQuantity23=" + drumWiseQuantity23
-				+ ", drumWiseQuantity24=" + drumWiseQuantity24 + ", drumWiseQuantity25=" + drumWiseQuantity25
-				+ ", drumWiseQuantity26=" + drumWiseQuantity26 + ", drumWiseQuantity27=" + drumWiseQuantity27
-				+ ", drumWiseQuantity28=" + drumWiseQuantity28 + ", drumWiseQuantity29=" + drumWiseQuantity29
-				+ ", drumWiseQuantity30=" + drumWiseQuantity30 + ", drumWiseQuantity31=" + drumWiseQuantity31
-				+ ", drumWiseQuantity32=" + drumWiseQuantity32 + ", drumWiseQuantity33=" + drumWiseQuantity33
-				+ ", drumWiseQuantity34=" + drumWiseQuantity34 + ", drumWiseQuantity35=" + drumWiseQuantity35
-				+ ", drumWiseQuantity36=" + drumWiseQuantity36 + ", drumWiseQuantity37=" + drumWiseQuantity37
-				+ ", drumWiseQuantity38=" + drumWiseQuantity38 + ", drumWiseQuantity39=" + drumWiseQuantity39
-				+ ", drumWiseQuantity40=" + drumWiseQuantity40 + ", drumWiseQuantity41=" + drumWiseQuantity41
-				+ ", drumWiseQuantity42=" + drumWiseQuantity42 + ", drumWiseQuantity43=" + drumWiseQuantity43
-				+ ", drumWiseQuantity44=" + drumWiseQuantity44 + ", drumWiseQuantity45=" + drumWiseQuantity45
-				+ ", drumWiseQuantity46=" + drumWiseQuantity46 + ", drumWiseQuantity47=" + drumWiseQuantity47
-				+ ", drumWiseQuantity48=" + drumWiseQuantity48 + ", drumWiseQuantity49=" + drumWiseQuantity49
-				+ ", drumWiseQuantity50=" + drumWiseQuantity50 + ", payment_status=" + payment_status + ", dop=" + dop
-				+ ", popname=" + popname + "]";
+				+ ", facheck_flag=" + facheck_flag + ", region_id=" + region_id + ", grossqty=" + grossqty
+				+ ", amountpayable=" + amountpayable + ", createdby=" + createdby + ", placeOfPurchase="
+				+ placeOfPurchase + ", drumWiseQuantity1=" + drumWiseQuantity1 + ", drumWiseQuantity2="
+				+ drumWiseQuantity2 + ", drumWiseQuantity3=" + drumWiseQuantity3 + ", drumWiseQuantity4="
+				+ drumWiseQuantity4 + ", drumWiseQuantity5=" + drumWiseQuantity5 + ", drumWiseQuantity6="
+				+ drumWiseQuantity6 + ", drumWiseQuantity7=" + drumWiseQuantity7 + ", drumWiseQuantity8="
+				+ drumWiseQuantity8 + ", drumWiseQuantity9=" + drumWiseQuantity9 + ", drumWiseQuantity10="
+				+ drumWiseQuantity10 + ", drumWiseQuantity11=" + drumWiseQuantity11 + ", drumWiseQuantity12="
+				+ drumWiseQuantity12 + ", drumWiseQuantity13=" + drumWiseQuantity13 + ", drumWiseQuantity14="
+				+ drumWiseQuantity14 + ", drumWiseQuantity15=" + drumWiseQuantity15 + ", drumWiseQuantity16="
+				+ drumWiseQuantity16 + ", drumWiseQuantity17=" + drumWiseQuantity17 + ", drumWiseQuantity18="
+				+ drumWiseQuantity18 + ", drumWiseQuantity19=" + drumWiseQuantity19 + ", drumWiseQuantity20="
+				+ drumWiseQuantity20 + ", drumWiseQuantity21=" + drumWiseQuantity21 + ", drumWiseQuantity22="
+				+ drumWiseQuantity22 + ", drumWiseQuantity23=" + drumWiseQuantity23 + ", drumWiseQuantity24="
+				+ drumWiseQuantity24 + ", drumWiseQuantity25=" + drumWiseQuantity25 + ", drumWiseQuantity26="
+				+ drumWiseQuantity26 + ", drumWiseQuantity27=" + drumWiseQuantity27 + ", drumWiseQuantity28="
+				+ drumWiseQuantity28 + ", drumWiseQuantity29=" + drumWiseQuantity29 + ", drumWiseQuantity30="
+				+ drumWiseQuantity30 + ", drumWiseQuantity31=" + drumWiseQuantity31 + ", drumWiseQuantity32="
+				+ drumWiseQuantity32 + ", drumWiseQuantity33=" + drumWiseQuantity33 + ", drumWiseQuantity34="
+				+ drumWiseQuantity34 + ", drumWiseQuantity35=" + drumWiseQuantity35 + ", drumWiseQuantity36="
+				+ drumWiseQuantity36 + ", drumWiseQuantity37=" + drumWiseQuantity37 + ", drumWiseQuantity38="
+				+ drumWiseQuantity38 + ", drumWiseQuantity39=" + drumWiseQuantity39 + ", drumWiseQuantity40="
+				+ drumWiseQuantity40 + ", drumWiseQuantity41=" + drumWiseQuantity41 + ", drumWiseQuantity42="
+				+ drumWiseQuantity42 + ", drumWiseQuantity43=" + drumWiseQuantity43 + ", drumWiseQuantity44="
+				+ drumWiseQuantity44 + ", drumWiseQuantity45=" + drumWiseQuantity45 + ", drumWiseQuantity46="
+				+ drumWiseQuantity46 + ", drumWiseQuantity47=" + drumWiseQuantity47 + ", drumWiseQuantity48="
+				+ drumWiseQuantity48 + ", drumWiseQuantity49=" + drumWiseQuantity49 + ", drumWiseQuantity50="
+				+ drumWiseQuantity50 + ", payment_status=" + payment_status + ", dop=" + dop + ", popname=" + popname
+				+ "]";
 	}
-
-
-
-
-
-
 
 	public VerifyTallySlip(int tallyid, String farmerRegNo, String tallyNo, Date puchasedate, String errors,
 			String status, int is_varified, int rateslipno, int binno, String jutevariety, double netquantity,
@@ -1718,7 +1732,7 @@ public class VerifyTallySlip {
 			double drumWiseQuantity40, double drumWiseQuantity41, double drumWiseQuantity42, double drumWiseQuantity43,
 			double drumWiseQuantity44, double drumWiseQuantity45, double drumWiseQuantity46, double drumWiseQuantity47,
 			double drumWiseQuantity48, double drumWiseQuantity49, double drumWiseQuantity50, int payment_status,
-			String dop, String popname) {
+			String dop, String popname, String facheck_flag, String region_id) {
 		super();
 		this.tallyid = tallyid;
 		this.farmerRegNo = farmerRegNo;
@@ -1790,6 +1804,9 @@ public class VerifyTallySlip {
 		this.payment_status = payment_status;
 		this.dop = dop;
 		this.popname = popname;
+		this.facheck_flag = facheck_flag;
+		this.facheck_flag = region_id;
+		
 	}
 
 

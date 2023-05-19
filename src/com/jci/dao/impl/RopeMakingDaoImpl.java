@@ -153,6 +153,8 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 //System.out.println("====================>>>>>>>>>>>>>>>>>>>result  "+result);
 		return result;
 	}
+	
+	
 
 	@Override
 	public List<RopeMakingModel> getAll(String placeofactivity) {

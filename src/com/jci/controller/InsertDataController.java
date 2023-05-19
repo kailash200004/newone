@@ -56,6 +56,8 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import java.util.Date;
 import com.jci.model.FarmerRegistrationModel;
+import com.jci.model.ImageVerificationModel;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jci.model.DistrictModel;
 import com.jci.model.StateList;
@@ -2123,6 +2125,9 @@ public class InsertDataController
             final String garsatRate = request.getParameter("garsatRate");
             final String amountPayable = request.getParameter("amountPayable");
             final VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
+            String Region_id =(String)request.getSession().getAttribute("region");
+            verifyTallySlip.setRegion_id(Region_id);
+
             verifyTallySlip.setIs_varified(is_verified);
             verifyTallySlip.setStatus(status);
             verifyTallySlip.setErrors(errors);
@@ -2319,18 +2324,30 @@ public class InsertDataController
         return mv;
     }
     
+	/*
+	 * @RequestMapping({ "viewVerifiedTallySlipList" }) public ModelAndView
+	 * viewVerifiedTallySlipList(final HttpServletRequest request) { String username
+	 * =(String)request.getSession().getAttribute("usrname"); String dpcId
+	 * =(String)request.getSession().getAttribute("dpcId"); ModelAndView mv = new
+	 * ModelAndView("verifiedTallySlipList"); final List<VerifyTallySlip> verifyList
+	 * = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", dpcId);
+	 * mv.addObject("verifyTallySliList", (Object)verifyList); if(username == null)
+	 * { mv = new ModelAndView("index"); } return mv; }
+	 */
+    
     @RequestMapping({ "viewVerifiedTallySlipList" })
     public ModelAndView viewVerifiedTallySlipList(final HttpServletRequest request) {
-    	String username =(String)request.getSession().getAttribute("usrname");
-    	 String dpcId =(String)request.getSession().getAttribute("dpcId");
+       String username =(String)request.getSession().getAttribute("usrname");
+        String region =(String)request.getSession().getAttribute("region");
         ModelAndView mv = new ModelAndView("verifiedTallySlipList");
-        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", dpcId);
+        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region);
         mv.addObject("verifyTallySliList", (Object)verifyList);
         if(username == null) {
-        	mv = new ModelAndView("index");
+             mv = new ModelAndView("index");
             }
         return mv;
     }
+
     
     @RequestMapping({ "viewCommercialCeilingPrice" })
     public ModelAndView viewCommercialCeilingPrice(final HttpServletRequest request) {
@@ -4093,6 +4110,77 @@ public class InsertDataController
 		        return gson.toJson((Object)result);
 		       
 		    }
+
+         @ResponseBody
+        @RequestMapping(value = { "setFaStatus" }, method = { RequestMethod.GET })
+        public String setFaStatus(final HttpServletRequest request) {
+            final Gson gson = new Gson();
+            String tno =  request.getParameter("tallyno");
+            this.verifyTallySlipService.updatefastatus(tno);
+            
+            System.out.println("username1"+tno);
+            return gson.toJson((Object)tno);
+        }
+
+
+
+                                  @RequestMapping(value="popupimage")
+           public ModelAndView popupimage(HttpServletRequest request) {
+                 String tallyNo = request.getParameter("tallyno");
+           String username =(String)request.getSession().getAttribute("usrname");
+                 ModelAndView mv = new ModelAndView("popupimage");
+                 final List<ImageVerificationModel> images= (List<ImageVerificationModel>)verifyTallySlipService.getImages(tallyNo);
+                 mv.addObject("images",(Object) images);
+                  System.out.println("images++++"+images);
+                 if(username == null) {
+                 mv = new ModelAndView("index");
+                }
+                 return mv;
+           }
+
+
+
+
+
+
+         @ResponseBody
+        @RequestMapping(value = { "setStatusRMZM" }, method = { RequestMethod.GET })
+        public String setStatusRMZM(final HttpServletRequest request) {
+           System.out.println("vishal111");
+            final Gson gson = new Gson();
+            String s="success";
+            this.verifyTallySlipService.statusrmzm();
+            System.out.println("vishal");
+            return gson.toJson((Object)s);
+        }
+
+
+           @RequestMapping({ "viewVerifiedTallySlipList_RM" })
+           public ModelAndView viewVerifiedTallySlipListRM(final HttpServletRequest request) {
+              String username =(String)request.getSession().getAttribute("usrname");
+               String region =(String)request.getSession().getAttribute("region");
+               ModelAndView mv = new ModelAndView("verifiedTallySlipList_RM");
+               final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforRM("RMZM", region);
+               mv.addObject("verifiedTallyforRM", (Object)verifyList);
+               if(username == null) {
+                    mv = new ModelAndView("index");
+                   }
+               return mv;
+           }
+             
+
+           @RequestMapping({ "viewVerifiedTallySlipList_ZM" })
+           public ModelAndView viewVerifiedTallySlipListZM(final HttpServletRequest request) {
+              String username =(String)request.getSession().getAttribute("usrname");
+               String region =(String)request.getSession().getAttribute("region");
+               ModelAndView mv = new ModelAndView("verifiedTallySlipList_ZM");
+               final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforRM("RMZM", region);
+               mv.addObject("verifiedTallyforZM", (Object)verifyList);
+               if(username == null) {
+                    mv = new ModelAndView("index");
+                   }
+               return mv;
+           }
 
     static {
         InsertDataController.count = 0;

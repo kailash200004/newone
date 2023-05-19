@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jci.dao.VerificationTallySlipDao;
+import com.jci.model.ImageVerificationModel;
 import com.jci.model.PaymentprocesstellyslipModel;
 import com.jci.model.VerifyTallySlip;
 import com.jci.service.VerifyTallySlipService;
@@ -42,8 +43,8 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	}
 
 	@Override
-	public List<VerifyTallySlip> getAll(String status, String dpcId) {
-		return VerificationTallySlipDao.getAll(status, dpcId);
+	public List<VerifyTallySlip> getAll(String status, String region) {
+		return VerificationTallySlipDao.getAll(status, region);
 	}
 
 	@Override
@@ -79,6 +80,30 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	public void savedata(PaymentprocesstellyslipModel createpayment) {
 		// TODO Auto-generated method stub
 		VerificationTallySlipDao.savepaymentdata(createpayment);
+	}
+
+	@Override
+	public void updatefastatus(String tno) {
+		// TODO Auto-generated method stub
+		VerificationTallySlipDao.updatefastatus(tno);
+	}
+
+	@Override
+	public void statusrmzm() {
+		// TODO Auto-generated method stub
+		VerificationTallySlipDao.statusrmzm();
+	}
+
+	@Override
+	public List<ImageVerificationModel> getImages(String tallyNo) {
+		
+		return VerificationTallySlipDao.getImages(tallyNo);
+	}
+
+	@Override
+	public List<VerifyTallySlip> getAllforRM(String status, String region) {
+		// TODO Auto-generated method stub
+		return VerificationTallySlipDao.getAllforRM(status, region);
 	}
 
 
