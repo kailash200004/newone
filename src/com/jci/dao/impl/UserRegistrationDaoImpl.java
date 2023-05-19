@@ -380,5 +380,52 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao{
 			}
 		}
 	
-	
+
+@Override
+       public String getroletypr(String usrname) {
+             String querystr = "select role_type from jciumt where username='" + usrname + "'";
+             Session session = sessionFactory.getCurrentSession();
+             SQLQuery query = session.createSQLQuery(querystr);
+             List<String> userList = query.list();
+
+             if (!userList.isEmpty()) {
+                    return userList.get(0);
+                    // return "0";
+             } else {
+                    return "0";
+             }
+       }
+
+       @Override
+       public String getregionId(String usrname) {
+             String querystr = "select regionId from jciumt where username='" + usrname + "'";
+             Session session = sessionFactory.getCurrentSession();
+             SQLQuery query = session.createSQLQuery(querystr);
+             List<String> userList = query.list();
+
+             if (!userList.isEmpty()) {
+                    return userList.get(0);
+                    // return "0";
+             } else {
+                    return "0";
+             }
+       }
+
+       @Override
+       public String getzoneId(String usrname) {
+             String querystr = "select zoneId from jciumt where username='" + usrname + "'";
+             Session session = sessionFactory.getCurrentSession();
+             SQLQuery query = session.createSQLQuery(querystr);
+             List<String> userList = query.list();
+
+             if (!userList.isEmpty()) {
+                    return userList.get(0);
+                    // return "0";
+             } else {
+                    return "0";
+             }
+       }
+
+
+
 }

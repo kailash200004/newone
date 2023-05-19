@@ -153,8 +153,6 @@ public class RopeMakingDaoImpl implements RopeMakingDao{
 //System.out.println("====================>>>>>>>>>>>>>>>>>>>result  "+result);
 		return result;
 	}
-	
-	
 
 	@Override
 	public List<RopeMakingModel> getAll(String placeofactivity) {
@@ -164,7 +162,7 @@ Criteria c = this.sessionFactory.getCurrentSession().createCriteria(RopeMakingMo
 		HttpSession session1=request.getSession(false); 
 		String querystr = "";
 		int is_ho = (int)session1.getAttribute("is_ho");
-		System.out.println("is_hois_ho"+is_ho);
+		//System.out.println("is_hois_ho"+is_ho);
 		if(is_ho == 1) {
 	 querystr = "select a.*, b.centername  from jcirop a left Join jcipurchasecenter b on a.placeofactivity = b.CENTER_CODE";
 		}else {

@@ -225,10 +225,11 @@ public class InsertDataController
     @RequestMapping({ "FarmerRegistration" })
     public ModelAndView FarmerRegistration(final HttpServletRequest request) {
     	String usersession =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("FarmerRegistration");
         final List<PincodeModel> pincodeList = (List<PincodeModel>)this.pincodeService.getAll();
         final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
         final List<DistrictModel> DistrictList = (List<DistrictModel>)this.distric.getAll();
-        ModelAndView mv = new ModelAndView("FarmerRegistration");
+      
         if(usersession == null) {
         mv = new ModelAndView("index");
         }
@@ -1966,13 +1967,15 @@ public class InsertDataController
     
     @RequestMapping({ "viewDistributionoftallyslips" })
     public ModelAndView viewDistributionoftallyslips(final HttpServletRequest request) {
+    	ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
     	String username =(String)request.getSession().getAttribute("usrname");
+    	if(username != null) {
         String dpcId =(String)request.getSession().getAttribute("dpcId");
-        ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
+        
         final List<DistributionoftallyslipModel> allDistributionoftallyslips = (List<DistributionoftallyslipModel>)this.distributionoftallyslipService.getAll(dpcId);
         mv.addObject("DistributionoftallyslipsList", (Object)allDistributionoftallyslips);
-        
-        if(username == null) {
+    	}
+        else if(username == null) {
         	mv = new ModelAndView("index");
             }
         return mv;
@@ -4124,7 +4127,7 @@ public class InsertDataController
 
 
 
-                                  @RequestMapping(value="popupimage")
+          @RequestMapping(value="popupimage")
            public ModelAndView popupimage(HttpServletRequest request) {
                  String tallyNo = request.getParameter("tallyno");
            String username =(String)request.getSession().getAttribute("usrname");

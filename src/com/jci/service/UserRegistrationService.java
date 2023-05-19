@@ -25,4 +25,7 @@ public interface UserRegistrationService {
 	public boolean validateEmployeeid(String employeeid);
 	public boolean validateusername(String username);
 	public int getis_ho(String usrname);
+	public String getzoneId(String usrname);
+	public String getroletypr(String usrname);
+	public String getregionId(String usrname);
 }

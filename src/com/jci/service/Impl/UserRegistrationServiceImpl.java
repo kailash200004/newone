@@ -121,4 +121,23 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 	   return userRegistrationDao.getis_ho(usrname);
 	}
+
+	@Override
+	public String getzoneId(String usrname) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getzoneId(usrname);
+	}
+
+	@Override
+	public String getroletypr(String usrname) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getroletypr(usrname);
+	}
+
+	@Override
+	public String getregionId(String usrname) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getregionId(usrname);
+	}
+	
 }
