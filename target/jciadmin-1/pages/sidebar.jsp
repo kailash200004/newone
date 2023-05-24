@@ -48,9 +48,9 @@ body {
 		String Email=(String)request.getSession().getAttribute("usrname");
 	
 		out.println(Email);
-		//out.println(roleid);
+		
 		if(Email==null){
-			
+			//String redirectURL = "http://49.50.79.121:8080/jcicms/index.obj";
 		    String redirectURL = "http://localhost:8080/jciadmin/index.obj";
 		    response.sendRedirect(redirectURL);
 		
@@ -120,6 +120,8 @@ body {
 					<li data-pre="19" id="o19"><a href="viewCommercialCeilingPrice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Commercial Ceiling Price Intimation</b></a></li>
 					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification Pending Tally Slip</b></a></li>
 					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List</b></a></li>
+					<li data-pre="53" id="o21"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List RM</b></a></li>
+					<li data-pre="54" id="o21"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List ZM</b></a></li>
 					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip List</b></a></li>					
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
@@ -159,7 +161,7 @@ body {
 					class="fa fa-angle-left arrow"></i></a> -->
 				<ul class="nav-2-level">
 					<li  data-pre="34" id="o34"><a href="entryofpcso.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of PCSO</b> </a></li>
-					<li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li>
+					<!-- <li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li> -->
 					<li  data-pre="36" id="o36"><a href="entry_derivativeprice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price</b></a></li>
 					<li  data-pre="37" id="o37"><a href="entryderivativepricelist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price List</b></a></li>
 					<li  data-pre="38" id="o38"><a href="contractgenerationPCSOWise.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation PCSO Wise</b></a></li>
@@ -192,6 +194,8 @@ body {
 					<li  data-pre="48" id="o48"><a href="salespricecalculationlist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Sale Price Calculation List</b></a></li>
 					<li  data-pre="49" id="o49"><a href="entryofoperationcostlist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Operation Cost List</b></a></li>
 					<li  data-pre="50" id="o50"><a href="viewcontractgenerationcommercial.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation Commercial List</b></a></li>
+					<li  data-pre="52" id="o52"><a href="MSPgradesCombination.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>MSP Grades Combination</b></a></li>
+				
 				</ul><!-- </li> -->
 		
 	</div>
@@ -232,8 +236,8 @@ $.ajax({
 					
 					var keys=value.split(":")[0].replace('["',"").replace('"',"");
 					values=value.split(":")[1].replace('"]',"").replace('"',"");
-					console.log("keys"+ keys);
-					console.log("values "+values);
+				//	console.log("keys"+ keys);
+				//	console.log("values "+values);
 
 
 					for(var j=0;j<userAction.length;j++){

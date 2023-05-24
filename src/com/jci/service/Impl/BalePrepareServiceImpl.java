@@ -42,8 +42,8 @@ public class BalePrepareServiceImpl implements BalePrepareService	{
 	}
 
 	@Override
-	public List<BalePreparation> getAll(String place_of_packing) {
-		return balePrepare.getAll(place_of_packing);
+	public List<BalePreparation> getAll(String place_of_packing, String regionId, String zoneId) {
+		return balePrepare.getAll(place_of_packing, regionId, zoneId);
 	}
 
 	@Override
@@ -51,9 +51,6 @@ public class BalePrepareServiceImpl implements BalePrepareService	{
 		return balePrepare.submitform(BalePreparation);
 	}
 
-	@Override
-	public List<BalePreparation> getAlldata() {
-		return balePrepare.getAlldata();
+	
 
-	}
 }

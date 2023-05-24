@@ -67,15 +67,23 @@ public class JBADaoImpl implements JbaDao {
 	}
 
 	@Override
-	public List<JbaModel> getAll(String dpcid) {
+	public List<JbaModel> getAll(String dpcid, String regionId, String zoneId) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(JbaModel.class);
 		List<Integer> result = new ArrayList<>();
-		HttpSession session1=request.getSession(false); 
+		HttpSession session1 = request.getSession(false);
+		
 		String querystr = "";
-		int is_ho = (int)session1.getAttribute("is_ho");
-		System.out.println("is_hois_ho"+is_ho);
-		if(is_ho == 1) {
+		String roletypes = (String) session1.getAttribute("roletype");
+
+		if(roletypes.equalsIgnoreCase("HO")) {
 			querystr = "select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE";
+		}		else if(roletypes.equalsIgnoreCase("ZO")){
+			
+			querystr="  select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE  LEFT JOIN jcirodetails c ON b.rocode = c.rocode where c.zonecode='"+zoneId+"'";
+				
+		}
+		else if(roletypes.equalsIgnoreCase("RO")){
+			querystr="select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE where b.rocode='"+regionId+"'";
 		}else {
 			querystr="select a.*, b.centername  from jcijba a left Join jcipurchasecenter b on a.dpcid = b.CENTER_CODE where a.dpcid='"+dpcid+"'";
 		}
@@ -144,7 +152,7 @@ public class JBADaoImpl implements JbaDao {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		//System.out.println("id from JBA DAO Impl is"+jbaId);
+		System.out.println("id from JBA DAO Impl is"+jbaId);
 		Query query = session.createSQLQuery("{CALL GetDatediffWithCurrentDt(:PID)}");
 		query.setParameter("PID", jbaId);
 

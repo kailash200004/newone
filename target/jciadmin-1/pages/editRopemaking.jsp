@@ -42,7 +42,7 @@
             String dpcCenter = (String) session.getAttribute("dpc_center");
             String dpcid = (String) session.getAttribute("dpcId");
             String region_id = (String) session.getAttribute("region");
-            int refid = (int)session.getAttribute("refId");
+            int refid2 = (int)session.getAttribute("refId");
                 
             %>
             <div class="page-content fade-in-up">
@@ -74,8 +74,17 @@
 											<label>Crop Year</label> 
 											<select name="cropyr" id="cropyr" class="form-control">
 	
-                                        		 												<option <%if(ropeMakingModel.getCropyr().equals("2021-2022")){out.print("selected");} %> value="2021-2022">2021-2022</option>
-												<option <%if(ropeMakingModel.getCropyr().equals("2022-2023")){out.print("selected");} %> value="2022-2023">2022-2023</option>
+                                        	<option <%if(ropeMakingModel.getCropyr().equals("2021-2022")){out.print("selected");} %> value="2021-2022">2021-2022</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2022-2023")){out.print("selected");} %> value="2022-2023">2022-2023</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2023-2024")){out.print("selected");} %> value="2023-2024">2023-2024</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2024-2025")){out.print("selected");} %> value="2024-2025">2024-2025</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2025-2026")){out.print("selected");} %> value="2025-2026">2025-2026</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2026-2027")){out.print("selected");} %> value="2026-2027">2026-2027</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2027-2028")){out.print("selected");} %> value="2027-2028">2027-2028</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2028-2029")){out.print("selected");} %> value="2028-2029">2028-2029</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2029-2030")){out.print("selected");} %> value="2029-2030">2029-2030</option>
+											<option <%if(ropeMakingModel.getCropyr().equals("2030-2031")){out.print("selected");} %> value="2030-2031">2030-2031</option>
+											
 											</select>
 										</div>
 										</div>

@@ -22,7 +22,7 @@ public class RopeMakingModel {
 	private int rpmrefid;
 	
 	@Column(name = "datereport")
-	private Date datereport;
+	private String datereport;
 	
 	@Column(name="region")
 	private String region;
@@ -74,12 +74,12 @@ public class RopeMakingModel {
 		this.rpmrefid = rpmrefid;
 	}
 
-	public Date getDatereport() {
+	public String getDatereport() {
 		return datereport;
 	}
 
-	public void setDatereport(Date datereport) {
-		this.datereport = datereport;
+	public void setDatereport(String datereport2) {
+		this.datereport = datereport2;
 	}
 
 	public String getBasis() {

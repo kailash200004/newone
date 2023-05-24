@@ -157,7 +157,7 @@ input[type="radio"] {
 
 									<div class="row">
 										<div class="col-sm-4 form-group">
-											<label>Delivery Type</label> <select name="delibry_type"
+											<label>Delivery Type</label> <select name="delivery_type"
 												id="delibry_type" class="form-control" required>
 												<option value="">-Select-</option>
 												<option value="mill">Mill Delivery</option>

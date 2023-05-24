@@ -17,9 +17,6 @@
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -74,7 +71,7 @@ $(document).ready(function() {
                 <h1 class="page-title">Entry Derivative Price List</h1>
             </div>
 				<%
-					List<EntryDerivativePrice> edpList = (List<EntryDerivativePrice>) request.getAttribute("edp");	
+				List<EntryDerivativePrice> edpList = (List<EntryDerivativePrice>) request.getAttribute("edp");
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
@@ -88,37 +85,20 @@ $(document).ready(function() {
 									<tr>
 										<th>Sl.No</th>
 										<th>Crop Year</th>
-										<th>Delibry Type</th>
+										<th>Delivery Type</th>
 										<th>State</th>
 										<th>District</th>
-										<th>T1</th>
-										<th>T2</th>
-										<th>T3</th>
-										<th>T4</th>
-										<th>T5</th>
-										<th>W1</th>
-										<th>W2</th>
-										<th>W3</th>
-										<th>W4</th>
-										<th>W5</th>
-										<th>M1</th>
-										<th>M2</th>
-										<th>M3</th>
-										<th>M4</th>
-										<th>M5</th>
-										<th>M6</th>
-										<th>B1</th>
-										<th>B2</th>
-										<th>B3</th>
-										<th>B4</th>
-										<th>B5</th>
-										<th>B6</th>
+										<th>status</th>
+										<th>creation_date</th>
+										<th>jute_variety</th>
+						
+										
 										<th></th>
 											<th></th>
 																								
 								</thead>
 								<tbody>
-									<% 
+									<%
 									int i= 1;
 									for(EntryDerivativePrice edpl : edpList){
 									%>
@@ -126,32 +106,13 @@ $(document).ready(function() {
 										<td><%=i%></td>
 									
 										<td><%=edpl.getCrop_year()%></td>
-										<td><%=edpl.getDelibry_type()%></td>
+										<td><%=edpl.getDelivery_type()%></td>
 				                    	<td><%=edpl.getState()%></td>
 										<td><%=edpl.getDistrict()%></td>
-										<td><%=edpl.getTgr1()%></td>
-										<td><%=edpl.getTgr2()%></td>
-										<td><%=edpl.getTgr3()%></td>
-										<td><%=edpl.getTgr4()%></td>
-										<td><%=edpl.getTgr5()%></td>
-										<td><%=edpl.getWgr1()%></td>
-										<td><%=edpl.getWgr2()%></td>
-										<td><%=edpl.getWgr3()%></td>
-										<td><%=edpl.getWgr4()%></td>
-										<td><%=edpl.getWgr5()%></td> 
-										 <td><%=edpl.getMgr1()%></td>
-										<td><%=edpl.getMgr2()%></td>
-										<td><%=edpl.getMgr3()%></td>
-										<td><%=edpl.getMgr4()%></td>
-										<td><%=edpl.getMgr5()%></td>
-										<td><%=edpl.getMgr6()%></td>
-										<td><%=edpl.getBgr1()%></td>  
-										<td><%=edpl.getBgr2()%></td>
-										<td><%=edpl.getBgr3()%></td>
-										<td><%=edpl.getBgr4()%></td>
-										<td><%=edpl.getBgr5()%></td>
-										<td><%=edpl.getBgr6()%></td>
-										
+										<td><%=edpl.getStatus()%></td>
+										<td><%=edpl.getCreation_date()%></td>
+										<td><%=edpl.getJute_variety()%></td>
+							 
 										<td><a href="editentryderivativeprice.obj?der_id=<%=edpl.getDer_id()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										<td><a onclick="return confirm('Are you sure you want to delete this item?');" href="entryderivativepriceDelete.obj?der_id=<%=edpl.getDer_id()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										

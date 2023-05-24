@@ -154,7 +154,7 @@ $(document).ready(function(){
 																let cvalue ="cvalue";
 																var count = 0;
 																$.each(allActions,function(key,value) {
-																	console.log(value);
+																	//console.log(value);
 																var keys=value.split(":")[0].replace('["',"").replace('"',"");
 																values=value.split(":")[1].replace('"]',"").replace('"',"");
 															//	console.log("keys--=========>>>"+keys);
@@ -222,7 +222,7 @@ $(document).ready(function(){
 				  }
 				  
 				  var totalaction = ress.substring(0, ress.length-1);
-				  alert("action"+totalaction);
+				//  alert("action"+totalaction);
 				  document.getElementById("action").value=totalaction;
 				  return true;
 			 });

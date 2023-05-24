@@ -41,6 +41,7 @@
             </div>
 				<%
 					List<JbaModel> jbapri = (List<JbaModel>) request.getAttribute("jbaList");	
+				List<JbaModel> jbapril = (List<JbaModel>) request.getAttribute("jbaLists");	
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">

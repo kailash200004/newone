@@ -116,14 +116,11 @@
 									    <th>Verify</th>
 										<th>Tally SlipNo</th>
 										<th>Farmer Reg No</th> 
-										<th>Place of Purchase</th> 
+										<th>Farmer Name</th>
+										<th>DPC Name</th> 
+										<th>Basis</th>
 									    <th>Purchase Date</th>
-										<th>Rates </th> 										
-										<th>Bin No</th>
-									    <th>Jute Variety</th>
 									    <th>Net Quntity</th>
-									    <th>Gross Qty</th>
-										<th>Garsat Rate</th> 										
 										<th>Amount Payable</th>
 							</tr>
 								</thead>
@@ -131,7 +128,7 @@
 									<%
 									double minvalue = 0;
 									int totalplist = 0;
-									double verifyed = 0;
+									int verifyed = 0;
 									int i= 1;
 							for(VerifyTallySlip verificationlists : verificationList){
 								 if(i<=200){  
@@ -158,15 +155,12 @@
 									  
 									
 										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
-				                    	<td><%=verificationlists.getFarmerRegNo()%> 
-				                    	<td><%=verificationlists.getPlaceOfPurchase()%> 
+										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>&farmerno=<%=verificationlists.getFarmerRegNo()%>" target="_blank"><%=verificationlists.getFarmerRegNo()%></a></td>
+				                    	<td><%=verificationlists.getFarmer_name()%></td>
+				                    	<td><%=verificationlists.getCentername()%></td>
+				                    	<td><%=verificationlists.getBasis()%></td>
 										<td><%=verificationlists.getDop()%></td> 
-										<td><%=verificationlists.getRateslipno()%></td>
-									    <td><%=verificationlists.getBinno()%></td> 
-				                    	<td><%=verificationlists.getJutevariety()%></td>
 										<td><%=verificationlists.getNetquantity()%></td> 
-										<td><%=verificationlists.getGrossqty()%></td> 
-										<td><%=verificationlists.getGarsatrate()%></td>
 						                <td><%=verificationlists.getAmountpayable()%></td>
 						              <!-- <td><a href="update_paymentstatus.obj?tallyno=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">Payment</a></td>
 						                 <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
@@ -212,7 +206,8 @@
        <script type="text/javascript">
        function enablebutton()
        {
-    	   var minvalue = '<%= minvalue %>';
+    	   var min = '<%= minvalue %>';
+    	   var minvalue = Math.round(min);
     	   var verifyed = '<%= verifyed %>';
     	   if(verifyed >= minvalue)
     		   {

@@ -101,9 +101,21 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	}
 
 	@Override
-	public List<VerifyTallySlip> getAllforRM(String status, String region) {
+	public List<VerifyTallySlip> getAllforRM(String status, String region_zone) {
 		// TODO Auto-generated method stub
-		return VerificationTallySlipDao.getAllforRM(status, region);
+		return VerificationTallySlipDao.getAllforRM(status, region_zone);
+	}
+
+	@Override
+	public String getEmailby_tally(String tnoemail) {
+		// TODO Auto-generated method stub
+		return VerificationTallySlipDao.getEmailby_tally(tnoemail);
+	}
+
+	@Override
+	public List<VerifyTallySlip> getAllforZM(String status, String region_zone) {
+		// TODO Auto-generated method stub
+		return VerificationTallySlipDao.getAllforZM(status, region_zone);
 	}
 
 

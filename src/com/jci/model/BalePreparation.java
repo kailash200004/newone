@@ -22,7 +22,7 @@ public class BalePreparation {
 	private int baleId;
 	
 	@Column(name = "packing_date")
-	private Date packing_date;
+	private String packing_date;
 
 	@Column(name="crop_year")
 	private String crop_year;
@@ -89,12 +89,12 @@ public class BalePreparation {
 		this.baleId = baleId;
 	}
 
-	public Date getPacking_date() {
+	public String getPacking_date() {
 		return packing_date;
 	}
 
-	public void setPacking_date(Date packing_date) {
-		this.packing_date = packing_date;
+	public void setPacking_date(String string) {
+		this.packing_date = string;
 	}
 
 	public String getCrop_year() {
@@ -193,7 +193,7 @@ public class BalePreparation {
 		this.jute_grade = jute_grade;
 	}
 
-	public BalePreparation(int baleId, Date packing_date, String crop_year, String bin_no, String basis,
+	public BalePreparation(int baleId, String packing_date, String crop_year, String bin_no, String basis,
 			String jute_variety, String slip_no_from, String slip_no_to, int bale_no, int created_by, int status,
 			String creation_date, String place_of_packing, String jute_grade, String region) {
 		super();

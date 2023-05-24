@@ -122,19 +122,21 @@ $(document).ready(function () {
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
                                    
-                                      <!--  <div class="col-sm-4 form-group">
+                                       <div class="col-sm-4 form-group">
                                             <label>User Type</label> 
 											<select name="usertype" id="usertype" class="form-control" required="required">
 												<option disabled selected value>-Select-</option>
 												<option value="Web">Web User</option>
 												<option value="Mobile">Mobile User</option>
 											</select>
-                                        </div -->
+                                        </div>
           
                                     </div>   
                                                                  
                                     <div class="form-group">
                                         <button class="btn btn-default" type="submit">Create</button>
+                                        <a href="viewuserrole.obj" class="btn btn-default">View Roles</a>
+ 	
                                     </div>
                                 </form>
                                  
@@ -150,7 +152,7 @@ $(document).ready(function () {
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
-   <script>
+<!--    <script>
 
 function validateRole(form) {
 	var rolename = document.getElementById("rolename").value;
@@ -165,11 +167,11 @@ function validateRole(form) {
 				
 				if (data === 'false'){
 				document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Role already Exists!";
-				return false;
+				 $(':input[type="submit"]').prop('disabled', true);
 				}
 				else if (data === 'true'){
 					document.getElementById("errrole").innerHTML = "";
-					return true;
+					 $(':input[type="submit"]').prop('disabled', false);
 				}
 				
 				}	
@@ -178,7 +180,7 @@ function validateRole(form) {
 		 
 }
 	
-</script>
+</script> -->
    <script>
     function allow_alphabets(element){
         let textInput = element.value;

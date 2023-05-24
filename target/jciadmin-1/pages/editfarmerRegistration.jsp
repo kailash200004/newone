@@ -252,7 +252,7 @@
 			
 								
 								<div class="col-sm-4 form-group">
-									<label>Bank Mandate Document </label> <input class="form-control"
+									<label>Bank Mandate Document </label><img id="imgPreviewidentity"  /> <input class="form-control"
 										name="F_DOC_Mandate"  accept=".jpg,.jpeg,.png" type="file" placeholder="Bank Mandate Document" id="F_DOC_Mandate" value="<%=editFarmer.getF_DOC_Mandate() %>" ><%=editFarmer.getF_DOC_Mandate() %> </input>
 								</div>
 								</div>
@@ -274,6 +274,24 @@
 	</div>
 
 	<div class="sidenav-backdrop backdrop"></div>
+	
+	<script type="text/javascript">
+$(document).ready(()=>{
+    $('#F_DOC_Mandate').change(function(){
+      const file = this.files[0];
+      console.log(file);
+      if (file){
+        let reader = new FileReader();
+        reader.onload = function(event){
+          console.log(event.target.result);
+          $('#imgPreviewidentity').attr('src', event.target.result);
+          $('#imgPreviewidentity').attr('width', "150px");
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+  </script>
 	<script>
 		$(document).ready(function() {
 			$('#emailTosend').keyup(function(e) {

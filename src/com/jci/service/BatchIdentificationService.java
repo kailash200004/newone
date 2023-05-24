@@ -12,7 +12,7 @@ public interface BatchIdentificationService {
 	public BatchIdentificationModel edit(int id);
 	public void delete(int id);
 	public BatchIdentificationModel find(int id);
-	public List<BatchIdentificationModel> getAll(String dpcId);
+	public List<BatchIdentificationModel> getAll(String dpcId, String regionId, String zoneId);
 	public boolean submitform(BatchIdentificationModel batch);
 
 	public List<String> GetDpcNamefromId(int dpcid);

@@ -143,9 +143,8 @@
 												class="form-control"  />
 												</div>
 										</div>
-
 										
-								
+										
 									<div class="row">
 										<div class="form-group">
 											<button class="btn btn-success" type="submit">Submit</button>
@@ -173,27 +172,22 @@ $("document").ready(function(){
 		var data1;
 		var data2;
 		var contract = <%=updatedContractQtyDTO.getContract_no()%>;
-		
-		alert(delivery);
 		$.ajax({
 			type:"GET",
  			url:"derivativePrice.obj",
  			data:{"type":delivery, "contract_no":contract },
  				success:function(data){
- 					
  					data1 = jQuery.parseJSON(data);
- 					alert("data1    "+data1);
+ 					//alert("data1    "+data1);
  				}
- 			
 		});
 		$.ajax({
 				type:"GET",
 	 			url:"percentage.obj",
 	 			data:{"contract_no":contract},
 	 				success:function(result){
-	 					
 	 					data2 = jQuery.parseJSON(result);
-	 					alert("data2    "+data2);
+	 					//alert("data2    "+data2);
 	 				}
 			});
 	});

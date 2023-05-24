@@ -56,7 +56,7 @@
                                         <div class="col-sm-4 form-group">
                                             <label>Date of purchase</label><span class="text-danger">* </span>&nbsp; <span id="errdatepurchase" name="errdatepurchase"
 												class="text-danger"> </span>
-                                            <input class="form-control"  name="datepurchase" id="datepurchase" placeholder="Date of Purchase" min="0">
+                                            <input readonly class="form-control"  name="datepurchase" id="datepurchase" placeholder="Date of Purchase" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Bin No.</label><span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
@@ -72,9 +72,17 @@
                                             <label>Crop Year</label> <span class="text-danger">* </span>&nbsp; <span id="errcropyr" name="errcropyr"
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
-												<option value="">-Select-</option>
-												<option value="2021-2022">2021-2022</option>
+												<option Selected Disabled value="">-Select-</option>
+											    <option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
+												<option value="2023-2024">2023-2024</option>
+												<option value="2024-2025">2024-2025</option>
+												<option value="2025-2026">2025-2026</option>
+												<option value="2026-2027">2026-2027</option>
+												<option value="2027-2028">2027-2028</option>
+												<option value="2028-2029">2028-2029</option>
+												<option value="2029-2030">2029-2030</option>
+												<option value="2030-2031">2030-2031</option>
 											</select>
                                         </div>
                                        
@@ -186,7 +194,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <script>
-$( "#datepurchase" ).datepicker({ maxDate: '0' , minDate: '-1',dateFormat: 'yy-mm-dd'});
+$( "#datepurchase" ).datepicker({ maxDate: '0' , minDate: '-1',dateFormat: 'dd-mm-yy'});
 $(binno).attr('maxlength',3);
 </script>
 
@@ -394,12 +402,13 @@ $(binno).attr('maxlength',3);
 	<script>
 	$(document).ready(function(){
 		 $("#dpc").click(function(){
-		alert("yes");
+		//alert("yes");
 		$.ajax({
 			type:"GET",
 			url:"dpc2.obj",
 			
 			success:function(result){
+				alert("record saved");
 			}
 			});
 		});

@@ -10,7 +10,7 @@ public interface UserRegistrationService {
 	public UserRegistrationModel edit(int id);
 	public void delete(int id);
 	public UserRegistrationModel find(int id);
-	public List <UserRegistrationModel> getAll( String dpcId);
+	public List <UserRegistrationModel> getAll( String dpcId, String regionId, String zoneId);
 	public boolean submitform(UserRegistrationModel userRegistration);
 	public String checkLogin(String usrname, String password);
 	public boolean validateEmail(String Email);
@@ -25,7 +25,7 @@ public interface UserRegistrationService {
 	public boolean validateEmployeeid(String employeeid);
 	public boolean validateusername(String username);
 	public int getis_ho(String usrname);
-	public String getzoneId(String usrname);
 	public String getroletypr(String usrname);
 	public String getregionId(String usrname);
+	public String getzoneId(String usrname);
 }

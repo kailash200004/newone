@@ -77,16 +77,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	public List<VerifyTallySlip> getAll(String status, String region) {
 	List<VerifyTallySlip> r = new ArrayList<>();
 	List<Object[]> result = new ArrayList<>();
-	HttpSession session1=request.getSession(false); 
-	String querystr = "";
-	int is_ho = (int)session1.getAttribute("is_ho");
-	System.out.println("is_hois_ho"+is_ho);
-	if(is_ho == 1)
-	{
-	 querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0'";
-	}else {
-		querystr = "Select * from verificationtallyslip where status='"+status+"' and payment_status='0' and region_id ="+region;
-	}
+	String querystr = "select a.*, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.payment_status='0' and a.region_id ="+region;
 	Session session = sessionFactory.getCurrentSession();
 	Transaction tx = session.beginTransaction();
 	SQLQuery query = session.createSQLQuery(querystr);
@@ -121,10 +112,13 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		verifyTallySlip.setPlaceOfPurchase((String)row[11]);
 		verifyTallySlip.setErrors((String)row[65]);
 		verifyTallySlip.setTallyid((int)row[0]);
-		verifyTallySlip.setFacheck_flag((String)row[70]);
+		verifyTallySlip.setFacheck_flag((String)row[69]);
+		verifyTallySlip.setBasis((String)row[73]);
+		verifyTallySlip.setCentername((String)row[74]);
+		verifyTallySlip.setFarmer_name((String)row[75]);
 		r.add(verifyTallySlip);
 	}
-
+        System.out.println("LIST SIZE==========="+r.size());
        	return 	r;
 	}
 	else
@@ -223,7 +217,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		PaymentprocesstellyslipModel paymentdetails = new PaymentprocesstellyslipModel();
 		try {
 			
-			String hql = "update verificationtallyslip set payment_status = 1 where tallyNo ="+tno;
+			String hql = "update verificationtallyslip set payment_status = 1, status ='PP' where tallyNo ="+tno;
 			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 			
 			//List<PaymentprocesstellyslipModel> paymentdetails = new ArrayList<>();
@@ -282,7 +276,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			System.out.println("success");
 		    }catch(Exception e)
 			    {
-				System.out.println(e.getLocalizedMessage());
+				System.out.println(e.getLocalizedMessage());	
 			    }
 	}
 
@@ -328,6 +322,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 				images.setF_ID_PROF((String)rows[2]);
 				images.setF_REG_FORM((String)rows[3]);
 				images.setSlip_image((String)rows[4]);
+				images.setGettally((String)rows[5]);
 				result.add(images);
 			}
 			}
@@ -340,13 +335,70 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		}
 
 	@Override
-	public List<VerifyTallySlip> getAllforRM(String status, String region) {
+	public List<VerifyTallySlip> getAllforRM(String status, String region_zone) {
 		// TODO Auto-generated method stub
 		List<VerifyTallySlip> r = new ArrayList<>();
 		List<Object[]> result = new ArrayList<>();
 		HttpSession session1=request.getSession(false); 
-		//String querystr = "Select * from verificationtallyslip where status='"+status+"' and amountpayable > 500000 and payment_status = 0 and region_id ="+region;
-		String querystr = "Select * from verificationtallyslip where status='"+status+"' and amountpayable <= 500000 and payment_status = 0 and region_id ="+region;
+		String querystr = "select a.*, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.amountpayable <= 500000 and payment_status = 0 and a.region_id ='"+region_zone+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		result = query.list();
+		if(result.size()>=1)
+		{
+		for(Object[] row : result)
+		{
+			VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
+			Date date = (Date)row[3];
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = format.format(date);
+			verifyTallySlip.setDop(dateString);
+			verifyTallySlip.setRateslipno((int)row[4]);
+			verifyTallySlip.setBinno((int)row[5]);
+			verifyTallySlip.setNetquantity(((BigDecimal)row[7]).doubleValue());
+			verifyTallySlip.setGarsatrate(((BigDecimal)row[8]).doubleValue());
+			verifyTallySlip.setAmountpayable(((BigDecimal)row[9]).doubleValue());
+			verifyTallySlip.setJutevariety((String)row[6]);
+			verifyTallySlip.setGrossqty(((BigDecimal)row[67]).doubleValue());
+			verifyTallySlip.setFarmerRegNo((String)row[1]);
+			verifyTallySlip.setTallyNo((String)row[2]);
+			//verifyTallySlip.setPlaceOfPurchase((String)row[11]);
+			verifyTallySlip.setErrors((String)row[65]);
+			verifyTallySlip.setTallyid((int)row[0]);
+			verifyTallySlip.setFacheck_flag((String)row[69]);
+			verifyTallySlip.setBasis((String)row[73]);
+			verifyTallySlip.setCentername((String)row[74]);
+			verifyTallySlip.setFarmer_name((String)row[75]);
+			r.add(verifyTallySlip);
+		}
+	       	return 	r;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public String getEmailby_tally(String tnoemail) {
+		// TODO Auto-generated method stub
+		String querystr = "select fa_approver_email	from verificationtallyslip where tallyNo ='"+tnoemail+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		String fa_approver_email = query.list().toString();
+		System.out.println(query.list());
+			return fa_approver_email;
+	}
+
+	@Override
+	public List<VerifyTallySlip> getAllforZM(String status, String region_zone) {
+		// TODO Auto-generated method stub
+		List<VerifyTallySlip> r = new ArrayList<>();
+		List<Object[]> result = new ArrayList<>();
+		HttpSession session1=request.getSession(false); 
+		String querystr = "select a.*, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.amountpayable > 500000 and payment_status = 0 and a.zone_id ='"+region_zone+"'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -372,7 +424,10 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			verifyTallySlip.setPlaceOfPurchase((String)row[11]);
 			verifyTallySlip.setErrors((String)row[65]);
 			verifyTallySlip.setTallyid((int)row[0]);
-			verifyTallySlip.setFacheck_flag((String)row[70]);
+			verifyTallySlip.setFacheck_flag((String)row[69]);
+			verifyTallySlip.setBasis((String)row[73]);
+			verifyTallySlip.setCentername((String)row[74]);
+			verifyTallySlip.setFarmer_name((String)row[75]);
 			r.add(verifyTallySlip);
 		}
 	       	return 	r;

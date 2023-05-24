@@ -38,8 +38,8 @@ public class JBAServiceImpl implements JBAService {
 	}
 
 	@Override
-	public List<JbaModel> getAll(String dpcid) {
-		return jbadao.getAll(dpcid);
+	public List<JbaModel> getAll(String dpcid, String regionId, String zoneId) {
+		return jbadao.getAll(dpcid, regionId, zoneId);
 	}
 
 	@Override

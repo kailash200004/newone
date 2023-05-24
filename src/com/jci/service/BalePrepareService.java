@@ -10,8 +10,7 @@ public interface BalePrepareService {
 	public BalePreparation edit(int id);
 	public void delete(int id);
 	public BalePreparation find(int id);
-	public List<BalePreparation> getAll(String place_of_packing);
-	public List<BalePreparation> getAlldata();
+	public List<BalePreparation> getAll(String place_of_packing, String regionId, String zoneId);
 	public boolean submitform(BalePreparation Zone);
 	
 }

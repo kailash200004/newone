@@ -41,8 +41,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 	}
 
 	@Override
-	public List<UserRegistrationModel> getAll( String dpcId) {
-		return userRegistrationDao.getAll(dpcId);
+	public List<UserRegistrationModel> getAll( String dpcId, String regionId, String zoneId) {
+		return userRegistrationDao.getAll(dpcId, regionId, zoneId);
 	}
 
 	@Override
@@ -121,17 +121,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 	   return userRegistrationDao.getis_ho(usrname);
 	}
-
-	@Override
-	public String getzoneId(String usrname) {
-		// TODO Auto-generated method stub
-		return userRegistrationDao.getzoneId(usrname);
-	}
-
+	
 	@Override
 	public String getroletypr(String usrname) {
 		// TODO Auto-generated method stub
-		return userRegistrationDao.getroletypr(usrname);
+	   return userRegistrationDao.getroletypr(usrname);
 	}
 
 	@Override
@@ -139,5 +133,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		// TODO Auto-generated method stub
 		return userRegistrationDao.getregionId(usrname);
 	}
+
+	@Override
+	public String getzoneId(String usrname) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.getzoneId(usrname);
+	}
+
 	
 }

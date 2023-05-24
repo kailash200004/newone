@@ -77,15 +77,22 @@ public class BatchDaoImpl implements BatchDao {
 	}
 
 	@Override
-	public List<BatchIdentificationModel> getAll(String dpcId) {
+	public List<BatchIdentificationModel> getAll(String dpcId, String regionId, String zoneId) {
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(BatchIdentificationModel.class);
-		HttpSession session1=request.getSession(false); 
+		HttpSession session1 = request.getSession(false);
+		
 		String querystr = "";
-		int is_ho = (int)session1.getAttribute("is_ho");
-		System.out.println("is_hois_ho"+is_ho);
-		if(is_ho == 1)
-		{
+		String roletypes = (String) session1.getAttribute("roletype");
+
+		if(roletypes.equalsIgnoreCase("HO")) {
 	querystr = "SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername";
+		}		else if(roletypes.equalsIgnoreCase("ZO")){
+			
+			querystr=" SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername  LEFT JOIN jcirodetails c ON b.rocode = c.rocode where c.zonecode='"+zoneId+"'";
+			
+		}
+		else if(roletypes.equalsIgnoreCase("RO")){
+			querystr="SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername where pur.rocode='"+regionId+"'";
 		}else {
 			querystr = "SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername where pur.CENTER_CODE = '"+dpcId+"'";
 		}
@@ -262,7 +269,7 @@ public class BatchDaoImpl implements BatchDao {
 		query.setParameter("P9", TotalValue);		
 
 		List<String> results = query.list();
-		System.out.println("binPurchaseMappingData===========-----  "+results);
+		//System.out.println("binPurchaseMappingData===========-----  "+results);
 		
 		CalculateGainBasedonBinFromproc(CropYr,binNo);
 		return results;
@@ -280,10 +287,9 @@ public class BatchDaoImpl implements BatchDao {
 		Query query = session.createSQLQuery("{CALL [GetValue_fromBale_Preperation](:P1,:P2)}");
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
-		
-		
+		System.out.println("GetValue_fromBale_Preperation=============--------- "+query.list());
 		List<String> results = query.list();
-	
+		
 		return results;
 
 	}

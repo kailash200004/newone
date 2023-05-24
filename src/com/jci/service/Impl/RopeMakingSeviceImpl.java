@@ -58,8 +58,8 @@ public class RopeMakingSeviceImpl implements RopeMakingService {
 		return ropeMakingDao.findBinno(cropyr,dpcid);
 	}
 	@Override
-	public List<RopeMakingModel> getAll(String placeofactivity) {
-		return ropeMakingDao.getAll(placeofactivity);
+	public List<RopeMakingModel> getAll(String placeofactivity, String regionId, String zoneId) {
+		return ropeMakingDao.getAll(placeofactivity, regionId, zoneId);
 	}
 
 

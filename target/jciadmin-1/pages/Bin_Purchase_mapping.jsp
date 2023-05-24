@@ -71,7 +71,7 @@
 
 			String region_id = (String) session.getAttribute("region");
 
-			int refid = (int) session.getAttribute("refId");
+			int refid2 = (int) session.getAttribute("refId");
 			%>
 			
 			<div class="page-content fade-in-up">
@@ -100,12 +100,19 @@
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
 												<option value="2023-2024">2023-2024</option>
+												<option value="2024-2025">2024-2025</option>
+												<option value="2025-2026">2025-2026</option>
+												<option value="2026-2027">2026-2027</option>
+												<option value="2027-2028">2027-2028</option>
+												<option value="2028-2029">2028-2029</option>
+												<option value="2029-2030">2029-2030</option>
+												<option value="2030-2031">2030-2031</option>
 											</select>
 										</div>
 										 
 										 <div class="col-sm-4 form-group">
                                             <label>Date of purchase</label><span class="text-danger">* </span>&nbsp;  
-                                            <input class="form-control" type="date" name="datepurchase" id="datepurchase" placeholder="Date of Purchase">
+                                            <input class="form-control" readonly name="datepurchase" id="datepurchase" placeholder="Date of Purchase">
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>Select BIN Number</label> 
@@ -311,7 +318,7 @@ $("#cropyr").on("change", function() {
 $("#dpcname").on("change", function() {
 	var cropyr=document.getElementById("cropyr").value;
 	  var dpcid=  document.getElementById("dpcname").value;
-	alert(cropyr);
+	//alert(cropyr);
 	 $.ajax({
 		   type:"GET",
 		   url:"findBinno.obj",
@@ -383,5 +390,13 @@ $("#dpcname").on("change", function() {
 	});	
 	</script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+	$( "#datepurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+
+	</script>
 </body>
 </html>

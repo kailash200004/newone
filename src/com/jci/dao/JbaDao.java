@@ -9,7 +9,7 @@ public interface JbaDao {
 	public JbaModel edit(int id);
 	public void delete(int id);
 	public JbaModel find(int id);
-	public List <JbaModel> getAll(String dpcid);
+	public List <JbaModel> getAll(String dpcid, String regionId, String zoneId);
 	public boolean submitform(JbaModel jbam);
 	public void create(JbaModel jbam);
 	public void update(JbaModel jbam);

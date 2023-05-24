@@ -68,17 +68,27 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 	}
 
 	@Override
-	public List<MarketArrivalModel> getAlldata(String dpc_code) {
+	public List<MarketArrivalModel> getAlldata(String dpc_code, String regionId, String zoneId) {
 		List<MarketArrivalModel> ll = new ArrayList<>();
-		List<Object[]> rows = new ArrayList<>();
-		HttpSession session1=request.getSession(false); 
+	HttpSession session1 = request.getSession(false);
 		String querystr = "";
-		int is_ho = (int)session1.getAttribute("is_ho");
-		System.out.println("is_hois_ho"+is_ho);
-		if(is_ho == 1)
+		String roletypes = (String) session1.getAttribute("roletype");
+		List<Object[]> rows = new ArrayList<>();
+		
+		if(roletypes.equalsIgnoreCase("HO"))
 		{
  querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE";
-		}else {
+		}
+		else if(roletypes.equalsIgnoreCase("ZO"))
+		{
+			querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE LEFT JOIN jcirodetails c ON b.rocode = c.rocode where c.zonecode='"+zoneId+"'";
+		}		
+		else if(roletypes.equalsIgnoreCase("RO"))
+		{
+			querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE where b.rocode='"+regionId+"'";
+		}
+		else 
+		{
 			querystr = "Select a.*, b.centername from jcimra a left Join jcipurchasecenter b on a.dpc_code = b.CENTER_CODE  where a.dpc_code = '"+dpc_code+"'";
 		}
 		Session session = sessionFactory.getCurrentSession();
@@ -144,7 +154,7 @@ public class MarketArrivalDaoImpl implements MarketArrivalDao{
 			maketarrival.setRegionName(region_name);
 			ll.add(maketarrival);	
 		}
-		
+		System.out.println("=========== "+ll.toString());
 		return ll;
 	}
 

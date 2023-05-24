@@ -21,7 +21,7 @@
     <script>
         $(function() {
             $( "#my_date_picker" ).datepicker({
-                defaultDate:"09/22/2019"
+                defaultDate:"22/09/2019"
             });
         });
     </script>

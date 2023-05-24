@@ -113,7 +113,7 @@
 									<input type="hidden" name="fIfsc" id="fIfsc" value="<%=farmerModel.getF_BANK_IFSC()%>">
 									<input type="hidden" name="facNo" id="facNo" value="<%=farmerModel.getF_AC_NO()%>">
 									<input type="hidden" name="fName" id="fName" value="<%=farmerModel.getF_NAME()%>">
-									<input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>">
+								<%-- 	<input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>"> --%>
 									<input type="hidden" name="fidProofType" id="fidProofType" value="<%=farmerModel.getF_ID_PROF_TYPE()%>">
 									<input type="hidden" name="fidProofNo" id="fidProofNo" value="<%=farmerModel.getF_ID_PROF_NO()%>">
 									<div class="">
@@ -170,12 +170,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-sm-6">
+										<!-- <div class="col-sm-6">
 												<div class="form-group">
 											<label>Address</label> <span class="err" name="address_span" id="address_span"></span> 
 											<input class="form-control" type="text" name="address" id="address" placeholder="Address" value="" required>
 											</div>
-										</div>
+										</div> -->
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Identity Proof Type</label> <span class="err" name="idProofType_span" id="idProofType_span"></span>
@@ -185,16 +185,15 @@
 													<option id="VoterId" value="Voter Id">Voter Id</option>
 												</select>
 											</div>
-										</div>										
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
+										</div>	
+																				<div class="col-sm-6">
 											<div class="form-group">
 												<label>Identity Proof Number</label> <span class="err" id="idProofNo_span" name="idProofNo_span"></span>
 												<input class="form-control"	type="text" name="identityProofNo" id="identityProofNo" placeholder="Identity Proof Number" value="" required>
 											</div>	
-										</div>							
+										</div>									
 									</div>
+
 									<div class="col-sm-6">
 									 	<div class="form-group">
 											<button class="btn btn-default" type="submit" id="enq_submit"  >Verify</button>
@@ -263,7 +262,7 @@
     });
     </script>
 	
-	<script>
+	<!-- <script>
 		function validate(){
 			var fIfsc = document.getElementById("fIfsc").value;
 			var facNo = document.getElementById("facNo").value;
@@ -296,10 +295,10 @@
 				return false;
 			//	document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 			}
-			else if(faddress.toUpperCase()!==address.toUpperCase()){
+		/* 	else if(faddress.toUpperCase()!==address.toUpperCase()){
 				document.getElementById("address_span").textContent= "Please check farmer address";
 				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-				return false;
+				return false; */
 			}
 			else if(fidProofType!==idProofType){
 				document.getElementById("idProofType_span").textContent= "Please check Id proof type";
@@ -311,6 +310,85 @@
 			//	document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 				return false;
 			}
+		}
+		
+	</script> -->
+	<script>
+		function validate(){
+			var missing=false;
+	
+			var fIfsc = document.getElementById("fIfsc").value;
+			var facNo = document.getElementById("facNo").value;
+			var fName = document.getElementById("fName").value;
+			var fidProofType = document.getElementById("fidProofType").value;
+			var fidProofNo = document.getElementById("fidProofNo").value;
+			var ifsc_code = document.getElementById("ifsc_code").value;
+			var ac_no = document.getElementById("ac_no").value;
+			var farmer_name = document.getElementById("farmer_name").value;
+			var idProofType = document.getElementById("idProofType").value;
+			var identityProofNo = document.getElementById("identityProofNo").value;
+		
+			if(fIfsc!==ifsc_code){
+			
+				document.getElementById("ifsc_span").textContent= "Please check IFSC code";
+				//return false;
+				missing = true;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+			else{
+				document.getElementById("ifsc_span").textContent= "";
+				
+			}
+			if(facNo!==ac_no){
+				
+				document.getElementById("ac_span").textContent= "Please check account number";
+				missing = true;
+				
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+			else{
+				
+				document.getElementById("ac_span").textContent= "";
+			}
+			if(fName.toUpperCase()!==farmer_name.toUpperCase()){
+				
+				document.getElementById("name_span").textContent= "Please check farmer name";
+				missing = true;
+				//return false;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+		else{
+				
+			document.getElementById("name_span").textContent= "";
+			}
+			/* else if(faddress.toUpperCase()!==address.toUpperCase()){
+				document.getElementById("address_span").textContent= "Please check farmer address";
+				document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				return false;
+			} */
+			if(fidProofType!==idProofType){
+				missing = true;
+				document.getElementById("idProofType_span").textContent= "Please check Id proof type";
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				//return false;
+			}
+			else{
+				document.getElementById("idProofType_span").textContent= "";
+			}
+			if(fidProofNo!=identityProofNo){
+				missing = true;
+				document.getElementById("idProofNo_span").textContent= "Please check proof no";
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				//return false;
+			}
+			else{
+				document.getElementById("idProofNo_span").textContent= "";
+				
+			}
+			if(missing == true)
+				{
+				return false;
+				}
 		}
 		
 	</script>

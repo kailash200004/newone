@@ -83,9 +83,17 @@
                                                                      <div class="col-sm-4 form-group">
                                                                            <label>Crop Year</label> <select name="cropyr" id="cropyr"
                                                                                   class="form-control">
-                                                                                  <option value="">-Select-</option>
-                                                                                  <option value="2021-2022">2021-2022</option>
-                                                                                  <option value="2022-2023">2022-2023</option>
+                                                                                  <option value="" Selected Disabled>--Select--</option>
+                                                                                 <option value="2021-2022">2021-2022</option>
+																					<option value="2022-2023">2022-2023</option>
+																					<option value="2023-2024">2023-2024</option>
+																					<option value="2024-2025">2024-2025</option>
+																					<option value="2025-2026">2025-2026</option>
+																					<option value="2026-2027">2026-2027</option>
+																					<option value="2027-2028">2027-2028</option>
+																					<option value="2028-2029">2028-2029</option>
+																					<option value="2029-2030">2029-2030</option>
+																					<option value="2030-2031">2030-2031</option>
                                                                            </select>
                                                                      </div>
                                                        
@@ -116,7 +124,7 @@
                                                                      </div> --%>
                                                                      <div class="col-sm-4 form-group">
                                                     <label class="required">Bin Number</label>
-                                                                     <select class="form-control" name="binnumb" id="binno">
+                                                                     <select class="form-control" name="binnumb" id="binno" placeholder="Bin" value="" readonly>
                                                                            <option disabled selected value>-Select-</option>
                                                                      </select>
                                         </div>
@@ -131,8 +139,8 @@
                                         </div>
                                                                      <div class="col-sm-4 form-group">
                                                                             <label>Jute Variety</label>
-                                              <select name="jutevariety" id="jutevariety" class="form-control">
-                                                     
+                                              <select name="jutevariety" id="jutevariety" class="form-control" placeholder="Jute Variety" >
+                                                      <option value="">-Select-</option>
                                               </select>
                                                                      </div> 
 
@@ -154,8 +162,8 @@
                                                                      </div>
                                                                       <div class="col-sm-4 form-group">
                                                                            <label>Date</label> <input
-                                                                                  class="form-control" name="date" type="Date"
-                                                                                  placeholder="Date">
+                                                                                  class="form-control" name="date"  id="date"
+                                                                                  placeholder="dd-mm-yyyy" value="" readonly>
                                                                      </div>
                                                               </div>
                                                               <div class="form-group">
@@ -372,6 +380,14 @@ $("#cropyr").on("change", function() {
           }); 
 });
 </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+	$( "#date" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+
+	</script>
 
 </body>
 </html>

@@ -9,7 +9,7 @@ public interface MarketArrivalDao {
 	public MarketArrivalModel edit(int id);
 	public void delete(int id);
 	public MarketArrivalModel find(int id);
-	public List <MarketArrivalModel> getAlldata(String dpc_code);
+	public List <MarketArrivalModel> getAlldata(String dpc_code, String regionId, String zoneId);
 	public boolean submitform(MarketArrivalModel marketArrival);
 
 }

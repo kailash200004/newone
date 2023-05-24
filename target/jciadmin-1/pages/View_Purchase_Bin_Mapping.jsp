@@ -264,7 +264,7 @@
     			}
     			else{   
     			    alert("Purchase data for "+dateOfPurch+" is Mapped to BIN ");
-    			    //window.location.href = "binPurchasemapping.obj";
+    			    window.location.href = "fingain.obj";
 
     			}
     		}

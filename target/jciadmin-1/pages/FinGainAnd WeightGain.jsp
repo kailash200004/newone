@@ -17,7 +17,40 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
- 
+ <script>
+
+       $(document).ready(function(){
+    	   var myVar = '<%=(String) session.getAttribute("region")%>';
+
+							  //alert(myVar);
+
+							$.ajax({
+										type : "GET",
+										url : "findDpcByRegion.obj",
+										data : {"id" : myVar},
+										success : function(result) {
+
+											var data = jQuery.parseJSON(result);
+											var html = "<option disabled selected value>-Select-</option>";
+											for (var i = 0; i < data.length; i++) {
+												console.log(data[i].split("-")[0]
+																+ " "
+																+ data[i]
+																		.split("-")[1]);
+												html += "<option value="
+														+ data[i].split("-")[0]
+														+ ">"
+														+ data[i].split("-")[1]
+														+ "</option>"
+											}
+											$("#place_of_packing").html(html);
+
+										}
+
+									});
+
+						});
+	</script>
     <script>
     
 	function binno_check(){
@@ -32,14 +65,15 @@
     		success: function(result){
     			//alert(result);
     			var data= jQuery.parseJSON(result);
-    		
+    			//alert( data[0][0] + " "+data[0][1] );
     			// alert( fingain + " "+weightgain );
     			 $.ajax({
-    				    
+    				 
     		    		type: 'GET',
     		    		url: 'InsertBinDataTodb.obj',
     		    		data:{"FinYear":finyr, "binNO":binno,"FinGain":data[0][0], "WeightGain":data[0][1]},
     		    		success: function(data1){
+    		    			alert("Finacial Gain and Weight gain has been Calculated");
     		    			
     		    		}
     		    	});	
@@ -51,6 +85,33 @@
 	}
     
     </script>
+    <script>
+    $(document).ready(function(){
+$("#FinYear").on("change", function() {
+	var cropyr=document.getElementById("FinYear").value;
+	  var dpcid=  document.getElementById("place_of_packing").value;
+	//alert(cropyr);
+	//alert("dpcid  "+dpcid);
+	 $.ajax({
+		   type:"GET",
+		   url:"findBinno.obj",
+		   data:jQuery.param({"cropyr":cropyr, "dpcid":dpcid}),
+		   success:function(result){
+			   var data= jQuery.parseJSON(result);
+			   var html = "<option disabled selected value>-Select-</option>";
+			     for (var i = 0; i< data.length; i++){
+			    	 
+				 html += "<option value=" +data[i]+">"+data[i]+"</option>"
+				// alert(data);
+			   }
+			   $("#binNO").html(html);
+		   
+	   }
+		   
+	   }); 
+});
+    });
+</script>
 </head>
 
 <body class="fixed-navbar">
@@ -74,20 +135,29 @@
                             <div class="ibox-body">
                                 <form method="POST">
                                     <div class="row">
+                                    <div class="col-sm-4 form-group">
+											<label class="required">Packing Place</label> <select
+												name="place_of_packing" id="place_of_packing"
+												class="form-control">
+												<option value="">-Select-</option>
+
+											</select>
+										</div>
+                                    
                                         <div class="col-sm-4 form-group">
                                             <label>Financial Year</label>
                                             <select class="form-control" name="FinYear"  id= "FinYear"  placeholder="Financial Year" required>
                                             <option disabled selected value>-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
-												<option value="2022-2023">2023-2024</option>
-												<option value="2022-2023">2024-2025</option>
-												<option value="2022-2023">2025-2026</option>
-												<option value="2022-2023">2026-2027</option>
-												<option value="2022-2023">2027-2028</option>
-												<option value="2022-2023">2028-2029</option>
-												<option value="2022-2023">2029-2030</option>
-												<option value="2022-2023">2030-2031</option>
+												<option value="2023-2024">2023-2024</option>
+												<option value="2024-2025">2024-2025</option>
+												<option value="2025-2026">2025-2026</option>
+												<option value="2026-2027">2026-2027</option>
+												<option value="2027-2028">2027-2028</option>
+												<option value="2028-2029">2028-2029</option>
+												<option value="2029-2030">2029-2030</option>
+												<option value="2030-2031">2030-2031</option>
                                             </select>
                                          </div>
                                          <div class="col-sm-4 form-group">
@@ -95,17 +165,17 @@
 											<span class="text-danger">* </span>&nbsp; <span id="errbinno" name="errbinno"
 												class="text-danger"> </span>
                       
-                                        	 <select class="form-control" name="binNO" id="binNO" onblur="binno_check()">
-                                                                           <option disabled selected value>-Select-</option>
-                                                                           <option  value="321">-321-</option>
-                                                                     </select>
+                                        	 <select class="form-control" name="binNO" id="binNO" >
+                                                                          </select>
 										</div>
                                     	
                                         
                                     </div>
-                                     
-                                    <div class="form-group">
-                                        <button class="btn btn-default" type="submit" id="submit" >Submit</button>
+                                        <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                   
+                                        <button class="btn btn-default" type="button" id="submit" onclick="binno_check()">Calculate</button>
+                                    </div>
                                     </div>
                                 </form>
                             </div>

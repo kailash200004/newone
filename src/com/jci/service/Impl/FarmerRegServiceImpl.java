@@ -56,8 +56,8 @@ public class FarmerRegServiceImpl implements FarmerRegService{
 	}
 
 	@Override
-	public List<FarmerRegModelDTO> verificationStatus(String dpcid) {
-		return farmerRegDao.verificationStatus(dpcid);
+	public List<FarmerRegModelDTO> verificationStatus(String dpcid, String region, String zone) {
+		return farmerRegDao.verificationStatus(dpcid, region, zone);
 	}
 
 	@Override

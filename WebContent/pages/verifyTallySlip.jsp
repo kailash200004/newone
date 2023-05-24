@@ -937,8 +937,9 @@ height: 614px;
 	          "</div>" +
 	          "<footer>" +
 	              "<div class='controls'>" +
+	              " <button class='button button-default cancelAction'> Cancel</button> " +
 	                  " <button class='button button-danger doAction'> Force Submit</button> " +
-	                  " <button class='button button-default cancelAction'> Cancel</button> " +
+	                  
 	              "</div>" +
 	          "</footer>" +
 	       "</div>" +

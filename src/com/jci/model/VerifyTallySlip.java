@@ -62,7 +62,51 @@ public class VerifyTallySlip {
 	@Column(name = "region_id")
 	private String region_id;
 	
+	@Column(name = "zone_id")
+	private String zone_id;
 	
+	@Transient
+	private String basis;
+	
+	@Column(name = "centername")
+	private String centername;
+	
+	@Transient
+	private String farmer_name;
+	
+	
+
+	public String getFarmer_name() {
+		return farmer_name;
+	}
+
+	public void setFarmer_name(String farmer_name) {
+		this.farmer_name = farmer_name;
+	}
+
+	public String getBasis() {
+		return basis;
+	}
+
+	public void setBasis(String basis) {
+		this.basis = basis;
+	}
+
+	public String getCentername() {
+		return centername;
+	}
+
+	public void setCentername(String centername) {
+		this.centername = centername;
+	}
+
+	public String getZone_id() {
+		return zone_id;
+	}
+
+	public void setZone_id(String zone_id) {
+		this.zone_id = zone_id;
+	}
 
 	public String getRegion_id() {
 		return region_id;
@@ -1679,13 +1723,16 @@ public class VerifyTallySlip {
 
 
 
+
+
 	@Override
 	public String toString() {
 		return "VerifyTallySlip [tallyid=" + tallyid + ", farmerRegNo=" + farmerRegNo + ", tallyNo=" + tallyNo
 				+ ", puchasedate=" + puchasedate + ", errors=" + errors + ", status=" + status + ", is_varified="
 				+ is_varified + ", rateslipno=" + rateslipno + ", binno=" + binno + ", jutevariety=" + jutevariety
 				+ ", netquantity=" + netquantity + ", garsatrate=" + garsatrate + ", tallySlipImg=" + tallySlipImg
-				+ ", facheck_flag=" + facheck_flag + ", region_id=" + region_id + ", grossqty=" + grossqty
+				+ ", facheck_flag=" + facheck_flag + ", region_id=" + region_id + ", zone_id=" + zone_id + ", basis="
+				+ basis + ", centername=" + centername + ", farmer_name=" + farmer_name + ", grossqty=" + grossqty
 				+ ", amountpayable=" + amountpayable + ", createdby=" + createdby + ", placeOfPurchase="
 				+ placeOfPurchase + ", drumWiseQuantity1=" + drumWiseQuantity1 + ", drumWiseQuantity2="
 				+ drumWiseQuantity2 + ", drumWiseQuantity3=" + drumWiseQuantity3 + ", drumWiseQuantity4="
@@ -1732,7 +1779,7 @@ public class VerifyTallySlip {
 			double drumWiseQuantity40, double drumWiseQuantity41, double drumWiseQuantity42, double drumWiseQuantity43,
 			double drumWiseQuantity44, double drumWiseQuantity45, double drumWiseQuantity46, double drumWiseQuantity47,
 			double drumWiseQuantity48, double drumWiseQuantity49, double drumWiseQuantity50, int payment_status,
-			String dop, String popname, String facheck_flag, String region_id) {
+			String dop, String popname, String facheck_flag, String region_id, String zone_id, String centername, String basis, String farmer_name) {
 		super();
 		this.tallyid = tallyid;
 		this.farmerRegNo = farmerRegNo;
@@ -1805,7 +1852,11 @@ public class VerifyTallySlip {
 		this.dop = dop;
 		this.popname = popname;
 		this.facheck_flag = facheck_flag;
-		this.facheck_flag = region_id;
+		this.region_id = region_id;
+		this.zone_id = zone_id;
+		this.centername = centername;
+		this.basis = basis;
+		this.farmer_name = farmer_name;
 		
 	}
 

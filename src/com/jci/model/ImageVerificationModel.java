@@ -10,6 +10,15 @@ public class ImageVerificationModel {
 	private String F_ID_PROF;
 	private String F_REG_FORM;
 	private String slip_image;
+	private String gettally;
+	
+	
+	public String getGettally() {
+		return gettally;
+	}
+	public void setGettally(String gettally) {
+		this.gettally = gettally;
+	}
 	public String getF_DOC_Mandate() {
 		return F_DOC_Mandate;
 	}

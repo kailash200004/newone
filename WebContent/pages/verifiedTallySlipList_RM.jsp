@@ -77,9 +77,8 @@
 			$(this).toggleClass('allChecked');
 		});
 
-		var array = [];
 
-		$('#submit').click(function() {
+	/* 	$('#submit').click(function() {
 			
 			$("input[name='checkbox']:checked").each(function() {
 				array.push($(this).val());
@@ -96,18 +95,41 @@
 		              data:{"tallyno":JSON.stringify(array)},
 		              success:function(result){
 							alert("hello"+result);
-							//$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
-							//alert("Result Saved Succesfully");
-			 				//var data= jQuery.parseJSON(result);
 		 	 				 
 						}	
 		       });
 		       alert("Invoice Generated,Mail has been sent to your gmail account!!!");
 		       location.reload();
-			//alert("hello"+ array);
-		});
+		}); */
 		
+	
 	});
+	function sendMail(roho)
+	{
+		var array = [];
+		
+		$("input[name='checkbox']:checked").each(function() {
+			array.push($(this).val());
+		});
+		if (Array.isArray(array) && array.length) {
+			$("#kycmodal").modal('show');
+		} else {
+			alert("CheckBox Not Selected !..Please Select");
+			return false;
+		}
+		 $.ajax({
+              type:'GET',
+              url:'update_paymentstatus.obj',
+              data:{"tallyno":JSON.stringify(array),"roho":roho},
+              success:function(result){
+					alert("hello"+result);
+ 	 				 
+				}	
+       });
+       alert("Invoice Generated,Mail has been sent to your gmail account!!!");
+       location.reload();
+		
+	}
 	</script>
 	
  
@@ -125,7 +147,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Verified Tally Slip RM</h1>
+                <h1 class="page-title">Approval Of Tally Slip For Payment Processing</h1>
                  
             </div>
 				
@@ -146,14 +168,11 @@
 									    <th>S No.</th>
 										<th>Tally SlipNo</th>
 										<th>Farmer Reg No</th> 
-										<th>Place of Purchase</th> 
+										<th>Farmer Name</th>
+										<th>DPC Name</th> 
+										<th>Basis</th>
 									    <th>Purchase Date</th>
-										<th>Rates </th> 										
-										<th>Bin No</th>
-									    <th>Jute Variety</th>
 									    <th>Net Quntity</th>
-									    <th>Gross Qty</th>
-										<th>Garsat Rate</th> 										
 										<th>Amount Payable</th>
 							</tr>
 								</thead>
@@ -167,16 +186,13 @@
 									<tr>
 									<td class="text-center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=verificationlists.getTallyNo()%>" ></td>
 										<td><%=i%></td>
-										<td><%=verificationlists.getTallyNo()%></td>
-				                    	<td><%=verificationlists.getFarmerRegNo()%> 
-				                    	<td><%=verificationlists.getPlaceOfPurchase()%> 
+										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
+										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>&farmerno=<%=verificationlists.getFarmerRegNo()%>" target="_blank"><%=verificationlists.getFarmerRegNo()%></a></td>
+				                    	<td><%=verificationlists.getFarmer_name()%></td>
+				                    	<td><%=verificationlists.getCentername()%></td>
+				                    	<td><%=verificationlists.getBasis()%></td>
 										<td><%=verificationlists.getDop()%></td> 
-										<td><%=verificationlists.getRateslipno()%></td>
-									    <td><%=verificationlists.getBinno()%></td> 
-				                    	<td><%=verificationlists.getJutevariety()%></td>
 										<td><%=verificationlists.getNetquantity()%></td> 
-										<td><%=verificationlists.getGrossqty()%></td> 
-										<td><%=verificationlists.getGarsatrate()%></td>
 						                <td><%=verificationlists.getAmountpayable()%></td>
 						              <!-- <td><a href="update_paymentstatus.obj?tallyno=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">Payment</a></td>
 						                 <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
@@ -201,10 +217,10 @@
 	                        <div class="col-sm-3 form-group">
 	                        </div>
 	                            <div class="col-sm-3 form-group">
-			                        <input type="submit" value="Process Through RO"class="btn btn-primary" id="submit">
+			                        <input type="submit" value="Process Through RO" onclick ="sendMail('RO')"class="btn btn-primary" id="submit">
 			                    </div>
 			                    <div class="col-sm-3 form-group">    
-			                        <input type="submit" value="Process Through HO"class="btn btn-primary" id="submit">
+			                        <input type="submit" value="Process Through HO" onclick ="sendMail('HO')" class="btn btn-primary" id="submit">
 	                            </div>
 	                        </div>
                         </div>

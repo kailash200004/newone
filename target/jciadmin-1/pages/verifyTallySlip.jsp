@@ -50,8 +50,10 @@
  <link rel="stylesheet" href="assets/css/magnify.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
    
-
- 
+<!-- date picker -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">>
  
 <!-- <script src="assets/css/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
 <script src="assets/js/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
@@ -199,8 +201,12 @@ height: 614px;
 		// $('.zoom').magnify();
 	});
 </script>
+
+
+
  <script>
- function magnify(imgID, zoom) {
+ function magnify(imgID, zoom)
+ {
 	  var img, glass, w, h, bw;
 	  img = document.getElementById(imgID);
 	  /*create magnifier glass:*/
@@ -221,39 +227,42 @@ height: 614px;
 	  /*and also for touch screens:*/
 	  glass.addEventListener("touchmove", moveMagnifier);
 	  img.addEventListener("touchmove", moveMagnifier);
-	  function moveMagnifier(e) {
-	    var pos, x, y;
-	    /*prevent any other actions that may occur when moving over the image*/
-	    e.preventDefault();
-	    /*get the cursor's x and y positions:*/
-	    pos = getCursorPos(e);
-	    x = pos.x;
-	    y = pos.y;
-	    /*prevent the magnifier glass from being positioned outside the image:*/
-	    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
-	    if (x < w / zoom) {x = w / zoom;}
-	    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
-	    if (y < h / zoom) {y = h / zoom;}
-	    /*set the position of the magnifier glass:*/
-	    glass.style.left = (x - w) + "px";
-	    glass.style.top = (y - h) + "px";
-	    /*display what the magnifier glass "sees":*/
-	    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
-	  }
-	  function getCursorPos(e) {
-	    var a, x = 0, y = 0;
-	    e = e || window.event;
-	    /*get the x and y positions of the image:*/
-	    a = img.getBoundingClientRect();
-	    /*calculate the cursor's x and y coordinates, relative to the image:*/
-	    x = e.pageX - a.left;
-	    y = e.pageY - a.top;
-	    /*consider any page scrolling:*/
-	    x = x - window.pageXOffset;
-	    y = y - window.pageYOffset;
-	    return {x : x, y : y};
-	  }
+		  function moveMagnifier(e) 
+		  {
+			    var pos, x, y;
+			    /*prevent any other actions that may occur when moving over the image*/
+			    e.preventDefault();
+			    /*get the cursor's x and y positions:*/
+			    pos = getCursorPos(e);
+			    x = pos.x;
+			    y = pos.y;
+			    /*prevent the magnifier glass from being positioned outside the image:*/
+			    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+			    if (x < w / zoom) {x = w / zoom;}
+			    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+			    if (y < h / zoom) {y = h / zoom;}
+			    /*set the position of the magnifier glass:*/
+			    glass.style.left = (x - w) + "px";
+			    glass.style.top = (y - h) + "px";
+			    /*display what the magnifier glass "sees":*/
+			    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+		  }
+		  function getCursorPos(e)
+		  {
+			    var a, x = 0, y = 0;
+			    e = e || window.event;
+			    /*get the x and y positions of the image:*/
+			    a = img.getBoundingClientRect();
+			    /*calculate the cursor's x and y coordinates, relative to the image:*/
+			    x = e.pageX - a.left;
+			    y = e.pageY - a.top;
+			    /*consider any page scrolling:*/
+			    x = x - window.pageXOffset;
+			    y = y - window.pageYOffset;
+			    return {x : x, y : y};
+		  }
 	} 
+
  </script>
  <script type="text/javascript">
  var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg, popname  ;
@@ -268,7 +277,7 @@ height: 614px;
 
 
   
-<body class="fixed-navbar">
+<body class="fixed-navbar" onload="transection()">
 
 	<div class="page-wrapper">
 		<!-- START HEADER-->
@@ -332,8 +341,9 @@ height: 614px;
 										<div class="form-group">
 											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
 											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" onblur="transection()" name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
-												min="0" onkeyup="deleteErrorMsg()">
+											<input class="form-control" type="number" Readonly name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
+												min="0" >
+
 										</div>
 										<div class="form-group">
 											<label>Farmer Registration No</label><span
@@ -350,7 +360,7 @@ height: 614px;
 											<label>Date of Purchase</label> <span class="text-danger">*
 											</span>&nbsp; <span id="errdateOfPurchase" name="errdateOfPurchase"
 												class="text-danger"> </span> 
-												<input class="form-control"type="date" name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
+												<input class="form-control" readonly name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
 										</div>
 									
 										<div class=" form-group">
@@ -358,9 +368,9 @@ height: 614px;
 											</span>&nbsp; <span id="errplaceOfPurchase"
 												name="errplaceOfPurchase" class="text-danger"> </span> 
 												<input class="form-control" type="hidden" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" readonly="readonly">
+												onkeyup="deleteErrorMsg()" Readonly>
 												<input class="form-control" type="text" name="popname" id="popname" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" readonly="readonly">
+												onkeyup="deleteErrorMsg()" Readonly>
 										</div>
 
 										<div class=" form-group">
@@ -370,7 +380,7 @@ height: 614px;
 												type="number" name="rateSlipNumber" id="rateSlipNumber"
 												placeholder="Rate Slip number" onkeyup="deleteErrorMsg()"
 												min="0"
-												oninput="javascript: if (this.value.length > 5) this.value = this.value.slice(0, 5);"
+												oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);"
 												onkeyup="deleteErrorMsg()">
 										</div>
 										<div class="form-group">
@@ -782,26 +792,16 @@ height: 614px;
 </body>
  
 <script>
-	//$(document).ready(function(){
-	//	  $("#enq_submit").click(function(){
 	function validate() {
-     // alert("hiiii");
 	let	 farmerRegNo = document.forms["myForm"]["farmerRegNo"].value;
-	 
 	let	 tallyNo = document.forms["myForm"]["tallyNo"].value;
-	//alert(tallyNo);
 	let	dateOfPurchase = document.forms["myForm"]["dateOfPurchase"].value;
-	//alert(dateOfPurchase);
 	let	 placeOfPurchase = document.forms["myForm"]["placeOfPurchase"].value;
-	//alert(placeOfPurchase);
 	let	 rateSlipNumber = Number(document.forms["myForm"]["rateSlipNumber"].value);
 	let	 binNumber = Number(document.forms["myForm"]["binNumber"].value);
 	let	 juteVariety = document.forms["myForm"]["juteVariety"].value;
-	//alert(juteVariety);
-		// let drumWiseQuantity = document.forms["myForm"]["drumWiseQuantity"].value; 
 	let	 netQuantity =  Number(document.forms["myForm"]["netQuantity"].value);
 	netQuantity =  netQuantity.toFixed(3);
-	//alert(""+  netQuantity)  ;
 	let	 garsatRate = Number(document.forms["myForm"]["garsatRate"].value);
 	garsatRate = garsatRate.toFixed(3);
 	let	 amountPayable = Number(document.forms["myForm"]["amountPayable"].value);
@@ -811,7 +811,6 @@ height: 614px;
 	sum_gross += Number(document.getElementById("drumWiseQuantity"+i).value);
     }
     sum_gross = sum_gross.toFixed(3);
-  //  alert(sum_gross);
 	 
 	var errors= "";
 	var missing= true;
@@ -872,7 +871,6 @@ height: 614px;
 		 if (farmerRegNo !== farmno) {
 
 			 mismatch= false;
-			//alert("mismatch farmer");
 			errors += "Farmer registration number didn't match! </br> ";
 			 
 		}  if (dateOfPurchase !== dop) {
@@ -915,16 +913,10 @@ height: 614px;
 			 mismatch= false;
 			errors += "Gross quantity didn't match! </br> ";
 			}
- // alert(mismatch);
- // alert(missing);
 	   if(missing)
 		 {
-		
-		// alert("missing");
 			 if(mismatch)
 				 {
-				// alert("mismatch");
-				 
 				 document.forms["myForm"]["error"].value  = "";
 				 document.forms["myForm"]["grsqty"].value  = sum_gross;
 				 document.forms["myForm"]["status"].value = 'FA';
@@ -945,8 +937,9 @@ height: 614px;
 	          "</div>" +
 	          "<footer>" +
 	              "<div class='controls'>" +
+	              " <button class='button button-default cancelAction'> Cancel</button> " +
 	                  " <button class='button button-danger doAction'> Force Submit</button> " +
-	                  " <button class='button button-default cancelAction'> Cancel</button> " +
+	                  
 	              "</div>" +
 	          "</footer>" +
 	       "</div>" +
@@ -992,29 +985,17 @@ height: 614px;
   
 <script>
 	function transection() {
- 
-     //  alert("act");
 		 tallyNo = document.forms["myForm"]["tallyNo"].value;
 		 if (tallyNo.length >= 3) {
             var reg = '<%=region%>';
-
-			//alert("tallyNo.length " + tallyNo.length);
-			//alert("inside tallyslip2");
-			// $("#uploadedImage").attr("src","/Users/animeshanand/Pictures/jciimage/Image.jpeg");
 			 $.ajax({
 						type : "GET",
 						url : "transectionDetails.obj",
 						data : jQuery.param({"tallyslipNo" : tallyNo,"region" : reg}),
 						success : function(result) {
-						//	alert(result);
-						
 						if(result)
 						  {
 							var parsedJSON = JSON.parse(result);
-                          
-							//console.log("######"+result);
-                           	 
-							
 							 farmno = parsedJSON.farmerRegNo;
 							 tallyno = parsedJSON.tallyNo;
 							 dop = parsedJSON.dop;
@@ -1022,7 +1003,6 @@ height: 614px;
 							 bin = parsedJSON.binno;
 							 jutevar = parsedJSON.jutevariety;
 							 ntqty = parsedJSON.netquantity.toFixed(3);
-							 //alert(ntqty);
 							 grate = parsedJSON.garsatrate.toFixed(3);
 							 tallyimage = parsedJSON.tallySlipImg;
 							 grossqty =  parsedJSON.grossqty.toFixed(3);
@@ -1033,19 +1013,16 @@ height: 614px;
 							 $("#placeOfPurchase").attr("value",pop);
 							 $("#popname").attr("value",popname);
 							 magnify("uploadedImage", 2);
-							//alert("inside transaction date = "+grossqty+"  amt pay = "+amtpay+"   bin = "+bin+" pop = "+pop);
 						  }
 						else{
+							
 							alert("No data found for the entered Tally slip.");
-						}
-							
-						
-							
+							}
 						}
 					});
 
 		}
-
+		 
 	}
 </script>
  
@@ -1060,7 +1037,7 @@ height: 614px;
 		}
 		let tallyNo = document.forms["myForm"]["tallyNo"].value;
 		if (tallyNo.length > 1) {
-			$("#errtallyNo").hide();
+			//$("#errtallyNo").hide();
 		}
 		let dateOfPurchase = document.forms["myForm"]["dateOfPurchase"].value;
 		if (dateOfPurchase.length > 1) {
@@ -1107,6 +1084,19 @@ height: 614px;
 		}
 
 	}
+	
+	
+	
+	</script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+	$( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+
+	</script>
 </script>
  
   <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
@@ -1115,12 +1105,7 @@ height: 614px;
       
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
  
-<!--  <script>
-  $(document).ready(function(){
-	// alert("date");
-    $("#dateOfPurchase").datepicker({ dateFormat: 'dd-mm-yy'});
-  });
-  </script>  -->
+ 
 
 
 </html>

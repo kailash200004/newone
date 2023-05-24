@@ -27,56 +27,61 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	//Global var
-	
+	var current, tomorrow;
 	//current date
 	var dateNewFormat, onlyDate, today = new Date();
-    dateNewFormat = today.getFullYear() + '-'; 
-   //  alert(today.getMonth()+1);
-     var month1 = (today.getMonth() + 1);
-    // alert(month1);
-    if (month1.toString().length== 2) {
-     //alert("if");
-        dateNewFormat += (today.getMonth() + 1);
-    }
-    else {
-        dateNewFormat += '0' + (today.getMonth() + 1);
-    }
-
-    onlyDate = today.getDate();
+	
+	onlyDate = today.getDate();
     if (onlyDate.toString().length == 2) {
 
-        dateNewFormat += "-" + onlyDate;
+        dateNewFormat =  onlyDate+ '/';
     }
     else {
-        dateNewFormat += '-0' + onlyDate;
+        dateNewFormat = '0' + onlyDate+ '/';
     }
+    
+   
+     var month1 = (today.getMonth() + 1);
+    if (month1.toString().length== 2) {
+        dateNewFormat += (today.getMonth() + 1)+ '/';
+    }
+    else {
+        dateNewFormat += '0' + (today.getMonth() + 1)+ '/';
+    }
+
+    dateNewFormat += today.getFullYear(); 
     
     //7 days back
     var tommorowymd, tomdate,tommorowdate = new Date();
     tommorowdate.setDate(tommorowdate.getDate()-7);
-    tommorowymd = tommorowdate.getFullYear() + '-'; 
-    tommonth = (tommorowdate.getMonth() + 1);
-    if (tommonth.toString().length == 2) {
-
-    	tommorowymd += (tommorowdate.getMonth() + 1);
-    }
-    else {
-    	tommorowymd += '0' + (tommorowdate.getMonth() + 1);
-    }
-
     tomdate = tommorowdate.getDate();
+    
+    tommonth = (tommorowdate.getMonth() + 1);
     if (tomdate.toString().length == 2) {
 
-    	tommorowymd += "-" + tomdate;
+    	tommorowymd =  tomdate+'/';
     }
     else {
-    	tommorowymd += '-' + tomdate;
+    	tommorowymd = '0' + tomdate+'/';
     }
+    
+    if (tommonth.toString().length == 2) {
+
+    	tommorowymd += (tommorowdate.getMonth() + 1)+'/';
+    }
+    else {
+    	tommorowymd += '0' + (tommorowdate.getMonth() + 1)+'/';
+    }
+
+    tommorowymd += tommorowdate.getFullYear(); 
+   
     
     $('#datejba').val(dateNewFormat);
     $('#datejba').attr('max', dateNewFormat);
-    $('#datejba').attr('min', tommorowymd);
-    
+    $('#datejba').attr('min', tommorowymd); 
+    current = dateNewFormat;
+    tomorrow = tommorowymd;
+   
 
 });
 
@@ -108,7 +113,7 @@ $(document).ready(function () {
                                             <input class="form-control" type="date" name="datejba" placeholder="JaBA Date" required> -->
                                         
                                            <label>JBA Date</label>
-                                         <input type="date" name="datejba" id="datejba" class="form-control" placeholder="JaBA Date"  required/>
+                                         <input  name="datejba" id="datejba" class="form-control" placeholder="JaBA Date"  readonly required/>
                                        <!--  <input readonly class="form-control" id="datejba" type=date name="datejba" placeholder="JaBA Date" required> -->
                                         </div>
                                         
@@ -160,24 +165,32 @@ $(document).ready(function () {
 												<option value="">-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
+												<option value="2023-2024">2023-2024</option>
+												<option value="2024-2025">2024-2025</option>
+												<option value="2025-2026">2025-2026</option>
+												<option value="2026-2027">2026-2027</option>
+												<option value="2027-2028">2027-2028</option>
+												<option value="2028-2029">2028-2029</option>
+												<option value="2029-2030">2029-2030</option>
+												<option value="2030-2031">2030-2031</option>
 											</select>
                                         </div>
                                       
                                       </div>
                                       <div class="row">
                                        <div class="col-sm-4 form-group" >
-											<label><b>Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="northernprice"  id ="northernprice" required="required" min="0"/></br> 
+											<label><b>Northern Base Pricesss</b></label></br>
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="northernprice"  id ="northernprice" required="required" minlength="0"/></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Semi-Northern Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="seminorthernprice"  id ="seminorthernprice" required="required" min="0" /></br> 
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="seminorthernprice"  id ="seminorthernprice" required="required" minlength="0"  /></br> 
 										</div>
 										
 										<div class="col-sm-4 form-group" >
 											<label><b>Bihar Base Price</b></label></br>
-											<label>Basis Price +</label><input  type="number" name="biharprice"  id ="biharprice" required="required" min="0"/></br> 
+											<label>Basis Price +</label><input  type="tel" maxlength="10" name="biharprice"  id ="biharprice" required="required" minlength="0" /></br> 
 										</div>
 										
 										<!-- <div class="col-sm-4 form-group" >
@@ -251,7 +264,7 @@ $(document).ready(function () {
 	$('#jutevariety').change(function () {
 			 var selectedText = $(this).find("option:selected").text();
 	            var selectedValue = $(this).val();
-	            console.log(" Value:" + selectedValue);
+	            //console.log(" Value:" + selectedValue);
 	            if(selectedValue == 'tossa' ){
 	            	$("#whitediv").hide();
 	            	$("#tossadiv").show();
@@ -299,7 +312,7 @@ $(document).ready(function () {
         // alert(grade4);
          //alert(typeof grade0);
          if(grade4==0 ){
-        	 alert("Pls fill the Grade Price...!!!");
+        	 alert("Pls fill the Grade 5 Price...!!!");
          	result = false;
          }
 		
@@ -461,6 +474,16 @@ $(document).ready(function () {
 			  return result;
 	}
 	</script>
+	</script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+    
+	$( "#datejba" ).datepicker({ dateFormat: 'dd/mm/yy',minDate : 'current-7', maxDate : 'current'});
+	</script>
+	
 	
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>

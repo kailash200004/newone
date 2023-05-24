@@ -88,49 +88,50 @@
 <script>
 $(document).ready(function () {
     var dateNewFormat, onlyDate, today = new Date();
-    dateNewFormat = today.getFullYear() + '-'; 
+    onlyDate = today.getDate();
+    if (onlyDate.toString().length == 2) {
+
+        dateNewFormat =  onlyDate+ '-';
+    }
+    else {
+        dateNewFormat = '0' + onlyDate+ '-';
+    }
+     
    //  alert(today.getMonth()+1);
      var month1 = (today.getMonth() + 1);
     // alert(month1);
     if (month1.toString().length== 2) {
      //alert("if");
-        dateNewFormat += (today.getMonth() + 1);
+        dateNewFormat += (today.getMonth() + 1)+ '-';
     }
     else {
-        dateNewFormat += '0' + (today.getMonth() + 1);
+        dateNewFormat += '0' + (today.getMonth() + 1)+ '-';
     }
 
-    onlyDate = today.getDate();
-    if (onlyDate.toString().length == 2) {
-
-        dateNewFormat += "-" + onlyDate;
-    }
-    else {
-        dateNewFormat += '-0' + onlyDate;
-    }
+    dateNewFormat += today.getFullYear();
     
     var tommorowymd, tomdate,tommorowdate = new Date();
     tommorowdate.setDate(tommorowdate.getDate()+1);
-    tommorowymd = tommorowdate.getFullYear() + '-'; 
-    tommonth = (tommorowdate.getMonth() + 1);
-    if (tommonth.toString().length == 2) {
-
-    	tommorowymd += (tommorowdate.getMonth() + 1);
-    }
-    else {
-    	tommorowymd += '0' + (tommorowdate.getMonth() + 1);
-    }
-
     tomdate = tommorowdate.getDate();
     if (tomdate.toString().length == 2) {
 
-    	tommorowymd += "-" + tomdate;
+    	tommorowymd = tomdate+ '-';
     }
     else {
-    	tommorowymd += '-' + tomdate;
+    	tommorowymd = '0' + tomdate+ '-';
     }
- 
+    tommonth = (tommorowdate.getMonth() + 1);
+    if (tommonth.toString().length == 2) {
 
+    	tommorowymd += (tommorowdate.getMonth() + 1)+ '-';
+    }
+    else {
+    	tommorowymd += '0' + (tommorowdate.getMonth() + 1)+ '-';
+    }
+
+   
+ 
+    tommorowymd += tommorowdate.getFullYear(); 
     $('#entryDate').val(dateNewFormat);
  //   $('#effectDate').val(tommorowymd);
  
@@ -277,6 +278,14 @@ $(document).ready(function () {
 												<option value="0">-Select-</option>
 												<option value="2021-2022">2021-2022</option>
 												<option value="2022-2023">2022-2023</option>
+												<option value="2023-2024">2023-2024</option>
+												<option value="2024-2025">2024-2025</option>
+												<option value="2025-2026">2025-2026</option>
+												<option value="2026-2027">2026-2027</option>
+												<option value="2027-2028">2027-2028</option>
+												<option value="2028-2029">2028-2029</option>
+												<option value="2029-2030">2029-2030</option>
+												<option value="2030-2031">2030-2031</option>
 											</select>
                                         </div>
 										
@@ -653,7 +662,7 @@ $(document).ready(function () {
 				  {
 				  grade7="0";
 				  }
-				  //alert(dpc);
+				  alert(dpc);
 					$.ajax({
 						type:"POST",
 						url:"saveGradePriceOfCommercial.obj",
