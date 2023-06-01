@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
      <title>JCI | CMS</title>
-    <!-- GLOBAL MAINLY STYLES-->
+   <!-- GLOBAL MAINLY STYLES-->
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
@@ -26,10 +26,19 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+     <script type="text/javascript">
+	$(document).ready(function ()  
+	{  
+		 $("#farmerVerific").DataTable({         
+	         scrollX: true,
+	         "pageLength": 50
+	       }); 
+	});  
+ </script>
 <style>
 .scrollmenu {
-
-  overflow: auto;
+ 
+  overflow: scroll;
   white-space: nowrap;
 }
 
@@ -40,6 +49,12 @@
   padding: 14px;
   text-decoration: none;
 }
+.tableFixHead          { overflow: auto; height: 100px; width: 240px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+.tableFixHead tbody th { position: sticky; left: 0; }
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; white-space: nowrap; }
+th     { background:#eee; }
 </style>
 </head>
 
@@ -67,23 +82,29 @@
                     <span>${msg}</span>
                     <div class="ibox-body">
                     <div class="scrollmenu">
-                         <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                         <table class="table table-striped table-bordered table-hover tableFixHead" id="example-table" cellspacing="0" width="100%">
 
 
 								<thead>
 									<tr>
 										<th>Sl.No</th>
 										<th>EMS Name</th>
+										 <th>EMP Name</th>
+										 <th>EMP ID</th>
+										 <th>EMP Email</th> 										
+										<th>Mobile Number</th>
+										<th>Role</th>
+										  <th>User Type</th> 
 										<th>Is HO</th>
 									    <th>Zone</th>
 										<th>Region</th> 										
 										<th>DPC</th>
-									    <th>User Type</th> 
-										<th>EMP ID</th>
-									    <th>EMP Name</th>
-										<th>EMP Email</th> 										
-										<th>Mobile Number</th>
-										<th>Role</th>
+									  
+										
+									   
+										<th>Edit</th> 										
+										
+										<th>Delete</th>
 										
 							</tr>
 								</thead>
@@ -97,19 +118,22 @@
 									<tr>
 										<td><%=i%></td>
 										<td><%=UserRegistrationList.getUsername()%></td>
-				
+										<td><%=UserRegistrationList.getEmployeename()%></td>
+										<td><%=UserRegistrationList.getEmployeeid()%></td>
+										<td><%=UserRegistrationList.getEmail()%></td> 
+										<td><%=UserRegistrationList.getMobileno()%></td>
+										
+										<td><%=UserRegistrationList.getRoles_name()%></td>
+										<td><%=UserRegistrationList.getUsertype()%></td>
 				                    	<td><%=UserRegistrationList.getHo()%>
 				                    
 										<td><%=UserRegistrationList.getZonename()%></td>
 										<td><%=UserRegistrationList.getRoname()%></td> 
 										<td><%=UserRegistrationList.getCentername()%></td>
-									    <td><%=UserRegistrationList.getUsertype()%></td>
-				                    	<td><%=UserRegistrationList.getEmployeeid()%></td>
-										<td><%=UserRegistrationList.getEmployeename()%></td>
-										<td><%=UserRegistrationList.getEmail()%></td> 
-										<td><%=UserRegistrationList.getMobileno()%></td>
+									    
+				                    	
 										
-										<td><%=UserRegistrationList.getRoles_name()%></td>
+										
 							
 						
 						
@@ -145,7 +169,7 @@
     <div class="sidenav-backdrop backdrop"></div>
     
     <!-- END PAGA BACKDROPS-->
-    <!-- CORE PLUGINS-->
+<!-- CORE PLUGINS-->
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
@@ -159,7 +183,9 @@
     <script type="text/javascript">
         $(function() {
             $('#example-table').DataTable({
-                pageLength: 10,
+            	
+            	    fixedHeader: true
+            
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
                     { "S": "name" },
@@ -167,9 +193,10 @@
                     { "data": "extn" },
                     { "data": "start_date" },
                     { "data": "salary" }
-                ]*/
+                ] */
             });
         })
+  
     </script>
 </body>
 

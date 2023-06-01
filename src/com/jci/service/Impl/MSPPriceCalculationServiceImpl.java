@@ -39,5 +39,23 @@ public class MSPPriceCalculationServiceImpl implements MSPPriceCalculationServic
 		return mSPPriceCalculationDao.validatejutevariety(jutevariety, cropyr);
 	}
 
+	@Override
+    public void delete(int id) {
+    mSPPriceCalculationDao.delete(id);
+          
+    }
+
+    @Override
+    public MSPPriceCalculationModel find(int id) {
+          // TODO Auto-generated method stub
+          return mSPPriceCalculationDao.find(id);
+    }
+
+    @Override
+    public void update(MSPPriceCalculationModel mspPriceCalculationModel) {
+           mSPPriceCalculationDao.update(mspPriceCalculationModel);
+          
+    }
+
 
 }

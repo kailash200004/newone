@@ -163,16 +163,7 @@ $(document).ready(function () {
                                             <label>Crop Year</label> 
 											<select name="cropyr" id="cropyr" class="form-control" required="required">
 												<option value="">-Select-</option>
-												<option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2023-2024">2023-2024</option>
-												<option value="2024-2025">2024-2025</option>
-												<option value="2025-2026">2025-2026</option>
-												<option value="2026-2027">2026-2027</option>
-												<option value="2027-2028">2027-2028</option>
-												<option value="2028-2029">2028-2029</option>
-												<option value="2029-2030">2029-2030</option>
-												<option value="2030-2031">2030-2031</option>
+												
 											</select>
                                         </div>
                                       
@@ -252,6 +243,25 @@ $(document).ready(function () {
     
     <div class="sidenav-backdrop backdrop"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
 	<script>
 		$(document).ready(function(){
 			$("#whitediv").hide();

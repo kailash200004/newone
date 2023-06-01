@@ -6,17 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>JCI | CMS</title>
-    <!-- GLOBAL MAINLY STYLES-->
-    <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- PLUGINS STYLES-->
-    <!-- THEME STYLES-->
-    <link href="assets/css/main.min.css" rel="stylesheet" />
-    <!-- PAGE LEVEL STYLES-->
+ <!-- GLOBAL MAINLY STYLES-->
+<link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link href="./assets/vendors/themify-icons/css/themify-icons.css"
+	rel="stylesheet" />
+
+<!-- PLUGINS STYLES-->
+<!-- THEME STYLES-->
+<link href="assets/css/main.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<!-- PAGE LEVEL STYLES-->
 </head>
 
 <body class="fixed-navbar">
@@ -73,16 +77,7 @@
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
 												<option Selected Disabled value="">-Select-</option>
-											    <option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2023-2024">2023-2024</option>
-												<option value="2024-2025">2024-2025</option>
-												<option value="2025-2026">2025-2026</option>
-												<option value="2026-2027">2026-2027</option>
-												<option value="2027-2028">2027-2028</option>
-												<option value="2028-2029">2028-2029</option>
-												<option value="2029-2030">2029-2030</option>
-												<option value="2030-2031">2030-2031</option>
+											   
 											</select>
                                         </div>
                                        
@@ -199,6 +194,27 @@ $(binno).attr('maxlength',3);
 </script>
 
 </body>
+<script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
 	  <script>
 	function netQuantity() {
        var gQuantity = parseFloat(document.getElementById('gquantity').value);
@@ -428,4 +444,23 @@ $(binno).attr('maxlength',3);
 		  });
 		});
 	</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script src="./assets/vendors/jquery/dist/jquery.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+		type="text/javascript"></script>
+	<script
+		src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+		type="text/javascript"></script>
+	<!-- PAGE LEVEL PLUGINS-->
+	<!-- CORE SCRIPTS-->
+	<script src="assets/js/app.min.js" type="text/javascript"></script>
+	<!-- PAGE LEVEL SCRIPTS-->
 </html>

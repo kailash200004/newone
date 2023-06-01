@@ -72,7 +72,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 		HttpSession session1 = request.getSession(false);
 		String querystr = "";
 		String roletypes = (String) session1.getAttribute("roletype");
-		
+		System.out.println("roletypes  "+roletypes);
 		if(roletypes.equalsIgnoreCase("HO"))
 		{
 			querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
@@ -346,7 +346,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	@Override
 	public boolean validateusername(String username) {
 		List<String> result = new ArrayList<>();
-		String querystr = "select * from jciumt where username ='" + username + "'";
+		String querystr = "select * from jciumt where email ='" + username + "'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -362,7 +362,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 
 	@Override
 	public int getis_ho(String usrname) {
-		String querystr = "select ho from jciumt where username='" + usrname + "'";
+		String querystr = "select ho from jciumt where email='" + usrname + "'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Integer> userList = query.list();
@@ -377,7 +377,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 
 	@Override
 	public String getroletypr(String usrname) {
-		String querystr = "select role_type from jciumt where username='" + usrname + "'";
+		String querystr = "select role_type from jciumt where email='" + usrname + "'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<String> userList = query.list();
@@ -392,7 +392,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 
 	@Override
 	public String getregionId(String usrname) {
-		String querystr = "select regionId from jciumt where username='" + usrname + "'";
+		String querystr = "select regionId from jciumt where email='" + usrname + "'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<String> userList = query.list();
@@ -407,7 +407,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 
 	@Override
 	public String getzoneId(String usrname) {
-		String querystr = "select zoneId from jciumt where username='" + usrname + "'";
+		String querystr = "select zoneId from jciumt where email='" + usrname + "'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<String> userList = query.list();

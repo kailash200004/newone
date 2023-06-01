@@ -11,41 +11,40 @@
 <meta name="viewport" content="width=device-width initial-scale=1.0">
 <title>JCI | CMS</title>
 <!-- GLOBAL MAINLY STYLES-->
-<link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="build/css/intlTelInput.css">
-<link rel="stylesheet" href="build/css/demo.css">
-<link
-	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src='<%=request.getContextPath()%>/resources/js/responsivevoice.js'></script>
-<script type="text/javascript"
-	src='<%=request.getContextPath()%>/resources/js/custom.js'></script>
-<script type="text/javascript"
-	src='<%=request.getContextPath()%>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
-<script type="text/javascript"
-	src='<%=request.getContextPath()%>/resources/js/jquery.validate.min.js'></script>
+<link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
 <link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
 	rel="stylesheet" />
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- PLUGINS STYLES-->
 <!-- THEME STYLES-->
 <link href="assets/css/main.min.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="<%=request.getContextPath() %>/resources/css/styleUserReg.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
+<script src="./assets/vendors/jquery/dist/jquery.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+	type="text/javascript"></script>
+<script
+	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+	type="text/javascript"></script>
+<!-- PAGE LEVEL PLUGINS-->
+<!-- CORE SCRIPTS-->
+<script src="assets/js/app.min.js" type="text/javascript"></script>
+
 
 <style>
 .required:after {
@@ -183,7 +182,7 @@
 									<div class="col-sm-4 form-group">
 											<label class="required">District</label> 	
 											<span id="errDistrict" name="errDistrict" class="text-danger"> </span>										 
-											<select id="child" name="F_District" class="form-control" onchange="deleteErrorMsg()">
+											<select id="F_District" name="F_District" class="form-control" onchange="deleteErrorMsg()">
 										   <option disabled selected value>-Select District-</option>
 											</select>
 
@@ -378,7 +377,7 @@
 <script>
 	$('#land_holding').on('change', function() {
 		
-	    var get_land_holding = document.getElementById('land_holding').value;
+	    var get_land_holding = document.getElementById("land_holding").value;
 	    
 	    var set_land_holding = parseFloat(get_land_holding).toFixed(2);
 	     $('input[name=land_holding').val(set_land_holding);
@@ -978,11 +977,11 @@ $("#ParentMenuID").change(function(){
  					for(var i = 0; i < result.length; i++) {
  						s += '<option value="' + result[i].split("-")[0] + '">' + result[i].split("-")[1] + '</option>';
  					}
- 					$('#child').html(s);
+ 					$('#F_District').html(s);
 				}
  				else
  				{
- 					document.getElementById("child").style.display="none";
+ 					document.getElementById("F_District").style.display="none";
  					document.getElementById("selectedArea").value="";
  					//document.getElementById("selectedAreaDiv").style.display="none";
  					//alert("No Record Found!");
@@ -1052,7 +1051,7 @@ $(document).ready(()=>{
 </script>
 
 <!-- <script>
-$("#child").change(function(){
+$("#F_District").change(function(){
 	//alert("hello");
 	var val = $(this).val();	
 	//alert(val);
@@ -1115,10 +1114,10 @@ $("#child").change(function(){
 </script> -->
 
 <script>
-$("#ParentMenuID").change(function(){
+$("#F_District").change(function(){
 	//alert("hello");
 	var val = $(this).val();	
-	console.log(val);
+	//console.log(val);
 	//alert(val);
 	if(val!="")
 	{
@@ -1223,30 +1222,7 @@ $("#ParentMenuID").change(function(){
 
 	<!-- END PAGA BACKDROPS-->
 	<!-- CORE PLUGINS-->
-	<script src="./assets/vendors/jquery/dist/jquery.min.js"
-		type="text/javascript"></script>
-		<script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-        </script>
-	<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
-		type="text/javascript"></script>
-	<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
-		type="text/javascript"></script>
-	<script
-		src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<link
-		href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"
-		rel="stylesheet" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<!-- PAGE LEVEL PLUGINS-->
-	<!-- CORE SCRIPTS-->
-	<script src="assets/js/app.min.js" type="text/javascript"></script>
+	
 </body>
  
 </html>

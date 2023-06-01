@@ -123,6 +123,32 @@ var hasError2 = false;
 											</select>
 										</div> -->
 										<div class="col-sm-4 form-group">
+											<label class="required">EMP ID</label>  &nbsp;&nbsp;&nbsp; <span id="errID" name="errID" class="text-danger"> </span><span id="errID1" name="errID1" class="text-danger"> </span>
+											<input class="form-control" name="employeeid" type="text" placeholder="Employee Id" id="employeeid">
+										</div>
+										</div>
+										<div class="row">
+										<div class="col-sm-4 form-group">
+											<label class="required">EMP Name</label>  &nbsp;&nbsp;&nbsp; <span id="errEMP" name="errEMP" class="text-danger"> </span>
+											<input class="form-control" name="employeename" type="text" placeholder="Employee Name" id="employeename" oninput="allow_alphabets(this)">
+															
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">EMP Email</label> &nbsp;&nbsp;&nbsp; <span id="errEmail" name="errEmail" class="text-danger"> </span>
+											<input class="form-control" autocomplete="off" type="text"  id="emailAddress" oninvalid="this.setCustomValidity('Please enter a valid Email')" oninput="this.setCustomValidity('')"   name="emailAddress" placeholder="Email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" onkeyup="validatemail()">
+											<span  style="color: red; font-size: 13px;" id="EmailError">Please enter a valid Email</span> 
+										</div>
+										<div class="col-sm-4 form-group">
+											<label class="required">Mobile Number</label>  &nbsp;&nbsp;&nbsp; <span id="errMobile" name="errMobile" class="text-danger"> </span><span id="errMobile1" name="errMobile1" class="text-danger"> </span>
+										<div class="input-group-prepend">										 
+    										<span class="input-group-text" id="basic-addon1">+91</span>
+											<input class="form-control" type="tel" maxlength="10" minlength="10" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"" id="mobile" name="mobile" title="10 digit mobile number" placeholder="Mobile Number">
+										
+										</div>
+										</div>
+										</div>
+										<div class="row">
+										<div class="col-sm-4 form-group">
                                                                         <label class="required">User Type</label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
                                                                         <select class="form-control" name="usertype" id="usertype"  required>
                                                                                <option disabled selected value>-Select-</option>
@@ -131,15 +157,17 @@ var hasError2 = false;
                                                                         </select>
                                                                   </div>
 										
-									</div>
-									<div class="row">
+									
+									
 										<div class="col-sm-4 form-group">
                                               <label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
                                               <select id="role" name ="role" class="form-control" >
                                                     <option disabled selected value>-Select-</option>
                                               
                                               </select>
-                                                  <input class="form-control" type="hidden" name="roletype" id="roletype">               
+                                                  <input class="form-control" type="hidden" name="roletype" id="roletype">     
+                                                    <input class="form-control" type="hidden" name="roleid" id="roleid">   
+                                                    <input class="form-control" type="hidden" name="rolename" id="rolename">         
                                         </div>
 										<div class="col-sm-4 form-group">
 											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
@@ -158,6 +186,9 @@ var hasError2 = false;
 											</select>
 											<!-- <input class="form-control" type="text" name="zone" placeholder="Zone"> -->
 										</div>
+										
+										</div>
+									<div class="row">
 										<div class="col-sm-4 form-group">
 											<label id="regionLabel" class="required">Region</label>&nbsp;&nbsp;&nbsp; <span id="errRegion" name="errRegion" class="text-danger"> </span>
 											<!-- <input class="form-control" type="text" name="region" placeholder="Region" required> -->
@@ -166,8 +197,7 @@ var hasError2 = false;
 											</select>
 										</div>
 										
-									</div>
-									<div class="row">
+									
 									<%-- <div class="col-sm-4 form-group">
 											<label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
 											<%
@@ -192,30 +222,11 @@ var hasError2 = false;
 											</select>
 										</div>
 										
-										<div class="col-sm-4 form-group">
-											<label class="required">EMP ID</label>  &nbsp;&nbsp;&nbsp; <span id="errID" name="errID" class="text-danger"> </span><span id="errID1" name="errID1" class="text-danger"> </span>
-											<input class="form-control" name="employeeid" type="text" placeholder="Employee Id" id="employeeid">
-										</div>
-										<div class="col-sm-4 form-group">
-											<label class="required">EMP Name</label>  &nbsp;&nbsp;&nbsp; <span id="errEMP" name="errEMP" class="text-danger"> </span>
-											<input class="form-control" name="employeename" type="text" placeholder="Employee Name" id="employeename" oninput="allow_alphabets(this)">
-															
-										</div>
+										
+										
 									</div>
 									<div class="row">
-										<div class="col-sm-4 form-group">
-											<label class="required">EMP Email</label> &nbsp;&nbsp;&nbsp; <span id="errEmail" name="errEmail" class="text-danger"> </span>
-											<input class="form-control" autocomplete="off" type="text"  id="emailAddress" oninvalid="this.setCustomValidity('Please enter a valid Email')" oninput="this.setCustomValidity('')"   name="emailAddress" placeholder="Email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" onkeyup="validatemail()">
-											<span  style="color: red; font-size: 13px;" id="EmailError">Please enter a valid Email</span> 
-										</div>
-										<div class="col-sm-4 form-group">
-											<label class="required">Mobile Number</label>  &nbsp;&nbsp;&nbsp; <span id="errMobile" name="errMobile" class="text-danger"> </span><span id="errMobile1" name="errMobile1" class="text-danger"> </span>
-										<div class="input-group-prepend">										 
-    										<span class="input-group-text" id="basic-addon1">+91</span>
-											<input class="form-control" type="tel" maxlength="10" minlength="10" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"" id="mobile" name="mobile" title="10 digit mobile number" placeholder="Mobile Number">
 										
-										</div>
-										</div>
 										
 									</div>
 <!-- 									<div class="row">
@@ -264,7 +275,7 @@ var hasError2 = false;
                                        console.log(data);
                                         var html = "<option disabled selected value>-Select-</option>";
                                      for (var i = 0; i< data.length; i++){
-                                        html += '<option  data-id="'+data[i].split("-")[1]+'" value="' +data[i].split("-")[0]+ '">'+data[i].split("-")[0]+'</option>'
+                                        html += '<option  data-id="'+data[i].split("-")[2]+'" value="' +data[i].split("-")[0]+'-'+data[i].split("-")[1]+ '">'+data[i].split("-")[1]+'</option>'
                                        
                                          
                                    } 
@@ -280,7 +291,7 @@ var hasError2 = false;
              
              var val = $('#role option:selected').data("id");
              document.getElementById("roletype").value =  val;
-             alert(val);
+           
              if(val=="HO"){
                     $("#zoneLabel, #regionLabel, #dpclabel").hide();
                     $("#zone, #region, #centerordpc").hide();
@@ -301,13 +312,16 @@ var hasError2 = false;
              }
              
              if(val=="DPC"){
+            	 
                     $("#zoneLabel, #regionLabel, #dpclabel").show();
                     $("#zone, #region, #centerordpc").show();
        
              }
-             
+            
              document.getElementById("roletype").value =  $('#role option:selected').data("id");
-             
+             document.getElementById("roleid").value =	$('#role option:selected').val().split("-")[0];
+             document.getElementById("rolename").value =	$('#role option:selected').val().split("-")[1];
+           
      });
        
        </script>
@@ -586,7 +600,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function () {
 if(hasError == true){
-	alert("if "+hasError);
+	//alert("if "+hasError);
 	 $(':input[type="submit"]').prop('disabled', true);
 }
 else{
@@ -595,7 +609,7 @@ else{
 });
 </script>
 
-<!-- 		<script>
+ 		<script>
 $(document).ready(function() {
 	
 	  $("#usenameError").hide();
@@ -616,7 +630,7 @@ $(document).ready(function() {
  
     });
 });
-</script> -->
+</script> 
   <div class="sidenav-backdrop backdrop"></div>
 <!--      <script>
 		$(document).ready(function() {

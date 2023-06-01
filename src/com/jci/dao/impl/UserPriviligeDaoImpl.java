@@ -37,7 +37,7 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
 	       	   Transaction tx = session.beginTransaction();
 	       	   SQLQuery query = session.createSQLQuery(querystr);
 	       	   List<String> data = query.list();
-	      // 	System.out.println("action_permissions===>>>>> "+data);
+	       
 	       	if(!data.isEmpty()) {
 				return data.toString();
 				

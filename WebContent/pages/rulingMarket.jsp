@@ -117,10 +117,7 @@
 	                                        		<option value="commercial">Commercial</option>
 	                                        	</select>
                                         </div>  -->
-                                   </div>
-                                    
-                                   <div class="row">
-	                                     <div class="col-sm-4 form-group">
+                                         <div class="col-sm-4 form-group">
 												<label>Jute Variety</label>
 												<span class="text-danger">* </span>&nbsp; <span id="errjutevariety" name="errjutevariety" class="text-danger"> </span>
 	                                        	<select name="jutevariety" id="jutevariety" class="form-control taxtbox" required>
@@ -134,22 +131,17 @@
 													<option value="White (New)">White (New)</option>
 	                                        	</select>
 										 </div>
+                                   </div>
+                                    
+                                   <div class="row">
+	                                    
 	                                       
 										 <div class="col-sm-4 form-group">
 	                                            <label>Crop Year</label> 
 	                                            <span class="text-danger">* </span>&nbsp; <span id="errcropyr" name="errcropyr" class="text-danger"> </span>
 												<select name="cropyr" id="cropyr" class="form-control taxtbox" required>
 													<option value="">-Select-</option>											
-												<option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2023-2024">2023-2024</option>
-												<option value="2024-2025">2024-2025</option>
-												<option value="2025-2026">2025-2026</option>
-												<option value="2026-2027">2026-2027</option>
-												<option value="2027-2028">2027-2028</option>
-												<option value="2028-2029">2028-2029</option>
-												<option value="2029-2030">2029-2030</option>
-												<option value="2030-2031">2030-2031</option>
+												
 												</select>
 	                                     </div>
 	                                     
@@ -157,14 +149,15 @@
 	                                             <label>Arrived Quantity</label>
 	                                        <input class="form-control taxtbox" name="arrivedquantity" min="0" type="number" placeholder="Arrived Quantity" required>
 	                                     </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                          <div class="col-sm-4 form-group">
+	                                     <div class="col-sm-4 form-group">
 												<label>Minimum Moisture</label>
 												<span  id="errminno" class = "text-danger"></span>
 	                                        	<input class="form-control taxtbox" id="minmoisture" name="minmoisture" min="0" type="number" placeholder="Minimum Moisture" onkeyup = "calminmax()" required>
-										  </div>
+										  </div>	
+                                    </div>
+                                    
+                                    <div class="row">
+                                          
 										  <div class="col-sm-4 form-group">
 												<label class="required">Maximum Moisture</label>
 												<span  id="errmaxno" class = "text-danger"></span>
@@ -221,7 +214,29 @@
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
-    
+    <script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		html += "<option value = '"+(cropyr + 1)+"-"+(cropyr + 2)+"'>"+(cropyr + 1)+"-"+(cropyr + 2)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+			html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
     	<script type="text/javascript">
 	$(document).ready(function(){
 		 $("#submit").click(function(){
@@ -546,11 +561,11 @@
 		var grade;
 		var count=0;
 		var data;
-		var basis = document.getElementById("basis").value;	
+		var basis = document.getElementById("jutevariety").value;	
 		
-			if(basis=="commercial")
+			if(basis=="Bimli" || basis=="Mesta" || basis=="Tossa" || basis=="White")
 				basis_no=2;
-			else if(basis=="msp")
+			else if(basis=="Tossa (New)" || basis=="White (New)" )
 				basis_no=1;
 		 var variety = (this.value);
 			 $.ajax({

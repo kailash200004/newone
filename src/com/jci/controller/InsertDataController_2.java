@@ -283,33 +283,35 @@ public class InsertDataController_2 {
 	}
 	
 	 
-	@RequestMapping("saveuserrole")  
-	public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{		String username =(String)request.getSession().getAttribute("usrname");
-		try {
-			String usertype = request.getParameter("usertype");
-			String rolename = request.getParameter("rolename");
-			UserRoleModel userrole = new UserRoleModel();			
-			userrole.setRole_name(rolename);
-			userrole.setUser_type(usertype);
-			Date d2 = new Date();
-			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
-			String formattedDate1 = dd.format(d2);
-			userrole.setCreated_date(formattedDate1);			
-			this.userroleService.create(userrole);		
-			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"+ "");
-		} catch (Exception e)
-		{
-			System.out.println("++++++++++++++"+e);
-			e.printStackTrace();
-		}
-		if(username == null) {
-	     	return new ModelAndView("index");
-	         }
-		return new ModelAndView(new RedirectView("viewuserrole.obj"));
-	}
-	
+    @RequestMapping("saveuserrole")  
+ public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes)
+ {             String username =(String)request.getSession().getAttribute("usrname");
+        try {
+               String usertype = request.getParameter("usertype");
+               String rolename = request.getParameter("rolename");
+               String roletype = request.getParameter("roletype");
+               UserRoleModel userrole = new UserRoleModel();               
+               userrole.setRole_name(rolename);
+               userrole.setUser_type(usertype);
+               userrole.setRole_type(roletype);
+               Date d2 = new Date();
+               SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
+               String formattedDate1 = dd.format(d2);
+               userrole.setCreated_date(formattedDate1);                   
+               this.userroleService.create(userrole);        
+               redirectAttributes.addFlashAttribute("msg",
+                                   "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"+ "");
+        } catch (Exception e)
+        {
+               System.out.println("++++++++++++++"+e);
+               e.printStackTrace();
+        }
+        if(username == null) {
+        return new ModelAndView("index");
+          }
+        return new ModelAndView(new RedirectView("viewuserrole.obj"));
+ }
+
 	 @ResponseBody
 	    @RequestMapping(value = { "validateRole" }, method = { RequestMethod.GET })
 	    public String validateRole(final HttpServletRequest request) {

@@ -16,6 +16,9 @@
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -91,6 +94,8 @@
 										<td><%=priceListing.getGrade5()%></td>
 										<td><%=priceListing.getGrade6()%></td>
 										
+										<td><a href="editGradesPrice.obj?id=<%=priceListing.getmsp_id()%>"class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+       <td><a href="deletemspGradesPriceList.obj?id=<%=priceListing.getmsp_id()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td>
 										
 										
 									</tr>

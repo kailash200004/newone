@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 
@@ -19,10 +18,10 @@
   
     <!-- PAGE LEVEL STYLES-->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+       
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
@@ -36,10 +35,10 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-	//Global var
-	
-	//current date
-	var dateNewFormat, onlyDate, today = new Date();
+       //Global var
+       
+       //current date
+       var dateNewFormat, onlyDate, today = new Date();
     dateNewFormat = today.getFullYear() + '-'; 
    //  alert(today.getMonth()+1);
      var month1 = (today.getMonth() + 1);
@@ -68,19 +67,19 @@ $(document).ready(function () {
     tommonth = (tommorowdate.getMonth() + 1);
     if (tommonth.toString().length == 2) {
 
-    	tommorowymd += (tommorowdate.getMonth() + 1);
+       tommorowymd += (tommorowdate.getMonth() + 1);
     }
     else {
-    	tommorowymd += '0' + (tommorowdate.getMonth() + 1);
+       tommorowymd += '0' + (tommorowdate.getMonth() + 1);
     }
 
     tomdate = tommorowdate.getDate();
     if (tomdate.toString().length == 2) {
 
-    	tommorowymd += "-" + tomdate;
+       tommorowymd += "-" + tomdate;
     }
     else {
-    	tommorowymd += '-' + tomdate;
+       tommorowymd += '-' + tomdate;
     }
     
     $('#datejba').val(dateNewFormat);
@@ -113,6 +112,18 @@ $(document).ready(function () {
                             <div class="ibox-body">
                                 <form action="saveuserrole.obj" method="POST" name="myForm"  onsubmit="return validateRole(this)">
                                     <div class="row">
+                                    
+                                                                       
+                                       <div class="col-sm-4 form-group">
+                                            <label>Role Type</label> 
+                                                                        <select name="roletype" id="roletype" class="form-control" required="required">
+                                                                               <option disabled selected value>-Select-</option>
+                                                                               <option value="HO">HO</option>
+                                                                               <option value="ZO">ZO</option>
+                                                                               <option value="RO">RO</option>
+                                                                               <option value="DPC">DPC</option>
+                                                                        </select>
+                                        </div>
                                         <div class="col-sm-4 form-group">
                                            <!--  <label>JBA Date</label>
                                             <input class="form-control" type="date" name="datejba" placeholder="JaBA Date" required> -->
@@ -124,11 +135,11 @@ $(document).ready(function () {
                                    
                                        <div class="col-sm-4 form-group">
                                             <label>User Type</label> 
-											<select name="usertype" id="usertype" class="form-control" required="required">
-												<option disabled selected value>-Select-</option>
-												<option value="Web">Web User</option>
-												<option value="Mobile">Mobile User</option>
-											</select>
+                                                                        <select name="usertype" id="usertype" class="form-control" required="required">
+                                                                               <option disabled selected value>-Select-</option>
+                                                                               <option value="Web User">Web User</option>
+                                                                               <option value="Mobile User">Mobile User</option>
+                                                                        </select>
                                         </div>
           
                                     </div>   
@@ -136,7 +147,7 @@ $(document).ready(function () {
                                     <div class="form-group">
                                         <button class="btn btn-default" type="submit">Create</button>
                                         <a href="viewuserrole.obj" class="btn btn-default">View Roles</a>
- 	
+      
                                     </div>
                                 </form>
                                  
@@ -155,31 +166,31 @@ $(document).ready(function () {
 <!--    <script>
 
 function validateRole(form) {
-	var rolename = document.getElementById("rolename").value;
-	var data;
-		 $.ajax({
-				type:"GET",
-				url:"validateRole.obj",
-				data:{"rolename":rolename},
-				success:function(result){
-					data =result;
-			
-				
-				if (data === 'false'){
-				document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Role already Exists!";
-				 $(':input[type="submit"]').prop('disabled', true);
-				}
-				else if (data === 'true'){
-					document.getElementById("errrole").innerHTML = "";
-					 $(':input[type="submit"]').prop('disabled', false);
-				}
-				
-				}	
-		  }); 
-		 
-		 
+       var rolename = document.getElementById("rolename").value;
+       var data;
+             $.ajax({
+                          type:"GET",
+                          url:"validateRole.obj",
+                          data:{"rolename":rolename},
+                          success:function(result){
+                                 data =result;
+                    
+                          
+                          if (data === 'false'){
+                           document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Role already Exists!";
+                          $(':input[type="submit"]').prop('disabled', true);
+                          }
+                          else if (data === 'true'){
+                                 document.getElementById("errrole").innerHTML = "";
+                                 $(':input[type="submit"]').prop('disabled', false);
+                          }
+                          
+                          }      
+               }); 
+              
+              
 }
-	
+       
 </script> -->
    <script>
     function allow_alphabets(element){

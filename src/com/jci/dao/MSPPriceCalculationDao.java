@@ -10,4 +10,7 @@ public interface MSPPriceCalculationDao{
 	public int create(MSPPriceCalculationModel mspPrices);
 	public List<MSPPriceCalculationModel> getAll();
 	public boolean validatejutevariety(String jutevariety, String cropyr);
+	public void delete(int id);
+    public MSPPriceCalculationModel find(int id);
+    public void update(MSPPriceCalculationModel mspPriceCalculationModel);
 }

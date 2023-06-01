@@ -63,14 +63,15 @@ public class UserRoleDaoImpl implements UserRoleDao {
 	@Override
     public List<String> getuserrole(String user_type) {
           List<String> result = new ArrayList<>();
+         // System.out.println("user_type  "+user_type);
           String querystr = " select * from jciuserrole where user_type ='"+user_type+"'";
           Session session = sessionFactory.getCurrentSession();
           Transaction tx = session.beginTransaction();
           SQLQuery query = session.createSQLQuery(querystr);
           List<Object[]> rows = query.list();
           for(Object[] row : rows){
-                 System.out.println(row[1].toString()+"-"+row[4].toString());
-                 result.add(row[1].toString()+"-"+row[4].toString());
+                 System.out.println(row[0].toString()+"-"+row[1].toString()+"-"+row[4].toString());
+                 result.add(row[0].toString()+"-"+row[1].toString()+"-"+row[4].toString());
           }
 
           return result;

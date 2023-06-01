@@ -52,11 +52,11 @@
                                     <div class="row">
 										
 										<div class="col-sm-4 form-group">
-											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
+											<label id="zoneLabel" class="required">Zone</label> <span class="text-danger">* </span> &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
 											<%
 												List<ZoneModel> zoneList = (List<ZoneModel>) request.getAttribute("zoneList");
 											%>
-											<select class="form-control" name="zone" id="zone">
+											<select class="form-control" name="zone" id="zone" required>
 												<option disabled selected value>-Select-</option>
 												<%
 													for(ZoneModel zoneLists : zoneList) {
@@ -69,15 +69,15 @@
 											<!-- <input class="form-control" type="text" name="zone" placeholder="Zone"> -->
 										</div>
 										<div class="col-sm-4 form-group">
-											<label id="regionLabel" class="required">Region</label>&nbsp;&nbsp;&nbsp; <span id="errRegion" name="errRegion" class="text-danger"> </span>
+											<label id="regionLabel" class="required">Region</label><span class="text-danger">* </span>&nbsp;&nbsp;&nbsp; <span id="errRegion" name="errRegion" class="text-danger"> </span>
 											<!-- <input class="form-control" type="text" name="region" placeholder="Region" required> -->
-											<select class="form-control" name="region" id="region">
+											<select class="form-control" name="region" id="region" required>
 												<option disabled selected value>-Select-</option>
 											</select>
 										</div>
 										<div class="col-sm-4 form-group">
-											<label id="dpclabel" class="required">DPC</label> &nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
-											<select class="form-control" name="dpccode" id="dpccode">
+											<label id="dpclabel" class="required">DPC</label> <span class="text-danger">* </span>&nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
+											<select class="form-control" name="dpccode" id="dpccode" required>
 												<option disabled selected value>-Select-</option>
 											</select>
 										</div>
@@ -93,28 +93,33 @@
 												class="text-danger"> </span>
                                             <input class="form-control" name="dateofreceipt" id="dateofreceipt" placeholder="Date of Receipt" required readonly>
                                         </div>
-                                        <div class="col-sm-4 form-group">
-											<label>No. of slip received</label>  <span class="text-danger">* </span>&nbsp; <span id="errslipreceived" name="errslipreceived" class="text-danger"> </span>
-											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onkeyup ="slipNo();" >
-										</div>
+                                        
+										 <div class="col-sm-4 form-group">
+                                             <label>Series Start from </label> <span class="text-danger">* </span>&nbsp; <span id="errseriesstartfrom" name="errseriesstartfrom"
+												class="text-danger"> </span>
+                                        	 <input class="form-control" name="seriesstartfrom" id="seriesstartfrom" type="number" placeholder="Series Start from " required min="0" onkeyup ="slipNo();" >
+                                        </div>
+                                         <div class="col-sm-4 form-group">
+                                            <label>Series to End</label>  <span class="text-danger">* </span>&nbsp; <span id="errseriestoend" name="errseriestoend"
+												class="text-danger"> </span>
+											<input class="form-control" name="seriestoend" id="seriestoend" type="number" placeholder="Series to End" required min="0" onkeyup ="slipNo();">
+                                        </div>
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-sm-4 form-group">
-                                             <label>Series Start from </label> <span class="text-danger">* </span>&nbsp; <span id="errseriesstartfrom" name="errseriesstartfrom"
-												class="text-danger"> </span>
-                                        	 <input class="form-control" name="seriesstartfrom" id="seriesstartfrom" type="number" placeholder="Series Start from " required min="0">
-                                        </div>
+                                   
+                                    <div class="col-sm-4 form-group">
+											<label>No. of slip received</label>  <span class="text-danger">* </span>&nbsp; <span id="errslipreceived" name="errslipreceived" class="text-danger"> </span>
+											<span id="errslipreceived2" name="errslipreceived2" class="text-danger"> </span>
+											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onkeyup ="slipNo();" >
+										</div>
                                        
-										<div class="col-sm-4 form-group">
-                                            <label>Series to End</label>  <span class="text-danger">* </span>&nbsp; <span id="errseriestoend" name="errseriestoend"
-												class="text-danger"> </span>
-											<input class="form-control" name="seriestoend" id="seriestoend" type="number" placeholder="Series to End" required min="0">
-                                        </div>
+                                       
+										
                         
                                     </div>                                    
                                     <div class="form-group col-sm-12">
-                                        <button class="btn btn-default" type="submit">Submit</button>
+                                        <button class="btn btn-default" id="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -202,19 +207,37 @@ $( "#dateofreceipt" ).datepicker({ maxDate: '0' , minDate: '0',dateFormat: 'dd-m
 </script>
 <script>
 function slipNo(){
-//	var slipreceived =$("#slipreceived").val();
+
 	var slipreceived = document.getElementById("slipreceived").value;
-	console.log(slipreceived);
-	if((slipreceived % 100) != 0){
-		// console.log("in if");
+	var slipfrom = document.getElementById("seriesstartfrom").value;
+	var slipto = document.getElementById("seriestoend").value;
+	
+	var result = slipto - slipfrom;
+	 document.getElementById("slipreceived").value = result;
+	if((result % 100) != 0){
+		
 		document.getElementById("errslipreceived").innerHTML = "No. of Slip Received should be in multiple of 100 !";
 		$("#errslipreceived").show();
+		$('#submit'). prop('disabled', true)
 	}
-	else if((slipreceived % 100) == 0){
-		console.log("in else");
+	else if((result % 100) == 0){
+		$('#submit'). prop('disabled', false)
 		$("#errslipreceived").hide();
 
 	}
+	if(result < 0){
+		
+		document.getElementById("errslipreceived2").innerHTML = "No. of Slip Received can not be negative !";
+		$("#errslipreceived2").show();
+		$('#submit'). prop('disabled', true)
+	}
+	else if((result % 100) == 0){
+		$('#submit'). prop('disabled', false)
+		$("#errslipreceived2").hide();
+		
+
+	}
+	
 }
 
 
@@ -292,4 +315,15 @@ function deleteErrorMsg(){
 		});
 		
 	</script>
+	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
+    <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
+    <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- PAGE LEVEL PLUGINS-->
+    <!-- CORE SCRIPTS-->
+    <script src="assets/js/app.min.js" type="text/javascript"></script>
+    <!-- PAGE LEVEL SCRIPTS-->
 </html>

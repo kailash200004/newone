@@ -56,7 +56,6 @@ com\jci\controller\ContractgenerationController.class
 com\jci\dao\impl\BalePrepareDaoImpl.class
 com\jci\service\AddOrganisationService.class
 com\jci\dao\RawJuteProcurementAndPaymentDao.class
-com\jci\model\JuteVarietyGrades.class
 com\jci\model\ProgOfAssortmentModel.class
 com\jci\service\Impl\AddOrganisationServiceImpl.class
 com\jci\model\PaymentInstrumentModel.class

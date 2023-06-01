@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
      <title>JCI | CMS</title>
-    <!-- GLOBAL MAINLY STYLES-->
+   <!-- GLOBAL MAINLY STYLES-->
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
@@ -21,6 +21,14 @@
     <!-- THEME STYLES-->
     <link href="assets/css/main.min.css" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+ 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- PAGE LEVEL STYLES-->
 <style>
 .scrollmenu {
 
@@ -34,6 +42,7 @@
   text-align: center;
   padding: 14px;
   text-decoration: none;
+  
 }
 </style>
  <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
@@ -50,8 +59,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"> 
+
  
  <script type="text/javascript">
 	$(document).ready(function ()  

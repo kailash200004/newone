@@ -27,13 +27,6 @@
 
 <!-- PAGE LEVEL STYLES-->
 
-<script>
-$(document).ready(function(){
-	
-	
-});
-
-</script>
 </head>
 
 

@@ -68,7 +68,7 @@ public class VerifyTallySlip {
 	@Transient
 	private String basis;
 	
-	@Column(name = "centername")
+	@Transient
 	private String centername;
 	
 	@Transient

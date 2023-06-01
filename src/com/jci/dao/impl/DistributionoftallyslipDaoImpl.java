@@ -67,22 +67,18 @@ public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDa
 		List<Integer> result = new ArrayList<>();
 		HttpSession session1=request.getSession(false); 
 		String querystr = "";
-		String roletypes = (String) session1.getAttribute("roletype");
+		/*String roletypes = (String) session1.getAttribute("roletype");
 		if(roletypes.equalsIgnoreCase("HO")){
 	querystr = "  SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE;";
-		}
-		else if(roletypes.equalsIgnoreCase("ZO"))
-		  { 
-			  querystr = "";
-			  } 
-		else if(roletypes.equalsIgnoreCase("RO")) 
-		  { 
-			  querystr = "  ";
-		}
+		}*/
+		/*
+		 * else if(roletypes.equalsIgnoreCase("ZO")) { querystr = ""; } else
+		 * if(roletypes.equalsIgnoreCase("RO")) { querystr = "  "; }
+		 */
 		
-		else {
+		/* else { */
 			querystr = "SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE where bale.dpccode = '"+dpcId+"'";
-		}
+		/* } */
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

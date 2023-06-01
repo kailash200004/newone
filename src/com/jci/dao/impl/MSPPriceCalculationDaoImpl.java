@@ -78,5 +78,25 @@ public class MSPPriceCalculationDaoImpl implements MSPPriceCalculationDao{
 			return false;
 		}
 	}
+	
+	@Override
+    public void delete(int id) {
+          String hql = "Delete from jcimspgradesprice where msp_id = '" + id + "' ";
+    this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+    }
+
+    @Override
+    public MSPPriceCalculationModel find(int id) {
+          // TODO Auto-generated method stub
+          return (MSPPriceCalculationModel) currentSession().get(MSPPriceCalculationModel.class, id);
+    }
+
+    @Override
+    public void update(MSPPriceCalculationModel mspPriceCalculationModel) {
+          currentSession().update( mspPriceCalculationModel);
+          
+    }
+
+
 
 }

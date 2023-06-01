@@ -7,62 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>JCI | CMS</title>
-    <!-- GLOBAL MAINLY STYLES-->
-   <link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="build/css/intlTelInput.css">
-<link rel="stylesheet" href="build/css/demo.css">
-<link
-	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
-	rel="stylesheet">
-    <!-- PLUGINS STYLES-->
-    <!-- THEME STYLES-->
-    <link href="assets/css/main.min.css" rel="stylesheet" />
-    <!-- PAGE LEVEL STYLES-->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="build/css/intlTelInput.css">
-<link rel="stylesheet" href="build/css/demo.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link
-	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
-	rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
-<!-- <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
-	type="text/javascript"></script> -->
-	<link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
+   <!-- GLOBAL MAINLY STYLES-->
+<link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
 	rel="stylesheet" />
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>  --> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- PLUGINS STYLES-->
+<!-- THEME STYLES-->
+<link href="assets/css/main.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<!-- <script
-	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script> -->
-<!-- CORE SCRIPTS-->
+<!-- PAGE LEVEL STYLES-->
 
-  <link rel="stylesheet" href="assets/css/docsupport/style.css">
-  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
-  <link rel="stylesheet" href="assets/css/chosen.css">
 
-  
-  
-
- 
 </head>
 <style>
 .container {
@@ -181,17 +144,8 @@
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
 												<option value="">-Select-</option>
-												<option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2023-2024">2023-2024</option>
-												<option value="2024-2025">2024-2025</option>
-												<option value="2025-2026">2025-2026</option>
-												<option value="2026-2027">2026-2027</option>
-												<option value="2027-2028">2027-2028</option>
-												<option value="2028-2029">2028-2029</option>
-												<option value="2029-2030">2029-2030</option>
-												<option value="2030-2031">2030-2031</option>
-											</select>
+												
+												</select>
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label>Bin Number</label>
@@ -273,7 +227,7 @@
                                              <label>Garsat Rate (Rs./Qtls.)</label>
                                              <span class="text-danger">* </span>&nbsp; <span id="errgarsatRate" name="errgarsatRate"
 												class="text-danger"> </span>
-                                        	 <input class="form-control" name="garsatRate" id="garsatRate" type="number" step="0.01" placeholder="Garsat Rate (Rs./Qtls.)"  readonly="true" onkeyup="deleteErrorMsg()" min="0">
+                                        	 <input class="form-control" name="garsatRate" id="garsatRate" type="number"  placeholder="Garsat Rate (Rs./Qtls.)"  readonly="true" onkeyup="deleteErrorMsg()" min="0">
                                         </div>
                                         <div class="col-sm-4 form-group">
 											<label class="required">Varification Slip (330kb-1MB)</label><span class="text-danger">* </span>&nbsp; 
@@ -288,7 +242,7 @@
                                              <label >Amount Payable</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="erramountPayable" name="erramountPayable" onkeyup="deleteErrorMsg()"
 												class="text-danger"> </span>
-											<input class="form-control" name="amountPayable" id="amountPayable" type="number" placeholder="Amount Payable" readonly="true" onkeyup="deleteErrorMsg()" step="0.01">
+											<input class="form-control" name="amountPayable" id="amountPayable" type="number" placeholder="Amount Payable" readonly="true" onkeyup="deleteErrorMsg()">
                                         </div>
                                         </div>
                                                <div class="col-sm-4 form-group">
@@ -296,7 +250,7 @@
                                              <label >TD5 base price</label> 
                                              <span class="text-danger">* </span>&nbsp; <span id="errTD5baseprice" name="errTD5baseprice" onkeyup="deleteErrorMsg()"
 												class="text-danger"> </span>
-											<input class="form-control" name="tdbaseprice" id="tdbaseprice" type="number" placeholder="TD5 base price"  onkeyup="deleteErrorMsg()" min="0" step="0.01">
+											<input class="form-control" name="tdbaseprice" id="tdbaseprice" type="number" placeholder="TD5 base price"  onkeyup="deleteErrorMsg()" min="0" >
                                         </div>
                                     	
                                     </div>
@@ -348,13 +302,33 @@
     <script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
 </body>
+<script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
 
+</script>
 <script>
 	$('#amountPayable').on('change', function() {
 		
 	    var amountPayable = document.getElementById('amountPayable').value;
 	    
-	    var amountPayable = parseFloat(amountPayable).toFixed(2);
+	    amountPayable = parseFloat(amountPayable).toFixed(2);
 	     $('input[name=amountPayable').val(amountPayable);
 	})
 	</script>
@@ -364,7 +338,7 @@
 		
 	    var garsatRate = document.getElementById('garsatRate').value;
 	    
-	    var garsatRate = parseFloat(garsatRate).toFixed(2);
+	     garsatRate = parseFloat(garsatRate).toFixed(2);
 	     $('input[name=garsatRate').val(garsatRate);
 	})
 	</script>
@@ -375,11 +349,11 @@
 		
 	    var deductionQuantity = document.getElementById('deductionQuantity').value;
 	    
-	    var deductionQuantity = parseFloat(deductionQuantity).toFixed(2);
+	     deductionQuantity = parseFloat(deductionQuantity).toFixed(2);
 	     $('input[name=deductionQuantity').val(deductionQuantity);
 	     var netquantity = document.getElementById('netquantity').value;
 		    
-		    var netquantity = parseFloat(netquantity).toFixed(2);
+		     netquantity = parseFloat(netquantity).toFixed(2);
 		     $('input[name=netquantity').val(netquantity);
 	})
 	</script>
@@ -732,9 +706,9 @@
 	
 	 	var k=0;
 		var a=0;
-		var garsat=0;
-		var garsatrate=0;
-		var gradePrice=0;
+		var garsat=0.0;
+		let garsatrate = 0.0;
+		var gradePrice= 0.0;
 		var qntl=0;
 		
 		var variety = document.getElementById("jutevariety").value;	
@@ -789,18 +763,19 @@
 				            	 				var rate = parseFloat(grade[i]);
 
 				          			 				var  gradesPersent= parseFloat(((input[i].value*rate)/100));
-				          			 				garsatrate  = parseFloat(garsatrate)+ gradesPersent ;
-				          			 				//alert("garsatrate = "+garsatrate);
+				          			 				garsatrate  = parseFloat(garsatrate)+ parseFloat(gradesPersent );
+				          			 				console.log("garsatrate = "+garsatrate);
+				          			 				console.log("gradesPersent = "+gradesPersent);
 										}
 										
 								 	} 	
 						 				var netPercent = parseFloat(total/100);
-						 				
+						 				console.log("netPercent = "+netPercent);
 						 				netAmount=parseFloat(garsatrate * netPercent);
 						 				
-						 				document.getElementById("amountPayable").value = 	Math.round((netAmount + Number.EPSILON) * 100) / 100;
+						 				document.getElementById("amountPayable").value = netAmount;
 						 				//alert("garsatrate = "+garsatrate);
-										document.getElementById("garsatRate").value = Math.round((garsatrate + Number.EPSILON) * 100) / 100;
+										document.getElementById("garsatRate").value = garsatrate;
 							}
 						
 						else if(basis=="commercial"){
@@ -858,7 +833,7 @@
 		     }); 
 		}
 					else{
-						alert("addition should be 100!");
+						alert("Summation of Estimated Grade Composition must be 100!");
 					
 					}
 					
@@ -1162,11 +1137,32 @@ function deleteErrorMsg(){
   </script>
   
    
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script src="./assets/vendors/jquery/dist/jquery.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+		type="text/javascript"></script>
+	<script
+		src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+		type="text/javascript"></script>
+	<!-- PAGE LEVEL PLUGINS-->
+	<!-- CORE SCRIPTS-->
+	<script src="assets/js/app.min.js" type="text/javascript"></script>
+	<!-- PAGE LEVEL SCRIPTS-->
    
 	<script src="assets/css/chosen.jquery.js" type="text/javascript"></script>
   <script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
   <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script> 
-  
+
+  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
+  <link rel="stylesheet" href="assets/css/chosen.css">
   
   
 </html>

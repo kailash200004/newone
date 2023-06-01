@@ -64,7 +64,7 @@ public class MSPPriceCalculationModel {
 	}
 
 	public void setmsp_id(int msp_id) {
-		msp_id = msp_id;
+		this.msp_id = msp_id;
 	}
 
 	public String getJute_variety() {

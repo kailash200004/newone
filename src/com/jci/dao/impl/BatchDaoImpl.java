@@ -88,7 +88,7 @@ public class BatchDaoImpl implements BatchDao {
 	querystr = "SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername";
 		}		else if(roletypes.equalsIgnoreCase("ZO")){
 			
-			querystr=" SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername  LEFT JOIN jcirodetails c ON b.rocode = c.rocode where c.zonecode='"+zoneId+"'";
+			querystr=" SELECT pur.centername,bale.* FROM jcibin bale left join jcipurchasecenter pur on bale.dpcnames = pur.centername  LEFT JOIN jcirodetails c ON pur.rocode = c.rocode where c.zonecode='"+zoneId+"'";
 			
 		}
 		else if(roletypes.equalsIgnoreCase("RO")){
@@ -287,7 +287,7 @@ public class BatchDaoImpl implements BatchDao {
 		Query query = session.createSQLQuery("{CALL [GetValue_fromBale_Preperation](:P1,:P2)}");
 		query.setParameter("P1", Integer.parseInt(binNO));
 		query.setParameter("P2", FinYear);
-		System.out.println("GetValue_fromBale_Preperation=============--------- "+query.list());
+	//	System.out.println("GetValue_fromBale_Preperation=============--------- "+query.list());
 		List<String> results = query.list();
 		
 		return results;

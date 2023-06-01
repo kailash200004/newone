@@ -36,7 +36,7 @@ public class LoginController {
 	
 	  @RequestMapping("dashboardview") 
 	  public ModelAndView dashboardview(HttpServletRequest request){ 
-		  System.out.println("dashboard"); 
+		//  System.out.println("dashboard"); 
 			String username =(String)request.getSession().getAttribute("usrname");
 		  ModelAndView mv = new ModelAndView("dashboard");
 		  if(username == null) {
@@ -51,11 +51,11 @@ public class LoginController {
             ModelAndView mv = new ModelAndView("index");
             
             try {
-                   String usrname =  request.getParameter("email");
+                   String email =  request.getParameter("email");
                    String password = request.getParameter("password");
-                   if(usrname != null && password != null) {
+                   if(email != null && password != null) {
                    String dpcId = request.getParameter("dpcId");
-                   String ifExist =  userRegService.checkLogin(usrname, password);
+                   String ifExist =  userRegService.checkLogin(email, password);
                    String username =(String)request.getSession().getAttribute("usrname");
                      if(ifExist!=null && ifExist.equalsIgnoreCase("mobile")) { 
                            mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
@@ -68,23 +68,23 @@ public class LoginController {
                      else
                          {
 
-                                int refId = userRegService.getRefId(usrname);
+                                int refId = userRegService.getRefId(email);
                                 int roleId = userRegService.getUserRoleId(refId);
                                 String rolename = userRegService.getUserId(refId);
                                 String dpcIdd = userRegService.getUserDpc(refId);
                                 String region = userRegService.getUserRegion(refId);
                                 String dpc_center = userRegService.getdpc_center(dpcIdd);
-                                int is_ho = userRegService.getis_ho(usrname);
-                                String roletype = userRegService.getroletypr(usrname);
-                                String regionId = userRegService.getregionId(usrname);
-                                String zoneId = userRegService.getzoneId(usrname);
+                                int is_ho = userRegService.getis_ho(email);
+                                String roletype = userRegService.getroletypr(email);
+                                String regionId = userRegService.getregionId(email);
+                                String zoneId = userRegService.getzoneId(email);
 
                                 session.setAttribute("regionId", regionId);
                                 session.setAttribute("zoneId", zoneId);
                                 session.setAttribute("roletype", roletype);
                                 session.setAttribute("is_ho", is_ho);
                                 session.setAttribute("userId", refId);
-                                session.setAttribute("usrname", usrname);
+                                session.setAttribute("usrname", email);
                                 session.setAttribute("dpcId", dpcIdd);
                                 session.setAttribute("region", region);
                                 session.setAttribute("zone", dpcId);

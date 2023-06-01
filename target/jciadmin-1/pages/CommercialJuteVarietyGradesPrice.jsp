@@ -27,11 +27,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
-
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
-<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
 <script src="./assets/vendors/jquery/dist/jquery.min.js"
 	type="text/javascript"></script>
 <script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
@@ -47,11 +42,7 @@
 <!-- CORE SCRIPTS-->
 <script src="assets/js/app.min.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="assets/css/docsupport/style.css">
-  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
-  <link rel="stylesheet" href="assets/css/chosen.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 
  
 
@@ -276,16 +267,7 @@ $(document).ready(function () {
                                             <label>Crop Year</label>  <span class="text-danger">* </span>
 											<select name="cropyr" id="cropyr" class="form-control" required>
 												<option value="0">-Select-</option>
-												<option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2023-2024">2023-2024</option>
-												<option value="2024-2025">2024-2025</option>
-												<option value="2025-2026">2025-2026</option>
-												<option value="2026-2027">2026-2027</option>
-												<option value="2027-2028">2027-2028</option>
-												<option value="2028-2029">2028-2029</option>
-												<option value="2029-2030">2029-2030</option>
-												<option value="2030-2031">2030-2031</option>
+												
 											</select>
                                         </div>
 										
@@ -332,6 +314,27 @@ $(document).ready(function () {
 		</div>
 	</div>
 		</body>
+		<script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
 		<script>
 		$("#zone").on("change", function() {
 			//alert("zone");
@@ -688,11 +691,5 @@ $(document).ready(function () {
 		});
 	</script>
 	 
-	
-	
-	<!-- <script src="assets/css/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> -->
-  <script src="assets/css/chosen.jquery.js" type="text/javascript"></script>
-  <script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-  <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 	
 </html>

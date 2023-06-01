@@ -37,6 +37,12 @@ public class DistributionoftallyslipModel {
 	@Column(name = "createddate")
 	private Date createddate;
 
+	@Column(name = "zone")
+	private String zone;
+	
+	@Column(name = "region")
+	private String region;
+	
 	public DistributionoftallyslipModel() {
 
 	}
@@ -97,12 +103,31 @@ public class DistributionoftallyslipModel {
 		this.createddate = createddate;
 	}
 
+	public String getZone() {
+		return zone;
+	}
+
+	public void setZone(String zone) {
+		this.zone = zone;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
 
 	@Override
 	public String toString() {
 		return "DistributionoftallyslipModel [refid=" + refid + ", dpccode=" + dpccode + ", dateofreceipt="
 				+ dateofreceipt + ", slipreceived=" + slipreceived + ", seriesstartfrom=" + seriesstartfrom
-				+ ", seriestoend=" + seriestoend + ", createddate=" + createddate + "]";
+				+ ", seriestoend=" + seriestoend + ", createddate=" + createddate + ", zone=" + zone + ", region="
+				+ region + "]";
 	}
+
+
+	
 
 }
