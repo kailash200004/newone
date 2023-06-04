@@ -92,7 +92,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<th>Sl.No</th>
 										<!-- <th>Region Name</th>
 										<th>DPC Name</th> -->
-										<th>Basis</th>
+										
 										<th>Arrival Date</th>
 										<th>Jute Variety</th>
 										<th>Crop Year</th> 										
@@ -128,17 +128,42 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 								 if(i<=200){  
 							%>
 									<tr>
-										<td><%=i%></td>
-										<%-- <td><%=marketArrivalList.getRegionName()%></td>
-										<td><%=marketArrivalList.getDpcnames()%></td> --%>
-								        <td><%=marketArrivalList.getBasis()%></td>
-				                    	<td><%=marketArrivalList.getDatearrival()%></td>
-
-										 <td><%=marketArrivalList.getJutevariety()%>
-										<td><%=marketArrivalList.getCropyr()%></td> 
-										<td><%=marketArrivalList.getArrivedqty()%></td>
-										<td><%=marketArrivalList.getMixmois()%></td>
-										<td><%=marketArrivalList.getMaxmois()%></td>
+									<td><%=i%></td>
+									 <%if(marketArrivalList.getCropyr().length() == 1 && marketArrivalList.getArrivedqty().length() == 1){ 
+									 %>
+							   <td><%=marketArrivalList.getDatearrival()%></td>
+							   <td>No Arrival</td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							   <td></td>
+							    <td></td>
+							     <td></td>
+							   </tr>
+							   <%}
+									else {%> 
+							   <%-- <td><%=marketArrivalList.getRegionName()%></td>
+									<td><%=marketArrivalList.getDpcnames()%></td> --%>
+									<td><%=marketArrivalList.getDatearrival()%></td>
+									<td><%=marketArrivalList.getJutevariety()%>
+									<td><%=marketArrivalList.getCropyr()%></td> 
+									<td><%=marketArrivalList.getArrivedqty()%></td>
+									<td><%=marketArrivalList.getMixmois()%></td>
+									<td><%=marketArrivalList.getMaxmois()%></td>
 									<td><%=marketArrivalList.getGrade1()%></td>
 									<td><%=marketArrivalList.getGrade2()%></td>
 									<td><%=marketArrivalList.getGrade3()%></td>
@@ -163,6 +188,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 									</tr>
 									<% 
+									}
 								  }  
 							i++; }
 							

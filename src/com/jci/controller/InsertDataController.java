@@ -4531,11 +4531,9 @@ public class InsertDataController
           @ResponseBody
           @RequestMapping(value = { "setStatusRMZM" }, method = { RequestMethod.GET })
           public String setStatusRMZM(final HttpServletRequest request) {
-             System.out.println("vishal111");
               final Gson gson = new Gson();
               String s="success";
               this.verifyTallySlipService.statusrmzm();
-              System.out.println("vishal");
               return gson.toJson((Object)s);
           }
 
@@ -4566,6 +4564,14 @@ public class InsertDataController
                mv.addObject("verifiedTallyforZM", (Object)verifyList);
              
                return mv;
+           }
+           @ResponseBody
+           @RequestMapping(value = { "check_password" }, method = { RequestMethod.GET })
+           public boolean check_password(final HttpServletRequest request) {
+               final Gson gson = new Gson();
+               String pass = request.getParameter("pass");
+           System.out.println("pass  = "+pass);
+               return false;
            }
     static {
         InsertDataController.count = 0;

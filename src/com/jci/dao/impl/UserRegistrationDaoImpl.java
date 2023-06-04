@@ -72,22 +72,22 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 		HttpSession session1 = request.getSession(false);
 		String querystr = "";
 		String roletypes = (String) session1.getAttribute("roletype");
-		System.out.println("roletypes  "+roletypes);
+		
 		if(roletypes.equalsIgnoreCase("HO"))
 		{
-			querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
+			querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role";
 		}
 		else if(roletypes.equalsIgnoreCase("ZO"))
 		  { 
-			  querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.zoneId ='"+zoneId+"'"; 
+			  querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.zoneId ='"+zoneId+"'"; 
 		  } 
 		else if(roletypes.equalsIgnoreCase("RO")) 
 		  { 
-			  querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.regionId ='" +regionId+"'"; 
+			  querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.regionId ='" +regionId+"'"; 
 		  }
 		 
 		else {
-			querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.dpcId ='"+dpcId+"'";
+			querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name, a.usertype , a.ho from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.dpcId ='"+dpcId+"'";
 		}
 
 		Session session = sessionFactory.getCurrentSession();
@@ -242,7 +242,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	@Override
 	public UserRegistrationModel getuserprofile(int refid) {
 		List<UserRegistrationModel> result = new ArrayList<>();
-		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid, e.role_name from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.refid='"
+		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.refid='"
 				+ refid + "'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();

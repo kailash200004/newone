@@ -206,12 +206,13 @@ body {
 	<script>
 
 		$(document).ready(function() {
-		for(var i=1; i<54;i++){
+		for(var i=1; i<55;i++){
 			$("#o"+i).hide();
 			
 			}
 			//alert("yes");
 			var roleid=<%=(int)request.getSession().getAttribute("roleId")%>;
+			//alert(roleid);
 			var userAction = new Array();
 			var allActions = new Array();
 		$.get('userpriviligeajax.obj',{roleId : roleid},

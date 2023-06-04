@@ -252,6 +252,24 @@ var hasError2 = false;
 	</div>
 		
 	<div class="sidenav-backdrop backdrop"></div>
+	
+	<!-- <script>
+	$("#password").on("change" , function(){
+		alert("yess");
+		var pass = $("#password");
+		alert(pass);
+		$.ajax({
+			type : 'GET',
+			data : {'pass': pass},
+			url : 'check_password.obj',
+			success : function(result){
+				//alert(result);
+			}
+			
+		});
+	});
+	</script> -->
+	
 	       <script>
        $("#usertype").on("change", function(){
        
