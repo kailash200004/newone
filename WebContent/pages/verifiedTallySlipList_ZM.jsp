@@ -119,7 +119,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Approval Of Tally Slip For Payment Processing</h1>
+                <h1 class="page-title">Approval Of verified Tally Slip by Regional Manager for payment processing</h1>
                  
             </div>
 				

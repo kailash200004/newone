@@ -426,7 +426,7 @@ height: 614px;
 												class="text-danger"> </span> 
 												<!-- <input class="form-control"type="text" name="juteVariety" id="juteVariety" placeholder="Jute Variety" onkeyup="deleteErrorMsg()"> -->
 												
-											<select name="juteVariety" id="juteVariety" class="form-control" required  onselect="deleteErrorMsg()">
+											<select name="juteVariety" id="juteVariety" class="form-control"   onselect="deleteErrorMsg()">
                                         	<option value="">Select</option>
                                         	<option value="Bimli">Bimli</option>
                                         	<option value="Mesta">Mesta</option>
@@ -821,60 +821,66 @@ height: 614px;
 	
 	   if (farmerRegNo == "") { 
 			document.getElementById("errfarmerRegNo").innerHTML = "Farmer registration number can not be empty!";
+			document.forms["myForm"]["farmerRegNo"].focus();
 			missing= false;
 			 
 		}  if (tallyNo == "") {
 			document.getElementById("errtallyNo").innerHTML = "Tally slip number can not be empty!";
 			missing= false;
-			 
+			document.forms["myForm"]["tallyNo"].focus();
 
 		}  
 
 		 if (dateOfPurchase == "") { 
 			document.getElementById("errdateOfPurchase").innerHTML = "Date of purchase can not be empty!";
 			missing= false;
-		 
+			document.forms["myForm"]["dateOfPurchase"].focus();
 		}
 		 
 		 if (placeOfPurchase == "") {
 			document.getElementById("errplaceOfPurchase").innerHTML = "Place of purchase can not be empty!";
 			missing= false;
-			 
+			document.forms["myForm"]["placeOfPurchase"].focus();
 		}
 
 		 if (rateSlipNumber == "") {
 			document.getElementById("errrateSlipNumber").innerHTML = "Rate Slip Number can not be empty!";
 			missing= false;
-			 
+			document.forms["myForm"]["rateSlipNumber"].focus();
 		}
 
 		 if (binNumber == "") {
 			document.getElementById("errbinNumber").innerHTML = "Bin Number can not be empty!";
+			document.forms["myForm"]["binNumber"].focus();
 			missing= false;
 			 
 		}  if (juteVariety == "") {
 			document.getElementById("errjuteVariety").innerHTML = "Jute Variety can not be empty!";
 			missing= false;	
-			 
+			document.forms["myForm"]["juteVariety"].focus();
 		}
 		 
 		 if (netQuantity == "") {
 			document.getElementById("errnetQuantity").innerHTML = "Net Quantity can not be empty!";
+			document.forms["myForm"]["netQuantity"].focus();
 			missing= false;
 			 
 		}  if (garsatRate == "") {
 			document.getElementById("errgarsatRate").innerHTML = "Garsat Rate can not be empty!";
+			document.forms["myForm"]["garsatRate"].focus();
 			missing= false;
 			 
 		}  if (amountPayable == "") {
 			document.getElementById("erramountPayable").innerHTML = "Amount Payable can not be empty!";
+			document.forms["myForm"]["amountPayable"].focus();
 			missing= false;
 			 
 		}
 		 if (farmerRegNo !== farmno) {
-
+			 
 			 mismatch= false;
 			errors += "Farmer registration number didn't match! </br> ";
+			
 			 
 		}  if (dateOfPurchase !== dop) {
 			errors += "Date of purchase didn't match! </br> ";
@@ -1101,8 +1107,20 @@ height: 614px;
     <script src="./assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
     <!-- CORE SCRIPTS-->
     <script src="assets/js/app.min.js" type="text/javascript"></script>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  
+  
 	<script>
-	$( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+	$(document).ready(function(){
+	/* 	$("#dateOfPurchase").datepicker({ dateFormat: 'dd-mm-yy'}); */
+	
+	
+	
+	 $( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+ });
 
 	</script>
 </script>

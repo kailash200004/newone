@@ -125,8 +125,8 @@
 								$('.mydatatz').empty();
 												cval = this.value;
 												
-												//alert("set");
-												$.get('userpriviligeajax.obj',{roleId : cval},
+												//alert("cval  "+ cval);
+												$.get('userpriviligeajax.obj',{'roleId' : cval},
 																function(responseText) {
 																	var text = responseText.replace("[","").replace("]","");
 																	userAction = text.split(",");

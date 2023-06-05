@@ -95,7 +95,7 @@ th     { background:#eee; }
 										<th>Mobile Number</th>
 										<th>Role</th>
 										  <th>User Type</th> 
-										<th>Is HO</th>
+										
 									    <th>Zone</th>
 										<th>Region</th> 										
 										<th>DPC</th>
@@ -121,12 +121,10 @@ th     { background:#eee; }
 										<td><%=UserRegistrationList.getEmployeename()%></td>
 										<td><%=UserRegistrationList.getEmployeeid()%></td>
 										<td><%=UserRegistrationList.getEmail()%></td> 
-										<td><%=UserRegistrationList.getMobileno()%></td>
-										
+										<td><%=UserRegistrationList.getMobileno()%></td>	
 										<td><%=UserRegistrationList.getRoles_name()%></td>
 										<td><%=UserRegistrationList.getUsertype()%></td>
-				                    	<td><%=UserRegistrationList.getHo()%>
-				                    
+				                    	
 										<td><%=UserRegistrationList.getZonename()%></td>
 										<td><%=UserRegistrationList.getRoname()%></td> 
 										<td><%=UserRegistrationList.getCentername()%></td>

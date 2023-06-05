@@ -15,12 +15,15 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
+	<link rel="stylesheet" href="build/css/intlTelInput.css">
+<link rel="stylesheet" href="build/css/demo.css">
+<link
+	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
+	rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="build/css/intlTelInput.css">
-<link rel="stylesheet" href="build/css/demo.css">
+
  
   <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
       
@@ -422,10 +425,7 @@ height: 614px;
 
 										<div class=" form-group">
 											<label>Jute Variety</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety"
-												class="text-danger"> </span> 
-												<!-- <input class="form-control"type="text" name="juteVariety" id="juteVariety" placeholder="Jute Variety" onkeyup="deleteErrorMsg()"> -->
-												
+											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety" class="text-danger"> </span> 
 											<select name="juteVariety" id="juteVariety" class="form-control"   onselect="deleteErrorMsg()">
                                         	<option value="">Select</option>
                                         	<option value="Bimli">Bimli</option>
@@ -1115,10 +1115,6 @@ height: 614px;
   
 	<script>
 	$(document).ready(function(){
-	/* 	$("#dateOfPurchase").datepicker({ dateFormat: 'dd-mm-yy'}); */
-	
-	
-	
 	 $( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
  });
 

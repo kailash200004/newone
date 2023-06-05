@@ -27,6 +27,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
+
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
 <script src="./assets/vendors/jquery/dist/jquery.min.js"
 	type="text/javascript"></script>
 <script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
@@ -42,7 +47,11 @@
 <!-- CORE SCRIPTS-->
 <script src="assets/js/app.min.js" type="text/javascript"></script>
 
-
+<link rel="stylesheet" href="assets/css/docsupport/style.css">
+  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
+  <link rel="stylesheet" href="assets/css/chosen.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
  
 
@@ -137,7 +146,6 @@ $(document).ready(function () {
      
 });
 </script>
- 
 
 <body class="fixed-navbar">
 	<div class="page-wrapper">
@@ -267,7 +275,8 @@ $(document).ready(function () {
                                             <label>Crop Year</label>  <span class="text-danger">* </span>
 											<select name="cropyr" id="cropyr" class="form-control" required>
 												<option value="0">-Select-</option>
-												
+												<option value="2021-2022">2021-2022</option>
+												<option value="2022-2023">2022-2023</option>
 											</select>
                                         </div>
 										
@@ -314,27 +323,6 @@ $(document).ready(function () {
 		</div>
 	</div>
 		</body>
-		<script>
- $(document).ready(function(){
-	var	html = "<option selected disabled>-select-</option>";
-		var today = new Date();
-		var cropyr = today.getFullYear();
-		var month = parseInt(today.getMonth()) + 1 ;
-		var date = parseInt(today.getDate());
-		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		if(date == '31'&& month == '6' && time == '23:59:59'){
-		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
-		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
-		}
-		else{
-			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
-			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
-		}
-		$("#cropyr").html(html);
-	}); 
-	
-
-</script>
 		<script>
 		$("#zone").on("change", function() {
 			//alert("zone");
@@ -665,7 +653,7 @@ $(document).ready(function () {
 				  {
 				  grade7="0";
 				  }
-				  alert(dpc);
+				  //alert(dpc);
 					$.ajax({
 						type:"POST",
 						url:"saveGradePriceOfCommercial.obj",
@@ -673,12 +661,19 @@ $(document).ready(function () {
 							"cqty":cqty,"effectDate":effectDate,"entryDate":entryDate, "grade0":grade0,"grade1":grade1,"grade2":grade2,"grade3":grade3,
 							"grade4":grade4,"grade5":grade5,"grade6":grade6,"grade7":grade7,"grade8":grade8,"cprice":"0"},
 						success:function(result){
-							location.reload(true)
+							//  location.reload(true);
+							  $('html, body').animate({scrollTop: '0px'}, 0);
 							$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
-							//alert("Result Saved Succesfully");
-			 				//var data= jQuery.parseJSON(result);
+							 setTimeout(function () {
+							      
+							        location.reload(true);
+							       // $("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+							       
+							      }, 1000);
+							
+						}
 		 	 				 
-						}			
+						
 					});
 				}
 			  else
@@ -691,5 +686,11 @@ $(document).ready(function () {
 		});
 	</script>
 	 
+	
+	
+	<!-- <script src="assets/css/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> -->
+  <script src="assets/css/chosen.jquery.js" type="text/javascript"></script>
+  <script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 	
 </html>
