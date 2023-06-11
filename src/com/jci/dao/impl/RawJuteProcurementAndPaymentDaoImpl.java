@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.RawJuteProcurementAndPaymentDao;
 import com.jci.model.RawJuteProcurementAndPayment;
+import com.mashape.unirest.request.HttpRequest;
 
 @Transactional
 @Repository
@@ -305,9 +307,34 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status , String dpcid) {
-
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status,HttpServletRequest request) {
+         
+		 String dpcid = (String)request.getSession().getAttribute("dpcId");
+		 String roletype =(String) request.getSession().getAttribute("roletype");
+		 String regionid = (String) request.getSession().getAttribute("regionId");
+		 System.out.println("roletype = "+ roletype);
+		 String queryStr = "";
+		 if(roletype.equalsIgnoreCase("RO")) {
+			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
+						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
+						+ "where status ='"+status+"' and regionId = '"+regionid+"'";
+		 }
+		 else if (roletype.equalsIgnoreCase("HO")) {
+			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
+						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
+						+ "where status ='"+status+"'";
+		 }
+		 else if (roletype.equalsIgnoreCase("DPC")) {
+			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
+						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
+						+ "where status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
+		 }
+		 else {
+			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
+						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
+						+ "where status ='"+status+"'";
+		 }
+		
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 

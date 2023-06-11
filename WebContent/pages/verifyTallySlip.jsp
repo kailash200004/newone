@@ -1021,7 +1021,7 @@ height: 614px;
 							 $("#uploadedImage").attr("src","http://49.50.79.121:8080/TallySlip/"+tallyimage);
 							 $("#placeOfPurchase").attr("value",pop);
 							 $("#popname").attr("value",popname);
-							 magnify("uploadedImage", 2);
+							// magnify("uploadedImage", 2);
 						  }
 						else{
 							

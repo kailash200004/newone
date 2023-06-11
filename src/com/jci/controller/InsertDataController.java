@@ -3985,7 +3985,7 @@ public class InsertDataController
             }
     	ModelAndView mv = new ModelAndView("tallyapproval");
 
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",(String)request.getSession().getAttribute("dpcId"));
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",request);
         mv.addObject("juteList", (Object)juteList);
         
         return mv;

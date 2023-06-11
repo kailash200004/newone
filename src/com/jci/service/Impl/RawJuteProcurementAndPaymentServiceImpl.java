@@ -112,9 +112,9 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, String dpcid) {
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, HttpServletRequest request) {
 
-		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, dpcid);
+		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, request);
 	}
 
 	@Override
