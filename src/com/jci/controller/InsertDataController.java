@@ -2559,7 +2559,7 @@ public class InsertDataController
             verifyTallySlip.setNetquantity(Double.parseDouble(netQuantity));
             verifyTallySlip.setPlaceOfPurchase(placeOfPurchase);
             final Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfPurchase);
-            verifyTallySlip.setPuchasedate(date1);
+            verifyTallySlip.setPuchasedate(dateOfPurchase);
             errors = errors.replace("</br>", "");
             errors = errors.replace("'", "");
             final HttpSession session = request.getSession();
@@ -2607,7 +2607,7 @@ public class InsertDataController
            mv = new ModelAndView("index");
           }
        try {
-        String region =(String)request.getSession().getAttribute("region"); 
+        String region =(String)request.getSession().getAttribute("regionId"); 
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region);
         mv.addObject("verifyTallySliList", (Object)verifyList);   
        } 
@@ -3936,7 +3936,7 @@ public class InsertDataController
     	if(username == null) {
         	return new ModelAndView("index");
             }
-    	 String dpcId =(String)request.getSession().getAttribute("dpcId");
+    	 String dpcId =(String)request.getSession().getAttribute("regionId");
     	ModelAndView mv = new ModelAndView("disputedtallyslip");
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD",dpcId);
         mv.addObject("verifyTallySliList", (Object)verifyList);
@@ -4543,7 +4543,7 @@ public class InsertDataController
             if(username == null) {
                 return new ModelAndView("index");
                }
-             String region =(String)request.getSession().getAttribute("region");
+             String region =(String)request.getSession().getAttribute("regionId");
              ModelAndView mv = new ModelAndView("verifiedTallySlipList_RM");
              final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforRM("RMZM", region);
              mv.addObject("verifiedTallyforRM", (Object)verifyList);

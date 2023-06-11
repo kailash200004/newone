@@ -260,7 +260,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 
 	@Override
 	public RawJuteProcurementAndPayment findbyTally(String tallyno) {
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, tallySlipImg from jciprocurement where tallyslipno ='"+tallyno+"'";
+		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno,netquantity from jciprocurement where tallyslipno ='"+tallyno+"'";
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 
@@ -286,6 +286,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 				BigDecimal amountpayable = (BigDecimal)o[11];
 				int ptsid = (int)o[12];
 				String tallyslip =  (String)o[13];
+				BigDecimal netqty = (BigDecimal)o[14];
 				raw.setFarmerregno(farmer);
 				raw.setDatepurchase(datepurchase);
 				raw.setBasis(basis);
@@ -299,6 +300,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 				raw.setGrasatrate(grasatrate.doubleValue());
 				raw.setAmountpayable(amountpayable.doubleValue());
 				raw.setPtsid(ptsid);
+				raw.setNetquantity(netqty.doubleValue());
 				raw.setTallyslipno(tallyslip);
 			//	result.add(raw);
 				//System.out.println("farmer  ====== "+farmer);

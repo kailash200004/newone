@@ -77,7 +77,10 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	public List<VerifyTallySlip> getAll(String status, String region) {
 	List<VerifyTallySlip> r = new ArrayList<>();
 	List<Object[]> result = new ArrayList<>();
-	String querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.payment_status='0' and a.region_id ="+region;
+	String querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
+			+ "d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
+			+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
+			+ " where a.status ='"+status+"' and a.payment_status='0' and a.region_id ="+region;
 	Session session = sessionFactory.getCurrentSession();
 	Transaction tx = session.beginTransaction();
 	SQLQuery query = session.createSQLQuery(querystr);
@@ -88,24 +91,18 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	for(Object[] row : result)
 	{
 		VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
-		Date date = (Date)row[2];
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		String dateString = format.format(date);
-        try {
-			date       = format.parse ( dateString );
-		    } catch (ParseException e)
-	            {
-				e.printStackTrace();
-			    }
+		String dateString =(String) row[3];
+        
+        verifyTallySlip.setTallyid(((int)row[0]));
 		verifyTallySlip.setDop(dateString);
-		verifyTallySlip.setNetquantity(((BigDecimal)row[3]).doubleValue());
-		verifyTallySlip.setAmountpayable(((BigDecimal)row[4]).doubleValue());
-		verifyTallySlip.setFarmerRegNo((String)row[1]);
-		verifyTallySlip.setTallyNo((String)row[0]);
-		verifyTallySlip.setFacheck_flag((String)row[5]);
-		verifyTallySlip.setBasis((String)row[6]);
-		verifyTallySlip.setCentername((String)row[7]);
-		verifyTallySlip.setFarmer_name((String)row[8]);
+		verifyTallySlip.setNetquantity(((BigDecimal)row[4]).doubleValue());
+		verifyTallySlip.setAmountpayable(((BigDecimal)row[5]).doubleValue());
+		verifyTallySlip.setFarmerRegNo((String)row[2]);
+		verifyTallySlip.setTallyNo((String)row[1]);
+		verifyTallySlip.setFacheck_flag((String)row[6]);
+		verifyTallySlip.setBasis((String)row[7]);
+		verifyTallySlip.setCentername((String)row[8]);
+		verifyTallySlip.setFarmer_name((String)row[9]);
 		r.add(verifyTallySlip);
 	}
         System.out.println("LIST SIZE==========="+r.size());
@@ -330,7 +327,10 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		List<VerifyTallySlip> r = new ArrayList<>();
 		List<Object[]> result = new ArrayList<>();
 		HttpSession session1=request.getSession(false); 
-		String querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.amountpayable <= 500000 and payment_status = 0 and a.region_id ='"+region_zone+"'";
+		String querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, "
+				+ "c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo "
+				+ "left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno "
+				+ "where a.status ='"+status+"' and a.amountpayable <= 500000 and payment_status = 0 and a.region_id ='"+region_zone+"'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
