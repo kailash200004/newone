@@ -70,6 +70,13 @@
             <script>
             $(document).ready(function(){
             	var day = <%= LocalDate.now().getDayOfMonth() %>
+            	 if (day.toString().length == 2) {
+
+            		 day =  day;
+            	    }
+            	    else {
+            	    	day = '0' + day;
+            	    }
             	var month = <%= LocalDate.now().getMonthValue() %>
             	var year = <%= LocalDate.now().getYear() %>
             	var fulldate = day+"-"+month+"-"+year;

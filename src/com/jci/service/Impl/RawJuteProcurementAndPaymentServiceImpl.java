@@ -112,9 +112,9 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, String dpcid) {
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, String dpcid, String roletype) {
 
-		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, dpcid);
+		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, dpcid,roletype);
 	}
 
 	@Override
@@ -128,6 +128,12 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	public String getbinno(String binno) {
 		return rawJuteProcurementAndPaymentDao.getbinno(binno);
 		
+	}
+
+	@Override
+	public boolean updateStatus(String tally) {
+		// TODO Auto-generated method stub
+		return rawJuteProcurementAndPaymentDao.updateStatus(tally);
 	}
 
 

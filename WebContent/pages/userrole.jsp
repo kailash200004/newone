@@ -195,7 +195,7 @@ function validateRole(form) {
    <script>
     function allow_alphabets(element){
         let textInput = element.value;
-        textInput = textInput.replace(/[^A-Za-z ]*$/gm, ""); 
+        textInput = textInput.replace(/[^A-Za-z- ]*$/gm, ""); 
         element.value = textInput;
     }
 </script>

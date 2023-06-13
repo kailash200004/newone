@@ -1219,10 +1219,12 @@ public class InsertDataController
             final String tdbaseprice = request.getParameter("tdbaseprice");
             final String dpcid = (String)request.getSession().getAttribute("dpcId");
             final int createdBy = (int)request.getSession().getAttribute("userId");
-            final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+            final SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy");
             final Date d1 = formatter1.parse(datepurchase);
             final Date n = new Date();
+            System.out.println("n == "+n);
             final long time_difference = n.getTime() - d1.getTime();
+            System.out.println("time_difference == "+time_difference);
             final long days_difference = TimeUnit.MILLISECONDS.toDays(time_difference) % 365L;
             if (days_difference == 1L || days_difference == 0L) {
                 rawJuteProcAndPay.setStatus("DPC");
@@ -1609,11 +1611,11 @@ public class InsertDataController
           //  final String ho = request.getParameter("ho");
            
             final String zone = request.getParameter("zone");
-            System.out.println("zone "+zone);
+     
             final String region = request.getParameter("region");
-            System.out.println("region "+ region);
+            
             final String centerordpc = request.getParameter("centerordpc");
-            System.out.println("centerordpc  "+centerordpc);
+         
             final String employeeid = request.getParameter("employeeid");
             final String employeename = request.getParameter("employeename");
             final String email = request.getParameter("emailAddress");
@@ -1621,9 +1623,12 @@ public class InsertDataController
             final String password = request.getParameter("password");
             final String usertype = request.getParameter("usertype");
             final String role = request.getParameter("rolename");
+          //  System.out.println("role "+role);
             final String username1 = request.getParameter("username");
             final String roletype = request.getParameter("roletype");
+          //  System.out.println("roletype "+ roletype);
             final String roleid = request.getParameter("roleid");
+          //  System.out.println("roleid  "+roleid);
             final String duplicateEmail = request.getParameter("emailCheck");
             final boolean duplicatemail = Boolean.parseBoolean(duplicateEmail);
             final UserRegistrationModel userRegistration = new UserRegistrationModel();
@@ -1840,31 +1845,31 @@ public class InsertDataController
               
             }
 			
-            String idProofTypeFinal;
-            if (idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) {
-                idProofTypeFinal = idProofType;
-                
-            }
-            else {
-                idProofTypeFinal = null;
-                
-            }
-            String idProofNumberFinal;
-            if (identityProofNo.equalsIgnoreCase(farmerIdProodNumberDb)) {
-                idProofNumberFinal = identityProofNo;
-               
-            }
-            else {
-                idProofNumberFinal = null;
-                
-            }
+			
+			  String idProofTypeFinal; if
+			  (idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) { idProofTypeFinal =
+			  idProofType;
+			  
+			  } else { idProofTypeFinal = null;
+			  
+			  }
+			 
+			
+			  String idProofNumberFinal; if
+			  (identityProofNo.equalsIgnoreCase(farmerIdProodNumberDb)) {
+			  idProofNumberFinal = identityProofNo;
+			  
+			  } else { idProofNumberFinal = null;
+			  
+			  }
+			 
             final VerifyFarmerModel verifyFarmer = new VerifyFarmerModel();
             verifyFarmer.setAccountno(accNoDbFinal);
             verifyFarmer.setFarmername(farmerNameFinal);
             verifyFarmer.setIfsccode(ifscDbFinal);
             verifyFarmer.setRegno(farmerRegNoFinal);
-            verifyFarmer.setIdentityProofType(idProofTypeFinal);
-            verifyFarmer.setIdentityProofNumber(idProofNumberFinal);
+           // verifyFarmer.setIdentityProofType(idProofTypeFinal);
+            //verifyFarmer.setIdentityProofNumber(idProofNumberFinal);
             verifyFarmer.setStatus(1);
             verifyFarmer.setVerificationdate(new Date());
             verifyFarmer.setRegno(farmer_reg_no);
@@ -1875,7 +1880,11 @@ public class InsertDataController
             String dcpid= (String)request.getSession().getAttribute("dpcId");
             final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus( placeofactivity,  regionId,  zoneId);
             final VerifyFarmerModel farmerById = this.verifyFarmerService.findbyReg(farmer_reg_no);
-            if (farmerById.getRegno() != null && farmerById.getIfsccode() != null && farmerById.getAccountno() != null && farmerById.getFarmername() != null  && farmerById.getIdentityProofType() != null && farmerById.getIdentityProofNumber() != null) {
+			if (farmerById.getRegno() != null && farmerById.getIfsccode() != null && farmerById.getAccountno() != null
+					&& farmerById.getFarmername() != null /*
+															 * && farmerById.getIdentityProofType() != null &&
+															 * farmerById.getIdentityProofNumber() != null
+															 */) {
                 this.farmerRegService.updateVerificationStatus(id);
             }
             mv.addObject("allFarmersList", (Object)allFarmersList);
@@ -1910,7 +1919,27 @@ public class InsertDataController
         }
         return mv;
     }
-    
+    @RequestMapping(value = { "viewFarmerReg" }, method = { RequestMethod.GET })
+    public ModelAndView viewFarmerReg(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewFarmerDetail");
+        if(username == null) {
+        	mv = new ModelAndView("index");
+            }
+        try {
+        if (request.getParameter("id") != null) {
+            final int id = Integer.parseInt(request.getParameter("id"));
+            final List<FarmerRegModel> farmerDetailsById = this.farmerRegService.findDetails(id);
+            final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
+            mv.addObject("Liststate", (Object)Liststate);
+            mv.addObject("farmerDetailsById", (Object)farmerDetailsById);
+        }
+        }
+        catch(Exception e) {
+        	e.printStackTrace();
+        }
+        return mv;
+    }
 	
 	/*
 	 * @RequestMapping({ "EditsaveFarmerRegistrationMid" }) public ModelAndView
@@ -2314,7 +2343,7 @@ public class InsertDataController
     @RequestMapping({ "saveTallySlipMid" })
     public ModelAndView saveTallySlipMid(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
-        ModelAndView mv = new ModelAndView("verifyTallySlip");
+        ModelAndView mv = new ModelAndView("tallyapproval");
         if(username == null) {
         	mv = new ModelAndView("index");
             }
@@ -2607,8 +2636,9 @@ public class InsertDataController
            mv = new ModelAndView("index");
           }
        try {
+    	   String role_type = (String)request.getSession().getAttribute("roletype");
         String region =(String)request.getSession().getAttribute("region"); 
-        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region);
+        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);   
        } 
        catch(Exception e) {
@@ -3012,8 +3042,10 @@ public class InsertDataController
             }
         try {
             final String id = request.getParameter("id");
+      	   String role_type = (String)request.getSession().getAttribute("roletype");
+           String region =(String)request.getSession().getAttribute("region"); 
             this.verifyTallySlipService.delete(Integer.parseInt(id));
-            final List<VerifyTallySlip> Deletetallyslip = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("", dpcId);
+            final List<VerifyTallySlip> Deletetallyslip = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll( "", region, role_type);
             mv.addObject("verifyTallySliList", (Object)Deletetallyslip);
             
             return new ModelAndView((View)new RedirectView("viewVerifiedTallySlipList.obj"));
@@ -3371,7 +3403,7 @@ public class InsertDataController
             DailyPurchase.setPlaceofpurchase(placeofpurchase);
             DailyPurchase.setCreatedby(createdBy);
             DailyPurchase.setRateslipno(rateslipno);
-            System.out.println(DailyPurchase.toString());
+           // System.out.println(DailyPurchase.toString());
             this.DailyPurchasefService.create(DailyPurchase);
             redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
         }
@@ -3936,9 +3968,11 @@ public class InsertDataController
     	if(username == null) {
         	return new ModelAndView("index");
             }
+    	 String role_type = (String)request.getSession().getAttribute("roletype");
+         String region =(String)request.getSession().getAttribute("region"); 
     	 String dpcId =(String)request.getSession().getAttribute("dpcId");
     	ModelAndView mv = new ModelAndView("disputedtallyslip");
-        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD",dpcId);
+        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD",region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);
         
         return mv;
@@ -3952,10 +3986,12 @@ public class InsertDataController
             }
     	ModelAndView mv = new ModelAndView("decissionmaking");
     	 String dpcId =(String)request.getSession().getAttribute("dpcId");
+    	 String role_type = (String)request.getSession().getAttribute("roletype");
         final int id = Integer.parseInt(request.getParameter("id"));
+        String region =(String)request.getSession().getAttribute("region"); 
         final VerifyTallySlip vrf = this.verifyTallySlipService.find(id);
         final RawJuteProcurementAndPayment raw = this.rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo());
-        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD", dpcId);
+        final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD", region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);
         mv.addObject("vrftally", (Object)vrf);
         mv.addObject("raw", (Object)raw);
@@ -3984,10 +4020,41 @@ public class InsertDataController
         	return new ModelAndView("index");
             }
     	ModelAndView mv = new ModelAndView("tallyapproval");
-
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",(String)request.getSession().getAttribute("dpcId"));
+    	//System.out.println("===========================  "+request.getSession().getAttribute("roletype"));
+    	String roletype = (String) request.getSession().getAttribute("roletype");
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",(String)request.getSession().getAttribute("regionId"), roletype);
         mv.addObject("juteList", (Object)juteList);
         
+        return mv;
+    }
+    
+    @RequestMapping({ "tallyListRMA" })
+    public ModelAndView tallyListRMA(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	if(username == null) {
+        	return new ModelAndView("index");
+            }
+    	ModelAndView mv = new ModelAndView("tallyListRMA");
+    	String roletype = (String) request.getSession().getAttribute("roletype");
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",(String)request.getSession().getAttribute("regionId"), roletype);
+        mv.addObject("juteList", (Object)juteList);
+        
+        return mv;
+    }
+    
+    @RequestMapping({ "approvalTallyslip" })
+    public ModelAndView approvalTallyslip(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	if(username == null) {
+        	return new ModelAndView("index");
+            }
+    	ModelAndView mv = new ModelAndView("tallyListRMA");
+    	String tally = request.getParameter("tally");
+    	boolean status = rawJuteProcurAndPayService.updateStatus(tally);
+    	String roletype = (String) request.getSession().getAttribute("roletype");
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",(String)request.getSession().getAttribute("regionId"), roletype);
+        mv.addObject("juteList", (Object)juteList);
+        mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
         return mv;
     }
     
@@ -4245,22 +4312,26 @@ public class InsertDataController
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
 			UserRegistrationModel userRegistration = userRegService.find(refid);
-				String username1 =  request.getParameter("username"); 
-				String employeeid = request.getParameter("employeeid");
+			//	String username1 =  request.getParameter("username"); 
+			//	String employeeid = request.getParameter("employeeid");
 				String email = request.getParameter("emailAddress");
-				String employeename =  request.getParameter("employeename");
+			//	String employeename =  request.getParameter("employeename");
 				String mobileno =  request.getParameter("mobile");
 				String centername = request.getParameter("centerordpc");
 				String roname =  request.getParameter("region");
 				String zonename = request.getParameter("zone");
-				String role = request.getParameter("role");
 				String usertype = request.getParameter("usertype");
 				userRegistration.setRefid(refid);
-				userRegistration.setUsername(username1);
-				userRegistration.setEmployeeid(employeeid);
+				final String role = request.getParameter("rolename");
+		        final String roletype = request.getParameter("roletype");
+		        final String roleid = request.getParameter("roleid");
+			//userRegistration.setUsername(username1);
+			//userRegistration.setEmployeeid(employeeid);
 				userRegistration.setEmail(email);
-				userRegistration.setEmployeename(employeename);
+			//	userRegistration.setEmployeename(employeename);
 				userRegistration.setMobileno(mobileno);
+				userRegistration.setRole_type(roletype);
+				userRegistration.setRoleId(Integer.parseInt(roleid));
 				userRegistration.setDpcId(centername);
 				userRegistration.setZone(zonename);
 				userRegistration.setRegion(roname);

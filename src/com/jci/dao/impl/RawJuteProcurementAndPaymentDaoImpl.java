@@ -305,9 +305,14 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 	}
 
 	@Override
-	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status , String dpcid) {
-
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
+	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status , String regionId, String roletype) {
+		String	queryStr ="";
+		if(!roletype.equalsIgnoreCase("HO")) {
+		queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"' and placeofpurchase = "+regionId;
+		}
+		else if(roletype.equalsIgnoreCase("HO")) {
+			queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement where status ='"+status+"'";
+			}
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 
@@ -396,7 +401,24 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		else basis_variety = "null";
 		return basis_variety;
 		}
-
-
-
+	
+	
+	@Override
+	public boolean updateStatus(String tally) {
+		boolean returnStatus=false;
+		String querystr = "update jciprocurement set status= 'ROV' where tallyslipno = '" +tally+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		int status = query.executeUpdate();
+		System.out.println("status  ===   "+status);
+		if(status>=1) {
+			returnStatus =true;
+			return returnStatus;
+		} else {
+			returnStatus =false;
+			return returnStatus;
+		}
+		
+	}
 }

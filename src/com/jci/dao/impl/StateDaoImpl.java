@@ -52,7 +52,7 @@ public class StateDaoImpl implements StateDao {
 
 	@Override
 	public List<StateList> getAll() {
-		System.out.println("Hello From StateListModel");
+		//System.out.println("Hello From StateListModel");
 		List<StateList> ll;
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(StateList.class);
 		ll=c.list();

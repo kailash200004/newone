@@ -85,6 +85,12 @@ public class FarmerRegServiceImpl implements FarmerRegService{
 		 
 		return farmerRegDao.findRegno(dpcid, region);
 	}
+
+	@Override
+	public List<FarmerRegModel> findDetails(int id) {
+		// TODO Auto-generated method stub
+		return farmerRegDao.findDetails(id);
+	}
 	
 	
 }
