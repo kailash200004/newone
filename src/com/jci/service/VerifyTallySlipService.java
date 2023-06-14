@@ -11,9 +11,8 @@ public interface VerifyTallySlipService {
 	public VerifyTallySlip edit(int id);
 	public void delete(int id);
 	public VerifyTallySlip find(int id);
-	public List<VerifyTallySlip> getAll(String status, String region);
+	public List<VerifyTallySlip> getAll(String status, String region, String role_type);
 	public boolean submitform(VerifyTallySlip VerifyTallySlip);
-
 	public String GettransectionDetails(String tallyNo, String region);
 //	public VerifyTallySlip findByTally(String tallyslipno);
 	public boolean updatebyTally(String status, int verified,String tallyno);

@@ -16,9 +16,6 @@
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
     <!-- THEME STYLES-->
@@ -96,7 +93,7 @@
 										<th>Garsat Rate</th> 										
 										<th>Amount Payable</th>
 										<th>Reason</th>
-									<!-- 	<th>Action</th> -->
+										<th>Action</th>
 							</tr>
 								</thead>
 								<tbody>
@@ -121,9 +118,10 @@
 						               <td><%=verificationlists.getAmountpayable()%></td>
 						                <td><%=verificationlists.getErrors()%></td>
 						               <!--  <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
+ 
 										 <td><a href="decissionmaking.obj?id=<%=verificationlists.getTallyid()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-folder-open" aria-hidden="true" style="font-size: 15px;"></i>View</a></td> 
 						 
-										
+ 
 										
 										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>
 	<td><a href="bnaDelete.obj?id=<%=bnaList.getId()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> --%>

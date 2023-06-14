@@ -63,7 +63,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Farmer Verification</h1>
+                <h1 class="page-title">Farmer List</h1>
             </div>
 			<%
 				 List <FarmerRegModelDTO>  allFarmersList = (List <FarmerRegModelDTO>) request.getAttribute("allFarmersList");
@@ -88,13 +88,14 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									</tr>
 								</thead>
 								<tbody>
-								<%
+								<% if(allFarmersList.size() != 0){
+									
 									int i = 1;
 									for(FarmerRegModelDTO farmerRegModelList : allFarmersList){
 								%>
 									<tr role="row" class="odd">
 									<td class="sorting_1"><%=i%></td>
-									<td><%=farmerRegModelList.getRegno() %></td>
+									<td><a href = "viewFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>" ><u><%=farmerRegModelList.getRegno() %></u></a></td>
 									<td><%=farmerRegModelList.getF_NAME() %></td> 
 									<td><%=farmerRegModelList.getF_MOBILE() %></td>
 									<td><%=farmerRegModelList.getState() %></td>
@@ -134,6 +135,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 												<td></td>
 										<%
 											}
+									
 										%>
 										
 									<%--	<td>
@@ -157,6 +159,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										</tr>
 									<%
 									i++; 
+									}
 								}
 								%>
 									</tbody>

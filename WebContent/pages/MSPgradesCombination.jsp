@@ -80,16 +80,8 @@
 												class="text-danger"> </span>
 											<select name="cropyr" id="cropyr" class="form-control">
 												<option value="">-Select-</option>
-												<option value="2021-2022">2021-2022</option>
-												<option value="2022-2023">2022-2023</option>
-												<option value="2022-2023">2023-2024</option>
-												<option value="2022-2023">2024-2025</option>
-												<option value="2022-2023">2025-2026</option>
-												<option value="2022-2023">2026-2027</option>
-												<option value="2022-2023">2027-2028</option>
-												<option value="2022-2023">2028-2029</option>
-												<option value="2022-2023">2029-2030</option>
-												<option value="2022-2023">2030-2031</option>
+												
+											
 											</select>
                                         </div>
                                         
@@ -123,6 +115,27 @@
         </div>
     </div>
     
+    <script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		if(date == '31'&& month == '6' && time == '23:59:59'){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -132,7 +145,7 @@ $(document).ready(function(){
     $("#addButton").click(function () {
 
     if(counter>10){
-            alert("Only 10 textboxes allow");
+            alert("You've reached max limit!");
             return false;
     }   
 

@@ -29,7 +29,15 @@
   overflow: auto;
   white-space: nowrap;
 }
-
+.text-details {
+    display: block;
+    border: 1px solid #ddd;
+}
+.mandt {
+    display: block;
+    padding: 20px;
+    background: #fff;
+}
 .scrollmenu a {
   display: inline-block;
   color: white;
@@ -37,6 +45,10 @@
   padding: 14px;
   text-decoration: none;
 }
+.content-wrapper {margin-left:0;}
+.doremon{padding:20px;}
+.doremon img{    width: 100%;
+    height: 500px;}
 </style>
  <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
  <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="text/javascript"></script>  
@@ -102,30 +114,63 @@
 			  {
 				%>
              <h1 class="page-title" class="center">Verify Tally Slip Image</h1>
+             <div class="doremon">
                <div class="row">
-		            <label class="center">Tally Slip Image</label><br><br>
-		            <img src="http://49.50.79.121:8080/TallySlip/<%=tallyImage%>" style=" width: 600px;  height: 400px;"/>
+               <div class="col-md-6">
+               		<div class="text-details">		            
+		            <img src="http://49.50.79.121:8080/TallySlip/<%=tallyImage%>"/>
+		            <div class="mandt">
+		            <label class="center">Tally Slip Image</label>
+		            </div>
+		            </div>
+		            </div>
+	            </div>
 	            </div>
 	            <%
 			  }else
 			  {
 	            %>
             <h1 class="page-title" class="center">Verify Farmer Images</h1>
-	            <div class="row">
-		            <label class="center">Farmer mandate Image</label><br><br>
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" style=" width: 600px;  height: 400px;"/><br>
+            <div class="doremon">
+            <div class="row">
+	            <div class="col-md-6">
+	            <div class="text-details">	            
+		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" />
+		            <div class="mandt">
+		            <label class="center">Farmer mandate Image</label>
+		            </div>
+		            </div>
 	            </div>
-	             <div class="row">
-		            <label class="center">Farmer Bank Document</label><br><br>
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>" style=" width: 600px;  height: 400px;"/><br>
+	             <div class="col-md-6">		 
+	             <div class="text-details">	           
+		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>"/>
+		            <div class="mandt">
+		            <label class="center">Farmer Bank Document</label>
+		            </div>
+		            </div>
+	            </div>	             
+	           </div> 
+	           </div>
+	           <div class="doremon">
+	           <div class="row">
+	           <div class="col-md-6">	
+	           <div class="text-details">		            
+		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>"/>
+		            <div class="mandt">
+		            <label class="center">Farmer Id Proof</label>
+		            </div>
+		            </div>
+		            
 	            </div>
-	             <div class="row">
-		            <label class="center">Farmer Id Proof</label><br><br>
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>" style=" width: 600px;  height: 400px;"/><br>
+	             <div class="col-md-6">		
+	             <div class="text-details">            
+		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>"/>
+		            <div class="mandt">
+		            <label class="center">Farmer Registration Form</label>
+		            </div>
+		            </div>
 	            </div>
-	             <div class="row">
-		            <label class="center">Farmer Registration Form</label><br><br>
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>" style=" width: 600px;  height: 400px;"/><br>
+	            </div>
 	            </div>
 	          <%
 			  }

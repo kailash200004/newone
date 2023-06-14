@@ -111,10 +111,11 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 		return rawJuteProcurementAndPaymentDao.updateProcurementerror(status, verified,tallyno, error,region);
 	}
 
-	@Override
+	@Override 
 	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status, HttpServletRequest request) {
-
+  
 		return rawJuteProcurementAndPaymentDao.jutelistbystatus(status, request);
+ 
 	}
 
 	@Override
@@ -128,6 +129,12 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	public String getbinno(String binno) {
 		return rawJuteProcurementAndPaymentDao.getbinno(binno);
 		
+	}
+
+	@Override
+	public boolean updateStatus(String tally) {
+		// TODO Auto-generated method stub
+		return rawJuteProcurementAndPaymentDao.updateStatus(tally);
 	}
 
 

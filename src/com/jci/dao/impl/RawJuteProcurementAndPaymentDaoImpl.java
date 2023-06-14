@@ -308,7 +308,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 			  return raw;
 	}
 
-	@Override
+	@Override 
 	public List<RawJuteProcurementAndPayment> jutelistbystatus(String status,HttpServletRequest request) {
          
 		 String dpcid = (String)request.getSession().getAttribute("dpcId");
@@ -337,6 +337,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 						+ "where status ='"+status+"'";
 		 }
 		
+ 
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 
@@ -425,7 +426,24 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		else basis_variety = "null";
 		return basis_variety;
 		}
-
-
-
+	
+	
+	@Override
+	public boolean updateStatus(String tally) {
+		boolean returnStatus=false;
+		String querystr = "update jciprocurement set status= 'ROV' where tallyslipno = '" +tally+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		int status = query.executeUpdate();
+		System.out.println("status  ===   "+status);
+		if(status>=1) {
+			returnStatus =true;
+			return returnStatus;
+		} else {
+			returnStatus =false;
+			return returnStatus;
+		}
+		
+	}
 }

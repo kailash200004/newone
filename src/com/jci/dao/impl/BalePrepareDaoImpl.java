@@ -78,11 +78,14 @@ public class BalePrepareDaoImpl implements  BalePrepareDao {
 		else if(roletypes.equalsIgnoreCase("ZO"))
 		{
 			querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE LEFT JOIN jcirodetails c ON pur.rocode = c.rocode where c.zonecode='"+zoneId+"'";
+			
 		}
 		else if(roletypes.equalsIgnoreCase("RO")){
 			
 			{
-				querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE where bale.where pur.rocode='"+regionId+"'";;
+				//querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE where bale.where pur.rocode='"+regionId+"'";
+				querystr = "SELECT pur.centername,bale.* FROM jcibalepreparation bale left join jcipurchasecenter pur on bale.place_of_packing = pur.CENTER_CODE where pur.rocode='"+regionId+"'";
+				
 			}	
 		}
 		else 

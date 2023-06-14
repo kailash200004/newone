@@ -137,12 +137,12 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 			String bankMandateForm = (String)row[13];
 			String BankDoc= (String)row[14];
 			String status = null;
-			String vRegNo = (String)row[37];
-			String vIFSC = (String) row[38];
+			String vRegNo = (String)row[38];
+			String vIFSC = (String) row[39];
 			String REGno = (String)row[19];
 			String RegBy = (String)row[6];
-			String state = (String)row[44];
-			String district = (String)row[45];
+			String state = (String)row[45];
+			String district = (String)row[46];
 			String block = (String)row[26];
 			int isVerified =0;
 			if (row[15] !=null) {
@@ -207,7 +207,7 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 				return returnStatus;
 			}
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println(e.getStackTrace());
 		}
 		return returnStatus;
 	}
@@ -265,6 +265,49 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 		else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<FarmerRegModel> findDetails(int id) {
+		List<FarmerRegModel> list = new ArrayList<FarmerRegModel>();
+		String querystr = "select a.* ,b.state_name, c.district_name from jcirmt a   join tbl_states b on a.F_STATE = b.id join tbl_districts c on a.F_District = c.id  where F_ID = '"+id+"'";
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		System.out.println("rows.size ==  "+ rows.size());
+		for(Object[] r : rows)
+		{
+			FarmerRegModel farmerRegModel = new FarmerRegModel();
+			farmerRegModel.setF_ID((int)r[0]);
+			farmerRegModel.setF_NAME((String)r[1]);
+			farmerRegModel.setF_ADDRESS((String)r[2]);
+			farmerRegModel.setF_MOBILE((String)r[3]);
+			farmerRegModel.setF_ID_PROF((String)r[4]);
+			farmerRegModel.setF_ID_PROF_NO((String)r[5]);
+			farmerRegModel.setF_I_CARE_REGISTERED((String)r[7]);
+			farmerRegModel.setLand_holding((String)r[8]);
+			farmerRegModel.setF_BANK_NAME((String)r[9]);
+			farmerRegModel.setF_BANK_BRANCH((String)r[10]);
+			farmerRegModel.setF_BANK_IFSC((String)r[11]);
+			farmerRegModel.setF_AC_NO((String)r[12]);
+			farmerRegModel.setF_DOC_Mandate((String)r[13]);
+			farmerRegModel.setF_BANK_DOC((String)r[14]);
+			farmerRegModel.setF_REG_NO((String)r[19]);
+			farmerRegModel.setBank_ac_type((String)r[20]);
+			farmerRegModel.setF_ID_PROF_TYPE((String)r[21]);
+			farmerRegModel.setCaste((String)r[22]);
+			farmerRegModel.setState_name((String)r[37]);
+			farmerRegModel.setDistrict_name((String)r[38]);
+			farmerRegModel.setF_Pincode((String)r[25]);
+			farmerRegModel.setF_Block((String)r[26]);
+			farmerRegModel.setGender((String)r[27]);
+			farmerRegModel.setF_REG_FORM((String)r[28]);
+			farmerRegModel.setPolice_station((String)r[29]);
+			farmerRegModel.setF_DOC_PATH((String)r[31]);
+			list.add(farmerRegModel);
+		}
+		return list;
 	}
 	
 	

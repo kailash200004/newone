@@ -203,14 +203,16 @@
 								<!-- <div class="ibox-title">Basic form</div> -->
 								<span>${msg}</span>
 							</div>
+							<div class="row">
+							<div class="col-sm-4 form-group">
+							
+							<a href="ViewFarmerRegistration.obj">Go Back</a>
+							</div>
+					</div>
 							<%
 								String id=request.getParameter("id");
 							%>
 								
-								
-								
-								
-							
 								<%
 							%>
 							
@@ -279,8 +281,8 @@
 											</div> -->
 											
 											<div class="form-group">
-												<label class="required">Identity Proof Type</label> <span class="err" name="idProofType_span" id="idProofType_span"></span>
-												<select  name="idProofType" id="idProofType" class="form-control" required>
+												<label>Identity Proof Type</label> <span class="err" name="idProofType_span" id="idProofType_span"></span>
+												<select  name="idProofType" id="idProofType" class="form-control" >
 													<option id="default" value="">-Select-</option>
 													<option id="AadharCard" value="Aadhar Card">Aadhar Card</option>
 													<option id="VoterId" value="Voter Id">Voter Id</option>
@@ -289,9 +291,9 @@
 											
 											<div class="form-group">
  
-												<label class="required">Identity Proof Number</label> <span class="err" name="idProofNo_span" id="idProofNo_span"></span>
+												<label>Identity Proof Number</label> <span class="err" name="idProofNo_span" id="idProofNo_span"></span>
  
-												<input class="form-control"	type="text" name="identityProofNo" id="identityProofNo" placeholder="Identity Proof Number" value="" required>
+												<input class="form-control"	type="text" name="identityProofNo" id="identityProofNo" placeholder="Identity Proof Number" value="" >
 											</div>
 											
 											<div class="form-group">
@@ -345,18 +347,18 @@
     });
     </script>
 	
-	
+
 	<script src="build/js/intlTelInput.js"></script>
 
 	<script>
 		function validate(){
 			var missing=false;
-	
-			var fIfsc = document.getElementById("fIfsc").value;
-			var facNo = document.getElementById("facNo").value;
-			var fName = document.getElementById("fName").value;
-			var fidProofType = document.getElementById("fidProofType").value;
-			var fidProofNo = document.getElementById("fidProofNo").value;
+		
+			var fIfsc = <%=farmerModel.getF_BANK_IFSC()%>;
+			var facNo = <%=farmerModel.getF_AC_NO()%>;
+			var fName = <%=farmerModel.getF_AC_NO()%>;
+			var fidProofType = <%=farmerModel.getF_ID_PROF_TYPE()%>;
+			var fidProofNo = <%=farmerModel.getF_ID_PROF_NO()%>;
 			var ifsc_code = document.getElementById("ifsc_code").value;
 			var ac_no = document.getElementById("ac_no").value;
 			var farmer_name = document.getElementById("farmer_name").value;
@@ -401,25 +403,7 @@
 				document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
 				return false;
 			} */
-			if(fidProofType!==idProofType){
-				missing = true;
-				document.getElementById("idProofType_span").textContent= "Please check Id proof type";
-				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-				//return false;
-			}
-			else{
-				document.getElementById("idProofType_span").textContent= "";
-			}
-			if(fidProofNo!=identityProofNo){
-				missing = true;
-				document.getElementById("idProofNo_span").textContent= "Please check proof no";
-				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-				//return false;
-			}
-			else{
-				document.getElementById("idProofNo_span").textContent= "";
-				
-			}
+			
 			if(missing == true)
 				{
 				return false;
@@ -428,7 +412,7 @@
 		
 	</script>
 	
-	<!-- <script>
+	 <script>
 	$(document).ready(function(){
 		$("#ac_no").keyup(function() {
 			var value = $(this).val();
@@ -443,7 +427,7 @@
 		   
 		});
 	});
-	</script> -->
+	</script> 
 	
 	<script src="./assets/vendors/jquery/dist/jquery.min.js"
 		type="text/javascript"></script>

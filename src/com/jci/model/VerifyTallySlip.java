@@ -411,19 +411,14 @@ public class VerifyTallySlip {
 
 
 
-
-
-
-
-
-
-
 	public String getPuchasedate() {
 		return puchasedate;
 	}
 
+ 
 	public void setPuchasedate(String puchasedate) {
 		this.puchasedate = puchasedate;
+ 
 	}
 
 	public String getErrors() {

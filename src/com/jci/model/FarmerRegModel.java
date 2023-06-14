@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="jcirmt", schema="dbo")
@@ -48,10 +49,15 @@ public class FarmerRegModel {
 
 	@Column(name="F_STATE")
 	private String F_STATE;
-
+	
+	@Transient
+	private String State_name;
 
 	@Column(name="F_District")
 	private String F_District;
+	
+	@Transient
+	private String district_name;
 
 
 
@@ -227,12 +233,15 @@ public class FarmerRegModel {
 	}
 
 	
+	
+
 	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
-			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String f_District,
-			String f_I_CARE_REGISTERED, String land_holding, String f_MOBILE, String f_AC_NO, String bank_ac_type,
-			String f_BANK_NAME, String f_BANK_BRANCH, String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM,
-			String f_DOC_PATH, String f_REG_NO, String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2,
-			String f_Pincode, int iS_VERIFIED, String dpc_id, String police_station) {
+			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String state_name,
+			String f_District, String district_name, String f_I_CARE_REGISTERED, String land_holding, String f_MOBILE,
+			String f_AC_NO, String bank_ac_type, String f_BANK_NAME, String f_BANK_BRANCH, String f_BANK_IFSC,
+			String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH, String f_REG_NO, String f_DOC_Mandate,
+			Date f_VERFIED_DATE, String f_Address2, String f_Pincode, int iS_VERIFIED, String dpc_id,
+			String police_station) {
 		super();
 		F_ID = f_ID;
 		F_NAME = f_NAME;
@@ -245,7 +254,9 @@ public class FarmerRegModel {
 		F_ID_PROF_NO = f_ID_PROF_NO;
 		F_REG_BY = f_REG_BY;
 		F_STATE = f_STATE;
+		State_name = state_name;
 		F_District = f_District;
+		this.district_name = district_name;
 		F_I_CARE_REGISTERED = f_I_CARE_REGISTERED;
 		this.land_holding = land_holding;
 		F_MOBILE = f_MOBILE;
@@ -501,12 +512,29 @@ public class FarmerRegModel {
 		F_REG_NO = f_REG_NO;
 	}
 
+	public String getState_name() {
+		return State_name;
+	}
+
+	public void setState_name(String state_name) {
+		State_name = state_name;
+	}
+
+	public String getDistrict_name() {
+		return district_name;
+	}
+
+	public void setDistrict_name(String district_name) {
+		this.district_name = district_name;
+	}
+
 	@Override
 	public String toString() {
 		return "FarmerRegModel [F_ID=" + F_ID + ", F_NAME=" + F_NAME + ", caste=" + caste + ", gender=" + gender
 				+ ", F_ADDRESS=" + F_ADDRESS + ", F_ID_PROF_TYPE=" + F_ID_PROF_TYPE + ", F_Block=" + F_Block
 				+ ", F_ID_PROF=" + F_ID_PROF + ", F_ID_PROF_NO=" + F_ID_PROF_NO + ", F_REG_BY=" + F_REG_BY
-				+ ", F_STATE=" + F_STATE + ", F_District=" + F_District + ", F_I_CARE_REGISTERED=" + F_I_CARE_REGISTERED
+				+ ", F_STATE=" + F_STATE + ", State_name=" + State_name + ", F_District=" + F_District
+				+ ", district_name=" + district_name + ", F_I_CARE_REGISTERED=" + F_I_CARE_REGISTERED
 				+ ", land_holding=" + land_holding + ", F_MOBILE=" + F_MOBILE + ", F_AC_NO=" + F_AC_NO
 				+ ", bank_ac_type=" + bank_ac_type + ", F_BANK_NAME=" + F_BANK_NAME + ", F_BANK_BRANCH=" + F_BANK_BRANCH
 				+ ", F_BANK_IFSC=" + F_BANK_IFSC + ", F_BANK_DOC=" + F_BANK_DOC + ", F_REG_FORM=" + F_REG_FORM
@@ -514,6 +542,8 @@ public class FarmerRegModel {
 				+ ", F_VERFIED_DATE=" + F_VERFIED_DATE + ", F_Address2=" + F_Address2 + ", F_Pincode=" + F_Pincode
 				+ ", IS_VERIFIED=" + IS_VERIFIED + ", dpc_id=" + dpc_id + ", police_station=" + police_station + "]";
 	}
+
+	
 
 	
 
