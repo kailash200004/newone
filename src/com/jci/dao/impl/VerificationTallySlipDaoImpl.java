@@ -77,14 +77,16 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 	public List<VerifyTallySlip> getAll(String status, String region,String role_type) {
 	List<VerifyTallySlip> r = new ArrayList<>();
 	List<Object[]> result = new ArrayList<>();
+
 	String querystr = "";
-	if(!role_type.equalsIgnoreCase("HO")) {
+	if(!role_type.equalsIgnoreCase("RO")) {
 		querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.payment_status='0' and a.region_id ="+region;
 
 	}
 	else if(role_type.equalsIgnoreCase("HO")) {
 	querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno where a.status ='"+status+"' and a.payment_status='0'";
 	}
+
 	Session session = sessionFactory.getCurrentSession();
 	Transaction tx = session.beginTransaction();
 	SQLQuery query = session.createSQLQuery(querystr);
