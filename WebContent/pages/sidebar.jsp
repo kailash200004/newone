@@ -170,6 +170,8 @@ body {
 					<li  data-pre="38" id="o38"><a href="contractgenerationPCSOWise.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation PCSO Wise</b></a></li>
 					<li  data-pre="39" id="o39"><a href="contractgenerationMillWise.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation Mill Wise</b></a></li>
 					<li  data-pre="40" id="o40"><a href="viewcontractgeneration.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation List</b></a></li>
+					<li  data-pre="56" id="o56"><a href="MSPgradesCombination.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>MSP Grades Combination</b></a></li>
+					
 				</ul></li>
 			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span

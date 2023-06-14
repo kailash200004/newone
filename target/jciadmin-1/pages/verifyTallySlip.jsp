@@ -15,12 +15,15 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
+	<link rel="stylesheet" href="build/css/intlTelInput.css">
+<link rel="stylesheet" href="build/css/demo.css">
+<link
+	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
+	rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="build/css/intlTelInput.css">
-<link rel="stylesheet" href="build/css/demo.css">
+
  
   <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
       
@@ -402,7 +405,7 @@ height: 614px;
 												class="text-danger"> </span> <input class="form-control"
 												type="number" name="netQuantity" id="netQuantity"
 												placeholder="Net Quantity" onkeyup="deleteErrorMsg()"
-												min="0">
+												min="0" step="any">
 										</div>
 										<div class=" form-group">
 											<label>Garsat Rate</label> <span class="text-danger">*
@@ -417,15 +420,12 @@ height: 614px;
 												class="text-danger"> </span> <input class="form-control"
 												type="number" name="amountPayable" id="amountPayable"
 												placeholder="Amount Payable" onkeyup="deleteErrorMsg()"
-												min="0">
+												min="0" step="any">
 										</div>
 
 										<div class=" form-group">
 											<label>Jute Variety</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety"
-												class="text-danger"> </span> 
-												<!-- <input class="form-control"type="text" name="juteVariety" id="juteVariety" placeholder="Jute Variety" onkeyup="deleteErrorMsg()"> -->
-												
+											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety" class="text-danger"> </span> 
 											<select name="juteVariety" id="juteVariety" class="form-control"   onselect="deleteErrorMsg()">
                                         	<option value="">Select</option>
                                         	<option value="Bimli">Bimli</option>
@@ -803,12 +803,16 @@ height: 614px;
 	let	 rateSlipNumber = Number(document.forms["myForm"]["rateSlipNumber"].value);
 	let	 binNumber = Number(document.forms["myForm"]["binNumber"].value);
 	let	 juteVariety = document.forms["myForm"]["juteVariety"].value;
+	
 	let	 netQuantity =  Number(document.forms["myForm"]["netQuantity"].value);
+	alert("netQuantity  = "+netQuantity);
 	netQuantity =  netQuantity.toFixed(3);
+	alert("netQuantity fixed = "+netQuantity);
 	let	 garsatRate = Number(document.forms["myForm"]["garsatRate"].value);
 	garsatRate = garsatRate.toFixed(3);
 	let	 amountPayable = Number(document.forms["myForm"]["amountPayable"].value);
 	amountPayable = amountPayable.toFixed(3);
+	alert("amountPayable  = "+amountPayable);
 	var sum_gross=0;
     for (var i=1; i<=50; i++){
 	sum_gross += Number(document.getElementById("drumWiseQuantity"+i).value);
@@ -1115,10 +1119,6 @@ height: 614px;
   
 	<script>
 	$(document).ready(function(){
-	/* 	$("#dateOfPurchase").datepicker({ dateFormat: 'dd-mm-yy'}); */
-	
-	
-	
 	 $( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
  });
 

@@ -1517,6 +1517,7 @@ public class InsertDataController
     
     @RequestMapping({ "dailyPurchaseList" })
     public ModelAndView dailyPurchaseList(final HttpServletRequest request) {
+    	
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
         if(username == null) {
@@ -2341,7 +2342,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "saveTallySlipMid" })
-    public ModelAndView saveTallySlipMid(final HttpServletRequest request) {
+    public ModelAndView saveTallySlipMid(final HttpServletRequest request , final RedirectAttributes redirectAttributes) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("tallyapproval");
         if(username == null) {
@@ -2587,8 +2588,8 @@ public class InsertDataController
             verifyTallySlip.setGarsatrate(Double.parseDouble(garsatRate));
             verifyTallySlip.setNetquantity(Double.parseDouble(netQuantity));
             verifyTallySlip.setPlaceOfPurchase(placeOfPurchase);
-            final Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfPurchase);
-            verifyTallySlip.setPuchasedate(date1);
+            final Date date1 = new SimpleDateFormat("dd-MM-yyyy").parse(dateOfPurchase);
+            verifyTallySlip.setPuchasedate(dateOfPurchase);
             errors = errors.replace("</br>", "");
             errors = errors.replace("'", "");
             final HttpSession session = request.getSession();
@@ -2604,18 +2605,23 @@ public class InsertDataController
             //System.out.println(procupdate);
             if (procupdate) {
                 this.verifyTallySlipService.submitform(verifyTallySlip);
-                mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Tally slip verified successfully.</div>\r\n");
+              //  mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Tally slip verified successfully.</div>\r\n");
+                redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Tally slip verified successfully.</div>\r\n");
+
             }
             else {
-                mv.addObject("msg", (Object)"<div class=\"alert alert-Failed\"><b>Fail to save !</b> Tally slip verification failed.</div>\r\n");
+             //   mv.addObject("msg", (Object)"<div class=\"alert alert-Failed\"><b>Fail to save !</b> Tally slip verification failed.</div>\r\n");
+                redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-Failed\"><b>Success !</b>  Tally slip verification failed.</div>\r\n");
+
             }
         }
         catch (Exception e) {
-            mv.addObject("msg", (Object)"<div class=\"alert Alert-Failed\"><b>Failed !</b> Tally slip Verification Failed.</div>\r\n");
+           e.printStackTrace();
         }
         
-        return mv;
+        return new ModelAndView((View)new RedirectView("tallyapproval.obj"));
     }
+    
     
 	/*
 	 * @RequestMapping({ "viewVerifiedTallySlipList" }) public ModelAndView
@@ -3889,12 +3895,13 @@ public class InsertDataController
             final String creation_date = request.getParameter("creation_date");
             final String jute_grade = request.getParameter("jute_grade");
             final BalePreparation balePreparation = new BalePreparation();
-            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             final LocalDateTime now = LocalDateTime.now();
             final String date = dtf.format(now);
             balePreparation.setCreation_date(date);
             final long millis = System.currentTimeMillis();
             final java.sql.Date sqlDate = new java.sql.Date(millis);
+            System.out.println("sqlDate =====   "+sqlDate);
             balePreparation.setPacking_date(sqlDate.toString());
             balePreparation.setPlace_of_packing(place_of_packing);
             balePreparation.setCrop_year(crop_year);

@@ -25,7 +25,7 @@ public class VerifyTallySlip {
 	private String tallyNo;
 
 	@Column(name ="puchasedate")
-	private Date puchasedate;
+	private String puchasedate;
 
 	@Column(name = "errors")
 	private String errors;
@@ -414,7 +414,7 @@ public class VerifyTallySlip {
 
 
 
-	public Date getPuchasedate() {
+	public String getPuchasedate() {
 		return puchasedate;
 	}
 
@@ -424,8 +424,8 @@ public class VerifyTallySlip {
 
 
 
-	public void setPuchasedate(Date puchasedate) {
-		this.puchasedate = puchasedate;
+	public void setPuchasedate(String dateOfPurchase) {
+		this.puchasedate = dateOfPurchase;
 	}
 
 
@@ -1763,7 +1763,7 @@ public class VerifyTallySlip {
 				+ "]";
 	}
 
-	public VerifyTallySlip(int tallyid, String farmerRegNo, String tallyNo, Date puchasedate, String errors,
+	public VerifyTallySlip(int tallyid, String farmerRegNo, String tallyNo, String puchasedate, String errors,
 			String status, int is_varified, int rateslipno, int binno, String jutevariety, double netquantity,
 			double garsatrate, String tallySlipImg, double grossqty, double amountpayable, int createdby,
 			String placeOfPurchase, double drumWiseQuantity1, double drumWiseQuantity2, double drumWiseQuantity3,

@@ -111,7 +111,7 @@ public class PurchaseCenterDaoImpl implements PurchaseCenterDao {
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Object[]> rows = query.list();
 		for(Object[] row : rows){
-			result.add(row[1].toString()+"-"+row[4].toString());
+			result.add(row[0].toString()+"-"+row[1].toString());
 		}
 		return result;
 	}

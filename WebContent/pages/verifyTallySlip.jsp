@@ -374,7 +374,7 @@ height: 614px;
 											</span>&nbsp; <span id="errplaceOfPurchase"
 												name="errplaceOfPurchase" class="text-danger"> </span> 
 												<input class="form-control" type="text" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" Readonly>
+												onkeyup="deleteErrorMsg()" >
 												<input class="form-control" type="hidden" name="popname" id="popname" placeholder="Place of Purhase"
 												onkeyup="deleteErrorMsg()" Readonly>
 										</div>
