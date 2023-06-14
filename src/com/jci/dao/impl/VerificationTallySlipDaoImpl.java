@@ -218,7 +218,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 			Date date = new Date();
 			for( Object[] row : list) {
 				
-				paymentdetails.setPurchase_date((Date)row[0]);
+				paymentdetails.setPurchase_date((String)row[0]);
 				paymentdetails.setAmount(((BigDecimal)row[1]).doubleValue());
 				paymentdetails.setBeneficiary_IFSC_code((String)row[2]);
 				paymentdetails.setBeneficiaryAC_No((String)row[3]);
@@ -340,9 +340,9 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		for(Object[] row : result)
 		{
 			VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
-			Date date = (Date)row[2];
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			String dateString = format.format(date);
+		//	Date date = (Date)row[2];
+		//	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			String dateString = (String)row[2];
 			verifyTallySlip.setDop(dateString);
 			verifyTallySlip.setNetquantity(((BigDecimal)row[3]).doubleValue());
 			verifyTallySlip.setAmountpayable(((BigDecimal)row[4]).doubleValue());
@@ -369,7 +369,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
-		String fa_approver_email = query.list().toString();
+		String fa_approver_email = query.list().get(0).toString();
 		System.out.println(query.list());
 			return fa_approver_email;
 	}
@@ -390,9 +390,9 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao{
 		for(Object[] row : result)
 		{
 			VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
-			Date date = (Date)row[2];
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			String dateString = format.format(date);
+			//Date date = (Date)row[2];
+		//	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			String dateString = (String)row[2];
 			verifyTallySlip.setDop(dateString);
 			verifyTallySlip.setNetquantity(((BigDecimal)row[3]).doubleValue());
 			verifyTallySlip.setAmountpayable(((BigDecimal)row[4]).doubleValue());

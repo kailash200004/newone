@@ -8,7 +8,7 @@ import javax.activation.*;
  
 public class SendMail {
 
-	 public void sendEmail(String to, String body, String subject, String filename, String username)
+	 public void sendEmail(InternetAddress[] toAddresses, String body, String subject, String filename, String username)
 	 {
 		 String from = "cyfuturejavateam14@gmail.com";
 		 Properties prop = new Properties();
@@ -30,9 +30,10 @@ public class SendMail {
 		});
 		 
 		 try {
-			 
+			// System.out.println("to = "+to );
 			 Message message = new MimeMessage(session);
-			 message.setRecipient(Message.RecipientType.TO,new InternetAddress(to));
+			// InternetAddress[] toAddresses = { new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
+			 message.setRecipients(Message.RecipientType.TO,toAddresses);
 			 message.setFrom(new InternetAddress(from));
 			 message.setSubject(subject);
 			 

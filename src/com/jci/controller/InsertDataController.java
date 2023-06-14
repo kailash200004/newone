@@ -66,6 +66,8 @@ import java.util.List;
 import java.util.Random;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -4327,9 +4329,13 @@ public class InsertDataController
 	    	try {
 	    	String username =(String)request.getSession().getAttribute("usrname");
 	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
+	    //	String path1 ="/Users/apple/Documents/Bob/";
 	    //	String path1 ="D:\\";
+	    	
+	    
 
-	     String usrname = (String) session.getAttribute("usrname");       
+	     String usrname = (String) session.getAttribute("usrname"); 
+	     String usermail = (String) session.getAttribute("usrname"); 
 	     Random num = new Random();
 	     int x= num.nextInt(50);
 	     String tno ="";
@@ -4408,7 +4414,7 @@ public class InsertDataController
 	                row.createCell(8).setCellValue(paymentlist.getSender());  
 	                row.createCell(9).setCellValue(paymentlist.getBeneficiary_bank());  
 	                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
-	                String purchasedate = dateFormat.format(paymentlist.getPurchase_date()); 
+	                String purchasedate = paymentlist.getPurchase_date(); 
 	                row.createCell(10).setCellValue(purchasedate);  
 	                row.createCell(11).setCellValue("UTR NO");
 	                String currentdate = dateFormat.format(paymentlist.getDate());
@@ -4428,25 +4434,44 @@ public class InsertDataController
 		          if(roho.equalsIgnoreCase("RO"))
 		          {
 		        	  //mail to RM-Finance(fa approver) and RM(Regional Manager(jo login kiya h))
-		        	  //toEmail = FA_approver_email+","+usrname;
-		        	  toEmail = "vishal.vishwakarma@cyfuture.com,animesh.anand@cyfuture.com";
+		        	//  toEmail = FA_approver_email+","+usermail;
+		        	  InternetAddress[] toAddresses  = {  new InternetAddress(FA_approver_email) , new InternetAddress(usermail) ,new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
+		        	  toEmail =  FA_approver_email+", "+usermail+", vishal.vishwakarma@cyfuture.com, animesh.anand@cyfuture.com";
+		        	  
+		        	  System.out.println("tomail = "+toEmail);
+		        	  SendMail sendMail = new SendMail();
+		              String subject = "Invoice Generated";
+		              String body = "PFA This is your payment details . ";
+		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
+		              a ="success";
+		              return a;
 		          }
 		          else if(roho.equalsIgnoreCase("HO"))
 		          {
 		        	  //mail to HO Finance (Finance Official of HO) and RM(Regional Manager)
 		        	  toEmail = "vishal.vishwakarma@cyfuture.com,animesh.anand@cyfuture.com";
+		        	  InternetAddress[] toAddresses  = {  new InternetAddress(FA_approver_email) , new InternetAddress(usermail) ,new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
+			        	 
+		        	  SendMail sendMail = new SendMail();
+		              String subject = "Invoice Generated";
+		              String body = "PFA This is your payment details . ";
+		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
+		              a ="success";
+		              return a;
 		          }
 		          else if(roho.equalsIgnoreCase("ZMHO"))
 		          {
 		        	  //Mail to ZM (jo login kiya h), HO Finance , RM
 		        	  toEmail = "vishal.vishwakarma@cyfuture.com,animesh.anand@cyfuture.com";
+		        	  InternetAddress[] toAddresses  = {  new InternetAddress(FA_approver_email) , new InternetAddress(usermail) ,new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
+		        	  SendMail sendMail = new SendMail();
+		              String subject = "Invoice Generated";
+		              String body = "PFA This is your payment details . ";
+		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
+		              a ="success";
+		              return a;	 
 		          }
-	              SendMail sendMail = new SendMail();
-	              String subject = "Invoice Generated";
-	              String body = "PFA This is your payment details . ";
-	              sendMail.sendEmail(toEmail, body, subject, filename, usrname);
-	              a ="success";
-	              return a;
+	             
 	    	  }   
 	            catch (Exception e)   
 		        {  

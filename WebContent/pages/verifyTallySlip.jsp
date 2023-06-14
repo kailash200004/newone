@@ -42,6 +42,7 @@
 	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
 	rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- PLUGINS STYLES-->
@@ -56,7 +57,7 @@
 <!-- date picker -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
  
 <!-- <script src="assets/css/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
 <script src="assets/js/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
@@ -189,6 +190,56 @@ width:1000px;
 overflow-y: auto;
 height: 614px;
 }
+.click-zoom input[type=checkbox] {
+  display: none
+}
+
+/* .click-zoom img {
+  margin: 100px;
+  transition: transform 0.25s ease;
+  cursor: zoom-in
+}
+
+.click-zoom input[type=checkbox]:checked~img {
+  transform: scale(2);
+  cursor: zoom-out
+} */
+
+.scroll .btn {
+  width: 50px;
+  height: 50px;
+  background: #FFF;
+  border: 1px solid #005bac;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  color: #005bac;
+  padding: 15px 10px 5px;
+  position: absolute;
+  text-align: center;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+	transition: all 0.3s ease;
+  z-index: 1;
+}
+.scroll .btn:hover {
+  background: #eef;
+}
+
+.scroll .zoom {
+  bottom: 190px;
+}
+
+.scroll .zoom-out {
+  bottom: 120px;
+}
+.scroll .zoom-init {
+  bottom: 50px;
+}
+button#turn{position:relative;z-index:999;}
 </style>
 
 <script type="text/javascript">
@@ -301,6 +352,7 @@ height: 614px;
 			//String tally = (String)request.getAttribute("tally");
 			 String tally = (String)request.getAttribute("tallyslip");
 			%>
+			
 			 
 			<div class="page-content fade-in-up">
 				<div class="row">
@@ -325,6 +377,7 @@ height: 614px;
 								<form action="saveTallySlipMid.obj" method="POST" name="myForm"
 									id="myForm" onsubmit="return validate()" autocomplete="off">
 									<span id="image"></span>
+									
 											<div class="row">
 									<div class="col-sm-6 form-group scroll">
 									
@@ -333,11 +386,18 @@ height: 614px;
 										src="https://pic.onlinewebfonts.com/svg/img_313385.png">
 									Rotate
 								</button>
-							<div  class="img-magnifier-container">
+								<a class="btn zoom"><i class="fas fa-search-plus"></i></a>
+									<a class="btn zoom-out"><i class="fas fa-search-minus"></i></a>
+									<a class="btn zoom-init"><i class="fas fa-recycle"></i></a>
+									<div  class="img-magnifier-container">
+								<div class="click-zoom target">
+								  
+								   <img name="uploadedImage"  id="uploadedImage" src="https://placehold.jp/960x450.png" class="magniflier"/>
+								</div>
 								
-								<img name="uploadedImage"  id="uploadedImage" src="https://placehold.jp/960x450.png" class="magniflier" style="
-                               width: 600px;  height: 400px; object-fit: fill;" />
-
+							
+								
+								
 							</div>
 									</div>
 										<div class="col-sm-6 form-group scroll">
@@ -1111,6 +1171,8 @@ height: 614px;
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
   
   
 	<script>
@@ -1125,7 +1187,22 @@ height: 614px;
 	</script>
 </script>
 
- 
+ <script type="text/javascript">
+	var zoom = 1;
+	
+	$('.zoom').on('click', function(){
+		zoom += 0.1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
+	$('.zoom-init').on('click', function(){
+		zoom = 1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
+	$('.zoom-out').on('click', function(){
+		zoom -= 0.1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
+ </script>
  
 
 
