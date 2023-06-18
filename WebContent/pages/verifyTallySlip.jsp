@@ -15,21 +15,28 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="build/css/intlTelInput.css">
+<link rel="stylesheet" href="build/css/intlTelInput.css">
 <link rel="stylesheet" href="build/css/demo.css">
 <link
 	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
 	rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
- 
-  <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" > </script>
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
+
+<link
+	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+	rel='stylesheet'>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link
 	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
 	rel="stylesheet">
@@ -45,7 +52,10 @@
 	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
 	rel="stylesheet" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+	integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+	crossorigin="anonymous">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- PLUGINS STYLES-->
@@ -53,148 +63,166 @@
 <link href="assets/css/main.min.css" rel="stylesheet" />
 <!-- PAGE LEVEL STYLES-->
 <!-- zooming feature -->
-  <link rel="stylesheet" href="assets/css/zoom.css"> 
- <link rel="stylesheet" href="assets/css/magnify.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-   
+<link rel="stylesheet" href="assets/css/zoom.css">
+<link rel="stylesheet" href="assets/css/magnify.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	charset="utf-8"></script>
+
 <!-- date picker -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
- 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 <!-- <script src="assets/css/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
 <script src="assets/js/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
 <script src="jquery.magnify.js" type="text/javascript"  charset="utf-8"></script> -->
 <style>
 .glass {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  border-radius: 50%;
-  cursor: crosshair;
-  
-  /* Multiple box shadows to achieve the glass effect */
-  box-shadow:
-    0 0 0 7px rgba(255, 255, 255, 0.85),
-    0 0 7px 7px rgba(0, 0, 0, 0.25), 
-    inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-  
-  /* hide the glass by default */
-  display: none;
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	border-radius: 50%;
+	cursor: crosshair;
+	/* Multiple box shadows to achieve the glass effect */
+	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px
+		rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+	/* hide the glass by default */
+	display: none;
 }
 
-* {box-sizing: border-box;}
+* {
+	box-sizing: border-box;
+}
 
 .img-magnifier-container {
-  position:relative;
+	position: relative;
 }
 
 .img-magnifier-glass {
-  position: absolute;
-  border: 3px solid #000;
-  border-radius: 50%;
-  cursor: none;
-  /*Set the size of the magnifier glass:*/
-  width: 100px;
-  height: 100px;
+	position: absolute;
+	border: 3px solid #000;
+	border-radius: 50%;
+	cursor: none;
+	/*Set the size of the magnifier glass:*/
+	width: 100px;
+	height: 100px;
 }
-
 </style>
 
 <!-- styling confirm box -->
 <style type="text/css">
 body {
-    font-family: sans-serif
-}
-.dialog-ovelay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 140vw;
-    background-color: rgba(0, 0, 0, 0.50);
-    z-index: 999999
-}
-.dialog-ovelay .dialog {
-    width: 600px;
-    margin: 100px auto 0;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    border-radius: 3px;
-    overflow: hidden
-}
-.dialog-ovelay .dialog header {
-    padding: 10px 8px;
-    background-color: #f6f7f9;
-    border-bottom: 1px solid #e5e5e5
-}
-.dialog-ovelay .dialog header h3 {
-    font-size: 14px;
-    margin: 0;
-    color: #555;
-    display: inline-block
-}
-.dialog-ovelay .dialog header .fa-close {
-    float: right;
-    color: #c4c5c7;
-    cursor: pointer;
-    transition: all .5s ease;
-    padding: 0 2px;
-    border-radius: 1px    
-}
-.dialog-ovelay .dialog header .fa-close:hover {
-    color: #b9b9b9
-}
-.dialog-ovelay .dialog header .fa-close:active {
-    box-shadow: 0 0 5px #673AB7;
-    color: #a2a2a2
-}
-.dialog-ovelay .dialog .dialog-msg {
-    padding: 12px 10px
-}
-.dialog-ovelay .dialog .dialog-msg p{
-    margin: 0;
-    font-size: 15px;
-    color: #333
-}
-.dialog-ovelay .dialog footer {
-    border-top: 1px solid #e5e5e5;
-    padding: 8px 10px
-}
-.dialog-ovelay .dialog footer .controls {
-    direction: rtl
-}
-.dialog-ovelay .dialog footer .controls .button {
-    padding: 5px 15px;
-    border-radius: 3px
-}
-.button {
-  cursor: pointer
-}
-.button-default {
-    background-color: rgb(248, 248, 248);
-    border: 1px solid rgba(204, 204, 204, 0.5);
-    color: #5D5D5D;
-}
-.button-danger {
-    background-color: #f44336;
-    border: 1px solid #d32f2f;
-    color: #f5f5f5
-}
-.link {
-  padding: 5px 10px;
-  cursor: pointer
+	font-family: sans-serif
 }
 
-.scroll{
-float:left;
-width:1000px;
-overflow-y: auto;
-height: 614px;
+.dialog-ovelay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 140vw;
+	background-color: rgba(0, 0, 0, 0.50);
+	z-index: 999999
 }
+
+.dialog-ovelay .dialog {
+	width: 600px;
+	margin: 100px auto 0;
+	background-color: #fff;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+	border-radius: 3px;
+	overflow: hidden
+}
+
+.dialog-ovelay .dialog header {
+	padding: 10px 8px;
+	background-color: #f6f7f9;
+	border-bottom: 1px solid #e5e5e5
+}
+
+.dialog-ovelay .dialog header h3 {
+	font-size: 14px;
+	margin: 0;
+	color: #555;
+	display: inline-block
+}
+
+.dialog-ovelay .dialog header .fa-close {
+	float: right;
+	color: #c4c5c7;
+	cursor: pointer;
+	transition: all .5s ease;
+	padding: 0 2px;
+	border-radius: 1px
+}
+
+.dialog-ovelay .dialog header .fa-close:hover {
+	color: #b9b9b9
+}
+
+.dialog-ovelay .dialog header .fa-close:active {
+	box-shadow: 0 0 5px #673AB7;
+	color: #a2a2a2
+}
+
+.dialog-ovelay .dialog .dialog-msg {
+	padding: 12px 10px
+}
+
+.dialog-ovelay .dialog .dialog-msg p {
+	margin: 0;
+	font-size: 15px;
+	color: #333
+}
+
+.dialog-ovelay .dialog footer {
+	border-top: 1px solid #e5e5e5;
+	padding: 8px 10px
+}
+
+.dialog-ovelay .dialog footer .controls {
+	direction: rtl
+}
+
+.dialog-ovelay .dialog footer .controls .button {
+	padding: 5px 15px;
+	border-radius: 3px
+}
+
+.button {
+	cursor: pointer
+}
+
+.button-default {
+	background-color: rgb(248, 248, 248);
+	border: 1px solid rgba(204, 204, 204, 0.5);
+	color: #5D5D5D;
+}
+
+.button-danger {
+	background-color: #f44336;
+	border: 1px solid #d32f2f;
+	color: #f5f5f5
+}
+
+.link {
+	padding: 5px 10px;
+	cursor: pointer
+}
+
+.scroll {
+	float: left;
+	width: 1000px;
+	overflow-y: auto;
+	height: 614px;
+}
+
 .click-zoom input[type=checkbox] {
-  display: none
+	display: none
 }
 
 /* .click-zoom img {
@@ -207,42 +235,47 @@ height: 614px;
   transform: scale(2);
   cursor: zoom-out
 } */
-
 .scroll .btn {
-  width: 50px;
-  height: 50px;
-  background: #FFF;
-  border: 1px solid #005bac;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  color: #005bac;
-  padding: 15px 10px 5px;
-  position: absolute;
-  text-align: center;
-  -ms-user-select: none;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+	width: 50px;
+	height: 50px;
+	background: #FFF;
+	border: 1px solid #005bac;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	color: #005bac;
+	padding: 15px 10px 5px;
+	position: absolute;
+	text-align: center;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 	transition: all 0.3s ease;
-  z-index: 1;
+	z-index: 1;
 }
+
 .scroll .btn:hover {
-  background: #eef;
+	background: #eef;
 }
 
 .scroll .zoom {
-  bottom: 190px;
+	bottom: 190px;
 }
 
 .scroll .zoom-out {
-  bottom: 120px;
+	bottom: 120px;
 }
+
 .scroll .zoom-init {
-  bottom: 50px;
+	bottom: 50px;
 }
-button#turn{position:relative;z-index:999;}
+
+button#turn {
+	position: relative;
+	z-index: 999;
+}
 </style>
 
 <script type="text/javascript">
@@ -261,7 +294,7 @@ button#turn{position:relative;z-index:999;}
 
 
 
- <script>
+<script>
  function magnify(imgID, zoom)
  {
 	  var img, glass, w, h, bw;
@@ -321,19 +354,19 @@ button#turn{position:relative;z-index:999;}
 	} 
 
  </script>
- <script type="text/javascript">
+<script type="text/javascript">
  var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg, popname  ;
  </script>
- 
-  
-   
-   
- 
+
+
+
+
+
 </head>
 
 
 
-  
+
 <body class="fixed-navbar" onload="transection()">
 
 	<div class="page-wrapper">
@@ -351,12 +384,12 @@ button#turn{position:relative;z-index:999;}
 			<%
 			String dpcCode;
 			dpcCode = (String) session.getAttribute("dpcId");
-			String region = (String)session.getAttribute("region");
+			String region = (String) session.getAttribute("region");
 			//String tally = (String)request.getAttribute("tally");
-			 String tally = (String)request.getAttribute("tallyslip");
+			String tally = (String) request.getAttribute("tallyslip");
 			%>
-			
-			 
+
+
 			<div class="page-content fade-in-up">
 				<div class="row">
 					<div class="col-md-11">
@@ -366,441 +399,491 @@ button#turn{position:relative;z-index:999;}
 								<span>${msg}</span>
 							</div>
 							<div class="row">
-							<div class="col-sm-4 form-group">
-							
-							<a href="tallyapproval.obj">Go Back</a>
+								<div class="col-sm-4 form-group">
+
+									<a href="tallyapproval.obj">Go Back</a>
+								</div>
 							</div>
-					</div>
-							
+
 
 
 
 							<div class="ibox-body mainform">
 
-								<form action="saveTallySlipMid.obj" method="POST" name="myForm"
-									id="myForm" onsubmit="return validate()" autocomplete="off">
-									<span id="image"></span>
-									
-											<div class="row">
+								<div class="row">
 									<div class="col-sm-6 form-group scroll">
-									
-									<button id='turn'>
-									<img style="width: 20px;"
-										src="https://pic.onlinewebfonts.com/svg/img_313385.png">
-									Rotate
-								</button>
-								<a class="btn zoom"><i class="fas fa-search-plus"></i></a>
-									<a class="btn zoom-out"><i class="fas fa-search-minus"></i></a>
-									<a class="btn zoom-init"><i class="fas fa-recycle"></i></a>
-									<div  class="img-magnifier-container">
-								<div class="click-zoom target">
-								  
-								   <img name="uploadedImage"  id="uploadedImage" src="https://placehold.jp/960x450.png" class="magniflier"/>
-								</div>
-								
-							
-								
-								
-							</div>
+
+										<button id='turn'>
+											<img style="width: 20px;"
+												src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+											Rotate
+										</button>
+										<a class="btn zoom"><i class="fas fa-search-plus"></i></a> <a
+											class="btn zoom-out"><i class="fas fa-search-minus"></i></a>
+										<a class="btn zoom-init"><i class="fas fa-recycle"></i></a>
+										<div class="img-magnifier-container">
+											<div class="click-zoom target">
+
+												<img name="uploadedImage" id="uploadedImage"
+													src="https://placehold.jp/960x450.png" class="magniflier" />
+											</div>
+										</div>
 									</div>
+									
 										<div class="col-sm-6 form-group scroll">
-										<div class="form-group">
-											<label>Tally No.</label> <span class="text-danger">* </span>&nbsp;
-											<span id="errtallyNo" name="errtallyNo" class="text-danger"></span> 
-											<input class="form-control" type="number" Readonly name="tallyNo" id="tallyNo" placeholder="Tally Number" value="<%=tally %>"
-												min="0" >
+										<form action="saveTallySlipMid.obj" method="POST" name="myForm"
+										id="myForm" onsubmit="return validate()" autocomplete="off">
+										<span id="image"></span>
+											<div class="form-group">
+												<label>Tally No.</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errtallyNo" name="errtallyNo"
+													class="text-danger"></span> <input class="form-control"
+													type="number" Readonly name="tallyNo" id="tallyNo"
+													placeholder="Tally Number" value="<%=tally%>" min="0">
 
-										</div>
-										<div class="form-group">
-											<label>Farmer Registration No</label><span
-												class="text-danger">* </span>&nbsp; <span
-												id="errfarmerRegNo" name="errfarmerRegNo"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="farmerRegNo" id="farmerRegNo"
-												placeholder="Farmer Registration No"
-												onkeyup="deleteErrorMsg()" min="0">
-										</div>
+											</div>
+											<div class="form-group">
+												<label>Farmer Registration No</label><span
+													class="text-danger">* </span>&nbsp; <span
+													id="errfarmerRegNo" name="errfarmerRegNo"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="farmerRegNo" id="farmerRegNo"
+													placeholder="Farmer Registration No"
+													onkeyup="deleteErrorMsg()" min="0">
+											</div>
 
-										
-										<div class="form-group">
-											<label>Date of Purchase</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errdateOfPurchase" name="errdateOfPurchase"
-												class="text-danger"> </span> 
-												<input class="form-control" readonly name="dateOfPurchase" id="dateOfPurchase" placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
-										</div>
-									
-										<div class=" form-group">
-											<label>Place of Purchase</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errplaceOfPurchase"
-												name="errplaceOfPurchase" class="text-danger"> </span> 
-												<input class="form-control" type="text" name="placeOfPurchase" id="placeOfPurchase" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" >
-												<input class="form-control" type="hidden" name="popname" id="popname" placeholder="Place of Purhase"
-												onkeyup="deleteErrorMsg()" Readonly>
-										</div>
 
-										<div class=" form-group">
-											<label>Rate Slip Number</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errrateSlipNumber" name="errrateSlipNumber"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="rateSlipNumber" id="rateSlipNumber"
-												placeholder="Rate Slip number" onkeyup="deleteErrorMsg()"
-												min="0"
-												oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);"
-												onkeyup="deleteErrorMsg()">
-										</div>
-										<div class="form-group">
-											<label>Bin Number</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errbinNumber" name="errbinNumber"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="binNumber" id="binNumber"
-												placeholder="Bin Number" value="" onkeyup="deleteErrorMsg()"
-												min="0"
-												oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
-										</div>
-									
-										<div class=" form-group">
-											<label>Net Quantity</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errnetQuantity" name="errnetQuantity"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="netQuantity" id="netQuantity"
-												placeholder="Net Quantity" onkeyup="deleteErrorMsg()"
-												min="0" step="any">
-										</div>
-										<div class=" form-group">
-											<label>Garsat Rate</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errgarsatRate" name="errgarsatRate"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="garsatRate" id="garsatRate"
-												placeholder="Garsat Rate" onkeyup="deleteErrorMsg()" min="0">
-										</div>
-										<div class="form-group">
-											<label>Amount Payable</label><span class="text-danger">*
-											</span>&nbsp; <span id="erramountPayable" name="erramountPayable"
-												class="text-danger"> </span> <input class="form-control"
-												type="number" name="amountPayable" id="amountPayable"
-												placeholder="Amount Payable" onkeyup="deleteErrorMsg()"
-												min="0" step="any">
-										</div>
+											<div class="form-group">
+												<label>Date of Purchase</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errdateOfPurchase" name="errdateOfPurchase"
+													class="text-danger"> </span> <input class="form-control" type="text"
+													  name="dateOfPurchase" id="dateOfPurchase"
+													placeholder="dd-mm-yyyy" onkeyup="deleteErrorMsg()">
+											</div>
 
-										<div class=" form-group">
-											<label>Jute Variety</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety" class="text-danger"> </span> 
-											<select name="juteVariety" id="juteVariety" class="form-control"   onselect="deleteErrorMsg()">
-                                        	<option value="">Select</option>
-                                        	<option value="Bimli">Bimli</option>
-                                        	<option value="Mesta">Mesta</option>
-                                        	<option value="Tossa">Tossa</option>
-                                        	<option value="White">White</option>
-                                        	   	<option value="Tossa (New)">Tossa (New)</option>
-                                        	<option value="White (New)">White (New)</option>
-                                        	</select>
-                                        	
-										</div>
-										<div class="  form-group">
-											<label>Drum-wise Quantity</label> <span class="text-danger">*
-											</span>&nbsp; <span id="errdrumWiseQuantity"
-												name="errdrumWiseQuantity" class="text-danger"> </span>
-												<span  id="sum1" style= "COLOR: DARKGREEN;"></span>
-												<input
-												class="form-control" type="number" name="drumWiseQuantity1"
-												id="drumWiseQuantity1" placeholder="Drum Wise Quantity 1"value="0"
-												min="0" onblur = "sum();"/>
-										</div>
-										<div class=" form-group"><span id="sum2" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control"
-												type="number" name="drumWiseQuantity2"
-												id="drumWiseQuantity2" placeholder="Drum Wise Quantity 2"value="0"
-												min="0" onblur = "sum();">
-										</div>
-										<div class=" form-group"><span id="sum3" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity3" id="drumWiseQuantity3"value="0"
-												placeholder="Drum Wise Quantity 3" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum4" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity4" id="drumWiseQuantity4"value="0"
-												placeholder="Drum Wise Quantity 4" min="0" onblur = "sum();">
-										</div>
-										<div class=" form-group"><span id="sum5" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity5" id="drumWiseQuantity5"value="0"
-												placeholder="Drum Wise Quantity 5" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum6" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity6" id="drumWiseQuantity6"value="0"
-												placeholder="Drum Wise Quantity 6" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum7" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity7" id="drumWiseQuantity7"value="0"
-												placeholder="Drum Wise Quantity 7" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum8" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity8" id="drumWiseQuantity8"value="0"
-												placeholder="Drum Wise Quantity 8" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum9" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity9" id="drumWiseQuantity9"value="0"
-												placeholder="Drum Wise Quantity 9" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum10" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity10" id="drumWiseQuantity10"value="0"
-												placeholder="Drum Wise Quantity 10" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum12" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity11" id="drumWiseQuantity11"value="0"
-												placeholder="Drum Wise Quantity 11" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum12" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity12" id="drumWiseQuantity12"value="0"
-												placeholder="Drum Wise Quantity 12" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum13" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"value="0"
-												name="drumWiseQuantity13" id="drumWiseQuantity13"
-												placeholder="Drum Wise Quantity 13" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum14" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity14" id="drumWiseQuantity14"value="0"
-												placeholder="Drum Wise Quantity 14" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum15" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity15" id="drumWiseQuantity15"value="0"
-												placeholder="Drum Wise Quantity 15" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum16" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity16" id="drumWiseQuantity16"value="0"
-												placeholder="Drum Wise Quantity 16" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum17" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity17" id="drumWiseQuantity17"value="0"
-												placeholder="Drum Wise Quantity 17" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum18" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity18" id="drumWiseQuantity18"value="0"
-												placeholder="Drum Wise Quantity 18" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum19" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity19" id="drumWiseQuantity19"value="0"
-												placeholder="Drum Wise Quantity 19" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum20" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity20" id="drumWiseQuantity20"value="0"
-												placeholder="Drum Wise Quantity 20" min="0" onblur = "sum();">
-										</div>
-									
-									
-										<div class="form-group"><span id="sum21" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity21" id="drumWiseQuantity21"value="0"
-												placeholder="Drum Wise Quantity 21" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum22" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity22" id="drumWiseQuantity22"value="0"
-												placeholder="Drum Wise Quantity 22 " min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum23" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity23" id="drumWiseQuantity23"value="0"
-												placeholder="Drum Wise Quantity 23" min="0" onblur = "sum();">
-										</div>
-								
-										<div class="form-group"><span id="sum24" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity24" id="drumWiseQuantity24"value="0"
-												placeholder="Drum Wise Quantity 24" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum25" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity25" id="drumWiseQuantity25"value="0"
-												placeholder="Drum Wise Quantity 25" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum26" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity26" id="drumWiseQuantity26"value="0"
-												placeholder="Drum Wise Quantity 26" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum27" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity27" id="drumWiseQuantity27"value="0"
-												placeholder="Drum Wise Quantity 27" min="0" onblur = "sum();">
-										</div>
+											<div class=" form-group">
+												<label>Place of Purchase</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errplaceOfPurchase"
+													name="errplaceOfPurchase" class="text-danger"> </span> <input
+													class="form-control" type="text" name="placeOfPurchase"
+													id="placeOfPurchase" placeholder="Place of Purhase"
+													onkeyup="deleteErrorMsg()"> <input
+													class="form-control" type="hidden" name="popname"
+													id="popname" placeholder="Place of Purhase"
+													onkeyup="deleteErrorMsg()" Readonly>
+											</div>
 
-										<div class="form-group"><span id="sum28" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity28" id="drumWiseQuantity28"value="0"
-												placeholder="Drum Wise Quantity 28" min="0" onblur = "sum();">
-										</div>
+											<div class=" form-group">
+												<label>Rate Slip Number</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errrateSlipNumber" name="errrateSlipNumber"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="rateSlipNumber" id="rateSlipNumber"
+													placeholder="Rate Slip number" onkeyup="deleteErrorMsg()"
+													min="0"
+													oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);"
+													onkeyup="deleteErrorMsg()">
+											</div>
+											<div class="form-group">
+												<label>Bin Number</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errbinNumber" name="errbinNumber"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="binNumber" id="binNumber"
+													placeholder="Bin Number" value=""
+													onkeyup="deleteErrorMsg()" min="0"
+													oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);">
+											</div>
 
-										<div class="form-group"><span id="sum29" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity29" id="drumWiseQuantity29"value="0"
-												placeholder="Drum Wise Quantity 29" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum30" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity30" id="drumWiseQuantity30"value="0"
-												placeholder="Drum Wise Quantity 30" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum31" style= "COLOR: DARKGREEN;"></span>
+											<div class=" form-group">
+												<label>Net Quantity</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errnetQuantity" name="errnetQuantity"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="netQuantity" id="netQuantity"
+													placeholder="Net Quantity" onkeyup="deleteErrorMsg()"
+													min="0" step="any">
+											</div>
+											<div class=" form-group">
+												<label>Garsat Rate</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errgarsatRate" name="errgarsatRate"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="garsatRate" id="garsatRate"
+													placeholder="Garsat Rate" onkeyup="deleteErrorMsg()"
+													min="0">
+											</div>
+											<div class="form-group">
+												<label>Amount Payable</label><span class="text-danger">*
+												</span>&nbsp; <span id="erramountPayable" name="erramountPayable"
+													class="text-danger"> </span> <input class="form-control"
+													type="number" name="amountPayable" id="amountPayable"
+													placeholder="Amount Payable" onkeyup="deleteErrorMsg()"
+													min="0" step="any">
+											</div>
 
-											<input class="form-control" type="number"
-												name="drumWiseQuantity31" id="drumWiseQuantity31"value="0"
-												placeholder="Drum Wise Quantity 31" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum32" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity32" id="drumWiseQuantity32"value="0"
-												placeholder="Drum Wise Quantity 32" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum33" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity33" id="drumWiseQuantity33"value="0"
-												placeholder="Drum Wise Quantity 33" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum34" style= "COLOR: DARKGREEN;"></span>
+											<div class=" form-group">
+												<label>Jute Variety</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errjuteVariety" name="errjuteVariety"
+													class="text-danger"> </span> <select name="juteVariety"
+													id="juteVariety" class="form-control"
+													onselect="deleteErrorMsg()">
+													<option value="">Select</option>
+													<option value="Bimli">Bimli</option>
+													<option value="Mesta">Mesta</option>
+													<option value="Tossa">Tossa</option>
+													<option value="White">White</option>
+													<option value="Tossa (New)">Tossa (New)</option>
+													<option value="White (New)">White (New)</option>
+												</select>
 
-											<input class="form-control" type="number"
-												name="drumWiseQuantity34" id="drumWiseQuantity34"value="0"
-												placeholder="Drum Wise Quantity 34" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum35" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity35" id="drumWiseQuantity35"value="0"
-												placeholder="Drum Wise Quantity 35" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum36" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity36" id="drumWiseQuantity36"value="0"
-												placeholder="Drum Wise Quantity 36" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum37" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity37" id="drumWiseQuantity37"value="0"
-												placeholder="Drum Wise Quantity 37" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum38" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity38" id="drumWiseQuantity38"value="0"
-												placeholder="Drum Wise Quantity 38" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum39" style= "COLOR: DARKGREEN;"></span>
+											</div>
+											<div class="  form-group">
+												<label>Drum-wise Quantity</label> <span class="text-danger">*
+												</span>&nbsp; <span id="errdrumWiseQuantity"
+													name="errdrumWiseQuantity" class="text-danger"> </span> <span
+													id="sum1" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity1"
+													id="drumWiseQuantity1" placeholder="Drum Wise Quantity 1"
+													value="0" min="0" onblur="sum();" />
+											</div>
+											<div class=" form-group">
+												<span id="sum2" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity2"
+													id="drumWiseQuantity2" placeholder="Drum Wise Quantity 2"
+													value="0" min="0" onblur="sum();">
+											</div>
+											<div class=" form-group">
+												<span id="sum3" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity3"
+													id="drumWiseQuantity3" value="0"
+													placeholder="Drum Wise Quantity 3" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum4" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity4"
+													id="drumWiseQuantity4" value="0"
+													placeholder="Drum Wise Quantity 4" min="0" onblur="sum();">
+											</div>
+											<div class=" form-group">
+												<span id="sum5" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity5"
+													id="drumWiseQuantity5" value="0"
+													placeholder="Drum Wise Quantity 5" min="0" onblur="sum();">
+											</div>
 
-											<input class="form-control" type="number"
-												name="drumWiseQuantity39" id="drumWiseQuantity39"value="0"
-												placeholder="Drum Wise Quantity 39" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum40" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity40" id="drumWiseQuantity40" value="0"
-												placeholder="Drum Wise Quantity 40" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum41" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity41" id="drumWiseQuantity41" value="0"
-												placeholder="Drum Wise Quantity 41" min="0" onblur = "sum();">
-										</div>
+											<div class="form-group">
+												<span id="sum6" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity6"
+													id="drumWiseQuantity6" value="0"
+													placeholder="Drum Wise Quantity 6" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum7" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity7"
+													id="drumWiseQuantity7" value="0"
+													placeholder="Drum Wise Quantity 7" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum8" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity8"
+													id="drumWiseQuantity8" value="0"
+													placeholder="Drum Wise Quantity 8" min="0" onblur="sum();">
+											</div>
 
+											<div class="form-group">
+												<span id="sum9" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" name="drumWiseQuantity9"
+													id="drumWiseQuantity9" value="0"
+													placeholder="Drum Wise Quantity 9" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum10" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity10" id="drumWiseQuantity10" value="0"
+													placeholder="Drum Wise Quantity 10" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum12" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity11" id="drumWiseQuantity11" value="0"
+													placeholder="Drum Wise Quantity 11" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum12" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity12" id="drumWiseQuantity12" value="0"
+													placeholder="Drum Wise Quantity 12" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum13" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" value="0"
+													name="drumWiseQuantity13" id="drumWiseQuantity13"
+													placeholder="Drum Wise Quantity 13" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum14" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity14" id="drumWiseQuantity14" value="0"
+													placeholder="Drum Wise Quantity 14" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum15" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity15" id="drumWiseQuantity15" value="0"
+													placeholder="Drum Wise Quantity 15" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum16" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity16" id="drumWiseQuantity16" value="0"
+													placeholder="Drum Wise Quantity 16" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum17" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity17" id="drumWiseQuantity17" value="0"
+													placeholder="Drum Wise Quantity 17" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum18" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity18" id="drumWiseQuantity18" value="0"
+													placeholder="Drum Wise Quantity 18" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum19" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity19" id="drumWiseQuantity19" value="0"
+													placeholder="Drum Wise Quantity 19" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum20" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity20" id="drumWiseQuantity20" value="0"
+													placeholder="Drum Wise Quantity 20" min="0" onblur="sum();">
+											</div>
+
+
+											<div class="form-group">
+												<span id="sum21" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity21" id="drumWiseQuantity21" value="0"
+													placeholder="Drum Wise Quantity 21" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum22" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity22" id="drumWiseQuantity22" value="0"
+													placeholder="Drum Wise Quantity 22 " min="0"
+													onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum23" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity23" id="drumWiseQuantity23" value="0"
+													placeholder="Drum Wise Quantity 23" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum24" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity24" id="drumWiseQuantity24" value="0"
+													placeholder="Drum Wise Quantity 24" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum25" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity25" id="drumWiseQuantity25" value="0"
+													placeholder="Drum Wise Quantity 25" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum26" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity26" id="drumWiseQuantity26" value="0"
+													placeholder="Drum Wise Quantity 26" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum27" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity27" id="drumWiseQuantity27" value="0"
+													placeholder="Drum Wise Quantity 27" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum28" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity28" id="drumWiseQuantity28" value="0"
+													placeholder="Drum Wise Quantity 28" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum29" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity29" id="drumWiseQuantity29" value="0"
+													placeholder="Drum Wise Quantity 29" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum30" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity30" id="drumWiseQuantity30" value="0"
+													placeholder="Drum Wise Quantity 30" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum31" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity31" id="drumWiseQuantity31" value="0"
+													placeholder="Drum Wise Quantity 31" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum32" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity32" id="drumWiseQuantity32" value="0"
+													placeholder="Drum Wise Quantity 32" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum33" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity33" id="drumWiseQuantity33" value="0"
+													placeholder="Drum Wise Quantity 33" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum34" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity34" id="drumWiseQuantity34" value="0"
+													placeholder="Drum Wise Quantity 34" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum35" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity35" id="drumWiseQuantity35" value="0"
+													placeholder="Drum Wise Quantity 35" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum36" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity36" id="drumWiseQuantity36" value="0"
+													placeholder="Drum Wise Quantity 36" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum37" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity37" id="drumWiseQuantity37" value="0"
+													placeholder="Drum Wise Quantity 37" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum38" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity38" id="drumWiseQuantity38" value="0"
+													placeholder="Drum Wise Quantity 38" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum39" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity39" id="drumWiseQuantity39" value="0"
+													placeholder="Drum Wise Quantity 39" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum40" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity40" id="drumWiseQuantity40" value="0"
+													placeholder="Drum Wise Quantity 40" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum41" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity41" id="drumWiseQuantity41" value="0"
+													placeholder="Drum Wise Quantity 41" min="0" onblur="sum();">
+											</div>
+
+
+											<div class=" form-group">
+												<span id="sum42" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity42" id="drumWiseQuantity42" value="0"
+													placeholder="Drum Wise Quantity 42" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum43" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity43" id="drumWiseQuantity43" value="0"
+													placeholder="Drum Wise Quantity 43" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum44" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity44" id="drumWiseQuantity44" value="0"
+													placeholder="Drum Wise Quantity 44" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum45" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity45" id="drumWiseQuantity45" value="0"
+													placeholder="Drum Wise Quantity 45" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum46" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity46" id="drumWiseQuantity46" value="0"
+													placeholder="Drum Wise Quantity 46" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum47" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" value="0"
+													name="drumWiseQuantity47" id="drumWiseQuantity47"
+													placeholder="Drum Wise Quantity 47" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<span id="sum48" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" value="0"
+													name="drumWiseQuantity48" id="drumWiseQuantity48"
+													placeholder="Drum Wise Quantity 48" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum49" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number" value="0"
+													name="drumWiseQuantity49" id="drumWiseQuantity49"
+													placeholder="Drum Wise Quantity 49" min="0" onblur="sum();">
+											</div>
+											<div class="form-group">
+												<span id="sum50" style="COLOR: DARKGREEN;"></span> <input
+													class="form-control" type="number"
+													name="drumWiseQuantity50" id="drumWiseQuantity50" value="0"
+													placeholder="Drum Wise Quantity 50" min="0" onblur="sum();">
+											</div>
+
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="error"
+													id="error" value="">
+											</div>
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="status"
+													id="status" value="">
+											</div>
+
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="grsqty"
+													id="grsqty" value="0.0">
+											</div>
+
+											<div class="form-group">
+												<button class="btn btn-default" type="submit"
+													id="enq_submit"
+													style="margin-left: 15px; width: 120px; background: mediumseagreen; color: white;">Verify</button>
+											</div>
+</form>
+										</div>
 									
-										<div class=" form-group"><span id="sum42" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity42" id="drumWiseQuantity42" value="0"
-												placeholder="Drum Wise Quantity 42" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum43" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity43" id="drumWiseQuantity43" value="0"
-												placeholder="Drum Wise Quantity 43" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum44" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity44" id="drumWiseQuantity44" value="0"
-												placeholder="Drum Wise Quantity 44" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum45" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity45" id="drumWiseQuantity45" value="0"
-												placeholder="Drum Wise Quantity 45" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum46" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity46" id="drumWiseQuantity46" value="0"
-												placeholder="Drum Wise Quantity 46" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum47" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number" value="0"
-												name="drumWiseQuantity47" id="drumWiseQuantity47"
-												placeholder="Drum Wise Quantity 47" min="0" onblur = "sum();">
-										</div>
-									
-										<div class="form-group"><span id="sum48" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number" value="0"
-												name="drumWiseQuantity48" id="drumWiseQuantity48"
-												placeholder="Drum Wise Quantity 48" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum49" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number" value="0"
-												name="drumWiseQuantity49" id="drumWiseQuantity49"
-												placeholder="Drum Wise Quantity 49" min="0" onblur = "sum();">
-										</div>
-										<div class="form-group"><span id="sum50" style= "COLOR: DARKGREEN;"></span>
-											<input class="form-control" type="number"
-												name="drumWiseQuantity50" id="drumWiseQuantity50" value="0"
-												placeholder="Drum Wise Quantity 50" min="0" onblur = "sum();">
-										</div>
-									
-                                         <div class="form-group">
-											<input class="form-control" type="hidden"
-												name="error" id="error" value="">
-										</div>
-										<div class="form-group">
-											<input class="form-control" type="hidden"
-												name="status" id="status" value="">
-										</div>
-										
-										<div class="form-group">
-											<input class="form-control" type="hidden"
-												name="grsqty" id="grsqty" value="0.0">
-										</div>
-										
-									<div class="form-group">
-										<button class="btn btn-default" type="submit" id="enq_submit" style="margin-left: 15px; width: 120px;
-                                        background: mediumseagreen;
-                                        color: white;">Verify</button>
-									</div>
-									
-									 </div>
-										 		
-										</div>			
-								</form>
+								</div>
+
 							</div>
+							<!-- ibox mainframe -->
 
 						</div>
 
@@ -811,21 +894,21 @@ button#turn{position:relative;z-index:999;}
 	</div>
 	<!-- END PAGE CONTENT-->
 	<%@ include file="footer.jsp"%>
-	 
+
 
 	<div class="sidenav-backdrop backdrop"></div>
-	
+
 	<script>
 /* Initiate Magnify Function with the id of the image, and the strength of the magnifier glass:*/
 //magnify("uploadedImage", 2);
 
   </script>
 
-	
+
 	<script src="build/js/intlTelInput.js"></script>
-	 
- 
-	 
+
+
+
 	<!-- END PAGA BACKDROPS-->
 	<!-- CORE PLUGINS-->
 	<script src="./assets/vendors/jquery/dist/jquery.min.js"
@@ -850,12 +933,12 @@ button#turn{position:relative;z-index:999;}
 		src="<%=request.getContextPath()%>/resources/js/owl.carousel.min.js"></script>
 	<!-- PAGE LEVEL PLUGINS-->
 	<!-- CORE SCRIPTS <script src="assets/js/app.min.js" type="text/javascript"></script>-->
-	
-	
-  
+
+
+
 
 </body>
- <script>
+<script>
  function sum(){
 		var sum_gross=0;
 	    for (var i=1; i<=50; i++){
@@ -1068,8 +1151,8 @@ button#turn{position:relative;z-index:999;}
 	}
 	
 </script>
- 
-  
+
+
 <script>
 	function transection() {
 		 tallyNo = document.forms["myForm"]["tallyNo"].value;
@@ -1112,9 +1195,9 @@ button#turn{position:relative;z-index:999;}
 		 
 	}
 </script>
- 
 
- 
+
+
 <script>
 	function deleteErrorMsg() {
 
@@ -1176,24 +1259,34 @@ button#turn{position:relative;z-index:999;}
 	
 	</script>
 
-	   <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
-    <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- PAGE LEVEL PLUGINS-->
-    <script src="./assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
-    <!-- CORE SCRIPTS-->
-    <script src="assets/js/app.min.js" type="text/javascript"></script>
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
-  
-  
-	<script>
+<script src="./assets/vendors/jquery/dist/jquery.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+	type="text/javascript"></script>
+<script
+	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+	type="text/javascript"></script>
+<!-- PAGE LEVEL PLUGINS-->
+<script src="./assets/vendors/DataTables/datatables.min.js"
+	type="text/javascript"></script>
+<!-- CORE SCRIPTS-->
+<script src="assets/js/app.min.js" type="text/javascript"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
+
+
+<script>
 	$(document).ready(function(){
 	 $( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
  });
@@ -1201,7 +1294,7 @@ button#turn{position:relative;z-index:999;}
 	</script>
 </script>
 
- <script type="text/javascript">
+<script type="text/javascript">
 	var zoom = 1;
 	
 	$('.zoom').on('click', function(){
@@ -1217,7 +1310,7 @@ button#turn{position:relative;z-index:999;}
 		$('.target').css('transform', 'scale(' + zoom + ')');
 	});
  </script>
- 
+
 
 
 </html>

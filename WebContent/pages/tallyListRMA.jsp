@@ -80,10 +80,10 @@
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
                     <span>${msg}</span>
-                   
+                     </div>
 							
-                    <div class="ibox-body">
-                    <div class="scrollmenu">
+                   <!--  <div class="ibox-body">
+                    <div class="scrollmenu"> -->
                     <div class="table-responsive" style="margin-top: 20px;"> 
                          <table id="verifiedlist"  class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 								<thead>
@@ -137,9 +137,9 @@
    
                         </table>
                         </div>
-                     </div>
-                     </div>
-                     </div>
+                    <!--  </div>
+                     </div> -->
+                   
                      </div>
                      
             <!-- END PAGE CONTENT-->

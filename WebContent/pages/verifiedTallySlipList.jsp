@@ -103,7 +103,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Verified Tally Slip</h1>
+                <h1 class="page-title">RO-Finance Verification of Tally Slip</h1>
                  
             </div>
 				
@@ -191,7 +191,7 @@
 								</tbody>
                      
                         </table>
-                        <input type="submit" value="Submit"class="btn btn-primary" id="submit">
+                        <input type="submit" value="Submit"class="btn btn-primary" id="submit" style="margin-left: 20px">
                         </div>
                         
                      

@@ -1,3 +1,4 @@
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -67,8 +68,9 @@
             </div>
 				
 				<%
-					List<VerifyTallySlip> verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
-				if(verificationList==null){
+				List<VerifyTallySlip> verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
+				System.out.println("verificationList ="+verificationList);
+				if(verificationList==null){ 
 					 verificationList = new ArrayList();
 				 }
 				%>

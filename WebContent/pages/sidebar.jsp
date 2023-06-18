@@ -120,14 +120,15 @@ body {
 					<li data-pre="17" id="o17"><a href="Distributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Distribution of tally Slip</b></a></li>
 				  	<li data-pre="18" id="o18"><a href="mspGradesPriceList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View MSP </b></a></li>
 					<li data-pre="19" id="o19"><a href="viewCommercialCeilingPrice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Commercial Ceiling Price Intimation</b></a></li>
-					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification Pending Tally Slip</b></a></li>
-					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List</b></a></li>
-					<li data-pre="53" id="o53"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List RM</b></a></li>
+					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification of Tally Slip</b></a></li>
+					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RO Finance Verification of Tally Slip</b></a></li>
+					<li data-pre="53" id="o53"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Payment Process of Tally Slip</b></a></li>
 					<!-- <li data-pre="54" id="o21"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List ZM</b></a></li> -->
-					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip List</b></a></li>					
+					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip</b></a></li>					
+					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Purchase Date Approval- Tally Slip</b></a></li>
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
-					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip List for RM Approval</b></a></li>
+
 					
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
@@ -209,7 +210,7 @@ body {
 	<script>
 
 		$(document).ready(function() {
-		for(var i=1; i<55;i++){
+		for(var i=1; i<=55;i++){
 			$("#o"+i).hide();
 			
 			}
@@ -220,9 +221,10 @@ body {
 			var allActions = new Array();
 		$.get('userpriviligeajax.obj',{roleId : roleid},
 				function(responseText) {
+			     //  alert(responseText);
 					var text = responseText.replace("[","").replace("]","");
 					userAction = text.split(",");
-					//alert("userAction >>>>> "+ userAction);
+				//	alert("userAction >>>>> "+ userAction);
 					
 
 $.ajax({
@@ -231,7 +233,7 @@ $.ajax({
 			success : function(result) {
 				var data = jQuery.parseJSON(result);
 				allActions = result.split(",");
-				//alert("allActions >>>>> "+ allActions);
+			//	alert("allActions >>>>> "+ allActions);
 				
 				$.each(allActions,function(key,value) {
 					
