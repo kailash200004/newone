@@ -15,4 +15,5 @@ public interface DailyPurchaseConfDao {
 	public boolean submitform(DailyPurchaseConfModel dailyPurchaseConfModel);
 	public  List<DailyPurchaseConfModel> dpc2();
 	public String findGradePriceJuteVariety (String variety, int msp_no, String cropyr,String dpcid );
+	public void firstLevel(String cropyr, String basis);
 }

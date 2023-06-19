@@ -23,6 +23,7 @@ import com.jci.model.UserActionModel;
 import com.jci.model.UserPriviligeModel;
 import com.jci.model.UserRoleModel;
 import com.jci.model.labelGenerationModel;
+import com.jci.service.DailyPurchaseModelConfService;
 import com.jci.service.EntryofsaleService;
 import com.jci.service.HoDispatchService;
 import com.jci.service.PaymentInstrumentService;
@@ -67,6 +68,9 @@ public class InsertDataController_2 {
 	
 	@Autowired
 	labelGenerationService labelgenerationService;
+	
+	@Autowired
+	DailyPurchaseModelConfService dailyPurchaseModelConfService;
 	
 	  @RequestMapping("entryofpcso")
 	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
@@ -718,8 +722,12 @@ public class InsertDataController_2 {
 	
 	  @RequestMapping("savegradesCombination") 
 	  public ModelAndView savegradesCombination(HttpServletRequest request, RedirectAttributes redirectAttributes,HttpSession session) {
-		  String username =(String)request.getSession().getAttribute("usrname");
+
 		  try { 
+			  String username =(String)request.getSession().getAttribute("usrname");
+			  if(username == null) {
+			     	return new ModelAndView("index");
+			         }
 				 labelGenerationModel labelgenerationModel = new labelGenerationModel(); 
 			  String basis = request.getParameter("basis"); 
 			  String cropyr = request.getParameter("cropyr"); 
@@ -758,9 +766,13 @@ public class InsertDataController_2 {
 		  System.out.println("++++++++++++++"+e);
 	  e.printStackTrace(); 
 	  } 
-	 if(username == null) {
-     	return new ModelAndView("index");
-         }
+	
 	 return new ModelAndView(new RedirectView("MSPgradesCombination.obj")); }
+	  
+	  @RequestMapping(value = "inventory")
+	  public void firstLevel(HttpServletRequest request, RedirectAttributes redirectAttributes,HttpSession session) {
+		  ModelAndView mv = new ModelAndView("Inventory");
+		  dailyPurchaseModelConfService.firstLevel("2022-2023", "msp");
+	  }
 	 
 }

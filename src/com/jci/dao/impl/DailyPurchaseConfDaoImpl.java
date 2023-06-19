@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -319,4 +320,38 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 
 	
   }
+
+	@Override
+	public void firstLevel(String cropyr, String basis) {
+		String querystr="";
+		 querystr = "select sum(a.grade1 + a.grade2 + a.grade3 + a.grade4 + a.grade5 + a.grade6+a.grade7+a.grade8) - sum(b.bale_no) FROM [XMWJCI].[dbo].[jciprocurement] a join [XMWJCI].[dbo].[jcibalepreparation] b on a.basis = b.basis where a.basis = '"+basis+"' and a.cropyr ='"+cropyr+"'"; 	
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		BigDecimal result=(BigDecimal)query.uniqueResult();
+		 System.out.println("loose jute        ==============        "+result);
+		 
+		 String querystr1="";
+		 querystr1 = "select jutevariety, sum(grade1) as grade1, sum(grade2) as grade2, sum(grade3) as grade3, sum(grade4) as grade4, sum(grade5) as grade5, sum(grade6) as grade6, sum(grade7) as grade7, sum(grade8) as grade8 FROM [XMWJCI].[dbo].[jciprocurement] where basis = '"+basis+"' and cropyr ='"+cropyr+"' group by jutevariety ";
+		Session session1 = sessionFactory.getCurrentSession();
+		Transaction tx1 = session1.beginTransaction();
+		SQLQuery query1 = session1.createSQLQuery(querystr1);
+		List<Object[]> result1= query1.list();
+		for(Object[] r : result1) {
+		 System.out.println("grades procured        ==============        "+r[0] +" , "+r[1]+" , "+r[2]+" , "+r[3]+" , "+r[4]+" , "+r[5]+" , "+r[6]+" , "+r[7]+" , "+r[8] );
+			}
+		
+	
+	String querystr2="";
+	 querystr2 = "select  jute_grade, sum(bale_no)   FROM jcibalepreparation where crop_year = '"+cropyr+"' and basis = '"+basis+"' group by jute_grade";
+	Session session2 = sessionFactory.getCurrentSession();
+	Transaction tx2 = session2.beginTransaction();
+	Query query2 = session2.createQuery(querystr2);
+	List<Object[]> result2 = query2.list();
+	 System.out.println("baled        ==============        "+querystr2.getClass().getName().toString());
+	
+	 System.out.println("baled        ==============        "+result2.get(0)[0] +" , "+result2.get(0)[1] );
+	 System.out.println("baled        ==============        "+result2.get(1)[0] +" , "+result2.get(1)[1] );
+		
+	}
 }
