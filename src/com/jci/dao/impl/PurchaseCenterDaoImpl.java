@@ -71,7 +71,7 @@ public class PurchaseCenterDaoImpl implements PurchaseCenterDao {
 	@Override
 	public List<String> purchaseCenter(String region) {
 		List<String> result = new ArrayList<>();
-		String querystr = "select * from jcipurchasecenter where rocode ='"+region+"'";
+		String querystr = "select * from jcipurchasecenter where rocode ='"+region+"'and centertypecode in ('D', 'S')";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

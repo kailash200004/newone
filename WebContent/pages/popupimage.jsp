@@ -47,8 +47,7 @@
 }
 .content-wrapper {margin-left:0;}
 .doremon{padding:20px;}
-.doremon img{    width: 100%;
-    height: 500px;}
+/*.doremon img{width: 100%;height: 500px;}*/
 </style>
  <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>  
  <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" type="text/javascript"></script>  
@@ -117,8 +116,12 @@
              <div class="doremon">
                <div class="row">
                <div class="col-md-6">
-               		<div class="text-details">		            
-		            <img src="http://49.50.79.121:8080/TallySlip/<%=tallyImage%>"/>
+               <button id="turn">
+					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+					Rotate
+				</button>
+               		<div class="text-details" style="border:none;">		            
+		            <img id="uploadedImage" src="http://49.50.79.121:8080/TallySlip/<%=tallyImage%>"/>
 		            <div class="mandt">
 		            <label class="center">Tally Slip Image</label>
 		            </div>
@@ -134,41 +137,57 @@
             <div class="doremon">
             <div class="row">
 	            <div class="col-md-6">
+	            <button id="turn1">
+					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+					Rotate
+				</button>
 	            <div class="text-details">	            
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" />
+		            <img id="uploadedImage1" src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" />
 		            <div class="mandt">
 		            <label class="center">Farmer mandate Image</label>
 		            </div>
 		            </div>
 	            </div>
-	             <div class="col-md-6">		 
+	             <div class="col-md-6">		
+	             <button id="turn2">
+					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+					Rotate
+				</button> 
 	             <div class="text-details">	           
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>"/>
+		            <img id="uploadedImage2" src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>"/>
 		            <div class="mandt">
-		            <label class="center">Farmer Bank Document</label>
+		            	<label class="center">Farmer Bank Document</label>
 		            </div>
-		            </div>
+		         </div>
 	            </div>	             
 	           </div> 
 	           </div>
 	           <div class="doremon">
 	           <div class="row">
 	           <div class="col-md-6">	
+	           <button id="turn3">
+					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+					Rotate
+				</button>
 	           <div class="text-details">		            
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>"/>
+		            <img id="uploadedImage3" src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>"/>
 		            <div class="mandt">
-		            <label class="center">Farmer Id Proof</label>
+		            	<label class="center">Farmer Id Proof</label>
 		            </div>
-		            </div>
+		        	</div>
 		            
 	            </div>
-	             <div class="col-md-6">		
+	             <div class="col-md-6">	
+	             <button id="turn4">
+					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+					Rotate
+				</button>	
 	             <div class="text-details">            
-		            <img src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>"/>
+		            <img id="uploadedImage4" src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>"/>
 		            <div class="mandt">
-		            <label class="center">Farmer Registration Form</label>
+		            	<label class="center">Farmer Registration Form</label>
 		            </div>
-		            </div>
+		           </div>
 	            </div>
 	            </div>
 	            </div>
@@ -202,3 +221,49 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#turn').on('click', function() {
+			var angle = ($('#uploadedImage').data('angle') + 90) || 90;
+			$('#uploadedImage').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage').data('angle', angle);
+		});
+		
+		$('#turn1').on('click', function() {
+			var angle = ($('#uploadedImage1').data('angle') + 90) || 90;
+			$('#uploadedImage1').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage1').data('angle', angle);
+		});
+		
+		$('#turn2').on('click', function() {
+			var angle = ($('#uploadedImage2').data('angle') + 90) || 90;
+			$('#uploadedImage2').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage2').data('angle', angle);
+		});
+		
+		$('#turn3').on('click', function() {
+			var angle = ($('#uploadedImage3').data('angle') + 90) || 90;
+			$('#uploadedImage3').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage3').data('angle', angle);
+		});
+		
+		$('#turn4').on('click', function() {
+			var angle = ($('#uploadedImage4').data('angle') + 90) || 90;
+			$('#uploadedImage4').css({
+				'transform' : 'rotate(' + angle + 'deg)'
+			});
+			$('#uploadedImage4').data('angle', angle);
+		});
+		
+		// $('.zoom').magnify();
+	});
+</script>

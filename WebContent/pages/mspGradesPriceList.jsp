@@ -72,7 +72,7 @@
 										<th>Crop-yr</th>
 										<th>Grade 1</th>
 										<th>Grade 2</th>
-										<th>BGrade 3</th>
+										<th>Grade 3</th>
 										<th>Grade 4</th>
 										<th>Grade 5</th>
 										<th> Grade 6</th>

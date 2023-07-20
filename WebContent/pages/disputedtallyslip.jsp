@@ -87,14 +87,14 @@
 										<th>Farmer Reg No</th> 
 										<th>Place of Purchase</th> 
 									    <th>Purchase Date</th>
-										<th>Rates </th> 										
-										<th>Bin No</th>
-									    <th>Jute Variety</th>
+										<!-- <th>Rates </th> 										
+										<th>Bin No</th> -->
+									    <!-- <th>Jute Variety</th> -->
 									    <th>Net Quntity</th>
-									    <th>Gross Qty</th>
-										<th>Garsat Rate</th> 										
+									   <!--  <th>Gross Qty</th>
+										<th>Garsat Rate</th> 	 -->									
 										<th>Amount Payable</th>
-										<th>Reason</th>
+										<!-- <th>Reason</th> -->
 										<th>Action</th>
 							</tr>
 								</thead>
@@ -109,16 +109,16 @@
 										<td><%=i%></td>
 										<td><%=verificationlists.getTallyNo()%></td>
 				                    	<td><%=verificationlists.getFarmerRegNo()%> 
-				                    	<td><%=verificationlists.getPlaceOfPurchase()%> 
+				                    	<td><%=verificationlists.getCentername()%> 
 										<td><%=verificationlists.getDop()%></td> 
-										<td><%=verificationlists.getRateslipno()%></td>
+										<%-- <td><%=verificationlists.getRateslipno()%></td>
 									    <td><%=verificationlists.getBinno()%></td> 
-				                    	<td><%=verificationlists.getJutevariety()%></td>
+				                    	<td><%=verificationlists.getJutevariety()%></td> --%>
 										<td><%=verificationlists.getNetquantity()%></td> 
-										<td><%=verificationlists.getGrossqty()%></td> 
-										<td><%=verificationlists.getGarsatrate()%></td>
+										<%-- <td><%=verificationlists.getGrossqty()%></td> 
+										<td><%=verificationlists.getGarsatrate()%></td> --%>
 						               <td><%=verificationlists.getAmountpayable()%></td>
-						                <td><%=verificationlists.getErrors()%></td>
+						                <%-- <td><%=verificationlists.getErrors()%></td> --%>
 						               <!--  <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
  
 										 <td><a href="decissionmaking.obj?id=<%=verificationlists.getTallyid()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-folder-open" aria-hidden="true" style="font-size: 15px;"></i>View</a></td> 

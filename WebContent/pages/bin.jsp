@@ -131,7 +131,7 @@
 
                                                               <div class="row">
                                                                      <div class="col-sm-4 form-group">
-                                                                           <label>Carry-forward Rope Qty</label> <input
+                                                                           <label>Carry-forward Rope Qty(Qtl)</label> <input
                                                                                   class="form-control" name="carryforwardRope" type="text"
                                                                                   placeholder="Carry-forward Rope Qty">
                                                                      </div>
@@ -157,7 +157,7 @@
        </div>
 
        <div class="sidenav-backdrop backdrop"></div>
-       <script>
+<script>
  $(document).ready(function(){
 	var	html = "<option selected disabled>-select-</option>";
 		var today = new Date();
@@ -165,10 +165,12 @@
 		var month = parseInt(today.getMonth()) + 1 ;
 		var date = parseInt(today.getDate());
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		if(date == '31'&& month == '6' && time == '23:59:59'){
+		if(date >=  1 && month >= 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
 		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
 		}
 		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
 			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
 		}
 		$("#cropyr").html(html);

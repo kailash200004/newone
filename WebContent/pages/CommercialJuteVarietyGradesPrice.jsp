@@ -147,6 +147,7 @@ $(document).ready(function () {
 });
 </script>
 
+
 <body class="fixed-navbar">
 	<div class="page-wrapper">
 		<!-- START HEADER-->
@@ -438,7 +439,7 @@ $(document).ready(function () {
 	    if(selected_val==='Region')
 	    	{
 	    	 $('#centerordpc option').prop('selected', true);  
-				 $('#centerordpc').trigger('chosen:updated');
+			 $('#centerordpc').trigger('chosen:updated');
 				 
 	    	}
 	    else
@@ -685,6 +686,28 @@ $(document).ready(function () {
 		  });
 		});
 	</script>
+	
+	<script>
+ $(document).ready(function(){
+	var	html = "<option selected disabled>-select-</option>";
+		var today = new Date();
+		var cropyr = today.getFullYear();
+		var month = parseInt(today.getMonth()) + 1 ;
+		var date = parseInt(today.getDate());
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+			if(date >=  1 && month >= 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
+		}
+		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
+			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
+		}
+		$("#cropyr").html(html);
+	}); 
+	
+
+</script>
 	 
 	
 	

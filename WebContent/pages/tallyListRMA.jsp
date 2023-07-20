@@ -66,7 +66,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">RM Approval Pending Tally Slip</h1>
+                <h1 class="page-title">Approval for delayed entered tally slips</h1>
                  
             </div>
 				
@@ -93,13 +93,13 @@
 										<th>Farmer Reg No</th> 
 										<th>Place of Purchase</th> 
 									    <th>Purchase Date</th>
-										<th>Rates </th> 										
-										<th>Bin No</th>
-									    <th>Jute Variety</th>
+										<th>Entry Date </th> 										
+										<th>Net Qty</th>
+									    <!-- <th>Jute Variety</th> -->
 									   <!--  <th>Net Quantity</th> -->
-									    <th>Gross Qty</th>
-										<th>Garsat Rate</th> 										
-										<!-- <th>Amount Payable</th> -->
+									   <!--  <th>Gross Qty</th>
+										<th>Garsat Rate</th>  -->										
+									    <th>Amount Payable</th> 
 										<th>Action</th>
 										
 							</tr>
@@ -114,17 +114,19 @@
 							%>
 									<tr>
 										<td><%=i%></td>
-										<td><%=verificationlists.getTallyslipno()%></td>
-				                    	<td><%=verificationlists.getFarmerregno()%> 
+										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyslipno()%>" target="_blank"><%=verificationlists.getTallyslipno()%></a></td>
+										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyslipno()%>&farmerno=<%=verificationlists.getFarmerregno()%>" target="_blank"><%=verificationlists.getFarmerregno()%></a></td>
+										<%-- <td><%=verificationlists.getTallyslipno()%></td>
+				                    	<td><%=verificationlists.getFarmerregno()%> </td> --%>
 				                    	<td><%=verificationlists.getPlaceofpurchase()%> 
 										<td><%=verificationlists.getDatepurchase()%></td> 
-										<td><%=verificationlists.getRateslipno()%></td>
-									    <td><%=verificationlists.getBinno()%></td> 
-				                    	<td><%=verificationlists.getJutevariety()%></td>
-										<%-- <td><%=verificationlists.getNetquantity()%></td>  --%>
+										<td><%=verificationlists.getDateof_entry()%></td>
+									    <td><%=verificationlists.getNetquantity()%></td> 
+				                    	<%-- <td><%=verificationlists.getJutevariety()%></td>
+										<td><%=verificationlists.getNetquantity()%></td> 
 										<td><%=verificationlists.getGrossquantity()%></td> 
-										<td><%=verificationlists.getGrasatrate()%></td>
-						              <%--  <td><%=verificationlists.getAmountpayable()%></td> --%>
+										<td><%=verificationlists.getGrasatrate()%></td> --%>
+						                <td><%=verificationlists.getAmountpayable()%></td> 
 						               <td><a href="approvalTallyslip.obj?tally=<%=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i  aria-hidden="true" style="font-size: 15px;"></i>Approve</a></td> 
 
 									</tr>

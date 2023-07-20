@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+
 import com.jci.model.RawJuteProcurementAndPayment;
 
 public interface RawJuteProcurementAndPaymentService {
@@ -32,4 +34,6 @@ public interface RawJuteProcurementAndPaymentService {
 	public boolean validateTally(String tally, String ro);
 	public String getbinno(String binno);
 	boolean updateStatus(String tally);
+	//Search tally by animesh
+	public JSONArray searchTally(String tallyno);
 }

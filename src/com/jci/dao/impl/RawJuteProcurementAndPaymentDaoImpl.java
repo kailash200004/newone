@@ -15,6 +15,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -139,8 +141,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		 querystr =  "SELECT  grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcimspgradesprice where crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%'";
 		}
 		else if(basis_no==2) {
-			 querystr = "SELECT  top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where effectDate <= GETDATE() and crop_yr='"+cropyr + "' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'"+"order by effectDate desc ";
-			}
+			 querystr = "SELECT  top 1 grade1, grade2, grade3, grade4, grade5, grade6, grade7, grade8 FROM jcijutepricesforcommercial where CONVERT( date, effectDate ,105) <= GETDATE() and crop_yr='"+cropyr +"' and jute_variety like '"+ variety+"%' and dpc like '%"+dpcid+"%'order by id desc"	;	}
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -260,7 +261,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 
 	@Override
 	public RawJuteProcurementAndPayment findbyTally(String tallyno) {
-		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno,netquantity from jciprocurement where tallyslipno ='"+tallyno+"'";
+		String	queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno,netquantity,slip_image from jciprocurement where tallyslipno ='"+tallyno+"'";
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
 
@@ -302,6 +303,7 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 				raw.setPtsid(ptsid);
 				raw.setNetquantity(netqty.doubleValue());
 				raw.setTallyslipno(tallyslip);
+				raw.setSlip_image((String)o[15]);
 			//	result.add(raw);
 				//System.out.println("farmer  ====== "+farmer);
 
@@ -317,24 +319,16 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		 System.out.println("roletype = "+ roletype);
 		 String queryStr = "";
 		 if(roletype.equalsIgnoreCase("RO")) {
-			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
-						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
-						+ "where status ='"+status+"' and regionId = '"+regionid+"'";
+			 queryStr=" select farmerregno,datepurchase,basis,cropyr,c.centername,rateslipno,binno,jutevariety,grossquantity,deductionquantity,grasatrate,amountpayable, ptsid,tallyslipno, slip_image,netquantity,dateof_entry from jciprocurement p left join jcipurchasecenter c on p.placeofpurchase = c.CENTER_CODE where p.status ='"+status+"' and regionId = '"+regionid+"'";
 		 }
 		 else if (roletype.equalsIgnoreCase("HO")) {
-			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
-						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
-						+ "where status ='"+status+"'";
+			 queryStr=" select farmerregno,datepurchase,basis,cropyr,c.centername,rateslipno,binno,jutevariety,grossquantity,deductionquantity,grasatrate,amountpayable, ptsid,tallyslipno, slip_image,netquantity,dateof_entry from jciprocurement p left join jcipurchasecenter c on p.placeofpurchase = c.CENTER_CODE where p.status ='"+status+"'";
 		 }
 		 else if (roletype.equalsIgnoreCase("DPC")) {
-			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
-						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
-						+ "where status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
+			 queryStr=" select farmerregno,datepurchase,basis,cropyr,c.centername,rateslipno,binno,jutevariety,grossquantity,deductionquantity,grasatrate,amountpayable, ptsid,tallyslipno, slip_image,netquantity,dateof_entry from jciprocurement p left join jcipurchasecenter c on p.placeofpurchase = c.CENTER_CODE where p.status ='"+status+"' and placeofpurchase = '"+dpcid+"'";
 		 }
 		 else {
-			 queryStr="select farmerregno,datepurchase,basis,cropyr,placeofpurchase,rateslipno,binno,jutevariety, "
-						+ "grossquantity,deductionquantity,grasatrate,amountpayable ,ptsid,tallyslipno, slip_image from jciprocurement "
-						+ "where status ='"+status+"'";
+			 queryStr=" select farmerregno,datepurchase,basis,cropyr,c.centername,rateslipno,binno,jutevariety,grossquantity,deductionquantity,grasatrate,amountpayable, ptsid,tallyslipno, slip_image,netquantity,dateof_entry from jciprocurement p left join jcipurchasecenter c on p.placeofpurchase = c.CENTER_CODE where p.status ='"+status+"'";
 		 }
 		
  
@@ -361,8 +355,11 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 				BigDecimal deductionquantity = (BigDecimal)o[9];
 				BigDecimal grasatrate = (BigDecimal)o[10];
 				BigDecimal amountpayable = (BigDecimal)o[11];
+				BigDecimal netqty = (BigDecimal)o[15];
+				String dateofentry = (String)o[16];
 				int ptsid = (int)o[12];
 				String tallyslip =  (String)o[13];
+				
 				raw.setFarmerregno(farmer);
 				raw.setDatepurchase(datepurchase);
 				raw.setBasis(basis);
@@ -377,6 +374,8 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 				raw.setAmountpayable(amountpayable.doubleValue());
 				raw.setPtsid(ptsid);
 				raw.setTallyslipno(tallyslip);
+				raw.setDateof_entry(dateofentry);
+				raw.setNetquantity(netqty.doubleValue());
 				result.add(raw);
 				//System.out.println("farmer  ====== "+farmer);
 			}
@@ -446,4 +445,54 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 		}
 		
 	}
+
+	@Override
+	public JSONArray searchTally(String tallyno) {
+		JSONArray arr = new JSONArray();
+		String	queryStr="select tallyslipno,status from jciprocurement where tallyslipno in ("+tallyno+")";
+		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
+		List<Object[]> res = new ArrayList<>();
+
+			Session session = sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(queryStr);
+	        res = query.list();
+	        for(Object[] o : res) {
+ 
+				String tally = (String)o[0];
+				System.out.println(tally);
+				String status = (String)o[1];
+				if(status.equalsIgnoreCase("DPC")) {
+					status = "Pending for Confirmation by DPCM";
+				}
+				else if(status.equalsIgnoreCase("RMA")) {
+					status = "Pending for Confirmation by RM";
+				}
+				else if(status.equalsIgnoreCase("DPCW")) {
+					status = "Withheld by DPCM";
+				}
+				else if(status.equalsIgnoreCase("ROV")) {
+					status = "Pending for verification by DEO";
+				}else if(status.equalsIgnoreCase("FA")) {
+					status = "Pending for financial approval by F&A Official";
+				}else if(status.equalsIgnoreCase("RMD")) {
+					status = "Pending for administrative approval by RM";
+				}else {
+					status = "Payment Intiated";
+				} 
+				
+				JSONObject obj = new JSONObject();
+				obj.put("tally", tally);
+ 				obj.put("status", status);
+ 				 
+ 				arr.put(obj);
+			}
+			 
+			  return arr;
+	}
+	
+	
+	
+	
+	
 }

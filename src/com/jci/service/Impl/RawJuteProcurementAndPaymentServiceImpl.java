@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -135,6 +136,12 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 	public boolean updateStatus(String tally) {
 		// TODO Auto-generated method stub
 		return rawJuteProcurementAndPaymentDao.updateStatus(tally);
+	}
+
+	@Override
+	public JSONArray searchTally(String tallyno) {
+		// TODO Auto-generated method stub
+		return rawJuteProcurementAndPaymentDao.searchTally(tallyno);
 	}
 
 

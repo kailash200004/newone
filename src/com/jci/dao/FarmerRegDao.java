@@ -20,4 +20,5 @@ public interface FarmerRegDao {
 	boolean validateAdhar(String aadharNo);
 	public String findRegno(String dpcid,String region);
 	public List<FarmerRegModel> findDetails(int id);
+	public String getFarmerNo(int id);
 }

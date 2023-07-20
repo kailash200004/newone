@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+
 @Entity
 @Table(name = "jcitallyslippayment", schema = "dbo")
 public class PaymentprocesstellyslipModel {
@@ -61,7 +62,29 @@ public class PaymentprocesstellyslipModel {
 	@Column(name = "excel_link")
 	private String excel_link;
 	
+	@Column(name = "dpc_name")
+	private String dpc_name;
+    
+	@Column(name = "farmerreg_no")
+   	private String farmerreg_no;
 	
+	
+
+	public String getDpc_name() {
+		return dpc_name;
+	}
+
+	public void setDpc_name(String dpc_name) {
+		this.dpc_name = dpc_name;
+	}
+
+	public String getFarmerreg_no() {
+		return farmerreg_no;
+	}
+
+	public void setFarmerreg_no(String farmerreg_no) {
+		this.farmerreg_no = farmerreg_no;
+	}
 
 	public String getExcel_link() {
 		return excel_link;
@@ -185,6 +208,8 @@ public class PaymentprocesstellyslipModel {
 	}
 
 
+
+
 	@Override
 	public String toString() {
 		return "PaymentprocesstellyslipModel [payment_id=" + payment_id + ", amount=" + amount + ", debitAC_no="
@@ -192,13 +217,15 @@ public class PaymentprocesstellyslipModel {
 				+ beneficiaryAC_No + ", AC_type=" + AC_type + ", beneficiary_name=" + beneficiary_name
 				+ ", beneficiary_branch=" + beneficiary_branch + ", JCI_Ref=" + JCI_Ref + ", sender=" + sender
 				+ ", beneficiary_bank=" + beneficiary_bank + ", purchase_date=" + purchase_date + ", UTR_no=" + UTR_no
-				+ ", date=" + date + ", excel_link=" + excel_link + "]";
+				+ ", date=" + date + ", excel_link=" + excel_link + ", dpc_name=" + dpc_name + ", farmerreg_no="
+				+ farmerreg_no + "]";
 	}
 
 
 	public PaymentprocesstellyslipModel(int payment_id, double amount, String debitAC_no, String beneficiary_IFSC_code,
 			String beneficiaryAC_No, String aC_type, String beneficiary_name, String beneficiary_branch, String jCI_Ref,
-			String sender, String beneficiary_bank, String purchase_date, String uTR_no, Date date, String excel_link) {
+			String sender, String beneficiary_bank, String purchase_date, String uTR_no, Date date, String excel_link,
+			String dpc_name, String farmerreg_no) {
 		super();
 		this.payment_id = payment_id;
 		this.amount = amount;
@@ -215,6 +242,8 @@ public class PaymentprocesstellyslipModel {
 		UTR_no = uTR_no;
 		this.date = date;
 		this.excel_link = excel_link;
+		this.dpc_name = dpc_name;
+		this.farmerreg_no = farmerreg_no;
 	}
 
 	public PaymentprocesstellyslipModel() {

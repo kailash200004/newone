@@ -310,7 +310,8 @@
 		var month = parseInt(today.getMonth()) + 1 ;
 		var date = parseInt(today.getDate());
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		if(date == '31'&& month == '6' && time == '23:59:59'){
+		if(date ==  1 && month == 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
+		
 		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
 		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
 		}

@@ -91,6 +91,7 @@ color: red;
 					List<VerifyTallySlip> verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
 				VerifyTallySlip vrf = (VerifyTallySlip)request.getAttribute("vrftally");
 				RawJuteProcurementAndPayment raw = (RawJuteProcurementAndPayment)request.getAttribute("raw");
+				System.out.print(raw.getSlip_image());
 				%>
 			 <!-- <div class="page-content fade-in-up"> -->
                <!--  <div class="ibox">
@@ -248,6 +249,24 @@ color: red;
                 </div>
                  
             </div> -->
+            
+            
+            <div class="doremon" style="margin-top: 60px; padding: 25px; width: 100%; ">
+               
+               
+               		<div class="text-details">	
+               		 <div class="mandt">
+		            <label class="center" style="color: red; ">Tally Slip Image</label>
+		            </div>	            
+		            <img width="100%" src="http://49.50.79.121:8080/TallySlip/<%=raw.getSlip_image()%>"/>
+		           
+		            </div>
+		            
+	            
+	            </div>
+            
+            
+            
             <!-- END PAGE CONTENT-->
             <%@ include file="footer.jsp"%>
         </div>

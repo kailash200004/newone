@@ -21,11 +21,13 @@ import com.jci.model.ProgOfAssortmentModel;
 import com.jci.model.DailyPurchaseConfModel;
 import com.jci.model.PurchaseCenterModel;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import com.jci.model.RawJuteProcurementAndPayment;
 import com.jci.model.JbaModel;
 import com.jci.model.AreaDetailCode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import com.jci.model.BalePreparation;
 import javax.servlet.http.HttpSession;
@@ -49,6 +51,8 @@ import com.jci.model.AddOrganizationModel;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
 import com.jci.model.FarmerRegistrationModel;
 import com.jci.model.ImageVerificationModel;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -100,13 +104,17 @@ import com.jci.service.PincodeService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 @Controller
@@ -862,6 +870,7 @@ public class InsertDataController
             int grade6;
             int grade7;
             int grade8;
+            int td6Gradediff;
             if (jutevariety.equalsIgnoreCase("tossa")) {
                 grade1 = Integer.parseInt(request.getParameter("gradewisepp1"));
                 grade2 = Integer.parseInt(request.getParameter("gradewisepp2"));
@@ -871,6 +880,8 @@ public class InsertDataController
                 grade6 = Integer.parseInt(request.getParameter("gradewisepp6"));
                 grade7 = Integer.parseInt(request.getParameter("gradewisepp7"));
                 grade8 = Integer.parseInt(request.getParameter("gradewisepp8"));
+                
+                
             }
             else {
                 grade1 = Integer.parseInt(request.getParameter("gradewisepp9"));
@@ -882,6 +893,9 @@ public class InsertDataController
                 grade7 = Integer.parseInt(request.getParameter("gradewisepp15"));
                 grade8 = Integer.parseInt(request.getParameter("gradewisepp16"));
             }
+            
+            td6Gradediff = grade5-grade6;
+            
             final JbaModel jbapri = new JbaModel();
             jbapri.setJbaDate(datejba);
             jbapri.setJutevariety(jutevariety);
@@ -928,28 +942,28 @@ public class InsertDataController
             jbanorth.setRegion(region);
             jbanorth.setDpcid(dpcid);
             if (grade1 != 0) {
-                jbanorth.setGradewisepp1((double)(grade1 + northern));
+                jbanorth.setGradewisepp1((double)(grade1 + northern+td6Gradediff));
             }
             if (grade2 != 0) {
-                jbanorth.setGradewisepp2((double)(grade2 + northern));
+                jbanorth.setGradewisepp2((double)(grade2 + northern+td6Gradediff));
             }
             if (grade3 != 0) {
-                jbanorth.setGradewisepp3((double)(grade3 + northern));
+                jbanorth.setGradewisepp3((double)(grade3 + northern+td6Gradediff));
             }
             if (grade4 != 0) {
-                jbanorth.setGradewisepp4((double)(grade4 + northern));
+                jbanorth.setGradewisepp4((double)(grade4 + northern+td6Gradediff));
             }
             if (grade5 != 0) {
-                jbanorth.setGradewisepp5((double)(grade5 + northern));
+                jbanorth.setGradewisepp5((double)(grade5 + northern+td6Gradediff));
             }
             if (grade6 != 0) {
-                jbanorth.setGradewisepp6((double)(grade6 + northern));
+                jbanorth.setGradewisepp6((double)(grade6 + northern+td6Gradediff));
             }
             if (grade7 != 0) {
-                jbanorth.setGradewisepp7((double)(grade7 + northern));
+                jbanorth.setGradewisepp7((double)(grade7 + northern+td6Gradediff));
             }
             if (grade8 != 0) {
-                jbanorth.setGradewisepp8((double)(grade8 + northern));
+                jbanorth.setGradewisepp8((double)(grade8 + northern+td6Gradediff));
             }
             this.jbaservice.create(jbanorth);
             final JbaModel jbasn = new JbaModel();
@@ -1301,7 +1315,7 @@ public class InsertDataController
             rawJuteProcAndPay.setDatepurchase(datepurchase);
             rawJuteProcAndPay.setFarmerregno(farmerregno);
             rawJuteProcAndPay.setCreadtedby(createdBy);
-            rawJuteProcAndPay.setDateof_entry(new Date());
+            rawJuteProcAndPay.setDateof_entry(formatter1.format(n));
             rawJuteProcAndPay.setTd_base(tdbaseprice);
             rawJuteProcAndPay.setTallyslipno(tallyslipno);
             final String amountPayable = request.getParameter("amountPayable");
@@ -1790,8 +1804,9 @@ public class InsertDataController
             final String ac_no = request.getParameter("ac_no");
             final String farmer_name = request.getParameter("farmer_name");
           //  final String address = request.getParameter("address");
-            final String idProofType = request.getParameter("idProofType");
-            final String identityProofNo = request.getParameter("identityProofNo");
+            // removed by animesh as per instruction 28 june 23
+         //   final String idProofType = request.getParameter("idProofType");
+         //   final String identityProofNo = request.getParameter("identityProofNo");
             final FarmerRegModel farmerdetails = this.farmerRegService.edit(id);
             final String farmerRegNoDb = farmerdetails.getF_REG_NO();
             final String ifscDb = farmerdetails.getF_BANK_IFSC();
@@ -1840,9 +1855,9 @@ public class InsertDataController
             }
 			
 			
-			  String idProofTypeFinal; if
-			  (idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) { idProofTypeFinal =
-			  idProofType;
+/*			  String idProofTypeFinal; 
+			  if(idProofType.equalsIgnoreCase(farmerIdProofTypeDb)) 
+			  { idProofTypeFinal = idProofType;
 			  
 			  } else { idProofTypeFinal = null;
 			  
@@ -1856,7 +1871,7 @@ public class InsertDataController
 			  } else { idProofNumberFinal = null;
 			  
 			  }
-			 
+			 */
             final VerifyFarmerModel verifyFarmer = new VerifyFarmerModel();
             verifyFarmer.setAccountno(accNoDbFinal);
             verifyFarmer.setFarmername(farmerNameFinal);
@@ -4072,6 +4087,7 @@ public class InsertDataController
     @RequestMapping(value = { "findBinno" }, method = { RequestMethod.GET })
     public String findBinno(final HttpServletRequest request) {
         final Gson gson = new Gson();
+        System.out.println(request.getParameter("cropyr") +"   "+request.getParameter("dpcid"));
         final List<String> result = (List<String>)this.ropeMakingService.findBinno(request.getParameter("cropyr"), request.getParameter("dpcid"));
         return gson.toJson((Object)result);
     }
@@ -4398,16 +4414,28 @@ public class InsertDataController
 	    	String a = "";
 	    	try {
 	    	String username =(String)request.getSession().getAttribute("usrname");
-	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
-	    //	String path1 ="/Users/apple/Documents/Bob/";
-	    //	String path1 ="D:\\";
-	    	
+	    //	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
+	    	String path1 ="D:\\";
+	    	//generating crop year
+	    	String cropyear = "";
+			Calendar cal = new GregorianCalendar();
+			int month = cal.get(Calendar.MONTH);
+			month++;
+		    int year = cal.get(Calendar.YEAR);
+		    if(month>6)
+		    {
+		    	cropyear = year+"-"+(year+1);
+		    }else
+		    {
+		    	cropyear = (year-1)+"-"+year;
+		    }
 	    
 
-	     String usrname = (String) session.getAttribute("usrname"); 
+	     String usrname = ""; 
 	     String usermail = (String) session.getAttribute("usrname"); 
 	     Random num = new Random();
-	     int x= num.nextInt(50);
+	     int random_no = 10000 + num.nextInt(90000);
+	     usrname = cropyear +"-"+ random_no +".xlsx";
 	     String tno ="";
 	     String tnoemail="";
 	     String tallyno = request.getParameter("tallyno");
@@ -4415,22 +4443,13 @@ public class InsertDataController
 	     tallyno = tallyno.replaceAll("\\[","").replaceAll("\\]","");
 	     String[] tally = tallyno.split(",");
 	     List<PaymentprocesstellyslipModel> list = new ArrayList();
-	     PaymentprocesstellyslipModel p1 = new PaymentprocesstellyslipModel();
-	     System.out.println("tally length = "+tally.length);
-	     for(int i=0;i<tally.length;i++)
-	     {
-	           tno = tally[i];
-	           p1 = this.verifyTallySlipService.updatepaymentstatus(tno);
-	           tnoemail = tno.replace("\"","");
-	           tno = "";
-	           list.add(p1);
-	     }
-	    String filename = "";
-	   
+	     PaymentprocesstellyslipModel paymentlist = new PaymentprocesstellyslipModel();
+	     String filename = "";
+	     double totalamount = 0;
+	     String jciref = "";
 	         String[] columns = {"Amount","Debit A/C No","Beneficiary IFSC code","Beneficiary A/C No","A/C type","Beneficiary Name","Beneficiary Branch","JCI Ref","Sender","Beneficiary Bank","Purchase Date","UTR No","Date"};
-	         usrname = usrname+x+"payment_slip.xlsx";
+	        // usrname = usrname+x+"payment_slip.xlsx";
 	         filename = path1+usrname;
-	         Biff8EncryptionKey.setCurrentUserPassword("vishal");
 	         Workbook workbook = new XSSFWorkbook(); 
 	         Sheet sheet = workbook.createSheet();
 	         Font headerFont = workbook.createFont();
@@ -4447,8 +4466,13 @@ public class InsertDataController
 		            cell.setCellStyle(headerCellStyle);
 		         }
 	                int rownum = 1; 
-	          for(PaymentprocesstellyslipModel paymentlist : list)
+	          for(int i=0;i<tally.length;i++)
 	            {
+	        	    tno = tally[i];
+	        	    paymentlist = this.verifyTallySlipService.updatepaymentstatus(tno);
+		            tnoemail = tno.replace("\"","");
+		            jciref = paymentlist.getDpc_name()+": "+tnoemail+"-"+paymentlist.getFarmerreg_no();
+		            tno = "";
 	                PaymentprocesstellyslipModel createpayment = new PaymentprocesstellyslipModel();
 	                createpayment.setAmount(paymentlist.getAmount());
 	                createpayment.setDebitAC_no(paymentlist.getDebitAC_no());
@@ -4457,12 +4481,12 @@ public class InsertDataController
 	                createpayment.setAC_type(paymentlist.getAC_type());
 	                createpayment.setBeneficiary_name(paymentlist.getBeneficiary_name());
 	                createpayment.setBeneficiary_branch(paymentlist.getBeneficiary_branch());
-	                createpayment.setJCI_Ref("JCI Ref");
-	                createpayment.setSender(paymentlist.getSender());
+	                createpayment.setJCI_Ref(jciref);
+	                createpayment.setSender("JCI");
 	                createpayment.setBeneficiary_bank(paymentlist.getBeneficiary_bank());
 	                createpayment.setPurchase_date(paymentlist.getPurchase_date());
-	                createpayment.setUTR_no("UTR NO");
-	                createpayment.setDate(paymentlist.getDate());
+	                //createpayment.setUTR_no("UTR NO");
+	                //createpayment.setDate(paymentlist.getDate());
 	                createpayment.setExcel_link(filename);
 	                //System.out.println("create payment controller = "+createpayment.toString());
 	                try {
@@ -4480,16 +4504,19 @@ public class InsertDataController
 	                row.createCell(4).setCellValue(paymentlist.getAC_type());  
 	                row.createCell(5).setCellValue(paymentlist.getBeneficiary_name());  
 	                row.createCell(6).setCellValue(paymentlist.getBeneficiary_branch()); 
-	                row.createCell(7).setCellValue("JCI Ref"); 
-	                row.createCell(8).setCellValue(paymentlist.getSender());  
+	                row.createCell(7).setCellValue(jciref); 
+	                row.createCell(8).setCellValue("JCI");  
 	                row.createCell(9).setCellValue(paymentlist.getBeneficiary_bank());  
 	                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
 	                String purchasedate = paymentlist.getPurchase_date(); 
 	                row.createCell(10).setCellValue(purchasedate);  
-	                row.createCell(11).setCellValue("UTR NO");
+	                row.createCell(11).setCellValue("");
 	                String currentdate = dateFormat.format(paymentlist.getDate());
-	                row.createCell(12).setCellValue(currentdate); 
+	                row.createCell(12).setCellValue(""); 
+	                totalamount +=  paymentlist.getAmount();
+	                
 	           }
+	             totalamount =Double.parseDouble(new DecimalFormat("##.####").format(totalamount));
 		          for(int j=0; j < columns.length; j++)
 		         {
 		                sheet.autoSizeColumn(j);
@@ -4498,7 +4525,7 @@ public class InsertDataController
 		          workbook.write(fileOut); 
 		          fileOut.close();
 		          workbook.close();
-		         
+		          String subject = "NEFT Advice Sheet: "+usrname+"-Rs."+totalamount+", "+totalamount+" will denote summation of tally slip amount within the sheet.";
 		          String toEmail = "";
 		          String FA_approver_email = this.verifyTallySlipService.getEmailby_tally(tnoemail);
 		          if(roho.equalsIgnoreCase("RO"))
@@ -4510,7 +4537,7 @@ public class InsertDataController
 		        	  
 		        	  System.out.println("tomail = "+toEmail);
 		        	  SendMail sendMail = new SendMail();
-		              String subject = "Invoice Generated";
+		              //String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
 		              a ="success";
@@ -4523,7 +4550,7 @@ public class InsertDataController
 		        	  InternetAddress[] toAddresses  = {  new InternetAddress(FA_approver_email) , new InternetAddress(usermail) ,new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
 			        	 
 		        	  SendMail sendMail = new SendMail();
-		              String subject = "Invoice Generated";
+		             // String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
 		              a ="success";
@@ -4535,7 +4562,7 @@ public class InsertDataController
 		        	  toEmail = "vishal.vishwakarma@cyfuture.com,animesh.anand@cyfuture.com";
 		        	  InternetAddress[] toAddresses  = {  new InternetAddress(FA_approver_email) , new InternetAddress(usermail) ,new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
 		        	  SendMail sendMail = new SendMail();
-		              String subject = "Invoice Generated";
+		              //String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
 		              a ="success";
@@ -4668,8 +4695,303 @@ public class InsertDataController
            System.out.println("pass  = "+pass);
                return false;
            }
+           
+           
+           @RequestMapping({ "uploadexcelsheet" })
+           public ModelAndView uploadexcelsheet(final HttpServletRequest request) {
+              String username =(String)request.getSession().getAttribute("usrname");
+              if(username == null) {
+                 return new ModelAndView("index");
+                 }
+               ModelAndView mv = new ModelAndView("uploadexcelsheet");
+               return mv;
+           }
+           
+           @RequestMapping({ "uploadexcel" })
+           public ModelAndView uploadexcel(final HttpServletRequest request, final RedirectAttributes redirectAttributes , @RequestParam("excelsheet") final MultipartFile excelsheet) throws EncryptedDocumentException, InvalidFormatException {
+        	  // File file = null;
+        	   
+        	   try (Workbook workbook = WorkbookFactory.create(excelsheet.getInputStream())){
+        		   Sheet sheet = workbook.getSheetAt(0);
+        		   int i = 1;
+        		   int rowCount = sheet.getLastRowNum();
+        		   FormulaEvaluator formulaEvaluator=workbook.getCreationHelper().createFormulaEvaluator(); 
+        		   
+        		   Row row = sheet.getRow(1);
+    			   Cell cell=row.getCell(7); 
+				   System.out.println(cell.getAddress());
+    			   cell=row.getCell(11); 
+				   System.out.println(cell.getNumericCellValue());   
+    			   cell=row.getCell(12); 
+    			   System.out.println(cell.getDateCellValue());
+        		 
+        		   for(Row rows: sheet)    
+        		   {  
+        		   for(Cell cells: row)     
+						   {  
+						   switch(formulaEvaluator.evaluateInCell(cell).getCellType())  
+						   {  
+						   case Cell.CELL_TYPE_NUMERIC:  
+						   System.out.println(cell.getNumericCellValue());   
+						   break;  
+						   case Cell.CELL_TYPE_STRING:   
+						   System.out.println(cell.getStringCellValue());  
+						   break;  
+						   }  
+						   }  
+						   System.out.println();  
+						   }  
+             
+                   
+        	   }
+                   catch (IOException e) {
+                   // Handle file processing errors
+                   e.printStackTrace();
+               } 
+        	   
+        	   
+        	   ModelAndView mv = new ModelAndView("uploadexcelsheet");
+               return mv;
+           
+           }
+           
+           
     static {
         InsertDataController.count = 0;
         InsertDataController.logger = LogManager.getLogger((Class)InsertDataController.class);
     }
+    
+    
+    
+    //edit farmer Animesh merged from Jyoti code
+    
+    
+    @RequestMapping(value = { "editFarmerDetails" }, method = { RequestMethod.GET })
+    public ModelAndView editFarmerDetails(final HttpServletRequest request) {
+      String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("editFarmerDetails");
+        if(username == null) {
+             mv = new ModelAndView("index");
+            }
+        try {
+        if (request.getParameter("id") != null) {
+
+            final List<PincodeModel> pincodeList = (List<PincodeModel>)this.pincodeService.getAll();
+            final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
+            final List<DistrictModel> DistrictList = (List<DistrictModel>)this.distric.getAll();
+          
+            
+            final int id = Integer.parseInt(request.getParameter("id"));
+            final List<FarmerRegModel> farmerDetailsById = this.farmerRegService.findDetails(id);      
+            mv.addObject("Liststate", (Object)Liststate);
+            mv.addObject("pincodeList", (Object)pincodeList);
+            mv.addObject("DistrictList", (Object)DistrictList);
+            mv.addObject("isverified", (Object)request.getParameter("isverified"));
+            mv.addObject("farmerDetailsById", (Object)farmerDetailsById);
+        }
+        }
+        catch(Exception e) {
+             e.printStackTrace();
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = { "updateFarmerDetails" })
+    public ModelAndView updateFarmerDetails(final HttpServletRequest request, final RedirectAttributes redirectAttributes, @RequestParam("F_ID_PROF") final MultipartFile F_ID_PROF, @RequestParam("F_BANK_DOC") final MultipartFile F_BANK_DOC, @RequestParam("F_REG_FORM") final MultipartFile F_REG_FORM) {
+      String username =(String)request.getSession().getAttribute("usrname");
+       if(username == null) {
+            return new ModelAndView("index");
+            }
+       final File theDir = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\");
+       if (!theDir.exists()) {
+           theDir.mkdirs();
+       }
+       final ModelAndView mv = new ModelAndView();
+       try {
+             String dpc= (String)request.getSession().getAttribute("dpcId");
+             final int id = Integer.parseInt(request.getParameter("id"));
+             String f_reg_no = farmerRegService.getFarmerNo(id);
+             List<FarmerRegModel> details = farmerRegService.findDetails(id);
+             FarmerRegModel fullDetails = details.get(0);
+             System.out.println("f_reg_no ------------------------->>>>>>>>>>>>>>> " +f_reg_no);
+           final String F_NAME = request.getParameter("F_NAME");
+           final String M_NAME = request.getParameter("M_NAME");
+           final String L_NAME = request.getParameter("L_NAME");
+           String farmerName="";
+           String mname = "";
+           String lname = "";
+           final String fname = F_NAME.replaceAll("\\s", "");
+           if(!fname.equalsIgnoreCase("") && fname != null)
+           farmerName = fname;
+           
+           if ((M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
+               lname = L_NAME.replaceAll("\\s", "");
+               if(!lname.equalsIgnoreCase(""))
+               farmerName = farmerName + " " + lname;
+           }
+           else if ((!M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
+               mname = M_NAME.replaceAll("\\s", "");
+               lname = L_NAME.replaceAll("\\s", "");
+               if(!mname.equalsIgnoreCase(""))
+               farmerName = farmerName + " " + mname;
+               if(!lname.equalsIgnoreCase(""))
+                   farmerName = farmerName + " " + lname;
+           }
+           else if (!M_NAME.isEmpty() && L_NAME.isEmpty()) {
+               mname = M_NAME.replaceAll("\\s", "");
+               if(!mname.equalsIgnoreCase(""))
+               farmerName = farmerName + " " + mname;
+           }
+           else if ((M_NAME.isEmpty()) && (L_NAME.isEmpty()) && (!F_NAME.isEmpty()))  {
+             if(!fname.equalsIgnoreCase(""))
+               farmerName = fname;
+           }
+           final String caste = request.getParameter("caste");
+           final String gender = request.getParameter("gender");
+           final String F_ADDRESS = request.getParameter("F_ADDRESS");
+           final String F_ID_PROF_TYPE = request.getParameter("F_ID_PROF_TYPE");
+           final String F_ID_PROF_NO = request.getParameter("F_ID_PROF_No");
+           final String F_REG_BY = request.getParameter("F_REG_BY");
+           final String F_I_CARE_REGISTERED = request.getParameter("F_I_CARE_REGISTERED");
+           final String land_holding = request.getParameter("land_holding");
+           final String F_MOBILE = request.getParameter("F_MOBILE");
+           final String state = request.getParameter("state");
+           final String F_District = request.getParameter("F_District");
+          // System.out.print(" ...................." + F_District);
+           final String F_Block = request.getParameter("F_Block");
+           final String F_Pincode = request.getParameter("pincode");
+           final String police_station = request.getParameter("policestation");
+         //  System.out.print(" ...................." + police_station);
+           final String F_AC_NO = request.getParameter("F_AC_NO");
+           final String bank_ac_type = request.getParameter("bank_ac_type");
+           final String F_BANK_NAME = request.getParameter("F_BANK_NAME");
+           final String F_BANK_BRANCH = request.getParameter("F_BANK_BRANCH");
+           final String F_BANK_IFSC = request.getParameter("F_BANK_IFSC");
+           final String F_Address2 = request.getParameter("F_Address2");
+           final String duplicateMobiileNo = request.getParameter("dubMobile");
+           final boolean duplicateMobiile = Boolean.parseBoolean(duplicateMobiileNo);
+           final String fileUpload = F_ID_PROF.getOriginalFilename();
+           final String duplicateAccNo = request.getParameter("accNoCheck");
+           final boolean accountBool = Boolean.parseBoolean(duplicateAccNo);
+           final String F_BANK_DOCupload = F_BANK_DOC.getOriginalFilename();
+           final String b_doc = request.getParameter("BANK_DOC");
+           final String id_proof = request.getParameter("ID_PROF");
+           final String reg_form = request.getParameter("REG_FORM");
+           System.out.println("b_doc =========  "+b_doc);
+           System.out.println("id_proof =========  "+id_proof);
+           System.out.println("reg_form =========  "+reg_form);
+           final FarmerRegModel farmerRegModel = new FarmerRegModel();
+           farmerRegModel.setF_ID(id);
+           farmerRegModel.setF_NAME(farmerName);
+           farmerRegModel.setCaste(caste);
+           farmerRegModel.setGender(gender);
+           farmerRegModel.setF_ADDRESS(F_ADDRESS);
+           farmerRegModel.setF_ID_PROF_TYPE(F_ID_PROF_TYPE);
+           farmerRegModel.setBank_ac_type(bank_ac_type);
+           farmerRegModel.setF_ID_PROF_NO(F_ID_PROF_NO);
+          
+           farmerRegModel.setF_I_CARE_REGISTERED(F_I_CARE_REGISTERED);
+           farmerRegModel.setLand_holding(land_holding);
+           farmerRegModel.setF_MOBILE(F_MOBILE);
+           farmerRegModel.setF_AC_NO(F_AC_NO);
+           farmerRegModel.setF_Pincode(F_Pincode);
+           farmerRegModel.setF_STATE(state);
+           farmerRegModel.setF_Block(F_Block);
+           farmerRegModel.setF_District(F_District);
+           farmerRegModel.setPolice_station(police_station);
+           farmerRegModel.setBank_ac_type(bank_ac_type);
+           farmerRegModel.setF_BANK_NAME(F_BANK_NAME);
+           farmerRegModel.setF_BANK_BRANCH(F_BANK_BRANCH);
+           farmerRegModel.setF_BANK_IFSC(F_BANK_IFSC);
+           farmerRegModel.setF_Address2(F_Address2);
+           farmerRegModel.setF_Pincode(F_Pincode);
+           farmerRegModel.setIS_VERIFIED(fullDetails.getIS_VERIFIED());
+           int verified = fullDetails.getIS_VERIFIED();
+           if(verified == 1) {
+        	   farmerRegModel.setF_DOC_Mandate(fullDetails.getF_DOC_Mandate());
+           }
+           farmerRegModel.setDpc_id(fullDetails.getDpc_id());            
+           farmerRegModel.setF_REG_NO(f_reg_no);
+           File file = null;
+           String pathurl = "";
+           try {
+               String url = "";
+               if (!F_BANK_DOC.isEmpty()) {
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\bankdoc_" + F_BANK_DOC.getOriginalFilename());
+                   try {
+                       final OutputStream os = new FileOutputStream(file);
+                       os.write(F_BANK_DOC.getBytes());
+                       os.close();
+                   }
+                   catch (Exception e) {
+                       System.out.println(e.getLocalizedMessage());
+                       e.printStackTrace();
+                   }
+                   pathurl = file.getAbsolutePath();
+                   final String path = url = "bankdoc_" + F_BANK_DOC.getOriginalFilename();
+                   System.out.println("F_BANK_DOC =========    "+F_BANK_DOC);
+                   farmerRegModel.setF_BANK_DOC(url);
+               }
+            
+               else if(b_doc != null) {
+                     farmerRegModel.setF_BANK_DOC(b_doc);
+               }
+               if (!F_ID_PROF.isEmpty()) {
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\idproof_" + F_ID_PROF.getOriginalFilename());
+                   try {
+                       final OutputStream os = new FileOutputStream(file);
+                       os.write(F_ID_PROF.getBytes());
+                       os.close();
+                   }
+                   catch (Exception e) {
+                       e.printStackTrace();
+                   }
+                   pathurl = file.getAbsolutePath();
+                   final String path = url = "idproof_" + F_ID_PROF.getOriginalFilename();
+                   farmerRegModel.setF_ID_PROF(url);
+               }else if(id_proof != null) {
+                     farmerRegModel.setF_ID_PROF(id_proof);
+               }
+               if (!F_REG_FORM.isEmpty()) {
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\regform_" + F_REG_FORM.getOriginalFilename());
+                   try {
+                       final OutputStream os = new FileOutputStream(file);
+                       os.write(F_REG_FORM.getBytes());
+                       os.close();
+                   }
+                   catch (Exception e) {
+                       e.printStackTrace();
+                   }
+                   
+                   pathurl = file.getAbsolutePath();
+                   final String path = url = "regform_" + F_REG_FORM.getOriginalFilename();
+                   farmerRegModel.setF_REG_FORM(url);
+                  
+               }
+               else if(reg_form != null) {
+                     farmerRegModel.setF_REG_FORM(reg_form);
+               }
+           }
+           catch (Exception e2) {
+               System.out.println(e2);
+               mv.addObject("msg", (Object)"Not Save please try again");
+           }
+         
+        //   System.out.println("session dpc =" + dpcid + " region = " + region);
+          
+               this.farmerRegService.update(farmerRegModel);
+               redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+           
+           
+       }
+       catch (Exception e3) {
+           System.out.println(e3);
+           redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Oops !</b> Error in updating record. Please try again</div>\r\n");
+       }
+      
+       return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
+   }
+
+
+
 }

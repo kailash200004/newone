@@ -123,12 +123,12 @@ body {
 					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification of Tally Slip</b></a></li>
 					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RO Finance Verification of Tally Slip</b></a></li>
 					<li data-pre="53" id="o53"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Payment Process of Tally Slip</b></a></li>
-					<!-- <li data-pre="54" id="o21"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verified Tally Slip List ZM</b></a></li> -->
+				    <li data-pre="54" id="o54"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>HO Payment Process of Tally Slip</b></a></li>
 					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip</b></a></li>					
-					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Purchase Date Approval- Tally Slip</b></a></li>
+					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Approval for delayed entered tally slips</b></a></li>
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
-
+                    <li data-pre="24" id="o24"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
 					
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
@@ -210,7 +210,7 @@ body {
 	<script>
 
 		$(document).ready(function() {
-		for(var i=1; i<=55;i++){
+		for(var i=1; i<=56;i++){
 			$("#o"+i).hide();
 			
 			}
@@ -244,7 +244,7 @@ $.ajax({
 
 
 					for(var j=0;j<userAction.length;j++){
-						for(var i=0;i<=54; i++){
+						for(var i=0;i<=56; i++){
 					if($("#o"+i).data("pre") == userAction[j]){
 					//console.log(userAction[j]);
 						$("#o"+i).show();

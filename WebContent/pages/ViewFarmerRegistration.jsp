@@ -82,8 +82,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<!-- <th>Land Holding</th> -->
 										<th>Is verified</th>
 										<!--<th>Registered By</th>-->
-										<th>Verify</th>
-										<th>Edit</th>
+										<th>Verify/Update Mandate</th>
+										 <th>Edit</th>
 										<th>Delete</th>
 									</tr>
 								</thead>
@@ -111,7 +111,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										%>
 										</td>
 										<%-- <td><%=farmerRegModelList.getF_REG_BY() %></td> --%>
-										<% 
+										<% if(farmerRegModelList.getF_DOC_Mandate()==null || farmerRegModelList.getF_DOC_Mandate().equalsIgnoreCase("null") ){
+											%>
+											<td><a href="editFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>"class="btn btn-danger btn-sm btn-block" style="background: darkgreen;">Update Mandate</a></td>
+									<% 
+										}
+										else{
 											if(farmerRegModelList.getIS_VERIFIED()==0)
 											{
 										%>
@@ -120,42 +125,15 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 											}else{
 										%>
 												<td></td>
-										<%
-											}
-										%>
-										
-										<% 
-											if(farmerRegModelList.getIS_VERIFIED()==0)
-											{
-										%>
-												<td><a href="editFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>"/>Edit</a></td>
-										<% 
-											}else{
-										%>
-												<td></td>
-										<%
-											}
-									
-										%>
-										
-									<%--	<td>
-											 <%
-												if(farmerRegModelList.getIS_VERIFIED()==1){
-											%>
-												Verified
-											<% 
-												}
-												else{
-											%>
-												<a href="verifyFarmer2.obj?id=<%=farmerRegModelList.getF_ID()%>" class="btn btn-danger btn-sm btn-block">Verify</a>
-											<% 		
-													
-												}
-											%> 
-										</td> --%>
-										
-										
-										<td><a href="deleteFarmer.obj?id=<%=farmerRegModelList.getF_ID()%>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
+										 <%}} %>
+
+							<td><a
+								href="editFarmerDetails.obj?id=<%=farmerRegModelList.getF_ID()%>" />EditDetails</a></td>
+							
+
+
+
+							<td><a href="deleteFarmer.obj?id=<%=farmerRegModelList.getF_ID()%>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										</tr>
 									<%
 									i++; 

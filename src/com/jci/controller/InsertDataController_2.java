@@ -1,3 +1,4 @@
+
 package com.jci.controller;
 
 import java.text.SimpleDateFormat;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,7 @@ import com.jci.service.EntryofsaleService;
 import com.jci.service.HoDispatchService;
 import com.jci.service.PaymentInstrumentService;
 import com.jci.service.PcsoentryService;
+import com.jci.service.RawJuteProcurementAndPaymentService;
 import com.jci.service.UploadRecieptService;
 import com.jci.service.UserActionService;
 import com.jci.service.UserPriviligeService;
@@ -71,6 +74,9 @@ public class InsertDataController_2 {
 	
 	@Autowired
 	DailyPurchaseModelConfService dailyPurchaseModelConfService;
+	
+	 @Autowired
+	 RawJuteProcurementAndPaymentService rawJuteProcurAndPayService;
 	
 	  @RequestMapping("entryofpcso")
 	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
@@ -774,5 +780,23 @@ public class InsertDataController_2 {
 		  ModelAndView mv = new ModelAndView("Inventory");
 		  dailyPurchaseModelConfService.firstLevel("2022-2023", "msp");
 	  }
+	  
+	  
+	  @RequestMapping(value = "SearchTally")
+	  public ModelAndView searchTally(HttpServletRequest request,HttpSession session) {
+		  ModelAndView mv = new ModelAndView("searchtally");
+		  return mv;
+		 
+	  }
+	  
+	  @ResponseBody
+      @RequestMapping(value = { "talystatus" }, method = { RequestMethod.GET })
+      public String talystatus(final HttpServletRequest request) {
+		  
+		 Gson gson = new Gson();
+		  JSONArray arr =   rawJuteProcurAndPayService.searchTally(request.getParameter("tally"));
+		  System.out.println(arr.toString());
+         return arr.toString();
+      }
 	 
 }

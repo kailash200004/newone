@@ -170,7 +170,7 @@ $(document).ready(function () {
                                       </div>
                                       <div class="row">
                                        <div class="col-sm-4 form-group" >
-											<label><b>Northern Base Pricesss</b></label></br>
+											<label><b>Northern Base Price</b></label></br>
 											<label>Basis Price +</label><input  type="tel" maxlength="10" name="northernprice"  id ="northernprice" required="required" minlength="0"/></br> 
 										</div>
 										
@@ -251,7 +251,7 @@ $(document).ready(function () {
 		var month = parseInt(today.getMonth()) + 1 ;
 		var date = parseInt(today.getDate());
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		if(date == '31'&& month == '6' && time == '23:59:59'){
+		if(date ==  1 && month == 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
 		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
 		}
 		else{
@@ -262,6 +262,7 @@ $(document).ready(function () {
 	
 
 </script>
+    
 	<script>
 		$(document).ready(function(){
 			$("#whitediv").hide();

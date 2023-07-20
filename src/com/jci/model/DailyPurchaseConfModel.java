@@ -56,7 +56,7 @@ public class DailyPurchaseConfModel {
 	private double tdbase;
 	
 	@Column(name="fibervalue")
-	private int fibervalue;
+	private double fibervalue;
 
 	@Column(name="grade1")
 	private double grade1;
@@ -223,11 +223,13 @@ public class DailyPurchaseConfModel {
 		this.tdbase = tdbase;
 	}
 
-	public int getFibervalue() {
+	 
+
+	public double getFibervalue() {
 		return fibervalue;
 	}
 
-	public void setFibervalue(int fibervalue) {
+	public void setFibervalue(double fibervalue) {
 		this.fibervalue = fibervalue;
 	}
 

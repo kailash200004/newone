@@ -92,5 +92,12 @@ public class FarmerRegServiceImpl implements FarmerRegService{
 		return farmerRegDao.findDetails(id);
 	}
 	
+	@Override
+    public String getFarmerNo(int id) {
+          // TODO Auto-generated method stub
+          return farmerRegDao.getFarmerNo(id);
+    }
+
+	
 	
 }

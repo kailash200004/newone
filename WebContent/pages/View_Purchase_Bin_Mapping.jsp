@@ -260,7 +260,7 @@
     		},
     		success : function(data) {
     			if (!$.trim(data)){   
-    			    //Todo
+    			   alert("if"); //Todo
     			}
     			else{   
     			    alert("Purchase data for "+dateOfPurch+" is Mapped to BIN ");

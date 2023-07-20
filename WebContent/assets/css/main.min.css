@@ -5180,7 +5180,7 @@ table.dataTable {
 .side-menu li:hover .sidebar-item-icon{color:#e9dc0c;}
 ul.nav-2-level.collapse.in {padding:10px 0;width:100%;display: block;}
 .side-menu .nav-2-level>li>a {padding: 10px 10px 10px 45px}
-.page-sidebar {width:320px;min-height: 100%;position: absolute;top: 0;margin-top: 0px;-webkit-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;z-index:9999;padding:15px 15px;}
+.page-sidebar {width:300px;min-height: 100%;position: absolute;top: 0;margin-top: 0px;-webkit-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;transition: all .2s ease-in-out;z-index:9999;padding:15px 15px;}
 .sidebar-mini .side-menu>li:hover>a {background-color: #007239;color: #fff}
 
 .sidebar-mini .side-menu>li:hover .nav-2-level {background-color: #00984c}

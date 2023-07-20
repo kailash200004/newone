@@ -122,7 +122,7 @@ public class RawJuteProcurementAndPayment {
 	private int creadtedby;
 
 	@Column(name="dateof_entry")
-	private Date dateof_entry;
+	private String dateof_entry;
 
 	@Column(name="td_base")
 	private String td_base;
@@ -239,12 +239,14 @@ public class RawJuteProcurementAndPayment {
 		this.is_varified = is_varified;
 	}
 
-	public Date getDateof_entry() {
+	
+	
+	public String getDateof_entry() {
 		return dateof_entry;
 	}
 
-	public void setDateof_entry(Date date) {
-		this.dateof_entry = date;
+	public void setDateof_entry(String dateof_entry) {
+		this.dateof_entry = dateof_entry;
 	}
 
 	public int getPtsid() {

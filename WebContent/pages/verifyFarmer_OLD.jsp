@@ -26,20 +26,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-<link
-	href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
-	rel='stylesheet'>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<link
-	href="<%=request.getContextPath()%>/resources/css/styleUserReg.css"
-	rel="stylesheet">
 <script type="text/javascript"
 	src='<%=request.getContextPath()%>/resources/js/responsivevoice.js'></script>
 <script type="text/javascript"
@@ -52,53 +38,29 @@
 	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
 	rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-	integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-	crossorigin="anonymous">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="assets/css/zoom.css">
+<link rel="stylesheet" href="assets/css/magnify.css">
+
 <!-- PLUGINS STYLES-->
 <!-- THEME STYLES-->
 <link href="assets/css/main.min.css" rel="stylesheet" />
 <!-- PAGE LEVEL STYLES-->
-<!-- zooming feature -->
-<link rel="stylesheet" href="assets/css/zoom.css">
-<link rel="stylesheet" href="assets/css/magnify.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-	charset="utf-8"></script>
+<style>
+.err {
+	color: red;
+}
+</style>
 
-<!-- date picker -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-<!-- <script src="assets/css/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
-<script src="assets/js/jquery.magnify.js" type="text/javascript"  charset="utf-8"></script>
-<script src="jquery.magnify.js" type="text/javascript"  charset="utf-8"></script> -->
 <style>
 .required:after {
 	content: " *";
 	color: red;
-}
-.glass {
-	width: 150px;
-	height: 150px;
-	position: absolute;
-	border-radius: 50%;
-	cursor: crosshair;
-	/* Multiple box shadows to achieve the glass effect */
-	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px
-		rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-	/* hide the glass by default */
-	display: none;
-}
-
-* {
-	box-sizing: border-box;
+} 
+.err {
+	color: red;
 }
 
 .img-magnifier-container {
@@ -114,8 +76,23 @@
 	width: 100px;
 	height: 100px;
 }
+
+.glass {
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	border-radius: 50%;
+	cursor: crosshair;
+	/* Multiple box shadows to achieve the glass effect */
+	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px
+		rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+	/* hide the glass by default */
+	display: none;
+}
 </style>
 
+
+ 
 <!-- styling confirm box -->
 <style type="text/css">
 body {
@@ -282,6 +259,7 @@ button#turn {
 }
 </style>
 
+ 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#turn').on('click', function() {
@@ -295,9 +273,6 @@ button#turn {
 		// $('.zoom').magnify();
 	});
 </script>
-
-
-
 <script>
  function magnify(imgID, zoom)
  {
@@ -358,21 +333,27 @@ button#turn {
 	} 
 
  </script>
-<script type="text/javascript">
- var tallyno, farmno, dop,pop,rsn,bin, ntqty,grate,amtpay,jutevar,grossqty,tallyimage , msg, popname  ;
+ 
+ <script type="text/javascript">
+	var zoom = 1;
+	
+	$('.zoom').on('click', function(){
+		zoom += 0.1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
+	$('.zoom-init').on('click', function(){
+		zoom = 1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
+	$('.zoom-out').on('click', function(){
+		zoom -= 0.1;
+		$('.target').css('transform', 'scale(' + zoom + ')');
+	});
  </script>
-
-
-
-
-
-</head>
-
-
-
-
-<body class="fixed-navbar" >
-
+ </head>
+  
+  
+  <body class="fixed-navbar">
 	<div class="page-wrapper">
 		<!-- START HEADER-->
 		<%@ include file="header.jsp"%>
@@ -386,7 +367,6 @@ button#turn {
 				<h1 class="page-title">Verify Farmer</h1>
 			</div>
 			<%
-			String id = request.getParameter("id");
 			FarmerRegModel farmerModel = null;
 			try {
 				farmerModel = (FarmerRegModel) request.getAttribute("farmerDetails");
@@ -394,7 +374,6 @@ button#turn {
 				out.println("Something went wrong");
 			}
 			%>
-
 
 			<div class="page-content fade-in-up">
 				<div class="row">
@@ -404,60 +383,67 @@ button#turn {
 								<!-- <div class="ibox-title">Basic form</div> -->
 								<span>${msg}</span>
 							</div>
+							
 							<div class="row">
 								<div class="col-sm-4 form-group">
 
 									<a href="ViewFarmerRegistration.obj">Go Back</a>
 								</div>
 							</div>
+							<%
+							String id = request.getParameter("id");
+							%>
 
+							<%
 
+							%>
 
 
 							<div class="ibox-body mainform">
-
-								<div class="row">
-									<div class="col-sm-6 form-group scroll">
-                                            <%
+									
+									<div class="row">
+									
+									    <div class="col-sm-6 form-group scroll">
+                                         <%
 											String filepath = "http://49.50.79.121:8080/FarmerRegistration/";
 											String imagepath = farmerModel.getF_DOC_Mandate();
 											%>
-										<button id='turn'>
-											<img style="width: 20px;"
+										  <button id='turn'>
+										  	<img style="width: 20px;"
 												src="https://pic.onlinewebfonts.com/svg/img_313385.png">
 											Rotate
-										</button>
-										<a class="btn zoom"><i class="fas fa-search-plus"></i></a> <a
+										  </button>
+										  <a class="btn zoom"><i class="fas fa-search-plus"></i></a> <a
 											class="btn zoom-out"><i class="fas fa-search-minus"></i></a>
-										<a class="btn zoom-init"><i class="fas fa-recycle"></i></a>
-										<div class="img-magnifier-container">
+										  <a class="btn zoom-init"><i class="fas fa-recycle"></i></a>
+										  
+										  <div class="img-magnifier-container">
 											<div class="click-zoom target">
 
 												<img name="uploadedImage" id="uploadedImage"
 													src="<%=filepath + farmerModel.getF_DOC_Mandate()%>" class="magniflier" />
 											</div>
-										</div>
-									</div>
+										    </div>
+									    </div>
+									    
+									    
+									 
+										<div class="col-sm-6 ">
+										<form action="saveVerification.obj" method="POST" name="enquiry_form" id="enquiry_form" onsubmit="return validate()">
 									
-										<div class="col-sm-6 form-group scroll">
-										<form action="saveVerification.obj" method="POST" name="myForm" id="myForm" onsubmit="return validate()" autocomplete="off">
-										<span id="image"></span>
-											
-											<input type="hidden" name="id" id="id" value="<%=farmerModel.getF_ID()%>"> 
-									       <input type="hidden" name="fIfsc" id="fIfsc" value="<%=farmerModel.getF_BANK_IFSC()%>"> 
-									       <input type="hidden" name="facNo" id="facNo" value="<%=farmerModel.getF_AC_NO()%>"> 
-									       <input type="hidden" name="fName" id="fName" value="<%=farmerModel.getF_NAME()%>"> 
-									       <input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>"> 
-									       <input type="hidden" name="fidProofType" id="fidProofType" value="<%=farmerModel.getF_ID_PROF_TYPE()%>"> 
-									       <input type="hidden" name="fidProofNo" id="fidProofNo" value="<%=farmerModel.getF_ID_PROF_NO()%>">
-									       
-									       <div class="form-group">
-											<label>Farmer Registration No</label> <input
+									<input type="hidden" name="id" id="id" value="<%=farmerModel.getF_ID()%>"> 
+									<input type="hidden" name="fIfsc" id="fIfsc" value="<%=farmerModel.getF_BANK_IFSC()%>"> 
+									<input type="hidden" name="facNo" id="facNo" value="<%=farmerModel.getF_AC_NO()%>"> 
+									<input type="hidden" name="fName" id="fName" value="<%=farmerModel.getF_NAME()%>"> 
+									<input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>"> 
+									<input type="hidden" name="fidProofType" id="fidProofType" value="<%=farmerModel.getF_ID_PROF_TYPE()%>"> 
+									<input type="hidden" name="fidProofNo" id="fidProofNo" value="<%=farmerModel.getF_ID_PROF_NO()%>">
+											<div class="form-group">
+												<label>Farmer Registration No</label> <input
 													class="form-control" type="text" name="farmer_reg_no"
 													id="farmer_reg_no" placeholder="Farmer Registration No"
 													value="<%=farmerModel.getF_REG_NO()%>" readonly required>
 											</div>
-											
 											<div class="form-group">
 												<label class="required">IFSC Code</label> <span class="err"
 													name="ifsc_span" id="ifsc_span"></span> <input
@@ -466,15 +452,13 @@ button#turn {
 													maxlength="11" name="ifsc_code" type="text"
 													placeholder="IFSC Code" id="ifsc_code" required>
 											</div>
-											
 											<div class="form-group">
 												<label class="required">Bank A/C Number</label> <span
-													class="err" name="aspan" id="aspan"></span> <input
+													class="err" name="ac_span" id="ac_span"></span> <input
 													class="form-control" min="0" name="ac_no" type="number"
 													placeholder="Bank A/C Number" id="ac_no" required
 													oninput="javascript: if (this.value.length > 18) this.value = this.value.slice(0, 18);">
 											</div>
-											
 											<div class="form-group">
 												<label class="required">Name of farmer </label> <span
 													class="err" name="name_span" id="name_span"></span> <input
@@ -504,48 +488,142 @@ button#turn {
 											</div>  -->
 
 											<div class="form-group">
-												 
-													
-													<button   type="submit"
-													id="enq_submit"
-													style="margin: 15px; width: 120px; border-radius: 9px;height: 30px; background: mediumseagreen; color: white;">Verify</button>
-											
+												<button class="btn btn-default" type="submit"
+													id="enq_submit">Verify</button>
 											</div>
-											 
-                                         </form>
+											</form>
 										</div>
-									
-								</div>
-
-							</div>
-							<!-- ibox mainframe -->
-
+										
+									</div> <!--row  -->
+								
+							</div> <!-- IBOX MAINFRAM -->
 						</div>
-
 					</div>
 				</div>
 			</div>
+			<!-- END PAGE CONTENT-->
+			<%@ include file="footer.jsp"%>
 		</div>
 	</div>
-	<!-- END PAGE CONTENT-->
-	<%@ include file="footer.jsp"%>
-
 
 	<div class="sidenav-backdrop backdrop"></div>
 
 	<script>
-/* Initiate Magnify Function with the id of the image, and the strength of the magnifier glass:*/
-//magnify("uploadedImage", 2);
+		$(document).ready(function() {
+			//alert("email"); 
+			 
+			//alert(reg);
+			//var img = document.getElementById('uploadedImage');
+	       // img.style.transform = 'rotate(180deg)';
+	        
+		});
+	</script>
 
-  </script>
+	<script>
+    $('#idProofType').on('change', function() {
+    	var  idProofType = $("#idProofType").find(':selected').val();
+    	if(idProofType == "Aadhar Card"){
+    		$("#identityProofNo").prop("type", "number");
+    		 $("#identityProofNo").keyup(function() {
+    			 var inputVal = ($(this).val());
+    			 var len = inputVal.toString().length;
+    			 if(len==12){
+    				 $("#identityProofNo").prop("type", "text");
+    				 $("#identityProofNo").attr("maxlength", "12");
+    			//	 alert("yes");
+    			 }
+    		});
+    	}else{
+    		$("#identityProofNo").prop("type", "text");
+    		$("#identityProofNo").attr("maxlength", "10");
+    		// alert("else");
+    	}
+    });
+    </script>
 
 
 	<script src="build/js/intlTelInput.js"></script>
 
+	<script>
+		function validate(){
+			var missing=false;
+		
+			var fIfsc = <%=farmerModel.getF_BANK_IFSC()%>;
+			var facNo = <%=farmerModel.getF_AC_NO()%>;
+			var fName = <%=farmerModel.getF_AC_NO()%>;
+			var fidProofType = <%=farmerModel.getF_ID_PROF_TYPE()%>;
+			var fidProofNo = <%=farmerModel.getF_ID_PROF_NO()%>;
+			var ifsc_code = document.getElementById("ifsc_code").value;
+			var ac_no = document.getElementById("ac_no").value;
+			var farmer_name = document.getElementById("farmer_name").value;
+			//remove proof id n dtype by animesh - 28 june 23
+		//	var idProofType = document.getElementById("idProofType").value;
+		//	var identityProofNo = document.getElementById("identityProofNo").value;
+		
+			if(fIfsc!==ifsc_code){
+			
+				document.getElementById("ifsc_span").textContent= "Please check IFSC code";
+				//return false;
+				missing = true;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+			else{
+				document.getElementById("ifsc_span").textContent= "";
+				
+			}
+			if(facNo!==ac_no){
+				
+				document.getElementById("ac_span").textContent= "Please check account number";
+				missing = true;
+				
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+			else{
+				
+				document.getElementById("ac_span").textContent= "";
+			}
+			if(fName.toUpperCase()!==farmer_name.toUpperCase()){
+				
+				document.getElementById("name_span").textContent= "Please check farmer name";
+				missing = true;
+				//return false;
+				//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+			}
+		else{
+				
+			document.getElementById("name_span").textContent= "";
+			}
+			/* else if(faddress.toUpperCase()!==address.toUpperCase()){
+				document.getElementById("address_span").textContent= "Please check farmer address";
+				document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
+				return false;
+			} */
+			
+			if(missing == true)
+				{
+				return false;
+				}
+		}
+		
+	</script>
 
+	<script>
+	$(document).ready(function(){
+		$("#ac_no").keyup(function() {
+			var value = $(this).val();
+		
+		  if(value.length < '6'  ){
+			 
+			  document.getElementById("ac_span").innerHTML = "Account No. should be between 6-18 digits!!";
+			  $('#ac_span').show();
+		  }
+		  else
+		    $('#ac_span').hide();
+		   
+		});
+	});
+	</script>
 
-	<!-- END PAGA BACKDROPS-->
-	<!-- CORE PLUGINS-->
 	<script src="./assets/vendors/jquery/dist/jquery.min.js"
 		type="text/javascript"></script>
 	<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
@@ -567,161 +645,8 @@ button#turn {
 	<script
 		src="<%=request.getContextPath()%>/resources/js/owl.carousel.min.js"></script>
 	<!-- PAGE LEVEL PLUGINS-->
-	<!-- CORE SCRIPTS <script src="assets/js/app.min.js" type="text/javascript"></script>-->
-
-
-
+	<!-- CORE SCRIPTS-->
+	<script src="assets/js/app.min.js" type="text/javascript"></script>
 
 </body>
- 
-<script>
-	function validate() {
-	//	alert("validate");
-		var missing=false;
-		
-		var fIfsc = '<%=farmerModel.getF_BANK_IFSC()%>';
-	//	alert(fIfsc);
-		var facNo = '<%=farmerModel.getF_AC_NO()%>';
-		//alert(facNo);
-		var fName = '<%=farmerModel.getF_NAME()%>';
-		fName =  fName.trim();
-	//	alert(fName);
-		<%-- var fidProofType = <%=farmerModel.getF_ID_PROF_TYPE()%>;
-		var fidProofNo = <%=farmerModel.getF_ID_PROF_NO()%>; --%>
-		var ifsc_code = document.getElementById("ifsc_code").value;
-	//	alert(ifsc_code+" "+fIfsc);
-		var ac_no = document.getElementById("ac_no").value;
-		//alert(ac_no==facNo);
-		var farmer_name = document.getElementById("farmer_name").value;
-		farmer_name = farmer_name.trim();
-		//alert(farmer_name+"12"+fName+"23");
-		//remove proof id n dtype by animesh - 28 june 23
-	//	var idProofType = document.getElementById("idProofType").value;
-	//	var identityProofNo = document.getElementById("identityProofNo").value;
-	
-		if(fIfsc!==ifsc_code){
-		  //  alert("if fifs");
-			document.getElementById("ifsc_span").textContent= "Please check IFSC code";
-			//return false;
-			missing = true;
-			//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-		}
-		else{
-			document.getElementById("ifsc_span").textContent= "";
-			
-		}
-		if(facNo!==ac_no){
-			//alert("hi");
-			document.getElementById("aspan").textContent= "Please check account number";
-			missing = true;
-			
-			//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-		}
-		else{
-			
-			document.getElementById("aspan").textContent= "";
-		}
-		if(fName.toUpperCase()!==farmer_name.toUpperCase()){
-			//alert(fName.toUpperCase());
-			document.getElementById("name_span").textContent= "Please check farmer name";
-			missing = true;
-			//return false;
-			//document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-		}
-	else{
-			
-		document.getElementById("name_span").textContent= "";
-		}
-		/* else if(faddress.toUpperCase()!==address.toUpperCase()){
-			document.getElementById("address_span").textContent= "Please check farmer address";
-			document.getElementById("enquiry_form").setAttribute("onsubmit", "event.preventDefault()");
-			return false;
-		} */
-		
-		if(missing == true)
-			{
-			return false;
-			}
-	 
-	}
-	
-</script>
-
-<script>
-	$(document).ready(function(){
-		$("#ac_no").keyup(function() {
-			var value = $(this).val();
-		
-		  if(value.length < '6'  ){
-			 
-			  document.getElementById("ac_span").innerHTML = "Account No. should be between 6-18 digits!!";
-			  $('#ac_span').show();
-		  }
-		  else
-		    $('#ac_span').hide();
-		   
-		});
-	});
-	</script>
-
- 
-
-
-
- 
-
-<script src="./assets/vendors/jquery/dist/jquery.min.js"
-	type="text/javascript"></script>
-<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
-	type="text/javascript"></script>
-<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
-	type="text/javascript"></script>
-<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
-	type="text/javascript"></script>
-<script
-	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script>
-<!-- PAGE LEVEL PLUGINS-->
-<script src="./assets/vendors/DataTables/datatables.min.js"
-	type="text/javascript"></script>
-<!-- CORE SCRIPTS-->
-<script src="assets/js/app.min.js" type="text/javascript"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
-
-
-<script>
-	$(document).ready(function(){
-	 $( "#dateOfPurchase" ).datepicker({ dateFormat: 'dd-mm-yy'    });
- });
-
-	</script>
-</script>
-
-<script type="text/javascript">
-	var zoom = 1;
-	
-	$('.zoom').on('click', function(){
-		zoom += 0.1;
-		$('.target').css('transform', 'scale(' + zoom + ')');
-	});
-	$('.zoom-init').on('click', function(){
-		zoom = 1;
-		$('.target').css('transform', 'scale(' + zoom + ')');
-	});
-	$('.zoom-out').on('click', function(){
-		zoom -= 0.1;
-		$('.target').css('transform', 'scale(' + zoom + ')');
-	});
- </script>
-
-
-
 </html>
