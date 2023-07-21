@@ -79,6 +79,7 @@
 							List<FarmerRegModel> editFarmers = (List<FarmerRegModel>)request.getAttribute("farmerDetailsById");
 							FarmerRegModel editFarmer = editFarmers.get(0);
 							int isverified = editFarmer.getIS_VERIFIED();
+							out.println("isverified == "+isverified);
 							%>
 			
 			<div class="page-content fade-in-up">
@@ -240,8 +241,9 @@
 										
 										<div class="col-sm-4 form-group">
 											<label class="required">Pincode</label>
+											
 											<span id="errPincode" name="errPincode" class="text-danger">
-											</span> <input type="number" min="0"  inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6"  class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value ="<%= editFarmer.getF_Pincode() %>">										
+											</span> <input type="number" min="0" max ="999999" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6"  class="form-control"  name="pincode" placeholder="Pin Code" id="pincode" onchange="deleteErrorMsg();" onkeyup="return check_pincode(this.value);" value ="<%= editFarmer.getF_Pincode() %>">										
 											</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">Identity Type </label>&nbsp;&nbsp;&nbsp; 
@@ -352,7 +354,7 @@
 											<label class="required">Identity Proof (330kb-1MB)</label>&nbsp; 
 											<span id="errIdProof" name="errIdProof" class="text-danger"> </span>
 												<img id="imgPreviewidentity"  />
-												<input class="form-control" id="ID_PROF" name="ID_PROF" type="hidden"  value="<%= editFarmer.getF_ID_PROF() %>">
+												<input class="form-control" id="ID_PROF" name="ID_PROF" type="hidden"  value="<%= editFarmer.getF_ID_PROF() %>" readonly>
 										<input class="form-control" name="F_ID_PROF" type="file" oninput="validateIDFileType()"
 											accept=".jpg,.jpeg,.png" placeholder="Identity Proof " id="F_ID_PROF" onkeypress="deleteErrorMsg()" value ="<%= editFarmer.getF_ID_PROF() %>"><%= editFarmer.getF_ID_PROF() %></input>
 										</div>
@@ -370,7 +372,7 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-4 form-group">
-											<input type="submit" value="Submit" class="btn btn-primary">
+											<input type="submit" value="Submit" class="btn btn-primary" id = "submit">
 											<!-- <input class="btn btn-primary" type="submit" id="enq_submit">Submit</button> -->
 										</div>
 									</div>
@@ -386,7 +388,34 @@
 	</div>
 
 	<div class="sidenav-backdrop backdrop"></div>
+       <script>
+       $(document).ready(function(){
+       $("#F_ID_PROF_TYPE").on('change', function(){
+             $("#F_ID_PROF_No").val("");
+             
+       });
+       });
+       </script>
+
 	
+	 <script>
+	
+		function check_pincode(e){
+			
+			if(e.length < 6 || e.length > 6){
+				document.getElementById("errPincode").innerHTML = "Pincode must be of 6 digits!";
+				  $(':input[type="submit"]').prop('disabled', true);
+			
+			return false;
+				}
+			else{
+				
+				  $(':input[type="submit"]').prop('disabled', false);
+					document.getElementById("errPincode").innerHTML = "";
+			}
+	
+		}
+	</script> 
 	<script>
 	$(document).ready(function(){
 		$("#F_MOBILE").keyup(function() {
@@ -490,22 +519,24 @@ function validateMobile() {
 	 var isverified = <%=isverified %>;
 	 if(isverified == 1){
 		 $('#F_NAME').attr("disabled", true) ;
-		 $('#caste').attr("disabled", true) 
-		 $('#gender').attr("disabled", true) 
-		 $('#F_ADDRESS').attr("disabled", true) 
-		 $('#F_District').attr("disabled", true) 
-		 $('#PoliceStation').attr("disabled", true) 
-		 $('#M_NAME').attr("disabled", true) 
-		 $('#L_NAME').attr("disabled", true) 
-		 $('#F_Block').attr("disabled", true) 
-		 $('#F_I_CARE_REGISTERED').attr("disabled", true) 
-		 $('#land_holding').attr("disabled", true) 
-		 $('#F_ID_PROF').attr("disabled", true) 
-		 $('#F_ID_PROF_No').attr("disabled", true) 
-		 $('#F_ID_PROF_TYPE').attr("disabled", true) 
-		 $('#F_REG_FORM').attr("disabled", true)
-		 $('#pincode').attr("disabled", true)
-		 $('#ParentMenuID').attr("disabled", true)
+		 $('#caste').attr("disabled", true) ;
+		 $('#gender').attr("disabled", true) ;
+		 $('#F_ADDRESS').attr("disabled", true) ;
+		 $('#F_District').attr("disabled", true) ;
+		 $('#PoliceStation').attr("disabled", true) ;
+		 $('#M_NAME').attr("disabled", true) ;
+		 $('#L_NAME').attr("disabled", true) ;
+		 $('#F_Block').attr("disabled", true) ;
+		 $('#F_I_CARE_REGISTERED').attr("disabled", true) ;
+		 $('#land_holding').attr("disabled", true) ;
+		// $('#F_ID_PROF').attr("disabled", true) ;
+		 	 $('#F_ID_PROF').hide();
+		 $('#F_ID_PROF_No').attr("disabled", true); 
+		 $('#F_ID_PROF_TYPE').attr("disabled", true); 
+		// $('#F_REG_FORM').attr("disabled", true);
+		 $('#F_REG_FORM').hide();
+		 $('#pincode').attr("disabled", true);
+		 $('#ParentMenuID').attr("disabled", true);
 		 
 	 }
 	 
@@ -513,6 +544,7 @@ function validateMobile() {
  </script> --%>
 <script>
  function validate() {
+	 
 	 let F_NAME = document.forms["myForm"]["F_NAME"].value;
 	// alert("after F_NAME");
 	 let caste = document.forms["myForm"]["caste"].value;
@@ -547,11 +579,10 @@ function validateMobile() {
 	 let F_BANK_BRANCH = document.forms["myForm"]["F_BANK_BRANCH"].value; 
 	// alert("after F_BANK_BRANCH  "+F_BANK_BRANCH);
 	 let F_BANK_DOC = document.forms["myForm"]["F_BANK_DOC"].value; 
-	
+
 	 let F_ID_PROF=document.forms["myForm"]["F_ID_PROF"].value; 
 	
 	 let F_REG_FORM=document.forms["myForm"]["F_REG_FORM"].value; 
-	 
 
 	 let BANK_DOC = document.forms["myForm"]["BANK_DOC"].value; 
 	
@@ -603,6 +634,7 @@ function validateMobile() {
 		  document.forms["myForm"]["pincode"].focus();
 		  return false;
 	  }
+	  
 	  else if(F_ID_PROF_TYPE == ""){
 		  document.getElementById("errIdtype").innerHTML = "Id Type can not be empty!";
 		  //alert("Identity Type must be filled out");
@@ -665,19 +697,19 @@ function validateMobile() {
 	  else if(F_BANK_DOC == "" && BANK_DOC == ""){
 		  
 		  document.getElementById("errBank").innerHTML = "Bank Document can not be empty!";
-		  //alert("Bank Document must be filled out");
+		 // alert("Bank Document must be filled out");
 		  document.forms["myForm"]["F_BANK_DOC"].focus(); 
 		  return false;
 	  } 
 	  else if(F_ID_PROF == "" && ID_PROF == ""){
 		  document.getElementById("errIdProof").innerHTML = "ID Prof document can not be empty!";
-		  //alert("Bank Document must be filled out");
+		 // alert("Bank Document must be filled out");
 		  document.forms["myForm"]["F_ID_PROF"].focus();
 		  return false;
 	  } 
 	 else if(F_REG_FORM == "" && REG_FORM == ""){
 		  document.getElementById("errRegForm").innerHTML = "REG FORM can not be empty!";
-		  //alert("Registration Form must be filled out");
+		//  alert("Registration Form must be filled out");
 		  document.forms["myForm"]["F_REG_FORM"].focus();
 		  return false;
 	  }
@@ -726,7 +758,7 @@ var policestation = document.forms["myForm"]["policestation"].value;
                $("#errPoliceStation").hide();
         }
 var pincode = document.forms["myForm"]["pincode"].value;
-        if(pincode.length == 6){
+        if(pincode.length === 6){
             $("#errPincode").hide();
         }
  
@@ -1004,30 +1036,35 @@ function validateAdhar(){
 </script>
 <script>
 $(document).ready(function(){
+         $("#F_BANK_IFSC").keyup(function(){
+               $("#F_BANK_NAME").val("");
+               $("#F_BANK_BRANCH").val("");
+         });
   $("#F_BANK_IFSC").blur(function(){
-	  var F_BANK_IFSC = document.forms["myForm"]["F_BANK_IFSC"].value;
-	  var len=F_BANK_IFSC.length;
-	  if(len==11){
-		  $.ajax({
-	          type: "GET",
-	          url: "https://ifsc.razorpay.com/"+F_BANK_IFSC,
-	          dataType: "json",
-	          processData: false,
-	          success: function (data) {
-	        	  // console.log(JSON.stringify(data.BRANCH));
-	        	  $("#F_BANK_BRANCH").val(JSON.stringify(data.BRANCH).replace(/\"/g, ""));
-	        	  $("#F_BANK_NAME").val(JSON.stringify(data.BANK).replace(/\"/g, ""));
-	          },
-	          error: function (jqXHR, exception) {
-	        	 alert("Enter valid IFSC!!!"); 
-	          }
-	      });
-	  }else if(len>11){
-		  alert('IFSC Code cannot be more then 11 characters');
-	  }	 
+         var F_BANK_IFSC = document.forms["myForm"]["F_BANK_IFSC"].value;
+         var len=F_BANK_IFSC.length;
+         if(len==11){
+               $.ajax({
+                 type: "GET",
+                 url: "https://ifsc.razorpay.com/"+F_BANK_IFSC,
+                 dataType: "json",
+                 processData: false,
+                 success: function (data) {
+                      // console.log(JSON.stringify(data.BRANCH));
+                      $("#F_BANK_BRANCH").val(JSON.stringify(data.BRANCH).replace(/\"/g, ""));
+                      $("#F_BANK_NAME").val(JSON.stringify(data.BANK).replace(/\"/g, ""));
+                 },
+                 error: function (jqXHR, exception) {
+                     alert("Enter valid IFSC!!!"); 
+                 }
+             });
+         }else if(len>11){
+               alert('IFSC Code cannot be more then 11 characters');
+         }    
   }); 
 });
 </script>
+
 <script>
 $(document).ready( function(){
 	var val=  $('#ParentMenuID').find(":selected").val();
@@ -1077,16 +1114,18 @@ $(document).ready( function(){
  					var result = JSON.parse(result);
  					var s = "<option disabled  value>-Select-</option>";
  					//var html = "<option disabled selected value>-Select-</option>";
+ 				
  					for(var i = 0; i < result.length; i++) {
- 						
- 						if(result[i] == $('#police').val()){
- 							s += '<option selected value="' + result[i] + '">' + result[i] + '</option>';
+ 						//console.log(result[i] );
+ 						if(result[i].split("-")[0] == $('#police').val()){
+ 							s += '<option selected value="' + result[i].split("-")[0] + '">' + result[i].split("-")[1] + '</option>';
  							//alert("police   ==   "+result[i]);
  						}
  						else {
  							
- 						}
- 						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 						
+ 						s += '<option value="' + result[i].split("-")[0] + '">' + result[i].split("-")[1] + '</option>';
+ 					}
  					}
  					$('#PoliceStation').html(s);
 				}
@@ -1106,19 +1145,20 @@ $(document).ready( function(){
 			url:"findVByBlock.obj",
 			data:{"F_Block":districtId},
 			success:function(result){
-				
+			//	alert("block  = "+$('#block').val());
 			
  				if(result.length>0){
  					var result = JSON.parse(result);
  					var s = "<option disabled  value>-Select-</option>";
  					for(var i = 0; i < result.length; i++) {
  						if(result[i] == $('#block').val()){
- 							s += '<option'+flag+' value="' + result[i] + '">' + result[i] + '</option>';
+ 							s += '<option selected value="' + result[i] + '">' + result[i] + '</option>';
  						}
  						else {
  						
- 						}
+ 						
  						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 					}
  					}
  					$('#F_Block').html(s);
 				}
@@ -1248,7 +1288,7 @@ $("#F_District").change(function(){
  					var s = "<option disabled selected value>-Select-</option>";
  					//var html = "<option disabled selected value>-Select-</option>";
  					for(var i = 0; i < result.length; i++) {
- 						s += '<option value="' + result[i] + '">' + result[i] + '</option>';
+ 						s += '<option value="' + result[i].split("-")[0] + '">' + result[i].split("-")[1] + '</option>';
  					}
  					$('#PoliceStation').html(s);
 				}
@@ -1268,7 +1308,7 @@ $("#F_District").change(function(){
 			data:{"F_Block":val},
 			success:function(result){
 				
-				alert(result);
+			//	alert(result);
  				if(result.length>0){
  					var result = JSON.parse(result);
  					var s = "<option disabled selected value>-Select-</option>";

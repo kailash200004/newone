@@ -2,6 +2,7 @@ package com.jci.dao.impl;
 
 import java.util.List;
 
+import java.util.ArrayList;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -66,19 +67,19 @@ public class PoliceStationDaoImpl implements PoliceStationDao{
 		return false;
 	}
 
-	@Override
-	public List<String> getAllFilledPoliceStation(String F_Block) {
-
-		//System.out.println("block value from DaoImpl is "+PoliceStation);
-
-		String hql = "select police_station from tbl_policeStation where district_id ='"+F_Block+"'";
-		
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
-		List<String> results = query.list();
-		//String sql = "select max(position) from dbo.product where menu_name='Insurance'";
-		//List<String> listsearch = jdbc.queryForList(sql, String.class);
-		return results;
-	}
+	   @Override
+       public List<String> getAllFilledPoliceStation(String F_Block) {
+             List<String> police = new ArrayList<String>();
+             //System.out.println("block value from DaoImpl is "+PoliceStation);
+             String hql = "select id, police_station from tbl_policeStation where district_id ='"+F_Block+"'";
+             Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
+             List<Object[]> results = query.list();
+             for(Object[] o : results) {
+                    police.add(o[0]+"-"+o[1]);
+             System.out.println("result id ===   "+o[0]+"-"+o[1]);
+             }
+             return police;
+       }
 
 
 }

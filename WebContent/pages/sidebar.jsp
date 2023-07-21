@@ -93,7 +93,7 @@ body {
 					class="nav-label"> &nbsp;Farmer Registration</span><i 
 					class="fa fa-angle-left arrow"></i></a>
 				<ul class="nav-2-level">
-					<li  data-pre="7" id="o7"><a  href="FarmerRegistration.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Farmer Registration</b></a></li>
+					<!-- <li  data-pre="7" id="o7"><a  href="FarmerRegistration.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Farmer Registration</b></a></li> -->
 					<li  data-pre="8" id="o8"><a  href="ViewFarmerRegistration.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Farmer List Reg</b></a></li>
 				</ul> </li> 
 				
@@ -102,7 +102,7 @@ body {
 					class="nav-label"> &nbsp;Market Arrival</span> <i
 					class="fa fa-angle-left arrow"></i></a>
 				<ul class="nav-2-level ">
-					<li  data-pre="9" id="o9"><a href="rulingMarketForm.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Ruling Market Rate at DPC</b></a></li>
+<!-- 					<li  data-pre="9" id="o9"><a href="rulingMarketForm.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Ruling Market Rate at DPC</b></a></li> -->
 					<li  data-pre="10" id="o10"><a href="viewmarketArrival.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Ruling Market List</b></a></li>				 
 					<li  data-pre="11" id="o11"><a href="jbaRate.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>JBA Rate</b></a></li>
 					<li  data-pre="12" id="o12"><a href="JbaPriceList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>JBA List</b></a></li>
@@ -115,20 +115,20 @@ body {
 				<ul class="nav-2-level ">
 					<li data-pre="13" id="o13"><a href="mspPriceCalculation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Enter Minimum Support Price </b></a></li>
 					<li data-pre="14" id="o14"><a href="commercialPriceCalculation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Commercial Ceiling Price Intimation </b></a></li>
-					<li data-pre="15" id="o15"><a href="rawJutePaymentAndProcurement.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Raw Jute Procurement & Payment</b></a></li>				
-					<li data-pre="16" id="o16"><a href="dailyPurchaseConf.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase Confirmation</b></a></li>
+<!-- 					<li data-pre="15" id="o15"><a href="rawJutePaymentAndProcurement.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Raw Jute Procurement & Payment</b></a></li>	 -->			
+<!-- 					<li data-pre="16" id="o16"><a href="dailyPurchaseConf.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase Confirmation</b></a></li> -->
 					<li data-pre="17" id="o17"><a href="Distributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Distribution of tally Slip</b></a></li>
 				  	<li data-pre="18" id="o18"><a href="mspGradesPriceList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View MSP </b></a></li>
 					<li data-pre="19" id="o19"><a href="viewCommercialCeilingPrice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Commercial Ceiling Price Intimation</b></a></li>
 					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification of Tally Slip</b></a></li>
 					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RO Finance Verification of Tally Slip</b></a></li>
 					<li data-pre="53" id="o53"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Payment Process of Tally Slip</b></a></li>
-				    <li data-pre="54" id="o54"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>HO Payment Process of Tally Slip</b></a></li>
+					<li data-pre="54" id="o54"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>HO Payment Process of Tally Slip</b></a></li>
 					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip</b></a></li>					
-					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Approval for delayed entered tally slips</b></a></li>
+					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Purchase Date Approval- Tally Slip</b></a></li>
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
-                    <li data-pre="24" id="o24"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
+
 					
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
@@ -136,9 +136,9 @@ body {
 					class="nav-label"> &nbsp;Progress of Assortment</span> <i
 					class="fa fa-angle-left arrow"></i></a> 
 				<ul class="nav-2-level ">
-					<li  data-pre="25" id="o25"><a href="balePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Bale Preparation</b></a></li>
+<!-- 					<li  data-pre="25" id="o25"><a href="balePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Bale Preparation</b></a></li> -->
 					<li  data-pre="26" id="o26"><a href="viewbalePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i> <b>View Bale Preparation</b></a></li>
-					<li  data-pre="27" id="o27"><a href="addRopeMaking.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Rope Making</b></a></li>
+<!-- 					<li  data-pre="27" id="o27"><a href="addRopeMaking.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Rope Making</b></a></li> -->
 					<li  data-pre="28" id="o28"><a href="ropeMakingListing.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Rope Making</b></a></li>
 				
 				</ul> </li>
@@ -147,7 +147,7 @@ body {
 				
 				
 				
-			 <li><a href="javascript:void(0);"><i
+		<!-- 	 <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">&nbsp;BIN Performance Calculation</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -158,7 +158,7 @@ body {
 					<li  data-pre="32" id="o32"><a href="fingain.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>FinGainAnd WeightGain</b></a></li>
 					<li  data-pre="33" id="o33"><a href="BinListfromDb.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN Gain List</b></a></li>
 
-				</ul> </li>
+				</ul> </li> -->
 				<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">6.&nbsp;Contract</span> <i
@@ -244,7 +244,7 @@ $.ajax({
 
 
 					for(var j=0;j<userAction.length;j++){
-						for(var i=0;i<=56; i++){
+						for(var i=0;i<=54; i++){
 					if($("#o"+i).data("pre") == userAction[j]){
 					//console.log(userAction[j]);
 						$("#o"+i).show();
