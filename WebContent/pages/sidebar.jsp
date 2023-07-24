@@ -128,6 +128,7 @@ body {
 					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Purchase Date Approval- Tally Slip</b></a></li>
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
+                    <li data-pre="57" id="o57"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
 
 					
 				</ul> </li> 
@@ -147,7 +148,7 @@ body {
 				
 				
 				
-		<!-- 	 <li><a href="javascript:void(0);"><i
+	 	 <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">&nbsp;BIN Performance Calculation</span> <i
 					class="fa fa-angle-left arrow"></i></a>
@@ -158,7 +159,7 @@ body {
 					<li  data-pre="32" id="o32"><a href="fingain.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>FinGainAnd WeightGain</b></a></li>
 					<li  data-pre="33" id="o33"><a href="BinListfromDb.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN Gain List</b></a></li>
 
-				</ul> </li> -->
+				</ul> </li> 
 				<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">6.&nbsp;Contract</span> <i
@@ -244,7 +245,7 @@ $.ajax({
 
 
 					for(var j=0;j<userAction.length;j++){
-						for(var i=0;i<=54; i++){
+						for(var i=0;i<=56; i++){
 					if($("#o"+i).data("pre") == userAction[j]){
 					//console.log(userAction[j]);
 						$("#o"+i).show();

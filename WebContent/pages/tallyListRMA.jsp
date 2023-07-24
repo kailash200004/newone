@@ -76,6 +76,7 @@
 				 if(verificationList==null){
 					 verificationList = new ArrayList();
 				 }
+				// out.println(verificationList.size());
 				%>
 			 <div class="page-content fade-in-up">
                 <div class="ibox">
@@ -109,7 +110,7 @@
 									int i= 1;
 							for(RawJuteProcurementAndPayment verificationlists : verificationList){
 								
-								 if(i<=200){  
+								 if(i<=verificationList.size()){  
 									 
 							%>
 									<tr>

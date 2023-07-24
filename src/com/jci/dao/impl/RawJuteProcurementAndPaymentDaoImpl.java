@@ -331,9 +331,10 @@ public class RawJuteProcurementAndPaymentDaoImpl implements RawJuteProcurementAn
 			 queryStr=" select farmerregno,datepurchase,basis,cropyr,c.centername,rateslipno,binno,jutevariety,grossquantity,deductionquantity,grasatrate,amountpayable, ptsid,tallyslipno, slip_image,netquantity,dateof_entry from jciprocurement p left join jcipurchasecenter c on p.placeofpurchase = c.CENTER_CODE where p.status ='"+status+"'";
 		 }
 		
- 
+        System.out.println("Query = "+queryStr);
 		List<RawJuteProcurementAndPayment> result = new ArrayList<>();
 		List<Object[]> res = new ArrayList<>();
+		System.out.println("size of list = "+res);
 
 			Session session = sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();

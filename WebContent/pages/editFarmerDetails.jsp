@@ -79,7 +79,7 @@
 							List<FarmerRegModel> editFarmers = (List<FarmerRegModel>)request.getAttribute("farmerDetailsById");
 							FarmerRegModel editFarmer = editFarmers.get(0);
 							int isverified = editFarmer.getIS_VERIFIED();
-							out.println("isverified == "+isverified);
+							//out.println("isverified == "+isverified);
 							%>
 			
 			<div class="page-content fade-in-up">
@@ -1336,7 +1336,7 @@ $("#F_District").change(function(){
 <script>
     function validateBANKFileType(){
         var F_BANK_DOC = document.getElementById('F_BANK_DOC').value;
-        alert("F_BANK_DOC  = =  "+F_BANK_DOC);
+      //  alert("F_BANK_DOC  = =  "+F_BANK_DOC);
         var idxDot = F_BANK_DOC.lastIndexOf(".") + 1;
         var extFile = F_BANK_DOC.substr(idxDot, F_BANK_DOC.length).toLowerCase();
          if (extFile=="jpg" || extFile=="jpeg" || extFile=="png")

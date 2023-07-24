@@ -105,20 +105,22 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 		String querystr = "";
 		int is_ho = (int)session1.getAttribute("is_ho");
 		String roletypes = (String) session1.getAttribute("roletype");
+		System.out.println("dpcid = "+dpcid+"region = "+region+"zone= "+zone);
+		System.out.println("roletype = "+roletypes);
 		if(roletypes.equalsIgnoreCase("HO")){
 		
-			querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
+			querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
 		}	
 		else if(roletypes.equalsIgnoreCase("ZO"))
 		  { 
-			  querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id left join [jcipurchasecenter] e on a.dpc_id = e.CENTER_CODE left join [jcirodetails] f on e.rocode = f.rocode where f.zonecode ='"+zone+"'"; 
+			  querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id left join [jcipurchasecenter] e on a.dpc_id = e.CENTER_CODE left join [jcirodetails] f on e.rocode = f.rocode where f.zonecode ='"+zone+"'"; 
 		  } 
 		else if(roletypes.equalsIgnoreCase("RO")) 
 		  { 
-			  querystr = "  Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id left join [jcipurchasecenter] e on a.dpc_id = e.CENTER_CODE where e.rocode='" +region+"'"; 
+			  querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id left join [jcipurchasecenter] e on a.dpc_id = e.CENTER_CODE where e.rocode='" +region+"'"; 
 		  }
 		else {
-		 querystr = "Select a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id where a.dpc_id='"+dpcid+"'";
+		 querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id where a.dpc_id='"+dpcid+"'";
 			
 		}
 		Session session = sessionFactory.getCurrentSession();

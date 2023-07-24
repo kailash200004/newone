@@ -1714,8 +1714,7 @@ public class InsertDataController
         	mv = new ModelAndView("index");
             }
         try {
-        String dcpid = (String)request.getSession().getAttribute("dpcId");
-       	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
+        String dcpid = (String)request.getSession().getAttribute("dpcId"); 
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
         final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus(dcpid, regionId, zoneId);
