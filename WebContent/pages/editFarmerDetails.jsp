@@ -66,7 +66,7 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Edit Farmer Registration</h1>
+				<h1 class="page-title">Edit Farmer Details</h1>
 			</div>
 			<%
 				int userId = 0;
@@ -90,6 +90,13 @@
 								<!-- <div class="ibox-title">Basic form</div> -->
 								<span>${msg}</span>
 							</div>
+							<div class="row">
+								<div class="col-sm-4 form-group">
+
+									<a href="ViewFarmerRegistration.obj">Go Back</a>
+								</div>
+							</div>
+							
 							<div class="ibox-body">
 								<form action="updateFarmerDetails.obj" method="POST"
 									enctype="multipart/form-data" name="myForm"
@@ -900,11 +907,11 @@ function validateAccount(){
  $('#F_BANK_DOC').on('change', function() {
         	
             var size = (this.files[0].size/ 1024 / 1024).toFixed(2);
-            if (size > 1 || size < .33) {
+            if (size > 1 || size < .01) {
             	 $("#F_BANK_DOC").val("");
-            	document.getElementById("errBank").innerHTML = "File must be between the size of 330KB-1 MB";
+            	document.getElementById("errBank").innerHTML = "File must be between the size of 10KB-1 MB";
             } else {
-            	if(size < 1 && size > .33) {
+            	if(size < 1 && size > .01) {
             		size = size * 1024;
             		
             		 $("#errBank").html('<span style="color:green">size: ' + size + "KB</span>");
@@ -919,12 +926,12 @@ function validateAccount(){
  	<script>
         $('#F_ID_PROF').on('change', function() {
        var size =(this.files[0].size/ 1024 / 1024).toFixed(2);
-            if (size > 1 || size < .33) {
+            if (size > 1 || size < .01) {
              $("#F_ID_PROF").val("");
-        document.getElementById("errIdProof").innerHTML = "File must be between the size of 330KB-1 MB";
+        document.getElementById("errIdProof").innerHTML = "File must be between the size of 10KB-1 MB";
             	 //alert("hgdfhgf");
             } else {
-            	if(size < 1 && size > .33) {
+            	if(size < 1 && size > .01) {
             		size = size * 1024;
             		
             		 $("#errIdProof").html('<span style="color:green">size: ' + size + "KB</span>");
@@ -941,11 +948,11 @@ function validateAccount(){
         $('#F_REG_FORM').on('change', function() {
             var size =
                (this.files[0].size/ 1024 / 1024).toFixed(2);
-            if (size > 1 || size < .33) {
+            if (size > 1 || size < .01) {
             	 $("#F_REG_FORM").val("");
-            	document.getElementById("errRegForm").innerHTML = "File must be between the size of 330KB-1 MB";
+            	document.getElementById("errRegForm").innerHTML = "File must be between the size of 10KB-1 MB";
             } else {
-            	if(size < 1 && size > .33) {
+            	if(size < 1 && size > .01) {
             		size = size * 1024;
             		 $("#errRegForm").html('<span style="color:green">size: ' + size + "KB</span>");
             	}

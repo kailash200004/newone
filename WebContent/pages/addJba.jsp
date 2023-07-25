@@ -243,7 +243,7 @@ $(document).ready(function () {
     
     <div class="sidenav-backdrop backdrop"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
+   <script>
  $(document).ready(function(){
 	var	html = "<option selected disabled>-select-</option>";
 		var today = new Date();
@@ -251,10 +251,12 @@ $(document).ready(function () {
 		var month = parseInt(today.getMonth()) + 1 ;
 		var date = parseInt(today.getDate());
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		if(date ==  1 && month == 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
+		if(date >=  1 && month >= 7 && parseInt(today.getHours()) >= 0 && parseInt(today.getMinutes()) >= 0 && parseInt(today.getSeconds()) > 0){
+		html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
 		html += "<option value = '"+cropyr+"-"+(cropyr + 1)+"'>"+cropyr+"-"+(cropyr + 1)+"</option>";
 		}
 		else{
+			html += "<option value = '"+(cropyr - 2)+"-"+(cropyr - 1)+"'>"+(cropyr - 2)+"-"+(cropyr - 1)+"</option>";
 			html += "<option value = '"+(cropyr - 1)+"-"+cropyr+"'>"+(cropyr - 1 )+"-"+cropyr+"</option>";
 		}
 		$("#cropyr").html(html);
@@ -262,6 +264,7 @@ $(document).ready(function () {
 	
 
 </script>
+
     
 	<script>
 		$(document).ready(function(){

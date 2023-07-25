@@ -28,4 +28,5 @@ public interface UserRegistrationDao {
 	public String getroletypr(String usrname);
 	public String getregionId(String usrname);
 	public String getzoneId(String usrname);
+	public String getoldpassword(int id);
 }

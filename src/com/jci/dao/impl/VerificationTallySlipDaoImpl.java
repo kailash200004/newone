@@ -427,4 +427,71 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		}
 	}
 
+	@Override
+	public void setholdstatus(String tno) {
+		// TODO Auto-generated method stub
+		try {
+			String hql = "update jciprocurement set status = 'hold' where tallyslipno ='"+tno+"'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+			
+			String hql1 = "update verificationtallyslip set status = 'hold' where tallyNo ='"+tno+"'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+
+	@Override
+	public List<VerifyTallySlip> getAllHold(String region, String role_type) {
+		// TODO Auto-generated method stub
+		List<VerifyTallySlip> r = new ArrayList<>();
+		List<Object[]> result = new ArrayList<>();
+		try {
+			String status ="hold";
+			String querystr = "";
+			if (role_type.equalsIgnoreCase("RO")) {
+				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
+						+ "d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
+						+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
+						+ " where a.status ='" + status + "' and a.payment_status='0' and a.region_id =" + region;
+			} else if (role_type.equalsIgnoreCase("HO")) {
+				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
+						+ "d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
+						+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
+						+ " where a.status ='" + status + "' and a.payment_status='0'";
+			}
+
+			Session session = sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(querystr);
+			result = query.list();
+			if (result.size() >= 1) {
+				// Object[] row = result.get(0);
+				for (Object[] row : result) {
+					VerifyTallySlip verifyTallySlip = new VerifyTallySlip();
+					String dateString = (String) row[3];
+
+					verifyTallySlip.setTallyid(((int) row[0]));
+					verifyTallySlip.setDop(dateString);
+					verifyTallySlip.setNetquantity(((BigDecimal) row[4]).doubleValue());
+					verifyTallySlip.setAmountpayable(((BigDecimal) row[5]).doubleValue());
+					verifyTallySlip.setFarmerRegNo((String) row[2]);
+					verifyTallySlip.setTallyNo((String) row[1]);
+					verifyTallySlip.setFacheck_flag((String) row[6]);
+					verifyTallySlip.setBasis((String) row[7]);
+					verifyTallySlip.setCentername((String) row[8]);
+					verifyTallySlip.setFarmer_name((String) row[9]);
+					r.add(verifyTallySlip);
+				}
+
+				return r;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+		//	System.out.println(e.getLocalizedMessage());
+			return null;
+		}
+	}
+
 }

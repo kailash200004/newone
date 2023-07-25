@@ -109,7 +109,7 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 		System.out.println("roletype = "+roletypes);
 		if(roletypes.equalsIgnoreCase("HO")){
 		
-			querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
+			querystr = "Select top(200) a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
 		}	
 		else if(roletypes.equalsIgnoreCase("ZO"))
 		  { 
@@ -272,14 +272,14 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 	@Override
     public List<FarmerRegModel> findDetails(int id) {
           List<FarmerRegModel> list = new ArrayList<FarmerRegModel>();
-          String querystr = "select a.* ,b.state_name, c.district_name from jcirmt a   join tbl_states b on a.F_STATE = b.id join tbl_districts c on a.F_District = c.id  where F_ID = '"+id+"'";
+          String querystr = "select a.* ,b.state_name, c.district_name, d.police_station as police_name from jcirmt a   join tbl_states b on a.F_STATE = b.id join tbl_districts c on a.F_District = c.id join tbl_policeStation d on a.police_station = d.id   where F_ID = '"+id+"'";
           Session session = sessionFactory.getCurrentSession();
           Transaction tx = session.beginTransaction();
           SQLQuery query = session.createSQLQuery(querystr);
           List<Object[]> rows = query.list();
     //     System.out.println("rows.size ==  "+ rows.size());
           for(Object[] r : rows)
-          {
+          { 
                  FarmerRegModel farmerRegModel = new FarmerRegModel();
                  farmerRegModel.setF_ID((int)r[0]);
                  farmerRegModel.setF_NAME((String)r[1]);
@@ -287,6 +287,7 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
                  farmerRegModel.setF_MOBILE((String)r[3]);
                  farmerRegModel.setF_ID_PROF((String)r[4]);
                  farmerRegModel.setF_ID_PROF_NO((String)r[5]);
+                 farmerRegModel.setF_REG_BY((String)r[6]);
                  farmerRegModel.setF_I_CARE_REGISTERED((String)r[7]);
                  farmerRegModel.setLand_holding((String)r[8]);
                  farmerRegModel.setF_BANK_NAME((String)r[9]);
@@ -307,13 +308,14 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
                  farmerRegModel.setF_Block((String)r[26]);
                  farmerRegModel.setGender((String)r[27]);
                  farmerRegModel.setF_REG_FORM((String)r[28]);
-                 farmerRegModel.setPolice_station((String)r[29]);
+                 farmerRegModel.setPolice_station((String)r[39]);
                  farmerRegModel.setF_DOC_PATH((String)r[31]);
                  farmerRegModel.setDpc_id((String)r[35]);
                  list.add(farmerRegModel);
           }
           return list;
     }
+
 
 	@Override
     public String getFarmerNo(int id) {

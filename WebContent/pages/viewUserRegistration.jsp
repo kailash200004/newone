@@ -113,7 +113,7 @@ th     { background:#eee; }
 									int i= 1;
 							for(UserRegistrationModel UserRegistrationList : allUserRegistration){
 								
-								 if(i<=200){  
+								 if(i<=allUserRegistration.size()){  
 							%>
 									<tr>
 										<td><%=i%></td>
@@ -125,9 +125,9 @@ th     { background:#eee; }
 										<td><%=UserRegistrationList.getRoles_name()%></td>
 										<td><%=UserRegistrationList.getUsertype()%></td>
 				                    	
-										<td><%=UserRegistrationList.getZonename()%></td>
-										<td><%=UserRegistrationList.getRoname()%></td> 
-										<td><%=UserRegistrationList.getCentername()%></td>
+										<td><% if(UserRegistrationList.getZonename() == null){out.println("NA");} else {out.println(UserRegistrationList.getZonename());}%></td>
+										<td><% if(UserRegistrationList.getRoname() == null){out.println("NA");} else {out.println(UserRegistrationList.getRoname());}%></td> 
+										<td><% if(UserRegistrationList.getCentername() == null){out.println("NA");} else {out.println(UserRegistrationList.getCentername());}%></td>
 									    
 				                    	
 										

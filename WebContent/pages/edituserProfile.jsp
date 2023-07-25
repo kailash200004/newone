@@ -47,7 +47,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">User Profile</h1>
+                <h1 class="page-title">Update Profile</h1>
                  
             </div>
 				
@@ -92,11 +92,11 @@
                                         	<input class="form-control"  id="mobile" name="mobile" placeholder="Mobile Number" value = "<%=userProfile.getMobileno()%>" >
 										</div>
 										 <div class="col-sm-4 form-group">
-											<label class="required">User Type</label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
+											<label class="required">User Type </label> &nbsp;&nbsp;&nbsp; <span id="errUserType" name="errUserType" class="text-danger" > </span>
 											<select class="form-control" name="usertype" id="usertype" required>
 												<option disabled selected value>-Select-</option>
-												<option>Web User</option>
-												<option>Mobile User</option>
+												<option <% if(userProfile.getUsertype().equalsIgnoreCase("Web User")){out.println("selected");}%>value="Web User">Web User</option>
+												<option <% if(userProfile.getUsertype().equalsIgnoreCase("Mobile User")){out.println("selected");}%>value="Mobile User">Mobile User</option>
 											</select>
 										</div>
 										</div>
@@ -129,8 +129,11 @@
 												<option disabled selected value>-Select-</option>
 												<%
 													for(ZoneModel zoneLists : zoneList) {
+														
+															
+														
 												%>
-												<option value="<%=zoneLists.getZonecode()%>"><%=zoneLists.getZonename()%></option>
+												<option <% if(zoneLists.getZonecode().equalsIgnoreCase(userProfile.getZone())){ out.println("selected");} %>value="<%=zoneLists.getZonecode()%>"><%=zoneLists.getZonename()%></option>
 												<%
 													}
 												%>
@@ -160,6 +163,41 @@
                 </div>
             </div>
             <script>
+            $(document).ready(function(){
+            	var user_type;
+                var variety = document.getElementById("usertype").value;
+            
+                if(variety=="Web User"){
+                       user_type="Web User";
+                }
+                
+                else if(variety=="Mobile User"){
+                       user_type="Mobile User";
+                }
+                
+                         $.ajax({
+                                    type:"GET",
+                                    url:"getuserrole.obj",
+                                    data:{"user_type":user_type},
+                                    success:function(result){
+                                          var data= jQuery.parseJSON(result);
+                                     //     console.log(data);
+                                           var html = "<option disabled  value>-Select-</option>";
+                                        for (var i = 0; i< data.length; i++){
+                                       	
+                                       	 if(data[i].split("-")[0] == <%= userProfile.getRoleId()%>){
+                                       
+                                           html += '<option selected data-id="'+data[i].split("-")[2]+'" value="' +data[i].split("-")[0]+'-'+data[i].split("-")[1]+ '">'+data[i].split("-")[1]+'</option>'
+                                       	 }
+                                       	 else{
+                                        		
+                                                html += '<option  data-id="'+data[i].split("-")[2]+'" value="' +data[i].split("-")[0]+'-'+data[i].split("-")[1]+ '">'+data[i].split("-")[1]+'</option>'
+                                            	 }
+                                            
+                                      } 
+                                    $("#role").html(html);
+                                    }
+                         });
        $("#usertype").on("change", function(){
    
              var user_type;
@@ -179,21 +217,55 @@
                                  data:{"user_type":user_type},
                                  success:function(result){
                                        var data= jQuery.parseJSON(result);
-                                       console.log(data);
-                                        var html = "<option disabled selected value>-Select-</option>";
+                                      // console.log(data);
+                                        var html = "<option disabled  selected value>-Select-</option>";
                                      for (var i = 0; i< data.length; i++){
+                                    	
                                         html += '<option  data-id="'+data[i].split("-")[2]+'" value="' +data[i].split("-")[0]+'-'+data[i].split("-")[1]+ '">'+data[i].split("-")[1]+'</option>'
-                                       
+                                    	 }
+                                    	
                                          
-                                   } 
+                                   
                                  $("#role").html(html);
                                  }
                       });
        
        });
+            });
 </script>
 	
 	<script>
+	$(document).ready(function(){
+	    
+        var val = '<%= userProfile.getRole_type() %>';
+        document.getElementById("roletype").value =  val;
+      
+        if(val=="HO"){
+               $("#zoneLabel, #regionLabel, #dpclabel").hide();
+               $("#zone, #region, #centerordpc").hide();
+
+        }
+        if(val=="ZO"){
+               $("#zoneLabel").show();
+               $("#zone").show();
+               $("#regionLabel, #dpclabel").hide();
+               $("#region, #centerordpc").hide();
+        }
+        
+        if(val=="RO"){
+               $("#zoneLabel, #regionLabel").show();
+               $("#zone, #region").show();
+               $("#dpclabel").hide();
+               $("#centerordpc").hide();
+        }
+        
+        if(val=="DPC"){
+       	 
+               $("#zoneLabel, #regionLabel, #dpclabel").show();
+               $("#zone, #region, #centerordpc").show();
+  
+        }
+
        $("#role").change(function () {
              
              var val = $('#role option:selected').data("id");
@@ -230,7 +302,7 @@
              document.getElementById("rolename").value =	$('#role option:selected').val().split("-")[1];
            
      });
-       
+	});
        </script>
        
 	
@@ -408,7 +480,66 @@ function deleteErrorMsg(){
 }
 	  
 </script> 
-
+<script>
+$(document).ready(function(){
+	
+		var id1 = '<%= userProfile.getZone()%>';
+		//alert(id1);
+		if(id1!=null){
+			$.ajax({
+				type:"GET",
+				url:"findRoByZone.obj",
+				data:{"id":id1},
+				success:function(result){				 
+	 				var data= jQuery.parseJSON(result);
+ 	 				var html = "<option disabled  value>-Select-</option>";
+	 				  for (var i = 0; i< data.length; i++){
+	 					  if( data[i].split("-")[0] == <%= userProfile.getRegion() %>){
+	 					 html += "<option selected value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+	 				  }
+	 				  else{
+	 					 html += "<option  value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+	 				    
+	 				  }
+	 				  }
+	 				  //alert(html)
+	 				$("#region").html(html);
+				}			
+			});
+		}
+		else{
+			$("#zoneLabel, #regionLabel, #dpclabel").hide();
+			$("#zone, #region, #centerordpc").hide();
+		}
+		
+		var id2 = '<%= userProfile.getRegion() %>';	
+		if(id2!=null){
+			$.ajax({
+				type:"GET",
+				url:"findDpcByRegion.obj",
+				data:{"id":id2},
+				success:function(result){
+	 				   var data= jQuery.parseJSON(result);
+ 	 					 var html = "<option disabled  value>-Select-</option>";
+	 				     for (var i = 0; i< data.length; i++){
+	 				    	 if(data[i].split("-")[0] == <%= userProfile.getDpcId()%>){
+	 					 html += "<option selected value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+	 				  } else{
+	 					 html += "<option  value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+	 	 				  
+	 				  }
+	 				     }
+	 				$("#centerordpc").html(html);
+				}			
+			});
+		} 
+		else{
+			$(" #regionLabel, #dpclabel").hide();
+			$(" #region, #centerordpc").hide();
+		}
+	
+});
+</script>
 <script>
 		$("#zone").on("change", function() {
 			var id = (this.value);
@@ -421,11 +552,13 @@ function deleteErrorMsg(){
 					success:function(result){				 
 		 				var data= jQuery.parseJSON(result);
 	 	 				var html = "<option disabled selected value>-Select-</option>";
+	 	 				var html2 = "<option disabled selected value>-Select-</option>";
 		 				  for (var i = 0; i< data.length; i++){
 		 					 html += "<option value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
 		 				  }
 		 				  //alert(html)
 		 				$("#region").html(html);
+		 				$("#centerordpc").html(html2);
 					}			
 				});
 			}

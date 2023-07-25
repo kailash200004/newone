@@ -129,7 +129,7 @@ body {
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
                     <li data-pre="57" id="o57"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
-
+					<li data-pre="58" id="o58"><a href="verifiedHoldTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>F & A Hold Tally Slip List</b></a></li>
 					
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
@@ -137,7 +137,7 @@ body {
 					class="nav-label"> &nbsp;Progress of Assortment</span> <i
 					class="fa fa-angle-left arrow"></i></a> 
 				<ul class="nav-2-level ">
-<!-- 					<li  data-pre="25" id="o25"><a href="balePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Bale Preparation</b></a></li> -->
+  					<li  data-pre="25" id="o25"><a href="balePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Bale Preparation</b></a></li>  
 					<li  data-pre="26" id="o26"><a href="viewbalePreparation.obj"><i class="sidebar-item-icon fa fa-th-large"></i> <b>View Bale Preparation</b></a></li>
 <!-- 					<li  data-pre="27" id="o27"><a href="addRopeMaking.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Rope Making</b></a></li> -->
 					<li  data-pre="28" id="o28"><a href="ropeMakingListing.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Rope Making</b></a></li>
@@ -211,7 +211,7 @@ body {
 	<script>
 
 		$(document).ready(function() {
-		for(var i=1; i<=56;i++){
+		for(var i=1; i<=60;i++){
 			$("#o"+i).hide();
 			
 			}
@@ -245,7 +245,7 @@ $.ajax({
 
 
 					for(var j=0;j<userAction.length;j++){
-						for(var i=0;i<=56; i++){
+						for(var i=0;i<=60; i++){
 					if($("#o"+i).data("pre") == userAction[j]){
 					//console.log(userAction[j]);
 						$("#o"+i).show();

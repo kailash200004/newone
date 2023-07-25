@@ -70,40 +70,7 @@
 	       }); 
 	});  
  </script>  
-    <script>
-	function updatefastatus(tallyno) {
-		//alert(tallyno);
-		
-		$.ajax({
-			type:"GET",
-			url:"setFaStatus.obj",
-			data:{"tallyno":tallyno},
-			success:function(result){
-				
- 				   var data= jQuery.parseJSON(result);
-			}			
-		});
-		
-		 window.location.reload();
-	}
-	</script>
-	<script>
-	function paymentonhold(tallyno) {
-		//alert(tallyno);
-		
-		$.ajax({
-			type:"GET",
-			url:"setholdstatus.obj",
-			data:{"tallyno":tallyno},
-			success:function(result){
-				 window.location.reload();
- 				   var data= jQuery.parseJSON(result);
-			}			
-		});
-		
 	
-	}
-	</script>
  <!-- ................Scripting........... -->
  
  
@@ -120,13 +87,13 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">RO-Finance Verification of Tally Slip</h1>
+                <h1 class="page-title">F & A Hold Tally Slip</h1>
                  
             </div>
 				
 				<%
 				 
-				List<VerifyTallySlip> 	 verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
+				List<VerifyTallySlip> 	 verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyHoldTallySliList");
 				 if(verificationList==null){
 					 verificationList = new ArrayList();
 				 }
@@ -138,7 +105,6 @@
 								<thead>
 									<tr>
 									    <th>S No.</th>
-									    <th>Verify</th>
 										<th>Tally SlipNo</th>
 										<th>Farmer Reg No</th> 
 										<th>Farmer Name</th>
@@ -147,39 +113,15 @@
 									    <th>Purchase Date</th>
 									    <th>Net Quntity</th>
 										<th>Amount Payable</th>
-										<th></th>
 							</tr>
 								</thead>
 								<tbody>
 									<%
-									double minvalue = 0;
-									int totalplist = 0;
-									int verifyed = 0;
 									int i= 1;
 							for(VerifyTallySlip verificationlists : verificationList){
-								 if(i<=200){  
-									 String facheckflag = verificationlists.getFacheck_flag();
-									 totalplist++;
 							%>
 									<tr>
 										<td><%=i%></td>
-									<% 
-									if(facheckflag =="checked" || facheckflag != null)
-									{
-										verifyed++;
-									%>
-										  <td><button type="button" class="btn btn-success btn-sm">verified</button></td>
-									
-									<% 
-									}else{
-								    %>
-									<td><button type="button" class="btn btn-danger btn-sm" onclick="updatefastatus('<%=verificationlists.getTallyNo()%>')">verify</button></td>
-									<%		
-									}
-									%>
-									
-									  
-									
 										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
 										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>&farmerno=<%=verificationlists.getFarmerRegNo()%>" target="_blank"><%=verificationlists.getFarmerRegNo()%></a></td>
 				                    	<td><%=verificationlists.getFarmer_name()%></td>
@@ -188,7 +130,7 @@
 										<td><%=verificationlists.getDop()%></td> 
 										<td><%=verificationlists.getNetquantity()%></td> 
 						                <td><%=verificationlists.getAmountpayable()%></td>
-									<td><button type="button" class="btn btn-danger btn-sm" onclick="paymentonhold('<%=verificationlists.getTallyNo()%>')">Hold</button></td>
+						                
 						              <!-- <td><a href="update_paymentstatus.obj?tallyno=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">Payment</a></td>
 						                 <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
 										<%-- <td><a onclick="return confirm('Are you sure you want to delete this item?');" href="deletetallyslip.obj?id=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td> --%>
@@ -201,23 +143,17 @@
 
 									</tr>
 									<% 
+									 i++; 
 								  }  
-							          i++; 
-							   }
-							minvalue = totalplist * 50 / 100 ;
+							         
 							
 							%>
 								</tbody>
                      
                         </table>
-                        <input type="submit" value="Submit"class="btn btn-primary" id="submit" style="margin-left: 20px">
                         </div>
                         
-                     
-                     
-                     
                        <!--Popup for CEFC bhel -->
-                     
                      
             <!-- END PAGE CONTENT-->
             <%@ include file="footer.jsp"%>
@@ -230,39 +166,7 @@
     <div class="sidenav-backdrop backdrop"></div>
     
     <!-- END PAGA BACKDROPS-->
-       <script type="text/javascript">
-       function enablebutton()
-       {
-    	   var min = '<%= minvalue %>';
-    	   var minvalue = Math.round(min);
-    	   var verifyed = '<%= verifyed %>';
-    	   if(verifyed >= minvalue)
-    		   {
-    		   document.getElementById("submit").disabled = false;
-    		   }else
-    			   {
-    			   document.getElementById("submit").disabled = true;
-    			   }
-       }
-       </script>
        
-       	<script type="text/javascript">
-		     $(document).ready(function(){
-			 $("#submit").click(function(){
-				 
-					$.ajax({
-						type:"GET",
-						url:"setStatusRMZM.obj",
-						success:function(result){
-			 		    var data= jQuery.parseJSON(result);
-			 		    alert("Payment In Progress!!")
-			 		   window.location.reload();
-						}			
-					});
-					
-			 });
-		     });
-       </script>
  
     <!-- CORE PLUGINS-->
     <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>

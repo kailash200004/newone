@@ -242,7 +242,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	@Override
 	public UserRegistrationModel getuserprofile(int refid) {
 		List<UserRegistrationModel> result = new ArrayList<>();
-		String querystr = "Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.roid left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.refid='"
+		String querystr = "  Select a.username, a.employeeid, a.email, a.employeename, a.mobileno, b.centername, c.roname, d.zonename, a.refid,  a.roles_name , a.usertype, a.roleId, a.role_type, a.zoneId, c.rocode, a.dpcId from jciumt a left Join jcipurchasecenter b on a.dpcId = b.CENTER_CODE left join jcirodetails c on a.regionId = c.rocode left join jcizones d on a.zoneId=d.zonecode left join jciuserrole e on e.role_Id = a.role where a.refid='"
 				+ refid + "'";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -261,9 +261,13 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 			String zonename = (String) row[7];
 			int id = (int) row[8];
 			String rolename = (String) row[9];
-			// System.out.println("zonessssss"+ zonename);
+			String userType = (String)  row[10];
+			int roleId = (int) row[11];
+			String roleType = (String) row [12];
+			String zoneId = (String) row[13];
+			String rocode = (String) row[14];
+			String dpcid = (String) row[15];
 			userRegistration.setRefid(id);
-			;
 			userRegistration.setUsername(username);
 			userRegistration.setEmployeeid(employeeid);
 			userRegistration.setEmail(email);
@@ -273,12 +277,18 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 			userRegistration.setRoname(roname);
 			userRegistration.setZonename(zonename);
 			userRegistration.setRoles_name(rolename);
-
+			userRegistration.setUsertype(userType);
+			userRegistration.setRoleId(roleId);
+			userRegistration.setRole_type(roleType);
+			userRegistration.setRegion(rocode);
+			userRegistration.setZone(zoneId);
+			userRegistration.setDpcId(dpcid);
 		}
 
 		return userRegistration;
 
 	}
+
 
 	@Override
 	public String getdpc_center(String dpcIdd) {
@@ -418,5 +428,15 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 		} else {
 			return "0";
 		}
+	}
+
+	@Override
+	public String getoldpassword(int id) {
+		String querystr = "select password from jciumt where refid='" + id + "'";
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(querystr);
+		String password = (String)query.uniqueResult();
+
+			return password;
 	}
 }

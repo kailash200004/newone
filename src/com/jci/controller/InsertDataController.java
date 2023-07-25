@@ -678,7 +678,7 @@ public class InsertDataController
             }
             catch (Exception e2) {
                 System.out.println(e2);
-                mv.addObject("msg", (Object)"Not Save please try again");
+                mv.addObject("msg", (Object)"Not Saved please try again");
             }
             final HttpSession session = request.getSession();
             String dpcid = "0000";
@@ -4277,19 +4277,34 @@ public class InsertDataController
         	mv = new ModelAndView("index");
             }
 		try {
+			boolean flag = true;
 			int refid = Integer.parseInt(request.getParameter("id"));
 			UserRegistrationModel userRegistration = userRegService.find(refid);
 
 				String mobileno =  request.getParameter("mobile");
-				String password =  request.getParameter("password");
+				String password =  request.getParameter("oldpassword");
+				String renewpassword =  request.getParameter("renewpassword");
+				String newpassword =  request.getParameter("newpassword");
 				userRegistration.setRefid(refid);
 				userRegistration.setMobileno(mobileno);
-				if(!password.isEmpty()) {
-					userRegistration.setPassword(password);
+				try {
+				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) {
+					userRegistration.setPassword(renewpassword);
 					userRegistration.setDatelastchangepassword(new Date());
+					
+				}
+				}
+				catch(Exception e)
+				{
+					
+					System.out.println(e.getStackTrace());
+					flag = false;
+				    redirectAttributes.addFlashAttribute("msg",
+							"<div class=\"alert alert-danger\"><b>Failed !</b>Failed to change password.</div>\r\n" + "");
 				}
 				userRegistration.setUpdatedat(new Date());
-				userRegService.update(userRegistration);
+				 userRegService.update(userRegistration);
+				 
 			    redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
 			return new ModelAndView(new RedirectView("viewUserRegistration.obj"));
@@ -4318,9 +4333,12 @@ public class InsertDataController
 		return mv;
 	}
 	
+
+	
 	@RequestMapping("updatesaveuserProfile")
 	public ModelAndView updatesaveUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
-	{String username =(String)request.getSession().getAttribute("usrname");
+	{
+		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("edituserProfile");
 		if(username == null) {
         	return new ModelAndView("index");
@@ -4328,10 +4346,7 @@ public class InsertDataController
 		try {
 			int refid = Integer.parseInt(request.getParameter("id"));
 			UserRegistrationModel userRegistration = userRegService.find(refid);
-			//	String username1 =  request.getParameter("username"); 
-			//	String employeeid = request.getParameter("employeeid");
 				String email = request.getParameter("emailAddress");
-			//	String employeename =  request.getParameter("employeename");
 				String mobileno =  request.getParameter("mobile");
 				String centername = request.getParameter("centerordpc");
 				String roname =  request.getParameter("region");
@@ -4341,16 +4356,27 @@ public class InsertDataController
 				final String role = request.getParameter("rolename");
 		        final String roletype = request.getParameter("roletype");
 		        final String roleid = request.getParameter("roleid");
-			//userRegistration.setUsername(username1);
-			//userRegistration.setEmployeeid(employeeid);
+		        if(roletype.equalsIgnoreCase("ho")) {
+		    		userRegistration.setDpcId(null);
+					userRegistration.setZone(null);
+					userRegistration.setRegion(null);
+		        }
+		        else  if(roletype.equalsIgnoreCase("ro")) {
+		        	userRegistration.setDpcId(null);
+					userRegistration.setZone(zonename);
+					userRegistration.setRegion(roname);
+		        }
+		        else  if(roletype.equalsIgnoreCase("dpc")) {
+		        	userRegistration.setDpcId(centername);
+					userRegistration.setZone(zonename);
+					userRegistration.setRegion(roname);
+		        }
 				userRegistration.setEmail(email);
-			//	userRegistration.setEmployeename(employeename);
+
 				userRegistration.setMobileno(mobileno);
 				userRegistration.setRole_type(roletype);
 				userRegistration.setRoleId(Integer.parseInt(roleid));
-				userRegistration.setDpcId(centername);
-				userRegistration.setZone(zonename);
-				userRegistration.setRegion(roname);
+		
 				userRegistration.setUsertype(usertype);
 				userRegistration.setRoles_name(role);
 				userRegistration.setUpdatedat(new Date());
@@ -4364,6 +4390,7 @@ public class InsertDataController
 		
 		return mv;
 	}
+
 	
 	  @RequestMapping({ "bnaDelete" })
     public ModelAndView bnaDelete(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
@@ -4876,9 +4903,7 @@ public class InsertDataController
            final String b_doc = request.getParameter("BANK_DOC");
            final String id_proof = request.getParameter("ID_PROF");
            final String reg_form = request.getParameter("REG_FORM");
-           System.out.println("b_doc =========  "+b_doc);
-           System.out.println("id_proof =========  "+id_proof);
-           System.out.println("reg_form =========  "+reg_form);
+    
            final FarmerRegModel farmerRegModel = new FarmerRegModel();
            farmerRegModel.setF_ID(id);
            farmerRegModel.setF_NAME(farmerName);
@@ -4905,6 +4930,7 @@ public class InsertDataController
            farmerRegModel.setF_Address2(F_Address2);
            farmerRegModel.setF_Pincode(F_Pincode);
            farmerRegModel.setIS_VERIFIED(fullDetails.getIS_VERIFIED());
+           farmerRegModel.setF_REG_BY(fullDetails.getF_REG_BY());
            int verified = fullDetails.getIS_VERIFIED();
            if(verified == 1) {
         	   farmerRegModel.setF_DOC_Mandate(fullDetails.getF_DOC_Mandate());
@@ -4990,6 +5016,37 @@ public class InsertDataController
       
        return new ModelAndView((View)new RedirectView("ViewFarmerRegistration.obj"));
    }
+    
+	    @ResponseBody
+	    @RequestMapping(value = { "setholdstatus" }, method = { RequestMethod.GET })
+	    public String setholdstatus(final HttpServletRequest request) {
+	        final Gson gson = new Gson();
+	        String tno =  request.getParameter("tallyno");
+	        this.verifyTallySlipService.setholdstatus(tno);
+	        return gson.toJson((Object)tno);
+	    }
+	    
+	    
+	    @RequestMapping({ "verifiedHoldTallySlipList" })
+        public ModelAndView verifiedHoldTallySlipList(final HttpServletRequest request) {
+           String username =(String)request.getSession().getAttribute("usrname");
+           ModelAndView mv = new ModelAndView("verifiedHoldTallySlipList");
+           if(username == null) {
+               mv = new ModelAndView("index");
+              }
+           try {
+
+        	   String role_type = (String)request.getSession().getAttribute("roletype");
+            String region =(String)request.getSession().getAttribute("region"); 
+            System.out.println("region = "+region);
+            final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllHold(region, role_type);
+            mv.addObject("verifyHoldTallySliList", (Object)verifyList);   
+           } 
+           catch(Exception e) {
+        	   e.printStackTrace();
+           }
+            return mv;
+        }
 
 
 

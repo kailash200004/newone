@@ -87,255 +87,105 @@
 								
 									<table>
 									<tr>
-											<td ><b>Name of Farmer &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Name of Farmer</b></td> 
 											
-											<td><b><%=editFarmer.getF_NAME() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_NAME() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Caste &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Caste</b></td> 
 											
-											<td><b><%=editFarmer.getCaste() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getCaste() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Gender &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Gender</b></td> 
 											
-											<td><b><%=editFarmer.getGender() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getGender() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Address &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Address</b></td> 
 											
-											<td><b><%=editFarmer.getF_ADDRESS() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ADDRESS() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>State &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>State</b></td> 
 											
-											<td><b><%=editFarmer.getState_name() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getState_name() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>District &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>District</b></td> 
 											
-											<td><b><%=editFarmer.getDistrict_name() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getDistrict_name() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Block &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Block</b></td> 
 											
-											<td><b><%=editFarmer.getF_Block() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_Block() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Police Station &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Police Station</b></td> 
 											
-											<td><b><%=editFarmer.getPolice_station() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getPolice_station() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Pincode &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Pincode</b></td> 
 											
-											<td><b><%=editFarmer.getF_Pincode() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_Pincode() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Identity Type &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Identity Type</b></td> 
 											
-											<td><b><%=editFarmer.getF_ID_PROF_TYPE() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ID_PROF_TYPE() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Identity Proof No. &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Identity Proof No.</b></td> 
 											
-											<td><b><%=editFarmer.getF_ID_PROF_NO() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ID_PROF_NO() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>I-CARE Registration &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>I-CARE Registration</b></td> 
 											
-											<td><b><%=editFarmer.getF_I_CARE_REGISTERED() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_I_CARE_REGISTERED() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Land Holding (Bigha) &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Land Holding (Bigha)</b></td> 
 											
-											<td><b><%=editFarmer.getLand_holding()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getLand_holding()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Mobile Number &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Mobile Number</b></td> 
 											
-											<td><b><%=editFarmer.getF_MOBILE()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_MOBILE()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank A/C Type &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Bank A/C Type</b></td> 
 											
-											<td><b><%=editFarmer.getGender() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getBank_ac_type() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank A/C No. &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Bank A/C No.</b></td> 
 											
-											<td><b><%=editFarmer.getF_AC_NO() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_AC_NO() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank IFSC &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Bank IFSC</b></td> 
 											
-											<td><b><%=editFarmer.getF_BANK_IFSC()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_IFSC()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank Name &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Bank Name </b></td> 
 											
-											<td><b><%=editFarmer.getF_BANK_NAME() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_NAME() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank Branch &nbsp; &nbsp; &nbsp; &nbsp; :</b></td> 
+											<td ><b>Bank Branch</b></td> 
 											
-											<td><b><%=editFarmer.getF_BANK_BRANCH() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_BRANCH() %></b></td>
 											</tr>
 											</table>
-											<%-- <div class="row">										
-										<div class="col-sm-4 form-group">
-											<label>Caste</label> <select class="form-control" name="caste" value="<%=editFarmer.getCaste() %>" type="text" placeholder="Caste" id="caste" readonly>
-												<option <% if(editFarmer.getCaste().equals("General")){out.print("selected");}%>value="General">General</option>
-												<option <% if(editFarmer.getCaste().equals("OBC")){out.print("selected");}%>value="OBC">OBC</option>
-												<option <% if(editFarmer.getCaste().equals("SC")){out.print("selected");}%>value="SC">SC</option>
-												<option <% if(editFarmer.getCaste().equals("ST")){out.print("selected");}%>value="ST">ST</option>
-												<!-- <option value="OBC">OBC</option>
-												<option value="SC_ST">SC/ST</option> -->
-											</select>
-										</div>
-										<div class="col-sm-4 form-group">
-											<label>Gender</label> 
-											<select class="form-control"
-												name="gender" id="gender" value="<%=editFarmer.getGender()%>" readonly>
-												<option <% if(editFarmer.getGender().equals("Male")){out.print("selected");}%>value="Male">Male</option>
-												<option <% if(editFarmer.getGender().equals("Female")){out.print("selected");}%>value="Female">Female</option>
-												<!-- <option id="Male" value="Male">Male</option>
-												<option id="Female" value="Female">Female</option> -->
-											</select>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 form-group">
-											<label>Address</label> <input class="form-control"
-												type="text" value="<%=editFarmer.getF_ADDRESS() %>" name="F_ADDRESS" placeholder="Farmer Address" id="F_ADDRESS" readonly>
-										</div>
-										
-																		<div class="col-sm-4 form-group">
-									<label class="required">State</label> 
-									<input class="form-control" type="text" name="f_state" placeholder="Farmer Address" value="<%=editFarmer.getF_STATE()%>" id="F_Address2" readonly>
-									<%
-											List<StateList> Liststate = (List<StateList>) request.getAttribute("Liststate");
-											%>
-											<select class="form-control" name="state" type="text"placeholder="State" id="ParentMenuID" onchange="deleteErrorMsg()">
-												<option disabled selected value>-Select-</option>
-												<%
-													for (StateList stateLists : Liststate) {
-												%>
-														<option value="<%=stateLists.getId()%>"><%=stateLists.getState_name()%></option>
-												<%
-													}
-												%>
-											</select>
-									</div>
-								
-								<div class="col-sm-4 form-group">
-									<label class="required">District  <%=editFarmer.getF_District()%></label> <input class="form-control"
-										type="text" name="f_district" placeholder="Farmer Address" value="<%=editFarmer.getF_District()%>" id="F_Address2" readonly>
-								</div>
-								
-								
-																		<div class="col-sm-4 form-group">
-									<label class="required">Block</label> <input class="form-control"
-										type="text" name="f_block" placeholder="Farmer Address" value="<%=editFarmer.getF_Block()%>" id="F_Address2" readonly>
-								</div>
-								
-																		<div class="col-sm-4 form-group">
-									<label class="required">Police Station <%=editFarmer.getPolice_station()%></label> <input class="form-control"
-										type="text" name="f_block" placeholder="Farmer Address" value="<%=editFarmer.getPolice_station()%>" id="F_Address2" readonly>
-								</div>
-								
-								<div class="col-sm-4 form-group">
-									<label class="required">Pincode</label> <input class="form-control"
-										type="text" name="F_Pincode" placeholder="Farmer Address" value="<%=editFarmer.getF_Pincode() %>" id="F_Pincode" readonly>
-								</div>
-			
 
-							</div>
-						<div class="row">
-						   <div class="col-sm-4 form-group">
-											<label>Identity Type </label> <select name="F_ID_PROF_TYPE" id="F_ID_PROF_TYPE" class="form-control" value="<%=editFarmer.getF_ID_PROF_TYPE()%>" type="text" readonly>
-												
-												<option <% if(editFarmer.getF_ID_PROF_TYPE().equals("AadharCard")){out.print("selected");}%> value="Aadhar Card">Aadhar Card</option>
-												<option <% if(editFarmer.getF_ID_PROF_TYPE().equals("VoterId")){out.print("selected");}%> value="Voter Id">Voter Id</option>
-												</select>
-										</div>
-						    <div class="col-sm-4 form-group">
-									<label>Identity Proof No.</label> <input class="form-control"
-										type="text" name="F_ID_PROF_NO"
-										placeholder="Identity Proof No." id="F_ID_PROF_NO" value="<%=editFarmer.getF_ID_PROF_NO()%>" readonly>
-								</div>
-																	<div class="col-sm-4 form-group">
-									<label>Whether I-CARE Registered</label> 
-									<select name="F_I_CARE_REGISTERED" id="F_I_CARE_REGISTERED" placeholder="Whether I-CARE Registered" class="form-control" value="<%=editFarmer.getF_I_CARE_REGISTERED()%>"  readonly>
-									
-										<option <% if(editFarmer.getF_I_CARE_REGISTERED().equals("Yes")){out.print("selected");}%> value="Yes">Yes</option>
-										<option <% if(editFarmer.getF_I_CARE_REGISTERED().equals("No")){out.print("selected");}%> value="No">No</option>
-									</select>
-								</div>
-						    <div class="col-sm-4 form-group">
-									<label class="required">Registered By </label> <input class="form-control"
-										type="text" name="F_REG_BY " placeholder="Registered By"
-										value= "${dpcCode}" readonly>
-								</div>
-				
-
-									</div>
-
-
-								<div class="row">
-
-								<div class="col-sm-4 form-group">
-									<label>Land Holding (Bigha)</label> <input class="form-control"
-										name="land_holding" type="number"
-										placeholder="Land Holding (Bigha)" min=0 step="0.001" id="land_holding" value="<%=editFarmer.getLand_holding()%>" readonly>
-								</div>
-								<div class="col-sm-4 form-group">
-									<label>Mobile Number</label>
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon1">+91</span> <input
-											class="form-control" type="number" id="F_MOBILE" name="F_MOBILE"
-											title="10 digit mobile number" placeholder="Farmer Mobile" maxlength="10" minlength="10" onkeyup="myfuctions()" pattern=".{10,10}" required title="10 to 10 characters" value="<%=editFarmer.getF_MOBILE()%>" readonly>
-									</div>
-									</div>
-									<div class="col-sm-4 form-group">
-										<label>Bank A/C Type</label> 
-										 <select name="bank_ac_type" id="bank_ac_type" value="<%=editFarmer.getBank_ac_type()%>" class="form-control" readonly>
-											<option <% if(editFarmer.getGender().equals("Saving")){out.print("selected");}%>value="Saving">Saving</option>
-											<option <% if(editFarmer.getGender().equals("Current")){out.print("selected");}%>value="Current">Current</option>										 
-										</select>
-									</div>
-								</div>
-								
-								<div class="row">
-									<div class="col-sm-4 form-group">
-									<label>Bank A/C No.</label> 
-									<input class="form-control" type="hidden" name="idPrimary" value="<%=editFarmer.getF_ID() %>" id= "idPrimary">
-									<input class="form-control" name="F_AC_NO" type="text" value="<%=editFarmer.getF_AC_NO() %>" placeholder="Farmer Bank Ac No." id="F_AC_NO" readonly>
-									</div>
-									<div class="col-sm-4 form-group">
-										<label>Bank IFSC</label> <input class="form-control"
-											name="F_BANK_IFSC" type="text" value="<%=editFarmer.getF_BANK_IFSC() %>" placeholder="IFSC Code" id="F_BANK_IFSC" readonly>
-									</div>
-																<div class="col-sm-4 form-group">
-									<label>Bank Name</label> <input class="form-control"
-										name="F_BANK_NAME" type="text" placeholder="Bank Name" id="F_BANK_NAME" value="<%=editFarmer.getF_BANK_NAME()%>" readonly>
-								</div>
-								</div>
-								
-								<div class="row">
-
-								<div class="col-sm-4 form-group">
-									<label>Bank Branch</label> <input class="form-control"
-										name="F_BANK_BRANCH" type="text" placeholder="Farmer Bank Branch" value="<%=editFarmer.getF_BANK_BRANCH() %>" id="F_BANK_BRANCH" readonly>
-								</div>		
-										
-		                          
-					</div>
 						
 						
 						
-							</form>
-							 --%>
             <h1 class="page-title" class="center">Documents</h1>
             <div class="doremon">
             <div class="row">

@@ -41,7 +41,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Bale Preparation List</h1>
+                <h1 class="page-title">Packing Register</h1>
                  
             </div>
 				
@@ -63,13 +63,16 @@
 								<thead>
 									<tr>
 										<th>S.No.</th> 
-									
+									    <th>Packing Date</th>
+									    <th>Crop Year</th>	
+									    <th>Jute Variety</th>
+									    <th>Jute Grade</th>
 										<th>Place Of Packing</th>
-										<th>Packing Date</th>									
+									    <th>Bale No</th>							
 										
-										<th>Jute Grade</th>
-										<th>Bale No</th>							
-										<th>Crop Year</th> 	
+										
+																	
+										 	
 										<!-- <th></th>
 										<th></th> -->
 									</tr>
@@ -104,12 +107,12 @@
 									<thead>
 										<tr>
 											<th>S.No.</th> 
-										
-											<th>Packing Date</th>									
-											
-											<th>Jute Grade</th>
-											<th>Bale No</th>							
-											<th>Crop Year</th> 	
+									    <th>Packing Date</th>
+									    <th>Crop Year</th>	
+									    <th>Jute Variety</th>
+									    <th>Jute Grade</th>
+										<th>Place Of Packing</th>
+									    <th>Bale No</th>	
 											<!-- <th></th>
 											<th></th> -->
 										</tr>
@@ -124,10 +127,11 @@
 											<td><%=i%></td>
 											
 											<td><%=balePreparationLists.getPacking_date()%></td>
-											
-											<td><%=balePreparationLists.getJute_grade()%></td>
-											<td><%=balePreparationLists.getBale_no()%></td>
 											<td><%=balePreparationLists.getCrop_year()%></td>
+											<td><%=balePreparationLists.getJute_variety()%></td>
+											<td><%=balePreparationLists.getJute_grade()%></td>
+											<td><%=balePreparationLists.getPlace_of_packing()%></td>
+											<td><%=balePreparationLists.getBale_no()%></td> 
 				          					<td><a href="editBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 					                     	<td><a  href="deleteBaleP.obj?id=<%=balePreparationLists.getBaleId()%>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										</tr>

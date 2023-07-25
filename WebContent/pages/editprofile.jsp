@@ -40,7 +40,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">User Profile</h1>
+                <h1 class="page-title">Edit Profile</h1>
                  
             </div>
 				
@@ -137,8 +137,16 @@
                                     </div>            
                                     <div class="row">--%>
                                    <div class="col-sm-4 form-group">
-											<label>password</label>
-                                        	<input  type ="text" class="form-control"  id="password" name="password" placeholder="password"  >
+											<label>Current password</label>
+                                        	<input  type ="text" class="form-control"  id="oldpassword" name="oldpassword" placeholder="password"  onblur= "return validatePassword();">
+										</div>
+										 <div class="col-sm-4 form-group">
+											<label>New password</label>
+                                        	<input  type ="text" class="form-control"  id="newpassword" name="newpassword" placeholder="password"  onblur= "return matchPassword();">
+										</div>
+										 <div class="col-sm-4 form-group">
+											<label>RE Enter New password</label>
+                                        	<input  type ="text" class="form-control"  id="renewpassword" name="renewlpassword" placeholder="password" onblur= "return matchPassword();" >
 										</div>
                                     </div>                        
                                     <div class="form-group col-sm-12">
@@ -150,6 +158,27 @@
                     </div>
                 </div>
             </div>
+            <script>
+            function matchPassword(){
+            	var oldpassword =  $("#oldpassword").val();
+            	var id = <%= userProfile.getRefid() %>;
+            	$.ajax({
+
+								type : "GET",
+								url : "getoldpassword.obj",
+								data : {"id" : id},
+								success : function(result) {
+								
+								}
+            	});
+            	var password = $("#newpassword").val();
+            	var repassword = $("#renewlpassword").val();
+            	if(password != repassword){
+            		alert("Newpassword and Re-entered password didn't match");
+            		return false;
+            	}
+            }
+            </script>
             	<script>
 
 		function validate() {

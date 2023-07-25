@@ -118,6 +118,18 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 		return VerificationTallySlipDao.getAllforZM(status, region_zone);
 	}
 
+	@Override
+	public void setholdstatus(String tno) {
+		// TODO Auto-generated method stub
+		VerificationTallySlipDao.setholdstatus(tno);
+	}
+
+	@Override
+	public List<VerifyTallySlip> getAllHold(String region, String role_type) {
+		// TODO Auto-generated method stub
+		return VerificationTallySlipDao.getAllHold(region, role_type);
+	}
+
 
 
 }
