@@ -91,7 +91,7 @@ color: red;
 					List<VerifyTallySlip> verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
 				VerifyTallySlip vrf = (VerifyTallySlip)request.getAttribute("vrftally");
 				RawJuteProcurementAndPayment raw = (RawJuteProcurementAndPayment)request.getAttribute("raw");
-				System.out.print(raw.getSlip_image());
+				//System.out.print(raw.getSlip_image());
 				%>
 			 <!-- <div class="page-content fade-in-up"> -->
                <!--  <div class="ibox">

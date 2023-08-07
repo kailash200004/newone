@@ -795,7 +795,7 @@ public class InsertDataController_2 {
 		  
 		 Gson gson = new Gson();
 		  JSONArray arr =   rawJuteProcurAndPayService.searchTally(request.getParameter("tally"));
-		  System.out.println(arr.toString());
+		 // System.out.println(arr.toString());
          return arr.toString();
       }
 	 

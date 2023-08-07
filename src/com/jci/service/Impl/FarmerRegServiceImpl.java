@@ -98,6 +98,12 @@ public class FarmerRegServiceImpl implements FarmerRegService{
           return farmerRegDao.getFarmerNo(id);
     }
 
+	@Override
+	public List<FarmerRegModelDTO> findByDpc( String dpc) {
+		// TODO Auto-generated method stub
+		return farmerRegDao.findByDpc(dpc);
+	}
+
 	
 	
 }

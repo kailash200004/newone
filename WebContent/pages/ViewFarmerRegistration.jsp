@@ -1,8 +1,10 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
+<%@page import="com.jci.model.ZoneModel"%>
 <%@page import="com.jci.model.VerifyFarmerModel"%>
 <%@page import="com.jci.model.FarmerRegModelDTO"%>
+<%@page import="com.jci.model.StateList"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +70,46 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 			<%
 				 List <FarmerRegModelDTO>  allFarmersList = (List <FarmerRegModelDTO>) request.getAttribute("allFarmersList");
 			%>
+			<form action ="findByDpc.obj" onsubmit ="return findByDpc()">
+			<div class="row">
+				<div class="col-sm-3 form-group">
+											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
+											<%
+												List<ZoneModel> zoneList = (List<ZoneModel>) request.getAttribute("zoneList");
+											%>
+											<select class="form-control" name="zone" id="zone">
+												<option disabled selected value>-Select-</option>
+												<%
+													for(ZoneModel zoneLists : zoneList) {
+												%>
+												<option value="<%=zoneLists.getZonecode()%>"><%=zoneLists.getZonename()%></option>
+												<%
+													}
+												%>
+											</select>
+												</div>
+										<div class="col-sm-3 form-group">
+											<label id="regionLabel" class="required">Region</label>&nbsp;&nbsp;&nbsp; <span id="errRegion" name="errRegion" class="text-danger"> </span>
+											<!-- <input class="form-control" type="text" name="region" placeholder="Region" required> -->
+											<select class="form-control" name="region" id="region">
+												<option disabled selected value>-Select-</option>
+											</select>
+										</div>
+										
+										<div class="col-sm-3 form-group">
+											<label id="dpclabel" class="required">DPC</label> &nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
+											<select class="form-control" name="dpc" id="dpc">
+												<option disabled selected value>-Select-</option>
+											</select>
+										</div>
+										<div>
+										<label> </label> &nbsp;&nbsp;&nbsp; 
+										
+										<input type = "submit" id="search" value ="search" class="btn btn-primary"/ style ="display: block;">
+										</div>
+									
+			</div>
+			</form>
                    <div class="table-responsive" style="margin-top: 20px;">                    
                         <table id="farmerVerific" class="table table-striped table-bordered table-hover" cellspacing="0"  >
 								<thead>
@@ -193,7 +235,80 @@ tr:nth-child(even) {background-color: #f2f2f2;}
      
 });
 
-</script>   
+</script>  
+<script>
+		$("#zone").on("change", function() {
+			var id = (this.value);
+			//alert(id);
+			if(id!=null){
+				$.ajax({
+					type:"GET",
+					url:"findRoByZone.obj",
+					data:{"id":id},
+					success:function(result){				 
+		 				var data= jQuery.parseJSON(result);
+	 	 				var html = "<option disabled selected value>-Select-</option>";
+		 				  for (var i = 0; i< data.length; i++){
+		 					 html += "<option value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+		 				  }
+		 				  //alert(html)
+		 				$("#region").html(html);
+					}			
+				});
+			}
+		});
+		
+		$("#region").on("change", function() {
+			var id = (this.value);	
+			if(id!=null){
+				$.ajax({
+					type:"GET",
+					url:"findDpcByRegion.obj",
+					data:{"id":id},
+					success:function(result){
+		 				   var data= jQuery.parseJSON(result);
+	 	 					 var html = "<option disabled selected value>-Select-</option>";
+		 				     for (var i = 0; i< data.length; i++){
+		 					 html += "<option value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+		 				  } 
+		 				$("#dpc").html(html);
+					}			
+				});
+			} 
+		});
+	</script>
+	
+<script>
+
+$("#search").click(function(){
+
+	var dpc = $("#dpc").find(":selected").val();
+	
+	if(dpc!="")
+	{
+		 return true;
+	   }
+	else{
+		alert("please select a dpc!");
+		return false;
+	}
+	});
+
+</script>
+<script>
+function findByDpc(){
+	var dpc = $("#dpc").find(":selected").val();
+	
+	if(dpc!="")
+	{
+		 return true;
+	   }
+	else{
+		alert("please select a dpc!");
+		return false;
+	}
+}
+</script>
 </body>
 
 </html>

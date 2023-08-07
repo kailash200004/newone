@@ -350,7 +350,7 @@
 									
 										<div class="row">
 										<div class="col-sm-4 form-group">
-											<label class="required">Bank Document (330kb-1MB)</label>&nbsp;
+											<label class="required">Bank Document (10kb-1MB)</label>&nbsp;
 										 <span id="errBank" name="errBank"class="text-danger"> </span>
 										<img id="imgPreviewwbank"  />
 										<input class="form-control" id="BANK_DOC" name="BANK_DOC" type="hidden"  value="<%= editFarmer.getF_BANK_DOC() %>">
@@ -358,7 +358,7 @@
 									<input class="form-control" id="F_BANK_DOC" name="F_BANK_DOC" type="file" oninput="validateBANKFileType()" value="<%= editFarmer.getF_BANK_DOC() %>"><%= editFarmer.getF_BANK_DOC() %></input>
 										</div>
 										<div class="col-sm-4 form-group">
-											<label class="required">Identity Proof (330kb-1MB)</label>&nbsp; 
+											<label class="required">Identity Proof (10kb-1MB)</label>&nbsp; 
 											<span id="errIdProof" name="errIdProof" class="text-danger"> </span>
 												<img id="imgPreviewidentity"  />
 												<input class="form-control" id="ID_PROF" name="ID_PROF" type="hidden"  value="<%= editFarmer.getF_ID_PROF() %>" readonly>
@@ -368,7 +368,7 @@
 									
 									
 										<div class="col-sm-4 form-group">
-											<label class="required">Registration Form (330kb-1MB)</label>&nbsp; 
+											<label class="required">Registration Form (10kb-1MB)</label>&nbsp; 
 											<span id="errRegForm" name="errRegForm" class="text-danger"> </span>
 									 <img id="imgPreview"  />
 									 <input class="form-control" id="REG_FORM" name="REG_FORM" type="hidden"  value="<%= editFarmer.getF_REG_FORM() %>">

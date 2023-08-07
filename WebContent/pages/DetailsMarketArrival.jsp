@@ -4,6 +4,7 @@
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <%@page import="com.jci.model.StateList"%>
 <%@page import="java.util.List"%>
+<%@page import="com.jci.model.MarketArrivalModel"%>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,14 +58,9 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Farmer Details</h1>
+				<h1 class="page-title">Market Details</h1>
 			</div>
-			<%
-				int userId = 0;
-				if(session.getAttribute("userId")!=null){
-					 userId = (int) (session.getAttribute("userId"));
-				} 
-			%>
+			
 			<div class="page-content fade-in-up">
 				<div class="row">
 					<div class="col-md-11">
@@ -76,155 +72,137 @@
 								<div class="row">
 							<div class="col-sm-4 form-group">
 							
-							<a href="ViewFarmerRegistration.obj">Go Back</a>
+							<a href="viewmarketArrival.obj">Go Back</a>
 							</div>
 					</div>
 							<% 
-								List<FarmerRegModel> editFarmers = (List<FarmerRegModel>)request.getAttribute("farmerDetailsById");
-							FarmerRegModel editFarmer = editFarmers.get(0);
+							MarketArrivalModel allmarketArrivalList = (MarketArrivalModel) request.getAttribute("marketArrival");	
+							
 							%>
 							<div class="ibox-body">
 								
 									<table>
 									<tr>
-											<td ><b>Name of Farmer</b></td> 
+											<td ><b>Arrival Date</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_NAME() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getDatearrival() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Caste</b></td> 
+											<td ><b>DPC Name</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getCaste() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getCentername() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Gender</b></td> 
+											<td ><b>Jute Variety</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getGender() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getJutevariety() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Address</b></td> 
+											<td ><b>Crop Year</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ADDRESS() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getCropyr() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>State</b></td> 
+											<td ><b>Arrived Quantity</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getState_name() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getArrivedqty() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>District</b></td> 
+											<td ><b>Minimum Moisture</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getDistrict_name() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getMixmois() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Block</b></td> 
+											<td ><b>Maximum Moisture</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_Block() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getMaxmois() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Police Station</b></td> 
+											<td ><b>Grade1</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getPolice_station() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade1() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Pincode</b></td> 
+											<td ><b>Grade2</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_Pincode() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade2() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Identity Type</b></td> 
+											<td ><b>Grade3</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ID_PROF_TYPE() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade3() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Identity Proof No.</b></td> 
+											<td ><b>Grade4</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_ID_PROF_NO() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade4() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>I-CARE Registration</b></td> 
+											<td ><b>Grade5</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_I_CARE_REGISTERED() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade5() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Land Holding (Bigha)</b></td> 
+											<td ><b>Grade6</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getLand_holding()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade6()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Mobile Number</b></td> 
+											<td ><b>Grade7</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_MOBILE()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade7()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank A/C Type</b></td> 
+											<td ><b>Grade8</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getBank_ac_type() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade8() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank A/C No.</b></td> 
+											<td ><b>Grade 1 Price</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_AC_NO() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate1() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank IFSC</b></td> 
+											<td ><b>Grade 2 Price</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_IFSC()%></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate2()%></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank Name </b></td> 
+											<td ><b>Grade 3 Price</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_NAME() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate3() %></b></td>
 											</tr>
 											<tr>
-											<td ><b>Bank Branch</b></td> 
+											<td ><b>Grade 4 Price</b></td> 
 											
-											<td><b>:&nbsp;&nbsp;&nbsp;<%=editFarmer.getF_BANK_BRANCH() %></b></td>
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate4() %></b></td>
+											</tr>
+											<tr>
+											<td ><b>Grade 5 Price</b></td> 
+											
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate5() %></b></td>
+											</tr>
+											<tr>
+											<td ><b>Grade 6 Price</b></td> 
+											
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate6() %></b></td>
+											</tr>
+											<tr>
+											<td ><b>Grade 7 Price</b></td> 
+											
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate7() %></b></td>
+											</tr>
+											<tr>
+											<td ><b>Grade 8 Price</b></td> 
+										
+											<td><b>:&nbsp;&nbsp;&nbsp;<%=allmarketArrivalList.getGrade_rate8() %></b></td>
 											</tr>
 											</table>
 
 						
 						
 						
-            <h1 class="page-title" class="center">Documents</h1>
-            <div class="doremon">
-            <div class="row">
-	            <div class="col-md-6">
-	            <div class="text-details">	            
-		         <a href="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_DOC_Mandate() %>" target = "_blank">   <img src="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_DOC_Mandate() %>" /></a>
-		            <div class="mandt">
-		            <label class="center">Farmer mandate Image</label>
-		            </div>
-		            </div>
-	            </div>
-	             <div class="col-md-6">		 
-	             <div class="text-details">	           
-		         <a href="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_BANK_DOC() %>" target = "_blank">     <img src="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_BANK_DOC() %>" /></a>
-		            <div class="mandt">
-		            <label class="center">Farmer Bank Document</label>
-		            </div>
-		            </div>
-	            </div>	             
-	           </div> 
-	           </div>
-	           <div class="doremon">
-	           <div class="row">
-	           <div class="col-md-6">	
-	           <div class="text-details">		            
-		          <a href="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_ID_PROF() %>" target = "_blank">    <img src="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_ID_PROF() %>" target = "_blank"/></a>
-		            <div class="mandt">
-		            <label class="center">Farmer Id Proof</label>
-		            </div>
-		            </div>
-		            
-	            </div>
-	             <div class="col-md-6">		
-	             <div class="text-details">            
-		     <a href="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_REG_FORM() %>" target = "_blank">         <img src="http://49.50.79.121:8080/FarmerRegistration/<%=editFarmer.getF_REG_FORM() %>" target = "_blank"/></a>
-		            <div class="mandt">
-		            <label class="center">Farmer Registration Form</label>
-		            </div>
-		            </div>
+                 </div>
 	            </div>
 	            </div>
 	            </div>

@@ -90,10 +90,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 								<thead>
 									<tr>
 										<th>Sl.No</th>
-										<!-- <th>Region Name</th>
-										<th>DPC Name</th> -->
-										
+										<!-- <th>Region Name</th>-->
+																	
 										<th>Arrival Date</th>
+										<th>DPC Name</th> 
 										<th>Jute Variety</th>
 										<th>Crop Year</th> 										
 										<th>Arrived Quantity</th>
@@ -108,14 +108,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										<th>Grade6 </th>
 										<th>Grade7 </th>
 										<th>Grade8 </th>
-										<th>Grade_rate1 </th>
-										<th>Grade_rate2 </th>
-										<th>Grade_rate3 </th>
-										<th>Grade_rate4 </th>
-										<th>Grade_rate5 </th>
-										<th>Grade_rate6 </th>
-										<th>Grade_rate7 </th>
-										<th>Grade_rate8 </th>
+										
+										<th>Grade 3 Price </th>
+										<th></th>
 										 
 
 									</tr>
@@ -148,17 +143,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 							   <td></td>
 							   <td></td>
 							   <td></td>
-							   <td></td>
-							   <td></td>
-							   <td></td>
-							    <td></td>
-							     <td></td>
 							   </tr>
 							   <%}
 									else {%> 
-							   <%-- <td><%=marketArrivalList.getRegionName()%></td>
-									<td><%=marketArrivalList.getDpcnames()%></td> --%>
+							
 									<td><%=marketArrivalList.getDatearrival()%></td>
+									<td><%=marketArrivalList.getCentername()%></td>
 									<td><%=marketArrivalList.getJutevariety()%>
 									<td><%=marketArrivalList.getCropyr()%></td> 
 									<td><%=marketArrivalList.getArrivedqty()%></td>
@@ -172,20 +162,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<td><%=marketArrivalList.getGrade6()%></td>
 									<td><%=marketArrivalList.getGrade7()%></td>
 									<td><%=marketArrivalList.getGrade8()%></td>
-									<td><%=marketArrivalList.getGrade_rate1()%></td>
-									<td><%=marketArrivalList.getGrade_rate2()%></td>
 									<td><%=marketArrivalList.getGrade_rate3()%></td>
-									<td><%=marketArrivalList.getGrade_rate4()%></td>
-									<td><%=marketArrivalList.getGrade_rate5()%></td>
-									<td><%=marketArrivalList.getGrade_rate6()%></td>
-									<td><%=marketArrivalList.getGrade_rate7()%></td>
-									<td><%=marketArrivalList.getGrade_rate8()%></td>
-									<%-- <td><a href="bnaDelete.obj?id=<%=marketArrivalList.getMrarefid()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td> 
-									 --%>	
-										<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td>
-	--%>
- 						 
-
+									<td><a href ="viewmarketArrivalDetails.obj?id=<%= marketArrivalList.getMrarefid() %>">Details</a></td>
 									</tr>
 									<% 
 									}

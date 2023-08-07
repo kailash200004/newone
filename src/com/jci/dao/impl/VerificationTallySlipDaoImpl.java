@@ -94,7 +94,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
 						+ "d.F_NAME,b.slip_image from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
 						+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
-						+ " where a.status ='" + status + "' and a.payment_status='0' and a.region_id =" + region;
+						+ " where a.status ='" + status + "' and a.payment_status='0' and b.regionId =" + region;
 			} else if (role_type.equalsIgnoreCase("HO")) {
 				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
 						+ "d.F_NAME,b.slip_image from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "

@@ -182,12 +182,7 @@
 												class="text-danger"> </span>
 											<input class="form-control" name="datepurchase" id="datepurchase"  placeholder="dd-mm-yyyy" value="" readonly>
 										</div>
-                                         <!--    <div class="col-sm-4 form-group">
-                                            <label>Form No.</label>
-                                            <span class="text-danger">* </span>&nbsp; <span id="errformno" name="errformno"
-												class="text-danger"> </span>
-                                            <input class="form-control" type="number" name="formno" id="formno" placeholder="Form No." onkeyup="deleteErrorMsg()">
-                                        </div>-->
+                                         
                                         <div class="col-sm-4 form-group">
 											<label>Jute Variety</label>
 											<span class="text-danger">* </span>&nbsp; <span id="errjutevariety" name="errjutevariety"

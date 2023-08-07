@@ -4,7 +4,7 @@
 <%@page import="com.jci.model.BalePreparationModel"%>
 <%@page import="com.jci.model.BalePreparation"%>
 <%@page import="java.text.SimpleDateFormat"%>
-
+<%@page import="com.jci.model.ZoneModel"%>
 
 
 
@@ -54,6 +54,60 @@
                 <div class="ibox">
                     <span>${msg}</span>
                     <div class="ibox-body">
+                    <form action = "getBalesData.obj"  onsubmit = "return validation()">
+                    <div class="row">
+				<div class="col-sm-4 form-group">
+											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>
+											<%
+												List<ZoneModel> zoneList = (List<ZoneModel>) request.getAttribute("zoneList");
+											%>
+											<select class="form-control" name="zone" id="zone">
+												<option disabled selected value>-Select-</option>
+												<%
+													for(ZoneModel zoneLists : zoneList) {
+												%>
+												<option value="<%=zoneLists.getZonecode()%>"><%=zoneLists.getZonename()%></option>
+												<%
+													}
+												%>
+											</select>
+												</div>
+			<div class="col-sm-4 form-group">
+											<label id="regionLabel" class="required">Region</label>&nbsp;&nbsp;&nbsp; <span id="errRegion" name="errRegion" class="text-danger"> </span>
+											<!-- <input class="form-control" type="text" name="region" placeholder="Region" required> -->
+											<select class="form-control" name="region" id="region">
+												<option disabled selected value>-Select-</option>
+											</select>
+										</div>
+										
+		   <div class="col-sm-4 form-group">
+											<label id="dpclabel" class="required">DPC</label> &nbsp;&nbsp;&nbsp; <span id="errDPC" name="errDPC" class="text-danger"> </span>
+											<select class="form-control" name="dpc" id="dpc">
+												<option disabled selected value>-Select-</option>
+											</select>
+										</div>
+									
+			</div>
+			<div class ="row">
+			 <div class="col-sm-4 form-group">
+											<label>From Date</label> 
+											<span class="text-danger">* </span>&nbsp; <span id="errfromdate" name="errfromdate"
+												class="text-danger"> </span>
+											<input class="form-control" name="fromdate" id="fromdate"  placeholder="dd-mm-yyyy" value="" readonly>
+										</div>
+			<div class="col-sm-4 form-group">
+											<label>To Date</label> 
+											<span class="text-danger">* </span>&nbsp; <span id="errtodate" name="errtodate"
+												class="text-danger"> </span>
+											<input class="form-control" name="todate" id="todate"  placeholder="dd-mm-yyyy" value="" readonly>
+										</div>
+			<div class="col-sm-4 form-group">
+										<label> </label> &nbsp;&nbsp;&nbsp; 
+										
+										<input type = "submit" id="search" value ="search" class="btn btn-primary"/ style ="display: block;">
+										</div>
+			</div>
+			</form>
                         <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
 							<%
 							int ho= (int)session.getAttribute("is_ho");
@@ -70,9 +124,6 @@
 										<th>Place Of Packing</th>
 									    <th>Bale No</th>							
 										
-										
-																	
-										 	
 										<!-- <th></th>
 										<th></th> -->
 									</tr>
@@ -187,6 +238,89 @@
             });
         })
     </script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+$( "#todate" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+$( "#fromdate" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+</script>
+
+<script>
+		$("#zone").on("change", function() {
+			var id = (this.value);
+			//alert(id);
+			if(id!=null){
+				$.ajax({
+					type:"GET",
+					url:"findRoByZone.obj",
+					data:{"id":id},
+					success:function(result){				 
+		 				var data= jQuery.parseJSON(result);
+	 	 				var html = "<option disabled selected value>-Select-</option>";
+		 				  for (var i = 0; i< data.length; i++){
+		 					 html += "<option value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+		 				  }
+		 				  //alert(html)
+		 				$("#region").html(html);
+					}			
+				});
+			}
+		});
+		
+		$("#region").on("change", function() {
+			var id = (this.value);	
+			if(id!=null){
+				$.ajax({
+					type:"GET",
+					url:"findDpcByRegion.obj",
+					data:{"id":id},
+					success:function(result){
+		 				   var data= jQuery.parseJSON(result);
+	 	 					 var html = "<option disabled selected value>-Select-</option>";
+		 				     for (var i = 0; i< data.length; i++){
+		 					 html += "<option value=" +data[i].split("-")[0]+ ">"+data[i].split("-")[1]+"</option>"
+		 				  } 
+		 				$("#dpc").html(html);
+					}			
+				});
+			} 
+		});
+	</script>
+	
+<script>
+
+
+	function validation(){
+	var dpc = $("#dpc").find(":selected").val();
+	var fromDate = $("#fromdate").val();
+	var toDate = $("#todate").val();
+	if(dpc!="" && toDate != "" && fromDate != "")
+	{
+		 return true;
+	   }
+	else{
+		alert("please fill all the fields!");
+		return false;
+	}
+}
+
+</script>
+<script>
+$("#search").click(function(){
+	var dpc = $("#dpc").find(":selected").val();
+	
+	if(dpc!="")
+	{
+		 return true;
+	   }
+	else{
+		alert("please select a dpc!");
+		return false;
+	}
+});
+</script>
 </body>
 
 </html>
