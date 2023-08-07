@@ -40,7 +40,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Edit Profile</h1>
+                <h1 class="page-title">Change password / Mobile No.</h1>
                  
             </div>
 				
@@ -55,102 +55,52 @@
                         <div class="ibox">
                             <span>${msg}</span>
                             <div class="ibox-body">
-                                <form action="updatesaveProfile.obj" method="POST" onsubmit ="return validate();">
+                                <form action="updatesaveProfile.obj" method="POST" onsubmit ="return matchpassword();">
                                    <div class="row">
-                      <!-- 
-                           <div class="col-sm-4 form-group">
-                                            <label>User Name</label>  -->
-                                            <input type ="hidden" name="id" value ="<%=userProfile.getRefid()%>">
-										<%-- 	<input class="form-control" name="username" id="username" placeholder="User Name" value="<%=userProfile.getUsername()%>" >
-                                        </div>
-                                        <div class="col-sm-4 form-group">
-                                        <label>Employee Id</label> 
-										<input class="form-control" name="employeeid" placeholder="Employee Id" id="employeeid" value="<%=userProfile.getEmployeeid()%>" readonly>
-											
-										</div>
-													<div class="col-sm-4 form-group">
-                                            <label>Email</label>
-                                            <input class="form-control" id="emailAddress"  name="emailAddress"  placeholder="Bin Email" value="<%=userProfile.getEmail()%>" readonly>
-                                          
-                                        </div>
-										</div> 
-										<div class="row">
-				
-                                        <div class="col-sm-4 form-group">
-                                             <label>Employee Name</label>
-                                        <input class="form-control"  name="employeename" type="text" placeholder="Employee Name" id="employeename"" value="<%=userProfile.getEmployeename()%>" readonly >
-                                        </div>  --%>
-                                       <%--  <div class="col-sm-4 form-group">
-											<label>Zone Name</label>
-
-                                        	<%
-												List<ZoneModel> zoneList = (List<ZoneModel>) request.getAttribute("zoneList");
-											%>
-											<select class="form-control" name="zone" id="zone">
-												<option disabled selected value>-Select-</option>
-												<%
-													for(ZoneModel zoneLists : zoneList) {
-												%>
-												<option value="<%=zoneLists.getZonecode()%>"><%=zoneLists.getZonename()%></option>
-												<%
-													}
-												%>
-											</select>
-										</div>
-                                        <div class="col-sm-4 form-group">
-											<label>Region Name</label>
-                                        	<select class="form-control" name="region" id="region">
-												<option disabled selected value>-Select-</option>
-											</select></div>
-                                    </div> 
-										   <div class="row">
-							<div class="col-sm-4 form-group">
-											<label>Center Name</label>
-                                        	<select class="form-control" name="centerordpc" id="centerordpc">
-												<option disabled selected value>-Select-</option>
-											</select></div> -->
-											 --%>
- 										
-												
+                     
+                                            
 										
 												<div class="col-sm-4 form-group">
 											<label>Mobile Number</label><span id="errMob" name="errMob" class="text-danger"> </span>
                                         	<input type ="number" class="form-control"  id="mobile" name="mobile" placeholder="Mobile Number" value = "<%=userProfile.getMobileno()%>" >
 										</div>
-										
-										<%-- <div class="col-sm-4 form-group">
-											<label class="required">Role</label>  &nbsp;&nbsp;&nbsp; <span id="errType" name="errType" class="text-danger"> </span>
-											<%
-												List<UserRoleModel> roleList = (List<UserRoleModel>) request.getAttribute("roleList");
-											%>
-											<select class="form-control" name="role" id="role">
-												<option disabled selected value>-Select-</option>
-												<%
-													for (UserRoleModel roleLists : roleList) {
-												%>
-												<option value="<%=roleLists.getRole_Id()%>"><%=roleLists.getRole_name()%></option>
-												<%
-													}
-												%>
-											</select>
-										</div> 
-                                    </div>            
-                                    <div class="row">--%>
+										 
+                                  
                                    <div class="col-sm-4 form-group">
-											<label>Current password</label>
-                                        	<input  type ="text" class="form-control"  id="oldpassword" name="oldpassword" placeholder="password"  onblur= "return validatePassword();">
+											<label>current password</label>&nbsp; &nbsp;&nbsp;
+										
+											<span id = "erroldPass" class="text-danger"></span>
+											<span id = "errPass" class="text-danger"></span>
+                                        	<input  type ="text" class="form-control"  id="password" name="password" placeholder="current password" onblur = "return matchPreviousPassword()" >
 										</div>
-										 <div class="col-sm-4 form-group">
-											<label>New password</label>
-                                        	<input  type ="text" class="form-control"  id="newpassword" name="newpassword" placeholder="password"  onblur= "return matchPassword();">
+											</div>
+											<div class="row">
+										<div class="col-sm-4 form-group">
+											<label>New password</label>&nbsp; &nbsp;&nbsp;
+											<span id = "errorPass" class="text-danger"></span>
+                                        	<input  type ="text" class="form-control"  id="newpassword" name="newpassword" placeholder="new password" onblur = "return matchpassword()" >
 										</div>
-										 <div class="col-sm-4 form-group">
-											<label>RE Enter New password</label>
-                                        	<input  type ="text" class="form-control"  id="renewpassword" name="renewlpassword" placeholder="password" onblur= "return matchPassword();" >
+									
+									
+										<div class="col-sm-4 form-group">
+											<label>Re Enter New password</label>&nbsp; &nbsp;&nbsp;
+											<span id = "errorRepass" class="text-danger"></span>
+                                        	<input  type ="text" class="form-control"  id="repassword" name="repassword" placeholder="new password" onblur = "return matchpassword()" >
 										</div>
-                                    </div>                        
+                                            </div>
+                                             <div class="row">              
                                     <div class="form-group col-sm-12">
-                                    <button class="btn btn-default" type="submit">Submit</button>
+                                    <button class="btn btn-default" type="submit" >Submit</button>
+                                    </div>
+                                    </div>
+                                    <div>
+                                    
+                                  <li>   	Length must be greater than or equal to <b>8</b> </li>
+  					   			<li> 	Must contain one or more <b>uppercase</b> characters </li>
+								  <li> 	Must contain one or more <b>lowercase</b> characters </li>
+								  <li> 	Must contain one or more <b>numeric</b> values </li>
+								  <li> 	Must contain one or more <b>special</b> characters </li>
+								                                    
                                     </div>
                                 </form>
                             </div>
@@ -158,25 +108,75 @@
                     </div>
                 </div>
             </div>
-            <script>
-            function matchPassword(){
-            	var oldpassword =  $("#oldpassword").val();
-            	var id = <%= userProfile.getRefid() %>;
-            	$.ajax({
-
-								type : "GET",
-								url : "getoldpassword.obj",
-								data : {"id" : id},
-								success : function(result) {
-								
-								}
-            	});
-            	var password = $("#newpassword").val();
-            	var repassword = $("#renewlpassword").val();
-            	if(password != repassword){
-            		alert("Newpassword and Re-entered password didn't match");
+             <script>
+             function matchPreviousPassword(){
+            	var oldpassword =  $("#password").val();
+           
+            	var database_pass = '<%=userProfile.getPassword() %>';
+            
+            	if(oldpassword != database_pass){
+            		console.log("current password is incorrect");
+            		
+            		  document.getElementById("erroldPass").innerHTML = "current password is incorrect!"
+            			  $("#erroldPass").show();
+            		
+            			  $(':input[type="submit"]').prop('disabled', true);
             		return false;
             	}
+            	else{
+            		$("#erroldPass").hide();
+          
+            		  $(':input[type="submit"]').prop('disabled', false);
+            	}
+            	
+            }
+            
+            function matchpassword(){
+            	var oldpassword =  $("#password").val();
+            	var database_pass = '<%=userProfile.getPassword() %>'
+            	var password = $("#newpassword").val();
+            	var repassword = $("#repassword").val();
+            	var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/; 
+            	if(password != "" && repassword != ""){
+            	if(password != repassword){
+            		 console.log("Both passwords didn't match"); 
+            		 document.getElementById("errorPass").innerHTML = "Both passwords didn't match!"
+                		 $("#errorPass").show();
+            		 $(':input[type="submit"]').prop('disabled', true);
+            		 return false;
+            	}
+            	else {
+            		 $("#errorPass").hide();
+            	}
+            	if( regex.test(password)) { 	 
+            		console.log("password matched with regex"); 
+            		 $(':input[type="submit"]').prop('disabled', false);
+            
+            	 } 
+            	else {  
+            		  document.getElementById("errorPass").innerHTML = "Password didn't match with criteria!"
+            		 $("#errorPass").show();
+            		console.log("password didn't match with regex");
+            		 $(':input[type="submit"]').prop('disabled', true);
+            		return false;} 
+            	
+            	}
+            	if(repassword == ""){
+            	
+            		  document.getElementById("errorPass").innerHTML = "please fill the password!"
+                 		 $("#errorRepass").show();
+            		  $(':input[type="submit"]').prop('disabled', true);
+            		  return false;
+            	}
+            	
+            	 if(password == ""){
+                	
+          		  document.getElementById("errorPass").innerHTML = "please fill the password!"
+               		 $("#errorPass").show();
+          		 $(':input[type="submit"]').prop('disabled', true);
+          		  return false;
+          	}
+            	 
             }
             </script>
             	<script>
@@ -184,19 +184,38 @@
 		function validate() {
 			
 			var value = $("#mobile").val();
-		
+			var curr_pass =$("#password").val();
+			var new_pass =$("#newpassword").val();
+			var repass_pass =$("#repassword").val();
+			
 		  if(value.length < '10' || value.length > '10' ){
 			 
 			  document.getElementById("errMob").innerHTML = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mobile Number should be 10 digits!!";
 			  $('#errMob').show();
+			  $(':input[type="submit"]').prop('disabled', true);
 			  return false;
 		  }
-		  else{
-		    $('#errMob').hide();
-		  return true;
-		  }
 		
-	}
+		  
+		  if(curr_pass == ""){
+			  document.getElementById("errPass").innerHTML = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; current password can not be empty!";
+			  $('#errPass').show();
+			  $(':input[type="submit"]').prop('disabled', true);
+			  return false;
+		  }
+		  if(new_pass == ""){
+			  document.getElementById("errorPass").innerHTML = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; New password can not be empty!";
+			  $('#errorPass').show();
+			  $(':input[type="submit"]').prop('disabled', true);
+			  return false;
+		  }
+		  if(repass_pass == ""){
+			  document.getElementById("errorRepass").innerHTML = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; New password can not be empty!";
+			  $('#errorRepass').show();
+			  $(':input[type="submit"]').prop('disabled', true);
+			  return false;
+		  }
+		}
 	</script>
             <script>
 		$("#zone").on("change", function() {

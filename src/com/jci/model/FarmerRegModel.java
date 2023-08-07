@@ -59,8 +59,8 @@ public class FarmerRegModel {
 	@Transient
 	private String district_name;
 
-
-
+	@Column(name="F_UPDATE_DATE")
+	private String F_UPDATE_DATE;
 
 	@Column(name="F_I_CARE_REGISTERED")
 	private String F_I_CARE_REGISTERED;
@@ -128,44 +128,15 @@ public class FarmerRegModel {
 		IS_VERIFIED = iS_VERIFIED;
 	}
 
-	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
-			String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE,String f_District,String f_I_CARE_REGISTERED, String land_holding,
-			String f_MOBILE, String f_AC_NO, String bank_ac_type, String f_BANK_NAME, String F_Block,String f_BANK_BRANCH,
-			String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH, String f_REG_NO,
-			String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2, String f_Pincode, int iS_VERIFIED) {
-		super();
-		F_ID = f_ID;
-		F_NAME = f_NAME;
-		this.caste = caste;
-		this.gender = gender;
-		F_ADDRESS = f_ADDRESS;
-		F_ID_PROF_TYPE = f_ID_PROF_TYPE;
-		F_ID_PROF = f_ID_PROF;
-		F_ID_PROF_NO = f_ID_PROF_NO;
-		F_REG_BY = f_REG_BY;
-		F_I_CARE_REGISTERED = f_I_CARE_REGISTERED;
-		this.land_holding = land_holding;
-		F_MOBILE = f_MOBILE;
-		F_AC_NO = f_AC_NO;
-		this.bank_ac_type = bank_ac_type;
-		F_BANK_NAME = f_BANK_NAME;
-		F_BANK_BRANCH = f_BANK_BRANCH;
-		F_BANK_IFSC = f_BANK_IFSC;
-		F_BANK_DOC = f_BANK_DOC;
-		F_REG_FORM = f_REG_FORM;
-		F_DOC_PATH = f_DOC_PATH;
-		F_REG_NO = f_REG_NO;
-		F_DOC_Mandate = f_DOC_Mandate;
-		F_VERFIED_DATE = f_VERFIED_DATE;
-		F_Address2 = f_Address2;
-		F_Pincode = f_Pincode;
-		IS_VERIFIED = iS_VERIFIED;
-
-		F_STATE = f_STATE;
-
-		F_District = f_District;
-		F_Block = F_Block;
+	public String getF_UPDATE_DATE() {
+		return F_UPDATE_DATE;
 	}
+
+	public void setF_UPDATE_DATE(String f_UPDATE_DATE) {
+		F_UPDATE_DATE = f_UPDATE_DATE;
+	}
+
+
 
 	public FarmerRegModel(String police_station) {
 		super();
@@ -232,51 +203,6 @@ public class FarmerRegModel {
 		F_Pincode = f_Pincode;
 	}
 
-	
-	
-
-	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
-			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String state_name,
-			String f_District, String district_name, String f_I_CARE_REGISTERED, String land_holding, String f_MOBILE,
-			String f_AC_NO, String bank_ac_type, String f_BANK_NAME, String f_BANK_BRANCH, String f_BANK_IFSC,
-			String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH, String f_REG_NO, String f_DOC_Mandate,
-			Date f_VERFIED_DATE, String f_Address2, String f_Pincode, int iS_VERIFIED, String dpc_id,
-			String police_station) {
-		super();
-		F_ID = f_ID;
-		F_NAME = f_NAME;
-		this.caste = caste;
-		this.gender = gender;
-		F_ADDRESS = f_ADDRESS;
-		F_ID_PROF_TYPE = f_ID_PROF_TYPE;
-		F_Block = f_Block;
-		F_ID_PROF = f_ID_PROF;
-		F_ID_PROF_NO = f_ID_PROF_NO;
-		F_REG_BY = f_REG_BY;
-		F_STATE = f_STATE;
-		State_name = state_name;
-		F_District = f_District;
-		this.district_name = district_name;
-		F_I_CARE_REGISTERED = f_I_CARE_REGISTERED;
-		this.land_holding = land_holding;
-		F_MOBILE = f_MOBILE;
-		F_AC_NO = f_AC_NO;
-		this.bank_ac_type = bank_ac_type;
-		F_BANK_NAME = f_BANK_NAME;
-		F_BANK_BRANCH = f_BANK_BRANCH;
-		F_BANK_IFSC = f_BANK_IFSC;
-		F_BANK_DOC = f_BANK_DOC;
-		F_REG_FORM = f_REG_FORM;
-		F_DOC_PATH = f_DOC_PATH;
-		F_REG_NO = f_REG_NO;
-		F_DOC_Mandate = f_DOC_Mandate;
-		F_VERFIED_DATE = f_VERFIED_DATE;
-		F_Address2 = f_Address2;
-		F_Pincode = f_Pincode;
-		IS_VERIFIED = iS_VERIFIED;
-		this.dpc_id = dpc_id;
-		this.police_station = police_station;
-	}
 
 	public Date getF_VERFIED_DATE() {
 		return F_VERFIED_DATE;
@@ -528,20 +454,69 @@ public class FarmerRegModel {
 		this.district_name = district_name;
 	}
 
+	
+	
+	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
+			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String state_name,
+			String f_District, String district_name, String f_UPDATE_DATE, String f_I_CARE_REGISTERED,
+			String land_holding, String f_MOBILE, String f_AC_NO, String bank_ac_type, String f_BANK_NAME,
+			String f_BANK_BRANCH, String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH,
+			String f_REG_NO, String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2, String f_Pincode,
+			int iS_VERIFIED, String dpc_id, String police_station) {
+		super();
+		F_ID = f_ID;
+		F_NAME = f_NAME;
+		this.caste = caste;
+		this.gender = gender;
+		F_ADDRESS = f_ADDRESS;
+		F_ID_PROF_TYPE = f_ID_PROF_TYPE;
+		F_Block = f_Block;
+		F_ID_PROF = f_ID_PROF;
+		F_ID_PROF_NO = f_ID_PROF_NO;
+		F_REG_BY = f_REG_BY;
+		F_STATE = f_STATE;
+		State_name = state_name;
+		F_District = f_District;
+		this.district_name = district_name;
+		F_UPDATE_DATE = f_UPDATE_DATE;
+		F_I_CARE_REGISTERED = f_I_CARE_REGISTERED;
+		this.land_holding = land_holding;
+		F_MOBILE = f_MOBILE;
+		F_AC_NO = f_AC_NO;
+		this.bank_ac_type = bank_ac_type;
+		F_BANK_NAME = f_BANK_NAME;
+		F_BANK_BRANCH = f_BANK_BRANCH;
+		F_BANK_IFSC = f_BANK_IFSC;
+		F_BANK_DOC = f_BANK_DOC;
+		F_REG_FORM = f_REG_FORM;
+		F_DOC_PATH = f_DOC_PATH;
+		F_REG_NO = f_REG_NO;
+		F_DOC_Mandate = f_DOC_Mandate;
+		F_VERFIED_DATE = f_VERFIED_DATE;
+		F_Address2 = f_Address2;
+		F_Pincode = f_Pincode;
+		IS_VERIFIED = iS_VERIFIED;
+		this.dpc_id = dpc_id;
+		this.police_station = police_station;
+	}
+
 	@Override
 	public String toString() {
 		return "FarmerRegModel [F_ID=" + F_ID + ", F_NAME=" + F_NAME + ", caste=" + caste + ", gender=" + gender
 				+ ", F_ADDRESS=" + F_ADDRESS + ", F_ID_PROF_TYPE=" + F_ID_PROF_TYPE + ", F_Block=" + F_Block
 				+ ", F_ID_PROF=" + F_ID_PROF + ", F_ID_PROF_NO=" + F_ID_PROF_NO + ", F_REG_BY=" + F_REG_BY
 				+ ", F_STATE=" + F_STATE + ", State_name=" + State_name + ", F_District=" + F_District
-				+ ", district_name=" + district_name + ", F_I_CARE_REGISTERED=" + F_I_CARE_REGISTERED
-				+ ", land_holding=" + land_holding + ", F_MOBILE=" + F_MOBILE + ", F_AC_NO=" + F_AC_NO
-				+ ", bank_ac_type=" + bank_ac_type + ", F_BANK_NAME=" + F_BANK_NAME + ", F_BANK_BRANCH=" + F_BANK_BRANCH
-				+ ", F_BANK_IFSC=" + F_BANK_IFSC + ", F_BANK_DOC=" + F_BANK_DOC + ", F_REG_FORM=" + F_REG_FORM
-				+ ", F_DOC_PATH=" + F_DOC_PATH + ", F_REG_NO=" + F_REG_NO + ", F_DOC_Mandate=" + F_DOC_Mandate
-				+ ", F_VERFIED_DATE=" + F_VERFIED_DATE + ", F_Address2=" + F_Address2 + ", F_Pincode=" + F_Pincode
-				+ ", IS_VERIFIED=" + IS_VERIFIED + ", dpc_id=" + dpc_id + ", police_station=" + police_station + "]";
+				+ ", district_name=" + district_name + ", F_UPDATE_DATE=" + F_UPDATE_DATE + ", F_I_CARE_REGISTERED="
+				+ F_I_CARE_REGISTERED + ", land_holding=" + land_holding + ", F_MOBILE=" + F_MOBILE + ", F_AC_NO="
+				+ F_AC_NO + ", bank_ac_type=" + bank_ac_type + ", F_BANK_NAME=" + F_BANK_NAME + ", F_BANK_BRANCH="
+				+ F_BANK_BRANCH + ", F_BANK_IFSC=" + F_BANK_IFSC + ", F_BANK_DOC=" + F_BANK_DOC + ", F_REG_FORM="
+				+ F_REG_FORM + ", F_DOC_PATH=" + F_DOC_PATH + ", F_REG_NO=" + F_REG_NO + ", F_DOC_Mandate="
+				+ F_DOC_Mandate + ", F_VERFIED_DATE=" + F_VERFIED_DATE + ", F_Address2=" + F_Address2 + ", F_Pincode="
+				+ F_Pincode + ", IS_VERIFIED=" + IS_VERIFIED + ", dpc_id=" + dpc_id + ", police_station="
+				+ police_station + "]";
 	}
+
+	
 
 	
 

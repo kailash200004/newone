@@ -21,4 +21,5 @@ public interface FarmerRegDao {
 	public String findRegno(String dpcid,String region);
 	public List<FarmerRegModel> findDetails(int id);
 	public String getFarmerNo(int id);
+	public List<FarmerRegModelDTO> findByDpc( String dpc );
 }

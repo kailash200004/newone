@@ -69,7 +69,7 @@
 				
 				<%
 				List<VerifyTallySlip> verificationList = (List<VerifyTallySlip>) request.getAttribute("verifyTallySliList");
-				System.out.println("verificationList ="+verificationList);
+				//System.out.println("verificationList ="+verificationList);
 				if(verificationList==null){ 
 					 verificationList = new ArrayList();
 				 }

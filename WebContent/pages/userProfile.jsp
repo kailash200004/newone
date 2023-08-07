@@ -109,7 +109,7 @@
 										
                                     </div>                                    
                                     <div class="form-group col-sm-12">
-                                     <a href="editprofile.obj?id=<%=(int)session.getAttribute("refId")%>"><button class="btn btn-default" type="button">Edit</button></a>
+                                     <a href="editprofile.obj"><button class="btn btn-default" type="button">Edit</button></a>
                                     </div>
                                 </form>
                             </div>

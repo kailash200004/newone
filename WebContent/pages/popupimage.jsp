@@ -138,11 +138,11 @@
             <div class="row">
 	            <div class="col-md-6">
 	            <button id="turn1">
-					<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
+				<img style="width: 20px;height:20px;" src="https://pic.onlinewebfonts.com/svg/img_313385.png">
 					Rotate
 				</button>
 	            <div class="text-details">	            
-		            <img id="uploadedImage1" src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" />
+		  <a href = "http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" target ="_blank"><img id="uploadedImage1" src="http://49.50.79.121:8080/FarmerRegistration/<%=mandate%>" /></a>
 		            <div class="mandt">
 		            <label class="center">Farmer mandate Image</label>
 		            </div>
@@ -154,7 +154,7 @@
 					Rotate
 				</button> 
 	             <div class="text-details">	           
-		            <img id="uploadedImage2" src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>"/>
+		           <a href = "http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>" target ="_blank">   <img id="uploadedImage2" src="http://49.50.79.121:8080/FarmerRegistration/<%=bankdoc%>"/></a>
 		            <div class="mandt">
 		            	<label class="center">Farmer Bank Document</label>
 		            </div>
@@ -170,7 +170,7 @@
 					Rotate
 				</button>
 	           <div class="text-details">		            
-		            <img id="uploadedImage3" src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>"/>
+		         <a href = "http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>" target ="_blank">      <img id="uploadedImage3" src="http://49.50.79.121:8080/FarmerRegistration/<%=idproof%>"/></a>
 		            <div class="mandt">
 		            	<label class="center">Farmer Id Proof</label>
 		            </div>
@@ -183,7 +183,7 @@
 					Rotate
 				</button>	
 	             <div class="text-details">            
-		            <img id="uploadedImage4" src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>"/>
+		           <a href = "http://49.50.79.121:8080/FarmerRegistration/<%=regform%>" target ="_blank">        <img id="uploadedImage4" src="http://49.50.79.121:8080/FarmerRegistration/<%=regform%>"/></a>
 		            <div class="mandt">
 		            	<label class="center">Farmer Registration Form</label>
 		            </div>

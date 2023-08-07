@@ -211,7 +211,7 @@ body {
 	<script>
 
 		$(document).ready(function() {
-		for(var i=1; i<=60;i++){
+		for(var i=1; i<=58;i++){
 			$("#o"+i).hide();
 			
 			}
@@ -245,7 +245,7 @@ $.ajax({
 
 
 					for(var j=0;j<userAction.length;j++){
-						for(var i=0;i<=60; i++){
+						for(var i=0;i<=58; i++){
 					if($("#o"+i).data("pre") == userAction[j]){
 					//console.log(userAction[j]);
 						$("#o"+i).show();

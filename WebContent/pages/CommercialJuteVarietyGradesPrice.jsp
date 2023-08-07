@@ -664,13 +664,13 @@ $(document).ready(function () {
 						success:function(result){
 							//  location.reload(true);
 							  $('html, body').animate({scrollTop: '0px'}, 0);
-							$("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+							 $("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
 							 setTimeout(function () {
 							      
 							        location.reload(true);
-							       // $("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+							        $("#msg").html("<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
 							       
-							      }, 1000);
+							      }, 1000); 
 							
 						}
 		 	 				 

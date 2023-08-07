@@ -555,7 +555,7 @@ public class InsertDataController
             if ((M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                 lname = L_NAME.replaceAll("\\s", "");
                 if(!lname.equalsIgnoreCase(""))
-                farmerName = farmerName + " " + lname;
+                farmerName = farmerName + " "+"NA"+" " + lname;
             }
             else if ((!M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                 mname = M_NAME.replaceAll("\\s", "");
@@ -630,56 +630,7 @@ public class InsertDataController
             farmerRegModel.setDpc_id(dpc);
             File file = null;
             String pathurl = "";
-            try {
-                String url = "";
-                if (!F_BANK_DOC.isEmpty()) {
-                    file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\bankdoc_" + F_BANK_DOC.getOriginalFilename());
-                    try {
-                        final OutputStream os = new FileOutputStream(file);
-                        os.write(F_BANK_DOC.getBytes());
-                        os.close();
-                    }
-                    catch (Exception e) {
-                        System.out.println(e.getLocalizedMessage());
-                        e.printStackTrace();
-                    }
-                    pathurl = file.getAbsolutePath();
-                    final String path = url = "bankdoc_" + F_BANK_DOC.getOriginalFilename();
-                    farmerRegModel.setF_BANK_DOC(url);
-                }
-                if (!F_ID_PROF.isEmpty()) {
-                    file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\idproof_" + F_ID_PROF.getOriginalFilename());
-                    try {
-                        final OutputStream os = new FileOutputStream(file);
-                        os.write(F_ID_PROF.getBytes());
-                        os.close();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    pathurl = file.getAbsolutePath();
-                    final String path = url = "idproof_" + F_ID_PROF.getOriginalFilename();
-                    farmerRegModel.setF_ID_PROF(url);
-                }
-                if (!F_REG_FORM.isEmpty()) {
-                    file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\regform_" + F_REG_FORM.getOriginalFilename());
-                    try {
-                        final OutputStream os = new FileOutputStream(file);
-                        os.write(F_REG_FORM.getBytes());
-                        os.close();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    pathurl = file.getAbsolutePath();
-                    final String path = url = "regform_" + F_REG_FORM.getOriginalFilename();
-                    farmerRegModel.setF_REG_FORM(url);
-                }
-            }
-            catch (Exception e2) {
-                System.out.println(e2);
-                mv.addObject("msg", (Object)"Not Saved please try again");
-            }
+           
             final HttpSession session = request.getSession();
             String dpcid = "0000";
             String region = "00";
@@ -705,6 +656,56 @@ public class InsertDataController
                 }
                 else {
                     farmerRegModel.setF_REG_NO(region + dpcid + "00001");
+                }
+                try {
+                    String url = "";
+                    if (!F_BANK_DOC.isEmpty()) {
+                        file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\bankdoc_"+farmerRegModel.getF_REG_NO()+"_" + F_BANK_DOC.getOriginalFilename());
+                        try {
+                            final OutputStream os = new FileOutputStream(file);
+                            os.write(F_BANK_DOC.getBytes());
+                            os.close();
+                        }
+                        catch (Exception e) {
+                            System.out.println(e.getLocalizedMessage());
+                            e.printStackTrace();
+                        }
+                        pathurl = file.getAbsolutePath();
+                        final String path = url = "bankdoc_" +farmerRegModel.getF_REG_NO()+"_" + F_BANK_DOC.getOriginalFilename();
+                        farmerRegModel.setF_BANK_DOC(url);
+                    }
+                    if (!F_ID_PROF.isEmpty()) {
+                        file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\idproof_" +farmerRegModel.getF_REG_NO()+"_" + F_ID_PROF.getOriginalFilename());
+                        try {
+                            final OutputStream os = new FileOutputStream(file);
+                            os.write(F_ID_PROF.getBytes());
+                            os.close();
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        pathurl = file.getAbsolutePath();
+                        final String path = url = "idproof_" +farmerRegModel.getF_REG_NO()+"_" + F_ID_PROF.getOriginalFilename();
+                        farmerRegModel.setF_ID_PROF(url);
+                    }
+                    if (!F_REG_FORM.isEmpty()) {
+                        file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\regform_" +farmerRegModel.getF_REG_NO()+"_" + F_REG_FORM.getOriginalFilename());
+                        try {
+                            final OutputStream os = new FileOutputStream(file);
+                            os.write(F_REG_FORM.getBytes());
+                            os.close();
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        pathurl = file.getAbsolutePath();
+                        final String path = url = "regform_" +farmerRegModel.getF_REG_NO()+"_" + F_REG_FORM.getOriginalFilename();
+                        farmerRegModel.setF_REG_FORM(url);
+                    }
+                }
+                catch (Exception e2) {
+                    System.out.println(e2);
+                    mv.addObject("msg", (Object)"Not Saved please try again");
                 }
                 this.farmerRegService.create(farmerRegModel);
                 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
@@ -1717,8 +1718,11 @@ public class InsertDataController
         String dcpid = (String)request.getSession().getAttribute("dpcId"); 
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-        final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus(dcpid, regionId, zoneId);
+        final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.verificationStatus(dcpid, regionId, zoneId); 
+        final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();     
+        mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("allFarmersList", (Object)allFarmersList);
+
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -1881,6 +1885,7 @@ public class InsertDataController
             verifyFarmer.setStatus(1);
             verifyFarmer.setVerificationdate(new Date());
             verifyFarmer.setRegno(farmer_reg_no);
+      
             final Boolean verifyRow = this.verifyFarmerService.duplicateVerificationEntryNumberCheck(farmer_reg_no);
             if (verifyRow) {
                 this.verifyFarmerService.submitform(verifyFarmer);
@@ -2124,7 +2129,7 @@ public class InsertDataController
             String pathurl = "";
             String url = "";
             if (!F_DOC_Mandate.isEmpty()) {
-                file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + F_DOC_Mandate.getOriginalFilename());
+                file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\mandate_" + farmerRegModel.getF_REG_NO()+"_"+F_DOC_Mandate.getOriginalFilename());
                 try {
                     final OutputStream os = new FileOutputStream(file);
                     os.write(F_DOC_Mandate.getBytes());
@@ -2134,7 +2139,7 @@ public class InsertDataController
                     e.printStackTrace();
                 }
                 pathurl = file.getAbsolutePath();
-                final String path = url = "mandate_" + F_DOC_Mandate.getOriginalFilename();
+                final String path = url = farmerRegModel.getF_REG_NO()+"mandate_" +farmerRegModel.getF_REG_NO()+"_"+ F_DOC_Mandate.getOriginalFilename();
                 farmerRegModel.setIS_VERIFIED(0);
                 farmerRegModel.setF_DOC_Mandate(url);
             }
@@ -2939,15 +2944,10 @@ public class InsertDataController
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
         
         String place_of_packing =(String)request.getSession().getAttribute("dpcId");
-        int is_ho = (int)request.getSession().getAttribute("is_ho");
-         List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
-		/*if(is_ho == 1)
-		{
-			  viewBale = (List<BalePreparation>)this.balePrepareService.getAlldata();
-		}*/
-		
-			viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing,regionId,  zoneId);
-    	
+        List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
+		viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing,regionId,  zoneId);
+		final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
+        mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("viewBalePreparation", (Object)viewBale);
     	}
     	catch(Exception e) {
@@ -4005,7 +4005,7 @@ public class InsertDataController
         final int id = Integer.parseInt(request.getParameter("id"));
         String region =(String)request.getSession().getAttribute("region"); 
         final VerifyTallySlip vrf = this.verifyTallySlipService.find(id);
-        final RawJuteProcurementAndPayment raw = this.rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo());
+        final RawJuteProcurementAndPayment raw = this.rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo(), Integer.parseInt(vrf.getRegion_id()));
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD", region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);
         mv.addObject("vrftally", (Object)vrf);
@@ -4278,36 +4278,42 @@ public class InsertDataController
             }
 		try {
 			boolean flag = true;
-			int refid = Integer.parseInt(request.getParameter("id"));
+			int refid = (int) request.getSession().getAttribute("userId");
 			UserRegistrationModel userRegistration = userRegService.find(refid);
-
-				String mobileno =  request.getParameter("mobile");
-				String password =  request.getParameter("oldpassword");
-				String renewpassword =  request.getParameter("renewpassword");
+			
+			 System.out.println("in method");
+				String  mobileno=  request.getParameter("mobile");
+				String password =  request.getParameter("password");
 				String newpassword =  request.getParameter("newpassword");
+				String renewpassword =  request.getParameter("repassword");
+				System.out.println("refid  "+ refid);
+				System.out.println("mobile  "+ mobileno);
+				System.out.println("password  "+ password);
+				System.out.println("newpassword  "+ newpassword);
+				System.out.println("repassword  "+ renewpassword);
 				userRegistration.setRefid(refid);
 				userRegistration.setMobileno(mobileno);
-				try {
-				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) {
+				 System.out.println("in continued");
+				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) 
+				{
+					System.out.println(" in if");
 					userRegistration.setPassword(renewpassword);
 					userRegistration.setDatelastchangepassword(new Date());
-					
+					userRegistration.setUpdatedat(new Date());
+
+					 userRegService.update(userRegistration);
+					 System.out.println(" if updated");
+					   redirectAttributes.addFlashAttribute("msg",
+								"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
 				}
-				}
-				catch(Exception e)
+				
+				else
 				{
-					
-					System.out.println(e.getStackTrace());
-					flag = false;
+					 System.out.println("in else");
 				    redirectAttributes.addFlashAttribute("msg",
 							"<div class=\"alert alert-danger\"><b>Failed !</b>Failed to change password.</div>\r\n" + "");
-				}
-				userRegistration.setUpdatedat(new Date());
-				 userRegService.update(userRegistration);
-				 
-			    redirectAttributes.addFlashAttribute("msg",
-				"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
-			return new ModelAndView(new RedirectView("viewUserRegistration.obj"));
+				}		 
+			return new ModelAndView(new RedirectView("userprivilige.obj"));
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}
@@ -4839,7 +4845,6 @@ public class InsertDataController
              String f_reg_no = farmerRegService.getFarmerNo(id);
              List<FarmerRegModel> details = farmerRegService.findDetails(id);
              FarmerRegModel fullDetails = details.get(0);
-             System.out.println("f_reg_no ------------------------->>>>>>>>>>>>>>> " +f_reg_no);
            final String F_NAME = request.getParameter("F_NAME");
            final String M_NAME = request.getParameter("M_NAME");
            final String L_NAME = request.getParameter("L_NAME");
@@ -4853,7 +4858,7 @@ public class InsertDataController
            if ((M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                lname = L_NAME.replaceAll("\\s", "");
                if(!lname.equalsIgnoreCase(""))
-               farmerName = farmerName + " " + lname;
+               farmerName = farmerName + " "+"NA"+" " + lname;
            }
            else if ((!M_NAME.isEmpty()) && (!L_NAME.isEmpty())) {
                mname = M_NAME.replaceAll("\\s", "");
@@ -4913,7 +4918,7 @@ public class InsertDataController
            farmerRegModel.setF_ID_PROF_TYPE(F_ID_PROF_TYPE);
            farmerRegModel.setBank_ac_type(bank_ac_type);
            farmerRegModel.setF_ID_PROF_NO(F_ID_PROF_NO);
-          
+           farmerRegModel.setF_UPDATE_DATE((new Date()).toString());
            farmerRegModel.setF_I_CARE_REGISTERED(F_I_CARE_REGISTERED);
            farmerRegModel.setLand_holding(land_holding);
            farmerRegModel.setF_MOBILE(F_MOBILE);
@@ -4942,7 +4947,7 @@ public class InsertDataController
            try {
                String url = "";
                if (!F_BANK_DOC.isEmpty()) {
-                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\bankdoc_" + F_BANK_DOC.getOriginalFilename());
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\bankdoc_" +farmerRegModel.getF_REG_NO()+"_"+ F_BANK_DOC.getOriginalFilename());
                    try {
                        final OutputStream os = new FileOutputStream(file);
                        os.write(F_BANK_DOC.getBytes());
@@ -4953,8 +4958,8 @@ public class InsertDataController
                        e.printStackTrace();
                    }
                    pathurl = file.getAbsolutePath();
-                   final String path = url = "bankdoc_" + F_BANK_DOC.getOriginalFilename();
-                   System.out.println("F_BANK_DOC =========    "+F_BANK_DOC);
+                   final String path = url = "bankdoc_" +farmerRegModel.getF_REG_NO()+"_"+ F_BANK_DOC.getOriginalFilename();
+                   System.out.println("F_BANK_DOC =========    "+path);
                    farmerRegModel.setF_BANK_DOC(url);
                }
             
@@ -4962,7 +4967,7 @@ public class InsertDataController
                      farmerRegModel.setF_BANK_DOC(b_doc);
                }
                if (!F_ID_PROF.isEmpty()) {
-                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\idproof_" + F_ID_PROF.getOriginalFilename());
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\idproof_" +farmerRegModel.getF_REG_NO()+"_"+ F_ID_PROF.getOriginalFilename());
                    try {
                        final OutputStream os = new FileOutputStream(file);
                        os.write(F_ID_PROF.getBytes());
@@ -4972,13 +4977,14 @@ public class InsertDataController
                        e.printStackTrace();
                    }
                    pathurl = file.getAbsolutePath();
-                   final String path = url = "idproof_" + F_ID_PROF.getOriginalFilename();
+                   final String path = url = "idproof_" +farmerRegModel.getF_REG_NO()+"_"+ F_ID_PROF.getOriginalFilename();
+                   System.out.println("F_ID_PROF =========    "+path);
                    farmerRegModel.setF_ID_PROF(url);
                }else if(id_proof != null) {
                      farmerRegModel.setF_ID_PROF(id_proof);
                }
                if (!F_REG_FORM.isEmpty()) {
-                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\regform_" + F_REG_FORM.getOriginalFilename());
+                   file = new File("E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\FarmerRegistration\\regform_" +farmerRegModel.getF_REG_NO()+"_"+ F_REG_FORM.getOriginalFilename());
                    try {
                        final OutputStream os = new FileOutputStream(file);
                        os.write(F_REG_FORM.getBytes());
@@ -4989,7 +4995,8 @@ public class InsertDataController
                    }
                    
                    pathurl = file.getAbsolutePath();
-                   final String path = url = "regform_" + F_REG_FORM.getOriginalFilename();
+                   final String path = url = "regform_" +farmerRegModel.getF_REG_NO()+"_"+ F_REG_FORM.getOriginalFilename();
+                   System.out.println("F_REG_FORM =========    "+path);
                    farmerRegModel.setF_REG_FORM(url);
                   
                }
@@ -5038,7 +5045,7 @@ public class InsertDataController
 
         	   String role_type = (String)request.getSession().getAttribute("roletype");
             String region =(String)request.getSession().getAttribute("region"); 
-            System.out.println("region = "+region);
+         //   System.out.println("region = "+region);
             final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllHold(region, role_type);
             mv.addObject("verifyHoldTallySliList", (Object)verifyList);   
            } 
@@ -5048,6 +5055,72 @@ public class InsertDataController
             return mv;
         }
 
+	    
+	    
 
-
+	    @RequestMapping(value = { "findByDpc" })
+	    public ModelAndView findByDistrict(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+	    	String username =(String)request.getSession().getAttribute("usrname");
+	    	ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
+	    	 if(username == null) {
+	         	return new ModelAndView("index");
+	             }
+	        try {
+	            final String dpc = request.getParameter("dpc");
+	            final List<FarmerRegModelDTO> allFarmersList = (List<FarmerRegModelDTO>)this.farmerRegService.findByDpc(dpc);
+	                final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
+	                mv.addObject("zoneList", (Object)zoneList);
+	               mv.addObject("allFarmersList", (Object)allFarmersList);
+	           
+	        }
+	        catch (Exception e) {
+	            System.out.println(e.getLocalizedMessage());
+	        }
+	         
+	        return mv;
+	    }
+	    
+	    
+	    @RequestMapping(value = { "getBalesData" })
+	    public ModelAndView getBalesData(final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+	    	String username =(String)request.getSession().getAttribute("usrname");
+	    	ModelAndView mv = new ModelAndView("viewbalePreparation");
+	    	 if(username == null) {
+	         	return new ModelAndView("index");
+	             }
+	        try {
+	            final String dpc = request.getParameter("dpc");
+	            final String fromdate = request.getParameter("fromdate");
+	            final String todate = request.getParameter("todate");
+	            
+	            List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
+	    		viewBale = (List<BalePreparation>)this.balePrepareService.getbyFilter(dpc,fromdate,  todate);
+	    		final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
+	            mv.addObject("zoneList", (Object)zoneList);
+	            mv.addObject("viewBalePreparation", (Object)viewBale);
+	           
+	        }
+	        catch (Exception e) {
+	            System.out.println(e.getLocalizedMessage());
+	        }
+	         
+	        return mv;
+	    }
+	    @RequestMapping({ "viewmarketArrivalDetails" })
+	    public ModelAndView viewmarketArrivalDetails(final HttpServletRequest request) {
+	    	String username =(String)request.getSession().getAttribute("usrname");
+	        ModelAndView mv = new ModelAndView("DetailsMarketArrival");
+	        if(username == null) {
+	        	mv = new ModelAndView("index");
+	            }
+	        try {
+	        int id = Integer.parseInt(request.getParameter("id"));
+	        final MarketArrivalModel marketArrival = (MarketArrivalModel)this.marketArrivalService.getAlldetails( id);
+	        mv.addObject("marketArrival", (Object)marketArrival);
+	        }
+	        catch(Exception e) {
+	        	e.printStackTrace();
+	        }
+	        return mv;
+	    }
 }

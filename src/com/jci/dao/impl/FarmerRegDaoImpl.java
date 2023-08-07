@@ -105,11 +105,10 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
 		String querystr = "";
 		int is_ho = (int)session1.getAttribute("is_ho");
 		String roletypes = (String) session1.getAttribute("roletype");
-		System.out.println("dpcid = "+dpcid+"region = "+region+"zone= "+zone);
-		System.out.println("roletype = "+roletypes);
+
 		if(roletypes.equalsIgnoreCase("HO")){
 		
-			querystr = "Select top(200) a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
+			querystr = "Select top 200 a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id";
 		}	
 		else if(roletypes.equalsIgnoreCase("ZO"))
 		  { 
@@ -326,9 +325,66 @@ public class FarmerRegDaoImpl implements FarmerRegDao{
           Transaction tx = session.beginTransaction();
           SQLQuery query = session.createSQLQuery(querystr);
           regNo = (String)query.uniqueResult();
-          System.out.println("regNo " + regNo);
+         // System.out.println("regNo " + regNo);
           return regNo;
     }
+
+	@Override
+	public List<FarmerRegModelDTO> findByDpc(String dpc) {
+		List<Integer> result = new ArrayList<>();
+		String querystr = "";
+
+		
+			querystr = "Select  a.*, b.verficationid, b.regno, b.ifsccode, b.accountno, b.farmername, b.address, b.status, b.verificationdate, st.state_name, d.district_name from jcirmt a left Join jcifarmerverification b on a.F_REG_NO = b.regno left join tbl_states st on a.F_STATE = st.id left join tbl_districts d on F_District = d.id where a.dpc_id ='"+dpc+"'";
+					
+	
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(querystr);
+		List<Object[]> rows = query.list();
+		FarmerRegModel farmerReg = new FarmerRegModel();
+		List<FarmerRegModelDTO> ll = new ArrayList<>();
+		for(Object[] row: rows) {
+			int F_ID = (int) row[0];
+			String farmerName = (String) row[1];
+			String address = (String) row[2];
+			String mobile = (String)row[3];
+			String branch = (String)row[4];
+			String accountNumber = (String)row[12];
+			String bankMandateForm = (String)row[13];
+			String BankDoc= (String)row[14];
+			String status = null;
+			String vRegNo = (String)row[38];
+			String vIFSC = (String) row[39];
+			String REGno = (String)row[19];
+			String RegBy = (String)row[6];
+			String state = (String)row[45];
+			String district = (String)row[46];
+			String block = (String)row[26];
+			int isVerified =0;
+			if (row[15] !=null) {
+				isVerified = (int) row[15];
+			}
+			FarmerRegModelDTO farmersDetailsDTO = new FarmerRegModelDTO();
+			farmersDetailsDTO.setF_NAME(farmerName);
+			farmersDetailsDTO.setF_ID(F_ID);
+			farmersDetailsDTO.setAddress(address);
+			farmersDetailsDTO.setF_MOBILE(mobile);
+			farmersDetailsDTO.setF_BANK_BRANCH(branch);
+			farmersDetailsDTO.setF_AC_NO(accountNumber);
+			farmersDetailsDTO.setRegno(REGno);
+			farmersDetailsDTO.setF_REG_BY(RegBy);
+			farmersDetailsDTO.setF_BANK_DOC(BankDoc);
+			farmersDetailsDTO.setIS_VERIFIED(isVerified);
+			farmersDetailsDTO.setF_DOC_Mandate(bankMandateForm);
+			farmersDetailsDTO.setState(state);
+			
+			farmersDetailsDTO.setDistrict(district);
+			farmersDetailsDTO.setBlock(block);
+			ll.add(farmersDetailsDTO);
+		}
+		 return ll;
+	}
 
 	
 	

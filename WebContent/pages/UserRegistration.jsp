@@ -335,9 +335,7 @@ var hasError2 = false;
                     $("#zone, #region, #centerordpc").show();
        
              }
-            console.log("roletype  =  "+ $('#role option:selected').data("id"));
-            console.log("roleid  =  "+$('#role option:selected').val().split("-")[0]);
-            console.log("rolename  =  "+$('#role option:selected').val().split("-")[1]);
+         
              document.getElementById("roletype").value =  $('#role option:selected').data("id");
              document.getElementById("roleid").value =	$('#role option:selected').val().split("-")[0];
              document.getElementById("rolename").value =	$('#role option:selected').val().split("-")[1];
