@@ -8,33 +8,29 @@ import javax.activation.*;
  
 public class SendMail {
 
-	 public void sendEmail(InternetAddress[] toAddresses, String body, String subject, String filename, String username)
+	 public void sendEmail(InternetAddress[] toAddresses, String body, String subject, String filename, String username1)
 	 {
-		 String from = "cyfuturejavateam14@gmail.com";
-		 Properties prop = new Properties();
-		 prop.put("mail.smtp.auth",true);
-		 prop.put("mail.smtp.starttls.enable",true);
-		 prop.put("mail.smtp.port","587");
-		 prop.put("mail.smtp.host","smtp.gmail.com");
-		 prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		 prop.put("mail.smtp.ssl.protocols","TLSv1.2");
-		 String user = "cyfuturejavateam14";
-		 String pass = "myqnupehvjafufaz";
-		 Session session = Session.getInstance(prop, new Authenticator() {
-		 @Override
-		 protected PasswordAuthentication getPasswordAuthentication()
-		 {
-				// TODO Auto-generated method stub
-				return new PasswordAuthentication(user,pass);
-			}
-		});
+
+		 String smtpHost = "smtp.office365.com";
+	        int smtpPort = 587; // Use 587 for TLS or 465 for SSL
+	        String username = "jci.erp.ops@jcimail.in"; // Office 365 email address
+	        String password = "Jute@1234";
+	       // String recipient = "vishal.vishwakarma@cyfuture.com"; // Recipient's email address
+	        
+	        
+	        Properties props = new Properties();
+	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.starttls.enable", "true");
+	        props.put("mail.smtp.host", smtpHost);
+	        props.put("mail.smtp.port", smtpPort);
+	        props.put("mail.smtp.ssl.protocols","TLSv1.2");
+	     
+		   Session session = Session.getInstance(props);
 		 
 		 try {
-			// System.out.println("to = "+to );
 			 Message message = new MimeMessage(session);
-			// InternetAddress[] toAddresses = { new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
 			 message.setRecipients(Message.RecipientType.TO,toAddresses);
-			 message.setFrom(new InternetAddress(from));
+			 message.setFrom(new InternetAddress(username));
 			 message.setSubject(subject);
 			 
 	         BodyPart messageBodyPart = new MimeBodyPart();
@@ -47,10 +43,13 @@ public class SendMail {
 	         
 	         DataSource source = new FileDataSource(filename);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
-	         messageBodyPart.setFileName(username);
+	         messageBodyPart.setFileName(username1);
 	         multipart.addBodyPart(messageBodyPart);
 	         message.setContent(multipart);
-	         Transport.send(message);
+	         Transport transport = session.getTransport("smtp");
+	         transport.connect(smtpHost, smtpPort, username, password);
+	         transport.sendMessage(message, message.getAllRecipients());
+	         transport.close();
 
 	         System.out.println("Sent message successfully....");
 			 
@@ -59,6 +58,7 @@ public class SendMail {
 				 System.out.println("error in sending mail"+e);
 				 e.printStackTrace();
 			 }
+	 
 	 }
 	    
 }

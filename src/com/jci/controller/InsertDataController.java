@@ -4443,11 +4443,12 @@ public class InsertDataController
 	    String path;
 	    @RequestMapping(value = { "update_paymentstatus" }, method = { RequestMethod.GET })
 	    public String updatedpaymentstatus(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
-	    	String a = "";
-	    	try {
+	    	String a = "success";
+	    try {
 	    	String username =(String)request.getSession().getAttribute("usrname");
 	    //	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
-	    	String path1 ="D:\\";
+	    //	String path1 ="/Users/apple/Documents/Bob/";
+	    	String path1 ="Downloads";
 	    	//generating crop year
 	    	String cropyear = "";
 			Calendar cal = new GregorianCalendar();
@@ -4501,9 +4502,9 @@ public class InsertDataController
 	          for(int i=0;i<tally.length;i++)
 	            {
 	        	    tno = tally[i];
-	        	    paymentlist = this.verifyTallySlipService.updatepaymentstatus(tno);
+	        	    paymentlist = this.verifyTallySlipService.getdataforExcelSheet(tno);
 		            tnoemail = tno.replace("\"","");
-		            jciref = paymentlist.getDpc_name()+": "+tnoemail+"-"+paymentlist.getFarmerreg_no();
+		            jciref = paymentlist.getDpc_name()+"-"+tnoemail+"-"+paymentlist.getFarmerreg_no();
 		            tno = "";
 	                PaymentprocesstellyslipModel createpayment = new PaymentprocesstellyslipModel();
 	                createpayment.setAmount(paymentlist.getAmount());
@@ -4539,11 +4540,11 @@ public class InsertDataController
 	                row.createCell(7).setCellValue(jciref); 
 	                row.createCell(8).setCellValue("JCI");  
 	                row.createCell(9).setCellValue(paymentlist.getBeneficiary_bank());  
-	                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");  
+	                DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");  
 	                String purchasedate = paymentlist.getPurchase_date(); 
 	                row.createCell(10).setCellValue(purchasedate);  
 	                row.createCell(11).setCellValue("");
-	                String currentdate = dateFormat.format(paymentlist.getDate());
+	                //String currentdate = dateFormat.format(paymentlist.getDate());
 	                row.createCell(12).setCellValue(""); 
 	                totalamount +=  paymentlist.getAmount();
 	                
@@ -4572,8 +4573,6 @@ public class InsertDataController
 		              //String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
-		              a ="success";
-		              return a;
 		          }
 		          else if(roho.equalsIgnoreCase("HO"))
 		          {
@@ -4585,8 +4584,6 @@ public class InsertDataController
 		             // String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
-		              a ="success";
-		              return a;
 		          }
 		          else if(roho.equalsIgnoreCase("ZMHO"))
 		          {
@@ -4597,11 +4594,15 @@ public class InsertDataController
 		              //String subject = "Invoice Generated";
 		              String body = "PFA This is your payment details . ";
 		              sendMail.sendEmail(toAddresses, body, subject, filename, usrname);
-		              a ="success";
-		              return a;	 
 		          }
 	             
-	    	  }   
+		    	  for(int i=0;i<tally.length;i++)
+		            {
+		        	    String tallyslipno = tally[i];
+		        	    tallyslipno = tallyslipno.replace("\"", "");
+		        	this.verifyTallySlipService.updatestatustoPP(tallyslipno);
+		            }
+	            }
 	            catch (Exception e)   
 		        {  
 		        	System.out.println("email send failed");
@@ -4742,51 +4743,54 @@ public class InsertDataController
            @RequestMapping({ "uploadexcel" })
            public ModelAndView uploadexcel(final HttpServletRequest request, final RedirectAttributes redirectAttributes , @RequestParam("excelsheet") final MultipartFile excelsheet) throws EncryptedDocumentException, InvalidFormatException {
         	  // File file = null;
-        	   
+        	   ModelAndView mv = new ModelAndView("uploadexcelsheet");
         	   try (Workbook workbook = WorkbookFactory.create(excelsheet.getInputStream())){
         		   Sheet sheet = workbook.getSheetAt(0);
         		   int i = 1;
         		   int rowCount = sheet.getLastRowNum();
-        		   FormulaEvaluator formulaEvaluator=workbook.getCreationHelper().createFormulaEvaluator(); 
-        		   
-        		   Row row = sheet.getRow(1);
-    			   Cell cell=row.getCell(7); 
-				   System.out.println(cell.getAddress());
-    			   cell=row.getCell(11); 
-				   System.out.println(cell.getNumericCellValue());   
-    			   cell=row.getCell(12); 
-    			   System.out.println(cell.getDateCellValue());
-        		 
-        		   for(Row rows: sheet)    
-        		   {  
-        		   for(Cell cells: row)     
-						   {  
-						   switch(formulaEvaluator.evaluateInCell(cell).getCellType())  
-						   {  
-						   case Cell.CELL_TYPE_NUMERIC:  
-						   System.out.println(cell.getNumericCellValue());   
-						   break;  
-						   case Cell.CELL_TYPE_STRING:   
-						   System.out.println(cell.getStringCellValue());  
-						   break;  
-						   }  
-						   }  
-						   System.out.println();  
-						   }  
+        		   System.out.println("rowcount"+rowCount);
+        		   FormulaEvaluator formulaEvaluator=workbook.getCreationHelper().createFormulaEvaluator();  
+        		   String[] tally;
+        		   String tallyno ;
+        		   for(i = 1; i < rowCount+1; i++)
+          		 {
+        			   try {
+	          			   Row row = sheet.getRow(i);
+	          			   Cell cell=row.getCell(7); 
+	          			   String jciref = cell.getStringCellValue();
+	          			   cell=row.getCell(11); 
+	          			   Integer utrno1 =(int) cell.getNumericCellValue();
+	          			   String utrno =""+utrno1;
+	          			   cell=row.getCell(12); 
+	          			   Date date = cell.getDateCellValue();
+	          			   DateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	          	           String strdate = outputDateFormat.format(date);
+	                       System.out.println(" jciref = "+ jciref +" utrno = "+ utrno  +" date = "+  strdate);
+	                       verifyTallySlipService.updateexceldata(jciref,utrno,strdate);
+	                       tally = jciref.split("-");
+	                       tallyno = tally[1];
+	                       //System.out.println("tallyno========="+tallyno);
+	                       verifyTallySlipService.updatestatusPD(tallyno);
+
+        			   }
+        			   catch(Exception e)
+        			   {
+        				   System.out.println("error in catch field-________"+e);
+        				   mv.addObject("msg", (Object)"<div class=\"alert alert-danger\"><b>OOps!</b> Date formate should be dd/mm/yyyy and UTR NO should be Number in excel file</div>\r\n");
+        				   return mv;        			   }
+
+          		    }  
+               }
              
-                   
-        	   }
-                   catch (IOException e) {
-                   // Handle file processing errors
+                   catch (IOException e)
+        	   {
                    e.printStackTrace();
                } 
-        	   
-        	   
-        	   ModelAndView mv = new ModelAndView("uploadexcelsheet");
-               return mv;
+			   mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Excel Uploaded successfully.</div>\r\n");
+
+			   return mv;
            
            }
-           
            
     static {
         InsertDataController.count = 0;
@@ -5123,4 +5127,7 @@ public class InsertDataController
 	        }
 	        return mv;
 	    }
+	    
+	    
+	    
 }

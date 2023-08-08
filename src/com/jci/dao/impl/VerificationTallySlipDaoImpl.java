@@ -92,12 +92,12 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 			String querystr = "";
 			if (role_type.equalsIgnoreCase("RO")) {
 				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
-						+ "d.F_NAME,b.slip_image from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
+						+ "d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
 						+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
-						+ " where a.status ='" + status + "' and a.payment_status='0' and b.regionId =" + region;
+						+ " where a.status ='" + status + "' and a.payment_status='0' and a.region_id =" + region;
 			} else if (role_type.equalsIgnoreCase("HO")) {
 				querystr = "select a.tallyid,a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, c.centername, "
-						+ "d.F_NAME,b.slip_image from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
+						+ "d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo left join "
 						+ "jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno"
 						+ " where a.status ='" + status + "' and a.payment_status='0'";
 			}
@@ -122,7 +122,6 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 					verifyTallySlip.setBasis((String) row[7]);
 					verifyTallySlip.setCentername((String) row[8]);
 					verifyTallySlip.setFarmer_name((String) row[9]);
-					verifyTallySlip.setTallySlipImg((String) row[10]);
 					r.add(verifyTallySlip);
 				}
 
@@ -215,21 +214,13 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 	}
 
 	@Override
-	public PaymentprocesstellyslipModel updatepaymentstatusbytally(String tno) {
+	public PaymentprocesstellyslipModel getdataforExcelSheet(String tno) {
 		// TODO Auto-generated method stub
 		tno = tno.replace("\"", "");
 		System.out.println("verification dao tno = " + tno);
 		List<Object[]> list = new ArrayList();
 		PaymentprocesstellyslipModel paymentdetails = new PaymentprocesstellyslipModel();
 		try {
-
-			String hql = "update verificationtallyslip set payment_status = 1, status ='PP' where tallyNo =" + tno;
-			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
-			
-			String rawhql = "update jciprocurement set  status ='PP' where tallyNo =" + tno;
-			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
-
-			// List<PaymentprocesstellyslipModel> paymentdetails = new ArrayList<>();
 
 			String querystr = "select v.puchasedate,v.amountpayable,j.F_BANK_IFSC,j.F_AC_NO,j.bank_ac_type,j.F_NAME,j.F_BANK_BRANCH,j.F_BANK_NAME,"
 					+ " p.centername, v.farmerregno from verificationtallyslip v left join jcirmt j on j.F_REG_NO = v.farmerregno left join "
@@ -240,7 +231,6 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 			Transaction tx = session.beginTransaction();
 			SQLQuery query = session.createSQLQuery(querystr);
 			list = query.list();
-			Date date = new Date();
 			for (Object[] row : list) {
 
 				paymentdetails.setPurchase_date((String) row[0]);
@@ -255,7 +245,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 				paymentdetails.setFarmerreg_no((String) row[9]);
 				paymentdetails.setDebitAC_no("N/A");
 				paymentdetails.setSender("JCI");
-				paymentdetails.setDate(date);
+				//paymentdetails.setDate(date);
 			}
 
 		}
@@ -265,6 +255,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		}
 		return paymentdetails;
 	}
+
 	@Override
 	public void savepaymentdata(PaymentprocesstellyslipModel createpayment) {
 		System.out.println("createpayment = " + createpayment.toString());
@@ -297,8 +288,11 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 
 		String status = "RMZM";
 		try {
+			String hql1 = "update jciprocurement set status = 'RMZM' where status='FA'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
+			
 			String hql = "update verificationtallyslip set status = '" + status + "', fa_approver_email = '" + useremail
-					+ "' where status='FA' and region_id=" + Region_id;
+					+ "' where status='FA'";
 			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 			System.out.println("success");
 		} catch (Exception e) {
@@ -347,7 +341,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		// TODO Auto-generated method stub
 		List<VerifyTallySlip> r = new ArrayList<>();
 		List<Object[]> result = new ArrayList<>();
-		HttpSession session1 = request.getSession(false);
+		//HttpSession session1 = request.getSession(false);
 		String querystr = "select a.tallyNo, a.farmerregno, a.puchasedate, a.netquantity, a.amountpayable, a.facheck_flag, b.basis, "
 				+ "c.centername, d.F_NAME from verificationtallyslip a left join jciprocurement b on b.tallyslipno = a.tallyNo "
 				+ "left join jcipurchasecenter c on c.CENTER_CODE = a.placeOfPurchase left join jcirmt d on d.F_REG_NO = a.farmerregno "
@@ -428,6 +422,37 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 	}
 
 	@Override
+	public void updateexceldata(String jciref, String utrno, String date) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String hql1 = "update jcitallyslippayment set UTR_no = '" + utrno + "', date = '"+date+"' where JCI_Ref ='"+ jciref+"'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
+			
+		
+			
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+
+	@Override
+	public void updatestatusPD(String tallyno) {
+		// TODO Auto-generated method stub
+	try {
+		
+		String hql1 = "update jciprocurement set status = 'PD' where tallyslipno ='"+tallyno+"'";
+		this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
+			
+		String hql2 = "update verificationtallyslip set status = 'PD' where tallyNo ='"+tallyno+"'";
+		this.sessionFactory.getCurrentSession().createSQLQuery(hql2).executeUpdate();		
+		
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+
+	@Override
 	public void setholdstatus(String tno) {
 		// TODO Auto-generated method stub
 		try {
@@ -491,6 +516,19 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		} catch (Exception e) {
 		//	System.out.println(e.getLocalizedMessage());
 			return null;
+		}
+	}
+
+	@Override
+	public void updatestatustoPP(String tallyslipno) {
+		try {
+			String hql = "update verificationtallyslip set payment_status = 1, status ='PP' where tallyNo =" + tallyslipno;
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+			
+			String hql1 = "update jciprocurement set status = 'PP' where tallyslipno =" + tallyslipno;
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
 		}
 	}
 

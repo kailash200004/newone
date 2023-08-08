@@ -1,5 +1,6 @@
 package com.jci.service.Impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,9 +72,9 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	}
 
 	@Override
-	public PaymentprocesstellyslipModel updatepaymentstatus(String tno) {
+	public PaymentprocesstellyslipModel getdataforExcelSheet(String tno) {
 		// TODO Auto-generated method stub
-		 return VerificationTallySlipDao.updatepaymentstatusbytally(tno);
+		 return VerificationTallySlipDao.getdataforExcelSheet(tno);
 	}
 
 	@Override
@@ -119,6 +120,18 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	}
 
 	@Override
+	public void updateexceldata(String jciref, String utrno, String date) {
+		// TODO Auto-generated method stub
+		 VerificationTallySlipDao.updateexceldata(jciref, utrno, date);
+	}
+
+	@Override
+	public void updatestatusPD(String tallyno) {
+		// TODO Auto-generated method stub
+		 VerificationTallySlipDao.updatestatusPD(tallyno);
+	}
+
+	@Override
 	public void setholdstatus(String tno) {
 		// TODO Auto-generated method stub
 		VerificationTallySlipDao.setholdstatus(tno);
@@ -128,6 +141,12 @@ public class VerifyTallySlipServiceImpl implements VerifyTallySlipService {
 	public List<VerifyTallySlip> getAllHold(String region, String role_type) {
 		// TODO Auto-generated method stub
 		return VerificationTallySlipDao.getAllHold(region, role_type);
+	}
+
+	@Override
+	public void updatestatustoPP(String tallyslipno) {
+		// TODO Auto-generated method stub
+		VerificationTallySlipDao.updatestatustoPP(tallyslipno);
 	}
 
 

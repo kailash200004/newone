@@ -130,7 +130,7 @@ body {
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
                     <li data-pre="57" id="o57"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
 					<li data-pre="58" id="o58"><a href="verifiedHoldTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>F & A Hold Tally Slip List</b></a></li>
-					
+					<li  data-pre="" id=""><a href="uploadexcelsheet.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Upload Payment Excel Sheet</b></a></li>
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
