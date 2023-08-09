@@ -223,8 +223,8 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		try {
 
 			String querystr = "select v.puchasedate,v.amountpayable,j.F_BANK_IFSC,j.F_AC_NO,j.bank_ac_type,j.F_NAME,j.F_BANK_BRANCH,j.F_BANK_NAME,"
-					+ " p.centername, v.farmerregno from verificationtallyslip v left join jcirmt j on j.F_REG_NO = v.farmerregno left join "
-					+ "jcipurchasecenter p on p.CENTER_CODE = v.placeOfPurchase where v.tallyNo ="
+					+ " p.centername, v.farmerregno, ro.bankACno from verificationtallyslip v left join jcirmt j on j.F_REG_NO = v.farmerregno left join "
+					+ "jcipurchasecenter p on p.CENTER_CODE = v.placeOfPurchase left join jcirodetails ro on ro.rocode = v.region_id where v.tallyNo ="
 					+ tno;
 
 			Session session = sessionFactory.getCurrentSession();
@@ -243,7 +243,7 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 				paymentdetails.setBeneficiary_bank((String) row[7]);
 				paymentdetails.setDpc_name((String) row[8]);
 				paymentdetails.setFarmerreg_no((String) row[9]);
-				paymentdetails.setDebitAC_no("N/A");
+				paymentdetails.setDebitAC_no((String) row[10]);
 				paymentdetails.setSender("JCI");
 				//paymentdetails.setDate(date);
 			}
