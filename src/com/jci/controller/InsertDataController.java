@@ -4558,7 +4558,7 @@ public class InsertDataController
 		          workbook.write(fileOut); 
 		          fileOut.close();
 		          workbook.close();
-		          String subject = "NEFT Advice Sheet: "+usrname+"-Rs."+totalamount+", "+totalamount+" will denote summation of tally slip amount within the sheet.";
+		          String subject = "NEFT Advice Sheet: "+usrname+"-Rs."+totalamount;
 		          String toEmail = "";
 		          String FA_approver_email = this.verifyTallySlipService.getEmailby_tally(tnoemail);
 		          if(roho.equalsIgnoreCase("RO"))

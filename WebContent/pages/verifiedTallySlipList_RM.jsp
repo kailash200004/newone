@@ -135,7 +135,7 @@
  	 				 
 				}	
        });
-       alert("Invoice Generated,Mail has been sent to your gmail account!!!");
+       alert("Payment Advice sheet Generated, Mail has been sent to your and your AFM Accounts!!!");
        location.reload();
 		
 	}

@@ -102,8 +102,8 @@ color: red;
 								<thead>
 									<tr>
 									     <th>Parametrs</th>
-									    <th>1st Level Entry</th>
-										<th>2nd Level Entry</th>
+									    <th>DPC level Entry</th>
+										<th>DEO level Entry</th>
 										<th>Reason</th>
 										 
 							</tr>
@@ -236,13 +236,13 @@ color: red;
    
                         </table>
                                    <div class="row" style="margin-left: 350px;">
-										<button class="btn btn-default" type="submit" id="approve" value = <%=raw.getTallyslipno() %> style="margin-left: 15px; width: 150px;
+										<button class="btn btn-default" type="submit" id="approve" value = <%=raw.getTallyslipno() %> style="margin-left: 15px; width: 256px;
                                         background: mediumseagreen;
-                                        color: white;">Approve</button>
+                                        color: white;">Process for Financial Concurrence</button>
                                         
-                                        <button class="btn btn-default" type="submit" id="decline" value = <%=raw.getTallyslipno() %> style="margin-left: 15px;  width: 150px;
+                                        <button class="btn btn-default" type="submit" id="decline" value = <%=raw.getTallyslipno() %> style="margin-left: 15px;  width: 221px;
                                         background: red;
-                                        color: white;">Decline</button>
+                                        color: white;">Refer to DPCM for correction</button>
 									</div>
                         </div>
                     <!-- </div>
