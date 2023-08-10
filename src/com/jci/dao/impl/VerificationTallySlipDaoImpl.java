@@ -197,8 +197,16 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		Session session = sessionFactory.getCurrentSession();
 		boolean returnStatus = false;
 		try {
-			Query q = session.createQuery("update VerifyTallySlip set status ='" + statuss + "', is_varified ="
-					+ verified + " where tallyNo='" + tallyno + "'");
+			Query q = null;
+			if(statuss.equals("DPCW"))
+			{
+				q = session.createQuery("delete VerifyTallySlip where tallyNo='"+ tallyno +"'");
+			}
+			else if(statuss.equals("FA"))
+			{
+			    q = session.createQuery("update VerifyTallySlip set status ='"+statuss+"', is_varified ="+verified+" where tallyNo='"+tallyno+"'");
+			}
+			
 			int status = q.executeUpdate();
 			if (status >= 1) {
 				returnStatus = true;

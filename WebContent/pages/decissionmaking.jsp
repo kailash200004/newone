@@ -296,17 +296,16 @@ color: red;
 $(document).ready(function(){
 	 $("#approve").click(function(){
 		 var tally = $("#approve").val();
-		 alert(tally);
 		 $.ajax({
 				type:"GET",
 				url:"rmapproval.obj",
 				data:jQuery.param({"tallyno":tally ,"status" :"FA", "verified":1}),
 				success:function(result){
-					alert(result);
 					if(result=="true")
 						{
 						alert("Succesfully Updated");
-						window.history.back();
+						location.reload();
+						//window.history.back();
 					//	window.location.href = "disputedtallyslip.obj";
 						}
 					else
@@ -330,17 +329,16 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("#decline").click(function(){
 		 var tally = $("#decline").val();
-		 alert(tally);
 		 $.ajax({
 				type:"GET",
 				url:"rmapproval.obj",
-				data:jQuery.param({"tallyno":tally ,"status" :"DPCC", "verified":0}),
+				data:jQuery.param({"tallyno":tally ,"status" :"DPCW", "verified":0}),
 				success:function(result){
-					alert(result);
 					if(result=="true")
 						{
 						alert("Succesfully Updated");
-						window.history.back();
+						location.reload();
+						//window.history.back();
 					//	window.location.href = "disputedtallyslip.obj";
 						}
 					else

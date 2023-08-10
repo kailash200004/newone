@@ -36,4 +36,5 @@ public interface RawJuteProcurementAndPaymentService {
 	boolean updateStatus(String tally);
 	//Search tally by animesh
 	public JSONArray searchTally(String tallyno);
+	public boolean updateStatusDPCW(String tally);
 }

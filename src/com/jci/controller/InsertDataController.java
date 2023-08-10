@@ -4021,6 +4021,7 @@ public class InsertDataController
         final String status = request.getParameter("status");
         final int is_verified = Integer.parseInt(request.getParameter("verified"));
         final boolean raw = this.rawJuteProcurAndPayService.updateProcurement(status, is_verified, tally);
+        
         final boolean ver = this.verifyTallySlipService.updatebyTally(status, is_verified, tally);
         if (raw && ver) {
             return "true";
@@ -4066,6 +4067,23 @@ public class InsertDataController
     	ModelAndView mv = new ModelAndView("tallyListRMA");
     	String tally = request.getParameter("tally");
     	boolean status = rawJuteProcurAndPayService.updateStatus(tally);
+    	String roletype = (String) request.getSession().getAttribute("roletype");
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",request);
+        mv.addObject("juteList", (Object)juteList);
+        mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
+        return mv;
+    }
+    
+    //rejectTallyslip list (vishal)
+    @RequestMapping({ "rejectTallyslip" })
+    public ModelAndView rejectTallyslip(final HttpServletRequest request) {
+    	String username =(String)request.getSession().getAttribute("usrname");
+    	if(username == null) {
+        	return new ModelAndView("index");
+            }
+    	ModelAndView mv = new ModelAndView("tallyListRMA");
+    	String tally = request.getParameter("tally");
+    	boolean status = rawJuteProcurAndPayService.updateStatusDPCW(tally);
     	String roletype = (String) request.getSession().getAttribute("roletype");
         final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",request);
         mv.addObject("juteList", (Object)juteList);

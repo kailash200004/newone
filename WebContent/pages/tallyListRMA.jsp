@@ -102,7 +102,7 @@
 										<th>Garsat Rate</th>  -->										
 									    <th>Amount Payable</th> 
 										<th>Action</th>
-										
+										<th>Action</th>
 							</tr>
 								</thead>
 								<tbody>
@@ -129,7 +129,7 @@
 										<td><%=verificationlists.getGrasatrate()%></td> --%>
 						                <td><%=verificationlists.getAmountpayable()%></td> 
 						               <td><a href="approvalTallyslip.obj?tally=<%=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i  aria-hidden="true" style="font-size: 15px;"></i>Approve</a></td> 
-
+						               <td><a href="rejectTallyslip.obj?tally=<%=verificationlists.getTallyslipno()%>" class="btn btn-danger btn-sm btn-block">  <i  aria-hidden="true" style="font-size: 15px;"></i>Reject</a></td> 
 									</tr>
 									<% 
 								  }  

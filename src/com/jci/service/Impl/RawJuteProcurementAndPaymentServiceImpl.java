@@ -144,6 +144,12 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 		return rawJuteProcurementAndPaymentDao.searchTally(tallyno);
 	}
 
+	@Override
+	public boolean updateStatusDPCW(String tally) {
+		// TODO Auto-generated method stub
+		return rawJuteProcurementAndPaymentDao.updateStatusDPCW(tally);
+	}
+
 
 
 
