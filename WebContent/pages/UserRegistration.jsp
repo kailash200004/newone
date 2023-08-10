@@ -111,7 +111,7 @@ var hasError2 = false;
 										</div>
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Password</label>  &nbsp;&nbsp;&nbsp; <span id="errPass" name="errPass" class="text-danger"> </span>
-											<input id="password" type="password" class="form-control" name="password" value="" placeholde="Password" >
+											<input id="password" type="password" class="form-control" name="password" value="" placeholde="Password" onblur = "return matchpassword()">
 											 <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 										</div>
 										<!-- <div class="col-sm-4 form-group"> 
@@ -245,6 +245,16 @@ var hasError2 = false;
 						</div>
 					</div>
 				</div>
+				 <div>
+                                   <ul>
+                                  <li>  Length must be greater than or equal to <b>8</b> </li>
+  					   		 	  <li> 	Must contain one or more <b>Uppercase</b> characters </li>
+								  <li> 	Must contain one or more <b>Lowercase</b> characters </li>
+								  <li> 	Must contain one or more <b>Numeric</b> values </li>
+								  <li> 	Must contain one or more <b>Special</b> characters </li>
+								     </ul>                                
+                                    </div>
+				
 			</div>
 			<!-- END PAGE CONTENT-->
 			<%@ include file="footer.jsp"%>
@@ -269,6 +279,26 @@ var hasError2 = false;
 		});
 	});
 	</script> -->
+	<script>
+	 function matchpassword(){
+            	
+            	var password = $("#password").val();
+            	
+            	var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/; 
+            	if( regex.test(password)) { 	
+            		 $("#errPass").hide();
+            		 $(':input[type="submit"]').prop('disabled', false);
+            return true;
+            	 } 
+            	else {  
+            		  document.getElementById("errPass").innerHTML = "Password didn't match with criteria!"
+            		 $("#errPass").show();
+            		 $(':input[type="submit"]').prop('disabled', true);
+            		return false;
+            		
+            	}      	
+	 }	
+            	</script>
 	
 	       <script>
        $("#usertype").on("change", function(){

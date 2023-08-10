@@ -288,11 +288,11 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 
 		String status = "RMZM";
 		try {
-			String hql1 = "update jciprocurement set status = 'RMZM' where status='FA'";
+			String hql1 = "update jciprocurement set status = 'RMZM' where status='FA' and regionId ="+Region_id;
 			this.sessionFactory.getCurrentSession().createSQLQuery(hql1).executeUpdate();
 			
 			String hql = "update verificationtallyslip set status = '" + status + "', fa_approver_email = '" + useremail
-					+ "' where status='FA'";
+					+ "' where status='FA' and region_id ="+Region_id;
 			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 			System.out.println("success");
 		} catch (Exception e) {

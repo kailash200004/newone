@@ -60,7 +60,7 @@ public class FarmerRegModel {
 	private String district_name;
 
 	@Column(name="F_UPDATE_DATE")
-	private String F_UPDATE_DATE;
+	private Date F_UPDATE_DATE;
 
 	@Column(name="F_I_CARE_REGISTERED")
 	private String F_I_CARE_REGISTERED;
@@ -128,12 +128,12 @@ public class FarmerRegModel {
 		IS_VERIFIED = iS_VERIFIED;
 	}
 
-	public String getF_UPDATE_DATE() {
+	public Date getF_UPDATE_DATE() {
 		return F_UPDATE_DATE;
 	}
 
-	public void setF_UPDATE_DATE(String f_UPDATE_DATE) {
-		F_UPDATE_DATE = f_UPDATE_DATE;
+	public void setF_UPDATE_DATE(Date date) {
+		F_UPDATE_DATE = date;
 	}
 
 
@@ -458,7 +458,7 @@ public class FarmerRegModel {
 	
 	public FarmerRegModel(int f_ID, String f_NAME, String caste, String gender, String f_ADDRESS, String f_ID_PROF_TYPE,
 			String f_Block, String f_ID_PROF, String f_ID_PROF_NO, String f_REG_BY, String f_STATE, String state_name,
-			String f_District, String district_name, String f_UPDATE_DATE, String f_I_CARE_REGISTERED,
+			String f_District, String district_name, Date f_UPDATE_DATE, String f_I_CARE_REGISTERED,
 			String land_holding, String f_MOBILE, String f_AC_NO, String bank_ac_type, String f_BANK_NAME,
 			String f_BANK_BRANCH, String f_BANK_IFSC, String f_BANK_DOC, String f_REG_FORM, String f_DOC_PATH,
 			String f_REG_NO, String f_DOC_Mandate, Date f_VERFIED_DATE, String f_Address2, String f_Pincode,

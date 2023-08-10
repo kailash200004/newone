@@ -4280,40 +4280,31 @@ public class InsertDataController
 			boolean flag = true;
 			int refid = (int) request.getSession().getAttribute("userId");
 			UserRegistrationModel userRegistration = userRegService.find(refid);
-			
-			 System.out.println("in method");
+			String view = "";
 				String  mobileno=  request.getParameter("mobile");
 				String password =  request.getParameter("password");
 				String newpassword =  request.getParameter("newpassword");
 				String renewpassword =  request.getParameter("repassword");
-				System.out.println("refid  "+ refid);
-				System.out.println("mobile  "+ mobileno);
-				System.out.println("password  "+ password);
-				System.out.println("newpassword  "+ newpassword);
-				System.out.println("repassword  "+ renewpassword);
 				userRegistration.setRefid(refid);
 				userRegistration.setMobileno(mobileno);
-				 System.out.println("in continued");
 				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) 
 				{
-					System.out.println(" in if");
 					userRegistration.setPassword(renewpassword);
 					userRegistration.setDatelastchangepassword(new Date());
 					userRegistration.setUpdatedat(new Date());
-
+					 view = "login.obj";
 					 userRegService.update(userRegistration);
-					 System.out.println(" if updated");
 					   redirectAttributes.addFlashAttribute("msg",
 								"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
 				}
 				
 				else
 				{
-					 System.out.println("in else");
+					view = "editprofile.obj";
 				    redirectAttributes.addFlashAttribute("msg",
 							"<div class=\"alert alert-danger\"><b>Failed !</b>Failed to change password.</div>\r\n" + "");
 				}		 
-			return new ModelAndView(new RedirectView("userprivilige.obj"));
+				return new ModelAndView(new RedirectView(view));
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}
@@ -4446,9 +4437,9 @@ public class InsertDataController
 	    	String a = "success";
 	    try {
 	    	String username =(String)request.getSession().getAttribute("usrname");
-	    	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
+	    //	String path1 ="E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlipPayments\\";
 	    //	String path1 ="/Users/apple/Documents/Bob/";
-	   // 	String path1 ="Downloads";
+	    	String path1 ="Downloads";
 	    	//generating crop year
 	    	String cropyear = "";
 			Calendar cal = new GregorianCalendar();
@@ -4922,7 +4913,7 @@ public class InsertDataController
            farmerRegModel.setF_ID_PROF_TYPE(F_ID_PROF_TYPE);
            farmerRegModel.setBank_ac_type(bank_ac_type);
            farmerRegModel.setF_ID_PROF_NO(F_ID_PROF_NO);
-           farmerRegModel.setF_UPDATE_DATE((new Date()).toString());
+           farmerRegModel.setF_UPDATE_DATE(new Date());
            farmerRegModel.setF_I_CARE_REGISTERED(F_I_CARE_REGISTERED);
            farmerRegModel.setLand_holding(land_holding);
            farmerRegModel.setF_MOBILE(F_MOBILE);

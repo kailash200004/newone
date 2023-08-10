@@ -47,6 +47,16 @@
 				
 				<%
 					UserRegistrationModel userProfile = (UserRegistrationModel)request.getAttribute("profile");
+				String roname = userProfile.getRoname();
+				String zone = userProfile.getZonename();
+				String dpc = userProfile.getCentername();
+					if(roname == null)
+						roname = "NA";
+					if(zone == null)
+						zone = "NA";
+					if(dpc == null)
+						dpc = "NA";
+
 					
 				%>
 			            <div class="page-content fade-in-up">
@@ -88,11 +98,11 @@
                                         </div>
                                        <div class="col-sm-4 form-group">
 											<label>Zone Name</label>
-                                        	<input class="form-control"  name="zone" id="zone" placeholder="Rope balance" value = "<%=userProfile.getZonename()%>" readonly>
+                                        	<input class="form-control"  name="zone" id="zone" placeholder="Rope balance" value = "<%=zone%>" readonly>
 										</div>
 													<div class="col-sm-4 form-group">
 											<label>Region Name</label>
-                                        	<input class="form-control" name="region" id="region" placeholder="Zone Name" value="<%=userProfile.getRoname()%>" readonly>
+                                        	<input class="form-control" name="region" id="region" placeholder="Zone Name" value="<%=roname%>" readonly>
 										</div>
                                     
 										</div>
@@ -100,7 +110,7 @@
 							
 										 <div class="col-sm-4 form-group">
 											<label>Center Name</label>
-                                        	<input class="form-control"  name="centerordpc" id="centerordpc" placeholder="Rope made"  value="<%=userProfile.getCentername()%>" readonly>
+                                        	<input class="form-control"  name="centerordpc" id="centerordpc" placeholder="Rope made"  value="<%=dpc%>" readonly>
 										</div>
 											<div class="col-sm-4 form-group">
 											<label>Mobile Number</label>

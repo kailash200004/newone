@@ -22,6 +22,9 @@ public class LoginController {
 
 	@RequestMapping("index")
 	public ModelAndView login(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.invalidate();
+
 		ModelAndView mv = new ModelAndView("index");
 	
 		return mv;
@@ -29,6 +32,9 @@ public class LoginController {
 
 	@RequestMapping("login")
 	public ModelAndView loginDetails(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.invalidate();
+
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
