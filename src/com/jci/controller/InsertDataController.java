@@ -2139,7 +2139,7 @@ public class InsertDataController
                     e.printStackTrace();
                 }
                 pathurl = file.getAbsolutePath();
-                final String path = url = farmerRegModel.getF_REG_NO()+"mandate_" +farmerRegModel.getF_REG_NO()+"_"+ F_DOC_Mandate.getOriginalFilename();
+                final String path = url = "mandate_" +farmerRegModel.getF_REG_NO()+"_"+ F_DOC_Mandate.getOriginalFilename();
                 farmerRegModel.setIS_VERIFIED(0);
                 farmerRegModel.setF_DOC_Mandate(url);
             }
