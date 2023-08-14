@@ -150,6 +150,13 @@ public class RawJuteProcurementAndPaymentServiceImpl implements RawJuteProcureme
 		return rawJuteProcurementAndPaymentDao.updateStatusDPCW(tally);
 	}
 
+	@Override
+	public List<RawJuteProcurementAndPayment> delayedenteredtallylist(String status1, String status2,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return rawJuteProcurementAndPaymentDao.delayedenteredtallylist(status1,status2, request);
+	}
+
 
 
 

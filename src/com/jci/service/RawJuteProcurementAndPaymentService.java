@@ -37,4 +37,5 @@ public interface RawJuteProcurementAndPaymentService {
 	//Search tally by animesh
 	public JSONArray searchTally(String tallyno);
 	public boolean updateStatusDPCW(String tally);
+	public List<RawJuteProcurementAndPayment> delayedenteredtallylist(String string, String string2,HttpServletRequest request);
 }
