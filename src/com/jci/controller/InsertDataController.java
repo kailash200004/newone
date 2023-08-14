@@ -4044,6 +4044,7 @@ public class InsertDataController
         return mv;
     }
     
+    //(vishal)
     @RequestMapping({ "tallyListRMA" })
     public ModelAndView tallyListRMA(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
@@ -4052,12 +4053,13 @@ public class InsertDataController
             }
     	ModelAndView mv = new ModelAndView("tallyListRMA");
     	String roletype = (String) request.getSession().getAttribute("roletype");
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",request);
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.delayedenteredtallylist("RMA","DPC",request);
         mv.addObject("juteList", (Object)juteList);
         
         return mv;
     }
     
+    //(vishal)
     @RequestMapping({ "approvalTallyslip" })
     public ModelAndView approvalTallyslip(final HttpServletRequest request) {
     	String username =(String)request.getSession().getAttribute("usrname");
@@ -4068,7 +4070,7 @@ public class InsertDataController
     	String tally = request.getParameter("tally");
     	boolean status = rawJuteProcurAndPayService.updateStatus(tally);
     	String roletype = (String) request.getSession().getAttribute("roletype");
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",request);
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.delayedenteredtallylist("RMA","DPC",request);
         mv.addObject("juteList", (Object)juteList);
         mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
         return mv;
@@ -4085,7 +4087,7 @@ public class InsertDataController
     	String tally = request.getParameter("tally");
     	boolean status = rawJuteProcurAndPayService.updateStatusDPCW(tally);
     	String roletype = (String) request.getSession().getAttribute("roletype");
-        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("RMA",request);
+        final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.delayedenteredtallylist("RMA","DPC",request);
         mv.addObject("juteList", (Object)juteList);
         mv.addObject("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
         return mv;
