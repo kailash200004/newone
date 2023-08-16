@@ -1,4 +1,4 @@
-package com.jci.dao.impl;
+package com.jci.dao.impl_phase2;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jci.dao.PcsoentryDao;
+import com.jci.dao_phase2.PcsoentryDao;
 import com.jci.model.EntryofpcsoModel;
 import com.jci.model.PcsoDateModel;
 

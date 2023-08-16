@@ -1,4 +1,4 @@
-package com.jci.service;
+package com.jci.service_phase2;
 
 import java.util.Date;
 import java.util.List;
