@@ -40,7 +40,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Change password / Mobile No.</h1>
+                <h1 class="page-title">Change password</h1>
                  
             </div>
 				
@@ -60,10 +60,10 @@
                      
                                             
 										
-												<div class="col-sm-4 form-group">
+											<%-- 	<div class="col-sm-4 form-group">
 											<label>Mobile Number</label><span id="errMob" name="errMob" class="text-danger"> </span>
-                                        	<input type ="number" class="form-control"  id="mobile" name="mobile" placeholder="Mobile Number" value = "<%=userProfile.getMobileno()%>" >
-										</div>
+                                        	<input type ="number" class="form-control"  id="mobile" name="mobile" placeholder="Mobile Number" value = "<%=userProfile.getMobileno()%>" readonly >
+										</div> --%>
 										 
                                   
                                    <div class="col-sm-4 form-group">

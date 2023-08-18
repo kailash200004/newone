@@ -233,7 +233,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
 		List<Integer> userList = query.list();
-		System.out.println(userList);
+	//	System.out.println(userList);
 		int roleId = userList.get(0);
 		return roleId;
 

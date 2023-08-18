@@ -75,6 +75,12 @@ public class PurchaseCenterServiceImpl implements PurchaseCenterService {
 		return purchaseCenterDao.getAllDpc();
 	}
 
+	@Override
+	public String findDpcname(String dpccode) {
+		// TODO Auto-generated method stub
+		return purchaseCenterDao.findDpcname(dpccode);
+	}
+
 //	@Override
 //	public List<PurchaseCenterModel> getCenterCodeByCode(int rocode) {
 //		purchaseCenterDao.

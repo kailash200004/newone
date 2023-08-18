@@ -134,11 +134,38 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									
 									int i = 1;
 									for(FarmerRegModelDTO farmerRegModelList : allFarmersList){
+										String firstname = "";
+										String middlename = "";
+										String lastname = "";
+										String fname = "";
+										String[] farmerName = new  String[3];
+										farmerName = farmerRegModelList.getF_NAME().split(" ");
+										if(farmerName.length == 1){
+										firstname = farmerRegModelList.getF_NAME().split(" ")[0];
+										fname = firstname;
+										}
+										else if(farmerName.length == 2){
+										 firstname = farmerRegModelList.getF_NAME().split(" ")[0];
+										 middlename = farmerRegModelList.getF_NAME().split(" ")[1];
+										 if(middlename.equalsIgnoreCase("NA"))
+											 middlename = "";
+										 fname = firstname +" "+middlename;
+										}
+										else if(farmerName.length == 3){
+											firstname = farmerRegModelList.getF_NAME().split(" ")[0];
+											middlename = farmerRegModelList.getF_NAME().split(" ")[1];
+											if (middlename.equalsIgnoreCase("NA"))
+												middlename = "";
+											lastname = farmerRegModelList.getF_NAME().split(" ")[2];
+											 if(middlename.equalsIgnoreCase("NA"))
+												 middlename = "";
+											 fname = firstname +" "+middlename+" "+lastname;
+											}
 								%>
 									<tr role="row" class="odd">
 									<td class="sorting_1"><%=i%></td>
 									<td><a href = "viewFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>" ><u><%=farmerRegModelList.getRegno() %></u></a></td>
-									<td><%=farmerRegModelList.getF_NAME() %></td> 
+									<td><%=fname %></td> 
 									<td><%=farmerRegModelList.getF_MOBILE() %></td>
 									<td><%=farmerRegModelList.getState() %></td>
 									<td><%=farmerRegModelList.getDistrict() %></td>

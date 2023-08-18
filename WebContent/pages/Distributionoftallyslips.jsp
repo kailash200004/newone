@@ -96,13 +96,15 @@
                                         
 										 <div class="col-sm-4 form-group">
                                              <label>Series Start from </label> <span class="text-danger">* </span>&nbsp; <span id="errseriesstartfrom" name="errseriesstartfrom"
+												class="text-danger"> </span><span id="errseriesstartfrom2" name="errseriesstartfrom2"
 												class="text-danger"> </span>
-                                        	 <input class="form-control" name="seriesstartfrom" id="seriesstartfrom" type="number" placeholder="Series Start from " required min="0" onkeyup ="slipNo();" >
+                                        	 <input class="form-control" name="seriesstartfrom" id="seriesstartfrom" type="number" placeholder="Series Start from " required min="0" onblur ="slipNo();" >
                                         </div>
                                          <div class="col-sm-4 form-group">
                                             <label>Series to End</label>  <span class="text-danger">* </span>&nbsp; <span id="errseriestoend" name="errseriestoend"
+												class="text-danger"> </span><span id="errseriestoend2" name="errseriestoend2"
 												class="text-danger"> </span>
-											<input class="form-control" name="seriestoend" id="seriestoend" type="number" placeholder="Series to End" required min="0" onkeyup ="slipNo();">
+											<input class="form-control" name="seriestoend" id="seriestoend" type="number" placeholder="Series to End" required min="0" onblur ="slipNo();">
                                         </div>
                                     </div>
                                     
@@ -111,7 +113,7 @@
                                     <div class="col-sm-4 form-group">
 											<label>No. of slip received</label>  <span class="text-danger">* </span>&nbsp; <span id="errslipreceived" name="errslipreceived" class="text-danger"> </span>
 											<span id="errslipreceived2" name="errslipreceived2" class="text-danger"> </span>
-											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onkeyup ="slipNo();" >
+											<input class="form-control" type="number" name="slipreceived" id="slipreceived" placeholder="No. of slip received" required min="0" onblur ="slipNo();" >
 										</div>
                                        
                                        
@@ -211,9 +213,26 @@ function slipNo(){
 	var slipreceived = document.getElementById("slipreceived").value;
 	var slipfrom = document.getElementById("seriesstartfrom").value;
 	var slipto = document.getElementById("seriestoend").value;
-	
-	var result = slipto - slipfrom;
-	 document.getElementById("slipreceived").value = result;
+if(slipfrom <0){
+	document.getElementById("errseriesstartfrom2").innerHTML = "Number can't be negative !";
+	$("#errseriesstartfrom2").show();
+	document.getElementById("slipreceived").value = 0;
+	$('#submit'). prop('disabled', true)
+}
+else{
+	$("#errseriesstartfrom2").hide();
+}
+if(slipto <0){
+	document.getElementById("errseriestoend2").innerHTML = "Number can't be negative !";
+	$("#errseriestoend2").show();
+	document.getElementById("slipreceived").value = 0;
+	$('#submit'). prop('disabled', true)
+}
+else{
+	$("#errseriestoend2").hide();
+}
+var result = slipto - slipfrom;
+document.getElementById("slipreceived").value = result;
 	if((result % 100) != 0){
 		
 		document.getElementById("errslipreceived").innerHTML = "No. of Slip Received should be in multiple of 100 !";
@@ -237,7 +256,9 @@ function slipNo(){
 		
 
 	}
-	
+if((slipfrom <0) ||(slipto <0) || result < 0){
+	$('#submit'). prop('disabled', true)
+}
 }
 
 
