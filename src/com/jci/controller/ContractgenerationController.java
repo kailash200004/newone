@@ -28,7 +28,6 @@ import com.jci.model.UpdatedContractQtyDTO;
 import com.jci.service.ContractgenerationMillWiseService;
 import com.jci.service.ContractgenerationService;
 import com.jci.service.PCSOServices;
-import com.jci.service.PcsoentryService;
 
 @Controller
 public class ContractgenerationController {
@@ -41,21 +40,8 @@ public class ContractgenerationController {
 	
 	@Autowired
 	PCSOServices pcsoService;
-	
-	@Autowired
-	PcsoentryService pcsoentryservice;
 
-	@RequestMapping("contractgenerationPCSOWise")
-	public ModelAndView contractgeneration(HttpServletRequest req) {
-		  String username =(String)req.getSession().getAttribute("usrname");
-		ModelAndView mv = new ModelAndView("contractgeneration");
-		List<Date> pcso= pcsoentryservice.getAll(); 
-		mv.addObject("pcso", (Object)pcso);
-		 if(username == null) {
-         	mv = new ModelAndView("index");
-             }
-		return mv;
-	}
+	
 	
 	/*
 	 * @RequestMapping("savecontractgenerationPcsoWise") public ModelAndView
@@ -359,27 +345,10 @@ public class ContractgenerationController {
 	 * + ""); } catch (Exception e) { System.out.println(e); } return new
 	 * ModelAndView(new RedirectView("editcontractgeneration.obj")); }
 	 */
-	 @ResponseBody
-	 @RequestMapping(value = "pcsoDates" , method =  RequestMethod.GET )
-     public List<Date> pcsoDates(final HttpServletRequest request){
-		 List<Date> pcso= pcsoentryservice.getAll(); 
-		 return pcso;
-	 }
+	
 	 
 	
-	 @ResponseBody
-	 @RequestMapping(value = "pcso_details" , method =  RequestMethod.GET )
-     public String pcso_details(final HttpServletRequest request){
-		  
-		 String outerArray = request.getParameter("pcso1");
-		 outerArray = outerArray.replaceAll("/", "'").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\"", "'");
-		final String[] bpArr = outerArray.split(",");
-			final List<String> list = Arrays.asList(bpArr);
-		 List<PcsoDateModel> pcso= pcsoentryservice.pcso_details(outerArray);
-		Gson gson= new Gson();
-		 return gson.toJson(pcso);
-	 }
-	 
+	
 	 @ResponseBody
 	 @RequestMapping(value = "derivativePrice" , method =  RequestMethod.GET )
      public String derivativePrice(final HttpServletRequest request){

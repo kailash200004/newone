@@ -23,10 +23,10 @@ public class EntryofpcsoModel {
 	private String reference_no;
 	
 	@Column(name = "reference_date")
-	private Date reference_date;
+	private String reference_date;
 	
 	@Column(name = "pcso_date")
-	private Date pcso_date;
+	private String pcso_date;
 	
 	@Column(name = "mill_code")
 	private String mill_code;
@@ -74,19 +74,19 @@ public class EntryofpcsoModel {
 		this.reference_no = reference_no;
 	}
 
-	public Date getReference_date() {
+	public String getReference_date() {
 		return reference_date;
 	}
 
-	public void setReference_date(Date reference_date) {
+	public void setReference_date(String reference_date) {
 		this.reference_date = reference_date;
 	}
 
-	public Date getPcso_date() {
+	public String getPcso_date() {
 		return pcso_date;
 	}
 
-	public void setPcso_date(Date pcso_date) {
+	public void setPcso_date(String pcso_date) {
 		this.pcso_date = pcso_date;
 	}
 
@@ -152,7 +152,7 @@ public class EntryofpcsoModel {
 
 	
 	
-	public EntryofpcsoModel(int pcsorefid, String reference_no, Date reference_date, Date pcso_date, String mill_code,
+	public EntryofpcsoModel(int pcsorefid, String reference_no, String reference_date, String pcso_date, String mill_code,
 			String mill_name, String total_allocation, String created_date, int millwise_contract,
 			int pcsowise_contract, double sumof_totalallocation) {
 		super();

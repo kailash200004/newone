@@ -70,10 +70,6 @@
 							for(EntryofpcsoModel entryofpcsolist : allentryofpcsolist){
 								 if(a<=b)
                                  {
-									 Date date = new Date();  
-									 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");  
-									 String referencedate = (String)request.getAttribute("referencedate");
-									 String pcsodate = (String)request.getAttribute("pcsodate");
 							%>
                                     <div class="row">
                                         <div class="col-sm-4 form-group">
@@ -83,12 +79,12 @@
                                         
                                          <div class="col-sm-4 form-group">
 											<label>Reference Date</label> 
-											<input class="form-control" name="refdate" type="text" value="<%=referencedate%>" readonly name="referencedate">
+											<input class="form-control" name="refdate" type="text" value="<%=entryofpcsolist.getReference_date()%>" readonly name="referencedate">
 										</div>
 										
 										 <div class="col-sm-4 form-group">
 											<label>PCSO Date</label> 
-											<input class="form-control" name="pcsodate" type="text" name="pcsodate" value="<%=pcsodate%>" readonly>
+											<input class="form-control" name="pcsodate" type="text" name="pcsodate" value="<%=entryofpcsolist.getPcso_date()%>" readonly>
 										</div>
 										 </div><br>
                                         <div class="row">

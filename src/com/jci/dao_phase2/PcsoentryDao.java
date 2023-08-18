@@ -1,4 +1,4 @@
-package com.jci.dao;
+package com.jci.dao_phase2;
 
 import java.util.Date;
 import java.util.List;

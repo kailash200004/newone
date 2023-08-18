@@ -68,14 +68,18 @@
                                             <input class="form-control" type="text" name="referenceno" placeholder="Reference.No." required>
                                         </div>
                                         
-                                         <div class="col-sm-4 form-group">
+										
+										
+										 <div class="col-sm-4 form-group">
 											<label>Reference Date</label> 
-											<input class="form-control" type="date" name="referencedate" placeholder="Reference Date" required>
+											<input class="form-control" name="referencedate" id="referencedate"  placeholder="dd-mm-yyyy" readonly required>
 										</div>
+										
+										
 										
 										 <div class="col-sm-4 form-group">
 											<label>PCSO Date</label> 
-											<input class="form-control" type="date" name="pcsodate" placeholder="PCSO Date" required>
+											<input class="form-control" name="pcsodate" id="pcsodate"  placeholder="dd-mm-yyyy" readonly required>
 										</div>
 										 </div><br>
                                         <div class="row">
@@ -135,18 +139,56 @@
     <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL PLUGINS-->
     <!-- CORE SCRIPTS-->
-    <script src="assets/js/app.min.js" type="text/javascript"></script>
+     <script src="assets/js/app.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ <script>
+	$( "#referencedate" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+	$( "#pcsodate" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+</script>
+   
     
       	<script type="text/javascript">
 	$(document).ready(function(){
 		 $("#submit").click(function(){
-			
+			 var referencedate = document.getElementById("referencedate").value;
+			 var pcsodate = document.getElementById("pcsodate").value;
+
+			 if(referencedate == "")
+				 {
+				 alert("Please Select Reference Date!!!");
+				 return false;
+				 }
+			 if(pcsodate == "")
+			 {
+			 alert("Please Select pcsodate Date!!!");
+			 return false;
+			 }
 		 });
 	 });
 	
 	</script>
 			
-		 }
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script src="./assets/vendors/jquery/dist/jquery.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+		type="text/javascript"></script>
+	<script
+		src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+		type="text/javascript"></script>
+	<!-- PAGE LEVEL PLUGINS-->
+	<!-- CORE SCRIPTS-->
+	<script src="assets/js/app.min.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
 </body>
 </html>
