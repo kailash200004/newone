@@ -78,13 +78,15 @@ public class LoginController {
                                 int roleId = userRegService.getUserRoleId(refId);
                                 String rolename = userRegService.getUserId(refId);
                                 String dpcIdd = userRegService.getUserDpc(refId);
+                                System.out.println("refId =====   "+refId);
+                                System.out.println("dpcIdd =====   "+dpcIdd);
                                 String region = userRegService.getUserRegion(refId);
                                 String dpc_center = userRegService.getdpc_center(dpcIdd);
                                 int is_ho = userRegService.getis_ho(email);
                                 String roletype = userRegService.getroletypr(email);
                                 String regionId = userRegService.getregionId(email);
                                 String zoneId = userRegService.getzoneId(email);
-
+                                System.out.println("dpc_center =====   "+dpc_center);
                                 session.setAttribute("regionId", regionId);
                                 session.setAttribute("zoneId", zoneId);
                                 session.setAttribute("roletype", roletype);

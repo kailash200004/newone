@@ -16,5 +16,6 @@ public interface PurchaseCenterService {
 	public List<String> purchaseCenter(String regionCode);
 	public List<String> dpcbyId(String dpc);
 	public List<String> getAllDpc();
+	public String findDpcname(String dpccode);
 //	public List<PurchaseCenterModel>getCenterCodeByCode(int rocode);
 }

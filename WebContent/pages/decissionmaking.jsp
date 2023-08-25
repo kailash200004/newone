@@ -337,9 +337,9 @@ $(document).ready(function(){
 					if(result=="true")
 						{
 						alert("Succesfully Updated");
-						location.reload();
+						//location.reload();
 						//window.history.back();
-					//	window.location.href = "disputedtallyslip.obj";
+						window.location.href = "disputedtallyslip.obj";
 						}
 					else
 						{

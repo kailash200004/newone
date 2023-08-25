@@ -107,10 +107,12 @@
 									<input type="hidden" name="F_REG_BY" id="F_REG_BY" value="<%=userId%>">
 									<input type="hidden" name="id" id="id" value="<%= editFarmer.getF_ID()%>">
 								<%
+								
+									FarmerRegModel farme = (FarmerRegModel) request.getAttribute("FarmerRegistration");
+								
 								String firstname = "";
 								String middlename = "";
 								String lastname = "";
-									FarmerRegModel farme = (FarmerRegModel) request.getAttribute("FarmerRegistration");
 								String[] farmerName = new  String[3];
 								farmerName = editFarmer.getF_NAME().split(" ");
 								if(farmerName.length == 1){
@@ -124,6 +126,8 @@
 								else if(farmerName.length == 3){
 									firstname = editFarmer.getF_NAME().split(" ")[0];
 									middlename = editFarmer.getF_NAME().split(" ")[1];
+									if (middlename.equalsIgnoreCase("NA"))
+										middlename = "";
 									lastname = editFarmer.getF_NAME().split(" ")[2];
 									}
 								%>

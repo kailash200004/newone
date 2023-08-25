@@ -15,5 +15,6 @@ public interface PurchaseCenterDao {
 	public List<String> purchaseCenter(String region);
 	public List<String> dpcbyid(String dpc);
 	public List<String> getAllDpc();
+	public String findDpcname(String dpccode);
 
 }

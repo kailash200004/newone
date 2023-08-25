@@ -1848,6 +1848,7 @@ public class InsertDataController
                
             }
             String farmerNameFinal;
+            System.out.println("farmer name = "+farmer_name);
             if (farmer_name.equalsIgnoreCase(farmerNameDb)) {
                 farmerNameFinal = farmer_name;
                
@@ -1885,9 +1886,10 @@ public class InsertDataController
             verifyFarmer.setStatus(1);
             verifyFarmer.setVerificationdate(new Date());
             verifyFarmer.setRegno(farmer_reg_no);
-      
+            System.out.println("verify farmer = "+verifyFarmer.toString());
             final Boolean verifyRow = this.verifyFarmerService.duplicateVerificationEntryNumberCheck(farmer_reg_no);
             if (verifyRow) {
+            	System.out.println("verify row status");
                 this.verifyFarmerService.submitform(verifyFarmer);
             }
             String dcpid= (String)request.getSession().getAttribute("dpcId");
@@ -1898,12 +1900,13 @@ public class InsertDataController
 															 * && farmerById.getIdentityProofType() != null &&
 															 * farmerById.getIdentityProofNumber() != null
 															 */) {
+				System.out.println("update verification status");
                 this.farmerRegService.updateVerificationStatus(id);
             }
             mv.addObject("allFarmersList", (Object)allFarmersList);
         }
         catch (Exception ex) { 
-        	
+        	System.out.println("saveVerification error = "+ex.getLocalizedMessage());
         }
         mv.addObject("msg", (Object)"success");
         mv.addObject("farmerdetails", (Object)new FarmerRegModel());
@@ -4301,12 +4304,12 @@ public class InsertDataController
 			int refid = (int) request.getSession().getAttribute("userId");
 			UserRegistrationModel userRegistration = userRegService.find(refid);
 			String view = "";
-				String  mobileno=  request.getParameter("mobile");
+				//String  mobileno=  request.getParameter("mobile");
 				String password =  request.getParameter("password");
 				String newpassword =  request.getParameter("newpassword");
 				String renewpassword =  request.getParameter("repassword");
 				userRegistration.setRefid(refid);
-				userRegistration.setMobileno(mobileno);
+			//	userRegistration.setMobileno(mobileno);
 				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) 
 				{
 					userRegistration.setPassword(renewpassword);
@@ -4315,7 +4318,7 @@ public class InsertDataController
 					 view = "login.obj";
 					 userRegService.update(userRegistration);
 					   redirectAttributes.addFlashAttribute("msg",
-								"<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n" + "");
+								"<div class=\"alert alert-success\"><b>Success !</b> Password updated successfully.</div>\r\n" + "");
 				}
 				
 				else
@@ -5138,7 +5141,13 @@ public class InsertDataController
 	        }
 	        return mv;
 	    }
-	    
+	    @ResponseBody
+	    @RequestMapping({ "findDpcname" })
+	    public String findDpcname(final HttpServletRequest request) {
+	    	String dpccode = request.getParameter("dpccode");
+	        final Gson gson = new Gson();
+	        return gson.toJson((Object)this.purchaseCenterService.findDpcname(dpccode));
+	    }
 	    
 	    
 }

@@ -106,7 +106,7 @@ var hasError2 = false;
 										</div> -->
 										<div class="col-sm-4 form-group">
 											<label class="required">EMS Name</label>  &nbsp;&nbsp;&nbsp; <span id="errName" name="errName" class="text-danger"> </span>
-											<input class="form-control" name="username" id="username" type="text" oninvalid="this.setCustomValidity('Please enter a valid EMS Name')" oninput="this.setCustomValidity('')"  placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="deleteErrorMsg()">
+											<input class="form-control" name="username" id="username" type="text" oninvalid="this.setCustomValidity('Please enter a valid EMS Name')" oninput="this.setCustomValidity('')"  placeholder="EMS Name" value="" oninput="allow_alphabets(this)" onkeyup="return deleteErrorMsg()">
 												<span  style="color: red; font-size: 13px;" id="usenameError">Please enter a valid EMS Name</span> 
 										</div>
 										<div class="col-sm-4 form-group">
@@ -343,6 +343,7 @@ var hasError2 = false;
              if(val=="HO"){
                     $("#zoneLabel, #regionLabel, #dpclabel").hide();
                     $("#zone, #region, #centerordpc").hide();
+                    $("#errZone, #errRegion, #errDPC ").hide();
 
              }
              if(val=="ZO"){
@@ -350,6 +351,7 @@ var hasError2 = false;
                     $("#zone").show();
                     $("#regionLabel, #dpclabel").hide();
                     $("#region, #centerordpc").hide();
+                    $(" #errRegion, #errDPC ").hide();
              }
              
              if(val=="RO"){
@@ -357,6 +359,7 @@ var hasError2 = false;
                     $("#zone, #region").show();
                     $("#dpclabel").hide();
                     $("#centerordpc").hide();
+                    $(" #errDPC ").hide();
              }
              
              if(val=="DPC"){
@@ -468,73 +471,470 @@ var hasError2 = false;
 
 	<script>
 	 function validate() {
-	
+		// alert("yes");
+		 var role = document.forms["myForm"]["role"].value;
+		  if(role == ""){
+				 document.getElementById("errType").innerHTML = "Role can not be empty!";
+				 document.getElementById("role").focus();
+				 return false;
+				
+		     }
+		  else {
+				 document.getElementById("errType").innerHTML = "";
+		  }
+	     var val = $('#role option:selected').data("id");
+       //  document.getElementById("roletype").value =  val;
+       //  alert(val);
+         if(val=="HO"){
+
 	 var username = document.forms["myForm"]["username"].value;
 	 var password = document.forms["myForm"]["password"].value;
-	 var ho = document.forms["myForm"]["ho"].value;
-	 var zone = document.forms["myForm"]["zone"].value;
-	 var region = document.forms["myForm"]["region"].value;
-	 var centerordpc = document.forms["myForm"]["centerordpc"].value;
 	 var usertype = document.forms["myForm"]["usertype"].value;
 	 var employeeid = document.forms["myForm"]["employeeid"].value;
 	 var employeename = document.forms["myForm"]["employeename"].value;
 	 var emailAddress = document.forms["myForm"]["emailAddress"].value;
 	 var mobile = document.forms["myForm"]["mobile"].value;
-	 	  if (username == "") {
+	 var role = document.forms["myForm"]["role"].value;
+	  if (username == "") {
 		    document.getElementById("errName").innerHTML = "Name can not be empty!";
 		    document.getElementById("username").focus();
 		    return false;
+		   
 	 	  }
-		  else if(password == ""){
+	  else{
+		  document.getElementById("errName").innerHTML = "";
+	  }
+	 	  
+		  if(password == ""){
 			 document.getElementById("errPass").innerHTML = "Password can not be empty!";
-			document.getElementById("password").focus();
-			return false;
+			 document.getElementById("password").focus();
+		return false;
+		
 	     }
+		  else{
+			  document.getElementById("errPass").innerHTML = "";
+		  }
 		 
-		  else if(zone == ""){
-				    
-				  document.getElementById("errZone").innerHTML = "Zone can not be empty!";
-					document.getElementById("zone").focus();
-					return false;
-				 
+		  if(role == ""){
+				 document.getElementById("errType").innerHTML = "Role can not be empty!";
+				 document.getElementById("role").focus();
+				 return false;
+				
+		     }
+		  else {
+				 document.getElementById("errType").innerHTML = "";
 		  }
-		  else if(region == ""){
-				 document.getElementById("errRegion").innerHTML = "Region can not be empty!";
-				document.getElementById("region").focus();
-				return false;
-		  }
-		  else if(centerordpc == ""){
-				 document.getElementById("errDPC").innerHTML = "Dpc can not be empty!";
-				document.getElementById("centerordpc").focus();
-				return false;
-		  }
-		  else if(usertype == ""){
-				 document.getElementById("errType").innerHTML = "Usertype can not be empty!";
+		
+		   if(usertype == ""){
+		
+				 document.getElementById("errUserType").innerHTML = "User type can not be empty!";
 				document.getElementById("usertype").focus();
 				return false;
+		
 		  }
-		  else if(employeeid == ""){
-				 document.getElementById("errID").innerHTML = "Employeeid can not be empty!";
-				document.getElementById("employeeid").focus();
-				return false;
-		     }
-		  else if(employeename == ""){
-					 document.getElementById("errEMP").innerHTML = "Employeename can not be empty!";
-					document.getElementById("employeename").focus();
-					return false;
+		   else{
+				  document.getElementById("errUserType").innerHTML = "";
 			  }
+		  if(employeeid == ""){
+	
+				 document.getElementById("errID").innerHTML = "Employee id can not be empty!";
+				 document.getElementById("employeeid").focus();
+				 return false;
+		
+		     }
+		  else{
+			  document.getElementById("errID").innerHTML = "";
+		  }
 		  
-		  else if(emailAddress == ""){
+		  if(employeename == ""){
+		
+					 document.getElementById("errEMP").innerHTML = "Employee name can not be empty!";
+					 document.getElementById("employeename").focus();
+					 return false;
+		
+			  }
+		  else{
+			  document.getElementById("errEMP").innerHTML = "";
+		  }
+		  
+		   if(emailAddress == ""){
+	
 				 document.getElementById("errEmail").innerHTML = "Email Address can not be empty!";
-				document.getElementById("emailAddress").focus();
-				return false;
+				 document.getElementById("emailAddress").focus();
+				 return false;
+			
 		  }
-		  else if(mobile == ""){
+		   else{
+				  document.getElementById("errEmail").innerHTML = "";
+			  }
+		  if(mobile == ""){
+		
 				 document.getElementById("errMobile").innerHTML = "Mobile No. can not be empty!";
-				document.getElementById("mobile").focus();
-				return false;
+				 document.getElementById("mobile").focus();
+				 return false;
+				
 		  }
-	  
+		  else{
+			  document.getElementById("errMobile").innerHTML = "";
+		  }
+         }
+         if(val=="ZO"){
+
+        	 var username = document.forms["myForm"]["username"].value;
+        	 var password = document.forms["myForm"]["password"].value;
+        	 var usertype = document.forms["myForm"]["usertype"].value;
+        	 var employeeid = document.forms["myForm"]["employeeid"].value;
+        	 var employeename = document.forms["myForm"]["employeename"].value;
+        	 var emailAddress = document.forms["myForm"]["emailAddress"].value;
+        	 var mobile = document.forms["myForm"]["mobile"].value;
+        	 var role = document.forms["myForm"]["role"].value;
+           	 var zone = document.forms["myForm"]["zone"].value;
+   	 	  if (username == "") {
+  		    document.getElementById("errName").innerHTML = "Name can not be empty!";
+  		    document.getElementById("username").focus();
+  		    return false;
+  		   
+  	 	  }
+   	 	 else{
+			  document.getElementById("errName").innerHTML = "";
+		  }
+  	 	  
+  		  if(password == ""){
+  			 document.getElementById("errPass").innerHTML = "Password can not be empty!";
+  			 document.getElementById("password").focus();
+  		return false;
+  		
+  	     }
+  		 else{
+			  document.getElementById("errPass").innerHTML = "";
+		  } 
+  		 
+  		  if(role == ""){
+  				 document.getElementById("errType").innerHTML = "Role can not be empty!";
+  				 document.getElementById("role").focus();
+  				 return false;
+  				
+  		     }
+  		 else{
+			  document.getElementById("errType").innerHTML = "";
+		  }
+  		  
+  		 if(zone == ""){
+  				  document.getElementById("errZone").innerHTML = "Zone can not be empty!";
+  				  document.getElementById("zone").focus();
+  				  return false;	 
+  		  }
+  		 else{
+			  document.getElementById("errZone").innerHTML = "";
+		  }
+  		   if(usertype == ""){
+  		
+  				 document.getElementById("errUserType").innerHTML = "User type can not be empty!";
+  				document.getElementById("usertype").focus();
+  				return false;
+  		
+  		  }
+  		 else{
+			  document.getElementById("errUserType").innerHTML = "";
+		  }
+  		   
+  		  if(employeeid == ""){
+  	
+  				 document.getElementById("errID").innerHTML = "Employee id can not be empty!";
+  				 document.getElementById("employeeid").focus();
+  				 return false;
+  		
+  		     }
+  		 else{
+			  document.getElementById("errID").innerHTML = "";
+		  }
+  		  if(employeename == ""){
+  		
+  					 document.getElementById("errEMP").innerHTML = "Employee name can not be empty!";
+  					 document.getElementById("employeename").focus();
+  					 return false;
+  		
+  			  }
+  		 else{
+			  document.getElementById("errEMP").innerHTML = "";
+		  }
+  		  
+  		  
+  		   if(emailAddress == ""){
+  	
+  				 document.getElementById("errEmail").innerHTML = "Email Address can not be empty!";
+  				 document.getElementById("emailAddress").focus();
+  				 return false;
+  			
+  		  }
+  		 else{
+			  document.getElementById("errEmail").innerHTML = "";
+		  }
+  	
+  		  if(mobile == ""){
+  		
+  				 document.getElementById("errMobile").innerHTML = "Mobile No. can not be empty!";
+  				 document.getElementById("mobile").focus();
+  				 return false;
+  				
+  		  }
+  		 else{
+			  document.getElementById("errMobile").innerHTML = "";
+		  }
+        	 }
+         
+         
+         if(val=="RO"){
+
+        	 var username = document.forms["myForm"]["username"].value;
+        	 var password = document.forms["myForm"]["password"].value;
+        	 var usertype = document.forms["myForm"]["usertype"].value;
+        	 var employeeid = document.forms["myForm"]["employeeid"].value;
+        	 var employeename = document.forms["myForm"]["employeename"].value;
+        	 var emailAddress = document.forms["myForm"]["emailAddress"].value;
+        	 var mobile = document.forms["myForm"]["mobile"].value;
+        	 var role = document.forms["myForm"]["role"].value;
+           	 var zone = document.forms["myForm"]["zone"].value;
+        	 var region = document.forms["myForm"]["region"].value;
+   	 	  if (username == "") {
+  		    document.getElementById("errName").innerHTML = "Name can not be empty!";
+  		    document.getElementById("username").focus();
+  		    return false;
+  		   
+  	 	  }
+   	 	 else{
+			  document.getElementById("errName").innerHTML = "";
+		  }
+  	 	  
+  		  if(password == ""){
+  			 document.getElementById("errPass").innerHTML = "Password can not be empty!";
+  			 document.getElementById("password").focus();
+  		return false;
+  		
+  	     }
+  		  
+  		 else{
+			  document.getElementById("errPass").innerHTML = "";
+		  }
+  		 
+  		  if(role == ""){
+  				 document.getElementById("errType").innerHTML = "Role can not be empty!";
+  				 document.getElementById("role").focus();
+  				 return false;
+  				
+  		     }
+  		 else{
+			  document.getElementById("errType").innerHTML = "";
+		  }
+  		  
+  		 if(zone == ""){
+  				  document.getElementById("errZone").innerHTML = "Zone can not be empty!";
+  				  document.getElementById("zone").focus();
+  				  return false;
+  		
+  				 
+  		  }
+  		 else{
+			  document.getElementById("errZone").innerHTML = "";
+		  }
+  		  if(region == ""){
+  			 
+  				 document.getElementById("errRegion").innerHTML = "Region can not be empty!";
+  				 document.getElementById("region").focus();
+  				 return false;
+  		
+  		  }
+  		 else{
+			  document.getElementById("errRegion").innerHTML = "";
+		  }
+  		
+  		   if(usertype == ""){
+  		
+  				 document.getElementById("errUserType").innerHTML = "User type can not be empty!";
+  				document.getElementById("usertype").focus();
+  				return false;
+  		
+  		  }
+  		 else{
+			  document.getElementById("errUserType").innerHTML = "";
+		  }
+  		   
+  		  if(employeeid == ""){
+  	
+  				 document.getElementById("errID").innerHTML = "Employee id can not be empty!";
+  				 document.getElementById("employeeid").focus();
+  				 return false;
+  		
+  		     }
+  		 else{
+			  document.getElementById("errID").innerHTML = "";
+		  }
+  		  
+  		  if(employeename == ""){
+  		
+  					 document.getElementById("errEMP").innerHTML = "Employee name can not be empty!";
+  					 document.getElementById("employeename").focus();
+  					 return false;
+  		
+  			  }
+  		 else{
+			  document.getElementById("errEMP").innerHTML = "";
+		  }
+  		  
+  		   if(emailAddress == ""){
+  	
+  				 document.getElementById("errEmail").innerHTML = "Email Address can not be empty!";
+  				 document.getElementById("emailAddress").focus();
+  				 return false;
+  			
+  		  }
+  		 else{
+			  document.getElementById("errEmail").innerHTML = "";
+		  }
+ 		  
+  	
+  		  if(mobile == ""){
+  		
+  				 document.getElementById("errMobile").innerHTML = "Mobile No. can not be empty!";
+  				 document.getElementById("mobile").focus();
+  				 return false;
+  				
+  		  }
+  		  
+  		 else{
+			  document.getElementById("errMobile").innerHTML = "";
+		  }
+		  
+        	 }
+         
+         if(val=="DPC"){
+
+        	 var username = document.forms["myForm"]["username"].value;
+        	 var password = document.forms["myForm"]["password"].value;
+        	 var usertype = document.forms["myForm"]["usertype"].value;
+        	 var employeeid = document.forms["myForm"]["employeeid"].value;
+        	 var employeename = document.forms["myForm"]["employeename"].value;
+        	 var emailAddress = document.forms["myForm"]["emailAddress"].value;
+        	 var mobile = document.forms["myForm"]["mobile"].value;
+        	 var role = document.forms["myForm"]["role"].value;
+           	 var zone = document.forms["myForm"]["zone"].value;
+        	 var region = document.forms["myForm"]["region"].value;
+        	 var centerordpc = document.forms["myForm"]["centerordpc"].value;
+   	 	  if (username == "") {
+  		    document.getElementById("errName").innerHTML = "Name can not be empty!";
+  		    document.getElementById("username").focus();
+  		    return false;
+  		   
+  	 	  }
+   		 else{
+			  document.getElementById("errName").innerHTML = "";
+		  }
+  		  if(password == ""){
+  			 document.getElementById("errPass").innerHTML = "Password can not be empty!";
+  			 document.getElementById("password").focus();
+  		return false;
+  		
+  	     }
+  		 else{
+			  document.getElementById("errPass").innerHTML = "";
+		  }
+  		 
+  		  if(role == ""){
+  				 document.getElementById("errType").innerHTML = "Role can not be empty!";
+  				 document.getElementById("role").focus();
+  				 return false;
+  				
+  		     }
+  		 else{
+			  document.getElementById("errType").innerHTML = "";
+		  }
+  		 if(zone == ""){
+  				  document.getElementById("errZone").innerHTML = "Zone can not be empty!";
+  				  document.getElementById("zone").focus();
+  				  return false;	 
+  		  }
+  		 else{
+			  document.getElementById("errZone").innerHTML = "";
+		  }
+  		
+  		  if(region == ""){
+  			 
+  				 document.getElementById("errRegion").innerHTML = "Region can not be empty!";
+  				 document.getElementById("region").focus();
+  				 return false;
+  		
+  		  }
+  		 else{
+			  document.getElementById("errRegion").innerHTML = "";
+		  }
+  		 if(centerordpc == ""){
+  		
+  				 document.getElementById("errDPC").innerHTML = "Dpc can not be empty!";
+  				 document.getElementById("centerordpc").focus();
+  				 return false;
+  			
+  		  }
+  		 else{
+			  document.getElementById("errDPC").innerHTML = "";
+		  }
+  		
+  		   if(usertype == ""){
+  		
+  				 document.getElementById("errUserType").innerHTML = "User type can not be empty!";
+  				document.getElementById("usertype").focus();
+  				return false;
+  		
+  		  }
+  		 else{
+			  document.getElementById("errUserType").innerHTML = "";
+		  }
+  		  if(employeeid == ""){
+  	
+  				 document.getElementById("errID").innerHTML = "Employee id can not be empty!";
+  				 document.getElementById("employeeid").focus();
+  				 return false;
+  		
+  		     }
+  		 else{
+			  document.getElementById("errID").innerHTML = "";
+		  }
+  		  if(employeename == ""){
+  		
+  					 document.getElementById("errEMP").innerHTML = "Employee name can not be empty!";
+  					 document.getElementById("employeename").focus();
+  					 return false;
+  		
+  			  }
+  		  
+  		 else{
+			  document.getElementById("errEMP").innerHTML = "";
+		  }
+  		   if(emailAddress == ""){
+  	
+  				 document.getElementById("errEmail").innerHTML = "Email Address can not be empty!";
+  				 document.getElementById("emailAddress").focus();
+  				 return false;
+  			
+  		  }
+  		 else{
+			  document.getElementById("errEmail").innerHTML = "";
+		  }
+  		  if(mobile == ""){
+  		
+  				 document.getElementById("errMobile").innerHTML = "Mobile No. can not be empty!";
+  				 document.getElementById("mobile").focus();
+  				 return false;
+  				
+  		  }
+  		 else{
+			  document.getElementById("errMobile").innerHTML = "";
+		  }
+        	 }
+         
+ 
+         
+
+	
 		  
 }
 	  </script>
@@ -845,9 +1245,11 @@ function validatemail(){
 						document.getElementById("dubName").value = result;
 						if(result == 'false'){
 							document.getElementById("errName").innerHTML = " User Name Already Exists!";
+							return false;
 						}
 						else{
 							document.getElementById("errName").innerHTML = "";
+							return true;
 						}
 					}
 			  });

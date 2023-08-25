@@ -83,7 +83,8 @@
 
 									<div class="row">
 									<div class="col-sm-4 form-group">
-											<label class="required">Packing Place</label> <input class="form-control" name="place_of_packing" id="place_of_packing" type="text" value="<%=dpcCenter%>" readonly>
+											<label class="required">Packing Place</label>
+											 <input class="form-control" name="place_of_packing" id="place_of_packing" type="text"  readonly>
 										</div>
 
 										<div class="col-sm-4 form-group">
@@ -112,7 +113,7 @@
 </div>
 									<div class="row">	<div class="col-sm-4 form-group">
 											<label>Basis</label> <select name="basis" id="basis"
-												class="form-control" value="<%=baleData.getBasis()%>">
+												class="form-control" >
 												<option value="">-Select-</option>
 												<%-- <% 
                                         			if(baleData.getBasis()!=null){
@@ -122,14 +123,10 @@
                                         			}
                                         		 %> --%>
 												<option
-													<%if (baleData.getBasis().equals("msp")) {
-	out.print("selected");
-}%>
+													<%if (baleData.getBasis().equalsIgnoreCase("msp")) {out.print("selected");}%>
 													value="msp">MSP</option>
 												<option
-													<%if (baleData.getBasis().equals("commercial")) {
-	out.print("selected");
-}%>
+													<%if (baleData.getBasis().equalsIgnoreCase("commercial")) {out.print("selected");}%>
 													value="commercial">Commercial</option>
 											</select>
 										</div>
@@ -229,6 +226,30 @@
 												html += "<option value="+ data[i].split("-")[0]+ ">"+ data[i].split("-")[1]+ "</option>"
 											}
 											$("#place_of_packing").html(html);
+
+										}
+
+									});
+
+						});
+	</script>
+	<script>
+
+       $(document).ready(function(){
+    	   var myVar = '<%=baleData.getPlace_of_packing()%>';
+
+							//  alert(myVar);
+
+							$
+									.ajax({
+										type : "GET",
+										url : "findDpcname.obj",
+										data : {
+											"dpccode" : myVar
+										},
+										success : function(result) {
+											//alert(result.replace(/['"]+/g, ''));
+											$("#place_of_packing").val(result.replace(/['"]+/g, ''));
 
 										}
 

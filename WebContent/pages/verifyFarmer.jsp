@@ -393,6 +393,31 @@ button#turn {
 			} catch (Exception e) {
 				out.println("Something went wrong");
 			}
+			String firstname = "";
+			String middlename = "";
+			String lastname = "";
+			String fname = "";
+			String[] farmerName = new  String[3];
+			farmerName = farmerModel.getF_NAME().split(" ");
+			if(farmerName.length == 1){
+			firstname = farmerModel.getF_NAME().split(" ")[0];
+			fname = firstname;
+			}
+			else if(farmerName.length == 2){
+			 firstname = farmerModel.getF_NAME().split(" ")[0];
+			 middlename = farmerModel.getF_NAME().split(" ")[1];
+			
+			 fname = firstname +" "+middlename;
+			}
+			else if(farmerName.length == 3){
+				firstname = farmerModel.getF_NAME().split(" ")[0];
+				middlename = farmerModel.getF_NAME().split(" ")[1];
+				lastname = farmerModel.getF_NAME().split(" ")[2];
+				if (middlename.equalsIgnoreCase("NA"))
+					 fname = firstname+" "+lastname;
+				else
+				 fname = firstname +" "+middlename+" "+lastname;
+				}
 			%>
 
 
@@ -446,7 +471,7 @@ button#turn {
 											<input type="hidden" name="id" id="id" value="<%=farmerModel.getF_ID()%>"> 
 									       <input type="hidden" name="fIfsc" id="fIfsc" value="<%=farmerModel.getF_BANK_IFSC()%>"> 
 									       <input type="hidden" name="facNo" id="facNo" value="<%=farmerModel.getF_AC_NO()%>"> 
-									       <input type="hidden" name="fName" id="fName" value="<%=farmerModel.getF_NAME()%>"> 
+									       <input type="hidden" name="fName" id="fName" value="<%=fname%>"> 
 									       <input type="hidden" name="faddress" id="faddress" value="<%=farmerModel.getF_ADDRESS()%>"> 
 									       <input type="hidden" name="fidProofType" id="fidProofType" value="<%=farmerModel.getF_ID_PROF_TYPE()%>"> 
 									       <input type="hidden" name="fidProofNo" id="fidProofNo" value="<%=farmerModel.getF_ID_PROF_NO()%>">
@@ -583,9 +608,9 @@ button#turn {
 	//	alert(fIfsc);
 		var facNo = '<%=farmerModel.getF_AC_NO()%>';
 		//alert(facNo);
-		var fName = '<%=farmerModel.getF_NAME()%>';
-		fName =  fName.trim();
-	//	alert(fName);
+		var fName = '<%=fname%>';
+	//	fName =  fName.trim();
+		//alert(fName);
 		<%-- var fidProofType = <%=farmerModel.getF_ID_PROF_TYPE()%>;
 		var fidProofNo = <%=farmerModel.getF_ID_PROF_NO()%>; --%>
 		var ifsc_code = document.getElementById("ifsc_code").value;
