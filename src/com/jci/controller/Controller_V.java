@@ -31,6 +31,7 @@ public class Controller_V {
 	
 	  @RequestMapping("entryofpcso")
 	    public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
+		  System.out.println();
 		  String username =(String)request.getSession().getAttribute("usrname");
 	          ModelAndView mv = new ModelAndView("entryofpcso");
 	          final List<EntryofpcsoModel> allentryofpcsolist = (List<EntryofpcsoModel>)this.pcsoentryservice.getAlldata();
