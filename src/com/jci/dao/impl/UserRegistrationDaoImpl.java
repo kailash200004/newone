@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.UserRegistrationDao;
+import com.jci.model.ConcurrentLoginModel;
 import com.jci.model.UserRegistrationModel;
 
 @Transactional
@@ -440,5 +441,52 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 		String password = (String)query.uniqueResult();
 
 			return password;
+	}
+
+	@Override
+	public String checkConcurrentlogin(String email) {
+		// TODO Auto-generated method stub
+		ConcurrentLoginModel concurrentloging = new ConcurrentLoginModel();
+		String querystr = "select flag from checkConcurrentlogin where email='" + email + "'";
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query = session.createSQLQuery(querystr);
+		String flag = (String)query.uniqueResult();
+		System.err.println("flag"+flag);
+		 if(flag==null)
+         {
+				System.err.println("innnnnn"+flag);
+
+			 concurrentloging.setEmail(email);
+			 concurrentloging.setFlag("login");
+			 currentSession().save(concurrentloging);
+				System.err.println("outtttttttt"+flag);
+
+			 flag = "";
+         }
+		return flag;
+	}
+
+	@Override
+	public void updateFlagInDatabase(String flag,String email) {
+		// TODO Auto-generated method stub
+		try {
+			System.out.println("repo"+flag+""+email);
+			String hql = "update checkConcurrentlogin set flag = 'logout' where email ='"+email+"'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+
+	@Override
+	public void updateConcurrentlogin(String email) {
+		// TODO Auto-generated method stub
+		 try {
+				String hql = "update checkConcurrentlogin set flag = 'login' where email ='"+email+"'";
+				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+			} catch (Exception e) {
+				System.out.println(e.getLocalizedMessage());
+			}
 	}
 }

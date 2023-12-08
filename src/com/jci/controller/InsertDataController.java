@@ -47,6 +47,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import com.jci.model.RopeMakingModel;
 import java.text.SimpleDateFormat;
+
+import com.jci.common.Encry;
 import com.jci.model.AddOrganizationModel;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
@@ -63,6 +65,8 @@ import java.util.List;
 import java.util.Random;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.crypto.SecretKey;
 import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -400,7 +404,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "ropeMakingListing" })
-    public ModelAndView ropeMaking(final HttpServletRequest request) {
+    public ModelAndView ropeMaking(final HttpServletRequest request,RedirectAttributes red) {
         ModelAndView mv = new ModelAndView("RopeMakingListing");
     	String username =(String)request.getSession().getAttribute("usrname");
         if(username == null) {
@@ -412,7 +416,11 @@ public class InsertDataController
      	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-   
+     	String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll(placeofactivity, regionId,zoneId);
         mv.addObject("ropeLists", (Object)ropeList);
     	}
@@ -744,14 +752,24 @@ public class InsertDataController
     }
     
     @RequestMapping({ "balePreparation" })
-    public ModelAndView balePreparation(final HttpServletRequest request, final HttpSession session) {
+    public ModelAndView balePreparation(final HttpServletRequest request, final HttpSession session,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("balePrepare");
     	if(username == null) {
             mv = new ModelAndView("index");
             }
         final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
-        mv.addObject("allDpcList", (Object)allDpcList);      
+        mv.addObject("allDpcList", (Object)allDpcList);   
+        try {
+  		   String userRole= (String)request.getSession().getAttribute("rolename");
+  		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole)) {
+  			 red.addFlashAttribute("errorMessage","Access denied");
+  			   return mv=new ModelAndView("index");
+  		   }
+         }
+ catch(Exception e) {
+  		   e.printStackTrace();
+  	   }
         return mv;
     }
     
@@ -827,15 +845,21 @@ public class InsertDataController
     }
     
     @RequestMapping({ "jbaRate" })
-    public ModelAndView jbaRate(final HttpServletRequest request) {
+    public ModelAndView jbaRate(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("addJba");
     	if(username == null) {
             mv = new ModelAndView("index");
             }
     	try {
+    		
         final List<AreaDetailCode> AreaCode = (List<AreaDetailCode>)this.areaService.getAll();
         mv.addObject("AreaCode", (Object)AreaCode);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
     	}
     	catch(Exception e) {
     		e.printStackTrace();
@@ -1047,7 +1071,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "JbaPriceList" })
-    public ModelAndView JbaPriceList(final HttpServletRequest request) {
+    public ModelAndView JbaPriceList(final HttpServletRequest request, final RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("JBAList");
         if(username == null) {
@@ -1062,6 +1086,11 @@ public class InsertDataController
         final List<JbaModel> jbapril = (List<JbaModel>)this.jbaservice.getAll();
         mv.addObject("jbaList", (Object)jbapri);
         mv.addObject("jbaLists", (Object)jbapril);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -1081,7 +1110,9 @@ public class InsertDataController
             }
         try {
         if (request.getParameter("id") != null) {
-            final int id = Integer.parseInt(request.getParameter("id"));
+        	String key = LoginController.secretkey;
+	    	String decryptedString = request.getParameter("id");
+	    	final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             final JbaModel editJBAList = this.jbaservice.find(id);
             mv.addObject("editJBAList", (Object)editJBAList);
         }
@@ -1373,7 +1404,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "juteProcurementList" })
-    public ModelAndView juteProcurementList(final HttpServletRequest request) {
+    public ModelAndView juteProcurementList(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView("juteProcurementList");
     	if(username == null) {
@@ -1383,6 +1414,11 @@ public class InsertDataController
         try {
             procurementList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.farmerDetailsList();
             mv.addObject("procurementList", (Object)procurementList);
+            String userRole= (String)request.getSession().getAttribute("rolename");
+  		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+  			 red.addFlashAttribute("errorMessage","Access denied");
+  			   return mv=new ModelAndView("index");
+  		   }
         }
         catch (Exception e) {
             System.out.println(e);
@@ -1524,7 +1560,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "dailyPurchaseList" })
-    public ModelAndView dailyPurchaseList(final HttpServletRequest request) {
+    public ModelAndView dailyPurchaseList(final HttpServletRequest request,RedirectAttributes red) {
     	
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
@@ -1536,7 +1572,17 @@ public class InsertDataController
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
         String dpcid =(String)request.getSession().getAttribute("dpcId");
         final List<DailyPurchaseConfModel> purchaseList = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.getAll(dpcid, regionId, zoneId);
-        mv.addObject("dailyPurchaseList", (Object)purchaseList);     
+        mv.addObject("dailyPurchaseList", (Object)purchaseList);    
+        try {
+            String userRole= (String)request.getSession().getAttribute("rolename");
+             		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) ) {
+             			 red.addFlashAttribute("errorMessage","Access denied");
+             			   return mv=new ModelAndView("index");
+             		   }
+            }
+            catch(Exception e) {
+     		   e.printStackTrace();
+     	   }
         return mv;
     }
     
@@ -1586,7 +1632,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "UserRegistration" })
-    public ModelAndView userRegistration(final HttpServletRequest request) {
+    public ModelAndView userRegistration(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("UserRegistration");
     	   if(username == null) {
@@ -1597,6 +1643,11 @@ public class InsertDataController
         final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)alluserroleList);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
     	   }
     	   catch(Exception e) {
     		   e.printStackTrace();
@@ -1687,7 +1738,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "viewmarketArrival" })
-    public ModelAndView viewmarketArrival(final HttpServletRequest request) {
+    public ModelAndView viewmarketArrival(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewmarketArrival");
         if(username == null) {
@@ -1700,6 +1751,11 @@ public class InsertDataController
         String dpc_code =(String)request.getSession().getAttribute("dpcId");
         final List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>)this.marketArrivalService.getAlldata( dpc_code,  regionId,  zoneId);
         mv.addObject("marketArrivalList", (Object)allmarketArrivalList);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -1708,7 +1764,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "ViewFarmerRegistration" })
-    public ModelAndView viewFarmerLists(final HttpServletRequest request) {
+    public ModelAndView viewFarmerLists(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
         if(username == null) {
@@ -1722,7 +1778,11 @@ public class InsertDataController
         final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();     
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("allFarmersList", (Object)allFarmersList);
-
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -1781,7 +1841,9 @@ public class InsertDataController
         	mv = new ModelAndView("index");
             }
         try {
-        final int id = Integer.parseInt(request.getParameter("id"));
+        String key = LoginController.secretkey;
+    	String decryptedString = request.getParameter("id");
+    	final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
         final FarmerRegModel farmerDetails = this.farmerRegService.find(id);
         mv.addObject("farmerDetails", (Object)farmerDetails);
         mv.setViewName("verifyFarmer");
@@ -1923,7 +1985,9 @@ public class InsertDataController
             }
         try {
         if (request.getParameter("id") != null) {
-            final int id = Integer.parseInt(request.getParameter("id"));
+        	String key = LoginController.secretkey;
+    		String decryptedString = request.getParameter("id");
+    		final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             final FarmerRegModel farmerDetailsById = this.farmerRegService.find(id);
             final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
             mv.addObject("Liststate", (Object)Liststate);
@@ -2023,7 +2087,9 @@ public class InsertDataController
        String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editGradesPrice");
         if (request.getParameter("id") != null) {
-            final int id = Integer.parseInt(request.getParameter("id"));
+       	    String key = LoginController.secretkey;
+	    	String decryptedString = request.getParameter("id");
+	    	final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             session.setAttribute("msp_id", id);
           
             final MSPPriceCalculationModel msppricecal = this.mSPPriceCalculationService.find(id);
@@ -2204,9 +2270,9 @@ public class InsertDataController
     }
     
     @RequestMapping({ "Distributionoftallyslips" })
-    public ModelAndView Distributionoftallyslips(final HttpServletRequest request) {
+    public ModelAndView Distributionoftallyslips(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
-        final ModelAndView mv = new ModelAndView("Distributionoftallyslips");
+         ModelAndView mv = new ModelAndView("Distributionoftallyslips");
         if(username == null) {
         	return new ModelAndView("index");
             }
@@ -2215,6 +2281,11 @@ public class InsertDataController
         final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)roleList);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole)) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -2258,7 +2329,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "viewDistributionoftallyslips" })
-    public ModelAndView viewDistributionoftallyslips(final HttpServletRequest request) {
+    public ModelAndView viewDistributionoftallyslips(final HttpServletRequest request,RedirectAttributes red) {
     	ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
     	String username =(String)request.getSession().getAttribute("usrname");
     	if(username == null) {
@@ -2269,6 +2340,12 @@ public class InsertDataController
         
         final List<DistributionoftallyslipModel> allDistributionoftallyslips = (List<DistributionoftallyslipModel>)this.distributionoftallyslipService.getAll(dpcId);
         mv.addObject("DistributionoftallyslipsList", (Object)allDistributionoftallyslips);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+  		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole) ) {
+
+	 red.addFlashAttribute("errorMessage","Access denied");
+	   return mv=new ModelAndView("index");
+    	}
     	}
        catch(Exception e) {
     	   e.printStackTrace();
@@ -2285,7 +2362,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "viewUserRegistration" })
-    public ModelAndView viewUserRegistration(final HttpServletRequest request) {
+    public ModelAndView viewUserRegistration(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	 ModelAndView mv = new ModelAndView("viewUserRegistration");
     	if(username != null) {
@@ -2300,6 +2377,16 @@ public class InsertDataController
         else{
         	mv = new ModelAndView("index");
             }
+    	try {
+    		   String userRole= (String)request.getSession().getAttribute("rolename");
+    		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+    			 red.addFlashAttribute("errorMessage","Access denied");
+    			   return mv=new ModelAndView("index");
+    		   }
+     	  }
+   catch(Exception e) {
+    		   e.printStackTrace();
+    	   }
         return mv;
     }
     
@@ -2649,7 +2736,7 @@ public class InsertDataController
 	 */
     
     @RequestMapping({ "viewVerifiedTallySlipList" })
-    public ModelAndView viewVerifiedTallySlipList(final HttpServletRequest request) {
+    public ModelAndView viewVerifiedTallySlipList(final HttpServletRequest request,RedirectAttributes red) {
        String username =(String)request.getSession().getAttribute("usrname");
        ModelAndView mv = new ModelAndView("verifiedTallySlipList");
        if(username == null) {
@@ -2661,6 +2748,11 @@ public class InsertDataController
         String region =(String)request.getSession().getAttribute("regionId"); 
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);   
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "DPC JI".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
        } 
        catch(Exception e) {
     	   e.printStackTrace();
@@ -2670,7 +2762,7 @@ public class InsertDataController
 
     
     @RequestMapping({ "viewCommercialCeilingPrice" })
-    public ModelAndView viewCommercialCeilingPrice(final HttpServletRequest request) {
+    public ModelAndView viewCommercialCeilingPrice(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
         if(username == null) {
@@ -2679,6 +2771,11 @@ public class InsertDataController
         try {
         final List<CommercialJuteVarietyModel> commercialList = (List<CommercialJuteVarietyModel>)this.commercialJuteVarietyGradesPriceService.getAll();
         mv.addObject("commercialList", (Object)commercialList);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole) ) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         } catch(Exception e) {
         	e.printStackTrace();
         }
@@ -2918,7 +3015,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "viewRulingMarket" })
-    public ModelAndView viewRulingMarket(final HttpServletRequest request) {
+    public ModelAndView viewRulingMarket(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	   if(username == null) {
            	return new ModelAndView("index");
@@ -2927,6 +3024,11 @@ public class InsertDataController
          try {
         final List<RulingMarket> rulingList = (List<RulingMarket>)this.rulingMarketService.getAll();
         mv.addObject("rulingList", (Object)rulingList);
+        String userRole= (String)request.getSession().getAttribute("rolename");
+		   if( "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
          }
          catch(Exception e) {
         	 e.printStackTrace();
@@ -2935,7 +3037,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "viewbalePreparation" })
-    public ModelAndView viewbalePreparation(final HttpServletRequest request) {
+    public ModelAndView viewbalePreparation(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView("viewbalePreparation");
     	if(username == null) {
@@ -2945,7 +3047,11 @@ public class InsertDataController
     	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-        
+     	String userRole= (String)request.getSession().getAttribute("rolename");
+		   if( "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+			 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("index");
+		   }
         String place_of_packing =(String)request.getSession().getAttribute("dpcId");
         List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
 		viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing,regionId,  zoneId);
@@ -3300,7 +3406,10 @@ public class InsertDataController
              }
         ModelAndView mv = new ModelAndView("editRopemaking");
         if (request.getParameter("id") != null) {
-            final int id = Integer.parseInt(request.getParameter("id"));
+        	
+       	    String key = LoginController.secretkey;
+	    	String decryptedString = request.getParameter("id");
+	    	final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             final RopeMakingModel editRopmaking = this.ropeMakingService.find(id);
             mv.addObject("editRopemaking", (Object)editRopmaking);
         }
@@ -3473,9 +3582,19 @@ public class InsertDataController
     }
     
     @RequestMapping({ "mspPriceCalculation" })
-    public ModelAndView mspPriceCalculation(final HttpServletRequest request) {
+    public ModelAndView mspPriceCalculation(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
-        final ModelAndView mv = new ModelAndView("mspPriceCalculation");
+         ModelAndView mv = new ModelAndView("mspPriceCalculation");
+        try {
+            String userRole= (String)request.getSession().getAttribute("rolename");
+             		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) ) {
+             			 red.addFlashAttribute("errorMessage","Access denied");
+             			   return mv=new ModelAndView("index");
+             		   }
+            }
+            catch(Exception e) {
+     		   e.printStackTrace();
+     	   }
         return mv;
     }
     
@@ -3713,7 +3832,7 @@ public class InsertDataController
     }
     
     @RequestMapping({ "commercialPriceCalculation" })
-    public ModelAndView commercialPriceCalculation(final HttpServletRequest request) {
+    public ModelAndView commercialPriceCalculation(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	if(username == null) {
         	return new ModelAndView("index");
@@ -3723,7 +3842,16 @@ public class InsertDataController
         ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)roleList);
-        
+        try {
+            String userRole= (String)request.getSession().getAttribute("rolename");
+             		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) ) {
+             			 red.addFlashAttribute("errorMessage","Access denied");
+             			   return mv=new ModelAndView("index");
+             		   }
+            }
+            catch(Exception e) {
+     		   e.printStackTrace();
+     	   }
         return mv;
     }
     
@@ -3956,7 +4084,7 @@ public class InsertDataController
     public String RouteEditforCheck(final HttpServletRequest request) {
         final String str = request.getParameter("id");
         final Gson gson = new Gson();
-        final List<String> DaysCount = (List<String>)this.jbaservice.GetDayCountofJBA(request.getParameter("id"));
+        final List<String> DaysCount = (List<String>)this.jbaservice.GetDayCountofJBA(str);
         final Integer DaysCount2 = Integer.parseInt(DaysCount.toString().replace("[", "").replace("]", ""));
         return gson.toJson((Object)DaysCount2);
     }
@@ -4005,7 +4133,9 @@ public class InsertDataController
     	ModelAndView mv = new ModelAndView("decissionmaking");
     	 String dpcId =(String)request.getSession().getAttribute("dpcId");
     	 String role_type = (String)request.getSession().getAttribute("roletype");
-        final int id = Integer.parseInt(request.getParameter("id"));
+    	 String key = LoginController.secretkey;
+	     String decryptedString = request.getParameter("id");
+	     final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
         String region =(String)request.getSession().getAttribute("region"); 
         final VerifyTallySlip vrf = this.verifyTallySlipService.find(id);
         final RawJuteProcurementAndPayment raw = this.rawJuteProcurAndPayService.findbyTally(vrf.getTallyNo(), Integer.parseInt(vrf.getRegion_id()));
@@ -4121,7 +4251,9 @@ public class InsertDataController
     	if(username == null) {
         	mv = new ModelAndView("index");
             }
-        final String tally = request.getParameter("tally");
+	   	String key = LoginController.secretkey;
+	 	String decryptedString = request.getParameter("tally");
+	 	final String tally = Encry.decrypt(decryptedString, key);
         mv.addObject("tallyslip", (Object)tally);
         mv.setViewName("verifyTallySlip");
         
@@ -4317,6 +4449,8 @@ public class InsertDataController
 					userRegistration.setUpdatedat(new Date());
 					 view = "login.obj";
 					 userRegService.update(userRegistration);
+					 HttpSession session = request.getSession();
+                     session.invalidate();
 					   redirectAttributes.addFlashAttribute("msg",
 								"<div class=\"alert alert-success\"><b>Success !</b> Password updated successfully.</div>\r\n" + "");
 				}
@@ -4335,14 +4469,18 @@ public class InsertDataController
 		return mv;
 	}
 
-	@RequestMapping("updateuserProfile")
-	public ModelAndView updateUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes)
+	@RequestMapping({ "updateuserProfile" })
+	public ModelAndView updateUserProfile(HttpServletRequest request,RedirectAttributes redirectAttributes) throws NumberFormatException, Exception
 	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("edituserProfile");
 		if(username == null) {
         	mv = new ModelAndView("index");
             }
-		int refid = Integer.parseInt(request.getParameter("id"));
+		String key = LoginController.secretkey;
+		String decryptedString = request.getParameter("id");
+		int refid = Integer.parseInt(Encry.decrypt(decryptedString, key));
+
+		System.err.println("refid"+refid);
 		UserRegistrationModel profile=userRegService.getuserprofile(refid);
 		 final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
 	        final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
@@ -4707,7 +4845,7 @@ public class InsertDataController
           }
 
          @RequestMapping({ "viewVerifiedTallySlipList_RM" })
-         public ModelAndView viewVerifiedTallySlipListRM(final HttpServletRequest request) {
+         public ModelAndView viewVerifiedTallySlipListRM(final HttpServletRequest request,RedirectAttributes red) {
             String username =(String)request.getSession().getAttribute("usrname");
             if(username == null) {
                 return new ModelAndView("index");
@@ -4716,13 +4854,22 @@ public class InsertDataController
              ModelAndView mv = new ModelAndView("verifiedTallySlipList_RM");
              final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforRM("RMZM", region);
              mv.addObject("verifiedTallyforRM", (Object)verifyList);
-            
+             try {
+              	String userRole= (String)request.getSession().getAttribute("rolename");
+                		   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole) ) {
+                			 red.addFlashAttribute("errorMessage","Access denied");
+                			   return mv=new ModelAndView("index");
+                		   }
+                		   		   }
+                  catch(Exception e) {
+                   		   e.printStackTrace();
+                   	   }
              return mv;
          }
              
 
            @RequestMapping({ "viewVerifiedTallySlipList_ZM" })
-           public ModelAndView viewVerifiedTallySlipListZM(final HttpServletRequest request) {
+           public ModelAndView viewVerifiedTallySlipListZM(final HttpServletRequest request,RedirectAttributes red) {
               String username =(String)request.getSession().getAttribute("usrname");
               if(username == null) {
                  return new ModelAndView("index");
@@ -4731,7 +4878,16 @@ public class InsertDataController
                ModelAndView mv = new ModelAndView("verifiedTallySlipList_ZM");
                final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforZM("RMZM", region_zone);
                mv.addObject("verifiedTallyforZM", (Object)verifyList);
-             
+               try {
+              	 String userRole= (String)request.getSession().getAttribute("rolename");
+  		   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole) ) {
+
+  			 red.addFlashAttribute("errorMessage","Access denied");
+  			   return mv=new ModelAndView("index");
+  		   }
+               }   catch(Exception e) {
+         		   e.printStackTrace();
+         	   }
                return mv;
            }
            @ResponseBody
@@ -4830,8 +4986,9 @@ public class InsertDataController
             final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
             final List<DistrictModel> DistrictList = (List<DistrictModel>)this.distric.getAll();
           
-            
-            final int id = Integer.parseInt(request.getParameter("id"));
+            String key = LoginController.secretkey;
+        	String decryptedString = request.getParameter("id");
+        	final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             final List<FarmerRegModel> farmerDetailsById = this.farmerRegService.findDetails(id);      
             mv.addObject("Liststate", (Object)Liststate);
             mv.addObject("pincodeList", (Object)pincodeList);
@@ -5132,8 +5289,10 @@ public class InsertDataController
 	        	mv = new ModelAndView("index");
 	            }
 	        try {
-	        int id = Integer.parseInt(request.getParameter("id"));
-	        final MarketArrivalModel marketArrival = (MarketArrivalModel)this.marketArrivalService.getAlldetails( id);
+	        String key = LoginController.secretkey;
+			String decryptedString = request.getParameter("id");
+			final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));	
+	        final MarketArrivalModel marketArrival = (MarketArrivalModel)this.marketArrivalService.getAlldetails(id);
 	        mv.addObject("marketArrival", (Object)marketArrival);
 	        }
 	        catch(Exception e) {

@@ -109,7 +109,7 @@ public class InsertDataController_2 {
 	  
 	 
 	@RequestMapping("userprivilige")
-	public ModelAndView userpriviligeModel(HttpServletRequest request)
+	public ModelAndView userpriviligeModel(HttpServletRequest request,RedirectAttributes red)
 	{	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userprivilige");
 		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
@@ -119,6 +119,17 @@ public class InsertDataController_2 {
 		 if(username == null) {
 		     	mv = new ModelAndView("index");
 		         }
+		  try {
+	   		   String userRole= (String)request.getSession().getAttribute("rolename");
+	   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	   			   return mv=new ModelAndView("index");
+	   		   }
+			  }
+
+	  catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
 		 return mv;
 	}
 	
@@ -153,17 +164,27 @@ public class InsertDataController_2 {
 	}
 	
 	@RequestMapping("userrole")
-	public ModelAndView userroleModel(HttpServletRequest request)
+	public ModelAndView userroleModel(HttpServletRequest request,RedirectAttributes red)
 	{   String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userrole");
 		if(username == null) {
 	     	mv = new ModelAndView("index");
 	         }
+		 try {
+	   		   String userRole= (String)request.getSession().getAttribute("rolename");
+	   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole) || "RO Manager".equals(userRole) || "Super Admin_IT Deptt".equals(userRole) || "DPC Manager Web".equals(userRole)) {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	   			   return mv=new ModelAndView("index");
+	   		   }
+		  }
+		   catch(Exception e) {
+  		   e.printStackTrace();
+  	   }
 		return mv;
 	}
 	
 	@RequestMapping("viewuserrole")
-	public ModelAndView viewuserroleModel(HttpServletRequest request)
+	public ModelAndView viewuserroleModel(HttpServletRequest request,RedirectAttributes red)
 	{
 		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("viewuserrole");
@@ -172,6 +193,16 @@ public class InsertDataController_2 {
 		 if(username == null) {
 		     	mv = new ModelAndView("index");
 		         }
+		 try {
+	   		   String userRole= (String)request.getSession().getAttribute("rolename");
+	   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole) || "RO Manager".equals(userRole) || "Super Admin_IT Deptt".equals(userRole)) {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	   			   return mv=new ModelAndView("index");
+	   		   }
+		  }
+		   catch(Exception e) {
+  		   e.printStackTrace();
+  	   }
 		return mv;
 	}
 	
@@ -215,12 +246,23 @@ public class InsertDataController_2 {
 	    
 	
 	@RequestMapping("useraction")
-	public ModelAndView useractionModel(HttpServletRequest request)
+	public ModelAndView useractionModel(HttpServletRequest request,RedirectAttributes red)
 	{		String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("useraction");
 		if(username == null) {
 	     	mv = new ModelAndView("index");
 	         }
+		 try {
+	   		   String userRole= (String)request.getSession().getAttribute("rolename");
+	   		   if("DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Operation".equals(userRole)) {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	   			   return mv=new ModelAndView("index");
+	   		   }
+			  }
+
+	  catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
 		return mv;
 	}
 	

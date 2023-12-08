@@ -29,4 +29,7 @@ public interface UserRegistrationDao {
 	public String getregionId(String usrname);
 	public String getzoneId(String usrname);
 	public String getoldpassword(int id);
+	public String checkConcurrentlogin(String email);
+	public void updateFlagInDatabase(String flag,String email);
+	public void updateConcurrentlogin(String email);
 }

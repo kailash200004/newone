@@ -1,7 +1,9 @@
 package com.jci.controller;
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +12,18 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.jci.common.Encry;
 import com.jci.service.UserRegistrationService;
 
 @Controller
 public class LoginController {
+	
+	public static String secretkey = "keyforencryptid";
 
 	public static String dpcCode;
+	
+	public static String useremail1;
+
 
 	@Autowired
 	UserRegistrationService userRegService;
@@ -62,6 +70,7 @@ public class LoginController {
                    if(email != null && password != null) {
                    String dpcId = request.getParameter("dpcId");
                    String ifExist =  userRegService.checkLogin(email, password);
+                   //String flag =  userRegService.checkConcurrentlogin(email);
                    String username =(String)request.getSession().getAttribute("usrname");
                      if(ifExist!=null && ifExist.equalsIgnoreCase("mobile")) { 
                            mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
@@ -73,7 +82,8 @@ public class LoginController {
                    
                      else
                          {
-
+                    	        useremail1 = email;
+                                userRegService.updateConcurrentlogin(email);
                                 int refId = userRegService.getRefId(email);
                                 int roleId = userRegService.getUserRoleId(refId);
                                 String rolename = userRegService.getUserId(refId);
@@ -87,6 +97,8 @@ public class LoginController {
                                 String regionId = userRegService.getregionId(email);
                                 String zoneId = userRegService.getzoneId(email);
                                 System.out.println("dpc_center =====   "+dpc_center);
+                                
+                                
                                 session.setAttribute("regionId", regionId);
                                 session.setAttribute("zoneId", zoneId);
                                 session.setAttribute("roletype", roletype);
@@ -100,7 +112,9 @@ public class LoginController {
                                 session.setAttribute("refId", refId);
                                 session.setAttribute("rolename", rolename);
                                 session.setAttribute("dpc_center", dpc_center);
+                                //session.setAttribute("Concurrentloginflag",flag);
                                 
+
                                   mv= new ModelAndView( (View)new RedirectView("dashboardview.obj")); 
                                  
                          }

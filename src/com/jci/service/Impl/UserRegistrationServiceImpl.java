@@ -140,5 +140,24 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 		return userRegistrationDao.getzoneId(usrname);
 	}
 
+	@Override
+	public String checkConcurrentlogin(String email) {
+		// TODO Auto-generated method stub
+		return userRegistrationDao.checkConcurrentlogin(email);
+	}
+
+	@Override
+	public void updateFlagInDatabase(String flag,String email) {
+		// TODO Auto-generated method stub
+		userRegistrationDao.updateFlagInDatabase(flag,email);
+	}
+
+	@Override
+	public void updateConcurrentlogin(String email) {
+		// TODO Auto-generated method stub
+		userRegistrationDao.updateConcurrentlogin(email);
+
+	}
+
 	
 }

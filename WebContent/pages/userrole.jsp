@@ -145,7 +145,7 @@ $(document).ready(function () {
                                     </div>   
                                                                  
                                     <div class="form-group">
-                                        <button class="btn btn-default" type="submit">Create</button>
+                                        <button class="btn btn-default" type="submit" id="submit">Create</button>
                                         <a href="viewuserrole.obj" class="btn btn-default">View Roles</a>
       
                                     </div>
@@ -198,6 +198,22 @@ function validateRole(form) {
         textInput = textInput.replace(/[^A-Za-z- ]*$/gm, ""); 
         element.value = textInput;
     }
+    
+        $('form').submit(function () {
+            var textInput = $('#rolename').val();
+            
+            // Remove characters that are not alphabets
+            var cleanedInput = textInput.replace(/[^A-Za-z]/g, "");
+
+            // You can also display an alert or perform additional validation if needed
+            if (textInput !== cleanedInput) {
+                document.getElementById("errrole").innerHTML = "&nbsp;&nbsp;&nbsp; Only alphabetic are allowed!";
+                return false; // Cancel form submission
+            }
+            // Form submission will proceed if the input is valid
+            return true;
+    });
+
 </script>
 </body>
 </html>
