@@ -5083,7 +5083,6 @@ public class InsertDataController
            final String b_doc = request.getParameter("BANK_DOC");
            final String id_proof = request.getParameter("ID_PROF");
            final String reg_form = request.getParameter("REG_FORM");
-    
            final FarmerRegModel farmerRegModel = new FarmerRegModel();
            farmerRegModel.setF_ID(id);
            farmerRegModel.setF_NAME(farmerName);

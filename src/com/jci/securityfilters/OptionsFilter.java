@@ -6,6 +6,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,6 +50,18 @@ public class OptionsFilter implements Filter {
         } else {
             // Continue with the filter chain for other methods
             chain.doFilter(request, response);
+        }
+        
+        Cookie[] cookies = httpRequest.getCookies();
+        if (cookies != null) {
+            // Loop through cookies and set SameSite attribute
+            for (Cookie cookie : cookies) {
+            	
+                cookie.setSecure(true); // Use 'true' if your site is served over HTTPS
+                String httpOnlyAttribute = "HttpOnly";
+                String sameSiteAttribute = "SameSite=Strict"; // or "SameSite=Lax" depending on your requirements
+                httpResponse.addHeader("Set-Cookie", cookie.getName() + "=" + cookie.getValue() + "; " + sameSiteAttribute + "; " + httpOnlyAttribute);
+            }
         }
     }
 

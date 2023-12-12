@@ -7,7 +7,7 @@
 	type="text/javascript"></script>
 <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
 	type="text/javascript"></script>
-<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+<script src="./assets/vendors/metisMenu/dist/metisMenu.miR.js"
 	type="text/javascript"></script>
 
 </head>
