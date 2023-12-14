@@ -72,4 +72,24 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
     	}
 		   return actions;
 }
+	
+	
+	
+	@Override
+	public String getactionPer(Integer userRole) {
+		 String actionpermission = ""; 
+		try {
+    	   String querystr = "select action_permissions from jciuserprivilege where role_Id = '"+userRole+"'";
+    	   Session session = sessionFactory.getCurrentSession();
+    	   Transaction tx = session.beginTransaction();
+    	   SQLQuery query = session.createSQLQuery(querystr);
+    	   actionpermission = query.list().get(0).toString();
+    	   System.err.println("actionpermission=="+actionpermission);
+		}
+		
+		catch(Exception e) {
+    		System.out.println(e.getStackTrace());
+    	}
+		   return actionpermission;
+	}
 }

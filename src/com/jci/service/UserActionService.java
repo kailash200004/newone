@@ -11,5 +11,8 @@ public interface UserActionService {
 	void create(UserActionModel useraction);
 
 	List<UserActionModel> getAll();
+	
+	public 	Integer getactionid(String useraction);
+
 
 }

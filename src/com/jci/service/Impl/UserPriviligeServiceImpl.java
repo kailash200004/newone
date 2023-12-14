@@ -26,5 +26,12 @@ public class UserPriviligeServiceImpl implements UserPriviligeService {
 	public List<String> getuserpriviligeajaxallData() {
 		return userpriviligedao.getuserpriviligeajaxallData();
 	}
+	
+
+	@Override
+	public String getactionPer(Integer userRole) {
+		return userpriviligedao.getactionPer(userRole);
+	}
+
 
 }

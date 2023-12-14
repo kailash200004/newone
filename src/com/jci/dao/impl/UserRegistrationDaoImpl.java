@@ -446,24 +446,12 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	@Override
 	public String checkConcurrentlogin(String email) {
 		// TODO Auto-generated method stub
-		ConcurrentLoginModel concurrentloging = new ConcurrentLoginModel();
-		String querystr = "select flag from checkConcurrentlogin where email='" + email + "'";
+		String querystr = "select password from jciumt where email='" + email + "'";
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(querystr);
-		String flag = (String)query.uniqueResult();
-		System.err.println("flag"+flag);
-		 if(flag==null)
-         {
-				System.err.println("innnnnn"+flag);
-
-			 concurrentloging.setEmail(email);
-			 concurrentloging.setFlag("login");
-			 currentSession().save(concurrentloging);
-				System.err.println("outtttttttt"+flag);
-
-			 flag = "";
-         }
-		return flag;
+		String password = (String)query.uniqueResult();
+		System.err.println("flag"+password);
+		return password;
 	}
 
 	@Override
@@ -480,10 +468,18 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	}
 
 	@Override
-	public void updateConcurrentlogin(String email) {
+	public void updateConcurrentlogin(String email,String set) {
 		// TODO Auto-generated method stub
 		 try {
-				String hql = "update checkConcurrentlogin set flag = 'login' where email ='"+email+"'";
+			 String hql = "";
+			 if(set.equals("0"))
+			 {
+					 hql = "update jciumt set lockedchances = '0' where email ='"+email+"'";
+			 }
+			 else 
+			 {
+					 hql = "update jciumt set lockedchances = '1' where email ='"+email+"'";
+			 }
 				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 			} catch (Exception e) {
 				System.out.println(e.getLocalizedMessage());

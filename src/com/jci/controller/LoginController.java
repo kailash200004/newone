@@ -6,7 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,6 +30,14 @@ public class LoginController {
 
 	@Autowired
 	UserRegistrationService userRegService;
+	
+	@ExceptionHandler(Exception.class)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
+    public String handleException(Exception e, Model model, HttpSession session) {
+        model.addAttribute("errorMessage", "Internal Server Error");
+       return "errorPage";
+    }
+
 
 	@RequestMapping("index")
 	public ModelAndView login(HttpServletRequest request){
@@ -83,7 +94,9 @@ public class LoginController {
                      else
                          {
                     	        useremail1 = email;
-                                userRegService.updateConcurrentlogin(email);
+                    	        String set0 = "0";
+                                userRegService.updateConcurrentlogin(email,set0);
+                                //userRegService.checkConcurrentlogin(email);
                                 int refId = userRegService.getRefId(email);
                                 int roleId = userRegService.getUserRoleId(refId);
                                 String rolename = userRegService.getUserId(refId);
@@ -112,6 +125,7 @@ public class LoginController {
                                 session.setAttribute("refId", refId);
                                 session.setAttribute("rolename", rolename);
                                 session.setAttribute("dpc_center", dpc_center);
+                                session.setAttribute("userpass", password);
                                 //session.setAttribute("Concurrentloginflag",flag);
                                 
 

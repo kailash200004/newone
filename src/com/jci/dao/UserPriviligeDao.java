@@ -14,6 +14,6 @@ public interface UserPriviligeDao {
 
 	public String getUserPrivilegeListing(int role_Id);
 	public List<String> getuserpriviligeajaxallData();
-	
+	public String getactionPer(Integer userRole);
 
 }

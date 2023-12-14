@@ -30,5 +30,5 @@ public interface UserRegistrationService {
 	public String getzoneId(String usrname);
 	public String checkConcurrentlogin(String email);
 	public void updateFlagInDatabase(String flag, String email);
-	public void updateConcurrentlogin(String email);
+	public void updateConcurrentlogin(String email, String set);
 }

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="com.jci.controller.InsertDataController"%>
+
 <html lang="en">
 <head>
 <script src="./assets/vendors/jquery/dist/jquery.min.js"
@@ -45,10 +47,9 @@ body {
 	<div class="font-strong">Welcome <br>
 	<span style="color: #ffc107;">
 	<%
+	    String userpass = (String)request.getSession().getAttribute("userpass");
 		String Email=(String)request.getSession().getAttribute("usrname");
-	
 		out.println(Email);
-		
 		if(Email==null){
 			//String redirectURL = "http://49.50.79.121:8080/jcicms/index.obj";
 		    String redirectURL = "http://localhost:8080/jciadmin/index.obj";
@@ -211,6 +212,21 @@ body {
 	<script>
 
 		$(document).ready(function() {
+			
+			var passuser = '<%= userpass %>';
+			//alert(passuser);
+			$.ajax({
+				url : "checksessionpass.obj",
+				type : "GET",
+				async:false,
+				success : function(result) {
+					var updatedpass = jQuery.parseJSON(result);
+					if(updatedpass != passuser)
+						{
+						window.location.href = "index.obj";	
+					    }
+				}
+			});
 		for(var i=1; i<=58;i++){
 			$("#o"+i).hide();
 			
@@ -266,7 +282,7 @@ $.ajax({
 });
 
 
-</script>
+</script>	
 	<!-- <div class="foter-bottom">
 		<div>
 			<img src="assets/img/icon1.png" class="sidebar-item-icon"><span>Logout</span>

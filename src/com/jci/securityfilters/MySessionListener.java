@@ -1,5 +1,6 @@
 package com.jci.securityfilters;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -18,6 +19,14 @@ public class MySessionListener implements HttpSessionListener {
 	@Autowired
 	UserRegistrationService userRegService;
 	
+	@Autowired
+	HttpServletRequest request;
+	
+	
+	protected Session currentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         // Session creation logic, if needed
@@ -32,14 +41,14 @@ public class MySessionListener implements HttpSessionListener {
         // Retrieve user information from the session
        // String flag = (String)se.getSession().getAttribute("Concurrentloginflag");
         //String email = (String)se.getSession().getAttribute("usrname");
-    	Session session = sessionFactory.openSession();
-    	   String email = LoginController.useremail1;
-           System.err.println("repo"+email);
+    	String email =(String)request.getSession().getAttribute("usrname");
+
+    	System.err.println("repo"+email);
 
            String hql = "update checkConcurrentlogin set flag = 'logout' where email ='"+email+"'";
-           int rowsUpdated = session.createSQLQuery(hql)
+           int rowsUpdated = (int) currentSession().createSQLQuery(hql)
                .setParameter("email", email)
-               .executeUpdate();
+               .uniqueResult();
            
              //String hql = "update checkConcurrentlogin set flag = 'logout' where email ='"+email+"'";
              System.out.println("repo"+email);

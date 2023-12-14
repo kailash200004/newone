@@ -31,5 +31,5 @@ public interface UserRegistrationDao {
 	public String getoldpassword(int id);
 	public String checkConcurrentlogin(String email);
 	public void updateFlagInDatabase(String flag,String email);
-	public void updateConcurrentlogin(String email);
+	public void updateConcurrentlogin(String email, String set);
 }

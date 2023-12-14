@@ -153,9 +153,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
 	}
 
 	@Override
-	public void updateConcurrentlogin(String email) {
+	public void updateConcurrentlogin(String email,String set) {
 		// TODO Auto-generated method stub
-		userRegistrationDao.updateConcurrentlogin(email);
+		userRegistrationDao.updateConcurrentlogin(email,set);
 
 	}
 

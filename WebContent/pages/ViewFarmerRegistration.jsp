@@ -74,6 +74,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 				 List <FarmerRegModelDTO>  allFarmersList = (List <FarmerRegModelDTO>) request.getAttribute("allFarmersList");
 			%>
 			<form action ="findByDpc.obj" onsubmit ="return findByDpc()">
+			<span>${msg}</span>
 			<div class="row">
 				<div class="col-sm-3 form-group">
 											<label id="zoneLabel" class="required">Zone</label>  &nbsp;&nbsp;&nbsp; <span id="errZone" name="errZone" class="text-danger"> </span>

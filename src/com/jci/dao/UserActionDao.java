@@ -13,5 +13,8 @@ public interface UserActionDao {
 	void create(UserActionModel useraction);
 
 	List<UserActionModel> getAll();
+	
+	public 	Integer getactionid(String useraction);
+
 
 }

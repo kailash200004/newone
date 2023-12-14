@@ -26,4 +26,9 @@ public class UserActionServiceImpl implements UserActionService {
 		return useractiondao.getAll();
 	}
 
+	@Override
+	public Integer getactionid(String useraction) {
+		return useractiondao.getactionid(useraction);
+	}
+	
 }

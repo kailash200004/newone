@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -77,34 +80,12 @@ public class InsertDataController_2 {
 	 RawJuteProcurementAndPaymentService rawJuteProcurAndPayService;
 	
 	
-    
-	  
-	/*
-	 * @RequestMapping("savepcsoentry") public ModelAndView
-	 * saveUserMid(HttpServletRequest request, RedirectAttributes
-	 * redirectAttributes) { try {
-	 * 
-	 * String referenceno = request.getParameter("referenceno"); String
-	 * referencedate = request.getParameter("referencedate"); String pcsodate =
-	 * request.getParameter("pcsodate"); String millcode =
-	 * request.getParameter("millcode"); String totalallocation =
-	 * request.getParameter("totalallocation");
-	 * 
-	 * //EntryofpcsoModel entryofpcso = new EntryofpcsoModel(); EntryofpcsoModel
-	 * entryofpcso = new EntryofpcsoModel();
-	 * entryofpcso.setReference_no(referenceno); SimpleDateFormat formatter1 = new
-	 * SimpleDateFormat("yyyy-MM-dd"); Date refdate =
-	 * formatter1.parse(referencedate); entryofpcso.setReference_date(refdate); Date
-	 * pcsodt = formatter1.parse(pcsodate); entryofpcso.setPcso_date(pcsodt);
-	 * entryofpcso.setMill_code(millcode);
-	 * entryofpcso.setTotal_allocation(totalallocation);
-	 * 
-	 * pcsoentryservice.create(entryofpcso);
-	 * redirectAttributes.addFlashAttribute("msg",
-	 * "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-	 * + ""); } catch (Exception e) { System.out.println(e); } return new
-	 * ModelAndView(new RedirectView("entryofpcso.obj")); }
-	 */
+	 private boolean isStringValid(String input) {
+	        String regex = ".*[<>].*";
+	        Pattern pattern = Pattern.compile(regex);
+	        Matcher matcher = pattern.matcher(input);
+	        return matcher.matches();
+	    }
 
 	  
 	 
@@ -119,17 +100,35 @@ public class InsertDataController_2 {
 		 if(username == null) {
 		     	mv = new ModelAndView("index");
 		         }
-		  try {
-	   		   String userRole= (String)request.getSession().getAttribute("rolename");
-	   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)) {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	   			   return mv=new ModelAndView("index");
+		 try {
+	   		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
+	   		   String userprivilige = "userprivilige";
+	   		   String actionPer = userpriviligeservice.getactionPer(userRole);
+	   		  Integer actionid = useractionservice.getactionid(userprivilige);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
 	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
 			  }
 
-	  catch(Exception e) {
-	   		   e.printStackTrace();
-	   	   }
+
+catch(Exception e) {
+ 		   e.printStackTrace();
+ 	   }
 		 return mv;
 	}
 	
@@ -140,6 +139,11 @@ public class InsertDataController_2 {
 		try {
 			String userrole = request.getParameter("userrole");
 			String useraction = request.getParameter("action");
+			if(isStringValid(userrole) || isStringValid(useraction))
+			  {
+			    redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+			    return new ModelAndView((View)new RedirectView("userprivilige.obj"));
+			  }
 			UserPriviligeModel userprivilige = new UserPriviligeModel();
 			userprivilige.setRole_Id(userrole);
 			userprivilige.setAction_permissions(useraction);
@@ -170,16 +174,38 @@ public class InsertDataController_2 {
 		if(username == null) {
 	     	mv = new ModelAndView("index");
 	         }
+    
 		 try {
-	   		   String userRole= (String)request.getSession().getAttribute("rolename");
-	   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole) || "RO Manager".equals(userRole) || "Super Admin_IT Deptt".equals(userRole) || "DPC Manager Web".equals(userRole)) {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	   			   return mv=new ModelAndView("index");
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String userrole = "userrole";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(userrole);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
 	   		   }
-		  }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
+			  }
+
 		   catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
+   		   e.printStackTrace();
+   	   }
 		return mv;
 	}
 	
@@ -214,6 +240,11 @@ public class InsertDataController_2 {
                String usertype = request.getParameter("usertype");
                String rolename = request.getParameter("rolename");
                String roletype = request.getParameter("roletype");
+               if(isStringValid(usertype) || isStringValid(rolename) ||isStringValid(roletype))
+               {
+                   redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                   return new ModelAndView((View)new RedirectView("userrole.obj"));
+               }
                UserRoleModel userrole = new UserRoleModel();               
                userrole.setRole_name(rolename);
                userrole.setUser_type(usertype);
@@ -253,17 +284,36 @@ public class InsertDataController_2 {
 	     	mv = new ModelAndView("index");
 	         }
 		 try {
-	   		   String userRole= (String)request.getSession().getAttribute("rolename");
-	   		   if("DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Operation".equals(userRole)) {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	   			   return mv=new ModelAndView("index");
+	   		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
+	   		System.out.println("userRole=="+userRole);
+	   		   String useraction = "useraction";
+	   		   String actionPer = userpriviligeservice.getactionPer(userRole);
+	   		  Integer actionid = useractionservice.getactionid(useraction);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
 	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
 			  }
 
 	  catch(Exception e) {
 	   		   e.printStackTrace();
 	   	   }
-		return mv;
+			return mv;
+		
 	}
 	
 	@RequestMapping("saveuseraction")  
@@ -272,7 +322,11 @@ public class InsertDataController_2 {
 		try {
 			String actionname = request.getParameter("actionname");
 			String actionstatus = request.getParameter("actionstatus");
-			
+			if(isStringValid(actionname) || isStringValid(actionstatus))
+			  {
+			    redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+			    return new ModelAndView((View)new RedirectView("useraction.obj"));
+			  }
 			UserActionModel useraction = new UserActionModel();
 			
 			useraction.setAction_name(actionname);
