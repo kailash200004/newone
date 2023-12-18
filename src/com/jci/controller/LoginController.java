@@ -155,6 +155,7 @@ public class LoginController {
                                 session.setAttribute("rolename", rolename);
                                 session.setAttribute("dpc_center", dpc_center);
                                 session.setAttribute("userpass", password);
+                                System.out.println("check");
                                 //session.setAttribute("Concurrentloginflag",flag);
                                 
 
