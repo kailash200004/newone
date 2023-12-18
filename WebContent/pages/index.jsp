@@ -31,6 +31,7 @@
                   <center>
                         <img src="assets\img\logos\main_logo.png">
                   </center>
+                   <span>${msg}</span>
                   <div class="form-group">
                         <div class="input-group-icon right">
                               <div class="input-icon">

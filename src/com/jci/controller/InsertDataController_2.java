@@ -172,7 +172,7 @@ catch(Exception e) {
 	{   String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userrole");
 		if(username == null) {
-	     	mv = new ModelAndView("index");
+			return mv = new ModelAndView("index");
 	         }
     
 		 try {

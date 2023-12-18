@@ -31,6 +31,7 @@
                   <center>
                         <img src="assets\img\logos\main_logo.png">
                   </center>
+                  <span>${msg}</span>
                   <div class="form-group">
                         <div class="input-group-icon right">
                               <div class="input-icon">
@@ -56,7 +57,7 @@
                   </div>
 
                   <div class="form-group">
-                        <button class="btn btn-info btn-block" type="submit">Login</button>
+                        <button class="btn btn-info btn-block" type="submit" id="submitBtn">Login</button>
                   </div>
 
             </form>
@@ -81,6 +82,18 @@
       <!-- CORE SCRIPTS-->
       <script src="assets/js/app.js" type="text/javascript"></script>
       <!-- PAGE LEVEL SCRIPTS-->
+            <script>
+      $(document).on('click' , '#submitBtn' , function(){
+      var response = grecaptcha.getResponse();
+      
+      if(response.length === 0){
+            alert("Please verify you are not robot");
+            return false;
+      }
+      
+      })
+      </script>
+      
       <script type="text/javascript">
             $(function() {
                   $('#login-form').validate({

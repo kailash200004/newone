@@ -243,7 +243,7 @@ public class InsertDataController
     	 String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("dashboard");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -253,7 +253,7 @@ public class InsertDataController
     	String usersession =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView("FarmerRegistration");
         if(usersession == null) {
-        mv = new ModelAndView("index");
+        return mv = new ModelAndView("index");
         }
         else {
         	try {
@@ -286,7 +286,7 @@ public class InsertDataController
     	 String username =(String)request.getSession().getAttribute("usrname");
          ModelAndView mv = new ModelAndView("addFarmer");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -390,7 +390,7 @@ public class InsertDataController
     	 String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("addOrganisation");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -400,7 +400,7 @@ public class InsertDataController
     	 ModelAndView mv = new ModelAndView("ropeMaking");
     	 String username =(String)request.getSession().getAttribute("usrname");
     	 if(username == null) {
-             mv = new ModelAndView("index");
+             return mv = new ModelAndView("index");
              }
      	
     	try {
@@ -445,7 +445,7 @@ public class InsertDataController
         ModelAndView mv = new ModelAndView("organisationLists");
     	String username =(String)request.getSession().getAttribute("usrname");
     	 if(username == null) {
-             mv = new ModelAndView("index");
+             return mv = new ModelAndView("index");
              }
   
         final List<AddOrganizationModel> organisationList = (List<AddOrganizationModel>)this.addOrganisationService.getAll();
@@ -485,7 +485,7 @@ public class InsertDataController
         ModelAndView mv = new ModelAndView("RopeMakingListing");
     	String username =(String)request.getSession().getAttribute("usrname");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         else {
     	try {
@@ -584,7 +584,7 @@ public class InsertDataController
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("addJciSales");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -619,7 +619,7 @@ public class InsertDataController
         ModelAndView mv = new ModelAndView("FarmerRegistration");
         mv.addObject("dpcCode", (Object)"0122");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -839,7 +839,7 @@ public class InsertDataController
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("RawJutePaymentAndProcurement");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         final List<String> farmerNo = (List<String>)this.rawJuteProcurAndPayService.getfarmerno((String)request.getSession().getAttribute("dpcId"));
         mv.addObject("farmerNo", (Object)farmerNo);
@@ -852,7 +852,7 @@ public class InsertDataController
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("balePrepare");
     	if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
         mv.addObject("allDpcList", (Object)allDpcList);   
@@ -915,7 +915,7 @@ try {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("BalePrepList");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         try {
         final List<BalePreparation> bale = (List<BalePreparation>)this.balepreparationservice.getAll();
@@ -956,7 +956,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("EditBale");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         try {
         if (request.getParameter("id") != null) {
@@ -986,7 +986,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("addJba");
     	if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
  	   try{final List<AreaDetailCode> AreaCode = (List<AreaDetailCode>)this.areaService.getAll();
        mv.addObject("AreaCode", (Object)AreaCode);
@@ -1038,9 +1038,12 @@ catch(Exception e) {
             final String jutevariety = request.getParameter("jutevariety");
             final String areacode = request.getParameter("areacode");
             final String cropyr = request.getParameter("cropyr");
-            final int northern = Integer.parseInt(request.getParameter("northernprice"));
-            final int seminorthern = Integer.parseInt(request.getParameter("seminorthernprice"));
-            final int bihar = Integer.parseInt(request.getParameter("biharprice"));
+            String nbaseproceString = request.getParameter("northernprice");
+            String sembaspriceString = request.getParameter("seminorthernprice");
+            String biharpriceString = request.getParameter("biharprice");
+            final int northern = Integer.parseInt(nbaseproceString);
+            final int seminorthern = Integer.parseInt(sembaspriceString);
+            final int bihar = Integer.parseInt(biharpriceString);
             int grade1;
             int grade2;
             int grade3;
@@ -1072,7 +1075,12 @@ catch(Exception e) {
                 grade7 = Integer.parseInt(request.getParameter("gradewisepp15"));
                 grade8 = Integer.parseInt(request.getParameter("gradewisepp16"));
             }
-            
+
+            if(isStringValid(datejba) || isStringValid(jutevariety) || isStringValid(areacode) || isStringValid(cropyr) || isStringValid(nbaseproceString)|| isStringValid(sembaspriceString) || isStringValid(biharpriceString))
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("addJba.obj"));
+                }
             td6Gradediff = grade5-grade6;
             
             final JbaModel jbapri = new JbaModel();
@@ -1229,7 +1237,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("JBAList");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         try {
             String dpcid =(String)request.getSession().getAttribute("dpcId");
@@ -1278,7 +1286,7 @@ catch(Exception e) {
         ModelAndView mv = new ModelAndView("EditJBA");
         String username =(String)request.getSession().getAttribute("usrname");
         if(username == null) {
-            mv = new ModelAndView("index");
+            return mv = new ModelAndView("index");
             }
         try {
         if (request.getParameter("id") != null) {
@@ -1323,6 +1331,12 @@ catch(Exception e) {
             final double grade6 = Double.parseDouble(request.getParameter("gradewisepp6"));
             final double grade7 = Double.parseDouble(request.getParameter("gradewisepp7"));
             final double grade8 = Double.parseDouble(request.getParameter("gradewisepp8"));
+            if(isStringValid(id) || isStringValid(datejba) ||isStringValid(jutevariety) ||isStringValid(areaname) || isStringValid(areacode) || isStringValid(cropyr)
+                	)
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("JbaPriceList.obj"));
+                }
             final JbaModel jbapri = new JbaModel();
             jbapri.setId(Integer.parseInt(id));
             jbapri.setJbaDate(datejba);
@@ -1580,7 +1594,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView("juteProcurementList");
     	if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         List<RawJuteProcurementAndPayment> procurementList = new ArrayList<RawJuteProcurementAndPayment>();
        
@@ -1627,7 +1641,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("DailyPurchaseConf");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -1759,7 +1773,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("dailyPurchaseLIst");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	 return mv = new ModelAndView("index");
             }
     	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
@@ -1848,7 +1862,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("UserRegistration");
     	   if(username == null) {
-           	mv = new ModelAndView("index");
+    		    return mv = new ModelAndView("index");
                }
     	   try {
     	       final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
@@ -1955,6 +1969,9 @@ catch(Exception e) {
         }
         catch (Exception ex) {
         	ex.printStackTrace();
+            redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+            return new ModelAndView((View)new RedirectView("UserRegistration.obj"));
+         
         }
        
         return new ModelAndView((View)new RedirectView("UserRegistration.obj"));
@@ -1973,7 +1990,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewmarketArrival");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	 return mv = new ModelAndView("index");
             }
         try {
         	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
@@ -2020,7 +2037,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("ViewFarmerRegistration");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	 return mv = new ModelAndView("index");
             }
         try {
             String dcpid = (String)request.getSession().getAttribute("dpcId"); 
@@ -2065,7 +2082,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewjcisales");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	 return mv = new ModelAndView("index");
             }
         try {
         final List<SalesModel> allviewsalesList = (List<SalesModel>)this.salesService.getAll();
@@ -2090,7 +2107,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewbalePreparation");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	 return mv = new ModelAndView("index");
             }
         try {
         final int id = Integer.parseInt(request.getParameter("id"));
@@ -2108,7 +2125,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView();
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
         String key = LoginController.secretkey;
@@ -2251,7 +2268,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editfarmerRegistration");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
         if (request.getParameter("id") != null) {
@@ -2274,7 +2291,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewFarmerDetail");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
         if (request.getParameter("id") != null) {
@@ -2366,7 +2383,7 @@ catch(Exception e) {
             mv.addObject("editGradesPrice", (Object)msppricecal);
         }
         if(username == null) {
-             mv = new ModelAndView("index");
+             return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -2389,6 +2406,13 @@ catch(Exception e) {
         final String grade6 = request.getParameter("g5");
         final String grade7 = request.getParameter("g6");
         final String grade8 = request.getParameter("g7");
+        if(isStringValid(jutevariety) || isStringValid(cropyr) ||isStringValid(grade0) ||isStringValid(grade2) || isStringValid(grade3) || isStringValid(grade4)
+                || isStringValid(grade5) || isStringValid(grade6) ||isStringValid(grade7) || isStringValid(grade8)
+            	)
+            {
+              redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+              return new ModelAndView((View)new RedirectView("editGradesPrice.obj"));
+            }
         final MSPPriceCalculationModel mspPriceCalculationModel = new MSPPriceCalculationModel();
         mspPriceCalculationModel.setmsp_id(mspid);
        
@@ -2445,7 +2469,7 @@ catch(Exception e) {
         mv.addObject("msppriceList", (Object)msppriceList);
         redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Data deleted successfully.</div>\r\n");
         if(username == null) {
-             mv = new ModelAndView("index");
+             return mv = new ModelAndView("index");
             }
         return new ModelAndView((View)new RedirectView("mspGradesPriceList.obj"));
         }
@@ -2596,6 +2620,13 @@ catch(Exception e) {
             final String seriestoend = request.getParameter("seriestoend");
             final String zone = request.getParameter("zone");
             final String region = request.getParameter("region");
+            if(isStringValid(dpccode) || isStringValid(dateofreceipt) || isStringValid(slipreceived) || isStringValid(seriesstartfrom) || isStringValid(seriestoend)
+                    || isStringValid(zone) || isStringValid(region))
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("Distributionoftallyslips.obj"));
+                }
+            
             final DistributionoftallyslipModel addDistributionoftallyslipModel = new DistributionoftallyslipModel();
             addDistributionoftallyslipModel.setDpccode(dpccode);
             addDistributionoftallyslipModel.setDateofreceipt(dateofreceipt);
@@ -2620,7 +2651,7 @@ catch(Exception e) {
     	ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
     	String username =(String)request.getSession().getAttribute("usrname");
     	if(username == null) {
-         	mv = new ModelAndView("index");
+         	return mv = new ModelAndView("index");
              }
     	try {
             String dpcId =(String)request.getSession().getAttribute("dpcId");
@@ -2680,7 +2711,7 @@ catch(Exception e) {
         mv.addObject("UserRegistrationList", (Object)allUserRegistration);
     	}
         else{
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
     	 try {
    		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
@@ -2742,7 +2773,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("procurementList");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
         final List<RawJuteProcurementAndPayment> allProcurementList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
@@ -2759,7 +2790,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("verifyTallySlip");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         final String tally = request.getParameter("tally");
         mv.addObject("tally", (Object)tally);
@@ -2772,7 +2803,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("tallyapproval");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final String farmerRegNo = request.getParameter("farmerRegNo");
@@ -3056,7 +3087,7 @@ catch(Exception e) {
 	 * ModelAndView("verifiedTallySlipList"); final List<VerifyTallySlip> verifyList
 	 * = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", dpcId);
 	 * mv.addObject("verifyTallySliList", (Object)verifyList); if(username == null)
-	 * { mv = new ModelAndView("index"); } return mv; }
+	 * { return mv = new ModelAndView("index"); } return mv; }
 	 */
     
     @RequestMapping({ "viewVerifiedTallySlipList" })
@@ -3064,7 +3095,7 @@ catch(Exception e) {
        String username =(String)request.getSession().getAttribute("usrname");
        ModelAndView mv = new ModelAndView("verifiedTallySlipList");
        if(username == null) {
-           mv = new ModelAndView("index");
+           return mv = new ModelAndView("index");
           }
        try {
 
@@ -3090,7 +3121,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final List<CommercialJuteVarietyModel> commercialList = (List<CommercialJuteVarietyModel>)this.commercialJuteVarietyGradesPriceService.getAll();
@@ -3128,7 +3159,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("rulingMarket");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         return mv;
     }
@@ -3279,14 +3310,46 @@ catch(Exception e) {
     }
     
     @RequestMapping({ "bin" })
-    public ModelAndView bin(final HttpServletRequest request) {
+    public ModelAndView bin(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
       //  final List<RawJuteProcurementAndPayment> binNumberList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.getAll();
         ModelAndView mv = new ModelAndView("bin");
        // mv.addObject("binNumberList", (Object)binNumberList);
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
+        try {
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String bin = "bin";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(bin);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
+	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
+			  }
+
+		   catch(Exception e) {
+		   e.printStackTrace();
+	   }
+
         return mv;
     }
     
@@ -3310,6 +3373,12 @@ catch(Exception e) {
             final String carryForwardLoose = request.getParameter("carryforwardloose");
             final String carryForwardRope = request.getParameter("carryforwardRope");
             final String date = request.getParameter("date");
+            if(isStringValid(nameOfDpc) || isStringValid(cropyear) ||isStringValid(binNumber) ||isStringValid(jutevariety) || isStringValid(basis) || isStringValid(carryForwardLoose)
+                    || isStringValid(carryForwardRope) || isStringValid(date))
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("bin.obj"));
+                }
             final BatchIdentificationModel batch = new BatchIdentificationModel();
             batch.setDpcnames(nameOfDpc);
             batch.setCropyr(cropyear);
@@ -3339,7 +3408,7 @@ catch(Exception e) {
     }
     
     @RequestMapping({ "binList" })
-    public ModelAndView binList(final HttpServletRequest request) {
+    public ModelAndView binList(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	if(username == null) {
         	return new ModelAndView("index");
@@ -3351,7 +3420,38 @@ catch(Exception e) {
         ModelAndView mv = new ModelAndView("binList");
         final List<BatchIdentificationModel> batch = (List<BatchIdentificationModel>)this.batchService.getAll(placeofactivity, regionId, zoneId);
         mv.addObject("batch", (Object)batch);
-        
+        try {
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String binList = "binList";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(binList);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
+	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
+			  }
+
+		   catch(Exception e) {
+		   e.printStackTrace();
+	   }
+
         return mv;
     }
     
@@ -3447,7 +3547,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewbalePreparation");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
         	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
@@ -3559,7 +3659,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editJuteProcurement");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final String id = request.getParameter("id");
@@ -3627,7 +3727,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView();
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         final int id = Integer.parseInt(request.getParameter("id"));
         final FarmerRegModel farmerDetails = this.farmerRegService.find(id);
@@ -3642,7 +3742,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewDistributionoftallyslips");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         String dpcId =(String)request.getSession().getAttribute("dpcId");
         try {
@@ -3661,7 +3761,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewCommercialCeilingPrice");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final String id = request.getParameter("id");
@@ -3702,7 +3802,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
        ModelAndView mv = new ModelAndView("editBalePreparation");
        if(username == null) {
-       	mv = new ModelAndView("index");
+       	return mv = new ModelAndView("index");
            }
         try {
             final String id = request.getParameter("id");
@@ -3734,6 +3834,13 @@ catch(Exception e) {
             final String slip_no_to = request.getParameter("slip_no_to");
             final String bale_no = request.getParameter("bale_no");
             final String jute_grade = request.getParameter("jute_grade");
+            if(isStringValid(baleid) || isStringValid(place_of_packing) ||isStringValid(crop_year) ||isStringValid(bin_no) || isStringValid(basis) || isStringValid(jute_variety)
+                    || isStringValid(slip_no_from) || isStringValid(slip_no_to) ||isStringValid(bale_no) ||isStringValid(jute_grade)
+                	)
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("viewbalePreparation.obj"));
+                }
           //  System.out.println(">>>>>data>>>>>>>>>>>baleid:" + baleid + "place_of_packing:" + place_of_packing + "crop_year:" + crop_year + "bin_no:" + bin_no + "basis:" + basis + "jute_variety: " + jute_variety + "slip_no_from:" + slip_no_from + "slip_no_from:" + slip_no_from + "slip_no_to:" + slip_no_to + "bale_no:" + bale_no + "jute_grade:" + jute_grade);
             final BalePreparation balePreparation = new BalePreparation();
             balePreparation.setBaleId(Integer.parseInt(baleid));
@@ -3815,6 +3922,13 @@ catch(Exception e) {
             final String regionId = request.getParameter("region_id");
             final String refid = request.getParameter("refid");
             final String binno = request.getParameter("binno");
+            if(isStringValid(id) || isStringValid(basis) || isStringValid(placeofactivity) || isStringValid(jutevariety) || isStringValid(ropemade)
+                    || isStringValid(ropeUsed) || isStringValid(balance) ||isStringValid(regionId) ||isStringValid(refid) || isStringValid(binno)
+                	)
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("ropeMakingListing.obj"));
+                }
             final RopeMakingModel addRopeMaking = new RopeMakingModel();
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             final LocalDateTime now = LocalDateTime.now();
@@ -3848,7 +3962,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editDailypurchase");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final String id = request.getParameter("id");
@@ -4071,7 +4185,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editcommercialprice");
         if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
         try {
             final String id = request.getParameter("id");
@@ -4129,7 +4243,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView("mspPriceCalculation");
     	 if(username == null) {
-         	mv = new ModelAndView("index");
+         	return mv = new ModelAndView("index");
              }
         try {
             final String jutevariety = request.getParameter("jutevariety");
@@ -4146,6 +4260,12 @@ catch(Exception e) {
             final String grade6 = request.getParameter("g5");
             final String grade7 = request.getParameter("g6");
             final String grade8 = request.getParameter("g7");
+            if(isStringValid(jutevariety) || isStringValid(cropyr) ||isStringValid(dubjuteVarietys) ||isStringValid(dubcropyr) || isStringValid(grade0) || isStringValid(grade2)
+                    || isStringValid(grade3) || isStringValid(grade4) ||isStringValid(grade5) ||isStringValid(grade6) || isStringValid(grade7) || isStringValid(grade8))
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("mspPriceCalculation.obj"));
+                }
             final MSPPriceCalculationModel mspPriceCalculationModel = new MSPPriceCalculationModel();
             mspPriceCalculationModel.setJute_variety(jutevariety);
             mspPriceCalculationModel.setCrop_yr(cropyr);
@@ -4294,6 +4414,13 @@ catch(Exception e) {
             final String grade6 = request.getParameter("grade5");
             final String grade7 = request.getParameter("grade6");
             final String grade8 = request.getParameter("grade7");
+            if(isStringValid(zone) || isStringValid(region) ||isStringValid(dpc) ||isStringValid(jutevariety) || isStringValid(radioselect) || isStringValid(entryDate)
+                    || isStringValid(effectDate) || isStringValid(cqty) ||isStringValid(cropyr) ||isStringValid(cprice) || isStringValid(grade0) || isStringValid(grade2) || isStringValid(grade3) ||isStringValid(grade4) || isStringValid(grade5) || isStringValid(grade6) || isStringValid(grade7)
+                	)
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("commercialPriceCalculation.obj"));
+                }
             final CommercialJuteVarietyModel commercialJuteVarietyModel = new CommercialJuteVarietyModel();
             commercialJuteVarietyModel.setJute_variety(jutevariety);
             commercialJuteVarietyModel.setCrop_yr(cropyr);
@@ -4471,6 +4598,13 @@ catch(Exception e) {
             final String creation_date = request.getParameter("creation_date");
             final String jute_grade = request.getParameter("jute_grade");
             final BalePreparation balePreparation = new BalePreparation();
+            if(isStringValid(place_of_packing) || isStringValid(crop_year) ||isStringValid(bin_no) ||isStringValid(basis) || isStringValid(jute_variety) || isStringValid(slip_no_from)
+                    || isStringValid(slip_no_to) || isStringValid(bale_no) ||isStringValid(created_by) ||isStringValid(creation_date) || isStringValid(jute_grade)
+                	)
+                {
+                  redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+                  return new ModelAndView((View)new RedirectView("balePreparation.obj"));
+                }
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             final LocalDateTime now = LocalDateTime.now();
             final String date = dtf.format(now);
@@ -4743,7 +4877,7 @@ catch(Exception e) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView();
     	if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
 	   	String key = LoginController.secretkey;
 	 	String decryptedString = request.getParameter("tally");
@@ -4772,24 +4906,61 @@ catch(Exception e) {
 	}
 
 	@RequestMapping("binPurchasemapping")
-	public ModelAndView binPurchasemapping(HttpServletRequest request) {
+	public ModelAndView binPurchasemapping(HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("Bin_Purchase_mapping");
 		if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
+		 try {
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String binPurchasemapping = "binPurchasemapping";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(binPurchasemapping);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
+	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
+			  }
+
+		   catch(Exception e) {
+ 		   e.printStackTrace();
+ 	   }
 		return mv;
 	}
 
 	@RequestMapping("BinPurchasemapping_mid")
-	public ModelAndView BinPurchasemapping_mid(HttpServletRequest request) {
+	public ModelAndView BinPurchasemapping_mid(HttpServletRequest request, final RedirectAttributes redirectAttributes) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	if(username == null) {
         	return new ModelAndView("index");
             }
 		String cropyr = request.getParameter("cropyr");
 		String dadatepurchasetepurchase = request.getParameter("datepurchase");
-		String binNo = request.getParameter("binNo");		
+		String binNo = request.getParameter("binNo");	
+		   if(isStringValid(cropyr) || isStringValid(dadatepurchasetepurchase) || isStringValid(binNo))
+	            	
+	            {
+	              redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b>Allowed only Alphabates and Numbers!</b> </div>\r\n");
+	              return new ModelAndView((View)new RedirectView("binPurchasemapping.obj"));
+	            }
 		List<BinPurchaseMappingDTO> binPurchaseList = new ArrayList<>();
 		try {
 			binPurchaseList = batchService.GetBinPurchasemappingdetails(cropyr, dadatepurchasetepurchase, binNo);
@@ -4801,6 +4972,7 @@ catch(Exception e) {
 		mv.addObject("binPurchaseList", binPurchaseList);
 		return mv;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "caculateTotalBinPurchase", method = RequestMethod.GET)
 	public String caculateTotalBinPurchase(HttpServletRequest request) {
@@ -4832,12 +5004,43 @@ catch(Exception e) {
 	}
 	
 	@RequestMapping(value="fingain")
-	public ModelAndView fingain(HttpServletRequest request) {
+	public ModelAndView fingain(HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("FinGainAnd WeightGain");
 		if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
+		 try {
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String fingain = "fingain";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(fingain);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
+	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
+			  }
+
+		   catch(Exception e) {
+ 		   e.printStackTrace();
+ 	   }
 		return mv;
 	}
 	
@@ -4864,18 +5067,44 @@ catch(Exception e) {
 	}
 	
 	@RequestMapping("BinListfromDb")
-	public ModelAndView BinListfromDb(HttpServletRequest request) {
+	public ModelAndView BinListfromDb(HttpServletRequest request,RedirectAttributes red) {
 		String username =(String)request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("ViewBinDataFromDb");
 		if(username == null) {
         	return new ModelAndView("index");
             }
 		List<BinListFromDbDTO> binPurchaseList = new ArrayList<>();
 		try {
 			binPurchaseList = batchService.GetBinListFromDb();
+			 Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   System.out.println("roleId===="+roleId);
+	   		   String userrole = "userrole";
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   System.out.println("actionPer=--="+actionPer);
+	   		  Integer actionid = useractionservice.getactionid(userrole);
+	   		  System.out.println("actionid==="+actionid);
+	  		   String idAction =  Integer.toString(actionid);
+	   		String[] stringArray  = actionPer.split(",");
+	   	   int i = 0;
+	   		   for(String action : stringArray) {
+	   	   		   System.err.println("action=="+action);
+	   	   		   if(action.equals(idAction)) {
+	   	   			 i = 1;  
+	   	   		   }
+	   	  
+	   		   }
+	   		   if(i==1) {
+	   			   return mv;
+	   		   }
+	   		   else {
+	   			 red.addFlashAttribute("errorMessage","Access denied");
+	 			   return mv=new ModelAndView("Home");
+	   		   }
+	   	
 		} catch (Exception e) {
 			 System.out.println(e.getLocalizedMessage());
 		}		
-		ModelAndView mv = new ModelAndView("ViewBinDataFromDb");
+	
 		mv.addObject("binPurchaseList", binPurchaseList);
 		
 		return mv;
@@ -4923,7 +5152,7 @@ catch(Exception e) {
 	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userProfile");
 		if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
 		try {
 			boolean flag = true;
@@ -4970,7 +5199,7 @@ catch(Exception e) {
 	{String username =(String)request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("edituserProfile");
 		if(username == null) {
-        	mv = new ModelAndView("index");
+        	return mv = new ModelAndView("index");
             }
 		String key = LoginController.secretkey;
 		String decryptedString = request.getParameter("id");
@@ -5481,7 +5710,7 @@ catch(Exception e) {
       String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editFarmerDetails");
         if(username == null) {
-             mv = new ModelAndView("index");
+             return mv = new ModelAndView("index");
             }
         try {
         if (request.getParameter("id") != null) {
@@ -5736,7 +5965,7 @@ catch(Exception e) {
            String username =(String)request.getSession().getAttribute("usrname");
            ModelAndView mv = new ModelAndView("verifiedHoldTallySlipList");
            if(username == null) {
-               mv = new ModelAndView("index");
+               return mv = new ModelAndView("index");
               }
            try {
 
@@ -5808,7 +6037,7 @@ catch(Exception e) {
 	    	String username =(String)request.getSession().getAttribute("usrname");
 	        ModelAndView mv = new ModelAndView("DetailsMarketArrival");
 	        if(username == null) {
-	        	mv = new ModelAndView("index");
+	        	return mv = new ModelAndView("index");
 	            }
 	        try {
 	        String key = LoginController.secretkey;

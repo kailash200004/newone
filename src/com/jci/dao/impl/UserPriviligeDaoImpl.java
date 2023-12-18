@@ -27,7 +27,32 @@ public class UserPriviligeDaoImpl implements UserPriviligeDao {
 	}
 	@Override
 	public void create(UserPriviligeModel userprivilige) {
-		currentSession().save(userprivilige);
+		
+		String roleid = userprivilige.getRole_Id();
+		String actionpermissionString = userprivilige.getAction_permissions();
+		String dbroleid = "";
+		try {
+	    	   String querystr = "select role_Id from jciuserprivilege where role_Id = '"+roleid+"'";
+	    	   Session session = sessionFactory.getCurrentSession();
+	    	   Transaction tx = session.beginTransaction();
+	    	   SQLQuery query = session.createSQLQuery(querystr);
+	    	   dbroleid = query.list().get(0).toString();
+			
+			if(roleid.equals(dbroleid))
+			{
+				String hql = "update jciuserprivilege set action_permissions = '"+actionpermissionString+"' where role_Id = '"+roleid+"'";
+				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+				
+			}
+			else 
+			{
+				currentSession().saveOrUpdate(userprivilige);
+			}
+		  }
+			catch(Exception e) {
+	    		System.out.println(e.getStackTrace());
+	    	}
+		
 		
 	}
 

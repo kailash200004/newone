@@ -31,12 +31,41 @@ public class LoginController {
 	@Autowired
 	UserRegistrationService userRegService;
 	
-	@ExceptionHandler(Exception.class)
-    @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
-    public String handleException(Exception e, Model model, HttpSession session) {
-        model.addAttribute("errorMessage", "Internal Server Error");
-       return "errorPage";
+    @RequestMapping("400")
+    @ResponseStatus(value = org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED)
+    public String handle404(HttpServletRequest request) {
+           String username = (String) request.getSession().getAttribute("usrname");
+           ModelAndView mv = new ModelAndView("errorPage");
+           if (username == null) {
+                  mv = new ModelAndView("index");
+           }
+           return "errorPage";
     }
+
+    @RequestMapping("404")
+    @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
+    public String handle500(HttpServletRequest request) {
+           String username = (String) request.getSession().getAttribute("usrname");
+           ModelAndView mv = new ModelAndView("errorPage");
+           if (username == null) {
+                  mv = new ModelAndView("index");
+           }
+           return "errorPage";
+    }
+
+    @RequestMapping("500")
+    @ResponseStatus(value = org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handle400(HttpServletRequest request) {
+           String username = (String) request.getSession().getAttribute("usrname");
+           ModelAndView mv = new ModelAndView("errorPage");
+           if (username == null) {
+                  mv = new ModelAndView("index");
+           }
+           return "errorPage";
+    }
+
+
+
 
 
 	@RequestMapping("index")

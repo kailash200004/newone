@@ -1351,7 +1351,13 @@ $("#F_District").change(function(){
       //  alert("F_BANK_DOC  = =  "+F_BANK_DOC);
         var idxDot = F_BANK_DOC.lastIndexOf(".") + 1;
         var extFile = F_BANK_DOC.substr(idxDot, F_BANK_DOC.length).toLowerCase();
-          
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png")
+        {
+        	
+            
+        }else{
+            alert("Only jpg/jpeg and png files are allowed!");
+        } 
     }
 </script>
 <script>
