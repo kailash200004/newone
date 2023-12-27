@@ -12,7 +12,7 @@
     <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-bO5pIFiiOq9ATKxIep9tiCxN7D5h/W/g5lZx3H+6EE1X1uUq1hYFF4XfcMufj+Il" crossorigin="anonymous"></script>
     <!-- PLUGINS STYLES-->
     <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
     <!-- THEME STYLES-->

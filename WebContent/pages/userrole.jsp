@@ -204,7 +204,7 @@ function validateRole(form) {
             var textInput = $('#rolename').val();
             
             // Remove characters that are not alphabets
-            var cleanedInput = textInput.replace(/[^A-Za-z]/g, "");
+            var cleanedInput = textInput.replace(/[^A-Za-z\s]/g, "");
 
             // You can also display an alert or perform additional validation if needed
             if (textInput !== cleanedInput) {

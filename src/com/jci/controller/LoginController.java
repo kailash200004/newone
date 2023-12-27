@@ -31,41 +31,89 @@ public class LoginController {
 	@Autowired
 	UserRegistrationService userRegService;
 	
-    @RequestMapping("400")
+	@ExceptionHandler(Exception.class)
     @ResponseStatus(value = org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED)
-    public String handle404(HttpServletRequest request) {
+    public String handle404(HttpServletRequest request, Exception e) {
            String username = (String) request.getSession().getAttribute("usrname");
            ModelAndView mv = new ModelAndView("errorPage");
            if (username == null) {
                   mv = new ModelAndView("index");
            }
+           e.printStackTrace();
            return "errorPage";
     }
-
-    @RequestMapping("404")
+	
+	@ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.BAD_REQUEST)
+    public String handle(HttpServletRequest request, NumberFormatException e) {
+           String username = (String) request.getSession().getAttribute("usrname");
+           ModelAndView mv = new ModelAndView("errorPage");
+           if (username == null) {
+                  mv = new ModelAndView("index");
+           }
+           e.printStackTrace();
+           return "errorPage";
+    }
+	
+	@ExceptionHandler(NullPointerException.class)
     @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
-    public String handle500(HttpServletRequest request) {
+    public String handle2(HttpServletRequest request, NullPointerException e) {
            String username = (String) request.getSession().getAttribute("usrname");
            ModelAndView mv = new ModelAndView("errorPage");
            if (username == null) {
                   mv = new ModelAndView("index");
            }
+           e.printStackTrace();
            return "errorPage";
     }
-
-    @RequestMapping("500")
-    @ResponseStatus(value = org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handle400(HttpServletRequest request) {
+	@ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
+    public String handle3(HttpServletRequest request, IllegalArgumentException e) {
            String username = (String) request.getSession().getAttribute("usrname");
            ModelAndView mv = new ModelAndView("errorPage");
            if (username == null) {
                   mv = new ModelAndView("index");
            }
+           e.printStackTrace();
            return "errorPage";
     }
 
+	 @RequestMapping("404")
+	    @ResponseStatus(value = org.springframework.http.HttpStatus.NOT_FOUND)
+	    public String handle500(HttpServletRequest request) {
+	           String username = (String) request.getSession().getAttribute("usrname");
+	           ModelAndView mv = new ModelAndView("errorPage");
+	           if (username == null) {
+	                  mv = new ModelAndView("index");
+	           }
+	           
+	           return "errorPage";
+	    }
 
+	    @RequestMapping("500")
+	    @ResponseStatus(value = org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+	    public String handle400(HttpServletRequest request) {
+	           String username = (String) request.getSession().getAttribute("usrname");
+	           ModelAndView mv = new ModelAndView("errorPage");
+	           if (username == null) {
+	                  mv = new ModelAndView("index");
+	           }
+	           return "errorPage";
+	    }
+	    
+	 
+	    
+	    @RequestMapping("501")
+	    @ResponseStatus(value = org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED)
+	    public String handle501(HttpServletRequest request) {
+	           return "errorPage";
+	    }
 
+	    @RequestMapping("405")
+	    @ResponseStatus(value = org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED)
+	    public String handle405(HttpServletRequest request) {
+	           return "errorPage";
+	    }
 
 
 	@RequestMapping("index")

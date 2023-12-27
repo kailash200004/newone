@@ -17,7 +17,7 @@ $(document).ready(function () {
         // Access the value of the input field using $(this).val()
         var inputValue = $(this).val();
       
-       var refVal = inputValue.replace(/[^a-zA-Z0-9-/]/g, "");
+       var refVal = inputValue.replace(/[^a-zA-Z0-9-\s]/g, "");
        $(this).val(refVal);              
 
     });

@@ -71,6 +71,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.crypto.SecretKey;
 import javax.mail.internet.InternetAddress;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.jci.service.BalePrepareService;
@@ -218,6 +219,29 @@ public class InsertDataController
         
     }
     
+    public int checkprivileges(String pagename) {
+    	
+    	int i = 0;
+    	 try {
+	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
+	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
+	   		   Integer actionid = useractionservice.getactionid(pagename);
+	  		   String idAction =  Integer.toString(actionid);
+	   		   String[] stringArray  = actionPer.split(",");
+	   		   for(String action : stringArray)
+	   		   {
+	   	   		   if(action.equals(idAction)) 
+	   	   		   {
+	   	   			 i = 1;  
+	   	   		   }
+	   		   }
+
+         }   catch(Exception e) {
+ 		   e.printStackTrace();
+ 	   }
+    	return i;
+	}
+    
     private boolean isStringValid(String input) {
         String regex = ".*[<>].*";
         Pattern pattern = Pattern.compile(regex);
@@ -346,43 +370,18 @@ public class InsertDataController
     	 if(username == null) {
              return new ModelAndView("index");
              }
-    	  else {
-        ModelAndView mv = new ModelAndView("ViewFarmer");
+    	 ModelAndView mv = new ModelAndView("ViewFarmer");
+    	 String pagename = "viewFarmerList";
+         int i = checkprivileges(pagename);
+         if(i != 1)
+         {
+         	 red.addFlashAttribute("errorMessage","Access denied");
+ 			   return mv=new ModelAndView("Home");
+         }
         final List<FarmerRegistrationModel> allFarmersList = (List<FarmerRegistrationModel>)this.farmerRegistrationService.getAll();
         mv.addObject("farmersList", (Object)allFarmersList);
-        try {
-	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-	   		   System.out.println("roleId===="+roleId);
-	   		   String viewFarmerList = "viewFarmerList";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(viewFarmerList);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
-	   	
-			  }
-
-		   catch(Exception e) {
-		   e.printStackTrace();
-	   }
         return mv;
-    	  }
+    	
     }
     
     @RequestMapping({ "addOrganisation" })
@@ -402,41 +401,13 @@ public class InsertDataController
     	 if(username == null) {
              return mv = new ModelAndView("index");
              }
-     	
-    	try {
-    	
-        final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
-        mv.addObject("allDpcList", (Object)allDpcList);
-        
-        Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-		   System.out.println("roleId===="+roleId);
-		   String ropeMaking = "ropeMaking";
-		   String actionPer = userpriviligeservice.getactionPer(roleId);
-		   System.out.println("actionPer=--="+actionPer);
-		  Integer actionid = useractionservice.getactionid(ropeMaking);
-		  System.out.println("actionid==="+actionid);
-		   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("Home");
-		   }
-	
-		  }
-    	catch(Exception e) {
-    		e.printStackTrace();
-    	}
+    	 String pagename = "addRopeMaking";
+         int i = checkprivileges(pagename);
+         if(i != 1)
+         {
+         	 red.addFlashAttribute("errorMessage","Access denied");
+ 			   return mv=new ModelAndView("Home");
+         }
         return mv;
     }
     
@@ -487,43 +458,19 @@ public class InsertDataController
         if(username == null) {
             return mv = new ModelAndView("index");
             }
-        else {
-    	try {
-    
-     	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
+        String pagename = "ropeMakingListing";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
+        String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-     	final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll(placeofactivity, regionId,zoneId);
+   
+        final List<RopeMakingModel> ropeList = (List<RopeMakingModel>)this.ropeMakingService.getAll(placeofactivity, regionId,zoneId);
         mv.addObject("ropeLists", (Object)ropeList);
-		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-		System.out.println("userRole=="+userRole);
-		   String ropeMakingListing = "ropeMakingListing";
-		   String actionPer = userpriviligeservice.getactionPer(userRole);
-		  Integer actionid = useractionservice.getactionid(ropeMakingListing);
-		   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("Home");
-		   }
-     
-        
-    	}
-    	catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	}
         return mv;
     }
     
@@ -854,35 +801,16 @@ public class InsertDataController
     	if(username == null) {
             return mv = new ModelAndView("index");
             }
+    	String pagename = "balePreparation";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         final List<String> allDpcList = (List<String>)this.purchaseCenterService.getAllDpc();
         mv.addObject("allDpcList", (Object)allDpcList);   
-try {
-		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-		System.out.println("userRole=="+userRole);
-		   String balePreparation = "balePreparation";
-		   String actionPer = userpriviligeservice.getactionPer(userRole);
-		  Integer actionid = useractionservice.getactionid(balePreparation);
-	   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
-		   return mv=new ModelAndView("Home");
-		   }
- }
-     catch(Exception e) {
-	   e.printStackTrace();
- }
+
         return mv;
     }
     
@@ -917,37 +845,13 @@ try {
         if(username == null) {
             return mv = new ModelAndView("index");
             }
-        try {
-        final List<BalePreparation> bale = (List<BalePreparation>)this.balepreparationservice.getAll();
-        mv.addObject("baleslis", (Object)bale);
-        Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-		   String BalePreparationList = "BalePreparationList";
-		   String actionPer = userpriviligeservice.getactionPer(userRole);
-		  Integer actionid = useractionservice.getactionid(BalePreparationList);
-		   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
+        String pagename = "BalePreparationList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
 			   return mv=new ModelAndView("Home");
-		   }
-	
-		  }
-
-
-catch(Exception e) {
-	   e.printStackTrace();
- }
+        }
         return mv;
     }
     
@@ -988,36 +892,13 @@ catch(Exception e) {
     	if(username == null) {
             return mv = new ModelAndView("index");
             }
- 	   try{final List<AreaDetailCode> AreaCode = (List<AreaDetailCode>)this.areaService.getAll();
-       mv.addObject("AreaCode", (Object)AreaCode);
-  		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-  		System.out.println("userRole=="+userRole);
-  		   String jbaRate = "jbaRate";
-  		   String actionPer = userpriviligeservice.getactionPer(userRole);
-  		  Integer actionid = useractionservice.getactionid(jbaRate);
- 		   String idAction =  Integer.toString(actionid);
-  		String[] stringArray  = actionPer.split(",");
-  	   int i = 0;
-  		   for(String action : stringArray) {
-  	   		   System.err.println("action=="+action);
-  	   		   if(action.equals(idAction)) {
-  	   			 i = 1;  
-  	   		   }
-  	  
-  		   }
-  		   if(i==1) {
-  			   return mv;
-  		   }
-  		   else {
-  			 red.addFlashAttribute("errorMessage","Access denied");
+    	String pagename = "jbaRate";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
 			   return mv=new ModelAndView("Home");
-  		   }
-
-}
-	
-catch(Exception e) {
-	e.printStackTrace();
-}
+        }
         return mv;
     }
     
@@ -1239,6 +1120,13 @@ catch(Exception e) {
         if(username == null) {
             return mv = new ModelAndView("index");
             }
+        String pagename = "JbaPriceList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
             String dpcid =(String)request.getSession().getAttribute("dpcId");
          	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
@@ -1248,29 +1136,6 @@ catch(Exception e) {
             final List<JbaModel> jbapril = (List<JbaModel>)this.jbaservice.getAll();
             mv.addObject("jbaList", (Object)jbapri);
             mv.addObject("jbaLists", (Object)jbapril);
-            
-        		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-        		System.out.println("userRole=="+userRole);
-        		   String JbaPriceList = "JbaPriceList";
-        		   String actionPer = userpriviligeservice.getactionPer(userRole);
-        		  Integer actionid = useractionservice.getactionid(JbaPriceList);
-       		   String idAction =  Integer.toString(actionid);
-        		String[] stringArray  = actionPer.split(",");
-        	   int i = 0;
-        		   for(String action : stringArray) {
-        	   		   System.err.println("action=="+action);
-        	   		   if(action.equals(idAction)) {
-        	   			 i = 1;  
-        	   		   }
-        	  
-        		   }
-        		   if(i==1) {
-        			   return mv;
-        		   }
-        		   else {
-        			 red.addFlashAttribute("errorMessage","Access denied");
-      			   return mv=new ModelAndView("Home");
-        		   }
             }
             catch(Exception e) {
             	e.printStackTrace();
@@ -1596,41 +1461,24 @@ catch(Exception e) {
     	if(username == null) {
         	return mv = new ModelAndView("index");
             }
-        List<RawJuteProcurementAndPayment> procurementList = new ArrayList<RawJuteProcurementAndPayment>();
+    	String pagename = "juteProcurementList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
+            List<RawJuteProcurementAndPayment> procurementList = new ArrayList<RawJuteProcurementAndPayment>();
        
            
-            try {
+            try 
+            {
             	 procurementList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.farmerDetailsList();
                  mv.addObject("procurementList", (Object)procurementList);
-            
- 	   		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
- 	   		   String juteProcurementList = "juteProcurementList";
- 	   		   String actionPer = userpriviligeservice.getactionPer(userRole);
- 	   		  Integer actionid = useractionservice.getactionid(juteProcurementList);
- 	  		   String idAction =  Integer.toString(actionid);
- 	   		String[] stringArray  = actionPer.split(",");
- 	   	   int i = 0;
- 	   		   for(String action : stringArray) {
- 	   	   		   System.err.println("action=="+action);
- 	   	   		   if(action.equals(idAction)) {
- 	   	   			 i = 1;  
- 	   	   		   }
- 	   	  
- 	   		   }
- 	   		   if(i==1) {
- 	   			   return mv;
- 	   		   }
- 	   		   else {
- 	   			 red.addFlashAttribute("errorMessage","Access denied");
- 	 			   return mv=new ModelAndView("Home");
- 	   		   }
- 	   	
- 			  }
-
-
- catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
+ 			} catch(Exception e) 
+            {
+  		         e.printStackTrace();
+  	        }
      
         
         return mv;
@@ -1775,40 +1623,19 @@ catch(Exception e) {
         if(username == null) {
         	 return mv = new ModelAndView("index");
             }
+        String pagename = "dailyPurchaseList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
     	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
         String dpcid =(String)request.getSession().getAttribute("dpcId");
         final List<DailyPurchaseConfModel> purchaseList = (List<DailyPurchaseConfModel>)this.DailyPurchasefService.getAll(dpcid, regionId, zoneId);
         mv.addObject("dailyPurchaseList", (Object)purchaseList);    
-        try {
-
- 		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
- 		System.out.println("userRole=="+userRole);
- 		   String dailyPurchaseList = "dailyPurchaseList";
- 		   String actionPer = userpriviligeservice.getactionPer(userRole);
- 		  Integer actionid = useractionservice.getactionid(dailyPurchaseList);
-		   String idAction =  Integer.toString(actionid);
- 		String[] stringArray  = actionPer.split(",");
- 	   int i = 0;
- 		   for(String action : stringArray) {
- 	   		   System.err.println("action=="+action);
- 	   		   if(action.equals(idAction)) {
- 	   			 i = 1;  
- 	   		   }
- 	  
- 		   }
- 		   if(i==1) {
- 			   return mv;
- 		   }
- 		   else {
- 			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("Home");
- 		   }
-         }
-         catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
         return mv;
     }
     
@@ -1864,35 +1691,19 @@ catch(Exception e) {
     	   if(username == null) {
     		    return mv = new ModelAndView("index");
                }
+    	   String pagename = "UserRegistration";
+           int i = checkprivileges(pagename);
+           if(i != 1)
+           {
+           	 red.addFlashAttribute("errorMessage","Access denied");
+   			   return mv=new ModelAndView("Home");
+           }
     	   try {
     	       final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
                final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
                mv.addObject("zoneList", (Object)zoneList);
                mv.addObject("roleList", (Object)alluserroleList);
-       		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-       		System.out.println("userRole=="+userRole);
-       		   String UserRegistration = "UserRegistration";
-       		   String actionPer = userpriviligeservice.getactionPer(userRole);
-       		  Integer actionid = useractionservice.getactionid(UserRegistration);
-      		   String idAction =  Integer.toString(actionid);
-       		String[] stringArray  = actionPer.split(",");
-       	   int i = 0;
-       		   for(String action : stringArray) {
-       	   		   System.err.println("action=="+action);
-       	   		   if(action.equals(idAction)) {
-       	   			 i = 1;  
-       	   		   }
-       	  
        		   }
-       		   if(i==1) {
-       			   return mv;
-       		   }
-       		   else {
-       			 red.addFlashAttribute("errorMessage","Access denied");
-     			   return mv=new ModelAndView("Home");
-       		   } }
-       	
-    		 
     	   catch(Exception e) {
     		   e.printStackTrace();
     	   }
@@ -1992,6 +1803,13 @@ catch(Exception e) {
         if(username == null) {
         	 return mv = new ModelAndView("index");
             }
+        String pagename = "viewmarketArrival";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
         	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
          	String regionId =(String)request.getSession().getAttribute("regionId");
@@ -1999,31 +1817,6 @@ catch(Exception e) {
             String dpc_code =(String)request.getSession().getAttribute("dpcId");
             final List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>)this.marketArrivalService.getAlldata( dpc_code,  regionId,  zoneId);
             mv.addObject("marketArrivalList", (Object)allmarketArrivalList);
-            
-        		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-        		System.out.println("userRole=="+userRole);
-        		   String viewmarketArrival = "viewmarketArrival";
-        		   String actionPer = userpriviligeservice.getactionPer(userRole);
-        		  Integer actionid = useractionservice.getactionid(viewmarketArrival);
-       		   String idAction =  Integer.toString(actionid);
-        		String[] stringArray  = actionPer.split(",");
-        	   int i = 0;
-        		   for(String action : stringArray) {
-        	   		   System.err.println("action=="+action);
-        	   		   if(action.equals(idAction)) {
-        	   			 i = 1;  
-        	   		   }
-        	  
-        		   }
-        		   if(i==1) {
-        			   return mv;
-        		   }
-        		   else {
-        			 red.addFlashAttribute("errorMessage","Access denied");
-      			   return mv=new ModelAndView("Home");
-        		   }
-        	
-     		  
 
             }
             catch(Exception e) {
@@ -2039,6 +1832,13 @@ catch(Exception e) {
         if(username == null) {
         	 return mv = new ModelAndView("index");
             }
+        String pagename = "ViewFarmerRegistration";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
             String dcpid = (String)request.getSession().getAttribute("dpcId"); 
          	String regionId =(String)request.getSession().getAttribute("regionId");
@@ -2047,27 +1847,7 @@ catch(Exception e) {
             final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();     
             mv.addObject("zoneList", (Object)zoneList);
             mv.addObject("allFarmersList", (Object)allFarmersList);
-            Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-	   		   String ViewFarmerRegistration = "ViewFarmerRegistration";
-	   		   String actionPer = userpriviligeservice.getactionPer(userRole);
-	   		  Integer actionid = useractionservice.getactionid(ViewFarmerRegistration);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
+           
 	   	
 			  }
 
@@ -2121,12 +1901,19 @@ catch(Exception e) {
     }
     
     @RequestMapping(value = { "verifyFarmer2" }, method = { RequestMethod.GET })
-    public ModelAndView verifyFarmer(final HttpServletRequest request) {
+    public ModelAndView verifyFarmer(final HttpServletRequest request, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView();
         if(username == null) {
         	return mv = new ModelAndView("index");
             }
+        String pagename = "verifyFarmer2";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
         String key = LoginController.secretkey;
     	String decryptedString = request.getParameter("id");
@@ -2134,10 +1921,13 @@ catch(Exception e) {
         final FarmerRegModel farmerDetails = this.farmerRegService.find(id);
         mv.addObject("farmerDetails", (Object)farmerDetails);
         mv.setViewName("verifyFarmer");
+        
+	
         }
         catch(Exception e) {
         	e.printStackTrace();
         }
+        
         return mv;
     }
     
@@ -2287,23 +2077,40 @@ catch(Exception e) {
         return mv;
     }
     @RequestMapping(value = { "viewFarmerReg" }, method = { RequestMethod.GET })
-    public ModelAndView viewFarmerReg(final HttpServletRequest request) {
+    public ModelAndView viewFarmerReg(final HttpServletRequest request, final HttpServletResponse response, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("viewFarmerDetail");
         if(username == null) {
         	return mv = new ModelAndView("index");
             }
+        String pagename = "viewFarmerReg";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
         if (request.getParameter("id") != null) {
-            final int id = Integer.parseInt(request.getParameter("id"));
+        	String key = LoginController.secretkey;
+    		String decryptedString = request.getParameter("id");
+    		final int id = Integer.parseInt(Encry.decrypt(decryptedString, key));
             final List<FarmerRegModel> farmerDetailsById = this.farmerRegService.findDetails(id);
             final List<StateList> Liststate = (List<StateList>)this.stateList.getAll();
+            System.err.println("Liststate---------------"+Liststate);
             mv.addObject("Liststate", (Object)Liststate);
             mv.addObject("farmerDetailsById", (Object)farmerDetailsById);
         }
         }
         catch(Exception e) {
         	e.printStackTrace();
+        	try {
+				request.getRequestDispatcher("/WebContent/errorPage.jsp").forward(request, response);
+			} catch (ServletException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			};
         }
         return mv;
     }
@@ -2370,9 +2177,16 @@ catch(Exception e) {
 	 * RedirectView("ViewFarmerRegistration.obj")); }
 	 */
     @RequestMapping(value = { "editGradesPrice" }, method = { RequestMethod.GET })
-    public ModelAndView editGradesPrice(final HttpServletRequest request, HttpSession session) {
+    public ModelAndView editGradesPrice(final HttpServletRequest request, HttpSession session, RedirectAttributes red) {
        String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editGradesPrice");
+        String pagename = "editGradesPrice";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         if (request.getParameter("id") != null) {
        	    String key = LoginController.secretkey;
 	    	String decryptedString = request.getParameter("id");
@@ -2570,33 +2384,19 @@ catch(Exception e) {
         if(username == null) {
         	return new ModelAndView("index");
             }
+        String pagename = "Distributionoftallyslips";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
             final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
             final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
             mv.addObject("zoneList", (Object)zoneList);
             mv.addObject("roleList", (Object)roleList);
-            Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-       		System.out.println("userRole=="+userRole);
-       		   String Distributionoftallyslips = "Distributionoftallyslips";
-       		   String actionPer = userpriviligeservice.getactionPer(userRole);
-       		  Integer actionid = useractionservice.getactionid(Distributionoftallyslips);
-      		   String idAction =  Integer.toString(actionid);
-       		String[] stringArray  = actionPer.split(",");
-       	   int i = 0;
-       		   for(String action : stringArray) {
-       	   		   System.err.println("action=="+action);
-       	   		   if(action.equals(idAction)) {
-       	   			 i = 1;  
-       	   		   }
-       	  
-       		   }
-       		   if(i==1) {
-       			   return mv;
-       		   }
-       		   else {
-       			 red.addFlashAttribute("errorMessage","Access denied");
-     			   return mv=new ModelAndView("Home");
-       		   }
+            
             }
             catch(Exception e) {
             	e.printStackTrace();
@@ -2653,35 +2453,19 @@ catch(Exception e) {
     	if(username == null) {
          	return mv = new ModelAndView("index");
              }
+    	String pagename = "viewDistributionoftallyslips";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
     	try {
             String dpcId =(String)request.getSession().getAttribute("dpcId");
             
             final List<DistributionoftallyslipModel> allDistributionoftallyslips = (List<DistributionoftallyslipModel>)this.distributionoftallyslipService.getAll(dpcId);
             mv.addObject("DistributionoftallyslipsList", (Object)allDistributionoftallyslips);
-
-
-    		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-    		System.out.println("userRole=="+userRole);
-    		   String viewDistributionoftallyslips = "viewDistributionoftallyslips";
-    		   String actionPer = userpriviligeservice.getactionPer(userRole);
-    		  Integer actionid = useractionservice.getactionid(viewDistributionoftallyslips);
-    		   String idAction =  Integer.toString(actionid);
-    		String[] stringArray  = actionPer.split(",");
-    	   int i = 0;
-    		   for(String action : stringArray) {
-    	   		   System.err.println("action=="+action);
-    	   		   if(action.equals(idAction)) {
-    	   			 i = 1;  
-    	   		   }
-    	  
-    		   }
-    		   if(i==1) {
-    			   return mv;
-    		   }
-    		   else {
-    			 red.addFlashAttribute("errorMessage","Access denied");
-    			   return mv=new ModelAndView("Home");
-    		   }
+    		   
         	}
            catch(Exception e) {
         	   e.printStackTrace();
@@ -2701,6 +2485,13 @@ catch(Exception e) {
     public ModelAndView viewUserRegistration(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	 ModelAndView mv = new ModelAndView("viewUserRegistration");
+    	 String pagename = "viewUserRegistration";
+         int i = checkprivileges(pagename);
+         if(i != 1)
+         {
+         	 red.addFlashAttribute("errorMessage","Access denied");
+ 			   return mv=new ModelAndView("Home");
+         }
     	if(username != null) {
         	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
          	String regionId =(String)request.getSession().getAttribute("regionId");
@@ -2713,35 +2504,6 @@ catch(Exception e) {
         else{
         	return mv = new ModelAndView("index");
             }
-    	 try {
-   		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-   		System.out.println("userRole=="+userRole);
-   		   String viewUserRegistration = "viewUserRegistration";
-   		   String actionPer = userpriviligeservice.getactionPer(userRole);
-   		  Integer actionid = useractionservice.getactionid(viewUserRegistration);
-  		   String idAction =  Integer.toString(actionid);
-   		String[] stringArray  = actionPer.split(",");
-   	   int i = 0;
-   		   for(String action : stringArray) {
-   	   		   System.err.println("action=="+action);
-   	   		   if(action.equals(idAction)) {
-   	   			 i = 1;  
-   	   		   }
-   	  
-   		   }
-   		   if(i==1) {
-   			   return mv;
-   		   }
-   		   else {
-   			 red.addFlashAttribute("errorMessage","Access denied");
- 			   return mv=new ModelAndView("Home");
-   		   }
-   	
-		  }
-
-   catch(Exception e) {
-    		   e.printStackTrace();
-    	   }
         return mv;
     }
     
@@ -3097,17 +2859,20 @@ catch(Exception e) {
        if(username == null) {
            return mv = new ModelAndView("index");
           }
+       String pagename = "viewVerifiedTallySlipList";
+       int i = checkprivileges(pagename);
+       if(i != 1)
+       {
+       	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+       }
        try {
 
     	String role_type = (String)request.getSession().getAttribute("roletype");
         String region =(String)request.getSession().getAttribute("regionId"); 
         final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("FA", region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);   
-        String userRole= (String)request.getSession().getAttribute("rolename");
-		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "DPC JI".equals(userRole) ) {
-			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("index");
-		   }
+
        } 
        catch(Exception e) {
     	   e.printStackTrace();
@@ -3123,31 +2888,16 @@ catch(Exception e) {
         if(username == null) {
         	return mv = new ModelAndView("index");
             }
+        String pagename = "viewCommercialCeilingPrice";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
             final List<CommercialJuteVarietyModel> commercialList = (List<CommercialJuteVarietyModel>)this.commercialJuteVarietyGradesPriceService.getAll();
             mv.addObject("commercialList", (Object)commercialList);
-            Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-       		System.out.println("userRole=="+userRole);
-       		   String viewCommercialCeilingPrice = "viewCommercialCeilingPrice";
-       		   String actionPer = userpriviligeservice.getactionPer(userRole);
-       		  Integer actionid = useractionservice.getactionid(viewCommercialCeilingPrice);
-      		   String idAction =  Integer.toString(actionid);
-       		String[] stringArray  = actionPer.split(",");
-       	   int i = 0;
-       		   for(String action : stringArray) {
-       	   		   System.err.println("action=="+action);
-       	   		   if(action.equals(idAction)) {
-       	   			 i = 1;  
-       	   		   }
-       	  
-       		   }
-       		   if(i==1) {
-       			   return mv;
-       		   }
-       		   else {
-       			 red.addFlashAttribute("errorMessage","Access denied");
-     			   return mv=new ModelAndView("Home");
-       		   }
             }catch(Exception e) {
             	e.printStackTrace();
             }
@@ -3318,38 +3068,13 @@ catch(Exception e) {
         if(username == null) {
         	return mv = new ModelAndView("index");
             }
-        try {
-	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-	   		   System.out.println("roleId===="+roleId);
-	   		   String bin = "bin";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(bin);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
-	   	
-			  }
-
-		   catch(Exception e) {
-		   e.printStackTrace();
-	   }
-
+        String pagename = "bin";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         return mv;
     }
     
@@ -3410,47 +3135,24 @@ catch(Exception e) {
     @RequestMapping({ "binList" })
     public ModelAndView binList(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("binList");
     	if(username == null) {
         	return new ModelAndView("index");
             }
+    	String pagename = "binList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         String dpcId =(String)request.getSession().getAttribute("dpcId");
         String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-        ModelAndView mv = new ModelAndView("binList");
         final List<BatchIdentificationModel> batch = (List<BatchIdentificationModel>)this.batchService.getAll(placeofactivity, regionId, zoneId);
         mv.addObject("batch", (Object)batch);
-        try {
-	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-	   		   System.out.println("roleId===="+roleId);
-	   		   String binList = "binList";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(binList);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
-	   	
-			  }
-
-		   catch(Exception e) {
-		   e.printStackTrace();
-	   }
+        
 
         return mv;
     }
@@ -3458,35 +3160,22 @@ catch(Exception e) {
     @RequestMapping({ "viewRulingMarket" })
     public ModelAndView viewRulingMarket(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("viewRulingMarket");
+
     	   if(username == null) {
            	return new ModelAndView("index");
                }
-         ModelAndView mv = new ModelAndView("viewRulingMarket");
+    	   String pagename = "viewRulingMarket";
+           int i = checkprivileges(pagename);
+           if(i != 1)
+           {
+           	 red.addFlashAttribute("errorMessage","Access denied");
+   			   return mv=new ModelAndView("Home");
+           }
          try {
         final List<RulingMarket> rulingList = (List<RulingMarket>)this.rulingMarketService.getAll();
         mv.addObject("rulingList", (Object)rulingList);
-        Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-		   String viewRulingMarket = "viewRulingMarket";
-		   String actionPer = userpriviligeservice.getactionPer(userRole);
-		  Integer actionid = useractionservice.getactionid(viewRulingMarket);
-		   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("Home");
-		   }
-	
+        
 		  }
 
          catch(Exception e) {
@@ -3502,39 +3191,24 @@ catch(Exception e) {
     	if(username == null) {
         	return new ModelAndView("index");
             }
+    	String pagename = "viewbalePreparation";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
     	try {
     
     	String placeofactivity =(String)request.getSession().getAttribute("dpcId");
      	String regionId =(String)request.getSession().getAttribute("regionId");
      	String zoneId =(String)request.getSession().getAttribute("zoneId");
-     	Integer userRole= (Integer)request.getSession().getAttribute("roleId");
 		 String place_of_packing =(String)request.getSession().getAttribute("dpcId");
 	        List<BalePreparation> viewBale = new ArrayList<BalePreparation>();
 			viewBale = (List<BalePreparation>)this.balePrepareService.getAll(place_of_packing,regionId,  zoneId);
 			final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
 	        mv.addObject("zoneList", (Object)zoneList);
 	        mv.addObject("viewBalePreparation", (Object)viewBale);
-		   String viewbalePreparation = "viewbalePreparation";
-		   String actionPer = userpriviligeservice.getactionPer(userRole);
-		  Integer actionid = useractionservice.getactionid(viewbalePreparation);
-		   String idAction =  Integer.toString(actionid);
-		String[] stringArray  = actionPer.split(",");
-	   int i = 0;
-		   for(String action : stringArray) {
-	   		   System.err.println("action=="+action);
-	   		   if(action.equals(idAction)) {
-	   			 i = 1;  
-	   		   }
-	  
-		   }
-		   if(i==1) {
-			   return mv;
-		   }
-		   else {
-			 red.addFlashAttribute("errorMessage","Access denied");
-			   return mv=new ModelAndView("Home");
-		   }
-       
     	}
     	catch(Exception e) {
     		e.printStackTrace();
@@ -3804,6 +3478,13 @@ catch(Exception e) {
        if(username == null) {
        	return mv = new ModelAndView("index");
            }
+       String pagename = "editBaleP";
+       int i = checkprivileges(pagename);
+       if(i != 1)
+       {
+    	   redirectAttributes.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+       }
         try {
             final String id = request.getParameter("id");
             final BalePreparation baleMod = this.balepreparationservice.find(Integer.parseInt(id));
@@ -3883,12 +3564,19 @@ catch(Exception e) {
     }
     
     @RequestMapping(value = { "editRopemaking" }, method = { RequestMethod.GET })
-    public ModelAndView editRopemaking(final HttpServletRequest request) {
+    public ModelAndView editRopemaking(final HttpServletRequest request, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	 if(username == null) {
          	return new ModelAndView("index");
              }
         ModelAndView mv = new ModelAndView("editRopemaking");
+        String pagename = "editRopemaking";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         if (request.getParameter("id") != null) {
         	
        	    String key = LoginController.secretkey;
@@ -4075,34 +3763,17 @@ catch(Exception e) {
     @RequestMapping({ "mspPriceCalculation" })
     public ModelAndView mspPriceCalculation(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	if(username == null) {
+        	return new ModelAndView("index");
+            }
          ModelAndView mv = new ModelAndView("mspPriceCalculation");
-         try {
-         	Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-        		System.out.println("userRole=="+userRole);
-        		   String mspPriceCalculation = "mspPriceCalculation";
-        		   String actionPer = userpriviligeservice.getactionPer(userRole);
-        		  Integer actionid = useractionservice.getactionid(mspPriceCalculation);
-       		   String idAction =  Integer.toString(actionid);
-        		String[] stringArray  = actionPer.split(",");
-        	   int i = 0;
-        		   for(String action : stringArray) {
-        	   		   System.err.println("action=="+action);
-        	   		   if(action.equals(idAction)) {
-        	   			 i = 1;  
-        	   		   }
-        	  
-        		   }
-        		   if(i==1) {
-        			   return mv;
-        		   }
-        		   else {
-        			 red.addFlashAttribute("errorMessage","Access denied");
-      			   return mv=new ModelAndView("Home");
-        		   }
+         String pagename = "mspPriceCalculation";
+         int i = checkprivileges(pagename);
+         if(i != 1)
+         {
+         	 red.addFlashAttribute("errorMessage","Access denied");
+ 			   return mv=new ModelAndView("Home");
          }
-         catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
  		return mv;
      }
     
@@ -4348,41 +4019,23 @@ catch(Exception e) {
     @RequestMapping({ "commercialPriceCalculation" })
     public ModelAndView commercialPriceCalculation(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+        ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
+
     	if(username == null) {
         	return new ModelAndView("index");
             }
+    	String pagename = "commercialPriceCalculation";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
     	final List<ZoneModel> zoneList = (List<ZoneModel>)this.zoneService.getAll();
         final List<RoleMasterModel> roleList = (List<RoleMasterModel>)this.roleService.getAll();
-        ModelAndView mv = new ModelAndView("CommercialJuteVarietyGradesPrice");
         mv.addObject("zoneList", (Object)zoneList);
         mv.addObject("roleList", (Object)roleList);
-        try {
-        	Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-       		System.out.println("userRole=="+userRole);
-       		   String commercialPriceCalculation = "commercialPriceCalculation";
-       		   String actionPer = userpriviligeservice.getactionPer(userRole);
-       		  Integer actionid = useractionservice.getactionid(commercialPriceCalculation);
-      		   String idAction =  Integer.toString(actionid);
-       		String[] stringArray  = actionPer.split(",");
-       	   int i = 0;
-       		   for(String action : stringArray) {
-       	   		   System.err.println("action=="+action);
-       	   		   if(action.equals(idAction)) {
-       	   			 i = 1;  
-       	   		   }
-       	  
-       		   }
-       		   if(i==1) {
-       			   return mv;
-       		   }
-       		   else {
-       			 red.addFlashAttribute("errorMessage","Access denied");
-     			   return mv=new ModelAndView("Home");
-       		   }
-            }
-            catch(Exception e) {
-     		   e.printStackTrace();
-     	   }
+        
         return mv;
     }
     
@@ -4482,39 +4135,21 @@ catch(Exception e) {
     @RequestMapping({ "mspGradesPriceList" })
     public ModelAndView mspGradesPriceList(final HttpServletRequest request,RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("mspGradesPriceList");
+
     	if(username == null) {
         	return new ModelAndView("index");
             }
-    	ModelAndView mv = new ModelAndView("mspGradesPriceList");
+    	String pagename = "mspGradesPriceList";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         final List<MSPPriceCalculationModel> msppriceList = (List<MSPPriceCalculationModel>)this.mSPPriceCalculationService.getAll();
         mv.addObject("msppriceList", (Object)msppriceList);
-        try {
-        	Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-       		System.out.println("userRole=="+userRole);
-       		   String mspGradesPriceList = "mspGradesPriceList";
-       		   String actionPer = userpriviligeservice.getactionPer(userRole);
-       		  Integer actionid = useractionservice.getactionid(mspGradesPriceList);
-      		   String idAction =  Integer.toString(actionid);
-       		String[] stringArray  = actionPer.split(",");
-       	   int i = 0;
-       		   for(String action : stringArray) {
-       	   		   System.err.println("action=="+action);
-       	   		   if(action.equals(idAction)) {
-       	   			 i = 1;  
-       	   		   }
-       	  
-       		   }
-       		   if(i==1) {
-       			   return mv;
-       		   }
-       		   else {
-       			 red.addFlashAttribute("errorMessage","Access denied");
-     			   return mv=new ModelAndView("Home");
-       		   }
-            }
-            catch(Exception e) {
-     		   e.printStackTrace();
-     	   }
+        
         return mv;
     }
     
@@ -4686,35 +4321,22 @@ catch(Exception e) {
     	if(username == null) {
         	return new ModelAndView("index");
             }
+    	String pagename = "disputedtallyslip";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
     	 String role_type = (String)request.getSession().getAttribute("roletype");
          String region =(String)request.getSession().getAttribute("regionId"); 
     	 String dpcId =(String)request.getSession().getAttribute("dpcId");
-    	 
          List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAll("RMD",region, role_type);
         mv.addObject("verifyTallySliList", (Object)verifyList);
         Integer userRole= (Integer)request.getSession().getAttribute("roleId");
    		System.out.println("userRole=="+userRole);
-   		   String disputedtallyslip = "disputedtallyslip";
-   		   String actionPer = userpriviligeservice.getactionPer(userRole);
-   		  Integer actionid = useractionservice.getactionid(disputedtallyslip);
-  		   String idAction =  Integer.toString(actionid);
-   		String[] stringArray  = actionPer.split(",");
-   	   int i = 0;
-   		   for(String action : stringArray) {
-   	   		   System.err.println("action=="+action);
-   	   		   if(action.equals(idAction)) {
-   	   			 i = 1;  
-   	   		   }
-   	  
-   		   }
-   		   if(i==1) {
-   			   return mv;
-   		   }
-   		   else {
-   			 red.addFlashAttribute("errorMessage","Access denied");
- 			   return mv=new ModelAndView("Home");
-   		   }}
+   		  }
         catch (Exception e)
 		{
 			//System.out.println("++++++++++++++"+e);
@@ -4725,12 +4347,21 @@ catch(Exception e) {
     }
     
     @RequestMapping({ "decissionmaking" })
-    public ModelAndView decissionmakingTallySlipList(final HttpServletRequest request) {
+    public ModelAndView decissionmakingTallySlipList(final HttpServletRequest request, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("decissionmaking");
     	if(username == null) {
         	return new ModelAndView("index");
             }
-    	ModelAndView mv = new ModelAndView("decissionmaking");
+    	
+    	String pagename = "decissionmaking";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
+    	
     	 String dpcId =(String)request.getSession().getAttribute("dpcId");
     	 String role_type = (String)request.getSession().getAttribute("roletype");
     	 String key = LoginController.secretkey;
@@ -4765,43 +4396,19 @@ catch(Exception e) {
     @RequestMapping({ "tallyapproval" })
     public ModelAndView tallyapproval(final HttpServletRequest request, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
+    	ModelAndView mv = new ModelAndView("tallyapproval"); 
     	if(username == null) {
         	return new ModelAndView("index");
             }
-    	ModelAndView mv = new ModelAndView("tallyapproval"); 
-
+    	String pagename = "tallyapproval";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         final List<RawJuteProcurementAndPayment> juteList = (List<RawJuteProcurementAndPayment>)this.rawJuteProcurAndPayService.jutelistbystatus("ROV",request);
- 
         mv.addObject("juteList", (Object)juteList);
-        try {
-    		   Integer userRole= (Integer)request.getSession().getAttribute("roleId");
-    		System.out.println("userRole=="+userRole);
-    		   String tallyapproval = "tallyapproval";
-    		   String actionPer = userpriviligeservice.getactionPer(userRole);
-    		  Integer actionid = useractionservice.getactionid(tallyapproval);
-   		   String idAction =  Integer.toString(actionid);
-    		String[] stringArray  = actionPer.split(",");
-    	   int i = 0;
-    		   for(String action : stringArray) {
-    	   		   System.err.println("action=="+action);
-    	   		   if(action.equals(idAction)) {
-    	   			 i = 1;  
-    	   		   }
-    	  
-    		   }
-    		   if(i==1) {
-    			   return mv;
-    		   }
-    		   else {
-    			 red.addFlashAttribute("errorMessage","Access denied");
-  			   return mv=new ModelAndView("Home");
-    		   }
-    	
-        
-
-    } catch (Exception e) {
-		 System.out.println(e.getStackTrace());
-	}
         return mv;
     }
     
@@ -4873,12 +4480,20 @@ catch(Exception e) {
     }
     
     @RequestMapping(value = { "verificationTallyslip2" }, method = { RequestMethod.GET })
-    public ModelAndView verifytallyslip(final HttpServletRequest request) {
+    public ModelAndView verifytallyslip(final HttpServletRequest request, RedirectAttributes red) {
     	String username =(String)request.getSession().getAttribute("usrname");
     	ModelAndView mv = new ModelAndView();
     	if(username == null) {
         	return mv = new ModelAndView("index");
             }
+    	
+    	String pagename = "verificationTallyslip2";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
 	   	String key = LoginController.secretkey;
 	 	String decryptedString = request.getParameter("tally");
 	 	final String tally = Encry.decrypt(decryptedString, key);
@@ -4912,37 +4527,13 @@ catch(Exception e) {
 		if(username == null) {
         	return mv = new ModelAndView("index");
             }
-		 try {
-	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-	   		   System.out.println("roleId===="+roleId);
-	   		   String binPurchasemapping = "binPurchasemapping";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(binPurchasemapping);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
-	   	
-			  }
-
-		   catch(Exception e) {
- 		   e.printStackTrace();
- 	   }
+		String pagename = "binPurchasemapping";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
 		return mv;
 	}
 
@@ -5010,37 +4601,13 @@ catch(Exception e) {
 		if(username == null) {
         	return mv = new ModelAndView("index");
             }
-		 try {
-	   		   Integer roleId= (Integer)request.getSession().getAttribute("roleId");
-	   		   System.out.println("roleId===="+roleId);
-	   		   String fingain = "fingain";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(fingain);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
-	   	
-			  }
-
-		   catch(Exception e) {
- 		   e.printStackTrace();
- 	   }
+		String pagename = "fingain";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
 		return mv;
 	}
 	
@@ -5073,33 +4640,18 @@ catch(Exception e) {
 		if(username == null) {
         	return new ModelAndView("index");
             }
+		String pagename = "BinListfromDb";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
 		List<BinListFromDbDTO> binPurchaseList = new ArrayList<>();
 		try {
 			binPurchaseList = batchService.GetBinListFromDb();
 			 Integer roleId= (Integer)request.getSession().getAttribute("roleId");
 	   		   System.out.println("roleId===="+roleId);
-	   		   String userrole = "userrole";
-	   		   String actionPer = userpriviligeservice.getactionPer(roleId);
-	   		   System.out.println("actionPer=--="+actionPer);
-	   		  Integer actionid = useractionservice.getactionid(userrole);
-	   		  System.out.println("actionid==="+actionid);
-	  		   String idAction =  Integer.toString(actionid);
-	   		String[] stringArray  = actionPer.split(",");
-	   	   int i = 0;
-	   		   for(String action : stringArray) {
-	   	   		   System.err.println("action=="+action);
-	   	   		   if(action.equals(idAction)) {
-	   	   			 i = 1;  
-	   	   		   }
-	   	  
-	   		   }
-	   		   if(i==1) {
-	   			   return mv;
-	   		   }
-	   		   else {
-	   			 red.addFlashAttribute("errorMessage","Access denied");
-	 			   return mv=new ModelAndView("Home");
-	   		   }
 	   	
 		} catch (Exception e) {
 			 System.out.println(e.getLocalizedMessage());
@@ -5163,6 +4715,29 @@ catch(Exception e) {
 				String password =  request.getParameter("password");
 				String newpassword =  request.getParameter("newpassword");
 				String renewpassword =  request.getParameter("repassword");
+				String currentpass = userRegistration.getPassword();
+				
+				if(newpassword.equals("") || renewpassword.equals(""))
+			       {
+			        	redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b> please fill the password! </b> </div>\r\n");
+			              return new ModelAndView((View)new RedirectView("editprofile.obj"));
+			       }
+				if(!currentpass.equals(password))
+				{
+					 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b> Current password is incorrect! </b> </div>\r\n");
+		              return new ModelAndView((View)new RedirectView("editprofile.obj"));
+				}
+				if(!renewpassword.equals(newpassword))
+				{
+					 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b> Both passwords didn't match! </b> </div>\r\n");
+		              return new ModelAndView((View)new RedirectView("editprofile.obj"));
+				}
+				String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+		        if (!newpassword.matches(passwordRegex) || !renewpassword.matches(passwordRegex) ) {
+		        	 redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-danger\"><b> Password didn't match with criteria! </b> </div>\r\n");
+		              return new ModelAndView((View)new RedirectView("editprofile.obj"));
+		        } 
+		        
 				userRegistration.setRefid(refid);
 			//	userRegistration.setMobileno(mobileno);
 				if(!password.isEmpty() && !renewpassword.isEmpty() && !newpassword.isEmpty() && password.equals(userRegistration.getPassword()) && renewpassword.equals(newpassword)) 
@@ -5201,6 +4776,13 @@ catch(Exception e) {
 		if(username == null) {
         	return mv = new ModelAndView("index");
             }
+		String pagename = "updateuserProfile";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	redirectAttributes.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
 		String key = LoginController.secretkey;
 		String decryptedString = request.getParameter("id");
 		int refid = Integer.parseInt(Encry.decrypt(decryptedString, key));
@@ -5212,7 +4794,7 @@ catch(Exception e) {
 	        mv.addObject("zoneList", (Object)zoneList);
 	        mv.addObject("roleList", (Object)alluserroleList);
 		mv.addObject("profile", profile);
-		
+
 		return mv;
 	}
 	
@@ -5546,20 +5128,29 @@ catch(Exception e) {
 
 
          @RequestMapping(value="popupimage")
-         public ModelAndView popupimage(HttpServletRequest request, HttpSession session) {
+         public ModelAndView popupimage(HttpServletRequest request, HttpSession session,RedirectAttributes red) {
         	 String username =(String)request.getSession().getAttribute("usrname");
+        	 ModelAndView mv = new ModelAndView("popupimage");
         	 if(username == null) {
                  return new ModelAndView("index");
                 }
-        	 String tallyNo = request.getParameter("tallyno");
-               String farmerno = request.getParameter("farmerno");
+        	 String pagename = "popupimage";
+             int i = checkprivileges(pagename);
+             if(i != 1)
+             {
+             	 red.addFlashAttribute("errorMessage","Access denied");
+     			   return mv=new ModelAndView("Home");
+             }
+               String key = LoginController.secretkey;
+        	   String decryptedtallyNo = request.getParameter("tallyno");
+               String decryptedfarmerno = request.getParameter("farmerno");
+               String tallyNo = String.valueOf(Encry.decrypt(decryptedtallyNo, key));
+               String farmerno = String.valueOf(Encry.decrypt(decryptedfarmerno, key));
+               
                session.setAttribute("farmerno", farmerno);
               // String farmerno1 =(String)request.getSession().getAttribute("farmerno");
-               ModelAndView mv = new ModelAndView("popupimage");
                final List<ImageVerificationModel> images= (List<ImageVerificationModel>)verifyTallySlipService.getImages(tallyNo);
                mv.addObject("images",(Object) images);
-               
-               
                return mv;
          }
 
@@ -5604,23 +5195,20 @@ catch(Exception e) {
            @RequestMapping({ "viewVerifiedTallySlipList_ZM" })
            public ModelAndView viewVerifiedTallySlipListZM(final HttpServletRequest request,RedirectAttributes red) {
               String username =(String)request.getSession().getAttribute("usrname");
+              ModelAndView mv = new ModelAndView("verifiedTallySlipList_ZM");
               if(username == null) {
                  return new ModelAndView("index");
                  }
+              String pagename = "viewVerifiedTallySlipList_ZM";
+              int i = checkprivileges(pagename);
+              if(i != 1)
+              {
+              	 red.addFlashAttribute("errorMessage","Access denied");
+      			   return mv=new ModelAndView("Home");
+              }
                String region_zone =(String)request.getSession().getAttribute("zoneId");
-               ModelAndView mv = new ModelAndView("verifiedTallySlipList_ZM");
                final List<VerifyTallySlip> verifyList = (List<VerifyTallySlip>)this.verifyTallySlipService.getAllforZM("RMZM", region_zone);
                mv.addObject("verifiedTallyforZM", (Object)verifyList);
-               try {
-              	 String userRole= (String)request.getSession().getAttribute("rolename");
-  		   		   if("RO Operation".equals(userRole) || "DPC JI".equals(userRole)|| "OM FINANACE".equals(userRole) || "HO Finance".equals(userRole) || "HO Operation".equals(userRole) || "Mill user".equals(userRole)|| "RO Finance".equals(userRole) || "RO Manager".equals(userRole) || "DPC JI".equals(userRole) || "DPC Manager Web".equals(userRole) || "Data Entry Operator".equals(userRole) ) {
-
-  			 red.addFlashAttribute("errorMessage","Access denied");
-  			   return mv=new ModelAndView("index");
-  		   }
-               }   catch(Exception e) {
-         		   e.printStackTrace();
-         	   }
                return mv;
            }
            @ResponseBody
@@ -5634,12 +5222,19 @@ catch(Exception e) {
            
            
            @RequestMapping({ "uploadexcelsheet" })
-           public ModelAndView uploadexcelsheet(final HttpServletRequest request) {
+           public ModelAndView uploadexcelsheet(final HttpServletRequest request, RedirectAttributes red) {
               String username =(String)request.getSession().getAttribute("usrname");
               if(username == null) {
                  return new ModelAndView("index");
                  }
                ModelAndView mv = new ModelAndView("uploadexcelsheet");
+               String pagename = "uploadexcelsheet";
+               int i = checkprivileges(pagename);
+               if(i != 1)
+               {
+               	 red.addFlashAttribute("errorMessage","Access denied");
+       			   return mv=new ModelAndView("Home");
+               }
                return mv;
            }
            
@@ -5706,12 +5301,19 @@ catch(Exception e) {
     
     
     @RequestMapping(value = { "editFarmerDetails" }, method = { RequestMethod.GET })
-    public ModelAndView editFarmerDetails(final HttpServletRequest request) {
+    public ModelAndView editFarmerDetails(final HttpServletRequest request , RedirectAttributes red) {
       String username =(String)request.getSession().getAttribute("usrname");
         ModelAndView mv = new ModelAndView("editFarmerDetails");
         if(username == null) {
              return mv = new ModelAndView("index");
             }
+        String pagename = "editFarmerDetails";
+        int i = checkprivileges(pagename);
+        if(i != 1)
+        {
+        	 red.addFlashAttribute("errorMessage","Access denied");
+			   return mv=new ModelAndView("Home");
+        }
         try {
         if (request.getParameter("id") != null) {
 
@@ -6033,12 +5635,20 @@ catch(Exception e) {
 	        return mv;
 	    }
 	    @RequestMapping({ "viewmarketArrivalDetails" })
-	    public ModelAndView viewmarketArrivalDetails(final HttpServletRequest request) {
+	    public ModelAndView viewmarketArrivalDetails(final HttpServletRequest request, RedirectAttributes red) {
 	    	String username =(String)request.getSession().getAttribute("usrname");
 	        ModelAndView mv = new ModelAndView("DetailsMarketArrival");
 	        if(username == null) {
 	        	return mv = new ModelAndView("index");
 	            }
+	        
+	        String pagename = "viewmarketArrivalDetails";
+	        int i = checkprivileges(pagename);
+	        if(i != 1)
+	        {
+	        	 red.addFlashAttribute("errorMessage","Access denied");
+				   return mv=new ModelAndView("Home");
+	        }
 	        try {
 	        String key = LoginController.secretkey;
 			String decryptedString = request.getParameter("id");

@@ -165,10 +165,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 												 middlename = "";
 											 fname = firstname +" "+middlename+" "+lastname;
 											}
+     						           String encryptedid = Encry.encrypt(String.valueOf(farmerRegModelList.getF_ID()),key);
+
 								%>
 									<tr role="row" class="odd">
 									<td class="sorting_1"><%=i%></td>
-									<td><a href = "viewFarmerReg.obj?id=<%=farmerRegModelList.getF_ID()%>" ><u><%=farmerRegModelList.getRegno() %></u></a></td>
+									<td><a href = "viewFarmerReg.obj?id=<%=encryptedid%>" ><u><%=farmerRegModelList.getRegno() %></u></a></td>
 									<td><%=fname %></td> 
 									<td><%=farmerRegModelList.getF_MOBILE() %></td>
 									<td><%=farmerRegModelList.getState() %></td>
@@ -181,7 +183,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 										}else{
 											out.print("Verified");
 										}
-        						           String encryptedid = Encry.encrypt(String.valueOf(farmerRegModelList.getF_ID()),key);
 										%>
 										</td>
 										<%-- <td><%=farmerRegModelList.getF_REG_BY() %></td> --%>

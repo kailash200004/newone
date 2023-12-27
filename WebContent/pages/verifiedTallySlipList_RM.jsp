@@ -2,7 +2,9 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
+<%@page import="com.jci.controller.LoginController"%>
 <%@page import="com.jci.model.VerifyTallySlip"%>
+<%@page import="com.jci.common.Encry"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -161,7 +163,7 @@
             </div>
 				
 				<%
-				 
+				String key = LoginController.secretkey;
 				List<VerifyTallySlip> 	 verificationList = (List<VerifyTallySlip>) request.getAttribute("verifiedTallyforRM");
 				 if(verificationList==null){
 					 verificationList = new ArrayList();
@@ -195,8 +197,12 @@
 									<tr>
 									<td class="text-center"><input type="checkbox" id="checkbox" name="checkbox" value="<%=verificationlists.getTallyNo()%>" ></td>
 										<td><%=i%></td>
-										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
-										<td><a href="popupimage.obj?tallyno=<%=verificationlists.getTallyNo()%>&farmerno=<%=verificationlists.getFarmerRegNo()%>" target="_blank"><%=verificationlists.getFarmerRegNo()%></a></td>
+										<%
+		        						String encryptedtally = Encry.encrypt(String.valueOf(verificationlists.getTallyNo()),key);
+		        						String encryptedfarmerno = Encry.encrypt(String.valueOf(verificationlists.getFarmerRegNo()),key);
+										%>
+										<td><a href="popupimage.obj?tallyno=<%=encryptedtally%>" target="_blank"><%=verificationlists.getTallyNo()%></a></td>
+										<td><a href="popupimage.obj?tallyno=<%=encryptedtally%>&farmerno=<%=encryptedfarmerno%>" target="_blank"><%=verificationlists.getFarmerRegNo()%></a></td>
 				                    	<td><%=verificationlists.getFarmer_name()%></td>
 				                    	<td><%=verificationlists.getCentername()%></td>
 				                    	<td><%=verificationlists.getBasis()%></td>

@@ -118,20 +118,20 @@ body {
 					<li data-pre="14" id="o14"><a href="commercialPriceCalculation.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Commercial Ceiling Price Intimation </b></a></li>
 <!-- 					<li data-pre="15" id="o15"><a href="rawJutePaymentAndProcurement.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Raw Jute Procurement & Payment</b></a></li>	 -->			
 <!-- 					<li data-pre="16" id="o16"><a href="dailyPurchaseConf.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase Confirmation</b></a></li> -->
-					<li data-pre="17" id="o17"><a href="Distributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Distribution of tally Slip</b></a></li>
+					<li data-pre="17" id="o15"><a href="Distributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Distribution of tally Slip</b></a></li>
 				  	<li data-pre="18" id="o18"><a href="mspGradesPriceList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View MSP </b></a></li>
 					<li data-pre="19" id="o19"><a href="viewCommercialCeilingPrice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Commercial Ceiling Price Intimation</b></a></li>
 					<li data-pre="20" id="o20"><a href="tallyapproval.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Verification of Tally Slip</b></a></li>
-					<li data-pre="21" id="o21"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RO Finance Verification of Tally Slip</b></a></li>
+					<li data-pre="21" id="o74"><a href="viewVerifiedTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RO Finance Verification of Tally Slip</b></a></li>
 					<li data-pre="53" id="o53"><a href="viewVerifiedTallySlipList_RM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Payment Process of Tally Slip</b></a></li>
 					<li data-pre="54" id="o54"><a href="viewVerifiedTallySlipList_ZM.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>HO Payment Process of Tally Slip</b></a></li>
 					<li data-pre="22" id="o22"><a href="disputedtallyslip.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Disputed Tally Slip</b></a></li>					
 					<li data-pre="55" id="o55"><a href="tallyListRMA.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>RM Purchase Date Approval- Tally Slip</b></a></li>
 					<li data-pre="23" id="o23"><a href="dailyPurchaseList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Daily Purchase List</b></a></li>				
 					<li data-pre="24" id="o24"><a href="viewDistributionoftallyslips.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Distribution of Tally Slip</b></a></li>
-                    <li data-pre="59" id="o59"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
+                    <li data-pre="59" id="o75"><a href="SearchTally.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Tally Slip Status</b></a></li>
 					<li data-pre="58" id="o58"><a href="verifiedHoldTallySlipList.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>F & A Hold Tally Slip List</b></a></li>
-					<li  data-pre="" id=""><a href="uploadexcelsheet.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Upload Payment Excel Sheet</b></a></li>
+					<li data-pre="76" id="o76"><a href="uploadexcelsheet.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Upload Payment Excel Sheet</b></a></li>
 				</ul> </li> 
 			 <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
@@ -161,13 +161,13 @@ body {
 					<li  data-pre="33" id="o33"><a href="BinListfromDb.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>BIN Gain List</b></a></li>
 
 				</ul> </li> 
-				<li><a href="javascript:void(0);"><i
+				<!-- <li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">6.&nbsp;Contract</span> <i
 					class="fa fa-angle-left arrow"></i></a>
 				<ul class="nav-2-level">
 					<li  data-pre="34" id="o34"><a href="entryofpcso.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of PCSO</b> </a></li>
-					<!-- <li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li> -->
+					<li  data-pre="35" id="o35"><a href="pcsolist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>PCSO List</b></a></li>
 					<li  data-pre="36" id="o36"><a href="entry_derivativeprice.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price</b></a></li>
 					<li  data-pre="37" id="o37"><a href="entryderivativepricelist.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Derivative Price List</b></a></li>
 					<li  data-pre="38" id="o38"><a href="contractgenerationPCSOWise.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation PCSO Wise</b></a></li>
@@ -204,7 +204,7 @@ body {
 					<li  data-pre="50" id="o50"><a href="viewcontractgenerationcommercial.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Contract Generation Commercial List</b></a></li>
 					<li  data-pre="52" id="o52"><a href="MSPgradesCombination.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>MSP Grades Combination</b></a></li>
 				
-				</ul></li>
+				</ul></li> -->
 		
 	</div>
 
@@ -227,7 +227,7 @@ body {
 					    }
 				}
 			});
-		for(var i=1; i<=58;i++){
+		for(var i=1; i<=90;i++){
 			$("#o"+i).hide();
 			
 			}

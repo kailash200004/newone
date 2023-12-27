@@ -43,7 +43,34 @@
         <error-code>500</error-code>
         <location>/errorPage.jsp</location>
     </error-page>
-  
+    <error-page>
+        <error-code>501</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+     <error-page>
+        <error-code>405</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+       <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
+     <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.NumberFormatException</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.IllegalArgumentException</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
