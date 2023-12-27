@@ -178,10 +178,11 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 									<td><%=farmerRegModelList.getBlock() %></td>
 									<td>
 								<%
-										if(farmerRegModelList.getIS_VERIFIED()==0){
+										if(farmerRegModelList.getIS_VERIFIED()==0){d
 											out.print("Not Verified");
 										}else{
 											out.print("Verified");
+											//ss
 										}
 										%>
 										</td>
