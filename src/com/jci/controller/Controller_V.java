@@ -228,7 +228,7 @@ public class Controller_V {
 				+ "Thanks & Regards \n " + "Jute Corporation Of India";
 
 		InternetAddress[] toAddresses = { new InternetAddress("pradeep.rathor@cyfuture.com"),
-				new InternetAddress("pradeeprathor3110@gmail.com") };
+				new InternetAddress("prakhar.rai@cyfuture.com") };
 
 		SendMail sendMail = new SendMail();
 
@@ -497,7 +497,7 @@ public class Controller_V {
 	@RequestMapping("updatePcso")
 	public ModelAndView updatePcso(HttpServletRequest request) throws ParseException {
 		int refId = Integer.parseInt(request.getParameter("pcsorefid"));
-
+		 
 		ModelAndView mv = new ModelAndView("editPcso");
 		String username = (String) request.getSession().getAttribute("usrname");
 		if (username == null) {

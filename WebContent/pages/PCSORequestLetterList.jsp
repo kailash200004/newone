@@ -215,7 +215,7 @@
 						"id" : id
 					},
 					success : function(result) {
-						location.reload();
+					
 					}
 				})
 			} else {

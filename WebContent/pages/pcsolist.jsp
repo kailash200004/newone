@@ -56,7 +56,7 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">PCSO List</h1>
+				<h1 class="page-title">PCO List</h1>
 			</div>
 			<%
 			List<EntryofpcsoModel> pcsoList = (List<EntryofpcsoModel>) request.getAttribute("pcsolist");
@@ -180,8 +180,7 @@
 									tableData += "<td>" + data[i].allocatedQty
 											+ "</td>";
 									tableData += "<td><a href='updatePcso.obj?pcsorefid="
-											+ data[i].pcsorefid.toString()
-													.trim()
+											+ data[i].pcsorefid
 											+ "' class='btn btn-warning btn-sm btn-block'><i class='fa fa-pencil' aria-hidden='true' style='font-size: 15px;'></i></a></td>";
 									tableData += "<td><a href='pcsoDelete.obj?pcsorefid="
 											+ data[i].pcsorefid

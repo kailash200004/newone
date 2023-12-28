@@ -266,10 +266,10 @@ body {
 						href="contractgenerationPCSOWise.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>Contract
 								Generation PCO Wise</b></a></li>
-					<li data-pre="39" id="o39"><a
+					<!-- <li data-pre="39" id="o39"><a
 						href="contractgenerationMillWise.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>Contract
-								Generation Mill Wise</b></a></li>
+								Generation Mill Wise</b></a></li> -->
 					<li data-pre="40" id="o40"><a
 						href="viewcontractgeneration.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>Contract
