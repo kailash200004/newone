@@ -59,9 +59,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.jci.model.FarmerRegistrationModel;
+import com.jci.model.FinancialConcurenceModel;
+import com.jci.model.GenrationDemandNoteModel;
 import com.jci.model.ImageVerificationModel;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jci.model.DistrictModel;
+import com.jci.model.EntryPaymentDetailsModel;
 import com.jci.model.StateList;
 import com.jci.model.PincodeModel;
 import java.util.List;
@@ -78,6 +81,9 @@ import com.jci.service.BalePrepareService;
 import com.jci.service.PoliceStationService;
 import com.jci.service.blockService;
 import com.jci.service.Impl.SendMail;
+import com.jci.service_phase2.FinancialConcurenceService;
+import com.jci.service_phase2.GenratedDemandNoteService;
+import com.jci.service_phase2.PaymentDetailService;
 import com.jci.service.CommercialJuteVarietyGradesPriceService;
 import com.jci.service.MSPPriceCalculationService;
 import com.jci.service.RulingMarketService;
@@ -113,6 +119,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.jci.service.PincodeService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
@@ -212,6 +219,17 @@ public class InsertDataController
     
     @Autowired
 	private HttpServletRequest request;
+    
+    @Autowired
+   	PaymentDetailService paymentDetailService;
+    
+
+    @Autowired
+    FinancialConcurenceService fiannacialConcurenceService;
+    
+    @Autowired
+    GenratedDemandNoteService genratedDemandNoteService;
+       
     
     public InsertDataController() {
         this.slipUpload = "E:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\TallySlip\\";
@@ -5678,5 +5696,237 @@ public class InsertDataController
 	        return gson.toJson((Object)flagvalue);
 			
 		}
+	    //kailash cont
+	    @RequestMapping({ "viewPaymentEntryDetails" })
+		public ModelAndView viewpaymentofDetails(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			ModelAndView mv = new ModelAndView("viewPaymentDetails");
+			if (username == null) {
+				mv = new ModelAndView("index");
+			}
+												
+
+			final List<EntryPaymentDetailsModel> allUserRegistration = (List<EntryPaymentDetailsModel>) this.paymentDetailService
+					.getAllPaymentInstrumentsentry();
+			mv.addObject("entryPaymentDetailsModel", allUserRegistration);
+			
+
+			return mv;
+		}
+	    
+		
+		@RequestMapping(value = {"editPaymentDetail"}, method = { RequestMethod.GET })
+		public ModelAndView editPaymentDetail(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			if (username == null) {
+				return new ModelAndView("index");
+			}
+			
+			ModelAndView mv = new ModelAndView("editPaymentDetails");
+			if (request.getParameter("id") != null) {
+				final int id = Integer.parseInt(request.getParameter("id"));
+				final EntryPaymentDetailsModel entryPaymentDetailsModel = this.paymentDetailService.find(id);
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date date=entryPaymentDetailsModel.getInstdate();
+				Date date1=entryPaymentDetailsModel.getDateofexpiry();
+				
+				Date date2=entryPaymentDetailsModel.getDateofship();
+				Date date3=entryPaymentDetailsModel.getDateofexpiry();
+				
+				
+				String parsed = date.toString().split(" ")[0];
+				String parsed1 =  date1.toString().split(" ")[0];
+				String parsed2 = date2.toString().split(" ")[0];
+				//String parsed3 =  date3.toString().split(" ")[0];
+				System.out.println(parsed+"date########");
+				//final List<PaymentInstrumentModel>paymentInstrumentModel =(List<PaymentInstrumentModel>)paymentInstrumentService.find(id);
+				mv.addObject("entryPaymentDetailsModel",entryPaymentDetailsModel);
+				mv.addObject("parsed",  parsed);
+				mv.addObject("parsed1",  parsed1);
+				mv.addObject("parsed2",  parsed2);
+				
+				//mv.addObject("parsed3",  parsed3);
+			}
+
+			return mv;
+		}
+		
+		@RequestMapping({ "updatePaymentDetail" })
+		public ModelAndView updatePaymentDetail(final HttpServletRequest request,
+				final RedirectAttributes redirectAttributes,Model m) {
+			String username = (String) request.getSession().getAttribute("usrname");
+		//	final ModelAndView mv = new ModelAndView("viewPaymentInstrument.obj");
+			if (username == null) {
+				return new ModelAndView("index");
+			}
+			try {
+				
+				final String id = request.getParameter("Payment_id");
+		
+				final SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+				final String fullcontractno = request.getParameter("fullcontractno");	
+				final String Instrumentno = request.getParameter("instrument");
+				final String instdate = request.getParameter("instdate");
+				final Date date1 = formatter1.parse(instdate);
+				final String IFSC = request.getParameter("IFSC");
+				final String BankName = request.getParameter("BankName");
+				final String Branch = request.getParameter("Branch");	
+				final String InstrumentValue = request.getParameter("InstrumentValue");
+				final String QtyAllowed = request.getParameter("QtyAllowed");
+				final String paymenttype  = request.getParameter("paymenttype");
+				final String SupportingDocument = request.getParameter("SupportingDocument");
+				final String dateofshipment = request.getParameter("dateofship");
+				final Date date3 = formatter1.parse(dateofshipment);
+				final String dateofexpiry = request.getParameter("dateofexpiry");
+				final Date date4 = formatter1.parse(dateofexpiry);
+				final String autorevolvingamount  = request.getParameter("autorevolvingamount");
+				final EntryPaymentDetailsModel entryPaymentDetailsModel = new EntryPaymentDetailsModel();
+				entryPaymentDetailsModel.setPayment_id(Integer.parseInt(id));
+				entryPaymentDetailsModel.setContractno(fullcontractno);
+				entryPaymentDetailsModel.setInstdate(date1);
+				entryPaymentDetailsModel.setInstrumentno(Instrumentno);
+				System.out.print("++++++++++++++++++++++++++++"+ entryPaymentDetailsModel);		
+				entryPaymentDetailsModel.setIFSC(IFSC);
+				entryPaymentDetailsModel.setBankName (BankName);
+				entryPaymentDetailsModel.setBranch(Branch);
+				//paymentInstrumentModel.setCreateddate(new Date());
+				entryPaymentDetailsModel.setInstrumentValue(InstrumentValue);
+//				/* entryPaymentDetailsModel.setQtyAllowed(QtyAllowed); */
+				entryPaymentDetailsModel.setPayment(paymenttype);
+				entryPaymentDetailsModel.setSupportingDocument(SupportingDocument);
+				
+				entryPaymentDetailsModel.setDateofship(date3);
+				entryPaymentDetailsModel.setDateofexpiry(date4);
+				entryPaymentDetailsModel.setAutorevolvingamount(autorevolvingamount);
+				 Date date= new Date();
+					// Date currdate = date.toString();
+					 entryPaymentDetailsModel.setCreated_date(date);
+				this.paymentDetailService.create(entryPaymentDetailsModel);
+				
+				redirectAttributes.addFlashAttribute("msg",
+						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Record updated successfully.</div>\r\n");
+
+				return new ModelAndView((View) new RedirectView("viewPaymentEntryDetails.obj"));
+				//return  new ModelAndView ("viewPaymentInstrument");
+			} catch (Exception ex) {
+				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+ex);
+				return new ModelAndView("EntryofPaymentDetails");
+			}
+		}
+		
+		@RequestMapping({ "viewFinancialConcurence" })
+		public ModelAndView viewFinancialConcurence(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			ModelAndView mv = new ModelAndView("viewFinancialConcurence");
+			if (username == null) {
+				mv = new ModelAndView("index");
+			}
+												
+
+			final List<FinancialConcurenceModel> allUserRegistration = (List<FinancialConcurenceModel>) this.fiannacialConcurenceService
+					.getAllPaymentInstruments();
+			mv.addObject("financialConcurenceModel", allUserRegistration);
+			
+
+			return mv;
+		}
+		@RequestMapping({ "viewPaymentForFC" })
+		public ModelAndView viewpaymentforFC(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			ModelAndView mv = new ModelAndView("viewFCpaymentlist");
+			if (username == null) {
+				mv = new ModelAndView("index");
+			}
+												
+
+			final List<EntryPaymentDetailsModel> allUserRegistration = (List<EntryPaymentDetailsModel>) this.paymentDetailService
+					.getAllPaymentInstruments();
+			mv.addObject("allUserRegistration", allUserRegistration);
+			
+
+			return mv;
+		}
+		
+		@RequestMapping(value = { "issuePaymentDetail" }, method = { RequestMethod.GET })
+		public ModelAndView issuePaymentDetail(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			if (username == null) {
+				return new ModelAndView("index");
+			}
+			ModelAndView mv = new ModelAndView("EntryofFinancialConcurence");
+			if (request.getParameter("id") != null) {
+				 final int id = Integer.parseInt(request.getParameter("id")); 
+				
+				final String  contno=request.getParameter("contno");
+				
+				this.paymentDetailService.update2(contno);
+				
+				final EntryPaymentDetailsModel entryPaymentDetailsModel = this.paymentDetailService.find(id);
+				
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date date=entryPaymentDetailsModel.getCreated_date();
+				
+				String  Con_no = entryPaymentDetailsModel.getContractno();
+				
+				 FinancialConcurenceModel financialConcurenceModel = new FinancialConcurenceModel();
+				
+				String Contrated_quanity =  this.fiannacialConcurenceService.ContractedQty(Con_no);
+				System.err.println(Contrated_quanity);
+				String parsed = date.toString().split(" ")[0];
+			    mv.addObject("entryPaymentDetailsModel",entryPaymentDetailsModel);
+				mv.addObject("financialConcurenceModel",financialConcurenceModel);
+				mv.addObject("parsedstring",Con_no  );
+				mv.addObject("parsedstring2",Contrated_quanity  );
+				mv.addObject("parsed",parsed  );
+				 double cost= this.fiannacialConcurenceService.calculateCharges(id,Con_no);
+				 financialConcurenceModel.setCarrying_Cost_Charged(cost);
+				 mv.addObject("cost",cost);
+			    }
+
+			return mv;
+		}
+		@RequestMapping({ "updatefcstatus" })
+		public ModelAndView bnaDeletepay( HttpServletRequest request, RedirectAttributes redirectAttributes) {
+			final ModelAndView mv = new ModelAndView("viewFCpaymentlist");
+			String username = (String) request.getSession().getAttribute("usrname");
+			if (username == null) {
+				return new ModelAndView("index");
+			}
+			try {		
+				if (request.getParameter("id") != null) {
+				final int id = Integer.parseInt(request.getParameter("id")); 
+				final String  contno=request.getParameter("contno");
+				this.paymentDetailService.update1(contno);
+				final EntryPaymentDetailsModel entryPaymentDetailsModel = this.paymentDetailService.find(id);
+				mv.addObject("entryPaymentDetailsModel",entryPaymentDetailsModel);
+			}
+					redirectAttributes.addFlashAttribute("msg",
+						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Data rejected successfully.</div>\r\n");
+
+				return  new ModelAndView(new RedirectView("viewPaymentForFC.obj"));
+			}
+
+			catch (Exception ex) {
+				return mv;
+			}
+		}
+
+		@RequestMapping({ "viewGenrationdemandNote" })
+		public ModelAndView viewgenrationDemnadNote(final HttpServletRequest request) {
+			String username = (String) request.getSession().getAttribute("usrname");
+			ModelAndView mv = new ModelAndView("viewGenrationDemandNote");
+			if (username == null) {
+				mv = new ModelAndView("index");
+			}
+												
+
+			final List<GenrationDemandNoteModel> allUserRegistration = (List<GenrationDemandNoteModel>)
+					this.genratedDemandNoteService.getAll();
+			mv.addObject("genrationDemandNoteModel", allUserRegistration);
+			
+
+			return mv;
+		}
+	    
 
 }

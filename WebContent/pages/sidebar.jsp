@@ -323,11 +323,43 @@ body {
 					<li data-pre="44" id="o44"><a href="uploadingreceipt.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>Uploading of
 								receipt</b></a></li>
-
-
+								
 
 				</ul></li>
+				
+				<li><a href="javascript:void(0);"><i
+					class="sidebar-item-icon fa fa-th-large"></i> <span
+					class="nav-label">8.&nbsp;Issue financial concurrence</span> <i
+					class="fa fa-angle-left arrow"></i></a>
+				<ul class="nav-2-level ">
+				
+				<li  data-pre="41" id="o41"><a href="EntryofPaymentDetails.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of payment Details</b></a></li>
+ 								<li  data-pre="44" id="o44"><a href="viewPaymentEntryDetails.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Payment of  Detail list</b></a></li>
+				
+				    <li  data-pre="44" id="o44"><a href="viewPaymentForFC.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Payment   Detail list</b></a></li>
+                    <li  data-pre="44" id="o44"><a href="EntryofFinancialConcurence.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Financial Concurence</b></a></li>
+				    <li  data-pre="44" id="o44"><a href="viewFinancialConcurence.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Financial Concuerence list</b></a></li>
+					
+					
+					<li  data-pre="44" id="o44"><a href="EntryofMillreceipt.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Mill Receipt</b></a></li>
+                    <li  data-pre="44" id="o44"><a href="viewMillReciept.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View of Mill Receipt</b></a></li>
+                   
+                   
+                      <li  data-pre="" id=""><a href="EntryofGenrationDeamandNote.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Generation demand Note</b></a></li>
+				   <li  data-pre="" id=""><a href="viewGenrationdemandNote.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View Generation demand Note list</b></a></li>
+				  <li  data-pre="" id=""><a href="EntryofGenerationBillsupply.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Generation Bill of supply</b></a></li>
+				<li  data-pre="" id=""><a href="ViewofGenerationBillsupply.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>View of Generation Bill of supply</b></a></li>
+				
+				
+				<li  data-pre="44" id="o44"><a href="entryofConfirationSettelment.obj"><i class="sidebar-item-icon fa fa-th-large"></i><b>Entry of Confirmation of Claim Settlement Report </b></a></li>
+                  
 
+				</ul></li>
+ 	
+				
+				
+				
+				
 			<li><a href="javascript:void(0);"><i
 					class="sidebar-item-icon fa fa-th-large"></i> <span
 					class="nav-label">8.&nbsp;Commercial / Daily Sales / Free
