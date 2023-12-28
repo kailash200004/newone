@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_states", schema = "dbo")
+@Table(name = "tbl_states_new", schema = "dbo")
 public class StateList {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY )

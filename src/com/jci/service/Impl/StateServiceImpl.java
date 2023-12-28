@@ -53,4 +53,9 @@ public class StateServiceImpl implements StateService {
 		return stateListDao.submitform(off);
 	}
 
+	@Override
+	public String getStateCode(String id) {
+		return stateListDao.getStateCode(id);
+	}
+
 }

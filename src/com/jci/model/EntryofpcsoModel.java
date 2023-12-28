@@ -9,54 +9,70 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 @Entity
-@Table(name = "jcientryofpcso", schema = "dbo")
+@Table(name = "jcientryof_pcso", schema = "dbo")
 
 public class EntryofpcsoModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pcsorefid")
 	private int pcsorefid;
-	
-	@Column(name = "reference_no")
+
+	@Column(name = "reference_no",length = 256)
+	@NotNull
 	private String reference_no;
-	
-	@Column(name = "reference_date")
+
+	@Column(name = "reference_date",length = 256)
+	@Nullable
 	private String reference_date;
-	
+
 	@Column(name = "pcso_date")
+	@NotNull
 	private String pcso_date;
-	
+
+	@Column(name = "letter_ref",length = 256)
+	@NotNull
+	private String letterRef;
+
+	@Column(name = "Jute_ratio" , length = 256)
+	@NotNull
+	private String juteRatio;
+
+
+	@Column(name = "Delivery_period" , length = 256)
+	@NotNull
+	private String deliveryPeriod;
+
+	@Column(name = "Letter_path" , length = 256)
+	@NotNull
+	private String letterPath;
+
 	@Column(name = "mill_code")
+	@NotNull
 	private String mill_code;
-	
-	@Column(name = "mill_name")
+
+	@Column(name = "mill_name" , length = 256)
+	@NotNull
 	private String mill_name;
+
+	@Column(name = "Allocated_qty")
+	@NotNull
+	private Double allocatedQty = 0.0;
 	
-	@Column(name = "total_allocation")
-	private String total_allocation;
-	
+
+	@Column(name = "pcso_qty")
+	@NotNull
+	private Double pcsoQty = 0.0;
+
 	@Column(name = "created_date")
-	private String created_date;
-	
-	@Column(name = "millwise_contract")
-	private int millwise_contract;
-	
-	@Column(name = "pcsowise_contract")
-	private int pcsowise_contract;
-	
-	@Column(name = "sumof_totalallocation")
-	private double sumof_totalallocation;
-	
+	private Date created_date;
 
-	public double getSumof_totalallocation() {
-		return sumof_totalallocation;
-	}
-
-	public void setSumof_totalallocation(double sumof_totalallocation) {
-		this.sumof_totalallocation = sumof_totalallocation;
-	}
+	@Column(name = "Pcso_contract_flag")
+	private int pcsoContractFlag = 0;
 
 	public int getPcsorefid() {
 		return pcsorefid;
@@ -90,6 +106,38 @@ public class EntryofpcsoModel {
 		this.pcso_date = pcso_date;
 	}
 
+	public String getLetterRef() {
+		return letterRef;
+	}
+
+	public void setLetterRef(String letterRef) {
+		this.letterRef = letterRef;
+	}
+
+	public String getJuteRatio() {
+		return juteRatio;
+	}
+
+	public void setJuteRatio(String juteRatio) {
+		this.juteRatio = juteRatio;
+	}
+
+	public String getDeliveryPeriod() {
+		return deliveryPeriod;
+	}
+
+	public void setDeliveryPeriod(String deliveryPeriod) {
+		this.deliveryPeriod = deliveryPeriod;
+	}
+
+	public String getLetterPath() {
+		return letterPath;
+	}
+
+	public void setLetterPath(String letterPath) {
+		this.letterPath = letterPath;
+	}
+
 	public String getMill_code() {
 		return mill_code;
 	}
@@ -106,75 +154,70 @@ public class EntryofpcsoModel {
 		this.mill_name = mill_name;
 	}
 
-	public String getTotal_allocation() {
-		return total_allocation;
+	public Double getAllocatedQty() {
+		return allocatedQty;
 	}
 
-	public void setTotal_allocation(String total_allocation) {
-		this.total_allocation = total_allocation;
+	public void setAllocatedQty(Double allocatedQty) {
+		this.allocatedQty = allocatedQty;
 	}
 
-	public String getCreated_date() {
+	public Double getPcsoQty() {
+		return pcsoQty;
+	}
+
+	public void setPcsoQty(Double pcsoQty) {
+		this.pcsoQty = pcsoQty;
+	}
+
+	public Date getCreated_date() {
 		return created_date;
 	}
 
-	public void setCreated_date(String created_date) {
+	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
 	}
 
-	public int getMillwise_contract() {
-		return millwise_contract;
+	public int getPcsoContractFlag() {
+		return pcsoContractFlag;
 	}
 
-	public void setMillwise_contract(int millwise_contract) {
-		this.millwise_contract = millwise_contract;
+	public void setPcsoContractFlag(int pcsoContractFlag) {
+		this.pcsoContractFlag = pcsoContractFlag;
 	}
 
-	public int getPcsowise_contract() {
-		return pcsowise_contract;
-	}
-
-	public void setPcsowise_contract(int pcsowise_contract) {
-		this.pcsowise_contract = pcsowise_contract;
-	}
-
-	
-	
 	@Override
 	public String toString() {
 		return "EntryofpcsoModel [pcsorefid=" + pcsorefid + ", reference_no=" + reference_no + ", reference_date="
-				+ reference_date + ", pcso_date=" + pcso_date + ", mill_code=" + mill_code + ", mill_name=" + mill_name
-				+ ", total_allocation=" + total_allocation + ", created_date=" + created_date + ", millwise_contract="
-				+ millwise_contract + ", pcsowise_contract=" + pcsowise_contract + ", sumof_totalallocation="
-				+ sumof_totalallocation + "]";
+				+ reference_date + ", pcso_date=" + pcso_date + ", letterRef=" + letterRef + ", juteRatio=" + juteRatio
+				+ ", deliveryPeriod=" + deliveryPeriod + ", letterPath=" + letterPath + ", mill_code=" + mill_code
+				+ ", mill_name=" + mill_name + ", allocatedQty=" + allocatedQty + ", pcsoQty=" + pcsoQty
+				+ ", created_date=" + created_date + ", pcsoContractFlag=" + pcsoContractFlag + "]";
 	}
 
-
-	
-	
-	public EntryofpcsoModel(int pcsorefid, String reference_no, String reference_date, String pcso_date, String mill_code,
-			String mill_name, String total_allocation, String created_date, int millwise_contract,
-			int pcsowise_contract, double sumof_totalallocation) {
+	public EntryofpcsoModel(int pcsorefid, String reference_no, String reference_date, String pcso_date,
+			String letterRef, String juteRatio, String deliveryPeriod, String letterPath, String mill_code,
+			String mill_name, Double allocatedQty, Double pcsoQty, Date created_date, int pcsoContractFlag) {
 		super();
 		this.pcsorefid = pcsorefid;
 		this.reference_no = reference_no;
 		this.reference_date = reference_date;
 		this.pcso_date = pcso_date;
+		this.letterRef = letterRef;
+		this.juteRatio = juteRatio;
+		this.deliveryPeriod = deliveryPeriod;
+		this.letterPath = letterPath;
 		this.mill_code = mill_code;
 		this.mill_name = mill_name;
-		this.total_allocation = total_allocation;
+		this.allocatedQty = allocatedQty;
+		this.pcsoQty = pcsoQty;
 		this.created_date = created_date;
-		this.millwise_contract = millwise_contract;
-		this.pcsowise_contract = pcsowise_contract;
-		this.sumof_totalallocation = sumof_totalallocation;
+		this.pcsoContractFlag = pcsoContractFlag;
 	}
 
 	public EntryofpcsoModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-
 }
+

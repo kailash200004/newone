@@ -1,5 +1,6 @@
 package com.jci.dao.impl;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.DistrictDao;
 import com.jci.model.DistrictModel;
+
 @Transactional
 @Repository
 
 public class DistrictdaoImpl implements DistrictDao {
 	@Autowired
 	SessionFactory sessionFactory;
-	protected Session currentSession(){
+
+	protected Session currentSession() {
 		return sessionFactory.getCurrentSession();
 	}
+
 	@Override
 	public void create(DistrictModel productlist) {
 		currentSession().save(productlist);
@@ -44,9 +48,9 @@ public class DistrictdaoImpl implements DistrictDao {
 	@Override
 	public void delete(int id) {
 		DistrictModel prod = new DistrictModel();
-		String hql = "Delete from dbo.product where id = '"+id+"' " ;
-		 this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
-		//List<String> results = query.list();
+		String hql = "Delete from dbo.product where id = '" + id + "' ";
+		this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+		// List<String> results = query.list();
 
 	}
 
@@ -57,10 +61,10 @@ public class DistrictdaoImpl implements DistrictDao {
 
 	@Override
 	public List<DistrictModel> getAll() {
-	//	System.out.println("Hello From StateListModel");
+		// System.out.println("Hello From StateListModel");
 		List<DistrictModel> ll;
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(DistrictModel.class);
-		ll=c.list();
+		ll = c.list();
 		return ll;
 	}
 
@@ -69,10 +73,10 @@ public class DistrictdaoImpl implements DistrictDao {
 		this.sessionFactory.getCurrentSession().saveOrUpdate(off);
 		return false;
 	}
-	
+
 	@Override
-	public List<String> findByDistrictId(String dids) {
-		String querystr = "select district_name from tbl_districts where id in ("+dids+")";
+	public List<String> findByDistrictIds(String dids) {
+		String querystr = "select district_name from tbl_districts where id in (" + dids + ")";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -95,15 +99,65 @@ public class DistrictdaoImpl implements DistrictDao {
 	@Override
 	public List<String> getAllFilledPosition(String state) {
 		List<String> result = new ArrayList<>();
-	
-		String hql = "select id, district_name from tbl_districts where state_id ="+state+"";
+
+		String hql = "select id, district_name from tbl_districts where state_id =" + state + "";
 		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List<Object[]> rows = query.list();
-		for(Object[] row : rows){
-			result.add(row[0].toString()+"-"+row[1].toString());
-			//System.out.println("state value from DaoImpl is      "+result);
-		
+		for (Object[] row : rows) {
+			result.add(row[0].toString() + "-" + row[1].toString());
+			// System.out.println("state value from DaoImpl is " + result);
+
 		}
 		return result;
 	}
+
+	@Override
+	public List<String> getSpecificDistricts(String state_code, String crop_year, String delivery_type) {
+		List<String> result = new ArrayList<>();
+		//System.out.println(state_code + " " + crop_year + " " + delivery_type + " ");
+		String sqlForExistingDistrictsInDatabase = "select DISTINCT  district_id from jcientry_derivative_price where crop_year ='"
+				+ crop_year + "' AND state ='" + state_code + "' AND delivery_type ='" + delivery_type
+				+ "'";
+		System.out.println(sqlForExistingDistrictsInDatabase + "this is the query for the result");
+
+		Query firstQuery = this.sessionFactory.getCurrentSession().createSQLQuery(sqlForExistingDistrictsInDatabase);
+		Object listOfIds = firstQuery.list();
+		System.out.println(listOfIds + " WWWWWWWWWWW");
+		String idsWithBounderies = listOfIds.toString();
+		String idsWithoutBounderies = idsWithBounderies.substring(1, idsWithBounderies.length()-1);
+		System.out.println("ListOfIds" + idsWithoutBounderies + " ");
+
+		String hql;
+		
+		if (idsWithoutBounderies != "") {
+		hql = "select id, dist_name, new_dist_code from tbl_districts_new where state_code ='" + state_code + "' AND id not in ("
+				+ idsWithoutBounderies + ")";
+	} else {
+		hql = "select id, dist_name, new_dist_code from tbl_districts_new where state_code ='" + state_code + "'";
+	}
+
+		System.out.println(state_code + "state_code<<<<<<<<<<<<<<<<<<<<<");
+
+		//hql = "select id, dist_name, new_dist_code from tbl_districts_new where state_code ='" + state_code + "'";
+
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
+		List<Object[]> rows = query.list();
+		for (Object[] row : rows) {
+			result.add(row[0].toString() + "-" + row[1].toString() + "-" + row[2].toString());
+			// System.out.println("state value from DaoImpl is " + result);
+//			System.out.println(row[0].toString() + "-" + row[1].toString() + "-" + row[2].toString());
+
+		}
+		return result;
+	}
+
+
+	@Override
+	public List<String> getDistrictCodeByDistrictIds(String ids) {
+		String hql = "select dist_code from tbl_districts_new where id in (" + ids + ")";
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
+		List<String> rows = query.list();
+		return rows;
+	}
+
 }

@@ -10,9 +10,27 @@ public interface PcsoentryService {
 	
 	void create(EntryofpcsoModel entryofpcso);
 
-	List<EntryofpcsoModel> getAlldata();
-	
-	List<Date> getAll();
-	
-	List<PcsoDateModel> pcso_details(String pcso);
+	List<Object[]> getAlldata();
+
+	List<EntryofpcsoModel> getAllPcso();
+
+	List<String> getAllDates();
+
+	void delete(int id);
+
+	public EntryofpcsoModel getPcso(int refid);
+
+	public void update(EntryofpcsoModel entryofpcso, int refid);
+
+	List<String> getAllRequest();
+
+	Object loadAllDetailsOfLetter(String refNo);
+
+	List<String> getAllLables();
+
+	List<String> getUniqueRefNos();
+
+	List<EntryofpcsoModel> getAllMillDetailsOfRefNo(String refNo);
+
+	int getCountOfTotalEntries();
 }

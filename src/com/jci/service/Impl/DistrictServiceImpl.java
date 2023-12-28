@@ -60,8 +60,8 @@ public class DistrictServiceImpl implements DistrictService {
 	}
 
 	@Override
-	public List<String> findByDistrictId(String dids) {
-		List<String> findByDistrictId = distrdao.findByDistrictId(dids);
+	public List<String> findByDistrictIds(String dids) {
+		List<String> findByDistrictId = distrdao.findByDistrictIds(dids);
 		System.out.println("findByDistrictId service"+findByDistrictId);
 		return findByDistrictId;
 	}
@@ -70,5 +70,15 @@ public class DistrictServiceImpl implements DistrictService {
 	@Override
 	public List<String> getAllFilledPosition(String id) {
 		return distrdao.getAllFilledPosition(id);
+	}
+	
+	@Override
+	public List<String> getSpecificDistricts(String state, String crop_year, String delivery_type) {
+		return distrdao.getSpecificDistricts(state,crop_year,delivery_type);
+	}
+	
+	@Override
+	public List<String> getDistrictCodeByDistrictIds(String ids) {
+		return distrdao.getDistrictCodeByDistrictIds(ids);
 	}
 }

@@ -13,5 +13,7 @@ public interface DistrictService {
 	public List <DistrictModel> getAll();
 	public boolean submitform(DistrictModel off);
 	public List <String> getAllFilledPosition(String id);
-	public List<String> findByDistrictId(String dids);
+	public List <String> getSpecificDistricts(String state, String crop_year, String delivery_type);
+	public List<String> findByDistrictIds(String dids);
+	public List<String> getDistrictCodeByDistrictIds(String dids);
 }

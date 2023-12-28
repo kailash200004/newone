@@ -1,4 +1,6 @@
 package com.jci.controller;
+import java.time.LocalDate;
+
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -170,6 +172,26 @@ public class LoginController {
                    
                      else
                          {
+                    	 
+                    	 LocalDate obj = LocalDate.now();
+							//LocalDate obj = LocalDate.of(2020, 1, 8)
+
+							int currentyear = obj.getYear();
+							int nextyear = 0;
+							int month = obj.getMonthValue();
+
+							if (month >= 7) {
+								nextyear = currentyear + 1;
+							} else {
+								nextyear = currentyear;
+								currentyear -= 1;
+							}
+						
+							String currCropYear = currentyear + "-" + nextyear;
+							
+
+                    	 
+                    	 
                     	        useremail1 = email;
                     	        String set0 = "0";
                                 userRegService.updateConcurrentlogin(email,set0);
@@ -203,6 +225,7 @@ public class LoginController {
                                 session.setAttribute("rolename", rolename);
                                 session.setAttribute("dpc_center", dpc_center);
                                 session.setAttribute("userpass", password);
+                                session.setAttribute("currCropYear", currCropYear);
                                 System.out.println("check");
                                 //session.setAttribute("Concurrentloginflag",flag);
                                 
