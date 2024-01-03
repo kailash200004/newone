@@ -9,6 +9,7 @@ public interface RoDetailsService {
 	public void update(RoDetailsModel roDetails);
 	public RoDetailsModel edit(int id);
 	public void delete(int id);
+	public String findregionbyid(String region);
 	public RoDetailsModel find(int id);
 	public List <RoDetailsModel> getAll();
 	public boolean submitform(RoDetailsModel roDetails);

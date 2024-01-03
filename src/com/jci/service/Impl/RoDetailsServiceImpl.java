@@ -47,7 +47,7 @@ public class RoDetailsServiceImpl implements RoDetailsService{
 	@Override
 	public List<RoDetailsModel> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return roDao.getAll();
 	}
 
 	@Override
@@ -59,5 +59,11 @@ public class RoDetailsServiceImpl implements RoDetailsService{
 	@Override
 	public List<String> zonecode(String zoneCode) {
 		return roDao.zonecode(zoneCode);
+	}
+
+	@Override
+	public String findregionbyid(String region) {
+		// TODO Auto-generated method stub
+		return roDao.findregionbyid(region);
 	}
 }

@@ -79,26 +79,34 @@ import com.jci.model.EntryDerivativePrice;
 import com.jci.model.EntryPaymentDetailsModel;
 import com.jci.model.EntryofGradeCompositionModel;
 import com.jci.model.EntryofpcsoModel;
+import com.jci.model.FactorssInvolvedCommercial;
 import com.jci.model.FinancialConcurenceModel;
 import com.jci.model.GenerationOfBillSupplyModel;
 import com.jci.model.GenrationDEmandDto;
 import com.jci.model.GenrationDemandNoteModel;
 import com.jci.model.MillRecieptModel;
+import com.jci.model.OperationAndTransportCostModel;
+import com.jci.model.OperationCostModel;
 import com.jci.model.PCSORequestLetter;
-
+import com.jci.model.RoDetailsModel;
 import com.jci.model.RoDispatchModel;
 import com.jci.model.StateList;
 import com.jci.model.settlemetCnDnModel;
 import com.jci.service.DistrictService;
+import com.jci.service.PurchaseCenterService;
+import com.jci.service.RoDetailsService;
 import com.jci.service_phase2.ConfirmationofClaimSettlementService;
 import com.jci.service_phase2.ContractGenerationService2;
 import com.jci.service_phase2.CreditNoteGenerationService;
 import com.jci.service_phase2.EntryDerivativePriceService2;
 import com.jci.service_phase2.EntryofGradeCompositionService;
+import com.jci.service_phase2.FactorssInvolvedCommercialService;
 import com.jci.service_phase2.FinancialConcurenceService;
 import com.jci.service_phase2.GenerationofBillService;
 import com.jci.service_phase2.GenratedDemandNoteService;
 import com.jci.service_phase2.MillRecieptService;
+import com.jci.service_phase2.OperationAndTransportCostService;
+import com.jci.service_phase2.OperationCostService;
 import com.jci.service_phase2.PCSOReqLetterService;
 import com.jci.service_phase2.PaymentDetailService;
 import com.jci.service_phase2.PaymentRealizationService;
@@ -170,12 +178,27 @@ public class Controller_V {
 
 	@Autowired
 	PaymentRealizationService paymentRealizationService;
+	
+	@Autowired
+	RoDetailsService roDetailsservice;
+	
+	@Autowired
+    PurchaseCenterService purchaseCenterService;
 
+	@Autowired
+	OperationAndTransportCostService operationCostservice;
+	
+	@Autowired
+	FactorssInvolvedCommercialService factorsinvolvedservice;
+	
 //	@Autowired
 //	DistrictService districtService;
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	OperationCostService operationcostservice;
 
 	protected Session currentSession() {
 		return sessionFactory.getCurrentSession();
@@ -2740,11 +2763,177 @@ public class Controller_V {
 				    return resultString;//gson.toJson((Object)millRecieptModelt1);
 				}
 
+				 @RequestMapping("entry_of_transportation_and_operation_cost")
+					public ModelAndView entry_of_transportation_and_operation_cost(HttpServletRequest request)
+					{	String username =(String)request.getSession().getAttribute("usrname");
+						ModelAndView mv = new ModelAndView("entryoftransportandoperationcost");
+						if(username == null) {
+				        	mv = new ModelAndView("index");
+				            }
+						  final List<RoDetailsModel> RegionList = (List<RoDetailsModel>)this.roDetailsservice.getAll();
+						  final List<OperationCostModel> operationcostlist = (List<OperationCostModel>)this.operationcostservice.getAll();
 
+					      mv.addObject("RegionList", (Object)RegionList);
+					      mv.addObject("operationcostlist", (Object)operationcostlist);
+						return mv;
+					}
 
-			 
+				  @RequestMapping("savetransportcost")
+				    public ModelAndView savetransportcost(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+					  String username =(String)request.getSession().getAttribute("usrname");
+					  if(username == null) {
+				         	return new ModelAndView("index");
+				             }
+			        try {
+			        	 Date date = new Date();
+			      	     int istransport = Integer.valueOf(request.getParameter("istransport"));
+			             String dpc = request.getParameter("alldpc");
+			             final List<String> list = (List<String>)this.purchaseCenterService.dpcbyId(dpc);
+			             String cropyear = request.getParameter("cropyear");
+			             String rocode = request.getParameter("region");
+			             String region = this.roDetailsservice.findregionbyid(rocode);
+			             String operationcost = request.getParameter("operationcost");
+			             Double rate = Double.valueOf(request.getParameter("rate"));
+			             String unit = request.getParameter("unit");
+			             String validtilldate = request.getParameter("validtilldate");
+			             int i = (int) request.getSession().getAttribute("userId");
+			             String createdBy=String.valueOf(i); 
+			             
+			             
+			             System.out.println("DPCCCCC"+dpc);
+			             OperationAndTransportCostModel operationcostmodel = new OperationAndTransportCostModel();
+			             
+			             operationcostmodel.setIs_transport(istransport);
+			             operationcostmodel.setDpc(String.join(",", list));
+			             operationcostmodel.setCrop_year(cropyear);
+			             operationcostmodel.setRegion(region);
+			             operationcostmodel.setOperation_cost_head(operationcost);
+			             operationcostmodel.setRate(rate);
+			             operationcostmodel.setUnit(unit);
+			             operationcostmodel.setValid_till(validtilldate);
+			             operationcostmodel.setCreated_date(date);
+			             operationcostmodel.setCreated_by(createdBy);
+			             
+			             this.operationCostservice.create(operationcostmodel);
+			             
+			             
+							  redirectAttributes.addFlashAttribute("msg",
+							  "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
+							  + "");
+			             }
+			        catch (Exception e) {
+			            System.out.println(e.getLocalizedMessage());
+			        }
+			        redirectAttributes.addFlashAttribute("msg", (Object)"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
+			       
+			        return new ModelAndView(new RedirectView("entryoftransportandoperationcost.obj"));
+			    }
+				  
+				  @RequestMapping({ "view_transportation_and_operation_cost" })
+				    public ModelAndView view_transportation_and_operation_cost(final HttpServletRequest request) {
+				    	String username =(String)request.getSession().getAttribute("usrname");
+				    	ModelAndView mv = new ModelAndView("Viewtransportationandoperationcost");
+				    	if(username == null) {
+				        	return new ModelAndView("index");
+				            }
+				    	try {
+				        
+				        List<OperationAndTransportCostModel> viewcostlist = (List<OperationAndTransportCostModel>)operationCostservice.getAlllist();
+				        mv.addObject("viewcostlist", (Object)viewcostlist);
+				    	}
+				    	catch(Exception e) {
+				    		e.printStackTrace();
+				    	}
+				        return mv;
+				    }
 
+				  @RequestMapping("Factors_involved_in_Commercial_Price")
+					public ModelAndView Factors_involved_in_Commercial_Price(HttpServletRequest request)
+					{	String username =(String)request.getSession().getAttribute("usrname");
+						ModelAndView mv = new ModelAndView("FactorsinvolvedinCommercialPrice");
+						if(username == null) {
+				        	mv = new ModelAndView("index");
+				            }
+						 // final List<RoDetailsModel> RegionList = (List<RoDetailsModel>)this.roDetailsservice.getAll();
+						  //final List<OperationCostModel> operationcostlist = (List<OperationCostModel>)this.operationcostservice.getAll();
 
+					     // mv.addObject("RegionList", (Object)RegionList);
+					     // mv.addObject("operationcostlist", (Object)operationcostlist);
+						return mv;
+					}
+				  
+				  @RequestMapping(value = { "saveFactorCommercial" }, method = { RequestMethod.GET })
+				    public ModelAndView saveFactorCommercial(final HttpServletRequest request, final RedirectAttributes redirectAttributes, HttpSession session) {
+			      try {
+			    	   String username =(String)request.getSession().getAttribute("usrname");
+			     	   if(username == null) {
+			              return new ModelAndView("index");
+			              }
+					   int user = (int) request.getSession().getAttribute("userId");
+			           String createdBy=String.valueOf(user); 
+					   
+					   String Factor_Head = request.getParameter("Factor_Head");
+					   String Unit = request.getParameter("Unit");
+					   String Applicability = request.getParameter("Applicability");
+					   String Status = request.getParameter("Status");
+					   String identification = request.getParameter("identification");
+					   Factor_Head = Factor_Head.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","");
+					   Unit = Unit.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","");
+					   Applicability = Applicability.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","");
+					   Status = Status.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","");
+					   String[] allstatus = Status.split(",");
+					   String[] allapplicability = Applicability.split(",");
+					   String[] allunit = Unit.split(",");
+					   String[] allfactorhead = Factor_Head.split(",");
+					   
+					   Date currentdate = new Date();
+					   
+					   
+					   final List<FactorssInvolvedCommercial> allList = new ArrayList();
+					   int i = 0;
+					   for(String unit1 : allunit)
+					   {
+						  
+						   FactorssInvolvedCommercial factorsinvolved = new FactorssInvolvedCommercial();
+						   factorsinvolved.setIdentification_no(identification);
+						   factorsinvolved.setFactor_head(allfactorhead[i]);
+						   factorsinvolved.setUnit(allunit[i]);
+						   factorsinvolved.setApplicability(allapplicability[i]);
+						   factorsinvolved.setStatus(Integer.parseInt(allstatus[i]));
+						   factorsinvolved.setCreated_by(createdBy);
+						   factorsinvolved.setCreated_on(currentdate);
+						   allList.add(factorsinvolved);
+						   i++;
+					   }
+	                    this.factorsinvolvedservice.create(allList);
+	              
+					  // System.out.println(allList);
+	                    redirectAttributes.addFlashAttribute("msg",
+	  						  "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
+	  						  + "");
+	             
+	                    return new ModelAndView(new RedirectView("listofFactorsinvolvedinCommercialPrice.obj"));
+			       }
+				    catch(Exception e) {
+				    		e.printStackTrace();
+				    	}
+			      return new ModelAndView(new RedirectView("listofFactorsinvolvedinCommercialPrice.obj")); 	
+				   }
+				   
+				  @RequestMapping("listofFactorsinvolvedinCommercialPrice")
+					public ModelAndView list_of_lFactors_involvedin_CommercialPrice(HttpServletRequest request)
+					{	String username =(String)request.getSession().getAttribute("usrname");
+						ModelAndView mv = new ModelAndView("viewFactorsinvolvedinCommercialPrice");
+						if(username == null) {
+				        	mv = new ModelAndView("index");
+				            }
+						
+						List<FactorssInvolvedCommercial> list =(List<FactorssInvolvedCommercial>) this.factorsinvolvedservice.getAll();
+					      mv.addObject("allFIC", list);
+
+					   
+						return mv;
+					}
 }
 
 //	  ******************************************>>>>>>>>Code ends here<<<<<<<<<<*********************************************************

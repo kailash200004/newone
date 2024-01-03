@@ -3,6 +3,7 @@ package com.jci.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao.RoDetailsDao;
+import com.jci.model.GenerationOfBillSupplyModel;
 import com.jci.model.RoDetailsModel;
 
 @Transactional
@@ -58,7 +60,8 @@ public class RoDetailsDaoimpl implements RoDetailsDao {
 	@Override
 	public List<RoDetailsModel> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		 Criteria criteria = currentSession().createCriteria(RoDetailsModel.class);
+	        return criteria.list();
 	}
 
 	@Override
@@ -79,5 +82,15 @@ public class RoDetailsDaoimpl implements RoDetailsDao {
 			result.add(row[2].toString()+"-"+row[3].toString());
 		}
 		return result;
+	}
+
+	@Override
+	public String findregionbyid(String id) {
+				String querystr = "select roname from jcirodetails where rocode ='" + id + "'";
+				Session session = sessionFactory.getCurrentSession();
+				Transaction tx = session.beginTransaction();
+				SQLQuery query = session.createSQLQuery(querystr);
+				String region = query.list().get(0).toString();
+				return region;
 	}
 }
