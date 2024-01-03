@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.print.attribute.standard.DialogOwner;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -39,7 +41,7 @@ public class PdfGenerator {
 
 	public void generatePdf(String jciRefNo, String millNameString, String millCode, Double qty, String cropyear,
 			List<Object[]> priceList, List<Object[]> compList, String fileName, String deliveryType,
-			String contractDate , String filePath) throws DocumentException, IOException {
+			String contractDate, String filePath , String letterHeadPath) throws DocumentException, IOException {
 
 		PdfWriter pdfWriter = new PdfWriter(filePath);
 		PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -59,12 +61,8 @@ public class PdfGenerator {
 		float widthOfHeader[] = { columnWidth20, columnWidth60, columnWidth20 };
 
 		Table table = new Table(widthOfTwoColumn);
-		
-		
-		Image letterHead = new Image(ImageDataFactory
-			.create("C:\\Users\\pradeep.rathor\\Desktop\\Backup\\JCI-CMS\\WebContent\\assets\\img\\fullLetterHead.png"));
 
-		
+		 Image letterHead = new Image(ImageDataFactory.create(letterHeadPath));
 
 //		Table headerTable = new Table(widthOfHeader);
 //		Image logoImage = new Image(ImageDataFactory
@@ -174,7 +172,7 @@ public class PdfGenerator {
 
 		letterHead.setWidth(PageSize.A4.getWidth());
 		letterHead.setHeight(160);
-		letterHead.setRelativePosition(-23,0,0,0);
+		letterHead.setRelativePosition(-23, 0, 0, 0);
 
 		document.add(letterHead);
 		document.add(new Paragraph("\n"));
@@ -196,10 +194,8 @@ public class PdfGenerator {
 
 	}
 
-	public void generatePdfOfRequestLetter(String jciRefNo, String cropyear, String date, String qty, String fileName)
-			throws DocumentException, IOException {
-
-		String path = "C:\\Users\\pradeep.rathor\\Desktop\\JCIStuff\\RequestLetters";
+	public void generatePdfOfRequestLetter(String jciRefNo, String cropyear, String date, String qty, String fileName,
+			String path , String letterHeadPath) throws DocumentException, IOException {
 
 		final File theDir = new File(path);
 		if (!theDir.exists()) {
@@ -216,25 +212,21 @@ public class PdfGenerator {
 		PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 
 		pdfDocument.setDefaultPageSize(PageSize.A4);
-		
-	
 
 		Document document = new Document(pdfDocument);
 		document.setMargins(0, document.getLeftMargin(), document.getBottomMargin(), document.getRightMargin());
-		
+
 		float fullWidth = PageSize.A4.getWidth();
 		float columnHalfWidth = fullWidth * 0.5f;
 		float columnWidth60 = fullWidth * 0.60f;
 		float columnWidth20 = fullWidth * 0.20f;
 		float widthOfTwoColumn[] = { columnHalfWidth, columnHalfWidth };
 		float widthOfHeader[] = { columnWidth20, columnWidth60, columnWidth20 };
-		
-		Image letterHead = new Image(ImageDataFactory
-			.create("C:\\Users\\pradeep.rathor\\Desktop\\Backup\\JCI-CMS\\WebContent\\assets\\img\\fullLetterHead.png"));
 
-		
+		 Image letterHead = new Image(ImageDataFactory.create(letterHeadPath));
+
 		// Setting font of the text
-		
+
 		Table table = new Table(widthOfTwoColumn);
 
 //		Table headerTable = new Table(widthOfHeader);
@@ -315,10 +307,10 @@ public class PdfGenerator {
 
 		Paragraph footer2 = new Paragraph("Fax:91-33-2252-1771 | E-mail:jci@jcimail.in | Website:www.jutecorp.in")
 				.setTextAlignment(TextAlignment.CENTER).setFontSize(10);
-		
+
 		letterHead.setWidth(PageSize.A4.getWidth());
 		letterHead.setHeight(160);
-		letterHead.setRelativePosition(-23,0,0,0);
+		letterHead.setRelativePosition(-23, 0, 0, 0);
 
 		document.add(letterHead);
 		document.add(new Paragraph("").setBorder(new SolidBorder(Color.GRAY, 1))).setFixedPosition(0,
@@ -331,15 +323,13 @@ public class PdfGenerator {
 		document.add(new Paragraph("\n"));
 
 		document.add(tableForSignature);
-	
+
 		document.add(copyToParagraph);
 		document.add(new Paragraph("\n"));
 		document.add(new Paragraph("").setBorder(new SolidBorder(Color.GRAY, 1))).setFixedPosition(0,
 				PageSize.A4.getHeight(), 1);
 		document.add(footer1);
 		document.add(footer2);
-		
-		
 
 		document.close();
 

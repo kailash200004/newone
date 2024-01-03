@@ -70,7 +70,7 @@ $(document).ready(function() {
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Grade Composition List </h1>
+                <h1 class="page-title">Ro Di List </h1>
             </div>
 				<%
 				List<RoDispatchModel> roDiList = (List<RoDispatchModel>) request.getAttribute("roDiList");

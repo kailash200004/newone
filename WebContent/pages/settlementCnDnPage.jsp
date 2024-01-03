@@ -76,7 +76,7 @@ $(document).ready(function() {
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Generation </h1>
+                <h1 class="page-title">Settlement of credit and debit note </h1>
             </div>
 				<%
 				List<Object[]> list = (List<Object[]>) request.getAttribute("millsOfContract");

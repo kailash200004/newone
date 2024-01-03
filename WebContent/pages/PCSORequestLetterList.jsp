@@ -99,13 +99,12 @@
 									<%
 									int i = 1;
 									for (PCSORequestLetter requestEl : requestList) {
-										//String date=new SimpleDateFormat("dd-MM-yyyy").format(requestEl.getCreation_date());
-										//String path = "C:\\Users\\pradeep.rathor\\Desktop\\RequestLetters\\";
-										String path = "C:\\Users\\pradeep.rathor\\Desktop\\JCIStuff\\RequestLetters\\";
-										String filePath = path + requestEl.getLetter_path();
-										String encodedFilePath = URLEncoder.encode(filePath, "UTF-8");
+										String date=new SimpleDateFormat("dd-MM-yyyy").format(requestEl.getCreation_date());
+									
+										String fullFilePath = requestEl.getLetter_path();
+										String encodedFilePath = URLEncoder.encode(fullFilePath, "UTF-8");
 										String refNo = requestEl.getReference_no();
-										String date = requestEl.getReqGenDate();
+										//String date = requestEl.getReqGenDate();
 										String cropYear = requestEl.getCropYear();
 										String qty = requestEl.getReq_qty() + "";
 										int id = requestEl.getReqId();
@@ -142,6 +141,7 @@
 									i++;
 									}
 									%>
+
 								</tbody>
 
 							</table>
@@ -215,7 +215,7 @@
 						"id" : id
 					},
 					success : function(result) {
-					
+					   location.reload();
 					}
 				})
 			} else {

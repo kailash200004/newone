@@ -52,6 +52,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -224,6 +225,10 @@ public class Controller_V {
 		return mv;
 	}
 
+
+	@Value("${upload.letterHeadPath}")
+	String letterHeadPath;
+	
 	@RequestMapping("generatePCSORequest")
 	public ModelAndView generatePCSORequestLetter(HttpServletRequest request, RedirectAttributes redirectAttributes)
 			throws ParseException, DocumentException, IOException {
@@ -261,13 +266,17 @@ public class Controller_V {
 
 		PdfGenerator pdfGenerator = new PdfGenerator();
 		pdfGenerator.generatePdfOfRequestLetter(referenceno, crop_year, creation_date, req_qty + "",
-				referenceno + ".pdf");
+				referenceno + ".pdf" , requestLetterpath , letterHeadPath);
 
 		redirectAttributes.addFlashAttribute("msg",
 				"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n" + "");
 
 		return new ModelAndView(new RedirectView("pcsoRequestLetterList.obj"));
 	}
+
+
+	
+	
 
 	@RequestMapping("pcsoRequestLetterList")
 	public ModelAndView requestList() {
@@ -296,7 +305,7 @@ public class Controller_V {
 				+ "Thanks & Regards \n " + "Jute Corporation Of India";
 
 		InternetAddress[] toAddresses = { new InternetAddress("pradeep.rathor@cyfuture.com"),
-				new InternetAddress("prakhar.rai@cyfuture.com") };
+				new InternetAddress("prakhar.rai@cyfuture.com"),new InternetAddress("pradeeprao31110@gmail.com") };
 
 		SendMail sendMail = new SendMail();
 
@@ -315,12 +324,16 @@ public class Controller_V {
 //		return new ModelAndView(new("pcsoRequestLetterList.obj"));
 
 	}
-
+	
+	
+	  @Value("${upload.requestLetter}")
+	    String requestLetterpath;
 	@RequestMapping(value = "downloadRequestLetter", method = RequestMethod.GET)
 	public void downloadRequestLetter(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String fileName = request.getParameter("imagePath");
-		System.err.println(fileName);
-		File imageFile = new File(fileName);
+	   String fullPath = requestLetterpath + File.separator+ fileName;
+		System.err.println(fullPath);
+		File imageFile = new File(fullPath);
 
 		if (imageFile.exists()) {
 			try {
@@ -356,6 +369,51 @@ public class Controller_V {
 		}
 
 	}
+	
+
+	@Value("${upload.contractLetterJava}")
+	String contractLetterJava;
+	@RequestMapping(value = "downloadContractLetter", method = RequestMethod.GET)
+	public void downloadContractLetter(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String fileName = request.getParameter("imagePath");
+		String fullPath = contractLetterJava + File.separator+ fileName;
+		System.err.println(fullPath);
+		File imageFile = new File(fullPath);
+		
+		if (imageFile.exists()) {
+			try {
+				// Set the content type based on the file type
+				response.setContentType("application/pdf");
+				
+				// download
+				// response.setHeader("Content-Disposition", "attachment; filename=" +
+				// fileName);
+				
+				// view
+				response.setHeader("Content-Disposition", "");
+				
+				// Stream the file content to the response
+				FileInputStream fileInputStream = new FileInputStream(imageFile);
+				OutputStream responseOutputStream = response.getOutputStream();
+				
+				byte[] buffer = new byte[1024];
+				int bytesRead;
+				while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+					responseOutputStream.write(buffer, 0, bytesRead);
+				}
+				fileInputStream.close();
+				responseOutputStream.close();
+			} catch (IOException e) {
+				// Handle IO exception
+				e.printStackTrace();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+		
+	}
+
 
 	@RequestMapping("pcsoRequestDelete")
 	public ModelAndView requestDelete(HttpServletRequest request, RedirectAttributes redirectAttributes)
@@ -621,6 +679,8 @@ public class Controller_V {
 		return mv;
 	}
 
+	@Value("${upload.contractLetter}")
+    String contractLetterPath;
 	@ResponseBody
 	@RequestMapping(value = "contractgenerationPcsoWiseSave", method = { RequestMethod.POST })
 	public String saveContractGenerationPcsoWise(HttpServletRequest request,
@@ -678,7 +738,7 @@ public class Controller_V {
 			List<Object[]> GradePriceList = contractGenerationService2.getListOfGradesPrice(cropYear);
 			List<Object[]> GradeCompList = contractGenerationService2.getListOfGradeComposition(gradeComp);
 
-			String filePath = "C:\\Users\\pradeep.rathor\\Desktop\\JCIStuff\\Contracts\\" + contractIdn;
+			String filePath = contractLetterPath + File.separator + contractIdn;
 
 			// System.err.println(filePath);
 
@@ -687,18 +747,18 @@ public class Controller_V {
 				parentDir.mkdirs();
 			}
 
-			filePath += "\\" + contractIdn + "Contract" + millCode + ".pdf";
+			filePath += File.separator + contractIdn + "Contract" + millCode + ".pdf";
 
 			// System.err.println(filePath);
 			pdfGenerator.generatePdf(finalGeneratedContractNo, millNameString, millCode, millQty, cropYear,
-					GradePriceList, GradeCompList, fileName, deliveryType, contractdate, filePath);
+					GradePriceList, GradeCompList, fileName, deliveryType, contractdate, filePath , letterHeadPath);
 
 			// send email
 			String body = "Please find below attachment to get full details of contract grade wise..";
 			String sub = "Contract Details";
 			final String filePathDir = filePath;
 			SendMail sendMail = new SendMail();
-			InternetAddress[] toAddresses = { new InternetAddress("pradeep.rathor@cyfuture.com") };
+			InternetAddress[] toAddresses = { new InternetAddress("pradeep.rathor@cyfuture.com"),new InternetAddress("pradeeprao31110@gmail.com") };
 
 			CompletableFuture.runAsync(() -> {
 				try {
@@ -713,6 +773,9 @@ public class Controller_V {
 
 		return "Saved";
 	}
+	
+	
+
 
 	@RequestMapping("viewcontractgeneration")
 	public ModelAndView viewContractGenerationList(HttpServletRequest request) {
@@ -1340,6 +1403,9 @@ public class Controller_V {
 		return mView;
 	}
 
+	  @Value("${upload.creditNoteDetails}")
+	    String creditNoteDetails;
+
 	@ResponseBody
 	@RequestMapping(value = { "saveCreditNote" }, method = { RequestMethod.POST })
 	public ModelAndView saveCreditNoteDetails(final HttpServletRequest request,
@@ -1380,7 +1446,7 @@ public class Controller_V {
 			creditNotes.setDocument("");
 		} else {
 			final String originalFileName = file.getOriginalFilename();
-			String dirString = "C:\\Users\\pradeep.rathor\\Desktop\\JCIStuff\\CreditNotes";
+			String dirString = creditNoteDetails;
 
 			File fileStoreAt = new File(dirString);
 
@@ -1398,6 +1464,8 @@ public class Controller_V {
 		return new ModelAndView(new RedirectView("creditNoteList.obj"));
 
 	}
+
+
 
 	@RequestMapping("changeCrnStatus")
 	public ModelAndView changeCrnStatusTo1(HttpServletRequest request, RedirectView redirectView) {
@@ -2671,11 +2739,13 @@ public class Controller_V {
 				    return new ModelAndView(new RedirectView("EntryofGenerationBillsupply.obj"));
 				}
 			
+			
+			
 			 @RequestMapping(value ="downloadPDF", method = RequestMethod.GET)
 
 			 public void downloadRequestLetter1(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-			 String fileName = request.getParameter("filePath");
+			 String fileName = request.getParameter("imagePath");
 
 			 System.err.println(fileName);
 

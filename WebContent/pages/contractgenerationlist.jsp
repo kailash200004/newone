@@ -181,8 +181,7 @@
 						},
 						success : function(result) {
 							var data = jQuery.parseJSON(result);
-							var path = "C:\\Users\\pradeep.rathor\\Desktop\\JCIStuff\\Contracts\\"
-									+ contractId + "\\";
+							var path = contractId + "\\";
 
 							var tableData = "<table class='table table-striped table-bordered table-hover id='example-table' cellspacing='0' width='100%'>";
 
@@ -217,7 +216,7 @@
 								tableData += "<td>" + data[i].Delivery_type
 										+ "</td>";
 
-								tableData += "<td><a target='_blank' href='downloadRequestLetter.obj?imagePath="
+								tableData += "<td><a target='_blank' href='downloadContractLetter.obj?imagePath="
 										+ encodeURIComponent(filePath)
 										+ "' class='btn btn-success'><i class='fa fa-download' aria-hidden='true';'></i></a></td>";
 
