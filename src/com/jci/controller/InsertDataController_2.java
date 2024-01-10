@@ -600,6 +600,8 @@ public class InsertDataController_2 {
 		try{
 			role_Id= Integer.parseInt(request.getParameter("roleId"));
 		  uPri= userpriviligeservice.getUserPrivilegeListing(role_Id);
+		  System.err.println("#########"+uPri.toString());
+		  
 		}catch(Exception ex){
 			System.out.println(ex.getStackTrace());
 		}

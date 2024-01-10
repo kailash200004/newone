@@ -57,7 +57,7 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Save Entry of PCSO</h1>
+				<h1 class="page-title">Save Entry of PCO</h1>
 			</div>
 
 			<%

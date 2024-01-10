@@ -446,7 +446,7 @@ body {
 												roleId : roleid
 											},
 											function(responseText) {
-												//  alert(responseText);
+												  alert(responseText);
 												var text = responseText
 														.replace("[", "")
 														.replace("]", "");

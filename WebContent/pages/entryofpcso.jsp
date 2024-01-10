@@ -140,13 +140,9 @@
 												placeholder="dd-mm-yyyy">
 										</div>
 
-										<div class="col-sm-3 form-group">
-											<label></label> <input type="button" class="form-control"
-												name="download" id="download" placeholder="Download">
-										</div>
-									</div>
+																			</div>
 									<div class="row">
-										<div class="col-sm-4 form-group">
+										<div class="col-sm-4 form-group ">
 											<label>Mill Code</label>
 										</div>
 										<div class="col-sm-4 form-group">

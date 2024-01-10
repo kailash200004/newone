@@ -2,6 +2,7 @@
 <%@page import="com.jci.model.PCSORequestLetter"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
 
 
 
@@ -215,7 +216,10 @@
 						"id" : id
 					},
 					success : function(result) {
+					 
 					   location.reload();
+						//window.location.href = "entryofpcso.obj";
+						
 					}
 				})
 			} else {
