@@ -2334,8 +2334,11 @@ public class Controller_V {
 
 	@RequestMapping("saveConfirmationOfClaimSettelment.obj")
 	public ModelAndView saveConfirmationOfClaimSettelment(HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
-
+			RedirectAttributes redirectAttributes,@RequestParam("SupportingDocument") final MultipartFile SupportingDocument) {
+		 final File theDir = new File("C:\\Users\\kailash.shah\\documentimage");
+		    if (!theDir.exists()) {
+		        theDir.mkdirs();
+		    }
 		final ModelAndView mv = new ModelAndView();
 		String username = (String) request.getSession().getAttribute("usrname");
 		try {
@@ -2357,6 +2360,10 @@ public class Controller_V {
 			// double Moisture_Content12 = Double.parseDouble(Moisture_Content1);
 			// String NCV_Percentage1 = request.getParameter("NCV_Percentage1");
 			// double NCV_Percentage12 = Double.parseDouble(NCV_Percentage1);
+			
+	        final String filename = SupportingDocument.getOriginalFilename();
+	        File serverFile = new File(theDir, filename);
+	        SupportingDocument.transferTo(serverFile);
 			double defaultValue = 0.0;
 
 			String Inspection_by1 = request.getParameter("Inspectionby1");
@@ -2639,57 +2646,59 @@ public class Controller_V {
 		return new ModelAndView(new RedirectView("EntryofGenerationBillsupply.obj"));
 	}
 
-	@RequestMapping(value = "downloadPDF", method = RequestMethod.GET)
+    @RequestMapping("downloadPDF")
+		 public void downloadPDF(@RequestParam("filename") String filename, HttpServletResponse response) {
+  	  String imageDirectory = "C:\\Users\\kailash.shah\\documentimage"; // Replace with your image directory path
+		    String imagePath = imageDirectory + File.separator + filename;
 
-	public void downloadRequestLetter1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		    File imageFile = new File(imagePath);
+  	  
+  	  try {
+			           
 
-		String fileName = request.getParameter("imagePath");
+			            if (imageFile.exists()) {
+			               
+			                String contentType = determineContentType1(filename);
+			                response.setContentType(contentType);
 
-		System.err.println(fileName);
+			                response.setContentLength((int) imageFile.length());
+			                response.setHeader("Content-Disposition", "attachment; filename=billofsupplyfinal.pdf");
+//			                //response.setHeader("Content-Disposition", "");
+			              
+			                FileInputStream fileInputStream = new FileInputStream(imageFile);
+			                OutputStream responseOutputStream = response.getOutputStream();
+//
+			                byte[] buffer = new byte[1024];
+			                int bytesRead;
+			                while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+			                    responseOutputStream.write(buffer, 0, bytesRead);
+			                }
+//
+			                fileInputStream.close();
+			                responseOutputStream.close();
+			            } else {
+			                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			            }
+			        } catch (IOException e) {
+//			            
+			            e.printStackTrace();
+			            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			        }
+			    }
+			 private String determineContentType1(String filePath) {
+			        if (filePath.endsWith(".pdf")) {
+			            return "application/pdf";
+			        } else if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) {
+			            return "image/jpeg";
+			        } else if (filePath.endsWith(".png")) {
+			            return "image/png";
+			        } else {
+			            return "application/octet-stream";
+			        }
+			    }
+//			 
 
-		File imageFile = new File(fileName);
-
-		if (imageFile.exists()) {
-
-			try {
-				response.setContentType("application/pdf");
-
-				response.setHeader("Content-Disposition", "");
-				FileInputStream fileInputStream = new FileInputStream(imageFile);
-
-				OutputStream responseOutputStream = response.getOutputStream();
-
-				byte[] buffer = new byte[1024];
-
-				int bytesRead;
-
-				while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-
-					responseOutputStream.write(buffer, 0, bytesRead);
-
-				}
-
-				fileInputStream.close();
-
-				responseOutputStream.close();
-
-			} catch (IOException e) {
-
-				// Handle IO exception
-
-				e.printStackTrace();
-
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
-			}
-
-		} else {
-
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-
-		}
-
-	}
+			
 
 	@RequestMapping({ "ViewofGenerationBillsupply" })
 	public ModelAndView viewBillofSupplyReciept(final HttpServletRequest request) {
