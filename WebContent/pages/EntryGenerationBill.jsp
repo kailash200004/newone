@@ -1,4 +1,3 @@
-<%-- <%@page import="java.util.List"%> --%>
 <%@page import="java.util.List"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -57,7 +56,7 @@
             </div>
             
            <%
-    List<Object> getChallanlist = (List<Object>) request.getAttribute("getChallanlist");
+    List<Object[]> getChallanlist = (List<Object[]>) request.getAttribute("getChallanlist");
            String billOfSupplyNo = (String) request.getAttribute("billOfSupplyNo");
            
            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -84,10 +83,15 @@
 	                                        		
 													    <option value="">-Select-</option>
 													    <%
-													    for (Object row : getChallanlist) {
-													       String field1 = (String)row;
+													    for (Object[] row : getChallanlist) {
+													       String field1 = (String)row[0];
+													       String field2 = (String)row[1];
 													    %>
-													    <option value="<%= field1 %>"><%= field1 %></option>
+												    <option value="<%= field1 %>"><%= field1 %></option>
+												     
+													      
+                                              
+        
 													    <%
 													    }
 													    %> 
@@ -262,6 +266,21 @@
 												<span class="text-danger">* </span>&nbsp; <span id="Contarct_no" name="Contarct_no" class="text-danger"> </span>
 												<input class="form-control" name="Contarct_no" id="Contarctno"  value="" readonly="readonly">
 										   </div>
+										   <div class="col-sm-2 form-group" style="display: none;">
+												<label "display: none;">Clientstate </label> 
+												<span class="text-danger">* </span>&nbsp; <span id="Contarct_no" name="Contarct_no" class="text-danger"> </span>
+												<input  type="hidden" class="form-control" name="Clientstate" id="Clientstate"  value="" readonly="readonly">
+										   </div>
+										    <div class="col-sm-2 form-group" style="display: none;">
+												<label "display: none;">Clientcode </label> 
+												<span class="text-danger">* </span>&nbsp; <span id="Contarct_no" name="Contarct_no" class="text-danger"> </span>
+												<input  type="hidden" class="form-control" name="Clientcode" id="Clientcode"  value="" readonly="readonly">
+										   </div>
+										    <div class="col-sm-2 form-group" style="display: none;">
+												<label "display: none;">ClientPan </label> 
+												<span class="text-danger">* </span>&nbsp; <span id="Contarct_no" name="Contarct_no" class="text-danger"> </span>
+												<input  type="hidden" class="form-control" name="ClientPan" id="ClientPan"  value="" readonly="readonly">
+										   </div>
 										   </div>
 	                                     <div class="row"> 
                                                 <div class="col-sm-1 form-group">
@@ -341,29 +360,68 @@
    	            data: { "contractno": field2Value },
    	            success: function(data) {
    	            	alert(data);
-   	          /*    var data1 = JSON.parse(data);
-   	          var ChallanDate1 = new Date(data1.Creation_date);
-   	           */ 
+   	           
    	           
    	        try {
    	            var dataArray = JSON.parse(data);
 
-   	            // Assuming dataArray has the structure: [["Contract No", "Creation Date"]]
    	            if (dataArray && dataArray.length > 0) {
    	                var contractNo = dataArray[0][0];
    	                var creationDateStr = dataArray[0][1];
-
-   	                // Now you can use contractNo and creationDateStr as needed
-   	                console.log("Contract No: " + contractNo);
-   	                console.log("Creation Date: " + creationDateStr);
-
-   	                // Parse the creation date string to a Date object
-   	                var creationDate = new Date(creationDateStr);
+   	                var millcode = dataArray[0][2];
+					 var creationDate = new Date(creationDateStr);
    	                console.log("Creation Date as Date object: ", creationDate);
    	                
-   	                // Do something with contractNo, creationDate, etc.
+   	                
    	                $('#Contarctno').val(contractNo);
    	                $('#ChallanDate1').val(formatDate(creationDate));
+   	             $('#Millcode').val(millcode);
+   	             
+   	             
+   	             
+			   	          $.ajax({
+			                  type: 'GET',
+			                  url: 'fetchingdataforbill.obj',
+			                  data: { "contractno": millcode },
+			                  success: function(secondData) {
+			                      alert(secondData);
+			                      try { 
+			                      var dataArray = JSON.parse(secondData);
+
+			       	              if (dataArray && dataArray.length > 0) {
+			       	                var unit_name = dataArray[0][1];
+			       	                var unit_address1 = dataArray[0][2];
+			       	                var unit_state = dataArray[0][3];
+			       	                var unit_state_location = dataArray[0][4];
+			       	                var client_gstin = dataArray[0][5];
+			       	                var client_pan = dataArray[0][6];
+			       	                var client_state = dataArray[0][7];
+			       	                var client_address1 = dataArray[0][8];
+			       	                var client_name = dataArray[0][9];
+			       	                
+			    					
+			       	                
+			       	                
+			       	                $('#Recipient_Name').val(unit_name);
+			       	                $('#Recipient_GSTN').val(client_gstin);
+			       	                $('#Recipient_Address').val(unit_address1);
+			       	                $('#Consignee_Name').val(client_name);
+			       	                $('#Consignee_GSTN').val(client_gstin);
+			       	                $('#Consignee_Address').val(client_address1);
+			       	                $('#Clientstate').val(client_state);
+			       	                $('#Clientcode').val(unit_state);
+			       	                $('#ClientPan').val(client_pan);
+			       	           }
+			             	        } catch (error) {
+			             	            console.error("Error parsing JSON: " + error);
+			             	        }
+			                      
+			                      
+			                  },
+			                  error: function(error) {
+			                      console.error('Second Ajax call error:', error);
+			                  }
+			              });
    	            }
    	        } catch (error) {
    	            console.error("Error parsing JSON: " + error);
@@ -372,6 +430,7 @@
    	       var formattedDate = formatDate(ChallanDate1);
    	                 $('#Contarctno').val(data1.Contract_No);
    	                 $('#ChallanDate1').val(formattedDate);
+   	             
    	                 
    	            }
    	             
@@ -380,7 +439,17 @@
    	});
 
          
-         </script> 
+         </script>
+         
+  
+	      
+         
+         
+         
+
+ 
+         
+         
   <script>
     function calculateGST() {
         // Retrieve the shipment value entered by the user
