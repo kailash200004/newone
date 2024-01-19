@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.jci.model.GenerationOfBillSupplyModel;
-import com.jci.model.genrationcashdocument;
+
 
 public interface GenerationofBillDao {
 	  public void create(GenerationOfBillSupplyModel generationOfBillSupplyModel);

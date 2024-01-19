@@ -523,7 +523,33 @@ public class Controller_V {
 
 		return mv;
 	}
+//////////////////////////////////////////
+	
+	
+	
+	
+	   @RequestMapping("millacceptform")
+       public ModelAndView MillAcceptanceForm(HttpServletRequest request) {
+              String username = (String) request.getSession().getAttribute("usrname");
+              ModelAndView mv = new ModelAndView("MillAcceptance");
+              if (username == null) {
+                     mv = new ModelAndView("index");
+              }
+              
+              //  Fetching Data From Jci Contract Number
+             // List<String> cno = millService.ContractNo();
+             // mv.addObject("cno", cno);
+              
+              
+              return mv;
+       }
 
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////
 	@RequestMapping("saveentryofpcsodata")
 	public ModelAndView entryofpcsosave(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		String username = (String) request.getSession().getAttribute("usrname");
