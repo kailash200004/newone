@@ -523,33 +523,7 @@ public class Controller_V {
 
 		return mv;
 	}
-//////////////////////////////////////////
-	
-	
-	
-	
-	   @RequestMapping("millacceptform")
-       public ModelAndView MillAcceptanceForm(HttpServletRequest request) {
-              String username = (String) request.getSession().getAttribute("usrname");
-              ModelAndView mv = new ModelAndView("MillAcceptance");
-              if (username == null) {
-                     mv = new ModelAndView("index");
-              }
-              
-              //  Fetching Data From Jci Contract Number
-             // List<String> cno = millService.ContractNo();
-             // mv.addObject("cno", cno);
-              
-              
-              return mv;
-       }
 
-	
-	
-	
-	
-	
-	///////////////////////////////////////////////////
 	@RequestMapping("saveentryofpcsodata")
 	public ModelAndView entryofpcsosave(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		String username = (String) request.getSession().getAttribute("usrname");
@@ -2273,7 +2247,35 @@ public class Controller_V {
 			String Payment_Ref = request.getParameter("Payment_Ref");
 			String contractedQtyStr = request.getParameter("Contracted_Qty");
 			double contractedQty = Double.parseDouble(contractedQtyStr);
-
+////////////////////////////////////////////
+			
+			
+			
+			
+			String fullcontractno = request.getParameter("fullcontractno");
+			String FC_Issue_Date = request.getParameter("FC_Issue_Date");
+			String FC_Ref_No = request.getParameter("FC_Ref_No.");
+			String Contracted_Qty = request.getParameter("Contracted_Qty.");
+			String QtyAllowed = request.getParameter("QtyAllowed");
+			String carryingCostParam = request.getParameter("Carrying_cost");
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//////////////////////////////////////////
 			String Unit_charge_str = request.getParameter("Unit_charge");
 			double Unit_charge = Double.parseDouble(Unit_charge_str);
 			String Carrying_cost_str = request.getParameter("Carrying_cost");
