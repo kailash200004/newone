@@ -705,6 +705,78 @@ $("#region").on("change",function(){
 												<input  type="hidden" class="form-control" name="ClientPan" id="ClientPan"  value="" readonly="readonly">
 										   </div>
 										   </div>
+										     <div class="row">
+                                    
+                                    
+                                    
+                                            <div class="col-sm-4 form-group">
+	                                            <label>Instrument Value </label> 
+	                                            <span class="text-danger">* </span>&nbsp; <span id="InstrumentValue " name="InstrumentValue " class="text-danger" type="double"> </span>
+												 <input class="form-control taxtbox" name="InstrumentValue" min="0" type="number" placeholder="Instrument Value" required>
+	                                     </div>
+	                                       
+	                                    
+	                                       
+	                                        <div class="col-sm-4 form-group">
+												<label>Instrument Date</label> 
+												<span class="text-danger">* </span>&nbsp; <span id="instrumentdate" name="instrumentdate" class="text-danger"> </span>
+												<input class="form-control" name="instdate" id="instdate" type="date" required>
+										   </div>
+	                                       <div class="col-sm-4 form-group">
+											<label class="required">Supporting Document (330kb-1MB)</label>&nbsp; 
+											<span id="errRegForm" name="errRegForm" class="text-danger"> </span>
+									       <img id="imgPreview"  /><input class="form-control taxtbox" name="SupportingDocument" type="file" accept=".jpg,.jpeg,.png"
+									        oninput="validateREGFileType()"  placeholder="Supporting Document" id="SupportingDocument" onkeypress="deleteErrorMsg()" required>
+										</div>
+										   
+	                                     
+	                                     
+                                     </div> 
+                                       
+                                   <div class="row">
+                                   
+                                           <div class="col-sm-4 form-group">
+	                                             <label id="IFSC1">IFSC </label>
+	                                             <input class="form-control" oninput="this.value = this.value.toUpperCase()" maxlength="11" name="IFSC" type="text"
+												placeholder="IFSC Code" id="IFSC"
+												onchange="deleteErrorMsg()" >
+	                                       </div>
+	                                        <div class="col-sm-4 form-group">
+	                                             <label id="BankName1">Bank Name</label>
+	                                             <input class="form-control taxtbox" name="BankName" id="BankName" min="0" type="text" placeholder="Bank Name" onchange="deleteErrorMsg()" >
+	                                       </div>
+	                                     
+	                                       <div class="col-sm-4 form-group">
+	                                             <label id="Branch1">Branch</label>
+	                                             <input class="form-control taxtbox" name="Branch" id="Branch" min="0" type="text" placeholder="Branch" onchange="deleteErrorMsg()">
+	                                       </div>
+	                                      
+	                                       
+	                                     
+	                                       
+	                                       
+                                    </div>  
+                                     
+                                        <div class="row">
+                                        <div class="col-sm-4 form-group">
+												<label id="doshipment">Last Shipment date</label> 
+												<input class="form-control" name="dateofship" id="dateofship" placeholder="Date of Shipment" type="date" >
+										   </div>
+                                         <div class="col-sm-4 form-group">
+												<label id="doexpiry">Date of Expiry</label> 
+												<input class="form-control" name="dateofexpiry" id="dateofexpiry" placeholder="Date of Expiry" type="date" disabled >
+										   </div>
+										   
+                                   
+                                            <div class="col-sm-4 form-group">
+	                                             <label id="autoamounta">Auto Revolving Amount</label>
+	                                             <input class="form-control taxtbox" name="autorevolvingamount" id="autorevolvingamount" min="0" type="number" placeholder="Auto Revolving Amount" 	>
+	                                       </div>
+	                                     
+	                                      
+	                                       
+                                    </div>
+										   
 	                                     <div class="row"> 
                                                 <div class="col-sm-1 form-group">
 									             <input type="submit" value="Submit"class="btn btn-primary" id="submit" onclick="">
@@ -730,6 +802,8 @@ $("#region").on("change",function(){
     </div>
     
     <div class="sidenav-backdrop backdrop"></div>
+    
+    
     
      <script type="text/javascript">
     
